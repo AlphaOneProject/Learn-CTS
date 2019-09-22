@@ -24,7 +24,7 @@ namespace Learn_CTS
                 this.setX(this.getX() + e.ClipRectangle.Width);
             }
             g.DrawImage(imageBackground, new Point(this.getX(), 0));
-            g.DrawImage(imageBackground, new Point(e.ClipRectangle.Width+this.getX(), 0));
+            g.DrawImage(imageBackground, new Point(imageBackground.Width+this.getX(), 0));
             imageBackground.Dispose();
         }
     }
