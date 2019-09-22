@@ -1,6 +1,6 @@
 ﻿namespace Learn_CTS
 {
-    partial class Form1
+    partial class GameWindow
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // GameWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Name = "GameWindow";
+            this.Text = "Learn CTS";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
