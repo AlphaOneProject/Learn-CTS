@@ -20,11 +20,15 @@ namespace Learn_CTS
 
         private int vitesse = 25;
 
+        private int acc = 0;
+
         private List<Texture> listeImages = new List<Texture>();
 
         private Background background = new Background(0);
 
         private Tram tram = new Tram(-500);
+
+        private Platform platform = new Platform(0);
 
         public GameWindow()
         {
@@ -34,14 +38,30 @@ namespace Learn_CTS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Button btnLaunch = new Button();
+            btnLaunch.Location = new Point(5,5);
+            btnLaunch.Size = new Size(150, 50);
+            btnLaunch.Text = "lancement";
+            btnLaunch.Click += new EventHandler(btnLaunch_Click);
+            this.Controls.Add(btnLaunch);
             this.Show();
-            this.gameLoop();
+        }
+
+        private void btnLaunch_Click(object sender, EventArgs e)
+        {
+            this.Refresh();
+            Button btnLaunch = sender as Button;
+            btnLaunch.Enabled = false;
+            btnLaunch.Visible = false;
+            gameLoop();
         }
 
         private void gameLoop()
         {
+            acc = 0;
             while (true)
             {
+                if (acc < vitesse) { acc++; }
                 this.Refresh();
             }
         }
@@ -49,9 +69,11 @@ namespace Learn_CTS
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            background.move(-vitesse, 0);
+            background.move(-acc, 0);
+            platform.move(-acc, 0);
             background.updateGraphic(g, e);
             tram.updateGraphic(g, e);
+            platform.updateGraphic(g, e);
         }
     }
 }
