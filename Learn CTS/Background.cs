@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -12,20 +6,19 @@ namespace Learn_CTS
     class Background : Texture
     {
 
-        public Background(int x) : base(x, 0)
+        public Background(int x) : base(x, 0, true)
         {
         }
 
-        public override void updateGraphic(Graphics g, PaintEventArgs e)
+        public override void updateGraphic(PaintEventArgs e)
         {
-            Image imageBackground = Image.FromFile(this.getPath());
+            Graphics g = e.Graphics;
             if(this.getX()< -e.ClipRectangle.Width)
             {
                 this.setX(this.getX() + e.ClipRectangle.Width);
             }
-            g.DrawImage(imageBackground, new Point(this.getX(), 0));
-            g.DrawImage(imageBackground, new Point(imageBackground.Width+this.getX(), 0));
-            imageBackground.Dispose();
+            g.DrawImage(this.getImage(), new Point(this.getX(), 0));
+            g.DrawImage(this.getImage(), new Point(this.getImage().Width+this.getX(), 0));
         }
     }
 }

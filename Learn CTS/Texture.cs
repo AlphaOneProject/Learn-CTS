@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -17,12 +13,20 @@ namespace Learn_CTS
         private int x;
         private int y;
         private string path;
+        private string pathhitbox;
+        private bool locked;
+        private Image img;
+        private Bitmap hitbox;
 
-        public Texture(int x, int y)
+        public Texture(int x, int y, bool b)
         {
             this.x = x;
             this.y = y;
-            this.path = projectDir + "\\ressources\\img\\"+this.GetType().Name+"Test.png";
+            this.locked = b;
+            this.path = projectDir + "\\ressources\\img\\"+this.GetType().Name+".png";
+            this.pathhitbox = projectDir + "\\ressources\\img\\" + this.GetType().Name + "HitBox.png";
+            this.img = Image.FromFile(this.path);
+            this.hitbox = new Bitmap(Image.FromFile(this.pathhitbox));
         }
 
         public virtual void move(int a, int b)
@@ -31,16 +35,39 @@ namespace Learn_CTS
             this.y += b;
         }
 
-        public virtual void updateGraphic(Graphics g, PaintEventArgs e)
+        public virtual void updateGraphic(PaintEventArgs e)
         {
-            Image image = Image.FromFile(this.path);
-            g.DrawImage(image, new Point(x, y));
-            image.Dispose();
+            Graphics g = e.Graphics;
+            g.DrawImage(this.img, new Point(x, y));
+        }
+
+        public Image getImage()
+        {
+            return this.img;
         }
 
         public string getPath()
         {
             return this.path;
+        }
+
+        public bool isHitboxHit(int c, int d)
+        {
+            if(c - this.x > 0 && c - this.x <= img.Width && d - this.y > 0 && d - this.y <= img.Height)
+            {
+                Color color = this.hitbox.GetPixel(c - this.x, d - this.y);
+                return !Color.Equals(color, Color.FromArgb(0,0,0,0));
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        public bool isLocked()
+        {
+            return this.locked;
         }
 
         public int getX()
