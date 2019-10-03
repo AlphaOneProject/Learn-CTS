@@ -16,7 +16,7 @@ namespace Learn_CTS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Editor1());
+            Application.Run(new Editor1("\\\\\\TEST\\|/VERSION///"));
         }
     }
 }

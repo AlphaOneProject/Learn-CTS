@@ -37,6 +37,7 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.GroupBox();
+            this.title = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // menu
@@ -70,24 +71,37 @@
             // content
             // 
             this.content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.content.Location = new System.Drawing.Point(236, 12);
+            this.content.Location = new System.Drawing.Point(236, 85);
             this.content.Name = "content";
-            this.content.Size = new System.Drawing.Size(754, 617);
+            this.content.Size = new System.Drawing.Size(754, 544);
             this.content.TabIndex = 1;
             this.content.TabStop = false;
             this.content.Text = "Général";
+            // 
+            // title
+            // 
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Location = new System.Drawing.Point(229, 24);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(115, 37);
+            this.title.TabIndex = 2;
+            this.title.Text = "Édition";
             // 
             // Editor1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 642);
+            this.Controls.Add(this.title);
             this.Controls.Add(this.content);
             this.Controls.Add(this.menu);
             this.MaximizeBox = false;
             this.Name = "Editor1";
             this.Text = "Éditeur";
+            this.SizeChanged += new System.EventHandler(this.Editor1_SizeChanged);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -95,5 +109,6 @@
 
         private System.Windows.Forms.TreeView menu;
         private System.Windows.Forms.GroupBox content;
+        private System.Windows.Forms.Label title;
     }
 }

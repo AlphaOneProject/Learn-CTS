@@ -15,11 +15,20 @@ namespace Learn_CTS
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
         /// </summary>
-        public Editor1()
+        public Editor1(String game)
         {
             InitializeComponent();
             this.DoubleBuffered = false;
+
             menu.ExpandAll();
+
+            // Set the title and cut it if necessary.
+            if(game.Length > 38)
+            {
+                game = game.Substring(0, 36) + "...";
+            }
+            title.Text = "Édition de '" + game + "'";
+            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Height);
         }
 
         /// <summary>
@@ -109,7 +118,7 @@ namespace Learn_CTS
             // Empty the groupbox from precedent controls.
             content.Controls.Clear();
 
-            // Button allowing the creation of new scenarios.
+            // Creation of a button allowing the creation of new scenarios.
             Button content_add_scenario = new Button();
             content_add_scenario.Text = "Ajouter un nouveau scénario";
             content_add_scenario.AutoSize = true;
@@ -127,7 +136,13 @@ namespace Learn_CTS
             // Empty the groupbox from precedent controls.
             content.Controls.Clear();
 
-            // WIP
+            // Creation of a button allowing to discard the scenario.
+            Button content_discard_scenario = new Button();
+            content_discard_scenario.Text = "Supprimer ce scénario";
+            content_discard_scenario.AutoSize = true;
+            content_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
+            content.Controls.Add(content_discard_scenario);
+            content_discard_scenario.Location = new Point((content.Size.Width - content_discard_scenario.Size.Width) / 2, 100);
 
             // MessageBox.Show("Scénario n°" + scenario_id.ToString());
         }
@@ -152,6 +167,35 @@ namespace Learn_CTS
             // Select the newly created TreeNode.
             menu.SelectedNode.Expand();
             menu.SelectedNode = new_scenario;
+        }
+
+        private void Discard_Scenario(object sender, EventArgs e)
+        {
+            // Ask for confirmation before suppression of the scenario.
+            if((MessageBox.Show("Confirmer la suppression du " + menu.SelectedNode.Text + " ?", "Confirmation de suppression", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)) {
+                return;
+            }
+
+            menu.Nodes.Remove(menu.SelectedNode);
+
+            TreeNode sc = menu.Nodes.Find("scenarios", false)[0];
+            menu.SelectedNode = sc;
+
+            // Reorder visually and nominally the rest of scenarios.
+            for(int i = 0; i < sc.Nodes.Count; i++)
+            {
+                sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
+                sc.Nodes[i].Text = "Scénario " + (i + 1).ToString();
+            }
+        }
+
+        private void Editor1_SizeChanged(object sender, EventArgs e)
+        {
+            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Height);
+            menu.Size = new Size(menu.Width, this.Height - menu.Location.Y - 51);
+            content.Size = new Size(this.Width - content.Location.X - 28, this.Height - content.Location.Y - 51);
+            Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
     }
 }
