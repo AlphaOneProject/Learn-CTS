@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Non-joueurs");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Joueur");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
-            treeNode28});
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Scénarios");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Général");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Non-joueurs");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Joueur");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.GroupBox();
             this.title = new System.Windows.Forms.Label();
@@ -47,33 +49,35 @@
             this.menu.ItemHeight = 32;
             this.menu.Location = new System.Drawing.Point(12, 12);
             this.menu.Name = "menu";
-            treeNode26.Name = "global";
-            treeNode26.Text = "Général";
-            treeNode27.Name = "npcs";
-            treeNode27.Text = "Non-joueurs";
-            treeNode28.Name = "player";
-            treeNode28.Text = "Joueur";
-            treeNode29.Name = "characters";
-            treeNode29.Text = "Personnages";
-            treeNode30.Name = "scenarios";
-            treeNode30.Text = "Scénarios";
+            treeNode7.Name = "global";
+            treeNode7.Text = "Général";
+            treeNode8.Name = "npcs";
+            treeNode8.Text = "Non-joueurs";
+            treeNode9.Name = "choices";
+            treeNode9.Text = "Dialogues";
+            treeNode10.Name = "player";
+            treeNode10.Text = "Joueur";
+            treeNode11.Name = "characters";
+            treeNode11.Text = "Personnages";
+            treeNode12.Name = "scenarios";
+            treeNode12.Text = "Scénarios";
             this.menu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode26,
-            treeNode29,
-            treeNode30});
+            treeNode7,
+            treeNode11,
+            treeNode12});
             this.menu.PathSeparator = " / ";
             this.menu.ShowLines = false;
             this.menu.ShowNodeToolTips = true;
-            this.menu.Size = new System.Drawing.Size(202, 618);
+            this.menu.Size = new System.Drawing.Size(225, 618);
             this.menu.TabIndex = 0;
             this.menu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Menu_AfterSelect);
             // 
             // content
             // 
             this.content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.content.Location = new System.Drawing.Point(236, 85);
+            this.content.Location = new System.Drawing.Point(250, 85);
             this.content.Name = "content";
-            this.content.Size = new System.Drawing.Size(754, 544);
+            this.content.Size = new System.Drawing.Size(740, 544);
             this.content.TabIndex = 1;
             this.content.TabStop = false;
             this.content.Text = "Général";
@@ -82,7 +86,7 @@
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(229, 24);
+            this.title.Location = new System.Drawing.Point(243, 28);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(115, 37);
             this.title.TabIndex = 2;
