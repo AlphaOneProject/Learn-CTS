@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Non-joueurs");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Joueur");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Scénarios");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Général");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Non-joueurs");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Joueur");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
+            treeNode27,
+            treeNode28});
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.GroupBox();
             this.title = new System.Windows.Forms.Label();
@@ -47,20 +47,20 @@
             this.menu.ItemHeight = 32;
             this.menu.Location = new System.Drawing.Point(12, 12);
             this.menu.Name = "menu";
-            treeNode1.Name = "global";
-            treeNode1.Text = "Général";
-            treeNode2.Name = "npcs";
-            treeNode2.Text = "Non-joueurs";
-            treeNode3.Name = "player";
-            treeNode3.Text = "Joueur";
-            treeNode4.Name = "characters";
-            treeNode4.Text = "Personnages";
-            treeNode5.Name = "scenarios";
-            treeNode5.Text = "Scénarios";
+            treeNode26.Name = "global";
+            treeNode26.Text = "Général";
+            treeNode27.Name = "npcs";
+            treeNode27.Text = "Non-joueurs";
+            treeNode28.Name = "player";
+            treeNode28.Text = "Joueur";
+            treeNode29.Name = "characters";
+            treeNode29.Text = "Personnages";
+            treeNode30.Name = "scenarios";
+            treeNode30.Text = "Scénarios";
             this.menu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode5});
+            treeNode26,
+            treeNode29,
+            treeNode30});
             this.menu.PathSeparator = " / ";
             this.menu.ShowLines = false;
             this.menu.ShowNodeToolTips = true;
@@ -96,9 +96,10 @@
             this.Controls.Add(this.title);
             this.Controls.Add(this.content);
             this.Controls.Add(this.menu);
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Editor1";
             this.Text = "Éditeur";
+            this.Load += new System.EventHandler(this.Editor1_Load);
             this.SizeChanged += new System.EventHandler(this.Editor1_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
