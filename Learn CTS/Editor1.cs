@@ -184,31 +184,32 @@ namespace Learn_CTS
             // Creation of a button allowing to discard the scenario.
             Button btn_discard_scenario = new Button();
             btn_discard_scenario.Name = "btn_discard_scenario";
-            btn_discard_scenario.Text = "Supprimer ce scénario";
+            btn_discard_scenario.Text = "X";
             btn_discard_scenario.AutoSize = true;
             btn_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
             content.Controls.Add(btn_discard_scenario);
 
             // Creation of a button allowing to rename the scenario.
-            Button btn_rename_scenario = new Button();
-            btn_rename_scenario.Name = "btn_discard_scenario";
-            btn_rename_scenario.Text = "Renommer ce scénario";
-            btn_rename_scenario.AutoSize = true;
-            btn_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
-            content.Controls.Add(btn_rename_scenario);
+            PictureBox pb_rename_scenario = new PictureBox();
+            pb_rename_scenario.Name = "pb_rename_scenario";
+            pb_rename_scenario.Size = new Size(24, 24);
+            pb_rename_scenario.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "\\internal\\images\\edit.png");
+            pb_rename_scenario.SizeMode = PictureBoxSizeMode.StretchImage;
+            pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
+            content.Controls.Add(pb_rename_scenario);
 
             // Creation of the hidden textbox allowing to enter a new scenario's name.
             TextBox txt_rename_scenario = new TextBox();
             txt_rename_scenario.Name = "txt_rename_scenario";
             txt_rename_scenario.Text = menu.SelectedNode.Text;
-            txt_rename_scenario.Width = (menu.SelectedNode.Text.Length * 24) + 60;
+            txt_rename_scenario.Width = (menu.SelectedNode.Text.Length * 12) + 20;
             txt_rename_scenario.KeyPress += new KeyPressEventHandler(this.Rename_Scenario_Txt_Keypress);
             txt_rename_scenario.Visible = false;
             content.Controls.Add(txt_rename_scenario);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point((content.Size.Width - btn_discard_scenario.Size.Width) / 2, 100);
-            btn_rename_scenario.Location = new Point((content.Size.Width - btn_rename_scenario.Size.Width) / 2, 200);
+            btn_discard_scenario.Location = new Point(content.Size.Width - btn_discard_scenario.Size.Width, 10);
+            pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
             txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
         }
 
@@ -265,6 +266,7 @@ namespace Learn_CTS
         {
             // Set the textbox of the name as visible.
             content.Controls.Find("txt_rename_scenario", false)[0].Visible = true;
+            content.Controls.Find("pb_rename_scenario", false)[0].Visible = false;
             content.Controls.Find("txt_rename_scenario", false)[0].Focus();
         }
 
@@ -279,8 +281,12 @@ namespace Learn_CTS
             TextBox t = (TextBox)sender;
             if (e.KeyChar == (char) 13) // (char) 13 => Enter.
             {
-                t.Visible = false;
                 Rename_Scenario(t.Text);
+            }
+            else if(e.KeyChar == (char) 27) // (char) 27 => Escape.
+            {
+                t.Visible = false;
+                content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             }
             else if(!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char) 8)) // (char) 8 => Backspace.
             {
@@ -301,6 +307,19 @@ namespace Learn_CTS
             // Exit if name is similar.
             if(menu.SelectedNode.Text == new_name) { return; }
 
+            // Exit and display an error message if the name is already in use.
+            string sc_path = this.game_path + "\\scenarios";
+            foreach (string s in Directory.GetDirectories(sc_path))
+            {
+                string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
+                if(folder[1] == new_name)
+                {
+                    MessageBox.Show("Le nom de scénario " + '"' + new_name + '"' + " est déjà utilisé, essayez un autre nom.",
+                                    "Nom de scénario invalide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             // Rename the scenario's folder.
             Directory.Move(this.game_path + "\\scenarios\\" + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
                            this.game_path + "\\scenarios\\" + menu.SelectedNode.Name.Substring(8) + "." + new_name);
@@ -308,6 +327,13 @@ namespace Learn_CTS
             // Rename the scenario's Node.
             menu.SelectedNode.Text = new_name;
             content.Text = menu.SelectedNode.FullPath;
+
+            // Repositioning size-sensitives contents.
+            TextBox t = (TextBox) content.Controls.Find("txt_rename_scenario", false)[0];
+            t.Visible = false;
+            t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
+            content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point((content.Text.Length * 9) + 20, 0);
+            content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
         }
 
         /// <summary>
@@ -389,8 +415,8 @@ namespace Learn_CTS
             string output = "";
             using (StreamReader stream_r = new StreamReader(this.game_path + internal_path))
             {
-                var json_file = stream_r.ReadToEnd();
-                var json_dict = JObject.Parse(json_file);
+                string json_file = stream_r.ReadToEnd();
+                JObject json_dict = JObject.Parse(json_file);
                 output = (string) json_dict[var_name];
             }
             return output;
