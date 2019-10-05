@@ -124,21 +124,17 @@ namespace Learn_CTS
 
         public string GetStateString()
         {
-            if(this.GetState() == 0)
-            {
-                return "A l'arret";
-            }
-            else if (this.GetState() == 1)
-            {
-                return "Demarrage";
-            }
-            else if (this.GetState() == 2)
-            {
-                return "En mouvement";
-            }
-            else
-            {
-                return "S'arrete";
+            switch (this.GetState()){
+                case 0:
+                    return "Stopped";
+                case 1:
+                    return "Leaving";
+                case 2:
+                    return "Moving";
+                case 3:
+                    return "Stopping";
+                default:
+                    return "";
             }
         }
 
