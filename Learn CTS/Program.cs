@@ -9,14 +9,14 @@ namespace Learn_CTS
     static class Program
     {
         /// <summary>
-        /// Entry point of the application.
+        /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Editor1("Learn CTS"));
+            Application.Run(new GameWindow());
         }
     }
 }
