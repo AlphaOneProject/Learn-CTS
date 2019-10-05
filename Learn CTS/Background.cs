@@ -6,19 +6,20 @@ namespace Learn_CTS
     class Background : Texture
     {
 
-        public Background(int x) : base(x, 0, true)
+        public Background(int x) : base(x, 0, -5000, true)
         {
         }
 
-        public override void updateGraphic(PaintEventArgs e)
+        public override void UpdateGraphic(PaintEventArgs e)
         {
+            this.Update();
             Graphics g = e.Graphics;
-            if(this.getX()< -e.ClipRectangle.Width)
+            if(this.GetX()< -this.GetImage().Width)
             {
-                this.setX(this.getX() + e.ClipRectangle.Width);
+                this.SetX(this.GetX() + this.GetImage().Width);
             }
-            g.DrawImage(this.getImage(), new Point(this.getX(), 0));
-            g.DrawImage(this.getImage(), new Point(this.getImage().Width+this.getX(), 0));
+            g.DrawImage(this.GetImage(), new Point(this.GetX(), 0));
+            g.DrawImage(this.GetImage(), new Point(this.GetImage().Width+this.GetX(), 0));
         }
     }
 }
