@@ -19,8 +19,24 @@
         - [ ] Interfaces de jeu
             - [ ] Interface tram
             - [ ] Interface bus
-        - [ ] Ecran d'accueil
-            - [ ] Menu
+            - [ ] Interface parc
+            - [ ] Interface "Point & Click"
+        - [ ] Menus
+            - [ ] Accueil
+            - [ ] Édition
+            - [ ] Test
+            - [ ] Jeux
+                - [ ] Tram
+                - [ ] Bus
+                - [ ] Parc
+                - [ ] "Point & Click"
+        - [ ] Éditeur
+            - [ ] Choix du moteur et options générales
+            - [ ] Création et gestion des PNJ (Personnages Non-Joueurs)
+            - [ ] Personnalisation du personnage principal
+            - [ ] Entrée et gestion des dialogues sous la forme de QCM
+            - [ ] Édition des différents scénarios
+            - [ ] Modification des textures d'ambiance
     - [ ] Pédagogie
         - [ ] Morale + Connaissances
             - [ ] Utilisation de français simple
