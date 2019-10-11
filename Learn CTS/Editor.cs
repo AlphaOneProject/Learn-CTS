@@ -1,33 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
 namespace Learn_CTS
 {
-    public partial class Editor1 : Form
+    public partial class Editor : Form
     {
 
         // Attributes
 
-        private String game;
-        private String game_path;
+        private readonly String game;
+        private readonly String game_path;
 
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
         /// </summary>
-        public Editor1(String game)
+        public Editor(String game)
         {
             InitializeComponent();
             this.game = game;
-            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "\\games\\" + game;
+            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games" + Path.DirectorySeparatorChar + game;
             this.DoubleBuffered = false;
         }
 
@@ -50,7 +44,7 @@ namespace Learn_CTS
             title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Height);
 
             // Load already existing scenarios.
-            string sc_path = this.game_path + "\\scenarios";
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             foreach (string s in Directory.GetDirectories(sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
@@ -67,13 +61,35 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // Empty the groupbox from precedent controls.
+            int nbr_ctrl = content.Controls.Count;
+            for (int i = 0; i < nbr_ctrl; i++)
+            {
+                if(content.Controls[0].GetType() == new PictureBox().GetType())
+                {
+                    PictureBox pb = (PictureBox)content.Controls[0];
+                    pb.Image.Dispose();
+                }
+                content.Controls[0].Dispose();
+            }
+            nbr_ctrl = menu.Controls.Count;
+            for (int i = 0; i < nbr_ctrl; i++)
+            {
+                if (menu.Controls[0].GetType() == new PictureBox().GetType())
+                {
+                    PictureBox pb = (PictureBox)menu.Controls[0];
+                    pb.Image.Dispose();
+                }
+                menu.Controls[0].Dispose();
+            }
+
             TreeView t = (TreeView) sender;
             String name = t.SelectedNode.Name;
             content.Text = t.SelectedNode.FullPath;
 
             if(name.StartsWith("scenario") && name != "scenarios")
             {
-                Display_Scenario(int.Parse(name.Substring(8)));
+                Display_Scenario();
             }
             else
             {
@@ -97,13 +113,18 @@ namespace Learn_CTS
             }
         }
 
+        private void Menu_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
         /// <summary>
         /// Load controls for general content.
         /// </summary>
         private void Display_Global()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
+            // Creation of controls linking properties from the game to the editor.
+
 
             // WIP
         }
@@ -113,9 +134,6 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Characters()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
             // WIP
         }
 
@@ -124,9 +142,6 @@ namespace Learn_CTS
         /// </summary>
         private void Display_NPCs()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
             // WIP
         }
 
@@ -135,9 +150,6 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Choices()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
             // WIP
         }
 
@@ -146,9 +158,6 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Player()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
             // WIP
         }
 
@@ -157,60 +166,16 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Scenarios()
         {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
             // Creation of a button allowing the creation of new scenarios.
-            Button btn_add_scenario = new Button();
-            btn_add_scenario.Name = "btn_add_scenario";
-            btn_add_scenario.Text = "Ajouter un nouveau scénario";
-            btn_add_scenario.AutoSize = true;
+            Button btn_add_scenario = new Button()
+            {
+                Name = "btn_add_scenario",
+                Text = "Ajouter un nouveau scénario",
+                AutoSize = true
+            };
             btn_add_scenario.Click += new System.EventHandler(this.Add_Scenario);
             content.Controls.Add(btn_add_scenario);
             btn_add_scenario.Location = new Point((content.Size.Width - btn_add_scenario.Size.Width) / 2, 100);
-        }
-
-        /// <summary>
-        /// Load a specified scenario into the "content" groupbox.
-        /// </summary>
-        /// <param name="scenario_id">ID of the scenario to load.</param>
-        private void Display_Scenario(int scenario_id)
-        {
-            // Empty the groupbox from precedent controls.
-            content.Controls.Clear();
-
-            // Creation of all controls.
-
-            // Creation of a button allowing to discard the scenario.
-            Button btn_discard_scenario = new Button();
-            btn_discard_scenario.Name = "btn_discard_scenario";
-            btn_discard_scenario.Text = "X";
-            btn_discard_scenario.AutoSize = true;
-            btn_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
-            content.Controls.Add(btn_discard_scenario);
-
-            // Creation of a button allowing to rename the scenario.
-            PictureBox pb_rename_scenario = new PictureBox();
-            pb_rename_scenario.Name = "pb_rename_scenario";
-            pb_rename_scenario.Size = new Size(24, 24);
-            pb_rename_scenario.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "\\internal\\images\\edit.png");
-            pb_rename_scenario.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
-            content.Controls.Add(pb_rename_scenario);
-
-            // Creation of the hidden textbox allowing to enter a new scenario's name.
-            TextBox txt_rename_scenario = new TextBox();
-            txt_rename_scenario.Name = "txt_rename_scenario";
-            txt_rename_scenario.Text = menu.SelectedNode.Text;
-            txt_rename_scenario.Width = (menu.SelectedNode.Text.Length * 12) + 20;
-            txt_rename_scenario.KeyPress += new KeyPressEventHandler(this.Rename_Scenario_Txt_Keypress);
-            txt_rename_scenario.Visible = false;
-            content.Controls.Add(txt_rename_scenario);
-
-            // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point(content.Size.Width - btn_discard_scenario.Size.Width, 10);
-            pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
-            txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
         }
 
         /// <summary>
@@ -225,15 +190,15 @@ namespace Learn_CTS
             TreeNode parent = menu.Nodes.Find("scenarios", false)[0];
             string new_scenario = "Nouveau scénario";
             int nbr_new_scenarios = 0;
-            foreach(TreeNode t in parent.Nodes)
+            foreach (TreeNode t in parent.Nodes)
             {
-                if(t.Text.StartsWith("Nouveau scénario")) { nbr_new_scenarios++; }
+                if (t.Text.StartsWith("Nouveau scénario")) { nbr_new_scenarios++; }
             }
-            if(nbr_new_scenarios != 0) { new_scenario = "Nouveau scénario (" + nbr_new_scenarios.ToString() + ")"; }
+            if (nbr_new_scenarios != 0) { new_scenario = "Nouveau scénario (" + nbr_new_scenarios.ToString() + ")"; }
             Add_Scenario(new_scenario);
 
             // Create the new scenario in the appropriate folder.
-            Directory.CreateDirectory(this.game_path + "\\scenarios\\" + parent.LastNode.Name.Substring(8) + "." + new_scenario);
+            Directory.CreateDirectory(this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8) + "." + new_scenario);
 
             // Select the newly created TreeNode.
             menu.SelectedNode = parent.LastNode;
@@ -255,6 +220,139 @@ namespace Learn_CTS
             tn_new_scenario.Name = "scenario" + nbr_existing_scenarios.ToString();
             tn_new_scenario.Text = new_scenario;
             tn_parent.Nodes.Add(tn_new_scenario);
+        }
+
+        /// <summary>
+        /// Load a specified scenario into the "content" groupbox.
+        /// </summary>
+        private void Display_Scenario()
+        {
+            // Creation of all controls.
+
+            // Creation of a button allowing to discard the scenario.
+            Button btn_discard_scenario = new Button()
+            {
+                Name = "btn_discard_scenario",
+                Text = "X",
+                AutoSize = true
+            };
+            btn_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
+            content.Controls.Add(btn_discard_scenario);
+
+            // Creation of two arrows allowing changement of the scenarios' order.
+            PictureBox pb_down_scenario = new PictureBox()
+            {
+                Name = "pb_down_scenario",
+                Size = new Size(16, 16),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" + 
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_down_scenario.Click += new EventHandler(this.Down_Scenario);
+            menu.Controls.Add(pb_down_scenario);
+
+            PictureBox pb_up_scenario = new PictureBox()
+            {
+                Name = "pb_up_scenario",
+                Size = new Size(16, 16),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_up_scenario.Click += new EventHandler(this.Up_Scenario);
+            menu.Controls.Add(pb_up_scenario);
+
+            // Creation of a button allowing to rename the scenario.
+            PictureBox pb_rename_scenario = new PictureBox()
+            {
+                Name = "pb_rename_scenario",
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
+            content.Controls.Add(pb_rename_scenario);
+
+            // Creation of the hidden textbox allowing to enter a new scenario's name.
+            TextBox txt_rename_scenario = new TextBox()
+            {
+                Name = "txt_rename_scenario",
+                Text = menu.SelectedNode.Text,
+                Width = (menu.SelectedNode.Text.Length * 12) + 20,
+                ShortcutsEnabled = false,
+                Visible = false
+            };
+            txt_rename_scenario.KeyPress += new KeyPressEventHandler(this.Rename_Scenario_Txt_Keypress);
+            content.Controls.Add(txt_rename_scenario);
+
+            // Set the correct location of the controls (responsive with the groupbox's size).
+            btn_discard_scenario.Location = new Point(content.Size.Width - btn_discard_scenario.Size.Width, 10);
+            pb_down_scenario.Location = new Point(menu.Location.X - 8, menu.Location.Y - 4 + (32 * 6) + (32 * menu.SelectedNode.Index));
+            pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, menu.Location.Y - 4 + (32 * 6) + (32 * menu.SelectedNode.Index));
+            pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
+            txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
+        }
+
+        private void Down_Scenario(object sender, EventArgs e)
+        {
+            int index = menu.SelectedNode.Index;
+            TreeNode tns = menu.Nodes.Find("scenarios", false)[0];
+
+            // Return if last node.
+            if (index == tns.LastNode.Index) { return; }
+            TreeNode tn = menu.SelectedNode;
+            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Insert(index + 1, tn);
+            menu.SelectedNode = tn;
+            Order_Files_Scenarios();
+        }
+
+        private void Up_Scenario(object sender, EventArgs e)
+        {
+            int index = menu.SelectedNode.Index;
+            TreeNode tns = menu.Nodes.Find("scenarios", false)[0];
+
+            // Return if fisrt node.
+            if (index == 0) { return; }
+            TreeNode tn = menu.SelectedNode;
+            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Insert(index - 1, tn);
+            menu.SelectedNode = tn;
+            Order_Files_Scenarios();
+        }
+
+        private void Order_Files_Scenarios()
+        {
+            TreeNode tns = menu.Nodes.Find("scenarios", false)[0];
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
+            foreach (string s in Directory.GetDirectories(sc_path))
+            {
+                string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
+                int act_index = 0;
+                int i = 0;
+                while (i < tns.Nodes.Count)
+                {
+                    if (tns.Nodes[i].Text == folder[1])
+                    {
+                        act_index = i;
+                        i = tns.Nodes.Count;
+                    }
+                    i++;
+                }
+                if (int.Parse(folder[0]) - 1 != act_index)
+                {
+                    int str_index = act_index + 1;
+                    Directory.Move(s, sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
+                }
+            }
+
+            // Reorder nominally the rest of scenarios.
+            TreeNode sc = menu.Nodes.Find("scenarios", false)[0];
+            for (int i = 0; i < sc.Nodes.Count; i++)
+            {
+                sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
+            }
         }
 
         /// <summary>
@@ -281,6 +379,8 @@ namespace Learn_CTS
             TextBox t = (TextBox)sender;
             if (e.KeyChar == (char) 13) // (char) 13 => Enter.
             {
+                // Block the renaming of a scenario if the new name is empty.
+                if(t.Text.Equals(string.Empty)) { return; }
                 Rename_Scenario(t.Text);
             }
             else if(e.KeyChar == (char) 27) // (char) 27 => Escape.
@@ -308,7 +408,7 @@ namespace Learn_CTS
             if(menu.SelectedNode.Text == new_name) { return; }
 
             // Exit and display an error message if the name is already in use.
-            string sc_path = this.game_path + "\\scenarios";
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             foreach (string s in Directory.GetDirectories(sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
@@ -321,8 +421,8 @@ namespace Learn_CTS
             }
 
             // Rename the scenario's folder.
-            Directory.Move(this.game_path + "\\scenarios\\" + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
-                           this.game_path + "\\scenarios\\" + menu.SelectedNode.Name.Substring(8) + "." + new_name);
+            Directory.Move(sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
+                           sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + new_name);
 
             // Rename the scenario's Node.
             menu.SelectedNode.Text = new_name;
@@ -343,16 +443,16 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Discard_Scenario(object sender, EventArgs e)
         {
-            string sc_path = this.game_path + "\\scenarios";
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
 
             // Ask for confirmation before suppression of the scenario.
-            if ((MessageBox.Show("Confirmer la suppression du " + menu.SelectedNode.Text + " ?", "Confirmation de suppression", 
+            if ((MessageBox.Show("Confirmer la suppression du scénario " + menu.SelectedNode.Text + " ?", "Confirmation de suppression", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)) {
                 return;
             }
 
             // Remove the scenario's folder.
-            Directory.Delete(sc_path + "\\" + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text, true);
+            Directory.Delete(sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text, true);
 
             // Remove the scenario's Node.
             menu.Nodes.Remove(menu.SelectedNode);
@@ -371,7 +471,7 @@ namespace Learn_CTS
                 string folder = s.Remove(0, sc_path.Length + 1);
                 if (j.ToString() != folder.Split('.')[0])
                 {
-                    Directory.Move(sc_path + "\\" + folder, sc_path + "\\" + j.ToString() + "." + folder.Split('.')[1]);
+                    Directory.Move(sc_path + Path.DirectorySeparatorChar + folder, sc_path + Path.DirectorySeparatorChar + j.ToString() + "." + folder.Split('.')[1]);
                 }
                 j++;
             }
