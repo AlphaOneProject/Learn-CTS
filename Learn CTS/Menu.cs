@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -20,12 +17,18 @@ namespace Learn_CTS
          */
         String displayed_menu;
 
+        /**
+         * Default path of all the created games. 
+         */
+        private readonly String games_path;
+
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
         /// </summary>
         public Menu()
         {
             InitializeComponent();
+            this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
             this.DoubleBuffered = false;
         }
 
@@ -44,15 +47,54 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="sender">Control calling the method.</param>
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        private void Btn_edit_Click(object sender, EventArgs e)
+        private void Main_menu_btn_edit_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
             Display_editor_menu();
         }
 
-        private void Display_Flp_Scenes_List(object sender, EventArgs e)
+        /// <summary>
+        /// Fetches all existing games into a list of GameCard.
+        /// </summary>
+        /// <returns>An ArrayList of GameCard</returns>
+        private ArrayList Get_Games_List()
         {
+            ArrayList game_card_list = new ArrayList();
+            foreach (string s in Directory.GetDirectories(this.games_path))
+            {
+                GameCard gc = new GameCard();
+                gc.Title = s.Remove(0, games_path.Length);
+                gc.Description = Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "description");
+                switch (Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "default"))
+                {
+                    case "true": gc.IsDefault = true;
+                        break;
+                    case "false": gc.IsDefault = false;
+                        break;
+                    default: break;
+                }
+                game_card_list.Add(gc);
+            }
+            return game_card_list;
+        }
 
+        /// <summary>
+        /// Recover the content of a variable in a JSON file at a specified path.
+        /// Cast this content as a string before returning it.
+        /// </summary>
+        /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
+        /// <param name="var_name">Variable name in the JSON file.</param>
+        /// <returns></returns>
+        public string Get_Var_From_JSON(string internal_path, string var_name)
+        {
+            string output = "";
+            using (StreamReader stream_r = new StreamReader(internal_path))
+            {
+                string json_file = stream_r.ReadToEnd();
+                JObject json_dict = JObject.Parse(json_file);
+                output = (string)json_dict[var_name];
+            }
+            return output;
         }
 
         /// <summary>
@@ -60,7 +102,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Btn_exit_Click(object sender, EventArgs e)
+        private void Main_menu_btn_exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -75,42 +117,32 @@ namespace Learn_CTS
         {
             displayed_menu = "main_menu";
             this.SuspendLayout();
-            //
-            // Creation of the button that will show the selection of available levels to play.
-            //
-            Button btn_play = new Button();
-            btn_play.Location = new Point(75, 55);
-            btn_play.Name = "btn_play";
-            btn_play.Size = new Size(75, 23);
-            btn_play.TabIndex = 0;
-            btn_play.Text = "Jouer";
-            btn_play.UseVisualStyleBackColor = true;
 
             // 
             // Creation of the button that will show the selection of available levels to edit.
             // 
-            Button btn_edit = new Button();
-            btn_edit.Location = new Point(75, 111);
-            btn_edit.Name = "btn_edit";
-            btn_edit.Size = new Size(75, 23);
-            btn_edit.TabIndex = 1;
-            btn_edit.Text = "Editer";
-            btn_edit.UseVisualStyleBackColor = true;
-            btn_edit.Click += new System.EventHandler(this.Btn_edit_Click);
+            Button main_menu_btn_edit = new Button();
+            main_menu_btn_edit.Location = new Point(75, (int)(this.Height * 0.3));
+            main_menu_btn_edit.Name = "btn_edit";
+            main_menu_btn_edit.Size = new Size(75, 23);
+            main_menu_btn_edit.TabIndex = 1;
+            main_menu_btn_edit.Text = "Editer";
+            main_menu_btn_edit.UseVisualStyleBackColor = true;
+            main_menu_btn_edit.Click += new System.EventHandler(this.Main_menu_btn_edit_Click);
 
             // 
             // Creation of the button that will exit the application.
             // 
-            Button btn_exit = new Button();
-            btn_exit.Location = new Point(75, 336);
-            btn_exit.Name = "btn_exit";
-            btn_exit.Size = new Size(75, 23);
-            btn_exit.TabIndex = 2;
-            btn_exit.Text = "Quitter";
-            btn_exit.UseVisualStyleBackColor = true;
-            btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
+            Button main_menu_btn_exit = new Button();
+            main_menu_btn_exit.Location = new Point(75, (int)(this.Height * 0.7));
+            main_menu_btn_exit.Name = "btn_exit";
+            main_menu_btn_exit.Size = new Size(75, 23);
+            main_menu_btn_exit.TabIndex = 2;
+            main_menu_btn_exit.Text = "Quitter";
+            main_menu_btn_exit.UseVisualStyleBackColor = true;
+            main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
 
-            this.Controls.AddRange(new Control[] { btn_play, btn_edit, btn_exit });
+            this.Controls.AddRange(new Control[] { main_menu_btn_edit, main_menu_btn_exit });
 
             this.ResumeLayout();
         }
@@ -124,29 +156,31 @@ namespace Learn_CTS
             this.displayed_menu = "editor_menu";
 
             this.SuspendLayout();
-            //
-            //Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
-            //
+
+            // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel flp_editor_menu = new FlowLayoutPanel();
-            flp_editor_menu.Location = new Point(0, 0);
+            flp_editor_menu.Size = new Size((int)(this.Width * 0.8), this.Height);
+            flp_editor_menu.Location = new Point((int)((this.Width / 2) - (flp_editor_menu.Width / 2)), 0);
             flp_editor_menu.Name = "flp_editor_menu";
-            flp_editor_menu.Size = new Size((int)(this.Width * 0.8), (int)(this.Height * 0.8));
-            flp_editor_menu.BackColor = Color.ForestGreen;
             flp_editor_menu.TabIndex = 3;
 
-            //
-            //Creation of the Button responsible to go back to the main menu.
-            //
+            // Creation of the Button responsible to go back to the main menu.
             Button btn_back_to_main_menu = new Button();
-            btn_back_to_main_menu.Location = new Point(0, this.Height - btn_back_to_main_menu.Height);
+            btn_back_to_main_menu.Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05));
+            btn_back_to_main_menu.Location = new Point(10, 10);
             btn_back_to_main_menu.Name = "btn_back_to_main_menu";
-            btn_back_to_main_menu.Size = new Size(150, 23);
-            btn_back_to_main_menu.Text = "Retour au menu principal";
+            btn_back_to_main_menu.Text = "<-";
             btn_back_to_main_menu.UseVisualStyleBackColor = true;
             btn_back_to_main_menu.Click += new EventHandler(this.Btn_Back_To_Main_Menu_Click);
 
             this.Controls.AddRange(new Control[] { flp_editor_menu, btn_back_to_main_menu });
-            flp_editor_menu.Controls.Add(btn_back_to_main_menu);
+
+            // Fetching the existing games
+            ArrayList games_list = Get_Games_List();
+            foreach (GameCard gc in games_list)
+            {
+                flp_editor_menu.Controls.Add(gc);
+            }
 
             this.ResumeLayout();
         }
@@ -166,12 +200,36 @@ namespace Learn_CTS
 
         private void Responsive_Resize_Editor_Menu()
         {
-
+            foreach (Control c in this.Controls)
+            {
+                switch (c.Name)
+                {
+                    case "flp_editor_menu":
+                        c.Size = new Size((int)(this.Width * 0.8), this.Height);
+                        c.Location = new Point((int)((this.Width / 2) - (c.Width / 2)), 0);
+                        break;
+                    case "btn_back_to_main_menu":
+                        c.Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05));
+                        c.Location = new Point(10, 10);
+                        break;
+                }
+            }
         }
 
         private void Responsive_Resize_Main_Menu()
         {
-            
+            foreach (Control c in this.Controls)
+            {
+                switch (c.Name)
+                {
+                    case "main_menu_btn_edit":
+                        c.Location = new Point(75, (int)(this.Height * 0.3));
+                        break;
+                    case "main_menu_btn_exit":
+                        c.Location = new Point(75, (int)(this.Height*0.7));
+                        break;
+                }
+            }
         }
     }
 }

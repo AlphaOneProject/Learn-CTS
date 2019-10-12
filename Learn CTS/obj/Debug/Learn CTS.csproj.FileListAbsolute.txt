@@ -28,3 +28,18 @@ C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.Properties.Resources.resources
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.csproj.GenerateResource.cache
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.csproj.CoreCompileInputs.cache
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.exe
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Learn CTS.exe.config
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Learn CTS.exe
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Learn CTS.pdb
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
+C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.pdb

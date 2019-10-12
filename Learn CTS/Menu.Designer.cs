@@ -28,51 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_play = new System.Windows.Forms.Button();
-            this.btn_edit = new System.Windows.Forms.Button();
-            this.btn_exit = new System.Windows.Forms.Button();
+            this.main_menu_btn_edit = new System.Windows.Forms.Button();
+            this.main_menu_btn_exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btn_play
+            // main_menu_btn_edit
             // 
-            this.btn_play.Location = new System.Drawing.Point(75, 55);
-            this.btn_play.Name = "btn_play";
-            this.btn_play.Size = new System.Drawing.Size(75, 23);
-            this.btn_play.TabIndex = 0;
-            this.btn_play.Tag = "main_menu";
-            this.btn_play.Text = "Jouer";
-            this.btn_play.UseVisualStyleBackColor = true;
+            this.main_menu_btn_edit.Location = new System.Drawing.Point(75, 111);
+            this.main_menu_btn_edit.Name = "main_menu_btn_edit";
+            this.main_menu_btn_edit.Size = new System.Drawing.Size(75, 23);
+            this.main_menu_btn_edit.TabIndex = 1;
+            this.main_menu_btn_edit.Tag = "main_menu";
+            this.main_menu_btn_edit.Text = "Editer";
+            this.main_menu_btn_edit.UseVisualStyleBackColor = true;
+            this.main_menu_btn_edit.Click += new System.EventHandler(this.Main_menu_btn_edit_Click);
             // 
-            // btn_edit
+            // main_menu_btn_exit
             // 
-            this.btn_edit.Location = new System.Drawing.Point(75, 111);
-            this.btn_edit.Name = "btn_edit";
-            this.btn_edit.Size = new System.Drawing.Size(75, 23);
-            this.btn_edit.TabIndex = 1;
-            this.btn_edit.Tag = "main_menu";
-            this.btn_edit.Text = "Editer";
-            this.btn_edit.UseVisualStyleBackColor = true;
-            this.btn_edit.Click += new System.EventHandler(this.Btn_edit_Click);
-            // 
-            // btn_exit
-            // 
-            this.btn_exit.Location = new System.Drawing.Point(75, 336);
-            this.btn_exit.Name = "btn_exit";
-            this.btn_exit.Size = new System.Drawing.Size(75, 23);
-            this.btn_exit.TabIndex = 2;
-            this.btn_exit.Tag = "main_menu";
-            this.btn_exit.Text = "Quitter";
-            this.btn_exit.UseVisualStyleBackColor = true;
-            this.btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
+            this.main_menu_btn_exit.Location = new System.Drawing.Point(75, 336);
+            this.main_menu_btn_exit.Name = "main_menu_btn_exit";
+            this.main_menu_btn_exit.Size = new System.Drawing.Size(75, 23);
+            this.main_menu_btn_exit.TabIndex = 2;
+            this.main_menu_btn_exit.Tag = "main_menu";
+            this.main_menu_btn_exit.Text = "Quitter";
+            this.main_menu_btn_exit.UseVisualStyleBackColor = true;
+            this.main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_exit);
-            this.Controls.Add(this.btn_edit);
-            this.Controls.Add(this.btn_play);
+            this.Controls.Add(this.main_menu_btn_exit);
+            this.Controls.Add(this.main_menu_btn_edit);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Learn CTS";
@@ -83,9 +71,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_play;
-        private System.Windows.Forms.Button btn_edit;
-        private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.Button main_menu_btn_edit;
+        private System.Windows.Forms.Button main_menu_btn_exit;
     }
 }

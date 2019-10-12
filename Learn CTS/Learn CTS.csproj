@@ -66,6 +66,12 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameCard.Designer.cs">
+      <DependentUpon>GameCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
