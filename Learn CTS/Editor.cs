@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Learn_CTS
 {
@@ -22,7 +23,30 @@ namespace Learn_CTS
             InitializeComponent();
             this.game = game;
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games" + Path.DirectorySeparatorChar + game;
+            this.Text = "Éditeur : " + game;
             this.DoubleBuffered = false;
+        }
+
+        /// <summary>
+        /// Restart the application when closing the editor.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void Editor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Marks the current game as available.
+            JObject properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            if(properties["state"].ToString().Substring(0, 8).Equals("[DENIED]"))
+            {
+                properties["state"] = properties["state"].ToString().Substring(8);
+            }
+            else
+            {
+                properties["state"] = "Inactif.";
+            }
+            Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+
+            Application.Restart();
         }
 
         /// <summary>
@@ -32,6 +56,24 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Editor1_Load(object sender, EventArgs e)
         {
+            // Marks the current game as in edition so it blocks any concurrent edition or playing.
+            JObject properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            if(!properties["state"].ToString().Equals("Inactif."))
+            {
+                properties["state"] = "[DENIED]" + properties["state"];
+                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+                MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.",
+                                "Jeu en utilisation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+            properties["state"] = "En cours d'édition...";
+            Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+
+            // Place the windows at the center of the screen.
+            Rectangle screen = Screen.FromControl(this).Bounds;
+            this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
+
             // Set the title and cut it if necessary.
             int char_space = (this.Width - menu.Width - 64) / 24;
             if (char_space < 12) { char_space = 12; } // Avoid a possible substring exception with a ridicularly little window.
@@ -45,7 +87,7 @@ namespace Learn_CTS
 
             // Load already existing scenarios.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
-            foreach (string s in Directory.GetDirectories(sc_path))
+            foreach (string s in Directory.GetDirectories(@"" + sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
                 Add_Scenario(folder[1]);
@@ -198,7 +240,7 @@ namespace Learn_CTS
             Add_Scenario(new_scenario);
 
             // Create the new scenario in the appropriate folder.
-            Directory.CreateDirectory(this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8) + "." + new_scenario);
+            Directory.CreateDirectory(@"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8) + "." + new_scenario);
 
             // Select the newly created TreeNode.
             menu.SelectedNode = parent.LastNode;
@@ -326,7 +368,7 @@ namespace Learn_CTS
         {
             TreeNode tns = menu.Nodes.Find("scenarios", false)[0];
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
-            foreach (string s in Directory.GetDirectories(sc_path))
+            foreach (string s in Directory.GetDirectories(@"" + sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
                 int act_index = 0;
@@ -343,7 +385,7 @@ namespace Learn_CTS
                 if (int.Parse(folder[0]) - 1 != act_index)
                 {
                     int str_index = act_index + 1;
-                    Directory.Move(s, sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
+                    Directory.Move(@"" + s, @"" + sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
                 }
             }
 
@@ -421,8 +463,8 @@ namespace Learn_CTS
             }
 
             // Rename the scenario's folder.
-            Directory.Move(sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
-                           sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + new_name);
+            Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
+                           @"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + new_name);
 
             // Rename the scenario's Node.
             menu.SelectedNode.Text = new_name;
@@ -452,7 +494,7 @@ namespace Learn_CTS
             }
 
             // Remove the scenario's folder.
-            Directory.Delete(sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text, true);
+            Directory.Delete(@"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text, true);
 
             // Remove the scenario's Node.
             menu.Nodes.Remove(menu.SelectedNode);
@@ -466,12 +508,12 @@ namespace Learn_CTS
                 sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
             }
             int j = 1;
-            foreach (string s in Directory.GetDirectories(sc_path))
+            foreach (string s in Directory.GetDirectories(@"" + sc_path))
             {
                 string folder = s.Remove(0, sc_path.Length + 1);
                 if (j.ToString() != folder.Split('.')[0])
                 {
-                    Directory.Move(sc_path + Path.DirectorySeparatorChar + folder, sc_path + Path.DirectorySeparatorChar + j.ToString() + "." + folder.Split('.')[1]);
+                    Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + folder, @"" + sc_path + Path.DirectorySeparatorChar + j.ToString() + "." + folder.Split('.')[1]);
                 }
                 j++;
             }
@@ -510,16 +552,34 @@ namespace Learn_CTS
         /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
         /// <param name="var_name">Variable name in the JSON file.</param>
         /// <returns></returns>
-        public string Get_Var_From_JSON(string internal_path, string var_name)
+        public JObject Get_From_JSON(string internal_path)
         {
-            string output = "";
-            using (StreamReader stream_r = new StreamReader(this.game_path + internal_path))
+            JObject output;
+            using (StreamReader stream_r = new StreamReader(@"" + this.game_path + internal_path))
             {
                 string json_file = stream_r.ReadToEnd();
-                JObject json_dict = JObject.Parse(json_file);
-                output = (string) json_dict[var_name];
+                output = JObject.Parse(json_file);
             }
             return output;
+        }
+
+        /// <summary>
+        /// Recover the content of a variable in a JSON file at a specified path.
+        /// Cast this content as a string before returning it.
+        /// </summary>
+        /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
+        /// <param name="var_name">Variable name in the JSON file.</param>
+        /// <returns></returns>
+        public void Set_To_JSON(string internal_path, JObject new_content)
+        {
+            File.WriteAllText(@"" + this.game_path + internal_path, new_content.ToString());
+
+            // write JSON directly to a file
+            using (StreamWriter file = File.CreateText(@"" + this.game_path + internal_path))
+            using (JsonTextWriter writer = new JsonTextWriter(file))
+            {
+                new_content.WriteTo(writer);
+            }
         }
     }
 }

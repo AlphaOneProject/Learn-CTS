@@ -15,7 +15,7 @@ namespace Learn_CTS
          * "editor_menu" is the menu where the games are displayed.
          * "credits" means that the credits are displayed.
          */
-        String displayed_menu;
+        private String displayed_menu;
 
         /**
          * Default path of all the created games. 
@@ -30,6 +30,7 @@ namespace Learn_CTS
             InitializeComponent();
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
             this.DoubleBuffered = false;
+            this.Activate();
         }
 
         /// <summary>

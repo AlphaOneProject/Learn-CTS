@@ -104,6 +104,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Editor";
             this.Text = "Éditeur";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Editor_FormClosed);
             this.Load += new System.EventHandler(this.Editor1_Load);
             this.SizeChanged += new System.EventHandler(this.Editor1_SizeChanged);
             this.ResumeLayout(false);

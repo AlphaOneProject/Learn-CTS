@@ -49,6 +49,7 @@ namespace Learn_CTS
         {
             Form editor = new Editor(Title);
             editor.Show();
+            this.Parent.Parent.Hide();
         }
     }
 }
