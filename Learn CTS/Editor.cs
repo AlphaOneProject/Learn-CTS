@@ -232,15 +232,32 @@ namespace Learn_CTS
             TreeNode parent = menu.Nodes.Find("scenarios", false)[0];
             string new_scenario = "Nouveau scénario";
             int nbr_new_scenarios = 0;
-            foreach (TreeNode t in parent.Nodes)
+            int i = 0;
+            while (i < parent.Nodes.Count)
             {
-                if (t.Text.StartsWith("Nouveau scénario")) { nbr_new_scenarios++; }
+                nbr_new_scenarios = i;
+                foreach (TreeNode t in parent.Nodes)
+                {
+                    if (t.Text.Equals("Nouveau scénario (" + i.ToString() + ")")) {
+                        nbr_new_scenarios = 0;
+                        break;
+                    }
+                }
+                if (nbr_new_scenarios != 0) { break; }
+                i++;
             }
             if (nbr_new_scenarios != 0) { new_scenario = "Nouveau scénario (" + nbr_new_scenarios.ToString() + ")"; }
             Add_Scenario(new_scenario);
 
             // Create the new scenario in the appropriate folder.
             Directory.CreateDirectory(@"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8) + "." + new_scenario);
+
+            // Add a "properties.json" to the newly created folder.
+            JObject properties_content = new JObject();
+            properties_content["description"] = "Description par défaut";
+            File.WriteAllText(@"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8)
+                              + "." + new_scenario + Path.DirectorySeparatorChar + "properties.json",
+                              properties_content.ToString());
 
             // Select the newly created TreeNode.
             menu.SelectedNode = parent.LastNode;
@@ -371,6 +388,8 @@ namespace Learn_CTS
             foreach (string s in Directory.GetDirectories(@"" + sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
+
+                // Get the corresponding index for the input text from the folder.
                 int act_index = 0;
                 int i = 0;
                 while (i < tns.Nodes.Count)
@@ -382,8 +401,11 @@ namespace Learn_CTS
                     }
                     i++;
                 }
+
+                // Rename the folder if the index changed.
                 if (int.Parse(folder[0]) - 1 != act_index)
                 {
+                    MessageBox.Show(folder[0] + "\n" + act_index.ToString());
                     int str_index = act_index + 1;
                     Directory.Move(@"" + s, @"" + sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
                 }
@@ -546,12 +568,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Recover the content of a variable in a JSON file at a specified path.
-        /// Cast this content as a string before returning it.
+        /// Recover the content of a JSON file at a specified path.
         /// </summary>
         /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
-        /// <param name="var_name">Variable name in the JSON file.</param>
-        /// <returns></returns>
+        /// <returns>Content of the JSON file under a JObject structure.</returns>
         public JObject Get_From_JSON(string internal_path)
         {
             JObject output;
@@ -564,17 +584,15 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Recover the content of a variable in a JSON file at a specified path.
-        /// Cast this content as a string before returning it.
+        /// Set the content of the JSON file at the specified path.
         /// </summary>
         /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
-        /// <param name="var_name">Variable name in the JSON file.</param>
-        /// <returns></returns>
+        /// <param name="new_content">JObject containing the variables needed in the file.</param>
         public void Set_To_JSON(string internal_path, JObject new_content)
         {
             File.WriteAllText(@"" + this.game_path + internal_path, new_content.ToString());
 
-            // write JSON directly to a file
+            // Write JSON directly to the specified file.
             using (StreamWriter file = File.CreateText(@"" + this.game_path + internal_path))
             using (JsonTextWriter writer = new JsonTextWriter(file))
             {
