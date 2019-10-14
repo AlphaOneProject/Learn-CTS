@@ -405,7 +405,6 @@ namespace Learn_CTS
                 // Rename the folder if the index changed.
                 if (int.Parse(folder[0]) - 1 != act_index)
                 {
-                    MessageBox.Show(folder[0] + "\n" + act_index.ToString());
                     int str_index = act_index + 1;
                     Directory.Move(@"" + s, @"" + sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
                 }
