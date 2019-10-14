@@ -24,7 +24,6 @@ C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Lear
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.dll
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.xml
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
-C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources

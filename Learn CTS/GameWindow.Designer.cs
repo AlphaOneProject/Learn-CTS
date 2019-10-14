@@ -38,7 +38,10 @@
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "GameWindow";
             this.Text = "Learn CTS";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameWindow_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
             this.ResumeLayout(false);
 
