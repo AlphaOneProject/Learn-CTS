@@ -9,9 +9,25 @@ namespace Learn_CTS
 {
     abstract class Character : Texture
     {
-        public Character(int x, int y) : base(x, y, false)
+        /// <summary>
+        /// Constructor of character.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+
+        public Character(int x, int y) : base(x, y, true)
         {
-            
+        }
+
+        /// <summary>
+        /// Constructor of character with a custom name.
+        /// </summary>
+        /// <param name="name">The name of the character.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+
+        public Character(String name, int x, int y) : base(name, x, y)
+        {
         }
     }
 }
