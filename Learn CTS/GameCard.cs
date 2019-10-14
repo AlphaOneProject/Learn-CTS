@@ -23,7 +23,18 @@ namespace Learn_CTS
                 return this.lbl_title.Text;
             }
 
-            set => this.lbl_title.Text = value;
+            set
+            {
+                int char_space = 24; // Number of characters that can be seen in the label
+                if (value.Length > char_space)
+                {
+                    this.lbl_title.Text = value.Substring(0, char_space - 3) + "...";
+                }
+                else
+                {
+                    this.lbl_title.Text = value;
+                }
+            }
         }
 
         public String Description
@@ -33,7 +44,18 @@ namespace Learn_CTS
                 return this.lbl_description.Text;
             }
 
-            set => this.lbl_description.Text = value;
+            set
+            {
+                int char_space = 64; // Number of characters that can be seen in the label
+                if (value.Length > char_space)
+                {
+                    this.lbl_description.Text = value.Substring(0, char_space - 3) + "...";
+                }
+                else
+                {
+                    this.lbl_description.Text = value;
+                }
+            }
         }
 
         public bool IsDefault

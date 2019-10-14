@@ -13,6 +13,7 @@ namespace Learn_CTS
          * displayed_menu is meant to keep track which part of the menu is currently displaying.
          * "main_menu" is the main menu.
          * "editor_menu" is the menu where the games are displayed.
+         * "create_menu" is the menu where you choose the name of the newly created game.
          * "credits" means that the credits are displayed.
          */
         private String displayed_menu;
@@ -41,6 +42,18 @@ namespace Learn_CTS
         private void Menu_Load(object sender, EventArgs e)
         {
             this.displayed_menu = "main_menu";
+
+            // Dynamically places the controls of the main menu.
+            main_menu_btn_create.Location = new Point((this.Width / 2) - (main_menu_btn_create.Width / 2),
+                                            (this.Height / 2) - main_menu_btn_create.Height - (main_menu_btn_create.Height / 2) - 4);
+
+            main_menu_btn_edit.Location = new Point((this.Width / 2) - (main_menu_btn_edit.Width / 2),
+                            (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_create.Height / 2) + 4);
+
+            main_menu_btn_credits.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
+                (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+
+            main_menu_btn_exit.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
         }
 
         /// <summary>
@@ -108,49 +121,91 @@ namespace Learn_CTS
             this.Close();
         }
 
-        private void Btn_Back_To_Main_Menu_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Called when the main_menu_btn_create is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Main_menu_btn_create_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            Display_Create_Menu();
+        }
+
+        /// <summary>
+        /// Called when the editor_menu_btn_back_to_main_menu in the editor is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Back_to_main_menu(object sender, EventArgs e)
         {
             this.Controls.Clear();
             Display_Main_Menu();
         }
 
+        /// <summary>
+        /// Creates all controls necessary to display the main menu.
+        /// </summary>
         private void Display_Main_Menu()
         {
             displayed_menu = "main_menu";
-            this.SuspendLayout();
 
-            // 
+            // Creation of the button that will create a game.
+            Button main_menu_btn_create_dyna = new Button()
+            {
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Name = "main_menu_btn_create",
+                Size = new Size(230, 60),
+                TabIndex = 1,
+                Text = "Créer un jeu",
+                UseVisualStyleBackColor = true
+            };
+            main_menu_btn_create_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_create_dyna.Width / 2),
+                                    (this.Height / 2) - main_menu_btn_create_dyna.Height - (main_menu_btn_create_dyna.Height / 2) - 4);
+            main_menu_btn_create_dyna.Click += new EventHandler(this.Main_menu_btn_create_Click);
+
             // Creation of the button that will show the selection of available levels to edit.
-            // 
-            Button main_menu_btn_edit = new Button();
-            main_menu_btn_edit.Location = new Point(75, (int)(this.Height * 0.3));
-            main_menu_btn_edit.Name = "btn_edit";
-            main_menu_btn_edit.Size = new Size(75, 23);
-            main_menu_btn_edit.TabIndex = 1;
-            main_menu_btn_edit.Text = "Editer";
-            main_menu_btn_edit.UseVisualStyleBackColor = true;
-            main_menu_btn_edit.Click += new System.EventHandler(this.Main_menu_btn_edit_Click);
+            Button main_menu_btn_edit_dyna = new Button()
+            {
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Name = "main_menu_btn_edit",
+                Size = new Size(230, 60),
+                TabIndex = 1,
+                Text = "Mes jeux",
+                UseVisualStyleBackColor = true
+            };
+            main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
+                            (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_btn_create_dyna.Height / 2) + 4);
+            main_menu_btn_edit_dyna.Click += new EventHandler(this.Main_menu_btn_edit_Click);
 
-            // 
             // Creation of the button that will exit the application.
-            // 
-            Button main_menu_btn_exit = new Button();
-            main_menu_btn_exit.Location = new Point(75, (int)(this.Height * 0.7));
-            main_menu_btn_exit.Name = "btn_exit";
-            main_menu_btn_exit.Size = new Size(75, 23);
-            main_menu_btn_exit.TabIndex = 2;
-            main_menu_btn_exit.Text = "Quitter";
-            main_menu_btn_exit.UseVisualStyleBackColor = true;
-            main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
+            Button main_menu_btn_exit_dyna = new Button() {
+                Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10),
+                Name = "main_menu_btn_exit",
+                Size = new Size(109, 30),
+                TabIndex = 5,
+                Text = "Quitter",
+                UseVisualStyleBackColor = true
+            };
+            main_menu_btn_exit_dyna.Click += new EventHandler(this.Main_menu_btn_exit_Click);
 
-            this.Controls.AddRange(new Control[] { main_menu_btn_edit, main_menu_btn_exit });
+            // Creation of the button that displays credits.
+            Button main_menu_btn_credits_dyna = new Button()
+            {
+                Name = "main_menu_btn_credits_dyna",
+                Size = new Size(109, 30),
+                TabIndex = 5,
+                Text = "Credits",
+                UseVisualStyleBackColor = true
+            };
+            main_menu_btn_credits_dyna.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
+                (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
-            this.ResumeLayout();
+            this.Controls.AddRange(new Control[] { main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_credits_dyna });
         }
 
         /// <summary>
         /// Creates all controls necessary to display the editor menu.
-        /// Every controls created here have the tag "editor_menu".
         /// </summary>
         private void Display_editor_menu()
         {
@@ -158,23 +213,28 @@ namespace Learn_CTS
 
             this.SuspendLayout();
 
-            // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
-            FlowLayoutPanel flp_editor_menu = new FlowLayoutPanel();
-            flp_editor_menu.Size = new Size((int)(this.Width * 0.8), this.Height);
-            flp_editor_menu.Location = new Point((int)((this.Width / 2) - (flp_editor_menu.Width / 2)), 0);
-            flp_editor_menu.Name = "flp_editor_menu";
-            flp_editor_menu.TabIndex = 3;
-
             // Creation of the Button responsible to go back to the main menu.
-            Button btn_back_to_main_menu = new Button();
-            btn_back_to_main_menu.Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05));
-            btn_back_to_main_menu.Location = new Point(10, 10);
-            btn_back_to_main_menu.Name = "btn_back_to_main_menu";
-            btn_back_to_main_menu.Text = "<-";
-            btn_back_to_main_menu.UseVisualStyleBackColor = true;
-            btn_back_to_main_menu.Click += new EventHandler(this.Btn_Back_To_Main_Menu_Click);
+            Button editor_menu_btn_back_to_main_menu = new Button() {
+                Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05)),
+                Location = new Point(10, 10),
+                Name = "editor_menu_btn_back_to_main_menu",
+                Text = "<-",
+                UseVisualStyleBackColor = true
+            };
+            editor_menu_btn_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
-            this.Controls.AddRange(new Control[] { flp_editor_menu, btn_back_to_main_menu });
+
+            // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
+            FlowLayoutPanel flp_editor_menu = new FlowLayoutPanel()
+            {
+                Size = new Size(this.Width - (editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width - 8),
+                        this.Height),
+                Name = "flp_editor_menu",
+                TabIndex = 3
+            };
+            flp_editor_menu.Location = new Point(editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width + 8, 0);
+
+            this.Controls.AddRange(new Control[] { flp_editor_menu, editor_menu_btn_back_to_main_menu });
 
             // Fetching the existing games
             ArrayList games_list = Get_Games_List();
@@ -184,6 +244,38 @@ namespace Learn_CTS
             }
 
             this.ResumeLayout();
+        }
+
+        /// <summary>
+        /// Creates all controls necessary to display the creator menu.
+        /// </summary>
+        private void Display_Create_Menu()
+        {
+            this.displayed_menu = "create_menu";
+
+            // Creation of the text box to enter the game name.
+            TextBox create_menu_txt_name_game = new TextBox() {
+                Name = "create_menu_txt_name_game",
+                Size = new Size(300, 60)
+            };
+            create_menu_txt_name_game.Location = new Point((this.Width / 2) - (create_menu_txt_name_game.Width / 2),
+                                    (this.Height / 2) - create_menu_txt_name_game.Height - (create_menu_txt_name_game.Height / 2) - 4);
+
+            // Creation of the button that will create the game and go to the editor.
+            Button create_menu_btn_confirm = new Button()
+            {
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Name = "create_menu_btn_confirm",
+                Size = new Size(230, 60),
+                TabIndex = 1,
+                Text = "Créer",
+                UseVisualStyleBackColor = true
+            };
+            create_menu_btn_confirm.Location = new Point((this.Width / 2) - (create_menu_btn_confirm.Width / 2),
+                            (this.Height / 2) - create_menu_btn_confirm.Height + (create_menu_txt_name_game.Height / 2) + 4);
+            create_menu_btn_confirm.Click += new EventHandler(this.Main_menu_btn_edit_Click);
+
+            this.Controls.AddRange(new Control[] { create_menu_txt_name_game, create_menu_btn_confirm });
         }
 
         private void Menu_SizeChanged(object sender, EventArgs e)
@@ -205,13 +297,16 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "flp_editor_menu":
-                        c.Size = new Size((int)(this.Width * 0.8), this.Height);
-                        c.Location = new Point((int)((this.Width / 2) - (c.Width / 2)), 0);
-                        break;
-                    case "btn_back_to_main_menu":
+                    case "editor_menu_btn_back_to_main_menu":
                         c.Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05));
                         c.Location = new Point(10, 10);
+                        break;
+                    case "flp_editor_menu":
+                        c.Location = new Point(this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Location.X +
+                            this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Width + 8, 0);
+                        c.Size = new Size(this.Width - (this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Location.X +
+                            this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Width - 8) - c.Location.X,
+                            this.Height);
                         break;
                 }
             }
@@ -223,11 +318,19 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
+                    case "main_menu_btn_create":
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2), (this.Height / 2) - c.Height - (c.Height / 2) - 4);
+                        break;
                     case "main_menu_btn_edit":
-                        c.Location = new Point(75, (int)(this.Height * 0.3));
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2), 
+                            (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_create",false)[0].Height / 2) + 4);
+                        break;
+                    case "main_menu_btn_credits_dyna":
+                        c.Location = new Point((this.Width / 2) - c.Width - 6,
+                            (this.Height / 2) + (this.Controls.Find("main_menu_btn_edit", false)[0].Height / 2) + 10);
                         break;
                     case "main_menu_btn_exit":
-                        c.Location = new Point(75, (int)(this.Height*0.7));
+                        c.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
                         break;
                 }
             }
