@@ -20,7 +20,6 @@ C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newt
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
-C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.dll
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.xml
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
@@ -43,3 +42,7 @@ C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\bin\Debug\Newton
 C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn CTS.pdb
 C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
+C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
+C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
+C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
+C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources

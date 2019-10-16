@@ -14,7 +14,7 @@ namespace Learn_CTS
 
         private bool right;
 
-        public Door(int x, int y, bool r) : base(x, y, -1999, false)
+        public Door(int x, int y, bool r) : base(x.ToString(), y, -1999, false)
         {
             this.right = r;
         }
