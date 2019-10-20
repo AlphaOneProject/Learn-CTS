@@ -18,10 +18,11 @@ namespace Learn_CTS
         /// </summary>
 
         private List<Texture> list_textures;
+        private NPC_Manager nm = NPC_Manager.GetInstance();
         private Timer timer = new Timer();
-        private Player player = new Player(600, 504);
-        private Tram tram = new Tram(-4000,198);
-        private Background background = new Background(0);
+        private Player player;
+        private Tram tram;
+        private Background background;
         private Platform platform;
         private int DrawSurfaceWidth;
         private int DrawSurfaceHeight;
@@ -31,14 +32,17 @@ namespace Learn_CTS
         private bool go_right = false;
         private int ticks = 0;
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
+        private Dialog d;
 
 
         /// <summary>
         /// Initialize the game window
         /// </summary>
 
-        public GameWindow()
+        public GameWindow(String game)
         {
+            this.Text = game;
+            Texture.InitializePath(game);
             InitializeComponent();
             DoubleBuffered = true;
         }
@@ -49,7 +53,7 @@ namespace Learn_CTS
 
         private void InitializeTimer()
         {
-            timer.Interval = 15;
+            timer.Interval = 25;
             timer.Tick += new EventHandler(Timer_Tick);
         }
 
@@ -59,6 +63,9 @@ namespace Learn_CTS
 
         private void InitializeListTextures()
         {
+            player = new Player(600, 504);
+            tram = new Tram(-4000, 198);
+            background = new Background(0);
             background.DisableCollisions();
             platform = new Platform(-300, tram.GetZ() + 2);
             list_textures = new List<Texture>() {
@@ -67,7 +74,9 @@ namespace Learn_CTS
                 player,
                 platform
             };
-            tram.AddChild(new NPC(-3200,370));
+            tram.AddChild(nm.CreateNPC("1", -3200, 400));
+            tram.AddChild(nm.CreateNPC("2", -2400, 430));
+            tram.AddChild(nm.CreateNPC("3", -1800, 420));
         }
 
         /// <summary>
@@ -281,7 +290,7 @@ namespace Learn_CTS
 
         private void CheckIfTheTramIsArrived()
         {
-            if (tram.GetState() == 2 && (tram.GetX()+tram.GetWidth() > platform.GetX() + platform.GetWidth() - tram.GetDistanceMaxStop()))
+            if (tram.GetState() == 2 && (tram.GetX()+tram.GetWidth() > platform.GetX() + platform.GetWidth() - tram.GetDistanceMaxStop()) && (tram.GetX() + tram.GetWidth() < platform.GetX() + platform.GetWidth() - tram.GetDistanceMaxStop() + 100))
             {
                 tram.ChangeState();
             }
@@ -394,14 +403,19 @@ namespace Learn_CTS
 
         private bool SearchNPCDialog(List<Texture> list, int mx, int my)
         {
-            foreach (Texture t in list)
+            if (tram.IsInside())
             {
-                if (t.GetType().Name == "NPC" && t.IsHitboxHit(mx, my))
+                foreach (Texture t in list)
                 {
-                    MessageBox.Show("Dialog");
-                    return true;
+                    if (t.GetType().Name == "NPC" && t.IsHitboxHit(mx, my))
+                    {
+                        d = new Dialog(((NPC)t).GetID());
+                        this.Controls.Add(d);
+                        return true;
+                    }
+                    SearchNPCDialog(t.GetListChilds(), mx, my);
                 }
-                SearchNPCDialog(t.GetListChilds(), mx, my);
+                return false;
             }
             return false;
         }
@@ -434,9 +448,14 @@ namespace Learn_CTS
         private bool MovePlayer(int a, int b)
         {
             bool boo = true;
+            if (this.Controls.Contains(d))
+            {
+                return false;
+            }
             if (!tram.IsInside())
             {
                 player.Move(a, 0);
+                player.UpdateMovement(a, b);
                 if (IsCollidingWithTextures(player))
                 {
                     player.Move(-a, 0);
@@ -452,12 +471,14 @@ namespace Learn_CTS
             else
             {
                 tram.Move(-a, 0);
+                player.UpdateMovement(a, b);
                 if (IsCollidingWithTextures(player))
                 {
                     tram.Move(a, 0);
                     boo = false;
                 }
                 player.Move(0, b);
+                player.UpdateMovement(a, b);
                 if (IsCollidingWithTextures(player))
                 {
                     player.Move(0, -b);

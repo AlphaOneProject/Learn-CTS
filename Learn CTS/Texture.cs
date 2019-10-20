@@ -14,8 +14,7 @@ namespace Learn_CTS
     {
 
         // Attributes
-
-        private static string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        private static string projectDir;
 
         private int x;
         private int y;
@@ -41,7 +40,8 @@ namespace Learn_CTS
         {
             this.x = x;
             this.y = y;
-            this.path_image = GetDefaultPathImage();
+            // A CHANGER
+            /*this.path_image = GetDefaultPathImage();
             this.path_hitbox = GetDefaultPathHitbox();
             try
             {
@@ -51,7 +51,7 @@ namespace Learn_CTS
             catch(Exception e)
             {
                 MessageBox.Show(e.ToString());
-            }
+            }*/
         }
 
         /// <summary>
@@ -90,8 +90,9 @@ namespace Learn_CTS
             this.name = name;
             this.x = x;
             this.y = y;
-            this.path_image = projectDir + "\\resources\\textures\\" + this.name + ".png";
-            this.path_hitbox = projectDir + "\\resources\\textures\\" + this.name + "HitBox.png";
+            // A CHANGER
+            this.path_image = GetCustomPathImage(name);
+            this.path_hitbox = GetCustomPathHitbox(name);
             try
             {
                 this.SetImage(CreateImage(this.path_image));
@@ -134,9 +135,20 @@ namespace Learn_CTS
         /// </summary>
         /// <returns>The path to the image used by the texture.</returns>
 
-        private String GetDefaultPathImage()
+        /*private String GetDefaultPathImage()
         {
-            return projectDir + "\\resources\\textures\\" + this.GetType().Name + ".png";
+            if(this.GetType().BaseType.Name == "Character")
+            {
+                return projectDir + "characters\\" + this.GetType().Name + "\\" + this.GetType().Name + ".png";
+            }
+            else if (this.GetType().Name == "Tram")
+            {
+                return projectDir + "others\\Tram\\" + this.GetType().Name + ".png";
+            }
+            else
+            {
+                return projectDir + "others\\" + this.GetType().Name + ".png";
+            }
         }
 
         /// <summary>
@@ -146,7 +158,43 @@ namespace Learn_CTS
 
         private String GetDefaultPathHitbox()
         {
-            return projectDir + "\\resources\\textures\\" + this.GetType().Name + "Hitbox.png";
+            if (this.GetType().BaseType.Name == "Character")
+            {
+                return projectDir + "\\characters\\" + this.GetType().Name + "\\" + this.GetType().Name + "HitBox.png";
+            }
+            else if (this.GetType().Name == "Tram")
+            {
+                return projectDir + "\\others\\Tram\\" + this.GetType().Name + "HitBox.png";
+            }
+            else
+            {
+                return projectDir + "\\others\\" + this.GetType().Name + "HitBox.png";
+            }
+        }*/
+
+        public String GetCustomPathImage(string name)
+        {
+            if (this.GetType().BaseType.Name == "Character")
+            {
+                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "1_0.png";
+            }
+            else
+            {
+                return projectDir + Path.DirectorySeparatorChar+ "others" + Path.DirectorySeparatorChar + name + ".png";
+            }
+        }
+
+        public String GetCustomPathHitbox(string name)
+        {
+            //TODO
+            if (this.GetType().BaseType.Name == "Character")
+            {
+                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "Hitbox.png";
+            }
+            else
+            {
+                return projectDir + Path.DirectorySeparatorChar+  "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
+            }
         }
 
         /// <summary>
@@ -206,13 +254,14 @@ namespace Learn_CTS
             {
                 return Image.FromFile(path);
             }
-            catch (IOException)
+            catch (Exception)
             {
                 MessageBox.Show("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
                                 "Veuillez qu'elle soit bien ici : " + path + "\n" +
                                 "L'image par défaut va être utilisé.");
             }
-            return Image.FromFile(this.GetDefaultPathImage());
+            //return Image.FromFile(this.GetDefaultPathImage());
+            return null;
 
         }
 
@@ -228,13 +277,14 @@ namespace Learn_CTS
             {
                 return new Bitmap(Image.FromFile(path));
             }
-            catch (IOException)
+            catch (Exception)
             {
                 MessageBox.Show("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
                                 "Veuillez qu'elle soit bien ici : " + path + "\n" +
                                 "La hitbox par défaut va être utilisé.");
             }
-            return new Bitmap(Image.FromFile(this.GetDefaultPathHitbox()));
+            //return new Bitmap(Image.FromFile(this.GetDefaultPathHitbox()));
+            return null;
         }
 
         /// <summary>
@@ -271,6 +321,10 @@ namespace Learn_CTS
 
         public Image GetImage()
         {
+            if(this.image == null)
+            {
+                MessageBox.Show(this.name);
+            }
             return this.image;
         }
 
@@ -306,6 +360,11 @@ namespace Learn_CTS
             this.height = this.image.Height;
         }
 
+        public string GetName()
+        {
+            return this.name;
+        }
+
         /// <summary>
         /// Set the hitbox used by the texture.
         /// </summary>
@@ -338,16 +397,8 @@ namespace Learn_CTS
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
                 Color color;
-                try
-                {
-                    color = this.hitbox.GetPixel(c - this.x, d - this.y);
-                    return !Color.Equals(color, Color.FromArgb(0, 0, 0, 0));
-                }
-                catch(ArgumentOutOfRangeException e)
-                {
-                    Console.WriteLine(this + "\n" + e.ToString());
-                }
-                return false;
+                color = this.hitbox.GetPixel(c - this.x, d - this.y);
+                return !Color.Equals(color, Color.FromArgb(0, 0, 0, 0));
             }
             else
             {
@@ -528,7 +579,6 @@ namespace Learn_CTS
                 {
                     if (c.CollideWith(t))
                     {
-                        Console.WriteLine("2 "+c.ToString() + ":" + t.ToString());
                         return true;
                     }
                 }
@@ -578,6 +628,16 @@ namespace Learn_CTS
             {
                 return 0;
             }
+        }
+
+        public static void InitializePath(string game)
+        {
+            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + /*Path.DirectorySeparatorChar +*/ "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
+        }
+
+        public static string GetDirImages()
+        {
+            return projectDir; 
         }
     }
 }
