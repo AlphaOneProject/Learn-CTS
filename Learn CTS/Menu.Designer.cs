@@ -32,6 +32,7 @@
             this.main_menu_btn_exit = new System.Windows.Forms.Button();
             this.main_menu_btn_create = new System.Windows.Forms.Button();
             this.main_menu_btn_credits = new System.Windows.Forms.Button();
+            this.main_menu_btn_launch_engine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // main_menu_btn_edit
@@ -51,7 +52,7 @@
             this.main_menu_btn_exit.Location = new System.Drawing.Point(391, 265);
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
             this.main_menu_btn_exit.Size = new System.Drawing.Size(109, 30);
-            this.main_menu_btn_exit.TabIndex = 2;
+            this.main_menu_btn_exit.TabIndex = 4;
             this.main_menu_btn_exit.Tag = "main_menu";
             this.main_menu_btn_exit.Text = "Quitter";
             this.main_menu_btn_exit.UseVisualStyleBackColor = true;
@@ -63,7 +64,7 @@
             this.main_menu_btn_create.Location = new System.Drawing.Point(267, 199);
             this.main_menu_btn_create.Name = "main_menu_btn_create";
             this.main_menu_btn_create.Size = new System.Drawing.Size(230, 60);
-            this.main_menu_btn_create.TabIndex = 3;
+            this.main_menu_btn_create.TabIndex = 2;
             this.main_menu_btn_create.Tag = "main_menu";
             this.main_menu_btn_create.Text = "Créer un jeu";
             this.main_menu_btn_create.UseVisualStyleBackColor = true;
@@ -74,16 +75,29 @@
             this.main_menu_btn_credits.Location = new System.Drawing.Point(267, 265);
             this.main_menu_btn_credits.Name = "main_menu_btn_credits";
             this.main_menu_btn_credits.Size = new System.Drawing.Size(109, 30);
-            this.main_menu_btn_credits.TabIndex = 4;
+            this.main_menu_btn_credits.TabIndex = 3;
             this.main_menu_btn_credits.Tag = "main_menu";
             this.main_menu_btn_credits.Text = "Crédits";
             this.main_menu_btn_credits.UseVisualStyleBackColor = true;
+            // 
+            // main_menu_btn_launch_engine
+            // 
+            this.main_menu_btn_launch_engine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.main_menu_btn_launch_engine.Location = new System.Drawing.Point(267, 67);
+            this.main_menu_btn_launch_engine.Name = "main_menu_btn_launch_engine";
+            this.main_menu_btn_launch_engine.Size = new System.Drawing.Size(230, 60);
+            this.main_menu_btn_launch_engine.TabIndex = 0;
+            this.main_menu_btn_launch_engine.Tag = "main_menu";
+            this.main_menu_btn_launch_engine.Text = "Tester le moteur";
+            this.main_menu_btn_launch_engine.UseVisualStyleBackColor = true;
+            this.main_menu_btn_launch_engine.Click += new System.EventHandler(this.Test_Engine);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.main_menu_btn_launch_engine);
             this.Controls.Add(this.main_menu_btn_credits);
             this.Controls.Add(this.main_menu_btn_create);
             this.Controls.Add(this.main_menu_btn_exit);
@@ -103,5 +117,6 @@
         private System.Windows.Forms.Button main_menu_btn_exit;
         private System.Windows.Forms.Button main_menu_btn_create;
         private System.Windows.Forms.Button main_menu_btn_credits;
+        private System.Windows.Forms.Button main_menu_btn_launch_engine;
     }
 }

@@ -11,7 +11,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="x">The x coordinate.</param>
 
-        public Background(int x) : base(x, -482, -5000)
+        public Background(int x) : base("Background",x, -482, -5000)
         {
         }
 

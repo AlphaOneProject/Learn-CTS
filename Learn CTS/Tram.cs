@@ -17,8 +17,8 @@ namespace Learn_CTS
         private int max_speed = 50;
         private int speed = 50;
         private bool inside = false;
-        private String path_image_outside;
-        private String path_hitbox_outside;
+        //private String path_image_outside;
+        //private String path_hitbox_outside;
         private Image image_outside;
         private Bitmap hitbox_outside;
         private Bitmap hitbox_inside;
@@ -34,14 +34,14 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Tram(int x, int y) : base(x, y, -2000)
+        public Tram(int x, int y) : base("Tram", x, y, -2000)
         {
             this.max_distance_stop = this.DistanceBeforeStopping();
-            this.path_image_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "Outside.png";
-            this.path_hitbox_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "OutsideHitBox.png";
-            this.image_outside = CreateImage(this.path_image_outside);
-            this.hitbox_inside = CreateHitbox(this.GetPathHitBox());
-            this.hitbox_outside = CreateHitbox(this.path_hitbox_outside);
+            //this.path_image_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "TramOutside.png";
+            //this.path_hitbox_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "TramOutsideHitBox.png";
+            //this.image_outside = CreateImage(this.path_image_outside);
+            this.hitbox_inside = CreateHitbox(this.GetCustomPathHitbox("TramInside"));
+            this.hitbox_outside = CreateHitbox(this.GetCustomPathHitbox("TramOutside"));
             this.tram_outside = new Texture("TramOutside",this.GetX(), this.GetY());
             this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
@@ -261,6 +261,18 @@ namespace Learn_CTS
         public int GetDistanceMaxStop()
         {
             return this.max_distance_stop;
+        }
+
+        public override bool CollideWith(Texture t)
+        {
+            if (this.GetState() == 3 && t.GetY() > this.GetY() + 239)
+            {
+                return false;
+            }
+            else
+            {
+                return base.CollideWith(t);
+            }
         }
     }
 }

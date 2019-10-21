@@ -20,7 +20,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Player(int x, int y) : base(x, y)
+        public Player(int x, int y) : base(0, "Player", x, y)
         {
         }
 
