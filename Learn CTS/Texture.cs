@@ -176,7 +176,7 @@ namespace Learn_CTS
         {
             if (this.GetType().BaseType.Name == "Character")
             {
-                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "1_0.png";
+                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "1_0.png";
             }
             else
             {
@@ -189,7 +189,7 @@ namespace Learn_CTS
             //TODO
             if (this.GetType().BaseType.Name == "Character")
             {
-                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "Hitbox.png";
+                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "Hitbox.png";
             }
             else
             {
@@ -311,7 +311,12 @@ namespace Learn_CTS
         public virtual void UpdateGraphic(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
+            if((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
+            {
+                g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
+                /*Rectangle r = new Rectangle(this.GetX(), this.GetY(), this.GetWidth(), this.GetHeight());
+                this.Invalidate(r);*/
+            }
         }
 
         /// <summary>
@@ -396,9 +401,7 @@ namespace Learn_CTS
         {
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
-                Color color;
-                color = this.hitbox.GetPixel(c - this.x, d - this.y);
-                return !Color.Equals(color, Color.FromArgb(0, 0, 0, 0));
+                return !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
             }
             else
             {
@@ -632,7 +635,7 @@ namespace Learn_CTS
 
         public static void InitializePath(string game)
         {
-            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + /*Path.DirectorySeparatorChar +*/ "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
+            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
         }
 
         public static string GetDirImages()

@@ -11,6 +11,7 @@ namespace Learn_CTS
     {
         // Attributes
 
+        private int quiz;
         private int id;
 
         /// <summary>
@@ -19,9 +20,10 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public NPC(int id, int x, int y) : base(x, y)
+        public NPC(int id, int x, int y, int quiz) : base(x, y)
         {
             this.id = id;
+            this.quiz = quiz;
         }
 
         /// <summary>
@@ -31,14 +33,14 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public NPC(int id, String name, int x, int y) : base(name, x, y)
+        public NPC(int id, String name, int x, int y, int quiz) : base(id, name, x, y)
         {
-            this.id = id;
+            this.quiz = quiz;
         }
 
-        public int GetID()
+        public int GetQuiz()
         {
-            return this.id;
+            return this.quiz;
         }
     }
 }
