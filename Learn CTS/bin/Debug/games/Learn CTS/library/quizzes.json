@@ -1,5 +1,23 @@
 {
+<<<<<<< HEAD
+	1 : {question : "Est-ce un test ?", choices : 4, 
+		c1 : {"Oui", valid : false, score : -100, redirect : ""},
+		c2 : {"Oui.", valid : false, score : -100, redirect : ""},
+		c3 : {"Non", valid : false, score : -20, redirect : ""},
+		c4 : {"Non.", valid : true, score : 12, redirect : ""}},
+	2 : {question : "Êtes-vous humain ?", choices : 4,
+		c1 : {"Oui", valid : true, score : 42, redirect : ""},
+		c2 : {"Oui.", valid : true, score : 12, redirect : ""},
+		c3 : {"Non", valid : false, score : -12, redirect : ""},
+		c4 : {"Non.", valid : false, score : -42, redirect : ""}},
+	3 : {question : "Aimez-vous les trains ?", choices : 4,
+		c1 : {"Oui", valid : true, score : 420, redirect : ""},
+		c2 : {"Oui.", valid : true, score : 142857, redirect : ""},
+		c3 : {"Non", valid : false, score : -666, redirect : ""},
+		c4 : {"Non.", valid : false, score : -696969, redirect : "hell"}}
+=======
 	1 : {question : "Est-ce un test ?", choices : 4, c1 : {answer : "Oui", valid : false, score : -100, redirect : ""}, c2 : {answer : "Oui.", valid : false, score : -100, redirect : ""}, c3 : {answer : "Non", valid : false, score : -20, redirect : ""}, c4 : {answer : "Non.", valid : true, score : 12, redirect : ""}},
 	2 : {question : "Êtes-vous humain ?", choices : 4, c1 : {answer : "Oui", valid : true, score : 42, redirect : ""}, c2 : {answer : "Oui.", valid : true, score : 12, redirect : ""}, c3 : {answer : "Non", valid : false, score : -12, redirect : ""}, c4 : {answer : "Non.", valid : false, score : -42, redirect : ""}},
 	3 : {question : "Aimez-vous les trains ?", choices : 4, c1 : {answer : "Oui", valid : true, score : 420, redirect : ""}, "c2" : {answer : "Oui.", valid : true, score : 142857, redirect : ""}, c3 : {answer : "Non", valid : false, score : -666, redirect : ""}, c4 : {answer : "Non.", valid : false, score : -696969, redirect : "hell"}}
+>>>>>>> 0d9288c64b9c3678a9a162c1d8211f763f7a0f8c
 }

@@ -47,9 +47,11 @@ namespace Learn_CTS
 
             main_menu_btn_launch_engine.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
                                     (this.Height / 2) - (main_menu_btn_launch_engine.Height*2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+            main_menu_btn_launch_engine.TabIndex = 0;
 
             main_menu_btn_create.Location = new Point((this.Width / 2) - (main_menu_btn_create.Width / 2),
                                             (this.Height / 2) - main_menu_btn_create.Height - (main_menu_btn_create.Height / 2) - 4);
+            main_menu_btn_create.TabIndex = 1;
 
             main_menu_btn_edit.Location = new Point((this.Width / 2) - (main_menu_btn_edit.Width / 2),
                             (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_create.Height / 2) + 4);
@@ -160,8 +162,8 @@ namespace Learn_CTS
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "main_menu_btn_launch_engine",
                 Size = new Size(230, 60),
-                TabIndex = 1,
-                Text = "Tester le moteur de jeu",
+                TabIndex = 0,
+                Text = "Tester le moteur",
                 UseVisualStyleBackColor = true
             };
             main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
@@ -188,7 +190,7 @@ namespace Learn_CTS
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "main_menu_btn_edit",
                 Size = new Size(230, 60),
-                TabIndex = 1,
+                TabIndex = 2,
                 Text = "Mes jeux",
                 UseVisualStyleBackColor = true
             };
@@ -201,7 +203,7 @@ namespace Learn_CTS
                 Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10),
                 Name = "main_menu_btn_exit",
                 Size = new Size(109, 30),
-                TabIndex = 5,
+                TabIndex = 4,
                 Text = "Quitter",
                 UseVisualStyleBackColor = true
             };
@@ -212,7 +214,7 @@ namespace Learn_CTS
             {
                 Name = "main_menu_btn_credits",
                 Size = new Size(109, 30),
-                TabIndex = 5,
+                TabIndex = 3,
                 Text = "Credits",
                 UseVisualStyleBackColor = true
             };
@@ -317,9 +319,13 @@ namespace Learn_CTS
             {
                 e.Handled = true;
             }
-            if (e.KeyChar == (char)13 && !t.Text.Equals(String.Empty))
+            if (e.KeyChar == (char)13 && !t.Text.Equals(String.Empty) && Is_Game_Unique(t.Text))
             {
                 Create_menu_confirm_box(t.Text);
+            }
+            if (!Is_Game_Unique(t.Text))
+            {
+                MessageBox.Show("Ce jeu existe déjà.");
             }
         }
         
@@ -327,39 +333,58 @@ namespace Learn_CTS
         {
             foreach (Control c in this.Controls)
             {
-                if (c.Name.Equals("create_menu_txt_name_game"))
+                if (c.Name.Equals("create_menu_txt_name_game") && Is_Game_Unique(c.Text))
                 {
                     if (!c.Text.Equals(String.Empty))
                     {
                         Create_menu_confirm_box(c.Text);
                     }
                 }
+                if (!Is_Game_Unique(c.Text))
+                {
+                    MessageBox.Show("Ce jeu existe déjà.");
+                }
             }
         }
 
+        private Boolean Is_Game_Unique(String nom)
+        {
+            Boolean res = true;
+            foreach (String dir in Directory.GetDirectories(@"" + games_path))
+            {
+                if (nom.Equals(dir))
+                {
+                    res = false;
+                }
+            }
+            return res;
+        }
 
         private void Create_menu_confirm_box(String nom)
         {
-            if (MessageBox.Show("Confirmer la creation du jeu " + nom + " ?", "Confirmation de création",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.No)
+            if ((MessageBox.Show("Confirmer la creation du jeu " + nom + " ?", "Confirmation de création",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes))
             {
-                MessageBox.Show("dd");
                 Create_game(nom);
+                Form g = new Editor(nom);
+                this.Hide();
+                g.Show();
             }
         }
 
         private void Create_game(String nom)
         {
+
+            //TODO : verifier si le nom est unique
             //Creation of the directories used by the game.
             Directory.CreateDirectory(@"" + this.games_path + nom);
-            MessageBox.Show(this.games_path + nom);
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
 
             // Add a "properties.json" to the newly created folder.
             JObject properties_content = new JObject();
-            properties_content["default"] = "true";
-            properties_content["state"] = "inactif";
+            properties_content["default"] = false;
+            properties_content["state"] = "Inactif.";
             properties_content["description"] = "Description par défaut";
             File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "properties.json",
                               properties_content.ToString());
