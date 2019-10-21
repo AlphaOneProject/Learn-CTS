@@ -32,6 +32,7 @@
             this.main_menu_btn_exit = new System.Windows.Forms.Button();
             this.main_menu_btn_create = new System.Windows.Forms.Button();
             this.main_menu_btn_credits = new System.Windows.Forms.Button();
+            this.main_menu_btn_launch_engine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // main_menu_btn_edit
@@ -79,11 +80,24 @@
             this.main_menu_btn_credits.Text = "Crédits";
             this.main_menu_btn_credits.UseVisualStyleBackColor = true;
             // 
+            // main_menu_btn_launch_engine
+            // 
+            this.main_menu_btn_launch_engine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.main_menu_btn_launch_engine.Location = new System.Drawing.Point(267, 67);
+            this.main_menu_btn_launch_engine.Name = "main_menu_btn_launch_engine";
+            this.main_menu_btn_launch_engine.Size = new System.Drawing.Size(230, 60);
+            this.main_menu_btn_launch_engine.TabIndex = 5;
+            this.main_menu_btn_launch_engine.Tag = "main_menu";
+            this.main_menu_btn_launch_engine.Text = "Tester le moteur";
+            this.main_menu_btn_launch_engine.UseVisualStyleBackColor = true;
+            this.main_menu_btn_launch_engine.Click += new System.EventHandler(this.Test_Engine);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.main_menu_btn_launch_engine);
             this.Controls.Add(this.main_menu_btn_credits);
             this.Controls.Add(this.main_menu_btn_create);
             this.Controls.Add(this.main_menu_btn_exit);
@@ -103,5 +117,6 @@
         private System.Windows.Forms.Button main_menu_btn_exit;
         private System.Windows.Forms.Button main_menu_btn_create;
         private System.Windows.Forms.Button main_menu_btn_credits;
+        private System.Windows.Forms.Button main_menu_btn_launch_engine;
     }
 }
