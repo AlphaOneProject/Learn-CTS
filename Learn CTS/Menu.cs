@@ -44,6 +44,10 @@ namespace Learn_CTS
             this.displayed_menu = "main_menu";
 
             // Dynamically places the controls of the main menu.
+
+            main_menu_btn_launch_engine.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height*2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+
             main_menu_btn_create.Location = new Point((this.Width / 2) - (main_menu_btn_create.Width / 2),
                                             (this.Height / 2) - main_menu_btn_create.Height - (main_menu_btn_create.Height / 2) - 4);
 
@@ -133,7 +137,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Called when the editor_menu_btn_back_to_main_menu in the editor is clicked.
+        /// Called when a button to return to the main menu is clicked.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -150,7 +154,21 @@ namespace Learn_CTS
         {
             displayed_menu = "main_menu";
 
-            // Creation of the button that will create a game.
+            // Creation of the button that will launch the game engine.
+            Button main_menu_btn_launch_engine_dyna = new Button()
+            {
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                Name = "main_menu_btn_launch_engine",
+                Size = new Size(230, 60),
+                TabIndex = 1,
+                Text = "Tester le moteur de jeu",
+                UseVisualStyleBackColor = true
+            };
+            main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+            main_menu_btn_launch_engine_dyna.Click += new EventHandler(Test_Engine);
+
+            // Creation of the button that go to the menu to create a game.
             Button main_menu_btn_create_dyna = new Button()
             {
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -192,7 +210,7 @@ namespace Learn_CTS
             // Creation of the button that displays credits.
             Button main_menu_btn_credits_dyna = new Button()
             {
-                Name = "main_menu_btn_credits_dyna",
+                Name = "main_menu_btn_credits",
                 Size = new Size(109, 30),
                 TabIndex = 5,
                 Text = "Credits",
@@ -201,7 +219,7 @@ namespace Learn_CTS
             main_menu_btn_credits_dyna.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
-            this.Controls.AddRange(new Control[] { main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_credits_dyna });
+            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_credits_dyna });
         }
 
         /// <summary>
@@ -215,7 +233,7 @@ namespace Learn_CTS
 
             // Creation of the Button responsible to go back to the main menu.
             Button editor_menu_btn_back_to_main_menu = new Button() {
-                Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05)),
+                Size = new Size(50, 50),
                 Location = new Point(10, 10),
                 Name = "editor_menu_btn_back_to_main_menu",
                 Text = "<-",
@@ -253,13 +271,25 @@ namespace Learn_CTS
         {
             this.displayed_menu = "create_menu";
 
+            // Creation of the Button responsible to go back to the main menu.
+            Button create_menu_btn_back_to_main_menu = new Button()
+            {
+                Size = new Size(50, 50),
+                Location = new Point(10, 10),
+                Name = "create_menu_btn_back_to_main_menu",
+                Text = "<-",
+                UseVisualStyleBackColor = true
+            };
+            create_menu_btn_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+
             // Creation of the text box to enter the game name.
             TextBox create_menu_txt_name_game = new TextBox() {
                 Name = "create_menu_txt_name_game",
+                ShortcutsEnabled = false,
                 Size = new Size(300, 60)
             };
             create_menu_txt_name_game.Location = new Point((this.Width / 2) - (create_menu_txt_name_game.Width / 2),
-                                    (this.Height / 2) - create_menu_txt_name_game.Height - (create_menu_txt_name_game.Height / 2) - 4);
+                                    (this.Height / 2) - create_menu_txt_name_game.Height - (create_menu_txt_name_game.Height *2 ) - 12);
 
             // Creation of the button that will create the game and go to the editor.
             Button create_menu_btn_confirm = new Button()
@@ -273,9 +303,66 @@ namespace Learn_CTS
             };
             create_menu_btn_confirm.Location = new Point((this.Width / 2) - (create_menu_btn_confirm.Width / 2),
                             (this.Height / 2) - create_menu_btn_confirm.Height + (create_menu_txt_name_game.Height / 2) + 4);
-            create_menu_btn_confirm.Click += new EventHandler(this.Main_menu_btn_edit_Click);
 
-            this.Controls.AddRange(new Control[] { create_menu_txt_name_game, create_menu_btn_confirm });
+            create_menu_btn_confirm.Click += new EventHandler(this.Create_menu_btn_confirm_Click);
+            create_menu_txt_name_game.KeyPress += new KeyPressEventHandler(this.Create_menu_txt_name_game_KeyPress);
+
+            this.Controls.AddRange(new Control[] { create_menu_btn_back_to_main_menu, create_menu_txt_name_game, create_menu_btn_confirm });
+        }
+
+        private void Create_menu_txt_name_game_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == (char)13 && !t.Text.Equals(String.Empty))
+            {
+                Create_menu_confirm_box(t.Text);
+            }
+        }
+        
+        private void Create_menu_btn_confirm_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c.Name.Equals("create_menu_txt_name_game"))
+                {
+                    if (!c.Text.Equals(String.Empty))
+                    {
+                        Create_menu_confirm_box(c.Text);
+                    }
+                }
+            }
+        }
+
+
+        private void Create_menu_confirm_box(String nom)
+        {
+            if (MessageBox.Show("Confirmer la creation du jeu " + nom + " ?", "Confirmation de création",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.No)
+            {
+                MessageBox.Show("dd");
+                Create_game(nom);
+            }
+        }
+
+        private void Create_game(String nom)
+        {
+            //Creation of the directories used by the game.
+            Directory.CreateDirectory(@"" + this.games_path + nom);
+            MessageBox.Show(this.games_path + nom);
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
+
+            // Add a "properties.json" to the newly created folder.
+            JObject properties_content = new JObject();
+            properties_content["default"] = "true";
+            properties_content["state"] = "inactif";
+            properties_content["description"] = "Description par défaut";
+            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "properties.json",
+                              properties_content.ToString());
         }
 
         private void Menu_SizeChanged(object sender, EventArgs e)
@@ -318,6 +405,10 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
+                    case "main_menu_btn_launch_engine":
+                        c.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+                        break;
                     case "main_menu_btn_create":
                         c.Location = new Point((this.Width / 2) - (c.Width / 2), (this.Height / 2) - c.Height - (c.Height / 2) - 4);
                         break;
@@ -325,7 +416,7 @@ namespace Learn_CTS
                         c.Location = new Point((this.Width / 2) - (c.Width / 2), 
                             (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_create",false)[0].Height / 2) + 4);
                         break;
-                    case "main_menu_btn_credits_dyna":
+                    case "main_menu_btn_credits":
                         c.Location = new Point((this.Width / 2) - c.Width - 6,
                             (this.Height / 2) + (this.Controls.Find("main_menu_btn_edit", false)[0].Height / 2) + 10);
                         break;
@@ -334,6 +425,12 @@ namespace Learn_CTS
                         break;
                 }
             }
+        }
+
+        private void Test_Engine(object sender, EventArgs e)
+        {
+            Form gw = new GameWindow("Learn CTS");
+            gw.Show();
         }
     }
 }
