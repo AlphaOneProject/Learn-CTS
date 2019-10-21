@@ -13,6 +13,7 @@ namespace Learn_CTS
     {
         // Attributes
 
+        private int id;
         private int c = 0;
         private int t = 0;
         private List<Image> animation_list_west = new List<Image>();
@@ -37,18 +38,19 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Character(String name, int x, int y) : base(name, x, y, true)
+        public Character(int id, String name, int x, int y) : base(name, x, y, true)
         {
+            this.id = id;
             for (int i = 0; i < 8; i++)
             {
-                animation_list_est.Add(this.CreateImage(Texture.GetDirImages()+ Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "1_"+(i+1).ToString()+".png"));
-                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar + "3_" + (i+1).ToString() + ".png"));
+                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "1_" + (i + 1).ToString() + ".png"));
+                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "3_" + (i + 1).ToString() + ".png"));
             }
         }
 
         public void SetDefaultPose()
         {
-            this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.GetName() + Path.DirectorySeparatorChar + this.last_direction.ToString() + "_0.png"));
+            this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + this.last_direction.ToString() + "_0.png"));
         }
 
         public void UpdateMovement(int a, int b)
@@ -67,7 +69,18 @@ namespace Learn_CTS
                     this.SetImage(animation_list_west[c]);
                     this.last_direction = 3;
                 }
-                if (a != 0)
+                if(b != 0)
+                {
+                    if(this.last_direction == 1)
+                    {
+                        this.SetImage(animation_list_est[c]);
+                    }
+                    else if(this.last_direction == 3)
+                    {
+                        this.SetImage(animation_list_west[c]);
+                    }
+                }
+                if (a != 0 || b!=0)
                 {
                     hasMoved = true;
                     this.c++;
@@ -93,6 +106,11 @@ namespace Learn_CTS
                 }
             }
             base.UpdateGraphic(e);
+        }
+
+        public int GetID()
+        {
+            return this.id;
         }
     }
 }

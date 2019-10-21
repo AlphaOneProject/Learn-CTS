@@ -262,5 +262,17 @@ namespace Learn_CTS
         {
             return this.max_distance_stop;
         }
+
+        public override bool CollideWith(Texture t)
+        {
+            if (this.GetState() == 3 && t.GetY() > this.GetY() + 239)
+            {
+                return false;
+            }
+            else
+            {
+                return base.CollideWith(t);
+            }
+        }
     }
 }
