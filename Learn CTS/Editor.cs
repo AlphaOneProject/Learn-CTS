@@ -87,10 +87,17 @@ namespace Learn_CTS
 
             // Load already existing scenarios.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
-            foreach (string s in Directory.GetDirectories(@"" + sc_path))
+            foreach (string scenario in Directory.GetDirectories(@"" + sc_path))
             {
-                string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
-                Add_Scenario(folder[1]);
+                string[] sc_folder = scenario.Remove(0, sc_path.Length + 1).Split('.');
+                Add_Scenario(sc_folder[1]);
+
+                // Load existing situations in each scenario.
+                foreach (string situation in Directory.GetDirectories(@"" + scenario))
+                {
+                    string[] si_folder = situation.Remove(0, scenario.Length + 1).Split('.');
+                    Add_Situation(menu.Nodes.Find("scenarios", false)[0].LastNode.Name, si_folder[1]);
+                }
             }
 
             menu.ExpandAll();
@@ -114,16 +121,6 @@ namespace Learn_CTS
                 }
                 content.Controls[0].Dispose();
             }
-            nbr_ctrl = menu.Controls.Count;
-            for (int i = 0; i < nbr_ctrl; i++)
-            {
-                if (menu.Controls[0].GetType() == new PictureBox().GetType())
-                {
-                    PictureBox pb = (PictureBox)menu.Controls[0];
-                    pb.Image.Dispose();
-                }
-                menu.Controls[0].Dispose();
-            }
 
             TreeView t = (TreeView) sender;
             String name = t.SelectedNode.Name;
@@ -132,6 +129,10 @@ namespace Learn_CTS
             if(name.StartsWith("scenario") && name != "scenarios")
             {
                 Display_Scenario();
+            }
+            else if (name.StartsWith("situation"))
+            {
+                Display_Situation();
             }
             else
             {
@@ -153,11 +154,6 @@ namespace Learn_CTS
                         throw new ArgumentException("Category not yet implemented: " + t.SelectedNode.Text);
                 }
             }
-        }
-
-        private void Menu_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-        {
-            e.Cancel = true;
         }
 
         /// <summary>
@@ -228,7 +224,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Add_Scenario(object sender, EventArgs e)
         {
-            // Initialize necessary variables and call .
+            // Initialize the name and data structure.
             TreeNode parent = menu.Nodes.Find("scenarios", false)[0];
             string new_scenario = "Nouveau scénario";
             int nbr_new_scenarios = 0;
@@ -238,7 +234,8 @@ namespace Learn_CTS
                 nbr_new_scenarios = i;
                 foreach (TreeNode t in parent.Nodes)
                 {
-                    if (t.Text.Equals("Nouveau scénario (" + i.ToString() + ")")) {
+                    if (t.Text.Equals("Nouveau scénario (" + i.ToString() + ")"))
+                    {
                         nbr_new_scenarios = 0;
                         break;
                     }
@@ -302,24 +299,24 @@ namespace Learn_CTS
             PictureBox pb_down_scenario = new PictureBox()
             {
                 Name = "pb_down_scenario",
-                Size = new Size(16, 16),
+                Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" + 
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             pb_down_scenario.Click += new EventHandler(this.Down_Scenario);
-            menu.Controls.Add(pb_down_scenario);
+            content.Controls.Add(pb_down_scenario);
 
             PictureBox pb_up_scenario = new PictureBox()
             {
                 Name = "pb_up_scenario",
-                Size = new Size(16, 16),
+                Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             pb_up_scenario.Click += new EventHandler(this.Up_Scenario);
-            menu.Controls.Add(pb_up_scenario);
+            content.Controls.Add(pb_up_scenario);
 
             // Creation of a button allowing to rename the scenario.
             PictureBox pb_rename_scenario = new PictureBox()
@@ -345,12 +342,24 @@ namespace Learn_CTS
             txt_rename_scenario.KeyPress += new KeyPressEventHandler(this.Rename_Scenario_Txt_Keypress);
             content.Controls.Add(txt_rename_scenario);
 
+            // Creation of the button responsible for the situations' creation.
+            Button btn_add_situation = new Button()
+            {
+                Name = "btn_add_situation",
+                Text = "Ajouter une situation",
+                AutoSize = true
+            };
+            btn_add_situation.Click += new EventHandler(this.Add_Situation);
+            content.Controls.Add(btn_add_situation);
+
             // Set the correct location of the controls (responsive with the groupbox's size).
             btn_discard_scenario.Location = new Point(content.Size.Width - btn_discard_scenario.Size.Width, 10);
-            pb_down_scenario.Location = new Point(menu.Location.X - 8, menu.Location.Y - 4 + (32 * 6) + (32 * menu.SelectedNode.Index));
-            pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, menu.Location.Y - 4 + (32 * 6) + (32 * menu.SelectedNode.Index));
             pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
+            pb_down_scenario.Location = new Point(pb_rename_scenario.Location.X + pb_rename_scenario.Width + 8, 0);
+            pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
             txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
+
+            btn_add_situation.Location = new Point((content.Size.Width - btn_add_situation.Size.Width) / 2, 100);
         }
 
         private void Down_Scenario(object sender, EventArgs e)
@@ -527,6 +536,311 @@ namespace Learn_CTS
             for(int i = 0; i < sc.Nodes.Count; i++)
             {
                 sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
+            }
+            int j = 1;
+            foreach (string s in Directory.GetDirectories(@"" + sc_path))
+            {
+                string folder = s.Remove(0, sc_path.Length + 1);
+                if (j.ToString() != folder.Split('.')[0])
+                {
+                    Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + folder, @"" + sc_path + Path.DirectorySeparatorChar + j.ToString() + "." + folder.Split('.')[1]);
+                }
+                j++;
+            }
+        }
+
+        public void Add_Situation(object sender, EventArgs e)
+        {
+            // Initialize the name and data structure.
+            TreeNode parent = menu.SelectedNode;
+            string new_situation = "Nouvelle situation";
+            int nbr_new_situations = 0;
+            int i = 1;
+            while (i < parent.Nodes.Count + 1)
+            {
+                nbr_new_situations = i;
+                foreach (TreeNode t in parent.Nodes)
+                {
+                    if (t.Text.Equals("Nouvelle situation (" + i.ToString() + ")"))
+                    {
+                        nbr_new_situations = 0;
+                        break;
+                    }
+                }
+                if (nbr_new_situations != 0) { break; }
+                i++;
+            }
+            if (nbr_new_situations != 0) { new_situation = "Nouvelle situation (" + nbr_new_situations.ToString() + ")"; }
+            Add_Situation(parent.Name, new_situation);
+
+            String access_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                                 (parent.Index + 1).ToString() + "." + parent.Text + Path.DirectorySeparatorChar;
+
+            // Create the new scenario in the appropriate folder.
+            Directory.CreateDirectory(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation);
+
+            // Add a "dialogs.json" to the newly created folder.
+            JObject dialogs_content = new JObject();
+            File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "dialogs.json",
+                              dialogs_content.ToString());
+
+            // Add a "environment.json" to the folder.
+            JObject environment_content = new JObject();
+            environment_content["background"] = "default";
+            environment_content["scene_type"] = "tram_entrance";
+            File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
+                              environment_content.ToString());
+
+            // Select the newly created TreeNode.
+            menu.SelectedNode = parent.LastNode;
+        }
+
+        private void Add_Situation(string scenario, string new_situation)
+        {
+            // Initialize necessary variables.
+            TreeNode tn_new_situation = new TreeNode();
+            TreeNode tn_parent = menu.Nodes.Find(scenario, true)[0];
+            int nbr_existing_scenarios = tn_parent.Nodes.Count + 1;
+
+            // Configure the TreeNode associated to the new scenario.
+            tn_new_situation.Name = "situation" + (tn_parent.Index + 1) + "_" + nbr_existing_scenarios.ToString();
+            tn_new_situation.Text = new_situation;
+            tn_parent.Nodes.Add(tn_new_situation);
+        }
+
+        public void Display_Situation()
+        {
+            // Creation of all controls.
+
+            // Creation of a button allowing to discard the situation.
+            Button btn_discard_situation = new Button()
+            {
+                Name = "btn_discard_situation",
+                Text = "X",
+                AutoSize = true
+            };
+            btn_discard_situation.Click += new System.EventHandler(this.Discard_Situation);
+            content.Controls.Add(btn_discard_situation);
+
+            // Creation of two arrows allowing changement of the scenarios' order.
+            PictureBox pb_down_situation = new PictureBox()
+            {
+                Name = "pb_down_situation",
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_down_situation.Click += new EventHandler(this.Down_Situation);
+            content.Controls.Add(pb_down_situation);
+
+            PictureBox pb_up_situation = new PictureBox()
+            {
+                Name = "pb_up_situation",
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_up_situation.Click += new EventHandler(this.Up_Situation);
+            content.Controls.Add(pb_up_situation);
+
+            // Creation of a button allowing to rename the scenario.
+            PictureBox pb_rename_situation = new PictureBox()
+            {
+                Name = "pb_rename_situation",
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            content.Controls.Add(pb_rename_situation);
+
+            // Creation of the hidden textbox allowing to enter a new scenario's name.
+            TextBox txt_rename_situation = new TextBox()
+            {
+                Name = "txt_rename_situation",
+                Text = menu.SelectedNode.Text,
+                Width = (menu.SelectedNode.Text.Length * 12) + 20,
+                ShortcutsEnabled = false,
+                Visible = false
+            };
+            txt_rename_situation.KeyPress += new KeyPressEventHandler(this.Rename_Situation_Txt_Keypress);
+            content.Controls.Add(txt_rename_situation);
+
+            // Set the correct location of the controls (responsive with the groupbox's size).
+            btn_discard_situation.Location = new Point(content.Size.Width - btn_discard_situation.Size.Width, 10);
+            pb_rename_situation.Location = new Point((content.Text.Length * 9) + 20, 0);
+            pb_down_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 8, 0);
+            pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
+            txt_rename_situation.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 48, 0);
+        }
+
+        private void Down_Situation(object sender, EventArgs e)
+        {
+            int index = menu.SelectedNode.Index;
+            TreeNode tns = menu.SelectedNode.Parent;
+
+            // Return if last node.
+            if (index == tns.LastNode.Index) { return; }
+            TreeNode tn = menu.SelectedNode;
+            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Insert(index + 1, tn);
+            menu.SelectedNode = tn;
+            Order_Files_Situations();
+        }
+
+        private void Up_Situation(object sender, EventArgs e)
+        {
+            int index = menu.SelectedNode.Index;
+            TreeNode tns = menu.SelectedNode.Parent;
+
+            // Return if fisrt node.
+            if (index == 0) { return; }
+            TreeNode tn = menu.SelectedNode;
+            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Insert(index - 1, tn);
+            menu.SelectedNode = tn;
+            Order_Files_Situations();
+        }
+
+        private void Order_Files_Situations()
+        {
+            TreeNode tns = menu.SelectedNode.Parent;
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                             +(menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text;
+            foreach (string s in Directory.GetDirectories(@"" + sc_path))
+            {
+                string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
+
+                // Get the corresponding index for the input text from the folder.
+                int act_index = 0;
+                int i = 0;
+                while (i < tns.Nodes.Count)
+                {
+                    if (tns.Nodes[i].Text == folder[1])
+                    {
+                        act_index = i;
+                        i = tns.Nodes.Count;
+                    }
+                    i++;
+                }
+
+                // Rename the folder if the index changed.
+                if (int.Parse(folder[0]) - 1 != act_index)
+                {
+                    int str_index = act_index + 1;
+                    Directory.Move(@"" + s, @"" + sc_path + Path.DirectorySeparatorChar + str_index.ToString() + "." + folder[1]);
+                }
+            }
+
+            // Reorder nominally the rest of scenarios.
+            TreeNode sc = menu.Nodes.Find("scenarios", false)[0];
+            for (int i = 0; i < sc.Nodes.Count; i++)
+            {
+                sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
+            }
+        }
+
+        private void Ask_Rename_Situation(object sender, EventArgs e)
+        {
+            // Set the textbox of the name as visible.
+            content.Controls.Find("txt_rename_situation", false)[0].Visible = true;
+            content.Controls.Find("pb_rename_situation", false)[0].Visible = false;
+            content.Controls.Find("txt_rename_situation", false)[0].Focus();
+        }
+
+        private void Rename_Situation_Txt_Keypress(object sender, KeyPressEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            if (e.KeyChar == (char)13) // (char) 13 => Enter.
+            {
+                // Block the renaming of a situation if the new name is empty.
+                if (t.Text.Equals(string.Empty)) { return; }
+                Rename_Situation(t.Text);
+            }
+            else if (e.KeyChar == (char)27) // (char) 27 => Escape.
+            {
+                t.Visible = false;
+                content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
+            }
+            else if (!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char)8)) // (char) 8 => Backspace.
+            {
+                e.Handled = true;
+            }
+            else if (t.Text.Length > 32)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Rename_Situation(string new_name)
+        {
+            // Exit if name is similar.
+            if (menu.SelectedNode.Text == new_name) { return; }
+
+            // Exit and display an error message if the name is already in use.
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                             +(menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text;
+            foreach (string s in Directory.GetDirectories(sc_path))
+            {
+                string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
+                if (folder[1] == new_name)
+                {
+                    MessageBox.Show("Le nom de la situation " + '"' + new_name + '"' + " est déjà utilisé, essayez un autre nom.",
+                                    "Nom de scénario invalide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            // Rename the situation's folder.
+            Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text,
+                           @"" + sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name);
+
+            // Rename the situation's Node.
+            menu.SelectedNode.Text = new_name;
+            content.Text = menu.SelectedNode.FullPath;
+
+            // Repositioning size-sensitives contents.
+            TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
+            t.Visible = false;
+            t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
+            content.Controls.Find("pb_rename_situation", false)[0].Location = new Point((content.Text.Length * 9) + 20, 0);
+            content.Controls.Find("pb_down_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation",
+                                  false)[0].Location.X + content.Controls.Find("pb_rename_situation", false)[0].Width + 8, 0);
+            content.Controls.Find("pb_up_situation", false)[0].Location = new Point(content.Controls.Find("pb_down_situation",
+                                  false)[0].Location.X + content.Controls.Find("pb_down_situation", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
+        }
+
+        public void Discard_Situation(object sender, EventArgs e)
+        {
+            TreeNode select_node = menu.SelectedNode;
+
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                             +(select_node.Parent.Index + 1) + "." + select_node.Parent.Text;
+
+            // Ask for confirmation before suppression of the scenario.
+            if ((MessageBox.Show("Confirmer la suppression de la situation " + select_node.Text + " ?", "Confirmation de suppression",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No))
+            {
+                return;
+            }
+
+            // Remove the situation's folder.
+            Directory.Delete(@"" + sc_path + Path.DirectorySeparatorChar + (select_node.Index + 1) + "." + select_node.Text, true);
+
+            TreeNode sc = select_node.Parent;
+            menu.SelectedNode = sc;
+
+            // Remove the situation's Node.
+            menu.Nodes.Remove(select_node);
+
+            // Reorder nominally the rest of scenarios.
+            for (int i = 0; i < sc.Nodes.Count; i++)
+            {
+                sc.Nodes[i].Name = "situation" + (i + 1).ToString();
             }
             int j = 1;
             foreach (string s in Directory.GetDirectories(@"" + sc_path))

@@ -70,7 +70,6 @@
             this.menu.ShowNodeToolTips = true;
             this.menu.Size = new System.Drawing.Size(225, 618);
             this.menu.TabIndex = 0;
-            this.menu.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.Menu_BeforeCollapse);
             this.menu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Menu_AfterSelect);
             // 
             // content
