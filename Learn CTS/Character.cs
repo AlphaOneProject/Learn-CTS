@@ -20,6 +20,7 @@ namespace Learn_CTS
         private List<Image> animation_list_est = new List<Image>();
         private bool hasMoved = false;
         private int last_direction = 1;
+        private static int m;
 
         /// <summary>
         /// Constructor of character.
@@ -56,7 +57,7 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (t % 3 == 0 && this.GetType().Name == "Player")
+            if (t % m == 0 && this.GetType().Name == "Player")
             {
                 t = 0;
                 if (a > 0)
@@ -90,6 +91,11 @@ namespace Learn_CTS
                     }
                 }
             }
+        }
+
+        public static void SetM(int a)
+        {
+            m = a;
         }
 
         public override void UpdateGraphic(PaintEventArgs e)

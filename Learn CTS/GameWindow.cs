@@ -57,7 +57,7 @@ namespace Learn_CTS
 
         private void InitializeTimer()
         {
-            timer.Interval = 25;
+            timer.Interval = 20;
             timer.Tick += new EventHandler(Timer_Tick);
         }
 
@@ -100,6 +100,7 @@ namespace Learn_CTS
             Controls.Add(btn_launch);
             InitializeListTextures();
             InitializeTimer();
+            Character.SetM(3);
             Show();
         }
 
@@ -157,7 +158,7 @@ namespace Learn_CTS
                     tram.ChangeInside();
                     tram.SetState(2);
                     tram.SetSpeed(0);
-                    timer.Interval = 60;
+                    Character.SetM(6);
                     PlacePlayerMiddleScreen();
                 }
                 MoveBackground();
@@ -536,6 +537,7 @@ namespace Learn_CTS
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             ConsoleAvgFPS();
+            nm.Clear();
         }
 
         public JObject Get_From_JSON(string internal_path)

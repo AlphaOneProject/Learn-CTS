@@ -63,5 +63,11 @@ namespace Learn_CTS
         {
             return list_npcs;
         }
+
+        public void Clear()
+        {
+            list_npcs.Clear();
+            npc_id = 1;
+        }
     }
 }
