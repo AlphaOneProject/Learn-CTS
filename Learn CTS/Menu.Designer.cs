@@ -38,7 +38,7 @@
             // main_menu_btn_edit
             // 
             this.main_menu_btn_edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.main_menu_btn_edit.Location = new System.Drawing.Point(267, 133);
+            this.main_menu_btn_edit.Location = new System.Drawing.Point(278, 154);
             this.main_menu_btn_edit.Name = "main_menu_btn_edit";
             this.main_menu_btn_edit.Size = new System.Drawing.Size(230, 60);
             this.main_menu_btn_edit.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             // main_menu_btn_exit
             // 
-            this.main_menu_btn_exit.Location = new System.Drawing.Point(391, 265);
+            this.main_menu_btn_exit.Location = new System.Drawing.Point(402, 286);
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
             this.main_menu_btn_exit.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_exit.TabIndex = 4;
@@ -61,7 +61,7 @@
             // main_menu_btn_create
             // 
             this.main_menu_btn_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.main_menu_btn_create.Location = new System.Drawing.Point(267, 199);
+            this.main_menu_btn_create.Location = new System.Drawing.Point(278, 220);
             this.main_menu_btn_create.Name = "main_menu_btn_create";
             this.main_menu_btn_create.Size = new System.Drawing.Size(230, 60);
             this.main_menu_btn_create.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // main_menu_btn_credits
             // 
-            this.main_menu_btn_credits.Location = new System.Drawing.Point(267, 265);
+            this.main_menu_btn_credits.Location = new System.Drawing.Point(278, 286);
             this.main_menu_btn_credits.Name = "main_menu_btn_credits";
             this.main_menu_btn_credits.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_credits.TabIndex = 3;
@@ -83,14 +83,14 @@
             // main_menu_btn_launch_engine
             // 
             this.main_menu_btn_launch_engine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.main_menu_btn_launch_engine.Location = new System.Drawing.Point(267, 67);
+            this.main_menu_btn_launch_engine.Location = new System.Drawing.Point(278, 88);
             this.main_menu_btn_launch_engine.Name = "main_menu_btn_launch_engine";
             this.main_menu_btn_launch_engine.Size = new System.Drawing.Size(230, 60);
             this.main_menu_btn_launch_engine.TabIndex = 0;
             this.main_menu_btn_launch_engine.Tag = "main_menu";
             this.main_menu_btn_launch_engine.Text = "Tester le moteur";
             this.main_menu_btn_launch_engine.UseVisualStyleBackColor = true;
-            this.main_menu_btn_launch_engine.Click += new System.EventHandler(this.Test_Engine);
+            this.main_menu_btn_launch_engine.Click += new System.EventHandler(this.Demo_Engine);
             // 
             // Menu
             // 

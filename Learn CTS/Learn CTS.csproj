@@ -72,6 +72,7 @@
     <Compile Include="GameCard.Designer.cs">
       <DependentUpon>GameCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hint.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +82,12 @@
     <Compile Include="NPC.cs" />
     <Compile Include="NPC_Manager.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PNCWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PNCWindow.Designer.cs">
+      <DependentUpon>PNCWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tram.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Platform.cs" />
@@ -106,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PNCWindow.resx">
+      <DependentUpon>PNCWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
