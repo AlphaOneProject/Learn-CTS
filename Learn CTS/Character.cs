@@ -100,7 +100,7 @@ namespace Learn_CTS
 
         public override void UpdateGraphic(PaintEventArgs e)
         {
-            if(t%3 == 0)
+            if(t%m == 0)
             {
                 if (!hasMoved)
                 {

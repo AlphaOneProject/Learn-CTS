@@ -31,7 +31,7 @@ namespace Learn_CTS
         private bool go_down = false;
         private bool go_left = false;
         private bool go_right = false;
-        private int ticks = 0;
+        private int ticks = 1;
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
         private Dialog d;
         private string game;
@@ -158,7 +158,7 @@ namespace Learn_CTS
                     tram.ChangeInside();
                     tram.SetState(2);
                     tram.SetSpeed(0);
-                    Character.SetM(6);
+                    Character.SetM(9);
                     PlacePlayerMiddleScreen();
                 }
                 MoveBackground();
