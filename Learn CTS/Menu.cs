@@ -87,9 +87,9 @@ namespace Learn_CTS
                 gc.Description = Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "description");
                 switch (Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "default"))
                 {
-                    case "true": gc.IsDefault = true;
+                    case "True": gc.IsDefault = true;
                         break;
-                    case "false": gc.IsDefault = false;
+                    case "False": gc.IsDefault = false;
                         break;
                     default: break;
                 }
@@ -108,12 +108,20 @@ namespace Learn_CTS
         public string Get_Var_From_JSON(string internal_path, string var_name)
         {
             string output = "";
-            using (StreamReader stream_r = new StreamReader(internal_path))
+            try
             {
-                string json_file = stream_r.ReadToEnd();
-                JObject json_dict = JObject.Parse(json_file);
-                output = (string)json_dict[var_name];
+                using (StreamReader stream_r = new StreamReader(internal_path))
+                {
+                    string json_file = stream_r.ReadToEnd();
+                    JObject json_dict = JObject.Parse(json_file);
+                    output = (string)json_dict[var_name];
+                }
             }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Le fichier "+internal_path+" est introuvable. Veuillez verifier qu'il existe.");
+            }
+            
             return output;
         }
 
@@ -168,7 +176,7 @@ namespace Learn_CTS
             };
             main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
                                     (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
-            main_menu_btn_launch_engine_dyna.Click += new EventHandler(Test_Engine);
+            main_menu_btn_launch_engine_dyna.Click += new EventHandler(Demo_Engine);
 
             // Creation of the button that go to the menu to create a game.
             Button main_menu_btn_create_dyna = new Button()
@@ -398,6 +406,8 @@ namespace Learn_CTS
                     break;
                 case "editor_menu": Responsive_Resize_Editor_Menu();
                     break;
+                case "create_menu": Reponsive_Resize_Create_menu_btn_confirm_Click();
+                    break;
                 default:
                     break;
             }
@@ -452,7 +462,25 @@ namespace Learn_CTS
             }
         }
 
-        private void Test_Engine(object sender, EventArgs e)
+        private void Reponsive_Resize_Create_menu_btn_confirm_Click()
+        {
+            foreach (Control c in this.Controls)
+            {
+                switch (c.Name)
+                {
+                    case "create_menu_txt_name_game":
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
+                                    (this.Height / 2) - c.Height - (c.Height * 2) - 12);
+                        break;
+                    case "create_menu_btn_confirm":
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
+                            (this.Height / 2) - c.Height + (this.Controls.Find("create_menu_txt_name_game", false)[0].Height / 2) + 4);
+                        break;
+                }
+            }
+        }
+
+        private void Demo_Engine(object sender, EventArgs e)
         {
             Form gw = new GameWindow("Learn CTS");
             gw.Show();

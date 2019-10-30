@@ -323,3 +323,12 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 *.cache
+.vs/slnx.sqlite
+.vs/slnx.sqlite
+.vs/learn-cts/v16/.suo
+Learn CTS/obj/Release/Learn CTS.csproj.CoreCompileInputs.cache
+Learn CTS/obj/Debug/Learn CTS.csproj.CoreCompileInputs.cache
+Learn CTS/obj/Debug/Learn CTS.csproj.FileListAbsolute.txt
+Learn CTS/obj/Debug/Learn CTS.csprojAssemblyReference.cache
+Learn CTS/bin/Debug/Learn CTS.exe
+Learn CTS/bin/Debug/Learn CTS.exe
