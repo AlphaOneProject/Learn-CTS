@@ -60,12 +60,14 @@ namespace Learn_CTS
             JObject properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
             if(!properties["state"].ToString().Equals("Inactif."))
             {
-                properties["state"] = "[DENIED]" + properties["state"];
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
-                MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.",
-                                "Jeu en utilisation", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-                return;
+                if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accèder ?",
+                                "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                {
+                    properties["state"] = "[DENIED]" + properties["state"];
+                    Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+                    this.Close();
+                    return;
+                }
             }
             properties["state"] = "En cours d'édition...";
             Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
