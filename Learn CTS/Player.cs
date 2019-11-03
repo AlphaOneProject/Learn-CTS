@@ -32,8 +32,8 @@ namespace Learn_CTS
 
         public void GoTo(int x, int y)
         {
-            this.obj_x = x;
-            this.obj_y = y;
+            this.obj_x = x - (this.GetX() + this.GetWidth()/2);
+            this.obj_y = y - (this.GetY() + this.GetHeight());
         }
 
         /// <summary>
@@ -44,6 +44,16 @@ namespace Learn_CTS
         public int GetObjX()
         {
             return (int)this.obj_x;
+        }
+
+        public void UpdateObjX(int x)
+        {
+            this.obj_x += x;
+        }
+
+        public void UpdateObjY(int y)
+        {
+            this.obj_y += y;
         }
 
         /// <summary>
@@ -81,15 +91,15 @@ namespace Learn_CTS
         public bool ReachedObjX()
         {
             return (
-                this.GetX() + this.GetWidth() / 2 < this.GetObjX() + 8 &&
-                this.GetX() + this.GetWidth() / 2 > this.GetObjX() - 8);
+                this.obj_x < 8 &&
+                this.obj_x > -8);
         }
 
         public bool ReachedObjY()
         {
             return (
-                this.GetY() + this.GetHeight() < this.GetObjY() + 16 &&
-                this.GetY() + this.GetHeight() > this.GetObjY() - 16);
+                this.obj_y < 8 &&
+                this.obj_y > -8);
         }
 
         /// <summary>
@@ -100,16 +110,6 @@ namespace Learn_CTS
         {
             this.obj_x = null;
             this.obj_y = null;
-        }
-
-        /// <summary>
-        /// Paint the player on the screen.
-        /// </summary>
-        /// <param name="e"></param>
-
-        public override void UpdateGraphic(PaintEventArgs e)
-        {
-            base.UpdateGraphic(e);
         }
     }
 }

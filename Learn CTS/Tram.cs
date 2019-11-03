@@ -17,14 +17,11 @@ namespace Learn_CTS
         private int max_speed = 50;
         private int speed = 50;
         private bool inside = false;
-        //private String path_image_outside;
-        //private String path_hitbox_outside;
-        private Image image_outside;
         private Bitmap hitbox_outside;
         private Bitmap hitbox_inside;
         private Texture doors_left;
         private Texture doors_right;
-        private Texture test;
+        private Texture interior;
         private Texture tram_outside;
         private int max_distance_stop;
 
@@ -37,20 +34,17 @@ namespace Learn_CTS
         public Tram(int x, int y) : base("Tram", x, y, -2000)
         {
             this.max_distance_stop = this.DistanceBeforeStopping();
-            //this.path_image_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "TramOutside.png";
-            //this.path_hitbox_outside = projectDir + "\\resources\\textures\\" + this.GetType().Name + "TramOutsideHitBox.png";
-            //this.image_outside = CreateImage(this.path_image_outside);
             this.hitbox_inside = CreateHitbox(this.GetCustomPathHitbox("TramInside"));
             this.hitbox_outside = CreateHitbox(this.GetCustomPathHitbox("TramOutside"));
             this.tram_outside = new Texture("TramOutside",this.GetX(), this.GetY());
             this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.tram_outside.DisableCollisions();
-            this.test = new Texture("test", this.GetX(), this.GetY(), true);
-            this.test.DisableCollisions();
+            this.interior = new Texture("interior", this.GetX(), this.GetY(), true);
+            this.SetHitbox(this.hitbox_outside);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
-            this.AddChild(test);
+            this.AddChild(interior);
             this.AddChild(tram_outside);
         }
 
@@ -69,8 +63,11 @@ namespace Learn_CTS
             }
             else
             {
+                this.doors_left.SetX(this.GetX());
                 this.AddChild(this.doors_left);
+                this.doors_right.SetX(this.GetX());
                 this.AddChild(this.doors_right);
+                this.tram_outside.SetX(this.GetX());
                 this.AddChild(this.tram_outside);
             }
         }
@@ -81,14 +78,6 @@ namespace Learn_CTS
 
         public void Update()
         {
-            if(this.inside || this.GetState() == 1)
-            {
-                this.SetHitbox(this.hitbox_inside);
-            }
-            else
-            {
-                this.SetHitbox(this.hitbox_outside);
-            }
             if (this.GetState() == 1 && this.speed < this.max_speed)
             {
                 if (this.doors_left.GetX() <= this.GetX())
@@ -179,6 +168,25 @@ namespace Learn_CTS
         public void ChangeState()
         {
             this.state++;
+            UpdateState();
+        }
+
+        public void UpdateState()
+        {
+            if (this.GetState() == 2 || this.GetState() == 1)
+            {
+                this.SetHitbox(this.hitbox_inside);
+                this.doors_left.DisableCollisions();
+                this.doors_right.DisableCollisions();
+                this.tram_outside.DisableCollisions();
+            }
+            else
+            {
+                this.SetHitbox(this.hitbox_outside);
+                this.doors_left.EnableCollisions();
+                this.doors_right.EnableCollisions();
+                this.tram_outside.EnableCollisions();
+            }
         }
 
         /// <summary>
@@ -235,6 +243,7 @@ namespace Learn_CTS
         public void SetState(int s)
         {
             this.state = s;
+            UpdateState();
         }
 
         /// <summary>
@@ -265,14 +274,14 @@ namespace Learn_CTS
 
         public override bool CollideWith(Texture t)
         {
-            if (this.GetState() == 3 && t.GetY() > this.GetY() + 239)
+            /*if(this.GetState() != 0 && this.list_childs.Contains(t) && t.GetZ() >= this.GetY()+this.GetHeight())
             {
-                return false;
+                return true;
             }
             else
-            {
+            {*/
                 return base.CollideWith(t);
-            }
+            //}
         }
     }
 }

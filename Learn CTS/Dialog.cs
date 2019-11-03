@@ -29,7 +29,7 @@ namespace Learn_CTS
         private void Dialog_Load(object sender, EventArgs e)
         {
             this.SetUp();
-            pbox_head_npc.Image = nm.GetNPCByID(id).GetImage();
+            pbox_head_npc.Image = GetHeadNPC(nm.GetNPCByID(id).GetImage());
             lbl_name.Text = nm.GetNPCByID(id).GetName();
             txt_dialog_npc.Text = this.data["question"].ToString();
             int nbr_choices = (int)this.data["choices"];
@@ -45,6 +45,14 @@ namespace Learn_CTS
                 //btn.Click += new System.EventHandler(this.button1_Click);
                 this.Controls.Add(btn);
             }
+        }
+
+        private Image GetHeadNPC(Image img)
+        {
+            Bitmap bmpImage = new Bitmap(img);
+            Rectangle rect = new Rectangle((img.Width-pbox_head_npc.Width)/2,0,pbox_head_npc.Width, pbox_head_npc.Height);
+            Bitmap bmpCrop = bmpImage.Clone(rect, bmpImage.PixelFormat);
+            return (Image)bmpCrop;
         }
 
         private void InitializeGamePath(string game)
@@ -74,9 +82,9 @@ namespace Learn_CTS
             this.data = (JObject)dialog[nm.GetNPCByID(this.id).GetQuiz().ToString()];
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        public void Dialog_Closed(object sender, EventArgs e)
         {
-            this.Parent.Controls.Remove(this);
+            ((GameWindow)this.FindForm()).RemoveDialog();
         }
     }
 }
