@@ -37,7 +37,8 @@ namespace Learn_CTS
             this.max_distance_stop = this.DistanceBeforeStopping();
             this.hitbox_inside_b = CreateHitbox(this.GetCustomPathHitbox("TramInsideB"));
             this.tram_inside = new Texture("TramInside", this.GetX(), this.GetY(), this.GetZ() + 1);
-            this.tram_outside = new Texture("TramOutside",this.GetX(), this.GetY());
+            //this.tram_outside = new Texture("TramOutside",this.GetX(), this.GetY());
+            this.tram_outside = new Texture("TramOutside", this.GetX(), this.GetY(), true);
             this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.tram_inside.DisableCollisions();
