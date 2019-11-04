@@ -154,7 +154,7 @@ namespace Learn_CTS
             if (tram.GetX() < this.Width && !tram.IsInside())
             {
                 CheckIfCharacterIsEnteringTheTram();
-                //CheckIfCharacterIsLeavingTheTram();
+                CheckIfCharacterIsLeavingTheTram();
                 CheckIfTheTramIsArrived();
             }
             else
@@ -340,13 +340,13 @@ namespace Learn_CTS
                 {
                     if (tram.GetListChilds()[i].GetType().Name == "Player" || tram.GetListChilds()[i].GetType().Name == "NPC")
                     {
-                        if (tram.GetListChilds()[i].GetZ() >= tram.GetY() + tram.GetHeight() && tram.GetListChilds()[i].GetZ() <= tram.GetY())
+                        if (tram.GetListChilds()[i].GetZ() >= tram.GetY() + tram.GetHeight())
                         {
                             list_textures.Add(tram.GetListChilds()[i]);
-                            if (tram.GetListChilds()[i].GetType().Name == "Player")
+                            /*if (tram.GetListChilds()[i].GetType().Name == "Player")
                             {
                                 tram.ChangeState();
-                            }
+                            }*/
                             tram.RemoveChild(tram.GetListChilds()[i]);
                         }
                     }
@@ -597,7 +597,7 @@ namespace Learn_CTS
                 tram.ChangeInside();
                 list_textures.Remove(player);
                 tram.AddChild(player);
-                platform.SetX(player.GetX()+tram.GetDistanceMaxStop()-platform.GetWidth());
+                platform.SetX((tram.GetX()));
                 tram.SetX(-4000);
                 tram.SetSpeed(tram.GetMaxSpeed());
                 list_textures.Add(platform);
