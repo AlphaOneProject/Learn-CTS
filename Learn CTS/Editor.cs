@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Learn_CTS
 {
@@ -14,6 +15,7 @@ namespace Learn_CTS
 
         private readonly String game;
         private readonly String game_path;
+        private JObject game_properties;
 
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
@@ -57,11 +59,11 @@ namespace Learn_CTS
         private void Editor1_Load(object sender, EventArgs e)
         {
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
-            JObject properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
-            if(!properties["state"].ToString().Equals("Inactif."))
+            this.game_properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            if(!this.game_properties["state"].ToString().Equals("Inactif."))
             {
-                properties["state"] = "[DENIED]" + properties["state"];
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+                this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
+                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
 
                 if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accèder ?",
                                 "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
@@ -72,8 +74,8 @@ namespace Learn_CTS
             }
             else
             {
-                properties["state"] = "En cours d'édition...";
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+                this.game_properties["state"] = "En cours d'édition...";
+                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
             }
 
             // Place the windows at the center of the screen.
@@ -169,8 +171,65 @@ namespace Learn_CTS
         {
             // Creation of controls linking properties from the game to the editor.
 
+            // Label of the description.
+            Label lbl_desc = new Label()
+            {
+                Name = "lbl_desc",
+                Text = "Description",
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_desc);
 
-            // WIP
+            // Creation of textbox containing the current game description.
+            TextBox txt_desc = new TextBox()
+            {
+                Name = "txt_desc",
+                Text = (string)this.game_properties["description"],
+                Multiline = true,
+                BackColor = Color.LightGreen,
+                ShortcutsEnabled = false
+            };
+            txt_desc.Width = content.Width - 100;
+            txt_desc.Height = ((int)((txt_desc.Text.Length * 12) / txt_desc.Width) + 1) * 40;
+            txt_desc.KeyPress += new KeyPressEventHandler(this.Desc_Txt_Keypress);
+            content.Controls.Add(txt_desc);
+
+            // Set the correct location of the controls (responsive with the groupbox's size).
+            lbl_desc.Location = new Point(50, 50);
+            txt_desc.Location = new Point(50, 100);
+        }
+
+        private void Desc_Txt_Keypress(object sender, KeyPressEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            List<char> autorized_chars = new List<char>() { ' ', '.', ',', '\'', '?', '!', '-' };
+            if (e.KeyChar == (char)13) // (char)13 => Enter.
+            {
+                // Block the renaming of a situation if the new name is empty.
+                if (t.Text.Equals(string.Empty)) { return; }
+                this.game_properties["description"] = t.Text;
+                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
+                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
+                t.BackColor = Color.LightGreen;
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (char)27) // (char)27 => Escape.
+            {
+                t.Text = (string)this.game_properties["description"];
+                t.BackColor = Color.LightGreen;
+            }
+            else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
+            {
+                e.Handled = true;
+            }
+            else if (t.Text.Length > 256) // Avoid endless descriptions.
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                t.BackColor = Color.LightCoral;
+            }
         }
 
         /// <summary>
@@ -359,13 +418,13 @@ namespace Learn_CTS
             content.Controls.Add(btn_add_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point(content.Size.Width - btn_discard_scenario.Size.Width, 10);
+            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width, 10);
             pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
             pb_down_scenario.Location = new Point(pb_rename_scenario.Location.X + pb_rename_scenario.Width + 8, 0);
             pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
             txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
 
-            btn_add_situation.Location = new Point((content.Size.Width - btn_add_situation.Size.Width) / 2, 100);
+            btn_add_situation.Location = new Point((content.Width - btn_add_situation.Width) / 2, 100);
         }
 
         private void Down_Scenario(object sender, EventArgs e)
@@ -455,18 +514,18 @@ namespace Learn_CTS
         private void Rename_Scenario_Txt_Keypress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
-            if (e.KeyChar == (char) 13) // (char) 13 => Enter.
+            if (e.KeyChar == (char) 13) // (char)13 => Enter.
             {
                 // Block the renaming of a scenario if the new name is empty.
                 if(t.Text.Equals(string.Empty)) { return; }
                 Rename_Scenario(t.Text);
             }
-            else if(e.KeyChar == (char) 27) // (char) 27 => Escape.
+            else if(e.KeyChar == (char) 27) // (char)27 => Escape.
             {
                 t.Visible = false;
                 content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             }
-            else if(!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char) 8)) // (char) 8 => Backspace.
+            else if(!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char) 8)) // (char)8 => Backspace.
             {
                 e.Handled = true;
             }
@@ -676,7 +735,7 @@ namespace Learn_CTS
             content.Controls.Add(txt_rename_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_situation.Location = new Point(content.Size.Width - btn_discard_situation.Size.Width, 10);
+            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width, 10);
             pb_rename_situation.Location = new Point((content.Text.Length * 9) + 20, 0);
             pb_down_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 8, 0);
             pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
@@ -760,13 +819,13 @@ namespace Learn_CTS
         private void Rename_Situation_Txt_Keypress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
-            if (e.KeyChar == (char)13) // (char) 13 => Enter.
+            if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
                 // Block the renaming of a situation if the new name is empty.
                 if (t.Text.Equals(string.Empty)) { return; }
                 Rename_Situation(t.Text);
             }
-            else if (e.KeyChar == (char)27) // (char) 27 => Escape.
+            else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
                 t.Visible = false;
                 content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
