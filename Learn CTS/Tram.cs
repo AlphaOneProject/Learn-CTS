@@ -186,14 +186,10 @@ namespace Learn_CTS
             if (this.GetState() != 0 && player_inside)
             {
                 this.tram_inside.EnableCollisions();
-                this.tram_outside.DisableCollisions();
-                this.tram_outside.DisableCollisions();
             }
             else
             {
-                this.tram_outside.EnableCollisions();
                 this.tram_inside.DisableCollisions();
-                this.tram_outside.EnableCollisions();
             }
         }
 
@@ -285,7 +281,7 @@ namespace Learn_CTS
             if(t.GetType().Name == "Player")
             {
                 this.player_inside = true;
-                this.tram_outside.SetHitbox(hitbox_inside_b);
+                //this.tram_outside.SetHitbox(hitbox_inside_b);
                 this.doors_left.DisableCollisions();
                 this.doors_right.DisableCollisions();
             }
@@ -297,7 +293,7 @@ namespace Learn_CTS
             if (t.GetType().Name == "Player")
             {
                 this.player_inside = false;
-                this.tram_outside.SetDefaultHitbox();
+                //this.tram_outside.SetDefaultHitbox();
                 this.doors_left.EnableCollisions();
                 this.doors_right.EnableCollisions();
             }
