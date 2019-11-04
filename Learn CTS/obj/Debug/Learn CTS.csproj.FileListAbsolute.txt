@@ -65,3 +65,4 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Dialog.resou
 C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_CTS.Dialog.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Dialog.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources

@@ -202,7 +202,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="t">Texture that will be add as a child.</param>
 
-        public void AddChild(Texture t)
+        public virtual void AddChild(Texture t)
         {
             if (!list_childs.Contains(t))
             {
@@ -215,7 +215,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="t">Texture that will be remove from the childs.</param>
 
-        public void RemoveChild(Texture t)
+        public virtual void RemoveChild(Texture t)
         {
             if (list_childs.Contains(t))
             {
@@ -641,6 +641,11 @@ namespace Learn_CTS
         public static string GetDirImages()
         {
             return projectDir; 
+        }
+
+        public void SetDefaultHitbox()
+        {
+            this.SetHitbox(CreateHitbox(this.path_hitbox));
         }
     }
 }
