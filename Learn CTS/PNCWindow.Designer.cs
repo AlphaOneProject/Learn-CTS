@@ -38,6 +38,7 @@
             this.Name = "PNCWindow";
             this.Text = "PNCWindow";
             this.Load += new System.EventHandler(this.PNCWindow_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PNCWindow_MouseDown);
             this.ResumeLayout(false);
 
         }

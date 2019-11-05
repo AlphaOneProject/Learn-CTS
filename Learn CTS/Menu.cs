@@ -258,7 +258,9 @@ namespace Learn_CTS
                 Size = new Size(this.Width - (editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width - 8),
                         this.Height),
                 Name = "flp_editor_menu",
-                TabIndex = 3
+                TabIndex = 3,
+                AutoScroll = true,
+                WrapContents = false
             };
             flp_editor_menu.Location = new Point(editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width + 8, 0);
 
