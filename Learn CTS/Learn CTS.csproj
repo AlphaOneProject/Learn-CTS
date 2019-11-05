@@ -72,7 +72,8 @@
     <Compile Include="GameCard.Designer.cs">
       <DependentUpon>GameCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hint.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemManager.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
