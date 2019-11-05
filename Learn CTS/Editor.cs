@@ -91,7 +91,7 @@ namespace Learn_CTS
                 cut_game = cut_game.Substring(0, char_space - 3) + "...";
             }
             title.Text = "Édition de " + cut_game;
-            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Height);
+            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Location.Y);
 
             // Load already existing scenarios.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
@@ -109,6 +109,7 @@ namespace Learn_CTS
             }
 
             menu.ExpandAll();
+            menu.SelectedNode = menu.Nodes[0];
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace Learn_CTS
 
             TreeView t = (TreeView) sender;
             String name = t.SelectedNode.Name;
-            content.Text = t.SelectedNode.FullPath;
+            lbl_path.Text = t.SelectedNode.FullPath;
 
             if(name.StartsWith("scenario") && name != "scenarios")
             {
@@ -176,6 +177,7 @@ namespace Learn_CTS
             {
                 Name = "lbl_desc",
                 Text = "Description",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
             };
             content.Controls.Add(lbl_desc);
@@ -194,9 +196,20 @@ namespace Learn_CTS
             txt_desc.KeyPress += new KeyPressEventHandler(this.Desc_Txt_Keypress);
             content.Controls.Add(txt_desc);
 
+            //
+            Label lbl_desc_state = new Label()
+            {
+                Name = "lbl_desc_state",
+                Text = "",
+                ForeColor = Color.Red,
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_desc_state);
+
             // Set the correct location of the controls (responsive with the groupbox's size).
-            lbl_desc.Location = new Point(50, 50);
-            txt_desc.Location = new Point(50, 100);
+            lbl_desc.Location = new Point(20, 20);
+            txt_desc.Location = new Point(20, lbl_desc.Location.Y + lbl_desc.Height + 20);
+            lbl_desc_state.Location = new Point(20, txt_desc.Location.Y + txt_desc.Height + 8);
         }
 
         private void Desc_Txt_Keypress(object sender, KeyPressEventArgs e)
@@ -209,14 +222,19 @@ namespace Learn_CTS
                 if (t.Text.Equals(string.Empty)) { return; }
                 this.game_properties["description"] = t.Text;
                 Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
-                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
+                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 32;
                 t.BackColor = Color.LightGreen;
+                content.Controls.Find("lbl_desc_state", false)[0].Text = "";
+
+                // Resize all controls inside "content".
+                Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
                 e.Handled = true;
             }
             else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
                 t.Text = (string)this.game_properties["description"];
                 t.BackColor = Color.LightGreen;
+                content.Controls.Find("lbl_desc_state", false)[0].Text = "";
             }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
             {
@@ -224,11 +242,13 @@ namespace Learn_CTS
             }
             else if (t.Text.Length > 256) // Avoid endless descriptions.
             {
+                if (e.KeyChar == (char)8) { return; } // Let you erase anyways.
                 e.Handled = true;
             }
             else
             {
-                t.BackColor = Color.LightCoral;
+                t.BackColor = Color.LightSalmon;
+                content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
             }
         }
 
@@ -383,6 +403,17 @@ namespace Learn_CTS
             pb_up_scenario.Click += new EventHandler(this.Up_Scenario);
             content.Controls.Add(pb_up_scenario);
 
+            // Creation of a label reminding the scenario's name.
+            Label lbl_name_scenario = new Label()
+            {
+                Name = "lbl_name_scenario",
+                Text = menu.SelectedNode.Text,
+                AutoSize = true,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0)))
+            };
+            content.Controls.Add(lbl_name_scenario);
+
             // Creation of a button allowing to rename the scenario.
             PictureBox pb_rename_scenario = new PictureBox()
             {
@@ -400,7 +431,9 @@ namespace Learn_CTS
             {
                 Name = "txt_rename_scenario",
                 Text = menu.SelectedNode.Text,
-                Width = (menu.SelectedNode.Text.Length * 12) + 20,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -418,11 +451,12 @@ namespace Learn_CTS
             content.Controls.Add(btn_add_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width, 10);
-            pb_rename_scenario.Location = new Point((content.Text.Length * 9) + 20, 0);
-            pb_down_scenario.Location = new Point(pb_rename_scenario.Location.X + pb_rename_scenario.Width + 8, 0);
+            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width, 0);
+            pb_down_scenario.Location = new Point(8, 0);
             pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
-            txt_rename_scenario.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 12, 0);
+            lbl_name_scenario.Location = new Point(pb_up_scenario.Location.X + pb_up_scenario.Width + 8, 0);
+            txt_rename_scenario.Location = new Point(lbl_name_scenario.Location.X, 0);
+            pb_rename_scenario.Location = new Point(lbl_name_scenario.Location.X + lbl_name_scenario.Width, 0);
 
             btn_add_situation.Location = new Point((content.Width - btn_add_situation.Width) / 2, 100);
         }
@@ -502,6 +536,7 @@ namespace Learn_CTS
             // Set the textbox of the name as visible.
             content.Controls.Find("txt_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = false;
+            content.Controls.Find("lbl_name_scenario", false)[0].Visible = false;
             content.Controls.Find("txt_rename_scenario", false)[0].Focus();
         }
 
@@ -524,6 +559,7 @@ namespace Learn_CTS
             {
                 t.Visible = false;
                 content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
+                content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
             }
             else if(!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char) 8)) // (char)8 => Backspace.
             {
@@ -563,14 +599,17 @@ namespace Learn_CTS
 
             // Rename the scenario's Node.
             menu.SelectedNode.Text = new_name;
-            content.Text = menu.SelectedNode.FullPath;
+            lbl_path.Text = menu.SelectedNode.FullPath;
 
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox) content.Controls.Find("txt_rename_scenario", false)[0];
             t.Visible = false;
             t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
-            content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point((content.Text.Length * 9) + 20, 0);
+            content.Controls.Find("lbl_name_scenario", false)[0].Text = menu.SelectedNode.Text;
+            content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point(content.Controls.Find("lbl_name_scenario", false)[0].Location.X +
+                                                                                       content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
+            content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
 
         /// <summary>
@@ -710,6 +749,17 @@ namespace Learn_CTS
             pb_up_situation.Click += new EventHandler(this.Up_Situation);
             content.Controls.Add(pb_up_situation);
 
+            // Creation of a label reminding the situation's name.
+            Label lbl_name_situation = new Label()
+            {
+                Name = "lbl_name_situation",
+                Text = menu.SelectedNode.Text,
+                AutoSize = true,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0)))
+            };
+            content.Controls.Add(lbl_name_situation);
+
             // Creation of a button allowing to rename the scenario.
             PictureBox pb_rename_situation = new PictureBox()
             {
@@ -727,7 +777,9 @@ namespace Learn_CTS
             {
                 Name = "txt_rename_situation",
                 Text = menu.SelectedNode.Text,
-                Width = (menu.SelectedNode.Text.Length * 12) + 20,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -735,11 +787,12 @@ namespace Learn_CTS
             content.Controls.Add(txt_rename_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width, 10);
-            pb_rename_situation.Location = new Point((content.Text.Length * 9) + 20, 0);
-            pb_down_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 8, 0);
+            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width, 0);
+            pb_down_situation.Location = new Point(8, 0);
             pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
-            txt_rename_situation.Location = new Point(((content.Text.Length - menu.SelectedNode.Text.Length) * 10) - 48, 0);
+            lbl_name_situation.Location = new Point(pb_up_situation.Location.X + pb_up_situation.Width + 8, 0);
+            txt_rename_situation.Location = new Point(lbl_name_situation.Location.X, 0);
+            pb_rename_situation.Location = new Point(lbl_name_situation.Location.X + lbl_name_situation.Width, 0);
         }
 
         private void Down_Situation(object sender, EventArgs e)
@@ -813,6 +866,7 @@ namespace Learn_CTS
             // Set the textbox of the name as visible.
             content.Controls.Find("txt_rename_situation", false)[0].Visible = true;
             content.Controls.Find("pb_rename_situation", false)[0].Visible = false;
+            content.Controls.Find("lbl_name_situation", false)[0].Visible = false;
             content.Controls.Find("txt_rename_situation", false)[0].Focus();
         }
 
@@ -829,6 +883,7 @@ namespace Learn_CTS
             {
                 t.Visible = false;
                 content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
+                content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
             }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char)8)) // (char) 8 => Backspace.
             {
@@ -865,18 +920,17 @@ namespace Learn_CTS
 
             // Rename the situation's Node.
             menu.SelectedNode.Text = new_name;
-            content.Text = menu.SelectedNode.FullPath;
+            lbl_path.Text = menu.SelectedNode.FullPath;
 
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
             t.Visible = false;
             t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
-            content.Controls.Find("pb_rename_situation", false)[0].Location = new Point((content.Text.Length * 9) + 20, 0);
-            content.Controls.Find("pb_down_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation",
-                                  false)[0].Location.X + content.Controls.Find("pb_rename_situation", false)[0].Width + 8, 0);
-            content.Controls.Find("pb_up_situation", false)[0].Location = new Point(content.Controls.Find("pb_down_situation",
-                                  false)[0].Location.X + content.Controls.Find("pb_down_situation", false)[0].Width + 2, 0);
+            content.Controls.Find("lbl_name_situation", false)[0].Text = menu.SelectedNode.Text;
+            content.Controls.Find("pb_rename_situation", false)[0].Location = new Point(content.Controls.Find("lbl_name_situation", false)[0].Location.X +
+                                                                                       content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
             content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
+            content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
         }
 
         public void Discard_Situation(object sender, EventArgs e)
@@ -935,7 +989,7 @@ namespace Learn_CTS
                 cut_name = cut_name.Substring(0, char_space - 3) + "...";
             }
             title.Text = "Édition de " + cut_name;
-            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Height);
+            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Location.Y);
 
             // Resize generals controls from the Editor.
             menu.Size = new Size(menu.Width, this.Height - menu.Location.Y - 51);
@@ -976,6 +1030,24 @@ namespace Learn_CTS
             {
                 new_content.WriteTo(writer);
             }
+        }
+
+        public int Get_Text_Width(string text, int font_size)
+        {
+            int width = -1;
+            Label lbl_width_measure = new Label()
+            {
+                Name = "lbl_width_measure",
+                Text = text,
+                AutoSize = true,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", font_size, System.Drawing.FontStyle.Regular, 
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Visible = false
+            };
+            this.Controls.Add(lbl_width_measure);
+            width = lbl_width_measure.Width;
+            this.Controls.Remove(lbl_width_measure);
+            return width;
         }
     }
 }
