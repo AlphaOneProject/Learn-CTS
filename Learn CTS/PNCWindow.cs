@@ -44,7 +44,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Item h1 = item_manager.CreateItem("transparent-test", 23, 24);
+            Item h1 = item_manager.CreateItem("Door", 23, 24);
             list_textures = new List<Texture>
             {
                 h1
@@ -110,13 +110,14 @@ namespace Learn_CTS
             int mouse_y = e.Location.Y;
             if (item_manager.GetItemOnPoint(mouse_x, mouse_y) != null)
             {
-                SelectItem(item_manager.GetItemOnPoint(mouse_x, mouse_y));
+                HighlightItem(item_manager.GetItemOnPoint(mouse_x, mouse_y));
             }
         }
 
-        private void SelectItem(Item item)
+        private void HighlightItem(Item item)
         {
-            MessageBox.Show(item.GetID().ToString());
+            ItemViewer highlight = new ItemViewer(item.GetID(), this.Height, this.Width);
+            this.Controls.Add(highlight);
         }
 
         public static Bitmap ChangeOpacity(Image img, float opacityvalue)

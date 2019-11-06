@@ -74,6 +74,12 @@
     </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemManager.cs" />
+    <Compile Include="ItemViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemViewer.Designer.cs">
+      <DependentUpon>ItemViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemViewer.resx">
+      <DependentUpon>ItemViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

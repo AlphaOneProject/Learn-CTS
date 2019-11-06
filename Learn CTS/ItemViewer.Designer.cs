@@ -28,10 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.pb_item = new System.Windows.Forms.PictureBox();
+            this.lbl_desc = new System.Windows.Forms.Label();
+            this.btn_exit = new System.Windows.Forms.Button();
+            this.lbl_color = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_item)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pb_item
+            // 
+            this.pb_item.Location = new System.Drawing.Point(33, 31);
+            this.pb_item.Name = "pb_item";
+            this.pb_item.Size = new System.Drawing.Size(270, 230);
+            this.pb_item.TabIndex = 0;
+            this.pb_item.TabStop = false;
+            // 
+            // lbl_desc
+            // 
+            this.lbl_desc.AutoSize = true;
+            this.lbl_desc.Location = new System.Drawing.Point(309, 82);
+            this.lbl_desc.Name = "lbl_desc";
+            this.lbl_desc.Size = new System.Drawing.Size(46, 13);
+            this.lbl_desc.TabIndex = 1;
+            this.lbl_desc.Text = "lbl_desc";
+            // 
+            // btn_exit
+            // 
+            this.btn_exit.Location = new System.Drawing.Point(301, 210);
+            this.btn_exit.Name = "btn_exit";
+            this.btn_exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_exit.TabIndex = 2;
+            this.btn_exit.Text = "OK";
+            this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
+            // 
+            // lbl_color
+            // 
+            this.lbl_color.Location = new System.Drawing.Point(0, 0);
+            this.lbl_color.Name = "lbl_color";
+            this.lbl_color.Size = new System.Drawing.Size(400, 246);
+            this.lbl_color.TabIndex = 3;
+            // 
+            // ItemViewer
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_exit);
+            this.Controls.Add(this.lbl_desc);
+            this.Controls.Add(this.pb_item);
+            this.Controls.Add(this.lbl_color);
+            this.Name = "ItemViewer";
+            this.Size = new System.Drawing.Size(431, 281);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_item)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox pb_item;
+        private System.Windows.Forms.Label lbl_desc;
+        private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.Label lbl_color;
     }
 }

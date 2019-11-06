@@ -84,3 +84,4 @@ C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CoreC
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.exe
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.pdb
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.resources
