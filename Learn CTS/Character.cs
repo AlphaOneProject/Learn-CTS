@@ -47,10 +47,10 @@ namespace Learn_CTS
             }
             this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + last_direction.ToString()+"_0.png"));
             this.SetHitbox(this.CreateHitbox(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "Hitbox.png"));
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
-                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "1_" + (i + 1).ToString() + ".png"));
-                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "3_" + (i + 1).ToString() + ".png"));
+                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "1_" + (i).ToString() + ".png"));
+                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "3_" + (i).ToString() + ".png"));
             }
         }
 
@@ -97,9 +97,9 @@ namespace Learn_CTS
                 {
                     hasMoved = true;
                     this.c++;
-                    if (c >= 8)
+                    if (c > 8)
                     {
-                        this.c = 0;
+                        this.c = 1;
                     }
                 }
             }
