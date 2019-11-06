@@ -90,7 +90,6 @@ namespace Learn_CTS
             this.name = name;
             this.x = x;
             this.y = y;
-            // A CHANGER
             this.path_image = GetCustomPathImage(name);
             this.path_hitbox = GetCustomPathHitbox(name);
             try
@@ -174,27 +173,12 @@ namespace Learn_CTS
 
         public String GetCustomPathImage(string name)
         {
-            if (this.GetType().BaseType.Name == "Character")
-            {
-                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "1_0.png";
-            }
-            else
-            {
-                return projectDir + Path.DirectorySeparatorChar+ "others" + Path.DirectorySeparatorChar + name + ".png";
-            }
+            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + ".png";
         }
 
         public String GetCustomPathHitbox(string name)
         {
-            //TODO
-            if (this.GetType().BaseType.Name == "Character")
-            {
-                return projectDir + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "Hitbox.png";
-            }
-            else
-            {
-                return projectDir + Path.DirectorySeparatorChar+  "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
-            }
+            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
         }
 
         /// <summary>
@@ -365,7 +349,7 @@ namespace Learn_CTS
             this.height = this.image.Height;
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.name;
         }

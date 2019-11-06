@@ -15,25 +15,13 @@ namespace Learn_CTS
         private int id;
 
         /// <summary>
-        /// Constructor of NPC
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-
-        public NPC(int id, int x, int y, int quiz) : base(x, y)
-        {
-            this.id = id;
-            this.quiz = quiz;
-        }
-
-        /// <summary>
         /// Constructor of NPC with custom names.
         /// </summary>
         /// <param name="name">Name of the NPC.</param>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public NPC(int id, String name, int x, int y, int quiz) : base(id, name, x, y)
+        public NPC(int id, string name, string folder, int x, int y, int quiz) : base(id, name, folder, x, y)
         {
             this.quiz = quiz;
         }

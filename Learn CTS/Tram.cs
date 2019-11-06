@@ -17,7 +17,6 @@ namespace Learn_CTS
         private int max_speed = 50;
         private int speed = 50;
         private bool inside = false;
-        private Bitmap hitbox_inside_b;
         private Texture doors_left;
         private Texture doors_right;
         private Texture interior;
@@ -35,9 +34,7 @@ namespace Learn_CTS
         public Tram(int x, int y) : base("Tram", x, y, -2000)
         {
             this.max_distance_stop = this.DistanceBeforeStopping();
-            this.hitbox_inside_b = CreateHitbox(this.GetCustomPathHitbox("TramInsideB"));
             this.tram_inside = new Texture("TramInside", this.GetX(), this.GetY(), this.GetZ() + 1);
-            //this.tram_outside = new Texture("TramOutside",this.GetX(), this.GetY());
             this.tram_outside = new Texture("TramOutside", this.GetX(), this.GetY(), true);
             this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
             this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
@@ -80,14 +77,6 @@ namespace Learn_CTS
 
         public void Update()
         {
-            /*if(this.GetState() == 0 && this.player_inside)
-            {
-                this.SetHitbox(hitbox_inside_b);
-            }
-            else if (this.GetState() == 0 && !this.player_inside)
-            {
-                this.SetHitbox(hitbox_inside);
-            }*/
             if (this.GetState() == 1 && this.speed < this.max_speed)
             {
                 if (this.doors_left.GetX() <= this.GetX())
@@ -109,7 +98,14 @@ namespace Learn_CTS
             }
             else if (this.GetState() == 3 && this.speed <= 0)
             {
-                OpenDoors();
+                if (this.doors_left.GetX() >= this.GetX() - 76)
+                {
+                    OpenDoors();
+                }
+                else
+                {
+                    this.ChangeState();
+                }
             }
             this.Move(this.speed, 0);
         }
@@ -120,15 +116,8 @@ namespace Learn_CTS
 
         public void OpenDoors()
         {
-            if (this.doors_left.GetX() >= this.GetX() - 76)
-            {
-                this.doors_left.Move(-2, 0);
-                this.doors_right.Move(2, 0);
-            }
-            else
-            {
-                this.ChangeState();
-            }
+            this.doors_left.Move(-2, 0);
+            this.doors_right.Move(2, 0);
         }
 
         /// <summary>
@@ -281,7 +270,6 @@ namespace Learn_CTS
             if(t.GetType().Name == "Player")
             {
                 this.player_inside = true;
-                //this.tram_outside.SetHitbox(hitbox_inside_b);
                 this.doors_left.DisableCollisions();
                 this.doors_right.DisableCollisions();
             }
@@ -293,7 +281,6 @@ namespace Learn_CTS
             if (t.GetType().Name == "Player")
             {
                 this.player_inside = false;
-                //this.tram_outside.SetDefaultHitbox();
                 this.doors_left.EnableCollisions();
                 this.doors_right.EnableCollisions();
             }

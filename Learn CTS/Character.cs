@@ -21,16 +21,8 @@ namespace Learn_CTS
         private bool hasMoved = false;
         private int last_direction = 1;
         private static int m;
-
-        /// <summary>
-        /// Constructor of character.
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-
-        public Character(int x, int y) : base(x, y, true)
-        {
-        }
+        private string folder;
+        private string name;
 
         /// <summary>
         /// Constructor of character with a custom name.
@@ -39,19 +31,39 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Character(int id, String name, int x, int y) : base(name, x, y, true)
+        public Character(int id, String name, String folder, int x, int y) : base(x, y, true)
         {
             this.id = id;
+            this.folder = folder;
+            this.name = name;
+            Random random = new Random();
+            if (random.Next(2) == 0)
+            {
+                last_direction = 1;
+            }
+            else
+            {
+                last_direction = 3;
+            }
+            this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + last_direction.ToString()+"_0.png"));
+            this.SetHitbox(this.CreateHitbox(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "Hitbox.png"));
             for (int i = 0; i < 8; i++)
             {
-                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "1_" + (i + 1).ToString() + ".png"));
-                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + "3_" + (i + 1).ToString() + ".png"));
+                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "1_" + (i + 1).ToString() + ".png"));
+                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "3_" + (i + 1).ToString() + ".png"));
             }
         }
 
         public void SetDefaultPose()
         {
-            this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + ((Character)this).GetID() + Path.DirectorySeparatorChar + this.last_direction.ToString() + "_0.png"));
+            if (last_direction == 1)
+            {
+                this.SetImage(animation_list_est[0]);
+            }
+            else /*(last_direction == 3)*/
+            {
+                this.SetImage(animation_list_west[0]);
+            }
         }
 
         public void UpdateMovement(int a, int b)
@@ -117,6 +129,23 @@ namespace Learn_CTS
         public int GetID()
         {
             return this.id;
+        }
+
+        public string GetFolder()
+        {
+            if(folder == null)
+            {
+                return this.id.ToString();
+            }
+            else
+            {
+                return this.folder;
+            }
+        }
+
+        public override string GetName()
+        {
+            return this.name;
         }
     }
 }
