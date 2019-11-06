@@ -169,10 +169,10 @@ namespace Learn_CTS
             {
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "main_menu_btn_launch_engine",
+                Cursor = Cursors.Hand,
                 Size = new Size(230, 60),
                 TabIndex = 0,
-                Text = "Tester le moteur",
-                UseVisualStyleBackColor = true
+                Text = "Tester le moteur"
             };
             main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
                                     (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
@@ -183,10 +183,10 @@ namespace Learn_CTS
             {
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "main_menu_btn_create",
+                Cursor = Cursors.Hand,
                 Size = new Size(230, 60),
                 TabIndex = 1,
-                Text = "Créer un jeu",
-                UseVisualStyleBackColor = true
+                Text = "Créer un jeu"
             };
             main_menu_btn_create_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_create_dyna.Width / 2),
                                     (this.Height / 2) - main_menu_btn_create_dyna.Height - (main_menu_btn_create_dyna.Height / 2) - 4);
@@ -197,10 +197,10 @@ namespace Learn_CTS
             {
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "main_menu_btn_edit",
+                Cursor = Cursors.Hand,
                 Size = new Size(230, 60),
                 TabIndex = 2,
-                Text = "Mes jeux",
-                UseVisualStyleBackColor = true
+                Text = "Mes jeux"
             };
             main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
                             (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_btn_create_dyna.Height / 2) + 4);
@@ -210,10 +210,10 @@ namespace Learn_CTS
             Button main_menu_btn_exit_dyna = new Button() {
                 Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10),
                 Name = "main_menu_btn_exit",
+                Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 4,
-                Text = "Quitter",
-                UseVisualStyleBackColor = true
+                Text = "Quitter"
             };
             main_menu_btn_exit_dyna.Click += new EventHandler(this.Main_menu_btn_exit_Click);
 
@@ -221,10 +221,10 @@ namespace Learn_CTS
             Button main_menu_btn_credits_dyna = new Button()
             {
                 Name = "main_menu_btn_credits",
+                Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 3,
-                Text = "Credits",
-                UseVisualStyleBackColor = true
+                Text = "Credits"
             };
             main_menu_btn_credits_dyna.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
@@ -242,27 +242,30 @@ namespace Learn_CTS
             this.SuspendLayout();
 
             // Creation of the Button responsible to go back to the main menu.
-            Button editor_menu_btn_back_to_main_menu = new Button() {
-                Size = new Size(50, 50),
-                Location = new Point(10, 10),
-                Name = "editor_menu_btn_back_to_main_menu",
-                Text = "<-",
-                UseVisualStyleBackColor = true
+            PictureBox editor_menu_pb_back_to_main_menu = new PictureBox()
+            {
+                Name = "editor_menu_pb_back_to_main_menu",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Location = new Point(16, 16),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
             };
-            editor_menu_btn_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            editor_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
 
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel flp_editor_menu = new FlowLayoutPanel()
             {
-                Size = new Size(this.Width - (editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width - 8),
+                Size = new Size(this.Width - (editor_menu_pb_back_to_main_menu.Location.X + editor_menu_pb_back_to_main_menu.Width - 8),
                         this.Height),
                 Name = "flp_editor_menu",
                 TabIndex = 3
             };
-            flp_editor_menu.Location = new Point(editor_menu_btn_back_to_main_menu.Location.X + editor_menu_btn_back_to_main_menu.Width + 8, 0);
+            flp_editor_menu.Location = new Point(editor_menu_pb_back_to_main_menu.Location.X + editor_menu_pb_back_to_main_menu.Width + 8, 0);
 
-            this.Controls.AddRange(new Control[] { flp_editor_menu, editor_menu_btn_back_to_main_menu });
+            this.Controls.AddRange(new Control[] { flp_editor_menu, editor_menu_pb_back_to_main_menu });
 
             // Fetching the existing games
             ArrayList games_list = Get_Games_List();
@@ -281,43 +284,47 @@ namespace Learn_CTS
         {
             this.displayed_menu = "create_menu";
 
-            // Creation of the Button responsible to go back to the main menu.
-            Button create_menu_btn_back_to_main_menu = new Button()
+            // Creation of the PictureBox responsible to go back to the main menu.
+            PictureBox create_menu_pb_back_to_main_menu = new PictureBox()
             {
-                Size = new Size(50, 50),
-                Location = new Point(10, 10),
-                Name = "create_menu_btn_back_to_main_menu",
-                Text = "<-",
-                UseVisualStyleBackColor = true
+                Name = "create_menu_pb_back_to_main_menu",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Location = new Point(16, 16),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
             };
-            create_menu_btn_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            create_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
             // Creation of the text box to enter the game name.
             TextBox create_menu_txt_name_game = new TextBox() {
                 Name = "create_menu_txt_name_game",
+                Cursor = Cursors.IBeam,
+                Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 ShortcutsEnabled = false,
                 Size = new Size(300, 60)
             };
             create_menu_txt_name_game.Location = new Point((this.Width / 2) - (create_menu_txt_name_game.Width / 2),
-                                    (this.Height / 2) - create_menu_txt_name_game.Height - (create_menu_txt_name_game.Height *2 ) - 12);
+                                    (this.Height / 2) - create_menu_txt_name_game.Height - create_menu_txt_name_game.Height - 12);
 
             // Creation of the button that will create the game and go to the editor.
             Button create_menu_btn_confirm = new Button()
             {
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
                 Name = "create_menu_btn_confirm",
+                Cursor = Cursors.Hand,
                 Size = new Size(230, 60),
                 TabIndex = 1,
-                Text = "Créer",
-                UseVisualStyleBackColor = true
+                Text = "Créer"
             };
             create_menu_btn_confirm.Location = new Point((this.Width / 2) - (create_menu_btn_confirm.Width / 2),
-                            (this.Height / 2) - create_menu_btn_confirm.Height + (create_menu_txt_name_game.Height / 2) + 4);
+                            (this.Height / 2) - create_menu_btn_confirm.Height + (create_menu_txt_name_game.Height / 2) + 8);
 
             create_menu_btn_confirm.Click += new EventHandler(this.Create_menu_btn_confirm_Click);
             create_menu_txt_name_game.KeyPress += new KeyPressEventHandler(this.Create_menu_txt_name_game_KeyPress);
 
-            this.Controls.AddRange(new Control[] { create_menu_btn_back_to_main_menu, create_menu_txt_name_game, create_menu_btn_confirm });
+            this.Controls.AddRange(new Control[] { create_menu_pb_back_to_main_menu, create_menu_txt_name_game, create_menu_btn_confirm });
         }
 
         private void Create_menu_txt_name_game_KeyPress(object sender, KeyPressEventArgs e)
