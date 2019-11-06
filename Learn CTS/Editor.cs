@@ -124,6 +124,24 @@ namespace Learn_CTS
         }
 
         /// <summary>
+        /// Ask for confirmation before switching from selected item if the current dataset was modified.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void Menu_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if(!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                this.saved = true;
+            }
+        }
+
+        /// <summary>
         /// Change the content display when the user select another category from the menu.
         /// </summary>
         /// <param name="sender">Control calling the method, here it will always be the menu.</param>
