@@ -17,32 +17,32 @@
 - [ ] Learn CTS
     - [ ] IHM
         - [ ] Interfaces de jeu
-            - [ ] Interface tram
+            - [X] Interface tram
             - [ ] Interface bus
-            - [ ] Interface parc
+            - [X] Interface parc
             - [ ] Interface "Point & Click"
-        - [ ] Menus
-            - [ ] Accueil
-            - [ ] Édition
-            - [ ] Test
-            - [ ] Jeux
-                - [ ] Tram
-                - [ ] Bus
-                - [ ] Parc
-                - [ ] "Point & Click"
+        - [X] Menus
+            - [X] Accueil
+            - [X] Édition
+            - [X] Test
+            - [X] Jeux
+                - [X] Tram
+                - [X] Bus
+                - [X] Parc
+                - [X] "Point & Click"
         - [ ] Éditeur
-            - [ ] Choix du moteur et options générales
+            - [X] Choix du moteur et options générales
             - [ ] Création et gestion des PNJ (Personnages Non-Joueurs)
             - [ ] Personnalisation du personnage principal
             - [ ] Entrée et gestion des dialogues sous la forme de QCM
-            - [ ] Édition des différents scénarios
+            - [X] Édition des différents scénarios
             - [ ] Modification des textures d'ambiance
     - [ ] Pédagogie
         - [ ] Morale + Connaissances
             - [ ] Utilisation de français simple
             - [ ] Récapitulatifs des décisions
         - [ ] Gameplay
-            - [ ] Interactions avec l'environnement
+            - [X] Interactions avec l'environnement
             - [ ] Difficultés
             - [ ] Indicateur de niveau
                 - [ ] Points de civilité

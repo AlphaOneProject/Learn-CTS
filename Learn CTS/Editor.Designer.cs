@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Non-joueurs");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Joueur");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9,
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Scénarios");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Non-joueurs");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Joueur");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Personnages", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Label();
@@ -45,38 +45,41 @@
             // 
             // menu
             // 
+            this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.menu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu.ForeColor = System.Drawing.Color.White;
             this.menu.FullRowSelect = true;
             this.menu.ItemHeight = 32;
             this.menu.Location = new System.Drawing.Point(12, 12);
             this.menu.Name = "menu";
-            treeNode7.Name = "global";
-            treeNode7.Text = "Général";
-            treeNode8.Name = "npcs";
-            treeNode8.Text = "Non-joueurs";
-            treeNode9.Name = "choices";
-            treeNode9.Text = "Dialogues";
-            treeNode10.Name = "player";
-            treeNode10.Text = "Joueur";
-            treeNode11.Name = "characters";
-            treeNode11.Text = "Personnages";
-            treeNode12.Name = "scenarios";
-            treeNode12.Text = "Scénarios";
+            treeNode1.Name = "global";
+            treeNode1.Text = "Général";
+            treeNode2.Name = "npcs";
+            treeNode2.Text = "Non-joueurs";
+            treeNode3.Name = "choices";
+            treeNode3.Text = "Dialogues";
+            treeNode4.Name = "player";
+            treeNode4.Text = "Joueur";
+            treeNode5.Name = "characters";
+            treeNode5.Text = "Personnages";
+            treeNode6.Name = "scenarios";
+            treeNode6.Text = "Scénarios";
             this.menu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode11,
-            treeNode12});
+            treeNode1,
+            treeNode5,
+            treeNode6});
             this.menu.PathSeparator = " / ";
             this.menu.ShowLines = false;
             this.menu.ShowNodeToolTips = true;
             this.menu.Size = new System.Drawing.Size(225, 618);
             this.menu.TabIndex = 0;
+            this.menu.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.Menu_BeforeSelect);
             this.menu.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Menu_AfterSelect);
             // 
             // content
             // 
             this.content.AutoScroll = true;
-            this.content.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.content.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.content.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.content.Location = new System.Drawing.Point(250, 85);
@@ -98,7 +101,7 @@
             // lbl_path
             // 
             this.lbl_path.AutoSize = true;
-            this.lbl_path.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.lbl_path.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
             this.lbl_path.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_path.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_path.Location = new System.Drawing.Point(250, 58);
@@ -111,14 +114,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.ClientSize = new System.Drawing.Size(1002, 642);
             this.Controls.Add(this.lbl_path);
             this.Controls.Add(this.title);
             this.Controls.Add(this.content);
             this.Controls.Add(this.menu);
+            this.ForeColor = System.Drawing.Color.White;
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Editor";
             this.Text = "Éditeur";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Editor_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Editor_FormClosed);
             this.Load += new System.EventHandler(this.Editor1_Load);
             this.SizeChanged += new System.EventHandler(this.Editor1_SizeChanged);

@@ -16,6 +16,7 @@ namespace Learn_CTS
         private readonly String game;
         private readonly String game_path;
         private JObject game_properties;
+        private bool saved;
 
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
@@ -27,6 +28,15 @@ namespace Learn_CTS
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games" + Path.DirectorySeparatorChar + game;
             this.Text = "Éditeur : " + game;
             this.DoubleBuffered = false;
+        }
+
+        private void Editor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous tout de même quitter ?",
+                                "Confirmation de fermeture", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         /// <summary>
@@ -60,6 +70,7 @@ namespace Learn_CTS
         {
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
             this.game_properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            this.saved = true;
             if(!this.game_properties["state"].ToString().Equals("Inactif."))
             {
                 this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
@@ -110,6 +121,24 @@ namespace Learn_CTS
 
             menu.ExpandAll();
             menu.SelectedNode = menu.Nodes[0];
+        }
+
+        /// <summary>
+        /// Ask for confirmation before switching from selected item if the current dataset was modified.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void Menu_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if(!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                this.saved = true;
+            }
         }
 
         /// <summary>
@@ -187,8 +216,12 @@ namespace Learn_CTS
             {
                 Name = "txt_desc",
                 Text = (string)this.game_properties["description"],
+                Cursor = Cursors.IBeam,
                 Multiline = true,
-                BackColor = Color.LightGreen,
+                ForeColor = Color.White,
+                BackColor = Color.FromArgb(56, 56, 56),
+                BorderStyle = BorderStyle.Fixed3D,
+                Margin = new Padding(8, 8, 8, 8),
                 ShortcutsEnabled = false
             };
             txt_desc.Width = content.Width - 100;
@@ -228,8 +261,9 @@ namespace Learn_CTS
                 if (t.Text.Equals(string.Empty)) { return; }
                 this.game_properties["description"] = t.Text;
                 Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
-                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 32;
-                t.BackColor = Color.LightGreen;
+                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                this.saved = true;
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "";
 
                 // Resize all controls inside "content".
@@ -239,7 +273,8 @@ namespace Learn_CTS
             else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
                 t.Text = (string)this.game_properties["description"];
-                t.BackColor = Color.LightGreen;
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                this.saved = true;
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "";
             }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
@@ -250,6 +285,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) { // Still backspace.
                     content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                    this.saved = false;
                     return; // Let you erase regardless of the lenght.
                 }
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "Limite de caractères atteinte !";
@@ -257,8 +293,9 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.LightSalmon;
+                t.BackColor = Color.FromArgb(56, 32, 32);
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                this.saved = false;
             }
         }
 
@@ -304,6 +341,7 @@ namespace Learn_CTS
             {
                 Name = "btn_add_scenario",
                 Text = "Ajouter un nouveau scénario",
+                Cursor = Cursors.Hand,
                 AutoSize = true
             };
             btn_add_scenario.Click += new System.EventHandler(this.Add_Scenario);
@@ -387,6 +425,7 @@ namespace Learn_CTS
             {
                 Name = "btn_discard_scenario",
                 Text = "X",
+                Cursor = Cursors.Hand,
                 AutoSize = true
             };
             btn_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
@@ -396,6 +435,7 @@ namespace Learn_CTS
             PictureBox pb_down_scenario = new PictureBox()
             {
                 Name = "pb_down_scenario",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" + 
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
@@ -407,6 +447,7 @@ namespace Learn_CTS
             PictureBox pb_up_scenario = new PictureBox()
             {
                 Name = "pb_up_scenario",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
@@ -420,16 +461,19 @@ namespace Learn_CTS
             {
                 Name = "lbl_name_scenario",
                 Text = menu.SelectedNode.Text,
+                Cursor = Cursors.Hand,
                 AutoSize = true,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
+            lbl_name_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(lbl_name_scenario);
 
             // Creation of a button allowing to rename the scenario.
             PictureBox pb_rename_scenario = new PictureBox()
             {
                 Name = "pb_rename_scenario",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
@@ -443,6 +487,7 @@ namespace Learn_CTS
             {
                 Name = "txt_rename_scenario",
                 Text = menu.SelectedNode.Text,
+                Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
@@ -457,13 +502,14 @@ namespace Learn_CTS
             {
                 Name = "btn_add_situation",
                 Text = "Ajouter une situation",
+                Cursor = Cursors.Hand,
                 AutoSize = true
             };
             btn_add_situation.Click += new EventHandler(this.Add_Situation);
             content.Controls.Add(btn_add_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width, 0);
+            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width - 2, 0);
             pb_down_scenario.Location = new Point(8, 0);
             pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
             lbl_name_scenario.Location = new Point(pb_up_scenario.Location.X + pb_up_scenario.Width + 8, 0);
@@ -765,6 +811,7 @@ namespace Learn_CTS
             {
                 Name = "btn_discard_situation",
                 Text = "X",
+                Cursor = Cursors.Hand,
                 AutoSize = true
             };
             btn_discard_situation.Click += new System.EventHandler(this.Discard_Situation);
@@ -774,6 +821,7 @@ namespace Learn_CTS
             PictureBox pb_down_situation = new PictureBox()
             {
                 Name = "pb_down_situation",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
@@ -785,6 +833,7 @@ namespace Learn_CTS
             PictureBox pb_up_situation = new PictureBox()
             {
                 Name = "pb_up_situation",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
@@ -798,16 +847,19 @@ namespace Learn_CTS
             {
                 Name = "lbl_name_situation",
                 Text = menu.SelectedNode.Text,
+                Cursor = Cursors.Hand,
                 AutoSize = true,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
+            lbl_name_situation.Click += new EventHandler(this.Ask_Rename_Situation);
             content.Controls.Add(lbl_name_situation);
 
             // Creation of a button allowing to rename the scenario.
             PictureBox pb_rename_situation = new PictureBox()
             {
                 Name = "pb_rename_situation",
+                Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
@@ -821,6 +873,7 @@ namespace Learn_CTS
             {
                 Name = "txt_rename_situation",
                 Text = menu.SelectedNode.Text,
+                Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
@@ -831,7 +884,7 @@ namespace Learn_CTS
             content.Controls.Add(txt_rename_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width, 0);
+            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width - 2, 0);
             pb_down_situation.Location = new Point(8, 0);
             pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
             lbl_name_situation.Location = new Point(pb_up_situation.Location.X + pb_up_situation.Width + 8, 0);
