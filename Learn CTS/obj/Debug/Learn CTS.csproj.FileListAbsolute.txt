@@ -65,4 +65,26 @@ C:\Users\louis\OneDrive\DUT Informatique\S3\Learn-CTS\Learn CTS\obj\Debug\Learn_
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Dialog.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources
+<<<<<<< HEAD
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
+=======
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.exe.config
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.exe
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.pdb
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Dialog.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Properties.Resources.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.GenerateResource.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CoreCompileInputs.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.exe
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.pdb
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.resources
+>>>>>>> 4e8fe57dbf53d3742bf4192a2602cc5c397041d5
