@@ -13,7 +13,8 @@ namespace Learn_CTS
          * False otherwise
          */
         private bool isDefaultGame;
-        private readonly String img_path;
+        private readonly string img_path;
+        private string gameFullName;
 
         public GameCard()
         {
@@ -31,7 +32,7 @@ namespace Learn_CTS
             pb_delete.BackColor = Color.Transparent;
         }
 
-        public String Title
+        public string Title
         {
             get
             {
@@ -40,6 +41,7 @@ namespace Learn_CTS
 
             set
             {
+                this.gameFullName = value;
                 int char_space = 14; // Number of characters that can be seen in the label
                 if (value.Length > char_space)
                 {
@@ -54,7 +56,7 @@ namespace Learn_CTS
             }
         }
 
-        public String Description
+        public string Description
         {
             get
             {
@@ -75,9 +77,9 @@ namespace Learn_CTS
             }
         }
 
-        public void Show_Thumbnail(String game)
+        public void Show_Thumbnail(string game)
         {
-            String thumbnail_path = AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game
+            string thumbnail_path = AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game
                 + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images"
                 + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "thumbnail.png";
             try
@@ -141,14 +143,14 @@ namespace Learn_CTS
 
         private void Pb_play_Click(object sender, EventArgs e)
         {
-            Form game = new GameWindow(Title);
+            Form game = new GameWindow(this.gameFullName);
             game.Show();
             this.Parent.Parent.Hide();
         }
 
         private void Pb_edit_Click(object sender, EventArgs e)
         {
-            Form editor = new Editor(Title);
+            Form editor = new Editor(this.gameFullName);
             editor.Show();
             this.Parent.Parent.Hide();
         }
@@ -161,7 +163,7 @@ namespace Learn_CTS
             }
             else
             {
-                if ((MessageBox.Show("Confirmer la suppression du jeu " + this.Title + " ?", "Confirmation de suppression",
+                if ((MessageBox.Show("Confirmer la suppression du jeu " + this.gameFullName + " ?", "Confirmation de suppression",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes))
                 {
                     Delete_Game();
@@ -172,7 +174,7 @@ namespace Learn_CTS
 
         private void Delete_Game()
         {
-            Directory.Delete(@"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + Title, true);
+            Directory.Delete(@"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName, true);
         }
 
         private void Pb_Btn_MouseHover(object sender, EventArgs e)

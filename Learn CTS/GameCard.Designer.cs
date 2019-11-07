@@ -1,4 +1,6 @@
-﻿namespace Learn_CTS
+﻿using System.Windows.Forms;
+
+namespace Learn_CTS
 {
     partial class GameCard
     {
@@ -66,6 +68,7 @@
             this.pb_edit.ImageLocation = "gamecard-edit-btn-x64.png";
             this.pb_edit.Location = new System.Drawing.Point(93, 7);
             this.pb_edit.Name = "pb_edit";
+            this.pb_edit.Cursor = Cursors.Hand;
             this.pb_edit.Size = new System.Drawing.Size(42, 42);
             this.pb_edit.TabIndex = 5;
             this.pb_edit.TabStop = false;
@@ -81,6 +84,7 @@
             this.pb_play.ImageLocation = "gamecard-play-btn-x128.png";
             this.pb_play.Location = new System.Drawing.Point(28, 28);
             this.pb_play.Name = "pb_play";
+            this.pb_play.Cursor = Cursors.Hand;
             this.pb_play.Size = new System.Drawing.Size(86, 86);
             this.pb_play.TabIndex = 4;
             this.pb_play.TabStop = false;
@@ -91,7 +95,7 @@
             // 
             // pb_thumbnail
             // 
-            this.pb_thumbnail.Location = new System.Drawing.Point(7, 7);
+            this.pb_thumbnail.Location = new System.Drawing.Point(6, 6);
             this.pb_thumbnail.Name = "pb_thumbnail";
             this.pb_thumbnail.Size = new System.Drawing.Size(128, 128);
             this.pb_thumbnail.TabIndex = 3;
@@ -104,6 +108,7 @@
             this.pb_delete.ImageLocation = "gamecard-delete-btn-x64.png";
             this.pb_delete.Location = new System.Drawing.Point(93, 92);
             this.pb_delete.Name = "pb_delete";
+            this.pb_delete.Cursor = Cursors.Hand;
             this.pb_delete.Size = new System.Drawing.Size(42, 42);
             this.pb_delete.TabIndex = 6;
             this.pb_delete.TabStop = false;
@@ -114,24 +119,25 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
             this.panel1.Controls.Add(this.pb_edit);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(142, 140);
+            this.panel1.Size = new System.Drawing.Size(140, 140);
             this.panel1.TabIndex = 7;
             // 
             // GameCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Controls.Add(this.pb_delete);
             this.Controls.Add(this.pb_play);
             this.Controls.Add(this.pb_thumbnail);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "GameCard";
             this.Size = new System.Drawing.Size(314, 140);
