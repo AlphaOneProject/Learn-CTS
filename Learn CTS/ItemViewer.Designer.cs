@@ -46,9 +46,10 @@
             // lbl_desc
             // 
             this.lbl_desc.AutoSize = true;
+            this.lbl_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
             this.lbl_desc.Location = new System.Drawing.Point(309, 82);
             this.lbl_desc.Name = "lbl_desc";
-            this.lbl_desc.Size = new System.Drawing.Size(46, 13);
+            this.lbl_desc.Size = new System.Drawing.Size(107, 29);
             this.lbl_desc.TabIndex = 1;
             this.lbl_desc.Text = "lbl_desc";
             // 
@@ -68,6 +69,7 @@
             this.lbl_color.Name = "lbl_color";
             this.lbl_color.Size = new System.Drawing.Size(400, 246);
             this.lbl_color.TabIndex = 3;
+            this.lbl_color.Click += new System.EventHandler(this.Lbl_color_Click);
             // 
             // ItemViewer
             // 
@@ -79,6 +81,7 @@
             this.Controls.Add(this.lbl_color);
             this.Name = "ItemViewer";
             this.Size = new System.Drawing.Size(431, 281);
+            this.ClientSizeChanged += new System.EventHandler(this.ItemViewer_ClientSizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pb_item)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

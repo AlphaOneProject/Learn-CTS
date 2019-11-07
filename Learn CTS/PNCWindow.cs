@@ -20,6 +20,7 @@ namespace Learn_CTS
 
         private int DrawSurfaceWidth;
         private int DrawSurfaceHeight;
+        private bool isOpen;
         private List<Texture> list_textures;
         private String game;
         private String game_path;
@@ -27,6 +28,7 @@ namespace Learn_CTS
 
         public PNCWindow(String game)
         {
+            this.isOpen = false;
             this.game = game;
             this.game_path = this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
@@ -116,7 +118,7 @@ namespace Learn_CTS
 
         private void HighlightItem(Item item)
         {
-            ItemViewer highlight = new ItemViewer(item.GetID(), this.Height, this.Width);
+            ItemViewer highlight = new ItemViewer(item.GetID());
             this.Controls.Add(highlight);
         }
 
@@ -131,6 +133,10 @@ namespace Learn_CTS
             graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
             graphics.Dispose();   // Releasing all resource used by graphics 
             return bmp;
+        }
+
+        private void PNCWindow_SizeChanged(object sender, EventArgs e)
+        {
         }
     }
 }
