@@ -71,7 +71,7 @@ namespace Learn_CTS
         {
             Texture.InitializePath(game);
             Character.SetM(3);
-            player = new Player(600, 504);
+            player = new Player("Moi",600, 504);
             tram = new Tram(-4000, 198);
             background = new Background(0);
             background.DisableCollisions();
@@ -142,11 +142,6 @@ namespace Learn_CTS
         private void Timer_Tick(object Sender, EventArgs e)
         {
             ticks += 1;
-            //EN ATTENDANT UN BUGFIXE DE LA MEMORY LEAK
-            if (ticks%100 == 0)
-            {
-                GC.Collect(); GC.WaitForPendingFinalizers();
-            }
             if (tram.GetState() == 0)
             {
                 MoveTexturesIfPlayerMoves();
@@ -610,13 +605,14 @@ namespace Learn_CTS
             JObject npcs2 = Get_From_JSON("library" + Path.DirectorySeparatorChar + "npcs.json");
             foreach (KeyValuePair<string, JToken> line in npcs)
             {
+                Console.WriteLine(npcs2[line.Key]["folder"].ToString());
                 if (tram != null && (line.Value["x"].ToObject<int>() > tram.GetX() && line.Value["x"].ToObject<int>() < tram.GetX() + tram.GetWidth()) && (line.Value["y"].ToObject<int>() > tram.GetY() && line.Value["x"].ToObject<int>() < tram.GetY() + tram.GetHeight()))
                 {
-                    tram.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>()));
+                    tram.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString()));
                 }
                 else
                 {
-                    background.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>()));
+                    background.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString()));
                 }
             }
         }
