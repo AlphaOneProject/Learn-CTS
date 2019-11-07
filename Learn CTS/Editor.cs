@@ -73,12 +73,11 @@ namespace Learn_CTS
             this.saved = true;
             if(!this.game_properties["state"].ToString().Equals("Inactif."))
             {
-                this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
-
                 if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accèder ?",
                                 "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                 {
+                    this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
+                    Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
                     this.Close();
                     return;
                 }
@@ -312,7 +311,92 @@ namespace Learn_CTS
         /// </summary>
         private void Display_NPCs()
         {
-            // WIP
+            // Creation of controls linking NPCs files to the editor.
+
+            // Label annoncing the following NPCs management.
+            Label lbl_npcs = new Label()
+            {
+                Name = "lbl_npcs",
+                Text = "Gestion des figurants",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_npcs);
+
+            // TableLayoutPanel, keeping the generated elements in rows.
+            TableLayoutPanel tlp_npcs = new TableLayoutPanel()
+            {
+                Name = "tlp_npcs",
+                AutoScroll = true,
+                RowCount = 0,
+                ColumnCount = 3,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset
+            };
+            content.Controls.Add(tlp_npcs);
+            tlp_npcs.Width = content.Width - 40;
+            tlp_npcs.Height = 2;
+
+            // Set the correct location of the controls (responsive with the groupbox's size).
+            lbl_npcs.Location = new Point(20, 20);
+            tlp_npcs.Location = new Point(20, lbl_npcs.Location.Y + lbl_npcs.Height + 20);
+
+            // Generates all data in tlp_npcs.
+            int i = 0;
+            JObject data_pnj;
+            string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                                        Path.DirectorySeparatorChar + "npcs";
+            foreach (string file_npc in Directory.GetFiles(npcs_folder_path))
+            {
+                data_pnj = Get_From_JSON(file_npc.Remove(0, this.game_path.Length));
+
+                tlp_npcs.Height += 42;
+                tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+
+                TextBox npc_name = new TextBox()
+                {
+                    Name = "npc_name" + (i + 1),
+                    Text = (string)data_pnj["name"],
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    ForeColor = Color.White,
+                    BackColor = Color.FromArgb(56, 56, 56),
+                    Multiline = true,
+                    Dock = DockStyle.Fill,
+                    AutoSize = true
+                };
+                tlp_npcs.Controls.Add(npc_name, 0, i);
+
+                TextBox npc_folder = new TextBox()
+                {
+                    Name = "npc_folder" + (i + 1),
+                    Text = (string)data_pnj["folder"],
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    ForeColor = Color.White,
+                    BackColor = Color.FromArgb(56, 56, 56),
+                    Multiline = true,
+                    Dock = DockStyle.Fill,
+                    AutoSize = true
+                };
+                tlp_npcs.Controls.Add(npc_folder, 1, i);
+
+                PictureBox npc_discard = new PictureBox()
+                {
+                    Name = "npc_discard" + (i + 1),
+                    Cursor = Cursors.Hand,
+                    Dock = DockStyle.Fill,
+                    Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                           Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png"),
+                    SizeMode = PictureBoxSizeMode.Zoom
+                };
+                // test2.Click += new EventHandler(this.Discard_Lib_NPC);
+                tlp_npcs.Controls.Add(npc_discard, 2, i);
+
+                i++;
+            }
+
+            // Setup the columns sizes.
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.06));
         }
 
         /// <summary>
