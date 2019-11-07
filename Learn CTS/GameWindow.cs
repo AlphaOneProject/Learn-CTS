@@ -605,6 +605,7 @@ namespace Learn_CTS
             JObject npcs2 = Get_From_JSON("library" + Path.DirectorySeparatorChar + "npcs.json");
             foreach (KeyValuePair<string, JToken> line in npcs)
             {
+                Console.WriteLine(npcs2[line.Key]["folder"].ToString());
                 if (tram != null && (line.Value["x"].ToObject<int>() > tram.GetX() && line.Value["x"].ToObject<int>() < tram.GetX() + tram.GetWidth()) && (line.Value["y"].ToObject<int>() > tram.GetY() && line.Value["x"].ToObject<int>() < tram.GetY() + tram.GetHeight()))
                 {
                     tram.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString()));
