@@ -1,4 +1,5 @@
 {
 	background : "default",
+	game_engine : "quizz",
 	scene_type : "tram_entrance"
 }
