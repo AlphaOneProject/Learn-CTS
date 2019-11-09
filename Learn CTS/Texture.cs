@@ -213,6 +213,10 @@ namespace Learn_CTS
 
         public void RemoveAllChilds()
         {
+            foreach(Texture t in this.list_childs)
+            {
+                t.RemoveAllChilds();
+            }
             this.list_childs = new List<Texture>();
         }
 

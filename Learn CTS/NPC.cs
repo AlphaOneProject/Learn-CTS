@@ -21,7 +21,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public NPC(int id, string name, string folder, int x, int y, int quiz) : base(id, name, folder, x, y)
+        public NPC(int id, string name, string folder, bool b, int x, int y, int quiz) : base(id, name, folder, b, x, y)
         {
             this.quiz = quiz;
         }

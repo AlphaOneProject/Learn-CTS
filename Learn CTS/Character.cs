@@ -16,15 +16,17 @@ namespace Learn_CTS
         private int id;
         private int c = 0;
         private int t = 0;
-        private int? obj_x;
-        private int? obj_y;
+        //private int? obj_x;
+        //private int? obj_y;
         private List<Image> animation_list_west = new List<Image>();
         private List<Image> animation_list_est = new List<Image>();
+        private List<Point> list_objectives = new List<Point>();
         private bool hasMoved = false;
         private int last_direction = 1;
         private static int m;
         private string folder;
         private string name;
+        private bool canMove = false;
 
         /// <summary>
         /// Constructor of character with a custom name.
@@ -33,11 +35,12 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Character(int id, String name, String folder, int x, int y) : base(x, y, true)
+        public Character(int id, String name, String folder, bool b, int x, int y) : base(x, y, true)
         {
             this.id = id;
             this.folder = folder;
             this.name = name;
+            this.canMove = b;
             Random random = new Random();
             if (random.Next(2) == 0)
             {
@@ -71,7 +74,7 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (t % m == 0 && this.GetType().Name == "Player")
+            if (t % m == 0 && this.canMove)
             {
                 t = 0;
                 if (a > 0)
@@ -156,10 +159,11 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate of the objective.</param>
         /// <param name="y">The y coordinate of the objective.</param>
 
-        public void GoTo(int x, int y)
+        public virtual void SetObjective(int x, int y)
         {
-            this.obj_x = x - (this.GetX() + this.GetWidth() / 2);
-            this.obj_y = y - (this.GetY() + this.GetHeight());
+            this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), y-(this.GetY() + this.GetHeight())));
+            //this.obj_x = x - (this.GetX() + this.GetWidth() / 2);
+            //this.obj_y = y - (this.GetY() + this.GetHeight());
         }
 
         /// <summary>
@@ -169,17 +173,7 @@ namespace Learn_CTS
 
         public int GetObjX()
         {
-            return (int)this.obj_x;
-        }
-
-        public void UpdateObjX(int x)
-        {
-            this.obj_x += x;
-        }
-
-        public void UpdateObjY(int y)
-        {
-            this.obj_y += y;
+            return this.list_objectives[0].X;
         }
 
         /// <summary>
@@ -189,7 +183,19 @@ namespace Learn_CTS
 
         public int GetObjY()
         {
-            return (int)this.obj_y;
+            return this.list_objectives[0].Y;
+        }
+
+        public void UpdateObjX(int x)
+        {
+            Point p = this.list_objectives[0];
+            this.list_objectives[0] = new Point(p.X += x, p.Y);
+        }
+
+        public void UpdateObjY(int y)
+        {
+            Point p = this.list_objectives[0];
+            this.list_objectives[0] = new Point(p.X, p.Y+=y);
         }
 
         /// <summary>
@@ -199,7 +205,7 @@ namespace Learn_CTS
 
         public bool HasObjective()
         {
-            return (this.obj_x != null && this.obj_y != null);
+            return this.list_objectives.Count > 0;
         }
 
         /// <summary>
@@ -216,16 +222,16 @@ namespace Learn_CTS
 
         public bool ReachedObjX()
         {
-            return (
-                this.obj_x < 8 &&
-                this.obj_x > -8);
+            Console.WriteLine("x:"+this.GetObjX());
+            return
+                Math.Abs(this.GetObjX()) < 10;
         }
 
         public bool ReachedObjY()
         {
-            return (
-                this.obj_y < 8 &&
-                this.obj_y > -8);
+            Console.WriteLine("y:"+this.GetObjY());
+            return
+                Math.Abs(this.GetObjY()) < 10;
         }
 
         /// <summary>
@@ -234,8 +240,15 @@ namespace Learn_CTS
 
         public void RemoveObjective()
         {
-            this.obj_x = null;
-            this.obj_y = null;
+            if(this.list_objectives.Count > 0)
+            {
+                this.list_objectives.RemoveAt(0);
+            }
+        }
+
+        public void RemoveAllObjectives()
+        {
+            this.list_objectives.Clear();
         }
     }
 }
