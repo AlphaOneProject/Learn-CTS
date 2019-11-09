@@ -185,14 +185,20 @@ namespace Learn_CTS
                 {
                     case "global":
                         Display_Global(); break;
-                    case "characters":
-                        Display_Characters(); break;
+                    case "models":
+                        Display_Models(); break;
+                    case "player":
+                        Display_Player(); break;
                     case "npcs":
                         Display_NPCs(); break;
                     case "choices":
                         Display_Choices(); break;
-                    case "player":
-                        Display_Player(); break;
+                    case "images":
+                        Display_Images(); break;
+                    case "sprites":
+                        Display_Sprites(); break;
+                    case "backgrounds":
+                        Display_Backgrounds(); break;
                     case "scenarios":
                         Display_Scenarios(); break;
                     default:
@@ -313,9 +319,17 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Load controls for characters' content.
+        /// Load controls for models' content.
         /// </summary>
-        private void Display_Characters()
+        private void Display_Models()
+        {
+            // WIP
+        }
+
+        /// <summary>
+        /// Load controls for player's content.
+        /// </summary>
+        private void Display_Player()
         {
             // WIP
         }
@@ -663,10 +677,17 @@ namespace Learn_CTS
             // WIP
         }
 
-        /// <summary>
-        /// Load controls for player's content.
-        /// </summary>
-        private void Display_Player()
+        private void Display_Images()
+        {
+            // WIP
+        }
+
+        private void Display_Sprites()
+        {
+            // WIP
+        }
+
+        private void Display_Backgrounds()
         {
             // WIP
         }
@@ -760,17 +781,6 @@ namespace Learn_CTS
         {
             // Creation of all controls.
 
-            // Creation of a button allowing to discard the scenario.
-            Button btn_discard_scenario = new Button()
-            {
-                Name = "btn_discard_scenario",
-                Text = "X",
-                Cursor = Cursors.Hand,
-                AutoSize = true
-            };
-            btn_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
-            content.Controls.Add(btn_discard_scenario);
-
             // Creation of two arrows allowing changement of the scenarios' order.
             PictureBox pb_down_scenario = new PictureBox()
             {
@@ -808,20 +818,7 @@ namespace Learn_CTS
             };
             lbl_name_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(lbl_name_scenario);
-
-            // Creation of a button allowing to rename the scenario.
-            PictureBox pb_rename_scenario = new PictureBox()
-            {
-                Name = "pb_rename_scenario",
-                Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
-                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-            pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
-            content.Controls.Add(pb_rename_scenario);
-
+            
             // Creation of the hidden textbox allowing to enter a new scenario's name.
             TextBox txt_rename_scenario = new TextBox()
             {
@@ -838,6 +835,32 @@ namespace Learn_CTS
             txt_rename_scenario.KeyPress += new KeyPressEventHandler(this.Rename_Scenario_Txt_Keypress);
             content.Controls.Add(txt_rename_scenario);
 
+            // Creation of a button allowing to rename the scenario.
+            PictureBox pb_rename_scenario = new PictureBox()
+            {
+                Name = "pb_rename_scenario",
+                Cursor = Cursors.Hand,
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
+            content.Controls.Add(pb_rename_scenario);
+
+            // Creation of a button allowing to discard the scenario.
+            PictureBox pb_discard_scenario = new PictureBox()
+            {
+                Name = "btn_discard_scenario",
+                Cursor = Cursors.Hand,
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
+            content.Controls.Add(pb_discard_scenario);
+
             // Creation of the button responsible for the situations' creation.
             Button btn_add_situation = new Button()
             {
@@ -850,12 +873,12 @@ namespace Learn_CTS
             content.Controls.Add(btn_add_situation);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_scenario.Location = new Point(content.Width - btn_discard_scenario.Width - 2, 0);
             pb_down_scenario.Location = new Point(8, 0);
             pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
             lbl_name_scenario.Location = new Point(pb_up_scenario.Location.X + pb_up_scenario.Width + 8, 0);
             txt_rename_scenario.Location = new Point(lbl_name_scenario.Location.X, 0);
             pb_rename_scenario.Location = new Point(lbl_name_scenario.Location.X + lbl_name_scenario.Width, 0);
+            pb_discard_scenario.Location = new Point(pb_rename_scenario.Location.X + pb_rename_scenario.Width + 2, 0);
 
             btn_add_situation.Location = new Point((content.Width - btn_add_situation.Width) / 2, 100);
         }
@@ -972,6 +995,7 @@ namespace Learn_CTS
                 t.Visible = false;
                 content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
                 content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
+                e.Handled = true;
             }
             else if(!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char) 8)) // (char)8 => Backspace.
             {
@@ -1147,18 +1171,7 @@ namespace Learn_CTS
         {
             // Creation of all controls.
 
-            // Creation of a button allowing to discard the situation.
-            Button btn_discard_situation = new Button()
-            {
-                Name = "btn_discard_situation",
-                Text = "X",
-                Cursor = Cursors.Hand,
-                AutoSize = true
-            };
-            btn_discard_situation.Click += new System.EventHandler(this.Discard_Situation);
-            content.Controls.Add(btn_discard_situation);
-
-            // Creation of two arrows allowing changement of the scenarios' order.
+            // Creation of two arrows allowing changement of the situations' order.
             PictureBox pb_down_situation = new PictureBox()
             {
                 Name = "pb_down_situation",
@@ -1196,20 +1209,7 @@ namespace Learn_CTS
             lbl_name_situation.Click += new EventHandler(this.Ask_Rename_Situation);
             content.Controls.Add(lbl_name_situation);
 
-            // Creation of a button allowing to rename the scenario.
-            PictureBox pb_rename_situation = new PictureBox()
-            {
-                Name = "pb_rename_situation",
-                Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
-                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-            pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
-            content.Controls.Add(pb_rename_situation);
-
-            // Creation of the hidden textbox allowing to enter a new scenario's name.
+            // Creation of the hidden textbox allowing to enter a new situation's name.
             TextBox txt_rename_situation = new TextBox()
             {
                 Name = "txt_rename_situation",
@@ -1225,13 +1225,39 @@ namespace Learn_CTS
             txt_rename_situation.KeyPress += new KeyPressEventHandler(this.Rename_Situation_Txt_Keypress);
             content.Controls.Add(txt_rename_situation);
 
+            // Creation of a picturebox allowing to rename the situation.
+            PictureBox pb_rename_situation = new PictureBox()
+            {
+                Name = "pb_rename_situation",
+                Cursor = Cursors.Hand,
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            content.Controls.Add(pb_rename_situation);
+
+            // Creation of a button allowing to discard the situation.
+            PictureBox pb_discard_situation = new PictureBox()
+            {
+                Name = "pb_discard_situation",
+                Cursor = Cursors.Hand,
+                Size = new Size(24, 24),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_discard_situation.Click += new EventHandler(this.Discard_Situation);
+            content.Controls.Add(pb_discard_situation);
+
             // Set the correct location of the controls (responsive with the groupbox's size).
-            btn_discard_situation.Location = new Point(content.Width - btn_discard_situation.Width - 2, 0);
             pb_down_situation.Location = new Point(8, 0);
             pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
             lbl_name_situation.Location = new Point(pb_up_situation.Location.X + pb_up_situation.Width + 8, 0);
             txt_rename_situation.Location = new Point(lbl_name_situation.Location.X, 0);
             pb_rename_situation.Location = new Point(lbl_name_situation.Location.X + lbl_name_situation.Width, 0);
+            pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
         }
 
         /// <summary>
@@ -1346,6 +1372,7 @@ namespace Learn_CTS
                 t.Visible = false;
                 content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
                 content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
+                e.Handled = true;
             }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == ' ' || e.KeyChar == (char)8)) // (char) 8 => Backspace.
             {
