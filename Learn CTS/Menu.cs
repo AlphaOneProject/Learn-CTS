@@ -14,7 +14,7 @@ namespace Learn_CTS
          * "main_menu" is the main menu.
          * "editor_menu" is the menu where the games are displayed.
          * "create_menu" is the menu where you choose the name of the newly created game.
-         * "credits" means that the credits are displayed.
+         * "options" means that the options are displayed.
          */
         private String displayed_menu;
 
@@ -56,7 +56,7 @@ namespace Learn_CTS
             main_menu_btn_edit.Location = new Point((this.Width / 2) - (main_menu_btn_edit.Width / 2),
                             (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_create.Height / 2) + 4);
 
-            main_menu_btn_credits.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
+            main_menu_btn_options.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
             main_menu_btn_exit.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
@@ -217,19 +217,19 @@ namespace Learn_CTS
             };
             main_menu_btn_exit_dyna.Click += new EventHandler(this.Main_menu_btn_exit_Click);
 
-            // Creation of the button that displays credits.
-            Button main_menu_btn_credits_dyna = new Button()
+            // Creation of the button that displays options.
+            Button main_menu_btn_options_dyna = new Button()
             {
-                Name = "main_menu_btn_credits",
+                Name = "main_menu_btn_options",
                 Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 3,
-                Text = "Credits"
+                Text = "options"
             };
-            main_menu_btn_credits_dyna.Location = new Point((this.Width / 2) - main_menu_btn_credits.Width - 6,
+            main_menu_btn_options_dyna.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
-            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_credits_dyna });
+            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace Learn_CTS
                         c.Location = new Point((this.Width / 2) - (c.Width / 2), 
                             (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_create",false)[0].Height / 2) + 4);
                         break;
-                    case "main_menu_btn_credits":
+                    case "main_menu_btn_options":
                         c.Location = new Point((this.Width / 2) - c.Width - 6,
                             (this.Height / 2) + (this.Controls.Find("main_menu_btn_edit", false)[0].Height / 2) + 10);
                         break;
