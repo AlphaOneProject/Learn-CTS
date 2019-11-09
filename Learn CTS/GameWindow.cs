@@ -441,8 +441,8 @@ namespace Learn_CTS
                     {
                         if(Math.Abs((t.GetX()+t.GetWidth()/2 - (player.GetX()+player.GetWidth()/2))) < 256 && Math.Abs((t.GetY() - player.GetY())) < 256)
                         {
-                            //d = new Dialog(t.GetID(), game);
-                            //this.Controls.Add(d); 
+                            d = new Dialog(t.GetID(), game);
+                            this.Controls.Add(d); 
                         }
                         else
                         {

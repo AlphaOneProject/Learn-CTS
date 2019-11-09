@@ -57,7 +57,7 @@
     <Compile Include="Dialog.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dialog.Designer.cs">
+    <Compile Include="Dialog.designer.cs">
       <DependentUpon>Dialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor.cs">
