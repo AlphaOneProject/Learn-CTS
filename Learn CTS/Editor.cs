@@ -16,6 +16,7 @@ namespace Learn_CTS
         private readonly String game;
         private readonly String game_path;
         private JObject game_properties;
+        private string old_category = "general";
         private bool saved;
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Learn_CTS
         {
             InitializeComponent();
             this.game = game;
-            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games" + Path.DirectorySeparatorChar + game;
+            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game;
             this.Text = "Éditeur : " + game;
             this.DoubleBuffered = false;
         }
@@ -73,12 +74,11 @@ namespace Learn_CTS
             this.saved = true;
             if(!this.game_properties["state"].ToString().Equals("Inactif."))
             {
-                this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
-
-                if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accèder ?",
+                if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accéder ?",
                                 "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                 {
+                    this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
+                    Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
                     this.Close();
                     return;
                 }
@@ -148,23 +148,30 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // Empty the groupbox from precedent controls.
-            int nbr_ctrl = content.Controls.Count;
-            for (int i = 0; i < nbr_ctrl; i++)
+            Begin_Control_Update(content);
+
+            TreeView t = (TreeView)sender;
+            string name = t.SelectedNode.Name;
+            lbl_path.Text = t.SelectedNode.FullPath;
+            List<String> keeping_categories = new List<String>()
+            { "npcs" };
+
+            if (!(this.old_category.Equals(name) && keeping_categories.Contains(name)))
             {
-                if(content.Controls[0].GetType() == new PictureBox().GetType())
+                // Empty the groupbox from precedent controls.
+                int nbr_ctrl = content.Controls.Count;
+                for (int i = 0; i < nbr_ctrl; i++)
                 {
-                    PictureBox pb = (PictureBox)content.Controls[0];
-                    pb.Image.Dispose();
+                    if (content.Controls[0].GetType() == new PictureBox().GetType())
+                    {
+                        PictureBox pb = (PictureBox)content.Controls[0];
+                        pb.Image.Dispose();
+                    }
+                    content.Controls[0].Dispose();
                 }
-                content.Controls[0].Dispose();
             }
 
-            TreeView t = (TreeView) sender;
-            String name = t.SelectedNode.Name;
-            lbl_path.Text = t.SelectedNode.FullPath;
-
-            if(name.StartsWith("scenario") && name != "scenarios")
+            if (name.StartsWith("scenario") && name != "scenarios")
             {
                 Display_Scenario();
             }
@@ -192,6 +199,9 @@ namespace Learn_CTS
                         throw new ArgumentException("Category not yet implemented: " + t.SelectedNode.Text);
                 }
             }
+            this.old_category = name;
+
+            End_Control_Update(content);
         }
 
         /// <summary>
@@ -257,7 +267,7 @@ namespace Learn_CTS
             List<char> autorized_chars = new List<char>() { ' ', '.', ',', '\'', '?', '!', '-', '°', '(', ')', ':' };
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
-                // Block the renaming of a situation if the new name is empty.
+                // Block the renaming if the new name is empty.
                 if (t.Text.Equals(string.Empty)) { return; }
                 this.game_properties["description"] = t.Text;
                 Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
@@ -273,6 +283,7 @@ namespace Learn_CTS
             else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
                 t.Text = (string)this.game_properties["description"];
+                t.SelectionStart = t.Text.Length;
                 t.BackColor = Color.FromArgb(56, 56, 56);
                 this.saved = true;
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "";
@@ -283,10 +294,12 @@ namespace Learn_CTS
             }
             else if (t.Text.Length > 512) // Avoid endless descriptions.
             {
-                if (e.KeyChar == (char)8) { // Still backspace.
+                if (e.KeyChar == (char)8) // Still backspace.
+                {
+                    t.BackColor = Color.FromArgb(56, 32, 32);
                     content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
                     this.saved = false;
-                    return; // Let you erase regardless of the lenght.
+                    return; // Let you erase regardless of the length.
                 }
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "Limite de caractères atteinte !";
                 e.Handled = true;
@@ -312,7 +325,334 @@ namespace Learn_CTS
         /// </summary>
         private void Display_NPCs()
         {
-            // WIP
+            if (this.old_category.Equals("npcs"))
+            {
+                TableLayoutPanel tlp = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
+                Button btn_add = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
+
+                tlp.Width = content.Width - 80;
+                btn_add.Location = new Point((content.Width - btn_add.Width) / 2, tlp.Location.Y + tlp.Height + 8);
+                return;
+            }
+
+            // Creation of controls linking NPCs files to the editor.
+
+            // Label annoncing the following NPCs management.
+            Label lbl_npcs = new Label()
+            {
+                Name = "lbl_npcs",
+                Text = "Gestion des figurants",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_npcs);
+
+            // Creation of two arrows allowing changement of the scenarios' order.
+            PictureBox pb_add_lib_npc = new PictureBox()
+            {
+                Name = "pb_add_lib_npc",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
+            content.Controls.Add(pb_add_lib_npc);
+
+            // TableLayoutPanel, keeping the generated elements in rows.
+            TableLayoutPanel tlp_npcs = new TableLayoutPanel()
+            {
+                Name = "tlp_npcs",
+                AutoScroll = true,
+                Width = content.Width - 80,
+                Height = 2,
+                RowCount = 0,
+                ColumnCount = 3,
+                CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
+                Visible = false
+            };
+            content.Controls.Add(tlp_npcs);
+
+            // Button allowing the creation of a new NPC.
+            Button btn_add_lib_npc = new Button()
+            {
+                Name = "btn_add_lib_npc",
+                Text = "Ajouter un personnage",
+                AutoSize = true
+            };
+            btn_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
+            content.Controls.Add(btn_add_lib_npc);
+
+            // Set the correct location of the controls (responsive with the groupbox's size).
+            lbl_npcs.Location = new Point(20, 20);
+            pb_add_lib_npc.Location = new Point(lbl_npcs.Location.X + lbl_npcs.Width + 20, 20);
+            tlp_npcs.Location = new Point(40, lbl_npcs.Location.Y + lbl_npcs.Height + 20);
+
+            // Setup the columns sizes.
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
+            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.06));
+
+            // Generates all data in tlp_npcs.
+            int i = 0;
+            JObject data_pnj;
+            string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                                        Path.DirectorySeparatorChar + "npcs";
+            foreach (string file_npc in Directory.GetFiles(npcs_folder_path))
+            {
+                data_pnj = Get_From_JSON(Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                        "npcs" + Path.DirectorySeparatorChar + (i + 1) + ".json");
+                
+                tlp_npcs.Height += 42;
+                tlp_npcs.RowCount++;
+                tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+
+                TextBox npc_name = new TextBox()
+                {
+                    Name = "npc_name" + (i + 1),
+                    Text = (string)data_pnj["name"],
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    ForeColor = Color.White,
+                    BackColor = Color.FromArgb(56, 56, 56),
+                    Dock = DockStyle.Fill,
+                    AutoSize = true
+                };
+                npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
+                tlp_npcs.Controls.Add(npc_name, 0, i);
+
+                TextBox npc_folder = new TextBox()
+                {
+                    Name = "npc_folder" + (i + 1),
+                    Text = (string)data_pnj["folder"],
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    ForeColor = Color.White,
+                    BackColor = Color.FromArgb(56, 56, 56),
+                    Dock = DockStyle.Fill,
+                    AutoSize = true
+                };
+                npc_folder.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
+                tlp_npcs.Controls.Add(npc_folder, 1, i);
+
+                PictureBox npc_discard = new PictureBox()
+                {
+                    Name = "npc_discard" + (i + 1),
+                    Cursor = Cursors.Hand,
+                    Dock = DockStyle.Fill,
+                    Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                           Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png"),
+                    SizeMode = PictureBoxSizeMode.Zoom
+                };
+                npc_discard.Click += new EventHandler(this.Discard_Lib_NPC);
+                tlp_npcs.Controls.Add(npc_discard, 2, i);
+
+                i++;
+            }
+
+            tlp_npcs.Visible = true;
+
+            // Must takes the final size of "tlp_npcs" in order to be under it.
+            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
+
+            /*if (content.VerticalScroll.Enabled)
+            {
+                // Add some space under the whole structure.
+                Panel pan_spacing = new Panel()
+                {
+                    Name = "pan_spacing",
+                    Size = new Size(content.Width - 40, 10),
+                    Location = new Point(20, content.VerticalScroll.Maximum + 30)
+                };
+                content.Controls.Add(pan_spacing);
+            }*/
+        }
+
+        public void Add_Lib_NPC(object sender, EventArgs e)
+        {
+            // Generates the new NPC's id.
+            string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "npcs";
+            int new_id = 1 + Directory.GetFiles(npcs_folder_path).Length;
+
+            // Creating a new file for the NPC's data.
+            JObject npc_content = new JObject()
+            {
+                ["name"] = "Nom",
+                ["folder"] = ""
+            };
+            File.WriteAllText(@"" + npcs_folder_path + Path.DirectorySeparatorChar + new_id + ".json",
+                              npc_content.ToString());
+
+            // Updating the display.
+            TableLayoutPanel tlp_npcs = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
+            Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
+
+            Begin_Control_Update(tlp_npcs);
+
+            tlp_npcs.Height += 42;
+            tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+
+            TextBox npc_name = new TextBox()
+            {
+                Name = "npc_name" + new_id,
+                Text = "Nom",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = Color.White,
+                BackColor = Color.FromArgb(56, 56, 56),
+                Dock = DockStyle.Fill,
+                AutoSize = true
+            };
+            npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
+            tlp_npcs.Controls.Add(npc_name, 0, new_id - 1);
+
+            TextBox npc_folder = new TextBox()
+            {
+                Name = "npc_folder" + new_id,
+                Text = "",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = Color.White,
+                BackColor = Color.FromArgb(56, 56, 56),
+                Dock = DockStyle.Fill,
+                AutoSize = true
+            };
+            npc_folder.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
+            tlp_npcs.Controls.Add(npc_folder, 1, new_id - 1);
+
+            PictureBox npc_discard = new PictureBox()
+            {
+                Name = "npc_discard" + new_id,
+                Cursor = Cursors.Hand,
+                Dock = DockStyle.Fill,
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png"),
+                SizeMode = PictureBoxSizeMode.Zoom
+            };
+            npc_discard.Click += new EventHandler(this.Discard_Lib_NPC);
+            tlp_npcs.Controls.Add(npc_discard, 2, new_id - 1);
+
+            tlp_npcs.RowCount++;
+
+            End_Control_Update(tlp_npcs);
+
+            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
+        }
+
+        public void Text_Changed_Lib_NPC(object sender, KeyPressEventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            List<char> autorized_chars = new List<char>() { ' ', '?', '!', '-', '(', ')', ':' };
+            if (e.KeyChar == (char)13) // (char)13 => Enter.
+            {
+                // Recovering the id of the involved file.
+                TableLayoutPanel flp = (TableLayoutPanel)t.Parent;
+                int txt_id = flp.GetRow(t) + 1;
+                int txt_type = flp.GetColumn(t);
+
+                string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                  "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
+                JObject data_npc = Get_From_JSON(txt_path);
+                switch (txt_type)
+                {
+                    case 0:
+                        data_npc["name"] = t.Text;
+                        break;
+                    case 1:
+                        data_npc["folder"] = t.Text;
+                        break;
+                }
+                Set_To_JSON(txt_path, data_npc); // Set the entered setting as a stored blueprint for npc.
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                this.saved = true;
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (char)27) // (char)27 => Escape.
+            {
+                // Recovering the id of the involved file.
+                TableLayoutPanel flp = (TableLayoutPanel)t.Parent;
+                int txt_id = flp.GetRow(t) + 1;
+                int txt_type = flp.GetColumn(t);
+
+                string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                  "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
+                JObject data_npc = Get_From_JSON(txt_path);
+                switch (txt_type)
+                {
+                    case 0:
+                        t.Text = (string)data_npc["name"];
+                        break;
+                    case 1:
+                        t.Text = (string)data_npc["folder"];
+                        break;
+                }
+                t.SelectionStart = t.Text.Length;
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                this.saved = true;
+                e.Handled = true;
+            }
+            else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
+            {
+                e.Handled = true;
+            }
+            else if (t.Text.Length > 32) // Avoid endless names.
+            {
+                if (e.KeyChar == (char)8) // Still backspace.
+                {
+                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    this.saved = false;
+                    return; // Let you erase regardless of the length.
+                }
+                e.Handled = true;
+            }
+            else
+            {
+                t.BackColor = Color.FromArgb(56, 32, 32);
+                this.saved = false;
+            }
+        }
+
+        public void Discard_Lib_NPC(object sender, EventArgs e)
+        {
+            // Recovering the id of the involved file.
+            Control ctrl = (Control)sender;
+            TableLayoutPanel tlp = (TableLayoutPanel)ctrl.Parent;
+            int del_id = tlp.GetRow(ctrl) + 1;
+
+            // Removing the involved file.
+            string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "npcs";
+            File.Delete(npcs_folder_path + Path.DirectorySeparatorChar + del_id + ".json");
+
+            // Reordering the others files.
+            for (int i = del_id; i <= Directory.GetFiles(@"" + npcs_folder_path).Length; i++)
+            {
+                if (del_id <= i)
+                {
+                    Directory.Move(@"" + npcs_folder_path + Path.DirectorySeparatorChar + (i + 1) + ".json",
+                                   @"" + npcs_folder_path + Path.DirectorySeparatorChar + i + ".json");
+                }
+            }
+
+            Begin_Control_Update(tlp);
+
+            // Updating the display.
+            Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
+
+            tlp.GetControlFromPosition(2, del_id - 1).Dispose();
+            tlp.GetControlFromPosition(1, del_id - 1).Dispose();
+            tlp.GetControlFromPosition(0, del_id - 1).Dispose();
+
+            for(int i = del_id; i < tlp.RowCount; i++)
+            {
+                tlp.SetCellPosition(tlp.GetControlFromPosition(2, i), new TableLayoutPanelCellPosition(2, i - 1));
+                tlp.SetCellPosition(tlp.GetControlFromPosition(1, i), new TableLayoutPanelCellPosition(1, i - 1));
+                tlp.SetCellPosition(tlp.GetControlFromPosition(0, i), new TableLayoutPanelCellPosition(0, i - 1));
+            }
+            tlp.RowCount--;
+
+            End_Control_Update(tlp);
+
+            tlp.Height -= 42;
+            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp.Location.Y + tlp.Height + 8);
         }
 
         /// <summary>
@@ -490,6 +830,7 @@ namespace Learn_CTS
                 Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                BackColor = Color.FromArgb(56, 56, 56),
                 Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
@@ -876,6 +1217,7 @@ namespace Learn_CTS
                 Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                BackColor = Color.FromArgb(56, 56, 56),
                 Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
@@ -1160,6 +1502,28 @@ namespace Learn_CTS
             {
                 new_content.WriteTo(writer);
             }
+        }
+
+        public static void Begin_Control_Update(Control control)
+        {
+            Message msgSuspendUpdate = Message.Create(control.Handle, 11, IntPtr.Zero,
+                  IntPtr.Zero);
+
+            NativeWindow window = NativeWindow.FromHandle(control.Handle);
+            window.DefWndProc(ref msgSuspendUpdate);
+        }
+
+        public static void End_Control_Update(Control control)
+        {
+            // Create a C "true" boolean as an IntPtr
+            IntPtr wparam = new IntPtr(1);
+            Message msgResumeUpdate = Message.Create(control.Handle, 11, wparam,
+                  IntPtr.Zero);
+
+            NativeWindow window = NativeWindow.FromHandle(control.Handle);
+            window.DefWndProc(ref msgResumeUpdate);
+            control.Invalidate();
+            control.Refresh();
         }
 
         /// <summary>
