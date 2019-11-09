@@ -95,15 +95,16 @@ namespace Learn_CTS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Button btn_launch = new Button();
+            /*Button btn_launch = new Button();
             btn_launch.Location = new Point(5,5);
             btn_launch.Size = new Size(150, 50);
             btn_launch.Text = "Lancer le jeu";
             btn_launch.Click += new EventHandler(Btn_Launch_Click);
-            Controls.Add(btn_launch);
+            Controls.Add(btn_launch);*/
             InitializeListTextures();
             InitializeTimer();
             Show();
+            timer.Enabled = true;
         }
 
         /// <summary>
@@ -166,9 +167,12 @@ namespace Learn_CTS
                 }
                 MoveBackground();
             }
-            if (player.HasObjective())
+            foreach(Texture t in GetAllTextures(list_textures))
             {
-                MovePlayerToObjective();
+                if ((t.GetType().Name == "Player" || t.GetType().Name == "NPC") && ((Character)t).HasObjective())
+                {
+                    MoveCharacterToObjective((Character)t);
+                }
             }
             ArrowsPressed();
             Refresh();
@@ -233,41 +237,48 @@ namespace Learn_CTS
         /// Move the player toward his objective
         /// </summary>
 
-        private void MovePlayerToObjective()
+        private void MoveCharacterToObjective(Character c)
         {
             int a = 0;
             int b = 0;
-            if (!player.ReachedObjX())
+            if (!c.ReachedObjX())
             {
-                if (player.GetObjX() > 8)
+                if (c.GetObjX() > 8)
                 {
                     a = 8;
                 }
-                else if (player.GetObjX() < -8)
+                else if (c.GetObjX() < -8)
                 {
                     a = -8;
                 }
             }
-            if (!player.ReachedObjY())
+            if (!c.ReachedObjY())
             {
-                if (player.GetObjY() > 16)
+                if (c.GetObjY() > 16)
                 {
                     b = 8;
                 }
-                else if (player.GetObjY() < -16)
+                else if (c.GetObjY() < -16)
                 {
                     b = -8;
                 }
             }
-            MovePlayer(a, b);
-            if (player.ReachedObjective())
+            if(c == player)
             {
-                player.RemoveObjective();
+                MovePlayer(a, b);
             }
             else
             {
-                player.UpdateObjX(-a);
-                player.UpdateObjY(-b);
+                MoveCharacter(c, a, b);
+            }
+            if (c.ReachedObjective())
+            {
+                c.RemoveObjective();
+            }
+            else
+            {
+                c.UpdateObjX(-a);
+                c.UpdateObjY(-b);
             }
         }
 
@@ -520,6 +531,25 @@ namespace Learn_CTS
                     player.Move(0, -b);
                     boo = false;
                 }
+            }
+            return boo;
+        }
+
+        private bool MoveCharacter(Character c, int a, int b)
+        {
+            bool boo = true;
+            c.Move(a, 0);
+            c.UpdateMovement(a, b);
+            if (IsPlayerCollidingWithTextures())
+            {
+                c.Move(-a, 0);
+                boo = false;
+            }
+            c.Move(0, b);
+            if (IsPlayerCollidingWithTextures())
+            {
+                c.Move(0, -b);
+                boo = false;
             }
             return boo;
         }
