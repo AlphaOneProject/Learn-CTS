@@ -72,12 +72,12 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Character.SetM(6);
+            Character.SetM(3);
             player = new Player("Moi",600, 504);
             tram = new Tram(-4000, 198);
             background = new Background(0);
             background.DisableCollisions();
-            platform = new Platform(-300, tram.GetZ() + 2);
+            platform = new Platform(0, tram.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {
                 background,
@@ -123,12 +123,13 @@ namespace Learn_CTS
         private void Timer_Tick(object Sender, EventArgs e)
         {
             ticks += 1;
+            if(!tram.IsPlayerInside()) MoveTexturesIfPlayerMoves();
             if (tram.GetState() == 0)
             {
                 tick_tram_stopped += 1;
                 NPCLeaveTram();
-                MoveTexturesIfPlayerMoves();
-                if(tick_tram_stopped > 200)
+                RemoveNPCsLeavingPlatform();
+                if (tick_tram_stopped > 200)
                 {
                     tram.ChangeState();
                     tick_tram_stopped = 0;
@@ -149,18 +150,19 @@ namespace Learn_CTS
             }
             else
             {
-                if (!tram.IsInside())
+                if (!tram.IsInside() && tram.IsPlayerInside())
                 {
                     ConsoleAvgFPS();
                     platform.RemoveAllChilds();
                     list_textures.Remove(platform);
+                    platform.Dispose();
                     tram.ChangeInside();
                     tram.SetState(2);
                     tram.SetSpeed(0);
                     //Character.SetM(6);
                     PlacePlayerMiddleScreen();
                 }
-                MoveBackground();
+                else if(tram.IsInside()) MoveBackground();
             }
             foreach(Texture t in GetAllTextures(list_textures))
             {
@@ -171,7 +173,6 @@ namespace Learn_CTS
             }
             ArrowsPressed();
             Refresh();
-            //Update();
         }
 
         /// <summary>
@@ -277,6 +278,8 @@ namespace Learn_CTS
         public void RemoveDialog()
         {
             this.Controls.Remove(d);
+            d.Dispose();
+            d = null;
             this.Focus();
         }
 
@@ -318,7 +321,7 @@ namespace Learn_CTS
                     t = platform.GetListChilds()[i];
                     if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                     {
-                        if (t.GetZ() < tram.GetY() + tram.GetHeight() && t.GetZ() > tram.GetY())
+                        if (t.GetZ() <= tram.GetY() + tram.GetHeight() && t.GetZ() > tram.GetY())
                         {
                             tram.AddChild(t);
                             platform.RemoveChild(t);
@@ -441,12 +444,12 @@ namespace Learn_CTS
             {
                 foreach (NPC t in nm.GetList())
                 {
-                    if (t.IsHitboxHit(mx, my))
+                    if (t.GetQuiz() > 0 && t.IsHitboxHit(mx, my))
                     {
                         if(Math.Abs((t.GetX()+t.GetWidth()/2 - (player.GetX()+player.GetWidth()/2))) < 256 && Math.Abs((t.GetY() - player.GetY())) < 256)
                         {
                             d = new Dialog(t.GetID(), game);
-                            this.Controls.Add(d); 
+                            this.Controls.Add(d);
                         }
                         else
                         {
@@ -489,6 +492,7 @@ namespace Learn_CTS
         {
             bool c_vertical = true;
             bool c_horizontal = true;
+            if (this.Controls.Contains(d)) return;
             player.UpdateMovement(a, b);
             if (!tram.IsInside())
             {
@@ -499,7 +503,7 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player))
+                if (IsCharacterCollidingWithTextures(player) || ((tram.GetX() > 0 || tram.GetX() + tram.GetWidth() < DrawSurfaceWidth) && player.GetY() < tram.GetY() + 200))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -534,13 +538,19 @@ namespace Learn_CTS
         /// <param name="b"></param>
         /// <returns></returns>
 
-        private bool MoveCharacter(Character c, int a, int b)
+        private void MoveCharacter(Character c, int a, int b)
         {
-            bool boo = true;
-            c.Move(a, 0);
             c.UpdateMovement(a, b);
+            c.Move(a, 0);
+            if (c.CollideWith(player))
+            {
+                player.Move(-a, 0);
+            }
             c.Move(0, b);
-            return boo;
+            if (c.CollideWith(player))
+            {
+                c.Move(0, -b);
+            }
         }
 
         /// <summary>
@@ -589,6 +599,10 @@ namespace Learn_CTS
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             ConsoleAvgFPS();
+            foreach(Texture t in list_textures)
+            {
+                t.Dispose();
+            }
             nm.Clear();
         }
 
@@ -605,35 +619,49 @@ namespace Learn_CTS
 
         private void StopTram()
         {
-            if (tram.IsInside())
+            if (tram.GetState() == 2)
             {
-                Character.SetM(3);
-                tram.ChangeInside();
-                list_textures.Remove(player);
-                tram.AddChild(player);
-                platform.SetX((tram.GetX()));
+                if (tram.IsInside())
+                {
+                    //Character.SetM(3);
+                    tram.ChangeInside();
+                    list_textures.Remove(player);
+                    tram.AddChild(player);
+                    platform = new Platform(tram.GetX(), tram.GetZ() + 2);
+                    tram.SetSpeed(tram.GetMaxSpeed());
+                    list_textures.Add(platform);
+                }
                 tram.SetX(-4000);
                 tram.SetSpeed(tram.GetMaxSpeed());
-                list_textures.Add(platform);
                 leave_npc = false;
             }
         }
 
         public void InitializeNPCs()
         {
-            JObject npcs = Get_From_JSON("library" + Path.DirectorySeparatorChar + "dialogs_test.json");
-            JObject npcs2 = Get_From_JSON("library" + Path.DirectorySeparatorChar + "npcs.json");
+            JObject npcs = Get_From_JSON("library" + Path.DirectorySeparatorChar + "dialogs.json");
+            int npc_x;
+            int npc_y;
+            string npc_name;
+            string npc_folder;
+            int npc_quiz;
             foreach (KeyValuePair<string, JToken> line in npcs)
             {
-                if (tram != null && (line.Value["x"].ToObject<int>() > tram.GetX() && line.Value["x"].ToObject<int>() < tram.GetX() + tram.GetWidth()) && (line.Value["y"].ToObject<int>() > tram.GetY() && line.Value["y"].ToObject<int>() < tram.GetY() + tram.GetHeight()))
+                npc_x = line.Value["x"].ToObject<int>();
+                npc_y = line.Value["y"].ToObject<int>();
+                npc_name = npcs[line.Key]["npc"]["name"].ToString();
+                npc_folder = npcs[line.Key]["npc"]["folder"].ToString();
+                npc_quiz = line.Value["quizz"].ToObject<int>();
+                if (tram != null && (npc_x > tram.GetX() && npc_x < tram.GetX() + tram.GetWidth()) && (npc_y > tram.GetY() && npc_y < tram.GetY() + tram.GetHeight()))
                 {
-                    tram.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString(), false));
+                    tram.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
                 }
                 else
                 {
-                    platform.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString(), true));
+                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
                 }
             }
+            FillGameNPCs();
         }
 
         private void NPCLeaveTram()
@@ -669,7 +697,7 @@ namespace Learn_CTS
             List<NPC> list = new List<NPC>();
             for(int i = 0; i< tram.GetListChilds().Count; i++)
             {
-                if(tram.GetListChilds()[i].GetType().Name == "NPC" && r.Next(0,3)!=0) list.Add((NPC)tram.GetListChilds()[i]);
+                if(tram.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)tram.GetListChilds()[i]).GetQuiz()<1 && r.Next(0,3)!=0) list.Add((NPC)tram.GetListChilds()[i]);
             }
             return list;
         }
@@ -679,12 +707,23 @@ namespace Learn_CTS
             bool b = true;
             foreach(NPC n in l)
             {
-                if (n.GetY() < tram.GetY() + tram.GetHeight() + 100)
+                if (n.GetY() <= tram.GetY() + tram.GetHeight()+10)
                 {
                     b = false;
                 }
             }
             return b;
+        }
+
+        private void RemoveNPCsLeavingPlatform()
+        {
+            for(int i = platform.GetListChilds().Count - 1; i>=0; i--)
+            {
+                if(platform.GetListChilds()[i].GetY() > platform.GetY() + platform.GetHeight() && platform.GetListChilds()[i].GetType().Name == "NPC")
+                {
+                    platform.RemoveChild(platform.GetListChilds()[i]);
+                }
+            }
         }
 
         private void NPCEnterTram()
@@ -714,6 +753,27 @@ namespace Learn_CTS
                 }
             }
             enter_npc = false;
+        }
+
+        private void FillGameNPCs()
+        {
+            Random r = new Random();
+            int max = r.Next(5, 10);
+            int x;
+            int y;
+            for(int i = 0; i < max; i++)
+            {
+                x = tram.GetX() + r.Next(460, tram.GetWidth() - 460);
+                y = tram.GetY() + 144 + r.Next(0, 20);
+                tram.AddChild(nm.CreateNPC(x,y,true));
+            }
+            max = r.Next(7, 12);
+            for (int i = 0; i < max; i++)
+            {
+                x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
+                y = platform.GetY() + r.Next(20, 192);
+                platform.AddChild(nm.CreateNPC(x, y, true));
+            }
         }
     }
 }

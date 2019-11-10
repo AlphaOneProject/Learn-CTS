@@ -12,7 +12,6 @@ namespace Learn_CTS
 
         // Attributes
 
-        private static string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         private int state = 2;
         private int max_speed = 50;
         private int speed = 50;
@@ -67,6 +66,13 @@ namespace Learn_CTS
                 this.RemoveChild(this.doors_left);
                 this.RemoveChild(this.doors_right);
                 this.RemoveChild(this.tram_outside);
+                foreach(Texture t in this.GetListChilds())
+                {
+                    if(t.GetType().Name == "NPC")
+                    {
+                        ((NPC)t).DisplayInteraction();
+                    }
+                }
             }
             else
             {
@@ -76,6 +82,13 @@ namespace Learn_CTS
                 this.AddChild(this.doors_right);
                 this.tram_outside.SetX(this.GetX());
                 this.AddChild(this.tram_outside);
+                foreach (Texture t in this.GetListChilds())
+                {
+                    if (t.GetType().Name == "NPC")
+                    {
+                        ((NPC)t).RemoveInteraction();
+                    }
+                }
             }
         }
 
@@ -190,6 +203,11 @@ namespace Learn_CTS
             }
         }
 
+        public bool IsPlayerInside()
+        {
+            return this.player_inside;
+        }
+
         /// <summary>
         /// Return the state of the tram.
         /// </summary>
@@ -299,11 +317,11 @@ namespace Learn_CTS
         {
             int min = Math.Abs(this.GetX()+pos_doors[0] - pos_c);
             int index = 0;
-            for(int i = 1; i<pos_doors.Length; i++)
+            for (int i = 1; i<pos_doors.Length; i++)
             {
                 if (Math.Abs(this.GetX()+pos_doors[i] - pos_c) < min)
                 {
-                    min = Math.Abs(pos_doors[i] - pos_c);
+                    min = Math.Abs(this.GetX()+pos_doors[i] - pos_c);
                     index = i;
                 }
             }

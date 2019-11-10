@@ -21,7 +21,6 @@ namespace Learn_CTS
         private List<Image> animation_list_west = new List<Image>();
         private List<Image> animation_list_est = new List<Image>();
         private List<Point> list_objectives = new List<Point>();
-        private bool hasMoved = false;
         private int last_direction = 1;
         private static int m;
         private string folder;
@@ -37,6 +36,8 @@ namespace Learn_CTS
 
         public Character(int id, String name, String folder, bool b, int x, int y) : base(x, y, true)
         {
+            if (folder == null) folder = (id % 6 + 1).ToString();
+            if (name == null) name = id.ToString();
             this.id = id;
             this.folder = folder;
             this.name = name;
@@ -74,10 +75,6 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (a != 0 || b != 0)
-            {
-                hasMoved = true;
-            }
             if (t % m == 0 && this.animated)
             {
                 t = 0;
@@ -121,8 +118,9 @@ namespace Learn_CTS
 
         public override void OnPaint(PaintEventArgs e)
         {
-            if(t%m == 0)
+            /*if (t % m == 0)
             {
+                //Console.WriteLine(this.id +":"+hasMoved);
                 if (!hasMoved)
                 {
                     this.SetDefaultPose();
@@ -131,7 +129,7 @@ namespace Learn_CTS
                 {
                     hasMoved = false;
                 }
-            }
+            }*/
             base.OnPaint(e);
         }
 
@@ -260,6 +258,7 @@ namespace Learn_CTS
             if(this.list_objectives.Count > 0)
             {
                 this.list_objectives.RemoveAt(0);
+                if(this.list_objectives.Count == 0) this.SetDefaultPose();
             }
         }
 
@@ -271,6 +270,19 @@ namespace Learn_CTS
         public void Animated(bool b)
         {
             this.animated = b;
+        }
+
+        public override void Dispose()
+        {
+            foreach(Image i in animation_list_est)
+            {
+                i.Dispose();
+            }
+            foreach (Image i in animation_list_west)
+            {
+                i.Dispose();
+            }
+            base.Dispose();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        private Texture(int x, int y)
+        public Texture(int x, int y)
         {
             this.x = x;
             this.y = y;
@@ -173,7 +173,7 @@ namespace Learn_CTS
             }
             catch (Exception)
             {
-                MessageBox.Show("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
+                Console.WriteLine("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
                                 "Veuillez qu'elle soit bien ici : " + path);
             }
             return null;
@@ -194,7 +194,7 @@ namespace Learn_CTS
             }
             catch (Exception)
             {
-                MessageBox.Show("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
+                Console.WriteLine("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
                                 "Veuillez qu'elle soit bien ici : " + path);
             }
             return null;
@@ -227,7 +227,7 @@ namespace Learn_CTS
 
         public virtual bool CollideWith(Texture t)
         {
-            if (Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
+            if (this.hitbox == null || Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
             {
                 return false;
             }
@@ -577,6 +577,16 @@ namespace Learn_CTS
         public bool CollidesOnlyOnZ()
         {
             return this.collide_only_z;
+        }
+
+        public virtual void Dispose()
+        {
+            foreach(Texture t in list_childs)
+            {
+                t.Dispose();
+            }
+            this.image.Dispose();
+            this.hitbox.Dispose();
         }
 
         /// <summary>
