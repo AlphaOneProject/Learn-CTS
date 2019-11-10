@@ -123,7 +123,7 @@ namespace Learn_CTS
         private void Timer_Tick(object Sender, EventArgs e)
         {
             ticks += 1;
-            if(!tram.IsPlayerInside()) MoveTexturesIfPlayerMoves();
+            if(!tram.IsInside() && tram.GetState() == 0) MoveTexturesIfPlayerMoves();
             if (tram.GetState() == 0)
             {
                 tick_tram_stopped += 1;
@@ -227,6 +227,10 @@ namespace Learn_CTS
                 player.RemoveObjective();
                 MovePlayer(a, b);
             }
+            else if(!player.HasObjective())
+            {
+                player.SetDefaultPose();
+            }
         }
 
         /// <summary>
@@ -278,8 +282,6 @@ namespace Learn_CTS
         public void RemoveDialog()
         {
             this.Controls.Remove(d);
-            d.Dispose();
-            d = null;
             this.Focus();
         }
 
@@ -424,7 +426,7 @@ namespace Learn_CTS
         {
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            if(!SearchNPCDialog(list_textures, mouse_x, mouse_y))
+            if(!this.Controls.Contains(d) && !SearchNPCDialog(list_textures, mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
             }

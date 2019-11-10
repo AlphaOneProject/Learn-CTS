@@ -43,7 +43,6 @@ namespace Learn_CTS
         {
             if (this.quiz > 0)
             {
-                Console.WriteLine(this.GetID());
                 interact.SetX(this.GetX() + this.GetWidth() / 2 - interact.GetWidth() / 2);
                 this.AddChild(interact);
             }
