@@ -278,8 +278,6 @@ namespace Learn_CTS
         public void RemoveDialog()
         {
             this.Controls.Remove(d);
-            d.Dispose();
-            d = null;
             this.Focus();
         }
 
@@ -424,7 +422,7 @@ namespace Learn_CTS
         {
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            if(!SearchNPCDialog(list_textures, mouse_x, mouse_y))
+            if(!this.Controls.Contains(d) && !SearchNPCDialog(list_textures, mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
             }

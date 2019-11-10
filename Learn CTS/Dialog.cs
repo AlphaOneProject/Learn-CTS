@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.IO;
@@ -29,10 +23,12 @@ namespace Learn_CTS
 
         private void Dialog_Load(object sender, EventArgs e)
         {
+            this.Focus();
+            npc.RemoveInteraction();
             this.Set_Up(npc.GetQuiz().ToString());
             lbl_name.Text = npc.GetName();
             Generate_Buttons_Choices();
-            this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+            //this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
         }
 
         private void InitializeGamePath(string game)
@@ -109,14 +105,15 @@ namespace Learn_CTS
             }
             else
             {
-                this.Set_Up(this.data["c" + btn.TabIndex.ToString()]["redirect"].ToString());
+                this.Set_Up(s);
                 Generate_Buttons_Choices();
-                this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+                //this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
             }
         }
 
         public void Dialog_Closed(object sender, EventArgs e)
         {
+            npc.DisplayInteraction();
             ((GameWindow)this.FindForm()).RemoveDialog();
         }
     }
