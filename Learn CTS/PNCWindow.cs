@@ -20,7 +20,6 @@ namespace Learn_CTS
 
         private int DrawSurfaceWidth;
         private int DrawSurfaceHeight;
-        private bool isOpen;
         private List<Texture> list_textures;
         private String game;
         private String game_path;
@@ -28,7 +27,6 @@ namespace Learn_CTS
 
         public PNCWindow(String game)
         {
-            this.isOpen = false;
             this.game = game;
             this.game_path = this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;

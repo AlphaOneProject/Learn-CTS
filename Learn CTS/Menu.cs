@@ -12,8 +12,7 @@ namespace Learn_CTS
         /**
          * displayed_menu is meant to keep track which part of the menu is currently displaying.
          * "main_menu" is the main menu.
-         * "editor_menu" is the menu where the games are displayed.
-         * "create_menu" is the menu where you choose the name of the newly created game.
+         * "games_menu" is the menu where the games are displayed.
          * "options" means that the options are displayed.
          */
         private String displayed_menu;
@@ -44,17 +43,12 @@ namespace Learn_CTS
             this.displayed_menu = "main_menu";
 
             // Dynamically places the controls of the main menu.
-
             main_menu_btn_launch_engine.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height*2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
             main_menu_btn_launch_engine.TabIndex = 0;
 
-            main_menu_btn_create.Location = new Point((this.Width / 2) - (main_menu_btn_create.Width / 2),
-                                            (this.Height / 2) - main_menu_btn_create.Height - (main_menu_btn_create.Height / 2) - 4);
-            main_menu_btn_create.TabIndex = 1;
-
             main_menu_btn_edit.Location = new Point((this.Width / 2) - (main_menu_btn_edit.Width / 2),
-                            (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_create.Height / 2) + 4);
+                            (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_launch_engine.Height / 2) + 2);
 
             main_menu_btn_options.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
@@ -70,7 +64,7 @@ namespace Learn_CTS
         private void Main_menu_btn_edit_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
-            Display_editor_menu();
+            Display_games_menu();
         }
 
         /// <summary>
@@ -136,14 +130,15 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Called when the main_menu_btn_create is clicked.
+        /// Called when the main_menu_btn_options is clicked.
+        /// Displays the options menu.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Main_menu_btn_create_Click(object sender, EventArgs e)
+        private void Main_menu_btn_options_Click(object sender, EventArgs e)
         {
             this.Controls.Clear();
-            Display_Create_Menu();
+            Display_options_menu();
         }
 
         /// <summary>
@@ -175,22 +170,8 @@ namespace Learn_CTS
                 Text = "Tester le moteur"
             };
             main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
             main_menu_btn_launch_engine_dyna.Click += new EventHandler(Demo_Engine);
-
-            // Creation of the button that go to the menu to create a game.
-            Button main_menu_btn_create_dyna = new Button()
-            {
-                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                Name = "main_menu_btn_create",
-                Cursor = Cursors.Hand,
-                Size = new Size(230, 60),
-                TabIndex = 1,
-                Text = "Créer un jeu"
-            };
-            main_menu_btn_create_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_create_dyna.Width / 2),
-                                    (this.Height / 2) - main_menu_btn_create_dyna.Height - (main_menu_btn_create_dyna.Height / 2) - 4);
-            main_menu_btn_create_dyna.Click += new EventHandler(this.Main_menu_btn_create_Click);
 
             // Creation of the button that will show the selection of available levels to edit.
             Button main_menu_btn_edit_dyna = new Button()
@@ -203,7 +184,7 @@ namespace Learn_CTS
                 Text = "Mes jeux"
             };
             main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
-                            (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_btn_create_dyna.Height / 2) + 4);
+                            (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_btn_launch_engine_dyna.Height / 2) + 2);
             main_menu_btn_edit_dyna.Click += new EventHandler(this.Main_menu_btn_edit_Click);
 
             // Creation of the button that will exit the application.
@@ -224,186 +205,109 @@ namespace Learn_CTS
                 Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 3,
-                Text = "options"
+                Text = "Options"
             };
             main_menu_btn_options_dyna.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
-            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_create_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
+            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
         }
 
         /// <summary>
         /// Creates all controls necessary to display the editor menu.
         /// </summary>
-        private void Display_editor_menu()
+        private void Display_games_menu()
         {
-            this.displayed_menu = "editor_menu";
+            this.displayed_menu = "games_menu";
 
             this.SuspendLayout();
 
-            // Creation of the Button responsible to go back to the main menu.
-            PictureBox editor_menu_pb_back_to_main_menu = new PictureBox()
+            // Creation of the panel parent to the the back to menu pb, and create game controls.
+            Label games_menu_pnl_topbar = new Label()
             {
-                Name = "editor_menu_pb_back_to_main_menu",
+                Name = "games_menu_pnl_topbar",
+                Location = new Point(0, 0),
+                Size = new Size(this.Width, 54),
+                Text = "Mes jeux",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
+            };
+
+            // Creation of the Button responsible to go back to the main menu.
+            PictureBox games_menu_pb_back_to_main_menu = new PictureBox()
+            {
+                Name = "games_menu_pb_back_to_main_menu",
                 Cursor = Cursors.Hand,
-                Size = new Size(32, 32),
-                Location = new Point(16, 16),
+                Size = new Size(42, 42),
+                Location = new Point(6, 6),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Parent = games_menu_pnl_topbar
             };
-            editor_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            games_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
+            // Creation of the Button responsible to create a game.
+            PictureBox games_menu_pb_create_game = new PictureBox()
+            {
+                Name = "games_menu_pb_create_game",
+                Cursor = Cursors.Hand,
+                Size = new Size(42, 42),
+                Location = new Point(this.Width - 68, 6),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Parent = games_menu_pnl_topbar
+            };
+            games_menu_pb_create_game.Click += new EventHandler(this.Display_create_game);
 
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
-            FlowLayoutPanel flp_editor_menu = new FlowLayoutPanel()
+            FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
             {
-                Size = new Size(this.Width - (editor_menu_pb_back_to_main_menu.Location.X + editor_menu_pb_back_to_main_menu.Width - 8),
-                        this.Height),
-                Name = "flp_editor_menu",
+                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
+                Location = new Point(0, games_menu_pnl_topbar.Height),
+                Name = "games_menu_flp_games",
                 TabIndex = 3,
                 AutoScroll = true
             };
-            flp_editor_menu.Location = new Point(editor_menu_pb_back_to_main_menu.Location.X + editor_menu_pb_back_to_main_menu.Width + 8, 0);
 
-            this.Controls.AddRange(new Control[] { flp_editor_menu, editor_menu_pb_back_to_main_menu });
+            this.Controls.AddRange(new Control[] {
+                games_menu_pb_back_to_main_menu,
+                games_menu_pb_create_game,
+                games_menu_pnl_topbar,
+                games_menu_flp_games
+            });
 
             // Fetching the existing games
             ArrayList games_list = Get_Games_List();
             foreach (GameCard gc in games_list)
             {
-                flp_editor_menu.Controls.Add(gc);
+                games_menu_flp_games.Controls.Add(gc);
             }
 
             this.ResumeLayout();
         }
 
         /// <summary>
-        /// Creates all controls necessary to display the creator menu.
+        /// Creates all controls necessary to display the options menu.
         /// </summary>
-        private void Display_Create_Menu()
+        private void Display_options_menu()
         {
-            this.displayed_menu = "create_menu";
-
-            // Creation of the PictureBox responsible to go back to the main menu.
-            PictureBox create_menu_pb_back_to_main_menu = new PictureBox()
-            {
-                Name = "create_menu_pb_back_to_main_menu",
-                Cursor = Cursors.Hand,
-                Size = new Size(32, 32),
-                Location = new Point(16, 16),
-                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-            create_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
-
-            // Creation of the text box to enter the game name.
-            TextBox create_menu_txt_name_game = new TextBox() {
-                Name = "create_menu_txt_name_game",
-                Cursor = Cursors.IBeam,
-                Font = new Font("Microsoft Sans Serif", 20F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                ShortcutsEnabled = false,
-                Size = new Size(300, 60)
-            };
-            create_menu_txt_name_game.Location = new Point((this.Width / 2) - (create_menu_txt_name_game.Width / 2),
-                                    (this.Height / 2) - create_menu_txt_name_game.Height - create_menu_txt_name_game.Height - 12);
-
-            // Creation of the button that will create the game and go to the editor.
-            Button create_menu_btn_confirm = new Button()
-            {
-                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                Name = "create_menu_btn_confirm",
-                Cursor = Cursors.Hand,
-                Size = new Size(230, 60),
-                TabIndex = 1,
-                Text = "Créer"
-            };
-            create_menu_btn_confirm.Location = new Point((this.Width / 2) - (create_menu_btn_confirm.Width / 2),
-                            (this.Height / 2) - create_menu_btn_confirm.Height + (create_menu_txt_name_game.Height / 2) + 8);
-
-            create_menu_btn_confirm.Click += new EventHandler(this.Create_menu_btn_confirm_Click);
-            create_menu_txt_name_game.KeyPress += new KeyPressEventHandler(this.Create_menu_txt_name_game_KeyPress);
-
-            this.Controls.AddRange(new Control[] { create_menu_pb_back_to_main_menu, create_menu_txt_name_game, create_menu_btn_confirm });
-        }
-
-        private void Create_menu_txt_name_game_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            TextBox t = (TextBox)sender;
-            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == (char)13 && !t.Text.Equals(String.Empty) && Is_Game_Unique(t.Text))
-            {
-                Create_menu_confirm_box(t.Text);
-            }
-            if (!Is_Game_Unique(t.Text))
-            {
-                MessageBox.Show("Ce jeu existe déjà.");
-            }
+            this.displayed_menu = "options_menu";
+            // Amuse toi bien Antoine :-*
         }
         
-        private void Create_menu_btn_confirm_Click(object sender, EventArgs e)
+        
+        /// <summary>
+        /// Displays a custom box to create a game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Display_create_game(Object sender, EventArgs e)
         {
-            foreach (Control c in this.Controls)
-            {
-                if (c.Name.Equals("create_menu_txt_name_game") && Is_Game_Unique(c.Text))
-                {
-                    if (!c.Text.Equals(String.Empty))
-                    {
-                        Create_menu_confirm_box(c.Text);
-                    }
-                }
-                if (!Is_Game_Unique(c.Text))
-                {
-                    MessageBox.Show("Ce jeu existe déjà.");
-                }
-            }
-        }
-
-        private Boolean Is_Game_Unique(String nom)
-        {
-            Boolean res = true;
-            foreach (String dir in Directory.GetDirectories(@"" + games_path))
-            {
-                if (nom.Equals(dir))
-                {
-                    res = false;
-                }
-            }
-            return res;
-        }
-
-        private void Create_menu_confirm_box(String nom)
-        {
-            if ((MessageBox.Show("Confirmer la creation du jeu " + nom + " ?", "Confirmation de création",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes))
-            {
-                Create_game(nom);
-                Form g = new Editor(nom);
-                this.Hide();
-                g.Show();
-            }
-        }
-
-        private void Create_game(String nom)
-        {
-
-            //TODO : verifier si le nom est unique
-            //Creation of the directories used by the game.
-            Directory.CreateDirectory(@"" + this.games_path + nom);
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
-
-            // Add a "properties.json" to the newly created folder.
-            JObject properties_content = new JObject();
-            properties_content["default"] = false;
-            properties_content["state"] = "Inactif.";
-            properties_content["description"] = "Description par défaut";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "properties.json",
-                              properties_content.ToString());
+            GameCreator gc = new GameCreator();
+            this.Controls.Add(gc);
+            gc.BringToFront();
         }
 
         private void Menu_SizeChanged(object sender, EventArgs e)
@@ -412,31 +316,43 @@ namespace Learn_CTS
             {
                 case "main_menu": Responsive_Resize_Main_Menu();
                     break;
-                case "editor_menu": Responsive_Resize_Editor_Menu();
+                case "games_menu": Responsive_Resize_games_menu();
                     break;
-                case "create_menu": Reponsive_Resize_Create_menu_btn_confirm_Click();
+                case "options_menu": Responsive_Resize_Options_Menu();
                     break;
                 default:
                     break;
             }
         }
 
-        private void Responsive_Resize_Editor_Menu()
+        private void Responsive_Resize_games_menu()
         {
             foreach (Control c in this.Controls)
             {
                 switch (c.Name)
                 {
-                    case "editor_menu_btn_back_to_main_menu":
-                        c.Size = new Size((int)(this.Width * 0.05), (int)(this.Width * 0.05));
-                        c.Location = new Point(10, 10);
+                    case "games_menu_pnl_topbar":
+                        c.Width = this.Width;
                         break;
-                    case "flp_editor_menu":
-                        c.Location = new Point(this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Location.X +
-                            this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Width + 8, 0);
-                        c.Size = new Size(this.Width - (this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Location.X +
-                            this.Controls.Find("editor_menu_btn_back_to_main_menu", false)[0].Width - 8) - c.Location.X,
-                            this.Height);
+                    case "games_menu_pb_back_to_main_menu":
+                        c.Size = new Size(42, 42);
+                        c.Location = new Point(6, 6);
+                        break;
+                    case "games_menu_pb_create_game":
+                        c.Size = new Size(42, 42);
+                        c.Location = new Point(this.Width - 68, 6);
+                        break;
+                    case "games_menu_flp_games":
+                        c.Location = new Point(0, this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);
+                        c.Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);
+                        break;
+                    case "games_menu_txt_name_game":
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
+                                    (this.Height / 2) - c.Height - (c.Height * 2) - 12);
+                        break;
+                    case "games_menu_btn_confirm":
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
+                            (this.Height / 2) - c.Height + (this.Controls.Find("games_menu_txt_name_game", false)[0].Height / 2) + 4);
                         break;
                 }
             }
@@ -450,14 +366,11 @@ namespace Learn_CTS
                 {
                     case "main_menu_btn_launch_engine":
                         c.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height * 2) - (main_menu_btn_launch_engine.Height / 2) - 12);
-                        break;
-                    case "main_menu_btn_create":
-                        c.Location = new Point((this.Width / 2) - (c.Width / 2), (this.Height / 2) - c.Height - (c.Height / 2) - 4);
+                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
                         break;
                     case "main_menu_btn_edit":
                         c.Location = new Point((this.Width / 2) - (c.Width / 2), 
-                            (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_create",false)[0].Height / 2) + 4);
+                            (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_launch_engine",false)[0].Height / 2) + 2);
                         break;
                     case "main_menu_btn_options":
                         c.Location = new Point((this.Width / 2) - c.Width - 6,
@@ -470,19 +383,16 @@ namespace Learn_CTS
             }
         }
 
-        private void Reponsive_Resize_Create_menu_btn_confirm_Click()
+        private void Responsive_Resize_Options_Menu()
         {
             foreach (Control c in this.Controls)
             {
                 switch (c.Name)
                 {
-                    case "create_menu_txt_name_game":
-                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
-                                    (this.Height / 2) - c.Height - (c.Height * 2) - 12);
+                    case "ton_nom":
+                        // Salut Antoine
                         break;
-                    case "create_menu_btn_confirm":
-                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
-                            (this.Height / 2) - c.Height + (this.Controls.Find("create_menu_txt_name_game", false)[0].Height / 2) + 4);
+                    default:
                         break;
                 }
             }

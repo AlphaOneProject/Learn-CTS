@@ -72,6 +72,12 @@
     <Compile Include="GameCard.Designer.cs">
       <DependentUpon>GameCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameCreator.Designer.cs">
+      <DependentUpon>GameCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemManager.cs" />
     <Compile Include="ItemViewer.cs">
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameCard.resx">
       <DependentUpon>GameCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameCreator.resx">
+      <DependentUpon>GameCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>
