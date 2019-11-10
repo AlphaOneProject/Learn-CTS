@@ -123,7 +123,7 @@ namespace Learn_CTS
         private void Timer_Tick(object Sender, EventArgs e)
         {
             ticks += 1;
-            if(!tram.IsPlayerInside()) MoveTexturesIfPlayerMoves();
+            if(!tram.IsInside() && tram.GetState() == 0) MoveTexturesIfPlayerMoves();
             if (tram.GetState() == 0)
             {
                 tick_tram_stopped += 1;
@@ -226,6 +226,10 @@ namespace Learn_CTS
             {
                 player.RemoveObjective();
                 MovePlayer(a, b);
+            }
+            else if(!player.HasObjective())
+            {
+                player.SetDefaultPose();
             }
         }
 

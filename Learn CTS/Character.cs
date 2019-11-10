@@ -116,23 +116,6 @@ namespace Learn_CTS
             m = a;
         }
 
-        public override void OnPaint(PaintEventArgs e)
-        {
-            /*if (t % m == 0)
-            {
-                //Console.WriteLine(this.id +":"+hasMoved);
-                if (!hasMoved)
-                {
-                    this.SetDefaultPose();
-                }
-                if (hasMoved)
-                {
-                    hasMoved = false;
-                }
-            }*/
-            base.OnPaint(e);
-        }
-
         public int GetID()
         {
             return this.id;
