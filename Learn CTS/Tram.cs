@@ -24,6 +24,14 @@ namespace Learn_CTS
         private Texture tram_inside;
         private int max_distance_stop;
         private bool player_inside = false;
+        private int[] pos_doors = new int[6]{
+            510,
+            920,
+            1528,
+            1944,
+            2552,
+            2928
+        };
 
         /// <summary>
         /// Constructor of a tram.
@@ -36,8 +44,8 @@ namespace Learn_CTS
             this.max_distance_stop = this.DistanceBeforeStopping();
             this.tram_inside = new Texture("TramInside", this.GetX(), this.GetY(), this.GetZ() + 1);
             this.tram_outside = new Texture("TramOutside", this.GetX(), this.GetY(), true);
-            this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
-            this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1);
+            this.doors_left = new Texture("DoorsLeft", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1, true);
+            this.doors_right = new Texture("DoorsRight", this.GetX(), this.GetY(), this.tram_outside.GetZ() + 1, true);
             this.tram_inside.DisableCollisions();
             this.interior = new Texture("interior", this.GetX(), this.GetY(), true);
             this.AddChild(doors_left);
@@ -285,6 +293,31 @@ namespace Learn_CTS
                 this.doors_right.EnableCollisions();
             }
             base.RemoveChild(t);
+        }
+
+        public int GetIndexNearestDoor(int pos_c)
+        {
+            int min = Math.Abs(this.GetX()+pos_doors[0] - pos_c);
+            int index = 0;
+            for(int i = 1; i<pos_doors.Length; i++)
+            {
+                if (Math.Abs(this.GetX()+pos_doors[i] - pos_c) < min)
+                {
+                    min = Math.Abs(pos_doors[i] - pos_c);
+                    index = i;
+                }
+            }
+            return index;
+        }
+
+        public int GetPosDoor(int i)
+        {
+            return this.GetX() + this.pos_doors[i];
+        }
+
+        public int GetNumberDoors()
+        {
+            return this.pos_doors.Length;
         }
     }
 }

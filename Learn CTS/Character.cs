@@ -26,7 +26,7 @@ namespace Learn_CTS
         private static int m;
         private string folder;
         private string name;
-        private bool canMove = false;
+        private bool animated = false;
 
         /// <summary>
         /// Constructor of character with a custom name.
@@ -40,7 +40,7 @@ namespace Learn_CTS
             this.id = id;
             this.folder = folder;
             this.name = name;
-            this.canMove = b;
+            this.animated = b;
             Random random = new Random();
             if (random.Next(2) == 0)
             {
@@ -74,7 +74,11 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (t % m == 0 && this.canMove)
+            if (a != 0 || b != 0)
+            {
+                hasMoved = true;
+            }
+            if (t % m == 0 && this.animated)
             {
                 t = 0;
                 if (a > 0)
@@ -100,7 +104,7 @@ namespace Learn_CTS
                 }
                 if (a != 0 || b!=0)
                 {
-                    hasMoved = true;
+                    //hasMoved = true;
                     this.c++;
                     if (c > 8)
                     {
@@ -119,6 +123,7 @@ namespace Learn_CTS
         {
             if(t%m == 0)
             {
+                //Console.WriteLine(this.id +":"+hasMoved);
                 if (!hasMoved)
                 {
                     this.SetDefaultPose();
@@ -162,8 +167,15 @@ namespace Learn_CTS
         public virtual void SetObjective(int x, int y)
         {
             this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), y-(this.GetY() + this.GetHeight())));
-            //this.obj_x = x - (this.GetX() + this.GetWidth() / 2);
-            //this.obj_y = y - (this.GetY() + this.GetHeight());
+        }
+
+        public void SetObjectiveX(int x)
+        {
+            this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), 0));
+        }
+        public void SetObjectiveY(int y)
+        {
+            this.list_objectives.Add(new Point(0, y - (this.GetY() + this.GetHeight())));
         }
 
         /// <summary>
@@ -173,7 +185,11 @@ namespace Learn_CTS
 
         public int GetObjX()
         {
-            return this.list_objectives[0].X;
+            if (this.list_objectives.Count > 0)
+            {
+                return this.list_objectives[0].X;
+            }
+            return 0;
         }
 
         /// <summary>
@@ -183,7 +199,11 @@ namespace Learn_CTS
 
         public int GetObjY()
         {
-            return this.list_objectives[0].Y;
+            if (this.list_objectives.Count > 0)
+            {
+                return this.list_objectives[0].Y;
+            }
+            return 0;
         }
 
         public void UpdateObjX(int x)
@@ -222,14 +242,12 @@ namespace Learn_CTS
 
         public bool ReachedObjX()
         {
-            Console.WriteLine("x:"+this.GetObjX());
             return
                 Math.Abs(this.GetObjX()) < 10;
         }
 
         public bool ReachedObjY()
         {
-            Console.WriteLine("y:"+this.GetObjY());
             return
                 Math.Abs(this.GetObjY()) < 10;
         }
@@ -249,6 +267,11 @@ namespace Learn_CTS
         public void RemoveAllObjectives()
         {
             this.list_objectives.Clear();
+        }
+
+        public void Animated(bool b)
+        {
+            this.animated = b;
         }
     }
 }

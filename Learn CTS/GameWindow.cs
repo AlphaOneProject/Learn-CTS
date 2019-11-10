@@ -38,6 +38,9 @@ namespace Learn_CTS
         private string game_path;
         private bool debug = false;
         private bool god = false;
+        private bool enter_npc = true;
+        private bool leave_npc = false;
+        private List<NPC> npcs_leaving_tram;
 
 
         /// <summary>
@@ -123,7 +126,15 @@ namespace Learn_CTS
             ticks += 1;
             if (tram.GetState() == 0)
             {
+                NPCLeaveTram();
                 MoveTexturesIfPlayerMoves();
+            }
+            else if (tram.GetState() == 1)
+            {
+                foreach(Texture n in tram.GetListChilds())
+                {
+                    if(n.GetType().Name == "NPC") ((NPC)n).Animated(false);
+                }
             }
             if (tram.GetX() < this.Width && !tram.IsInside())
             {
@@ -449,11 +460,11 @@ namespace Learn_CTS
         /// <param name="p"></param>
         /// <returns></returns>
 
-        private bool IsPlayerCollidingWithTextures()
+        private bool IsCharacterCollidingWithTextures(Character c)
         {
             foreach(Texture t in list_textures)
             {
-                if (t.CollideWith(player))
+                if (t.CollideWith(c))
                 {
                     return true;
                 }
@@ -476,13 +487,13 @@ namespace Learn_CTS
             {
                 player.UpdateMovement(a, b);
                 player.Move(a, 0);
-                if (IsPlayerCollidingWithTextures())
+                if (IsCharacterCollidingWithTextures(player))
                 {
                     player.Move(-a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsPlayerCollidingWithTextures())
+                if (IsCharacterCollidingWithTextures(player))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -492,14 +503,14 @@ namespace Learn_CTS
             {
                 tram.Move(-a, 0);
                 player.UpdateMovement(a, b);
-                if (IsPlayerCollidingWithTextures())
+                if (IsCharacterCollidingWithTextures(player))
                 {
                     tram.Move(a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);
                 player.UpdateMovement(a, b);
-                if (IsPlayerCollidingWithTextures())
+                if (IsCharacterCollidingWithTextures(player))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -516,17 +527,7 @@ namespace Learn_CTS
             bool boo = true;
             c.Move(a, 0);
             c.UpdateMovement(a, b);
-            /*if (IsPlayerCollidingWithTextures())
-            {
-                c.Move(-a, 0);
-                boo = false;
-            }*/
             c.Move(0, b);
-            /*if (IsPlayerCollidingWithTextures())
-            {
-                c.Move(0, -b);
-                boo = false;
-            }*/
             return boo;
         }
 
@@ -602,6 +603,7 @@ namespace Learn_CTS
                 tram.SetX(-4000);
                 tram.SetSpeed(tram.GetMaxSpeed());
                 background.AddChild(platform);
+                leave_npc = true;
             }
         }
 
@@ -622,19 +624,83 @@ namespace Learn_CTS
             }
         }
 
+        private List<NPC> SelectionNPCsLeavingTram()
+        {
+            Random r = new Random();
+            List<NPC> list = new List<NPC>();
+            for(int i = 0; i< tram.GetListChilds().Count; i++)
+            {
+                if(tram.GetListChilds()[i].GetType().Name == "NPC" && r.Next(0,3)!=0) list.Add((NPC)tram.GetListChilds()[i]);
+            }
+            return list;
+        }
+
+        private bool HasAllNPCsLeavedTram(List<NPC> l)
+        {
+            bool b = true;
+            foreach(NPC n in l)
+            {
+                if (n.GetY() < tram.GetY() + tram.GetHeight() + 100)
+                {
+                    b = false;
+                }
+            }
+            return b;
+        }
+
         private void NPCLeaveTram()
         {
-            //pnj random
+            if (!leave_npc)
+            {
+                npcs_leaving_tram = SelectionNPCsLeavingTram();
+                Random r = new Random();
+                int i;
+                foreach (NPC n in npcs_leaving_tram)
+                {
+                    n.Animated(true);
+                    i = tram.GetIndexNearestDoor(n.GetX());
+                    n.SetObjectiveX(tram.GetPosDoor(i));
+                    n.SetObjectiveY(tram.GetY() + tram.GetHeight() + r.Next(0, 100));
+                    n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014),2000);
+                }
+                leave_npc = true;
+            }
+            else
+            {
+                if(npcs_leaving_tram != null && HasAllNPCsLeavedTram(npcs_leaving_tram))
+                {
+                    NPCEnterTram();
+                }
+            }
         }
 
         private void NPCEnterTram()
         {
-            int x;
-            foreach(Texture t in platform.GetListChilds())
+            Random r = new Random();
+            int i;
+            foreach (Texture t in platform.GetListChilds())
             {
-                Character c = (Character)t;
-                //x = tram.GetPosNearestDoor(t.GetX());
+                if (t.GetType().Name == "NPC" && !((NPC)t).HasObjective())
+                {
+                    NPC n = (NPC)t;
+                    i = tram.GetIndexNearestDoor(n.GetX());
+                    n.SetObjectiveX(tram.GetPosDoor(i));
+                    n.SetObjectiveY(tram.GetY() + 336 + r.Next(0, 20));
+                    if (i == 0)
+                    {
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-64, 256));
+                    }
+                    else if (i == tram.GetNumberDoors() - 1)
+                    {
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 64));
+                    }
+                    else
+                    {
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 256));
+                    }
+                }
             }
+            enter_npc = true;
         }
     }
 }

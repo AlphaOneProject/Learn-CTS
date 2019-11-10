@@ -129,6 +129,11 @@ namespace Learn_CTS
             this.z = z;
         }
 
+        public Texture(String name, int x, int y, int z, bool b) : this(name, x, y, b)
+        {
+            this.z = z;
+        }
+
         /// <summary>
         /// Path to the default image of the texture.
         /// </summary>
