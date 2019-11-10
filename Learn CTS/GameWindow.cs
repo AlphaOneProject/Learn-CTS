@@ -41,6 +41,7 @@ namespace Learn_CTS
         private bool enter_npc = true;
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_tram;
+        private int tick_tram_stopped = 0;
 
 
         /// <summary>
@@ -80,10 +81,10 @@ namespace Learn_CTS
             background.DisableCollisions();
             platform = new Platform(-300, tram.GetZ() + 2);
             platform.AddChild(player);
-            background.AddChild(platform);
             list_textures = new List<Texture>() {
                 background,
-                tram
+                tram,
+                platform
             };
             InitializeNPCs();
         }
@@ -126,8 +127,14 @@ namespace Learn_CTS
             ticks += 1;
             if (tram.GetState() == 0)
             {
+                tick_tram_stopped += 1;
                 NPCLeaveTram();
                 MoveTexturesIfPlayerMoves();
+                if(tick_tram_stopped > 300)
+                {
+                    tram.ChangeState();
+                    tick_tram_stopped = 0;
+                }
             }
             else if (tram.GetState() == 1)
             {
@@ -148,7 +155,7 @@ namespace Learn_CTS
                 {
                     ConsoleAvgFPS();
                     platform.RemoveAllChilds();
-                    background.RemoveChild(platform);
+                    list_textures.Remove(platform);
                     tram.ChangeInside();
                     tram.SetState(2);
                     tram.SetSpeed(0);
@@ -316,10 +323,6 @@ namespace Learn_CTS
                         if (t.GetZ() < tram.GetY() + tram.GetHeight() && t.GetZ() > tram.GetY())
                         {
                             tram.AddChild(t);
-                            if (t.GetType().Name == "Player")
-                            {
-                                tram.ChangeState();
-                            }
                             platform.RemoveChild(t);
                         }
                     }
@@ -602,8 +605,8 @@ namespace Learn_CTS
                 platform.SetX((tram.GetX()));
                 tram.SetX(-4000);
                 tram.SetSpeed(tram.GetMaxSpeed());
-                background.AddChild(platform);
-                leave_npc = true;
+                list_textures.Add(platform);
+                leave_npc = false;
             }
         }
 
@@ -620,6 +623,33 @@ namespace Learn_CTS
                 else
                 {
                     platform.AddChild(nm.CreateNPC(npcs2[line.Key]["name"].ToString(), line.Value["x"].ToObject<int>(), line.Value["y"].ToObject<int>(), line.Value["quizz"].ToObject<int>(), npcs2[line.Key]["folder"].ToString(), true));
+                }
+            }
+        }
+
+        private void NPCLeaveTram()
+        {
+            if (!leave_npc)
+            {
+                npcs_leaving_tram = SelectionNPCsLeavingTram();
+                Random r = new Random();
+                int i;
+                foreach (NPC n in npcs_leaving_tram)
+                {
+                    n.Animated(true);
+                    i = tram.GetIndexNearestDoor(n.GetX());
+                    n.SetObjectiveX(tram.GetPosDoor(i));
+                    n.SetObjectiveY(tram.GetY() + tram.GetHeight() + r.Next(0, 100));
+                    n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 2000);
+                }
+                leave_npc = true;
+                enter_npc = true;
+            }
+            else
+            {
+                if (npcs_leaving_tram != null && enter_npc && HasAllNPCsLeavedTram(npcs_leaving_tram))
+                {
+                    NPCEnterTram();
                 }
             }
         }
@@ -648,32 +678,6 @@ namespace Learn_CTS
             return b;
         }
 
-        private void NPCLeaveTram()
-        {
-            if (!leave_npc)
-            {
-                npcs_leaving_tram = SelectionNPCsLeavingTram();
-                Random r = new Random();
-                int i;
-                foreach (NPC n in npcs_leaving_tram)
-                {
-                    n.Animated(true);
-                    i = tram.GetIndexNearestDoor(n.GetX());
-                    n.SetObjectiveX(tram.GetPosDoor(i));
-                    n.SetObjectiveY(tram.GetY() + tram.GetHeight() + r.Next(0, 100));
-                    n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014),2000);
-                }
-                leave_npc = true;
-            }
-            else
-            {
-                if(npcs_leaving_tram != null && HasAllNPCsLeavedTram(npcs_leaving_tram))
-                {
-                    NPCEnterTram();
-                }
-            }
-        }
-
         private void NPCEnterTram()
         {
             Random r = new Random();
@@ -700,7 +704,7 @@ namespace Learn_CTS
                     }
                 }
             }
-            enter_npc = true;
+            enter_npc = false;
         }
     }
 }
