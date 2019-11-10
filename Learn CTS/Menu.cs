@@ -209,6 +209,7 @@ namespace Learn_CTS
             };
             main_menu_btn_options_dyna.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+            main_menu_btn_options_dyna.Click += new EventHandler(this.Main_menu_btn_options_Click);
 
             this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
         }
@@ -294,7 +295,23 @@ namespace Learn_CTS
         private void Display_options_menu()
         {
             this.displayed_menu = "options_menu";
+
+            // Creation of the Button responsible to go back to the main menu.
+            PictureBox options_menu_pb_back_to_main_menu = new PictureBox()
+            {
+                Name = "options_menu_pb_back_to_main_menu",
+                Cursor = Cursors.Hand,
+                Size = new Size(42, 42),
+                Location = new Point(6, 6),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            options_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+
+            this.Controls.Add(options_menu_pb_back_to_main_menu);
             // Amuse toi bien Antoine :-*
+
         }
         
         
@@ -333,10 +350,6 @@ namespace Learn_CTS
                 {
                     case "games_menu_pnl_topbar":
                         c.Width = this.Width;
-                        break;
-                    case "games_menu_pb_back_to_main_menu":
-                        c.Size = new Size(42, 42);
-                        c.Location = new Point(6, 6);
                         break;
                     case "games_menu_pb_create_game":
                         c.Size = new Size(42, 42);
@@ -389,7 +402,7 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "ton_nom":
+                    case "salut":
                         // Salut Antoine
                         break;
                     default:

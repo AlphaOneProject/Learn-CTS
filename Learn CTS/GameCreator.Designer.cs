@@ -33,7 +33,6 @@
             this.pb_confirm = new System.Windows.Forms.PictureBox();
             this.pnl_bg = new System.Windows.Forms.Panel();
             this.lbl_create = new System.Windows.Forms.Label();
-            this.pnl_greyout = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pb_back_create)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_confirm)).BeginInit();
             this.pnl_bg.SuspendLayout();
@@ -78,7 +77,7 @@
             this.pnl_bg.Controls.Add(this.pb_back_create);
             this.pnl_bg.Controls.Add(this.txt_create);
             this.pnl_bg.Controls.Add(this.pb_confirm);
-            this.pnl_bg.Location = new System.Drawing.Point(0, 3);
+            this.pnl_bg.Location = new System.Drawing.Point(0, 0);
             this.pnl_bg.Name = "pnl_bg";
             this.pnl_bg.Size = new System.Drawing.Size(372, 157);
             this.pnl_bg.TabIndex = 5;
@@ -94,22 +93,12 @@
             this.lbl_create.TabIndex = 4;
             this.lbl_create.Text = "Créer un nouveau jeu";
             // 
-            // pnl_greyout
-            // 
-            this.pnl_greyout.BackColor = System.Drawing.Color.Green;
-            this.pnl_greyout.Location = new System.Drawing.Point(298, 3);
-            this.pnl_greyout.Name = "pnl_greyout";
-            this.pnl_greyout.Size = new System.Drawing.Size(71, 48);
-            this.pnl_greyout.TabIndex = 4;
-            this.pnl_greyout.Click += new System.EventHandler(this.Pnl_greyout_Click);
-            // 
             // GameCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnl_bg);
-            this.Controls.Add(this.pnl_greyout);
             this.Name = "GameCreator";
             this.Size = new System.Drawing.Size(372, 160);
             this.SizeChanged += new System.EventHandler(this.GameCreator_SizeChanged);
@@ -127,6 +116,5 @@
         private System.Windows.Forms.PictureBox pb_confirm;
         private System.Windows.Forms.Panel pnl_bg;
         private System.Windows.Forms.Label lbl_create;
-        private System.Windows.Forms.Panel pnl_greyout;
     }
 }
