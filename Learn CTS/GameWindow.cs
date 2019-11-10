@@ -14,9 +14,7 @@ namespace Learn_CTS
 
     public partial class GameWindow : Form
     {
-        /// <summary>
         /// Attributes
-        /// </summary>
 
         private List<Texture> list_textures;
         private NPC_Manager nm = NPC_Manager.GetInstance();
@@ -74,7 +72,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Character.SetM(3);
+            Character.SetM(6);
             player = new Player("Moi",600, 504);
             tram = new Tram(-4000, 198);
             background = new Background(0);
@@ -130,7 +128,7 @@ namespace Learn_CTS
                 tick_tram_stopped += 1;
                 NPCLeaveTram();
                 MoveTexturesIfPlayerMoves();
-                if(tick_tram_stopped > 300)
+                if(tick_tram_stopped > 200)
                 {
                     tram.ChangeState();
                     tick_tram_stopped = 0;
@@ -159,7 +157,7 @@ namespace Learn_CTS
                     tram.ChangeInside();
                     tram.SetState(2);
                     tram.SetSpeed(0);
-                    Character.SetM(9);
+                    //Character.SetM(6);
                     PlacePlayerMiddleScreen();
                 }
                 MoveBackground();
@@ -307,7 +305,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if a player or a npc enter the tram and add him as a passenger of the latter and remove him for the list of the textures
+        /// Check if a character enters the tram, add him as a child of the tram and remove it from the platform.
         /// </summary>
 
         private void CheckIfCharacterIsEnteringTheTram()
@@ -329,6 +327,10 @@ namespace Learn_CTS
                 }
             }
         }
+
+        /// <summary>
+        /// Check if a character leaves the tram, remove it from the tram and add it to the platform.
+        /// </summary>
 
         private void CheckIfCharacterIsLeavingTheTram()
         {
@@ -381,9 +383,10 @@ namespace Learn_CTS
         {
             List<Texture> list_all_textures = GetAllTextures(list_textures);
             list_all_textures.Sort(Texture.Compare);
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             foreach (Texture t in list_all_textures)
             {
-                t.UpdateGraphic(e);
+                t.OnPaint(e);
                 if (debug)
                 {
                     t.Debug(e);
@@ -478,7 +481,7 @@ namespace Learn_CTS
         /// <summary>
         /// Move the player if there are no collisions.
         /// </summary>
-        /// <param name="a"></param>
+        /// <param name="a">Move the player of a</param>
         /// <param name="b"></param>
         /// <returns>true if the player has moved, false otherwise.</returns>
 
@@ -486,9 +489,9 @@ namespace Learn_CTS
         {
             bool c_vertical = true;
             bool c_horizontal = true;
+            player.UpdateMovement(a, b);
             if (!tram.IsInside())
             {
-                player.UpdateMovement(a, b);
                 player.Move(a, 0);
                 if (IsCharacterCollidingWithTextures(player))
                 {
@@ -505,14 +508,12 @@ namespace Learn_CTS
             else
             {
                 tram.Move(-a, 0);
-                player.UpdateMovement(a, b);
                 if (IsCharacterCollidingWithTextures(player))
                 {
                     tram.Move(a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                player.UpdateMovement(a, b);
                 if (IsCharacterCollidingWithTextures(player))
                 {
                     player.Move(0, -b);
@@ -524,6 +525,14 @@ namespace Learn_CTS
                 player.RemoveObjective();
             }
         }
+
+        /// <summary>
+        /// Move the character
+        /// </summary>
+        /// <param name="c">The character</param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
 
         private bool MoveCharacter(Character c, int a, int b)
         {

@@ -252,10 +252,10 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="e"></param>
 
-        public override void UpdateGraphic(PaintEventArgs e)
+        public override void OnPaint(PaintEventArgs e)
         {
             this.Update();
-            base.UpdateGraphic(e);
+            base.OnPaint(e);
         }
 
         private int DistanceBeforeStopping()
