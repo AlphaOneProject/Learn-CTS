@@ -148,8 +148,10 @@ namespace Learn_CTS
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
                 ForeColor = Color.White,
-                ShortcutsEnabled = false
+                ShortcutsEnabled = false,
+                Tag = id
             };
+            txt_answer.KeyPress += new KeyPressEventHandler(this.Txt_Answer_KeyPress);
             pan_choice.Controls.Add(txt_answer);
             toolTip.SetToolTip(txt_answer, "Réponse proposée.");
 
@@ -164,7 +166,8 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White
+                ForeColor = Color.White,
+                Tag = id
             };
             pan_choice.Controls.Add(nud_score);
             toolTip.SetToolTip(nud_score, "Score donné ou retiré au choix de cette réponse, négatif " +
@@ -179,8 +182,10 @@ namespace Learn_CTS
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White
+                ForeColor = Color.White,
+                Tag = id
             };
+            cbo_redirect.SelectedIndexChanged += new EventHandler(this.Cbo_Redirect_SelectedIndexChanged);
             pan_choice.Controls.Add(cbo_redirect);
             toolTip.SetToolTip(cbo_redirect, "Dialogue vers lequel le joueur sera redirigé lors de ce choix." +
                                "\nLa redirection vers [FIN] indique la fin de la situation.");
@@ -225,7 +230,17 @@ namespace Learn_CTS
             this.Height = this.prev_line_loc;
         }
 
-        /*FUNCTIONS*/
+        public void Txt_Answer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox cbo = (ComboBox)sender;
+            ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex;
+            Tools.Set_To_JSON(this.file_path, this.data);
+        }
 
         public void Discard_Choice(object sender, EventArgs e)
         {
