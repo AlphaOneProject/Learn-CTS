@@ -15,44 +15,24 @@ namespace Learn_CTS
     public partial class Dialog : UserControl
     {
         private NPC_Manager nm = NPC_Manager.GetInstance();
-        private int id;
+        NPC npc;
         private string game_path;
         private JObject data;
 
         public Dialog(int id, string game)
         {
             InitializeComponent();
-            this.id = id;
+            npc = nm.GetNPCByID(id);
             InitializeGamePath(game);
+            this.DoubleBuffered = true;
         }
 
         private void Dialog_Load(object sender, EventArgs e)
         {
-            this.SetUp();
-            pbox_head_npc.Image = GetHeadNPC(nm.GetNPCByID(id).GetImage());
-            lbl_name.Text = nm.GetNPCByID(id).GetName();
-            txt_dialog_npc.Text = this.data["question"].ToString();
-            int nbr_choices = (int)this.data["choices"];
-            for(int i = 1; i<=nbr_choices; i++)
-            {
-                Button btn = new Button();
-                btn.Name = "btn";
-                btn.Size = new System.Drawing.Size(92, 23);
-                btn.Location = new System.Drawing.Point(this.pbox_head_npc.Location.X + this.pbox_head_npc.Width + 20 + (2*btn.Width*i), this.txt_dialog_npc.Location.Y + this.txt_dialog_npc.Height + 20);
-                btn.TabIndex = 2;
-                btn.Text = this.data["c" + i.ToString()]["answer"].ToString();
-                btn.UseVisualStyleBackColor = true;
-                //btn.Click += new System.EventHandler(this.button1_Click);
-                this.Controls.Add(btn);
-            }
-        }
-
-        private Image GetHeadNPC(Image img)
-        {
-            Bitmap bmpImage = new Bitmap(img);
-            Rectangle rect = new Rectangle((img.Width-pbox_head_npc.Width)/2,0,pbox_head_npc.Width, pbox_head_npc.Height);
-            Bitmap bmpCrop = bmpImage.Clone(rect, bmpImage.PixelFormat);
-            return (Image)bmpCrop;
+            this.Set_Up(npc.GetQuiz().ToString());
+            lbl_name.Text = npc.GetName();
+            Generate_Buttons_Choices();
+            this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
         }
 
         private void InitializeGamePath(string game)
@@ -76,10 +56,63 @@ namespace Learn_CTS
             return output;
         }
 
-        private void SetUp()
+        private void Set_Up(string q)
         {
             JObject dialog = Get_From_JSON("quizzes.json");
-            this.data = (JObject)dialog[nm.GetNPCByID(this.id).GetQuiz().ToString()];
+            this.data = (JObject)dialog[q];
+            txt_dialog_npc.Text = this.data["question"].ToString();
+        }
+
+        private void Generate_Buttons_Choices()
+        {
+            flp_choices.Controls.Clear();
+            int nbr_choices = (int)this.data["choices"];
+            for (int i = 1; i <= nbr_choices; i++)
+            {
+                Button btn = new Button();
+                btn.Name = "btn_choice";
+                btn.AutoSize = true;
+                btn.Location = new Point(this.txt_dialog_npc.Location.X + 20 + (2 * btn.Width * i), this.txt_dialog_npc.Location.Y + this.txt_dialog_npc.Height + 20);
+                btn.TabIndex = i;
+                btn.Cursor = System.Windows.Forms.Cursors.Hand;
+                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btn.Text = this.data["c" + i.ToString()]["answer"].ToString();
+                btn.UseVisualStyleBackColor = true;
+                btn.Click += new System.EventHandler(this.Answer_Event);
+                flp_choices.Controls.Add(btn);
+            }
+            flp_choices.Controls.Add(Generate_Button_Leave());
+        }
+
+        private Button Generate_Button_Leave()
+        {
+            Button btn_leave = new Button();
+            btn_leave.Cursor = System.Windows.Forms.Cursors.Hand;
+            btn_leave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btn_leave.Location = new System.Drawing.Point(243, 6);
+            btn_leave.Name = "btn_leave";
+            btn_leave.AutoSize = true;
+            btn_leave.TabIndex = 5;
+            btn_leave.Text = "Partir";
+            btn_leave.UseVisualStyleBackColor = true;
+            btn_leave.Click += new System.EventHandler(this.Dialog_Closed);
+            return btn_leave;
+        }
+
+        public void Answer_Event(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string s = this.data["c" + btn.TabIndex.ToString()]["redirect"].ToString();
+            if(s.Length == 0)
+            {
+                this.Dialog_Closed(sender,e);
+            }
+            else
+            {
+                this.Set_Up(this.data["c" + btn.TabIndex.ToString()]["redirect"].ToString());
+                Generate_Buttons_Choices();
+                this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+            }
         }
 
         public void Dialog_Closed(object sender, EventArgs e)

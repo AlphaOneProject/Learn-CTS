@@ -16,8 +16,6 @@ namespace Learn_CTS
         private Item item;
         private ItemManager manager;
 
-        //TODO: Gérer le SizeChanged
-
         public ItemViewer(int item_id)
         {
             InitializeComponent();

@@ -30,8 +30,7 @@
         {
             this.main_menu_btn_edit = new System.Windows.Forms.Button();
             this.main_menu_btn_exit = new System.Windows.Forms.Button();
-            this.main_menu_btn_create = new System.Windows.Forms.Button();
-            this.main_menu_btn_credits = new System.Windows.Forms.Button();
+            this.main_menu_btn_options = new System.Windows.Forms.Button();
             this.main_menu_btn_launch_engine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -64,33 +63,19 @@
             this.main_menu_btn_exit.UseVisualStyleBackColor = false;
             this.main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
             // 
-            // main_menu_btn_create
+            // main_menu_btn_options
             // 
-            this.main_menu_btn_create.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.main_menu_btn_create.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.main_menu_btn_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.main_menu_btn_create.ForeColor = System.Drawing.Color.White;
-            this.main_menu_btn_create.Location = new System.Drawing.Point(278, 220);
-            this.main_menu_btn_create.Name = "main_menu_btn_create";
-            this.main_menu_btn_create.Size = new System.Drawing.Size(230, 60);
-            this.main_menu_btn_create.TabIndex = 2;
-            this.main_menu_btn_create.Tag = "main_menu";
-            this.main_menu_btn_create.Text = "Créer un jeu";
-            this.main_menu_btn_create.UseVisualStyleBackColor = false;
-            this.main_menu_btn_create.Click += new System.EventHandler(this.Main_menu_btn_create_Click);
-            // 
-            // main_menu_btn_credits
-            // 
-            this.main_menu_btn_credits.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.main_menu_btn_credits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.main_menu_btn_credits.ForeColor = System.Drawing.Color.White;
-            this.main_menu_btn_credits.Location = new System.Drawing.Point(278, 286);
-            this.main_menu_btn_credits.Name = "main_menu_btn_credits";
-            this.main_menu_btn_credits.Size = new System.Drawing.Size(109, 30);
-            this.main_menu_btn_credits.TabIndex = 3;
-            this.main_menu_btn_credits.Tag = "main_menu";
-            this.main_menu_btn_credits.Text = "Crédits";
-            this.main_menu_btn_credits.UseVisualStyleBackColor = false;
+            this.main_menu_btn_options.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.main_menu_btn_options.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.main_menu_btn_options.ForeColor = System.Drawing.Color.White;
+            this.main_menu_btn_options.Location = new System.Drawing.Point(278, 286);
+            this.main_menu_btn_options.Name = "main_menu_btn_options";
+            this.main_menu_btn_options.Size = new System.Drawing.Size(109, 30);
+            this.main_menu_btn_options.TabIndex = 3;
+            this.main_menu_btn_options.Tag = "main_menu";
+            this.main_menu_btn_options.Text = "Options";
+            this.main_menu_btn_options.UseVisualStyleBackColor = false;
+            this.main_menu_btn_options.Click += new System.EventHandler(this.Main_menu_btn_options_Click);
             // 
             // main_menu_btn_launch_engine
             // 
@@ -114,8 +99,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.main_menu_btn_launch_engine);
-            this.Controls.Add(this.main_menu_btn_credits);
-            this.Controls.Add(this.main_menu_btn_create);
+            this.Controls.Add(this.main_menu_btn_options);
             this.Controls.Add(this.main_menu_btn_exit);
             this.Controls.Add(this.main_menu_btn_edit);
             this.ForeColor = System.Drawing.Color.White;
@@ -132,8 +116,7 @@
         #endregion
         private System.Windows.Forms.Button main_menu_btn_edit;
         private System.Windows.Forms.Button main_menu_btn_exit;
-        private System.Windows.Forms.Button main_menu_btn_create;
-        private System.Windows.Forms.Button main_menu_btn_credits;
+        private System.Windows.Forms.Button main_menu_btn_options;
         private System.Windows.Forms.Button main_menu_btn_launch_engine;
     }
 }

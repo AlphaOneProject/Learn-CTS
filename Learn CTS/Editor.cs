@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -11,13 +12,15 @@ namespace Learn_CTS
     public partial class Editor : Form
     {
 
-        // Attributes
+        // Attributes.
 
         private readonly String game;
         private readonly String game_path;
         private JObject game_properties;
         private string old_category = "general";
         private bool saved;
+
+        // Methods.
 
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
@@ -29,6 +32,11 @@ namespace Learn_CTS
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game;
             this.Text = "Éditeur : " + game;
             this.DoubleBuffered = false;
+        }
+
+        public void Set_Saved(bool saved)
+        {
+            this.saved = saved;
         }
 
         private void Editor_FormClosing(object sender, FormClosingEventArgs e)
@@ -48,7 +56,7 @@ namespace Learn_CTS
         private void Editor_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Marks the current game as available.
-            JObject properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            JObject properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
             if(properties["state"].ToString().Substring(0, 8).Equals("[DENIED]"))
             {
                 properties["state"] = properties["state"].ToString().Substring(8);
@@ -57,7 +65,7 @@ namespace Learn_CTS
             {
                 properties["state"] = "Inactif.";
             }
-            Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", properties);
+            Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", properties);
 
             Application.Restart();
         }
@@ -70,7 +78,7 @@ namespace Learn_CTS
         private void Editor1_Load(object sender, EventArgs e)
         {
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
-            this.game_properties = Get_From_JSON(Path.DirectorySeparatorChar + "properties.json");
+            this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
             this.saved = true;
             if(!this.game_properties["state"].ToString().Equals("Inactif."))
             {
@@ -78,7 +86,7 @@ namespace Learn_CTS
                                 "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
                 {
                     this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
-                    Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
+                    Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
                     this.Close();
                     return;
                 }
@@ -86,7 +94,7 @@ namespace Learn_CTS
             else
             {
                 this.game_properties["state"] = "En cours d'édition...";
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties);
+                Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
             }
 
             // Place the windows at the center of the screen.
@@ -148,13 +156,13 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            Begin_Control_Update(content);
+            Tools.Begin_Control_Update(content);
 
             TreeView t = (TreeView)sender;
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
-            { "npcs" };
+            { "npcs", "dialogs" };
 
             if (!(this.old_category.Equals(name) && keeping_categories.Contains(name)))
             {
@@ -191,8 +199,8 @@ namespace Learn_CTS
                         Display_Player(); break;
                     case "npcs":
                         Display_NPCs(); break;
-                    case "choices":
-                        Display_Choices(); break;
+                    case "dialogs":
+                        Display_Dialogs(); break;
                     case "images":
                         Display_Images(); break;
                     case "sprites":
@@ -207,7 +215,7 @@ namespace Learn_CTS
             }
             this.old_category = name;
 
-            End_Control_Update(content);
+            Tools.End_Control_Update(content);
         }
 
         /// <summary>
@@ -276,7 +284,7 @@ namespace Learn_CTS
                 // Block the renaming if the new name is empty.
                 if (t.Text.Equals(string.Empty)) { return; }
                 this.game_properties["description"] = t.Text;
-                Set_To_JSON(Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
+                Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
                 t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
                 t.BackColor = Color.FromArgb(56, 56, 56);
                 this.saved = true;
@@ -339,7 +347,7 @@ namespace Learn_CTS
         /// </summary>
         private void Display_NPCs()
         {
-            if (this.old_category.Equals("npcs"))
+            if (this.old_category.Equals("npcs")) // Trigger only on form resize.
             {
                 TableLayoutPanel tlp = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
                 Button btn_add = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
@@ -361,7 +369,6 @@ namespace Learn_CTS
             };
             content.Controls.Add(lbl_npcs);
 
-            // Creation of two arrows allowing changement of the scenarios' order.
             PictureBox pb_add_lib_npc = new PictureBox()
             {
                 Name = "pb_add_lib_npc",
@@ -415,8 +422,7 @@ namespace Learn_CTS
                                                         Path.DirectorySeparatorChar + "npcs";
             foreach (string file_npc in Directory.GetFiles(npcs_folder_path))
             {
-                data_pnj = Get_From_JSON(Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                                        "npcs" + Path.DirectorySeparatorChar + (i + 1) + ".json");
+                data_pnj = Tools.Get_From_JSON(npcs_folder_path + Path.DirectorySeparatorChar + (i + 1) + ".json");
                 
                 tlp_npcs.Height += 42;
                 tlp_npcs.RowCount++;
@@ -430,6 +436,7 @@ namespace Learn_CTS
                     ForeColor = Color.White,
                     BackColor = Color.FromArgb(56, 56, 56),
                     Dock = DockStyle.Fill,
+                    ShortcutsEnabled = false,
                     AutoSize = true
                 };
                 npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
@@ -443,6 +450,7 @@ namespace Learn_CTS
                     ForeColor = Color.White,
                     BackColor = Color.FromArgb(56, 56, 56),
                     Dock = DockStyle.Fill,
+                    ShortcutsEnabled = false,
                     AutoSize = true
                 };
                 npc_folder.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
@@ -486,7 +494,7 @@ namespace Learn_CTS
             // Generates the new NPC's id.
             string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                       Path.DirectorySeparatorChar + "npcs";
-            int new_id = 1 + Directory.GetFiles(npcs_folder_path).Length;
+            int new_id = Directory.GetFiles(npcs_folder_path).Length + 1;
 
             // Creating a new file for the NPC's data.
             JObject npc_content = new JObject()
@@ -501,7 +509,7 @@ namespace Learn_CTS
             TableLayoutPanel tlp_npcs = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
             Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
 
-            Begin_Control_Update(tlp_npcs);
+            Tools.Begin_Control_Update(tlp_npcs);
 
             tlp_npcs.Height += 42;
             tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
@@ -546,7 +554,7 @@ namespace Learn_CTS
 
             tlp_npcs.RowCount++;
 
-            End_Control_Update(tlp_npcs);
+            Tools.End_Control_Update(tlp_npcs);
 
             btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
         }
@@ -564,7 +572,7 @@ namespace Learn_CTS
 
                 string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                                   "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
-                JObject data_npc = Get_From_JSON(txt_path);
+                JObject data_npc = Tools.Get_From_JSON(this.game_path + txt_path);
                 switch (txt_type)
                 {
                     case 0:
@@ -574,7 +582,7 @@ namespace Learn_CTS
                         data_npc["folder"] = t.Text;
                         break;
                 }
-                Set_To_JSON(txt_path, data_npc); // Set the entered setting as a stored blueprint for npc.
+                Tools.Set_To_JSON(this.game_path + txt_path, data_npc); // Set the entered setting as a stored blueprint for npc.
                 t.BackColor = Color.FromArgb(56, 56, 56);
                 this.saved = true;
                 e.Handled = true;
@@ -588,7 +596,7 @@ namespace Learn_CTS
 
                 string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                                   "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
-                JObject data_npc = Get_From_JSON(txt_path);
+                JObject data_npc = Tools.Get_From_JSON(this.game_path + txt_path);
                 switch (txt_type)
                 {
                     case 0:
@@ -646,7 +654,7 @@ namespace Learn_CTS
                 }
             }
 
-            Begin_Control_Update(tlp);
+            Tools.Begin_Control_Update(tlp);
 
             // Updating the display.
             Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
@@ -663,7 +671,7 @@ namespace Learn_CTS
             }
             tlp.RowCount--;
 
-            End_Control_Update(tlp);
+            Tools.End_Control_Update(tlp);
 
             tlp.Height -= 42;
             btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp.Location.Y + tlp.Height + 8);
@@ -672,9 +680,175 @@ namespace Learn_CTS
         /// <summary>
         /// Load controls for Choices' content.
         /// </summary>
-        private void Display_Choices()
+        private void Display_Dialogs()
         {
-            // WIP
+            if (this.old_category == "dialogs") // Trigger only on form resize.
+            {
+                foreach (QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
+                {
+                    qe.Width = content.Width - 80;
+                }
+                return;
+            }
+
+            // Generating basic Label & add PictureBox in the upper part of "content".
+            Label lbl_dialogs = new Label()
+            {
+                Name = "lbl_dialogs",
+                Text = "Dialogues",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_dialogs);
+
+            PictureBox pb_add_dialog = new PictureBox()
+            {
+                Name = "pb_add_dialog",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_dialog.Click += new EventHandler(this.Add_Dialog);
+            content.Controls.Add(pb_add_dialog);
+
+            // Place the controls just created.
+            lbl_dialogs.Location = new Point(20, 20);
+            pb_add_dialog.Location = new Point(lbl_dialogs.Location.X + lbl_dialogs.Width + 20, 20);
+
+            // Generating to all files' a QuizzEdition UserControl.
+            int i = 1;
+            int last_pos = 0;
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            foreach (string file in Directory.GetFiles(dialogs_path))
+            {
+                // Creating the UserControl responsible for the internal edition of the JSON file.
+                QuizzEdition QEdition = new QuizzEdition(@"" + dialogs_path + i + ".json")
+                {
+                    Name = "QuizzEdition" + i,
+                    Width = content.Width - 80,
+                    Location = new Point(40, 100 + last_pos)
+                };
+                content.Controls.Add(QEdition);
+                last_pos += QEdition.Height + 40;
+
+                // Label over the UserControl, displaying dialog's id.
+                Label lbl_dialog_id = new Label()
+                {
+                    Name = "lbl_dialog_id" + i,
+                    Text = "N°" + i,
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    BackColor = Color.FromArgb(46, 46, 46),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+                content.Controls.Add(lbl_dialog_id);
+
+                lbl_dialog_id.Location = new Point(QEdition.Location.X, QEdition.Location.Y - lbl_dialog_id.Height + 1);
+                i++;
+            }
+        }
+
+        public void Add_Dialog(object sender, EventArgs e)
+        {
+            // Generates the new dialog's id.
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int new_id = Directory.GetFiles(dialogs_path).Length + 1;
+
+            // Creating a new file for the dialog's data.
+            JObject dialog_content = new JObject()
+            {
+                ["question"] = "Quelle question placer ici ?",
+                ["choices"] = 2,
+                ["c1"] = new JObject()
+                {
+                    ["answer"] = "Réponse 1",
+                    ["score"] = 0,
+                    ["redirect"] = 0
+                },
+                ["c2"] = new JObject()
+                {
+                    ["answer"] = "Réponse 2",
+                    ["score"] = 0,
+                    ["redirect"] = 0
+                }
+            };
+            File.WriteAllText(@"" + dialogs_path + Path.DirectorySeparatorChar + new_id + ".json",
+                              dialog_content.ToString());
+
+            // Creating the UserControl responsible for the internal edition of the JSON file.
+            QuizzEdition QEdition = new QuizzEdition(@"" + dialogs_path + new_id + ".json")
+            {
+                Name = "QuizzEdition" + new_id,
+                Width = content.Width - 80,
+                Location = new Point(40, 100)
+            };
+            content.Controls.Add(QEdition);
+
+            // Label over the UserControl, displaying dialog's id.
+            Label lbl_dialog_id = new Label()
+            {
+                Name = "lbl_dialog_id" + new_id,
+                Text = "N°" + new_id,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true,
+                BackColor = Color.FromArgb(46, 46, 46),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            content.Controls.Add(lbl_dialog_id);
+
+            // Placing the controls created in the right place.
+            Update_Dialogs();
+        }
+
+        /// <summary>
+        /// Update positions of all "QuizzEdition" UserControls in content based on their heights.
+        /// Called when height of one contained UserControl is changed through "Parent" attribute.
+        /// </summary>
+        public void Update_Dialogs()
+        {
+            int i = 1;
+            int last_pos = 0;
+            foreach (QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
+            {
+                qe.Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value);
+                content.Controls.Find("lbl_dialog_id" + i, false)[0].Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value -
+                                                                                          content.Controls.Find("lbl_dialog_id" + i, false)[0].Height + 1);
+                last_pos += qe.Height + 40;
+                i++;
+            }
+        }
+
+        public void Discard_Dialog(QuizzEdition sender)
+        {
+            // Ask for confirmation before suppression of the scenario.
+            if ((MessageBox.Show("Confirmer la suppression du dialogue N°" + sender.Get_Id() + " ?", "Confirmation de suppression",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No))
+            {
+                return;
+            }
+
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            // Deleting sender file.
+            File.Delete(@"" + dialogs_path + sender.Get_Id() + ".json");
+
+            // Reordering files.
+            for (int i = sender.Get_Id(); i <= Directory.GetFiles(@"" + dialogs_path).Length; i++)
+            {
+                if (sender.Get_Id() <= i)
+                {
+                    Directory.Move(@"" + dialogs_path + Path.DirectorySeparatorChar + (i + 1) + ".json",
+                                   @"" + dialogs_path + Path.DirectorySeparatorChar + i + ".json");
+                }
+            }
+
+            // Rerendering the whole content panel.
+            this.old_category = "reload_injection";
+            Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
         private void Display_Images()
@@ -828,7 +1002,8 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
-                Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
+                ForeColor = Color.White,
+                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -851,7 +1026,7 @@ namespace Learn_CTS
             // Creation of a button allowing to discard the scenario.
             PictureBox pb_discard_scenario = new PictureBox()
             {
-                Name = "btn_discard_scenario",
+                Name = "pb_discard_scenario",
                 Cursor = Cursors.Hand,
                 Size = new Size(24, 24),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
@@ -1015,7 +1190,7 @@ namespace Learn_CTS
         private void Rename_Scenario(string new_name)
         {
             // Exit if name is similar.
-            if(menu.SelectedNode.Text == new_name) { return; }
+            if(menu.SelectedNode.Text == new_name.Trim()) { return; }
 
             // Exit and display an error message if the name is already in use.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
@@ -1045,6 +1220,8 @@ namespace Learn_CTS
             content.Controls.Find("lbl_name_scenario", false)[0].Text = menu.SelectedNode.Text;
             content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point(content.Controls.Find("lbl_name_scenario", false)[0].Location.X +
                                                                                        content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
+            content.Controls.Find("pb_discard_scenario", false)[0].Location = new Point(content.Controls.Find("pb_rename_scenario", false)[0].Location.X +
+                                                                                       content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
@@ -1218,7 +1395,8 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
-                Width = Get_Text_Width(menu.SelectedNode.Text, 16) + 24,
+                ForeColor = Color.White,
+                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 16) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -1392,7 +1570,7 @@ namespace Learn_CTS
         private void Rename_Situation(string new_name)
         {
             // Exit if name is similar.
-            if (menu.SelectedNode.Text == new_name) { return; }
+            if (menu.SelectedNode.Text == new_name.Trim()) { return; }
 
             // Exit and display an error message if the name is already in use.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
@@ -1423,6 +1601,8 @@ namespace Learn_CTS
             content.Controls.Find("lbl_name_situation", false)[0].Text = menu.SelectedNode.Text;
             content.Controls.Find("pb_rename_situation", false)[0].Location = new Point(content.Controls.Find("lbl_name_situation", false)[0].Location.X +
                                                                                        content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
+            content.Controls.Find("pb_discard_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation", false)[0].Location.X +
+                                                                                       content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
             content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
         }
@@ -1496,85 +1676,6 @@ namespace Learn_CTS
 
             // Resize all controls inside "content".
             Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
-        }
-
-        /// <summary>
-        /// Recover the content of a JSON file at a specified path.
-        /// </summary>
-        /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
-        /// <returns>Content of the JSON file under a JObject structure.</returns>
-        public JObject Get_From_JSON(string internal_path)
-        {
-            JObject output;
-            using (StreamReader stream_r = new StreamReader(@"" + this.game_path + internal_path))
-            {
-                string json_file = stream_r.ReadToEnd();
-                output = JObject.Parse(json_file);
-            }
-            return output;
-        }
-
-        /// <summary>
-        /// Set the content of the JSON file at the specified path.
-        /// </summary>
-        /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
-        /// <param name="new_content">JObject containing the variables needed in the file.</param>
-        public void Set_To_JSON(string internal_path, JObject new_content)
-        {
-            File.WriteAllText(@"" + this.game_path + internal_path, new_content.ToString());
-
-            // Write JSON directly to the specified file.
-            using (StreamWriter file = File.CreateText(@"" + this.game_path + internal_path))
-            using (JsonTextWriter writer = new JsonTextWriter(file))
-            {
-                new_content.WriteTo(writer);
-            }
-        }
-
-        public static void Begin_Control_Update(Control control)
-        {
-            Message msgSuspendUpdate = Message.Create(control.Handle, 11, IntPtr.Zero,
-                  IntPtr.Zero);
-
-            NativeWindow window = NativeWindow.FromHandle(control.Handle);
-            window.DefWndProc(ref msgSuspendUpdate);
-        }
-
-        public static void End_Control_Update(Control control)
-        {
-            // Create a C "true" boolean as an IntPtr
-            IntPtr wparam = new IntPtr(1);
-            Message msgResumeUpdate = Message.Create(control.Handle, 11, wparam,
-                  IntPtr.Zero);
-
-            NativeWindow window = NativeWindow.FromHandle(control.Handle);
-            window.DefWndProc(ref msgResumeUpdate);
-            control.Invalidate();
-            control.Refresh();
-        }
-
-        /// <summary>
-        /// Allows the user to input a text and his font size in order to get the final number of pixels it will use, in a textbox for example.
-        /// </summary>
-        /// <param name="text">Text needing estimation.</param>
-        /// <param name="font_size">Font size desired.</param>
-        /// <returns>Number of pixels used by the text.</returns>
-        public int Get_Text_Width(string text, int font_size)
-        {
-            int width;
-            Label lbl_width_measure = new Label()
-            {
-                Name = "lbl_width_measure",
-                Text = text,
-                AutoSize = true,
-                Font = new System.Drawing.Font("Microsoft Sans Serif", font_size, System.Drawing.FontStyle.Regular, 
-                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                Visible = false
-            };
-            this.Controls.Add(lbl_width_measure);
-            width = lbl_width_measure.Width;
-            this.Controls.Remove(lbl_width_measure);
-            return width;
         }
     }
 }
