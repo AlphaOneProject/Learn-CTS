@@ -45,6 +45,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Stops the render update on a specified Control.
+        /// </summary>
+        /// <param name="control">Targeted Control.</param>
         public static void Begin_Control_Update(Control control)
         {
             Message msgSuspendUpdate = Message.Create(control.Handle, 11, IntPtr.Zero,
@@ -54,6 +58,10 @@ namespace Learn_CTS
             window.DefWndProc(ref msgSuspendUpdate);
         }
 
+        /// <summary>
+        /// Resumes the render update on a specified Control.
+        /// </summary>
+        /// <param name="control">Targeted Control.</param>
         public static void End_Control_Update(Control control)
         {
             // Create a C "true" boolean as an IntPtr
@@ -91,6 +99,12 @@ namespace Learn_CTS
             return width;
         }
 
+        /// <summary>
+        /// Return the minimum between two specified integers.
+        /// </summary>
+        /// <param name="nbr1">First integer.</param>
+        /// <param name="nbr2">Second integer.</param>
+        /// <returns>Minimum of both parameters.</returns>
         public static int Min_Int(int nbr1, int nbr2)
         {
             int output = nbr1;

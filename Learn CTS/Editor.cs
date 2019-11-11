@@ -34,11 +34,22 @@ namespace Learn_CTS
             this.DoubleBuffered = false;
         }
 
+        /// <summary>
+        /// Accessor to the local parameter "saved".
+        /// </summary>
+        /// <param name="saved">New desired value for "saved".</param>
         public void Set_Saved(bool saved)
         {
             this.saved = saved;
         }
 
+        /// <summary>
+        /// Triggers while the Editor began a closing operation, checks first if there is unsaved work
+        /// and if there is ask the user to confirm his decision.
+        /// Upon confirmation, or without modification, the window parameters will be saved into "/internal/options.json".
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Editor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous tout de même quitter ?",
@@ -517,6 +528,11 @@ namespace Learn_CTS
             }*/
         }
 
+        /// <summary>
+        /// Add a new NPC to the library, both in the Editor and in the dedicated folder.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Add_Lib_NPC(object sender, EventArgs e)
         {
             // Generates the new NPC's id.
@@ -587,6 +603,12 @@ namespace Learn_CTS
             btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
         }
 
+        /// <summary>
+        /// Checks the action made into the TextBox and depending on this action,
+        /// save, cancel or edit the content.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Text_Changed_Lib_NPC(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
@@ -660,6 +682,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Discard the file matching the sender position in his TableLayoutPanel.
+        /// Then discard the row in the above-mentionned TableLayoutPanel.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Discard_Lib_NPC(object sender, EventArgs e)
         {
             // Recovering the id of the involved file.
@@ -779,6 +807,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Creates a new dialog file and it's Controls.
+        /// Then call Update_Dialogs in order to place them.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Add_Dialog(object sender, EventArgs e)
         {
             // Generates the new dialog's id.
@@ -850,6 +884,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Delete a specified instance of QuizzEdition and his reference's file.
+        /// </summary>
+        /// <param name="sender">Instance of QuizzEdition calling the function, permits to identify which file delete.</param>
         public void Discard_Dialog(QuizzEdition sender)
         {
             // Ask for confirmation before suppression of the scenario.
@@ -879,16 +917,25 @@ namespace Learn_CTS
             Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
+        /// <summary>
+        /// Load controls for images' content.
+        /// </summary>
         private void Display_Images()
         {
             // WIP
         }
 
+        /// <summary>
+        /// Load controls for sprites' content.
+        /// </summary>
         private void Display_Sprites()
         {
             // WIP
         }
 
+        /// <summary>
+        /// Load controls for backgrounds' content.
+        /// </summary>
         private void Display_Backgrounds()
         {
             // WIP

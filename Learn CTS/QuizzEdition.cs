@@ -24,6 +24,10 @@ namespace Learn_CTS
 
         // Methods.
         
+        /// <summary>
+        /// Setup the parameters necessary to the UserControl.
+        /// </summary>
+        /// <param name="file_path">Absolute path of the linked file.</param>
         public QuizzEdition(string file_path)
         {
             InitializeComponent();
@@ -35,6 +39,11 @@ namespace Learn_CTS
             Reload_Redirections();
         }
 
+        /// <summary>
+        /// Load and display the data of the linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void QuizzEdition_Load(object sender, EventArgs e)
         {
             // Add the question.
@@ -123,6 +132,7 @@ namespace Learn_CTS
             this.data["c" + (nbr_choices + 1).ToString()] = new_choice;
             Tools.Set_To_JSON(this.file_path, this.data);
             Add_Choice(nbr_choices + 1);
+            ((Editor)this.ParentForm).Update_Dialogs();
         }
 
         public void Add_Choice(int id)
@@ -328,15 +338,22 @@ namespace Learn_CTS
                                 "merci de cliquer sur la croix en haut à droite.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            // Delete the choice from the JSON file.
+            
+            // Delete the choice reoder the others in the JSON file.
             this.data["choices"] = nbr_choices - 1;
-            data.Property("c" + ((PictureBox)sender).Tag).Remove();
+            for(int i = (int)((PictureBox)sender).Tag; i < nbr_choices; i++)
+            {
+                this.data["c" + i] = this.data["c" + (i + 1)];
+            }
+            data.Property("c" + nbr_choices).Remove();
             Tools.Set_To_JSON(this.file_path, this.data);
 
             // Delete the panel linked to the choice.
             this.prev_line_loc -= ((PictureBox)sender).Parent.Height + 10;
             this.Controls.Remove(((PictureBox)sender).Parent);
             this.Height = this.prev_line_loc;
+            QuizzEdition_Resize(this, new EventArgs());
+            ((Editor)this.ParentForm).Update_Dialogs();
         }
 
         private void QuizzEdition_Resize(object sender, EventArgs e)
@@ -347,6 +364,7 @@ namespace Learn_CTS
             pb_delete_all.Location = new Point(this.Width - pb_delete_all.Width - 10, 10);
             this.Height = this.prev_line_loc;
 
+            this.prev_line_loc = 50;
             foreach(Panel pan in this.Controls.OfType<Panel>())
             {
                 pan.Width = this.Width - 20;
@@ -365,10 +383,13 @@ namespace Learn_CTS
                 cbo_redirect.Width = size_left / 2;
 
                 // Placement of all created controls.
+                pan.Location = new Point(10, this.prev_line_loc);
                 txt_answer.Location = new Point(10, 10);
                 nud_score.Location = new Point(txt_answer.Location.X + txt_answer.Width + 8, 10);
                 cbo_redirect.Location = new Point(nud_score.Location.X + nud_score.Width + 8, 10);
                 pb_discard_choice.Location = new Point(cbo_redirect.Location.X + cbo_redirect.Width + 8, 10);
+
+                this.prev_line_loc += pan.Height + 10;
             }
         }
 
