@@ -56,6 +56,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Reload the existing dialogs upon signal from the Editor.
+        /// </summary>
         public void Reload_Redirections()
         {
             this.cbo_redirect_list = new List<string>() { "[FIN]" };
@@ -68,11 +71,20 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Get method for the QuizzEdition's id.
+        /// </summary>
+        /// <returns>Instance's id.</returns>
         public int Get_Id()
         {
             return this.id;
         }
 
+        /// <summary>
+        /// Verify, save or cancel the input data to the linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Txt_Question_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
@@ -119,6 +131,12 @@ namespace Learn_CTS
             pb_add.Location = new Point(txt_question.Location.X + txt_question.Width + 8, 10);
         }
 
+        /// <summary>
+        /// Triggers upon click on the PictureBox.
+        /// Add a new choice to the file through a new JObject inserted into the file's data.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Add_Choice(object sender, EventArgs e)
         {
             int nbr_choices = int.Parse((string)this.data["choices"]);
@@ -135,6 +153,10 @@ namespace Learn_CTS
             ((Editor)this.ParentForm).Update_Dialogs();
         }
 
+        /// <summary>
+        /// Creates and adds all necessary Controls to the QuizzEdition for displaying a choice of the specified id.
+        /// </summary>
+        /// <param name="id">Id of the choice which need Controls management.</param>
         public void Add_Choice(int id)
         {
             // Generates choice's management controls.
@@ -241,6 +263,11 @@ namespace Learn_CTS
             this.Height = this.prev_line_loc;
         }
 
+        /// <summary>
+        /// Verify, save or cancel the input data to the linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Txt_Answer_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
@@ -282,6 +309,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Verify, save or cancel the input data to the linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Nud_Score_KeyPress(object sender, KeyPressEventArgs e)
         {
             NumericUpDown t = (NumericUpDown)sender;
@@ -322,6 +354,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Save the input data to the linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cbo = (ComboBox)sender;
@@ -329,6 +366,12 @@ namespace Learn_CTS
             Tools.Set_To_JSON(this.file_path, this.data);
         }
 
+        /// <summary>
+        /// Discard a choice identified by the sender's Tag.
+        /// Both in the JSON file and on the display.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Discard_Choice(object sender, EventArgs e)
         {
             int nbr_choices = int.Parse((string)this.data["choices"]);
@@ -356,6 +399,11 @@ namespace Learn_CTS
             ((Editor)this.ParentForm).Update_Dialogs();
         }
 
+        /// <summary>
+        /// Resize the Controls in order to match the new size of the UserControl.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void QuizzEdition_Resize(object sender, EventArgs e)
         {
             txt_question.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
@@ -393,6 +441,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Asks to the Editor to delete both this QuizzEdition and his linked file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Delete_All(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Discard_Dialog(this);
