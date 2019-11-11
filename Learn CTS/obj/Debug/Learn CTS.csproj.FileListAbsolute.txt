@@ -88,5 +88,9 @@ C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.r
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.resources
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.resources
+<<<<<<< HEAD
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
+=======
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.resources
+>>>>>>> 1ee92d4e15b4bc58de82913ba388fdc23e63ec1d

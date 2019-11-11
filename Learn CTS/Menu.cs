@@ -43,14 +43,16 @@ namespace Learn_CTS
             this.displayed_menu = "main_menu";
 
             // Dynamically places the controls of the main menu.
-            main_menu_btn_launch_engine.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
-            main_menu_btn_launch_engine.TabIndex = 0;
+            main_menu_lbl_title1.Location = new Point((this.Width / 2) - (main_menu_lbl_title1.Width) + 15,
+                                    (this.Height / 2) - (main_menu_lbl_title1.Height*2));
+
+            main_menu_lbl_title2.Location = new Point(main_menu_lbl_title1.Location.X + main_menu_lbl_title1.Width - 20,
+                                    main_menu_lbl_title1.Location.Y - 10);
 
             main_menu_btn_edit.Location = new Point((this.Width / 2) - (main_menu_btn_edit.Width / 2),
-                            (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_btn_launch_engine.Height / 2) + 2);
+                            (this.Height / 2) - main_menu_btn_edit.Height + (main_menu_lbl_title1.Height / 2) + 2);
 
-            main_menu_btn_options.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
+            main_menu_btn_options.Location = new Point(main_menu_btn_edit.Location.X,
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
             main_menu_btn_exit.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
@@ -159,19 +161,29 @@ namespace Learn_CTS
         {
             displayed_menu = "main_menu";
 
-            // Creation of the button that will launch the game engine.
-            Button main_menu_btn_launch_engine_dyna = new Button()
+            // Creation of the first part of the title
+            Label main_menu_lbl_title1_dyna = new Label()
             {
-                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                Name = "main_menu_btn_launch_engine",
-                Cursor = Cursors.Hand,
-                Size = new Size(230, 60),
-                TabIndex = 0,
-                Text = "Tester le moteur"
+                Font = new System.Drawing.Font("Nirmala UI Semilight", 36F),
+                Location = new System.Drawing.Point(276, 31),
+                Name = "main_menu_lbl_title1",
+                Size = new System.Drawing.Size(141, 65),
+                Text = "Learn"
             };
-            main_menu_btn_launch_engine_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
-            main_menu_btn_launch_engine_dyna.Click += new EventHandler(Demo_Engine);
+            main_menu_lbl_title1_dyna.Location = new Point((this.Width / 2) - (main_menu_lbl_title1_dyna.Width) + 15,
+                                (this.Height / 2) - (main_menu_lbl_title1_dyna.Height*2));
+
+            // Creation of the second part of the title
+            Label main_menu_lbl_title2_dyna = new Label()
+            {
+                Font = new Font("Nirmala UI", 44F, System.Drawing.FontStyle.Bold),
+                ForeColor = Color.Red,
+                Name = "main_menu_lbl_title2",
+                Size = new Size(138, 78),
+                Text = "CTS"
+            };
+            main_menu_lbl_title2_dyna.Location = new Point(main_menu_lbl_title1_dyna.Location.X + main_menu_lbl_title1_dyna.Width - 20,
+                            main_menu_lbl_title1_dyna.Location.Y - 10);
 
             // Creation of the button that will show the selection of available levels to edit.
             Button main_menu_btn_edit_dyna = new Button()
@@ -184,12 +196,12 @@ namespace Learn_CTS
                 Text = "Mes jeux"
             };
             main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
-                            (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_btn_launch_engine_dyna.Height / 2) + 2);
+                    (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_lbl_title1_dyna.Height / 2) + 2);
             main_menu_btn_edit_dyna.Click += new EventHandler(this.Main_menu_btn_edit_Click);
 
             // Creation of the button that will exit the application.
             Button main_menu_btn_exit_dyna = new Button() {
-                Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10),
+                Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit_dyna.Height / 2) + 10),
                 Name = "main_menu_btn_exit",
                 Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
@@ -207,10 +219,11 @@ namespace Learn_CTS
                 TabIndex = 3,
                 Text = "Options"
             };
-            main_menu_btn_options_dyna.Location = new Point((this.Width / 2) - main_menu_btn_options.Width - 6,
-                (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+            main_menu_btn_options_dyna.Location = new Point(main_menu_btn_edit_dyna.Location.X,
+                (this.Height / 2) + (main_menu_btn_edit_dyna.Height / 2) + 10);
+            main_menu_btn_options_dyna.Click += new EventHandler(this.Main_menu_btn_options_Click);
 
-            this.Controls.AddRange(new Control[] { main_menu_btn_launch_engine_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
+            this.Controls.AddRange(new Control[] { main_menu_lbl_title2_dyna, main_menu_lbl_title1_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
         }
 
         /// <summary>
@@ -294,7 +307,23 @@ namespace Learn_CTS
         private void Display_options_menu()
         {
             this.displayed_menu = "options_menu";
+
+            // Creation of the Button responsible to go back to the main menu.
+            PictureBox options_menu_pb_back_to_main_menu = new PictureBox()
+            {
+                Name = "options_menu_pb_back_to_main_menu",
+                Cursor = Cursors.Hand,
+                Size = new Size(42, 42),
+                Location = new Point(6, 6),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            options_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+
+            this.Controls.Add(options_menu_pb_back_to_main_menu);
             // Amuse toi bien Antoine :-*
+
         }
         
         
@@ -334,10 +363,6 @@ namespace Learn_CTS
                     case "games_menu_pnl_topbar":
                         c.Width = this.Width;
                         break;
-                    case "games_menu_pb_back_to_main_menu":
-                        c.Size = new Size(42, 42);
-                        c.Location = new Point(6, 6);
-                        break;
                     case "games_menu_pb_create_game":
                         c.Size = new Size(42, 42);
                         c.Location = new Point(this.Width - 68, 6);
@@ -364,20 +389,25 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "main_menu_btn_launch_engine":
-                        c.Location = new Point((this.Width / 2) - (main_menu_btn_launch_engine.Width / 2),
-                                    (this.Height / 2) - (main_menu_btn_launch_engine.Height) - (main_menu_btn_launch_engine.Height / 2) - 2);
+                    case "main_menu_lbl_title1":
+                        c.Location = new Point((this.Width / 2) - (c.Width) + 14,
+                                    (this.Height / 2) - (c.Height * 2));
+                        break;
+                    case "main_menu_lbl_title2":
+                        c.Location = new Point((this.Width / 2) - 5,
+                                    (this.Height / 2) - (c.Height * 2) + 16);
                         break;
                     case "main_menu_btn_edit":
-                        c.Location = new Point((this.Width / 2) - (c.Width / 2), 
-                            (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_btn_launch_engine",false)[0].Height / 2) + 2);
+                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
+                            (this.Height / 2) - c.Height + (this.Controls.Find("main_menu_lbl_title1", false)[0].Height / 2) + 2);
                         break;
                     case "main_menu_btn_options":
                         c.Location = new Point((this.Width / 2) - c.Width - 6,
                             (this.Height / 2) + (this.Controls.Find("main_menu_btn_edit", false)[0].Height / 2) + 10);
                         break;
                     case "main_menu_btn_exit":
-                        c.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+                        c.Location = new Point((this.Width / 2) + 6,
+                            (this.Height / 2) + (this.Controls.Find("main_menu_btn_edit", false)[0].Height / 2) + 10);
                         break;
                 }
             }
@@ -389,19 +419,13 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "ton_nom":
+                    case "salut":
                         // Salut Antoine
                         break;
                     default:
                         break;
                 }
             }
-        }
-
-        private void Demo_Engine(object sender, EventArgs e)
-        {
-            Form gw = new GameWindow("Learn CTS");
-            gw.Show();
         }
     }
 }

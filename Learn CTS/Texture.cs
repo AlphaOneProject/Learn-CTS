@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -31,6 +30,16 @@ namespace Learn_CTS
         private int height;
 
         /// <summary>
+        /// Initialize the path of the folder of the images and hitboxes corresponding to the game.
+        /// </summary>
+        /// <param name="game">The name of the game.</param>
+
+        public static void InitializePath(string game)
+        {
+            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
+        }
+
+        /// <summary>
         /// Constructor of a texture which is placed at the specified coordinates.
         /// </summary>
         /// <param name="x">The x coordinate.</param>
@@ -40,30 +49,6 @@ namespace Learn_CTS
         {
             this.x = x;
             this.y = y;
-            // A CHANGER
-            /*this.path_image = GetDefaultPathImage();
-            this.path_hitbox = GetDefaultPathHitbox();
-            try
-            {
-                this.SetImage(CreateImage(this.path_image));
-                this.SetHitbox(CreateHitbox(this.path_hitbox));
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }*/
-        }
-
-        /// <summary>
-        /// Constructor of a texture which is placed at the specified coordinates x,y with a custom depth z
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-        /// <param name="z">THe depth position compared to the other textures.</param>
-
-        public Texture(int x, int y, int z) : this(x, y)
-        {
-            this.z = z;
         }
 
         /// <summary>
@@ -85,11 +70,9 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Texture(String name, int x, int y)
+        public Texture(String name, int x, int y) : this(x,y)
         {
             this.name = name;
-            this.x = x;
-            this.y = y;
             this.path_image = GetCustomPathImage(name);
             this.path_hitbox = GetCustomPathHitbox(name);
             try
@@ -104,7 +87,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Constructor of a texture with a custom name, placed at the specified coordinates x,y but specifies if it collides only on depth.
+        /// Constructor of a texture with a custom name, placed at the specified coordinates x,y and specifies if it collides only on depth.
         /// </summary>
         /// <param name="name"> Name of the texture.</param>
         /// <param name="x">The x coordinate.</param>
@@ -130,55 +113,206 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Path to the default image of the texture.
+        /// Constructor of a texture with a custom name, placed at the specified coordinates x,y, a custom depth z and specifies if it collides only on depth.
         /// </summary>
-        /// <returns>The path to the image used by the texture.</returns>
+        /// <param name="name"> Name of the texture.</param>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <param name="z">THe depth position compared to the other textures.</param>
+        /// <param name="b">Specifies if the texture collides only when the depth is the same as the other texture.</param>
 
-        /*private String GetDefaultPathImage()
+        public Texture(String name, int x, int y, int z, bool b) : this(name, x, y, b)
         {
-            if(this.GetType().BaseType.Name == "Character")
+            this.z = z;
+        }
+
+
+        /// <summary>
+        /// Move the texture and all its childs, by adding a to the x coordinate and b to the y coordinate.
+        /// </summary>
+        /// <param name="a">Number that will be added to the x coordinate.</param>
+        /// <param name="b">Number that will be added to the x coordinate.</param>
+
+        public virtual void Move(int a, int b)
+        {
+            this.x += a;
+            this.y += b;
+            foreach (Texture t in this.list_childs)
             {
-                return projectDir + "characters\\" + this.GetType().Name + "\\" + this.GetType().Name + ".png";
-            }
-            else if (this.GetType().Name == "Tram")
-            {
-                return projectDir + "others\\Tram\\" + this.GetType().Name + ".png";
-            }
-            else
-            {
-                return projectDir + "others\\" + this.GetType().Name + ".png";
+                t.Move(a, b);
             }
         }
 
         /// <summary>
-        /// Get the path to the default hitbox of the texture.
+        /// Paint itself to the window.
         /// </summary>
-        /// <returns>The path to the hitbox used by the texture.</returns>
+        /// <param name="e"></param>
 
-        private String GetDefaultPathHitbox()
+        public virtual void OnPaint(PaintEventArgs e)
         {
-            if (this.GetType().BaseType.Name == "Character")
+            Graphics g = e.Graphics;
+            if ((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
             {
-                return projectDir + "\\characters\\" + this.GetType().Name + "\\" + this.GetType().Name + "HitBox.png";
+                g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
+                /*Rectangle r = new Rectangle(this.GetX(), this.GetY(), this.GetWidth(), this.GetHeight());
+                this.Invalidate(r);*/
             }
-            else if (this.GetType().Name == "Tram")
+        }
+
+        /// <summary>
+        /// Create a image from a file specified by the path.
+        /// </summary>
+        /// <param name="path">Path to the file.</param>
+        /// <returns>The image created from the file.</returns>
+
+        public Image CreateImage(String path)
+        {
+            try
             {
-                return projectDir + "\\others\\Tram\\" + this.GetType().Name + "HitBox.png";
+                return Image.FromFile(path);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
+                                "Veuillez qu'elle soit bien ici : " + path);
+            }
+            return null;
+
+        }
+
+        /// <summary>
+        /// Create a hitbox from a file specified by the path.
+        /// </summary>
+        /// <param name="path">Path to the file.</param>
+        /// <returns>Returns the bitmap of the hitbox.</returns>
+
+        public Bitmap CreateHitbox(String path)
+        {
+            try
+            {
+                return new Bitmap(Image.FromFile(path));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
+                                "Veuillez qu'elle soit bien ici : " + path);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Method that can determine if the hitbox of the texture is hit at these coordinates.
+        /// </summary>
+        /// <param name="c">The x coordinate that will be tested.</param>
+        /// <param name="d">The y coordinate that will be tested.</param>
+        /// <returns>True if the hitbox is hit, false otherwise.</returns>
+
+        public bool IsHitboxHit(int c, int d)
+        {
+            if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
+            {
+                return !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
             }
             else
             {
-                return projectDir + "\\others\\" + this.GetType().Name + "HitBox.png";
+                return false;
             }
-        }*/
-
-        public String GetCustomPathImage(string name)
-        {
-            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + ".png";
         }
 
-        public String GetCustomPathHitbox(string name)
+        /// <summary>
+        /// Check if the instance is colliding with the texture t or its childs
+        /// </summary>
+        /// <param name="t">The texture that will be tested.</param>
+        /// <returns>true if this hit the hitbox of t or one of its childs, false otherwise.</returns>
+
+        public virtual bool CollideWith(Texture t)
         {
-            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
+            if (this.hitbox == null || Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
+            {
+                return false;
+            }
+            if (this.collide_only_z && t.CollidesOnlyOnZ() && Math.Abs(this.GetZ() - t.GetZ()) > 4)
+            {
+                return false;
+            }
+            Rectangle r1 = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
+            Rectangle r2 = new Rectangle(t.GetX(), t.GetY(), t.GetImage().Width, t.GetImage().Height);
+            if (r1.IntersectsWith(r2))
+            {
+                Rectangle r3 = Rectangle.Intersect(r1, r2);
+                for (int i = 0; i < r3.Width; i += 8)
+                {
+                    for (int j = 0; j < r3.Height; j += 8)
+                    {
+                        if (this.IsHitboxHit(r3.X + i, r3.Y + j) && t.IsHitboxHit(r3.X + i, r3.Y + j))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                foreach (Texture c in this.list_childs)
+                {
+                    if (c.CollideWith(t))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Method that paint the hitbox and the contour of the texture.
+        /// </summary>
+        /// <param name="e"></param>
+
+        public void Debug(PaintEventArgs e)
+        {
+            if (this.hitbox == null) return;
+            Graphics g = e.Graphics;
+            Rectangle rect = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
+            Pen pen = new Pen(Brushes.Red);
+            pen.Width = 4;
+            g.DrawRectangle(pen, rect);
+            g.DrawImage(this.hitbox, new Point(x, y));
+            pen.Dispose();
+        }
+
+        /// <summary>
+        /// Comparator which sort the textures by depth.
+        /// </summary>
+        /// <param name="t1">The first texture.</param>
+        /// <param name="t2">The second texture.</param>
+        /// <returns>
+        /// 1 if t1 is above t2
+        /// -1 if t1 is below t2
+        /// 0 if they are at the same depth.
+        /// </returns>
+
+        public static int Compare(Texture t1, Texture t2)
+        {
+            if (t1.GetZ() >= t2.GetZ())
+            {
+                return 1;
+            }
+            else if (t1.GetZ() < t2.GetZ())
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Get the directory where is stored the images
+        /// </summary>
+        /// <returns>A string which represents the path to the folder.</returns>
+
+        public static string GetDirImages()
+        {
+            return projectDir;
         }
 
         /// <summary>
@@ -213,6 +347,10 @@ namespace Learn_CTS
 
         public void RemoveAllChilds()
         {
+            foreach(Texture t in this.list_childs)
+            {
+                t.RemoveAllChilds();
+            }
             this.list_childs = new List<Texture>();
         }
 
@@ -224,83 +362,6 @@ namespace Learn_CTS
         public List<Texture> GetListChilds()
         {
             return this.list_childs;
-        }
-
-        /// <summary>
-        /// Create a image from a file specified by the path.
-        /// </summary>
-        /// <param name="path">Path to the file.</param>
-        /// <returns>The image created from the file.</returns>
-
-        public Image CreateImage(String path)
-        {
-            try
-            {
-                return Image.FromFile(path);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
-                                "Veuillez qu'elle soit bien ici : " + path + "\n" +
-                                "L'image par défaut va être utilisé.");
-            }
-            //return Image.FromFile(this.GetDefaultPathImage());
-            return null;
-
-        }
-
-        /// <summary>
-        /// Create a hitbox from a file specified by the path.
-        /// </summary>
-        /// <param name="path">Path to the file.</param>
-        /// <returns>Returns the bitmap of the hitbox.</returns>
-
-        public Bitmap CreateHitbox(String path)
-        {
-            try
-            {
-                return new Bitmap(Image.FromFile(path));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
-                                "Veuillez qu'elle soit bien ici : " + path + "\n" +
-                                "La hitbox par défaut va être utilisé.");
-            }
-            //return new Bitmap(Image.FromFile(this.GetDefaultPathHitbox()));
-            return null;
-        }
-
-        /// <summary>
-        /// Move the texture and all its childs, by adding a to the x coordinate and b to the y coordinate.
-        /// </summary>
-        /// <param name="a">Number that will be added to the x coordinate.</param>
-        /// <param name="b">Number that will be added to the x coordinate.</param>
-
-        public virtual void Move(int a, int b)
-        {
-            this.x += a;
-            this.y += b;
-            foreach(Texture t in this.list_childs)
-            {
-                t.Move(a, b);
-            }
-        }
-
-        /// <summary>
-        /// Paint itself to the window.
-        /// </summary>
-        /// <param name="e"></param>
-
-        public virtual void UpdateGraphic(PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            if((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
-            {
-                g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
-                /*Rectangle r = new Rectangle(this.GetX(), this.GetY(), this.GetWidth(), this.GetHeight());
-                this.Invalidate(r);*/
-            }
         }
 
         /// <summary>
@@ -349,11 +410,6 @@ namespace Learn_CTS
             this.height = this.image.Height;
         }
 
-        public virtual string GetName()
-        {
-            return this.name;
-        }
-
         /// <summary>
         /// Set the hitbox used by the texture.
         /// </summary>
@@ -374,23 +430,9 @@ namespace Learn_CTS
             return this.collide;
         }
 
-        /// <summary>
-        /// Method that can determine if the hitbox of the texture is hit at these coordinates.
-        /// </summary>
-        /// <param name="c">The x coordinate that will be tested.</param>
-        /// <param name="d">The y coordinate that will be tested.</param>
-        /// <returns>True if the hitbox is hit, false otherwise.</returns>
-
-        public bool IsHitboxHit(int c, int d)
+        public virtual string GetName()
         {
-            if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
-            {
-                return !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
-            }
-            else
-            {
-                return false;
-            }
+            return this.name;
         }
 
         /// <summary>
@@ -434,11 +476,15 @@ namespace Learn_CTS
 
         public void SetY(int y)
         {
-            this.y = y;
             foreach (Texture t in this.list_childs)
             {
-                t.SetY(y);
+                t.SetY(y + (t.GetY() - this.GetY()));
             }
+            if (this.z != null)
+            {
+                this.z += (y - this.GetY());
+            }
+            this.y = y;
         }
 
         /// <summary>
@@ -489,19 +535,25 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Method that paint the hitbox and the contour of the texture.
+        /// Get the path of the image accordingly to the name.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="name">The name of the texture.</param>
+        /// <returns></returns>
 
-        public void Debug(PaintEventArgs e)
+        public String GetCustomPathImage(string name)
         {
-            Graphics g = e.Graphics;
-            Rectangle rect = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
-            Pen pen = new Pen(Brushes.Red);
-            pen.Width = 4;
-            g.DrawRectangle(pen, rect);
-            g.DrawImage(this.hitbox, new Point(x, y));
-            pen.Dispose();
+            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + ".png";
+        }
+
+        /// <summary>
+        /// Get the path of the hitbox accordingly to the name.
+        /// </summary>
+        /// <param name="name">The name of the texture.</param>
+        /// <returns></returns>
+
+        public String GetCustomPathHitbox(string name)
+        {
+            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
         }
 
         /// <summary>
@@ -532,45 +584,14 @@ namespace Learn_CTS
             return this.collide_only_z;
         }
 
-        /// <summary>
-        /// Check if the instance is colliding with the texture t
-        /// </summary>
-        /// <param name="t">The texture that will be tested.</param>
-        /// <returns>true if this hit the hitbox of t, false otherwise.</returns>
-
-        public virtual bool CollideWith(Texture t)
+        public virtual void Dispose()
         {
-            if (Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
+            foreach(Texture t in list_childs)
             {
-                return false;
+                t.Dispose();
             }
-            if (this.collide_only_z && t.CollidesOnlyOnZ() && Math.Abs(this.GetZ() - t.GetZ()) > 8)
-            {
-                return false;
-            }
-            Rectangle r1 = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
-            Rectangle r2 = new Rectangle(t.GetX(), t.GetY(), t.GetImage().Width, t.GetImage().Height);
-            if (r1.IntersectsWith(r2)){
-                Rectangle r3 = Rectangle.Intersect(r1, r2);
-                for(int i = 0; i<r3.Width; i+=4)
-                {
-                    for(int j = 0; j<r3.Height; j+=4)
-                    {
-                        if(this.IsHitboxHit(r3.X+i,r3.Y+j) && t.IsHitboxHit(r3.X+i, r3.Y+j))
-                        {
-                            return true;
-                        }
-                    }
-                }
-                foreach (Texture c in this.list_childs)
-                {
-                    if (c.CollideWith(t))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            this.image.Dispose();
+            if(this.hitbox != null) this.hitbox.Dispose();
         }
 
         /// <summary>
@@ -580,7 +601,7 @@ namespace Learn_CTS
 
         public override string ToString()
         {
-            if(this.name == null)
+            if (this.name == null)
             {
                 return this.GetType().Name;
             }
@@ -588,48 +609,6 @@ namespace Learn_CTS
             {
                 return this.name;
             }
-        }
-
-        /// <summary>
-        /// Comparator which sort the textures by depth.
-        /// </summary>
-        /// <param name="t1">The first texture.</param>
-        /// <param name="t2">The second texture.</param>
-        /// <returns>
-        /// 1 if t1 is above t2
-        /// -1 if t1 is below t2
-        /// 0 if they are at the same depth.
-        /// </returns>
-
-        public static int Compare(Texture t1, Texture t2)
-        {
-            if(t1.GetZ() >= t2.GetZ())
-            {
-                return 1;
-            }
-            else if(t1.GetZ() < t2.GetZ())
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public static void InitializePath(string game)
-        {
-            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
-        }
-
-        public static string GetDirImages()
-        {
-            return projectDir; 
-        }
-
-        public void SetDefaultHitbox()
-        {
-            this.SetHitbox(CreateHitbox(this.path_hitbox));
         }
     }
 }

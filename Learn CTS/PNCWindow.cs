@@ -73,7 +73,7 @@ namespace Learn_CTS
             list_all_textures.Sort(Texture.Compare);
             foreach (Texture t in list_all_textures)
             {
-                t.UpdateGraphic(e);
+                t.OnPaint(e);
             }
         }
 

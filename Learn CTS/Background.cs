@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -20,10 +21,12 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="e"></param>
 
-        public override void UpdateGraphic(PaintEventArgs e)
+        public override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            if(this.GetX()< -this.GetWidth())
+            CompositingMode c = g.CompositingMode;
+            g.CompositingMode = CompositingMode.SourceCopy;
+            if (this.GetX()< -this.GetWidth())
             {
                 this.SetX(this.GetX() + this.GetWidth());
             }
@@ -33,6 +36,7 @@ namespace Learn_CTS
             }
             g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
             g.DrawImage(this.GetImage(), new Point(this.GetWidth()+this.GetX(), this.GetY()));
+            g.CompositingMode = c;
         }
     }
 }

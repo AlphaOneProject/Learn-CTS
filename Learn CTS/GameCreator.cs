@@ -27,12 +27,6 @@ namespace Learn_CTS
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
 
             this.Dock = DockStyle.Fill;
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
-
-            pnl_greyout.BackColor = Color.FromArgb(80, 0, 0, 0);
-            pnl_greyout.Location = new Point(0, 0);
-            pnl_greyout.Size = new Size(this.Width, this.Height);
 
             pnl_bg.Location = new Point(this.Width / 2 - pnl_bg.Width / 2,
                 this.Height / 2 - pnl_bg.Height / 2);
@@ -136,7 +130,6 @@ namespace Learn_CTS
 
         private void GameCreator_SizeChanged(object sender, EventArgs e)
         {
-            pnl_greyout.Size = new Size(this.Width, this.Height);
             pnl_bg.Location = new Point(this.Width / 2 - pnl_bg.Width / 2,
                 this.Height / 2 - pnl_bg.Height / 2);
             lbl_create.Location = new Point(pnl_bg.Width / 2 - lbl_create.Width / 2, 24);

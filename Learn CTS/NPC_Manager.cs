@@ -28,9 +28,17 @@ namespace Learn_CTS
             return instance;
         }
 
-        public NPC CreateNPC(string name, int x, int y, int quiz, string folder)
+        public NPC CreateNPC(string name, int x, int y, int quiz, string folder, bool b)
         {
-            NPC npc = new NPC(NPC_Manager.npc_id, name, folder, x, y, quiz);
+            NPC npc = new NPC(NPC_Manager.npc_id, name, folder, b, x, y, quiz);
+            NPC_Manager.npc_id++;
+            list_npcs.Add(npc);
+            return npc;
+        }
+
+        public NPC CreateNPC(int x, int y, bool b)
+        {
+            NPC npc = new NPC(NPC_Manager.npc_id, b, x, y);
             NPC_Manager.npc_id++;
             list_npcs.Add(npc);
             return npc;
