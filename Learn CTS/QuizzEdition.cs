@@ -71,7 +71,7 @@ namespace Learn_CTS
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
                 this.data["question"] = t.Text.Trim();
-                Tools.Set_To_JSON(this.file_path, this.data); // Set the entered setting as a stored blueprint for npc.
+                Tools.Set_To_JSON(this.file_path, this.data);
                 t.BackColor = Color.FromArgb(56, 56, 56);
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
@@ -169,6 +169,7 @@ namespace Learn_CTS
                 ForeColor = Color.White,
                 Tag = id
             };
+            nud_score.KeyPress += new KeyPressEventHandler(this.Nud_Score_KeyPress);
             pan_choice.Controls.Add(nud_score);
             toolTip.SetToolTip(nud_score, "Score donné ou retiré au choix de cette réponse, négatif " +
                                "\npour une réponse fausse et positif pour réponse juste.");
@@ -232,7 +233,83 @@ namespace Learn_CTS
 
         public void Txt_Answer_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox t = (TextBox)sender;
+            List<char> autorized_chars = new List<char>() { ' ', '.', ',', '\'', '?', '!', '-', '°', '(', ')', ':' };
+            if (e.KeyChar == (char)13) // (char)13 => Enter.
+            {
+                ((JObject)this.data["c" + t.Tag])["answer"] = t.Text.Trim();
+                Tools.Set_To_JSON(this.file_path, this.data); // Set the entered setting as a stored blueprint for npc.
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                ((Editor)this.ParentForm).Set_Saved(true);
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (char)27) // (char)27 => Escape.
+            {
+                t.Text = (string)((JObject)this.data["c" + t.Tag])["answer"];
+                t.SelectionStart = t.Text.Length;
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                ((Editor)this.ParentForm).Set_Saved(true);
+                e.Handled = true;
+            }
+            else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
+            {
+                e.Handled = true;
+            }
+            else if (t.Text.Length > 128) // Avoid endless names.
+            {
+                if (e.KeyChar == (char)8) // Still backspace.
+                {
+                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    ((Editor)this.ParentForm).Set_Saved(false);
+                    return; // Let you erase regardless of the length.
+                }
+                e.Handled = true;
+            }
+            else
+            {
+                t.BackColor = Color.FromArgb(56, 32, 32);
+                ((Editor)this.ParentForm).Set_Saved(false);
+            }
+        }
 
+        public void Nud_Score_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            NumericUpDown t = (NumericUpDown)sender;
+            List<char> autorized_chars = new List<char>() { ' ', ',', '!', '-', '(', ')', ':' };
+            if (e.KeyChar == (char)13) // (char)13 => Enter.
+            {
+                ((JObject)this.data["c" + t.Tag])["score"] = int.Parse(t.Text.Trim());
+                Tools.Set_To_JSON(this.file_path, this.data);
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                ((Editor)this.ParentForm).Set_Saved(true);
+                e.Handled = true;
+            }
+            else if (e.KeyChar == (char)27) // (char)27 => Escape.
+            {
+                t.Text = (string)((JObject)this.data["c" + t.Tag])["score"];
+                t.BackColor = Color.FromArgb(56, 56, 56);
+                ((Editor)this.ParentForm).Set_Saved(true);
+                e.Handled = true;
+            }
+            else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
+            {
+                e.Handled = true;
+            }
+            else if (t.Text.Length > 128) // Avoid endless names.
+            {
+                if (e.KeyChar == (char)8) // Still backspace.
+                {
+                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    ((Editor)this.ParentForm).Set_Saved(false);
+                    return; // Let you erase regardless of the length.
+                }
+                e.Handled = true;
+            }
+            else
+            {
+                t.BackColor = Color.FromArgb(56, 32, 32);
+                ((Editor)this.ParentForm).Set_Saved(false);
+            }
         }
 
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
