@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transport.cs" />
     <EmbeddedResource Include="Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
     </EmbeddedResource>

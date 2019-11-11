@@ -610,33 +610,5 @@ namespace Learn_CTS
                 return this.name;
             }
         }
-
-        /*public void Resize(int width, int height)
-        {
-            float m_x = ((float)width / 1280);
-            float m_y = ((float)height / 720);
-            int w = (int)(this.GetWidth() * m_x);
-            int h = (int)(this.GetHeight() * m_y);
-            this.x = ((int)(this.GetX() * m_x));
-            this.y = ((int)(this.GetY() * m_y));
-            this.SetImage((Image)ResizeBitmap(new Bitmap(this.image), w, h));
-            if(this.hitbox != null) this.hitbox = ResizeBitmap(new Bitmap(this.hitbox), w, h);
-            foreach(Texture t in this.list_childs)
-            {
-                t.Resize(width, height);
-            }
-        }
-        private Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
-        {
-            Console.WriteLine(this.GetName()+":"+width +":"+height);
-            Bitmap result = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(result))
-            {
-                g.DrawImage(bmp, 0, 0, width, height);
-            }
-
-            return result;
-        }*/
-
     }
 }

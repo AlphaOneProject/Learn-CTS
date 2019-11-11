@@ -20,7 +20,7 @@ namespace Learn_CTS
         private NPC_Manager nm = NPC_Manager.GetInstance();
         private Timer timer = new Timer();
         private Player player;
-        private Tram tram;
+        private Transport vehicule;
         private Background background;
         private Platform platform;
         private int draw_surface_width = 0;
@@ -38,8 +38,8 @@ namespace Learn_CTS
         private bool god = false;
         private bool enter_npc = true;
         private bool leave_npc = false;
-        private List<NPC> npcs_leaving_tram;
-        private int tick_tram_stopped = 0;
+        private List<NPC> npcs_leaving_vehicule;
+        private int tick_stopped = 0;
         private int NPCsDensity = 10;
 
 
@@ -47,13 +47,17 @@ namespace Learn_CTS
         /// Initialize the game window
         /// </summary>
 
-        public GameWindow(String game)
+        public GameWindow(string game)
         {
             this.game = game;
             this.game_path = this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
+        }
+
+        public GameWindow(string game, string situation) : this(game)
+        {
         }
 
         /// <summary>
@@ -75,14 +79,14 @@ namespace Learn_CTS
             Texture.InitializePath(game);
             Character.SetM(3);
             player = new Player("Moi",600, 504);
-            tram = new Tram(-4000, 198);
+            vehicule = new Tram(-4000, 198);
             background = new Background(0);
             background.DisableCollisions();
-            platform = new Platform(0, tram.GetY()+tram.GetHeight(), tram.GetZ() + 2);
+            platform = new Platform(0, vehicule.GetY()+vehicule.GetHeight(), vehicule.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {
                 background,
-                tram,
+                vehicule,
                 platform
             };
             InitializeNPCs();
@@ -124,26 +128,26 @@ namespace Learn_CTS
         private void Timer_Tick(object Sender, EventArgs e)
         {
             ticks += 1;
-            if(!tram.IsInside() && tram.GetState() == 0) MoveTexturesIfPlayerMoves();
-            if (tram.GetState() == 0)
+            if(!vehicule.IsInside() && vehicule.GetState() == 0) MoveTexturesIfPlayerMoves();
+            if (vehicule.GetState() == 0)
             {
-                tick_tram_stopped += 1;
+                tick_stopped += 1;
                 NPCLeaveTram();
                 RemoveNPCsLeavingPlatform();
-                if (tick_tram_stopped > 200)
+                if (tick_stopped > 200)
                 {
-                    tram.ChangeState();
-                    tick_tram_stopped = 0;
+                    vehicule.ChangeState();
+                    tick_stopped = 0;
                 }
             }
-            else if (tram.GetState() == 1)
+            else if (vehicule.GetState() == 1)
             {
-                foreach(Texture n in tram.GetListChilds())
+                foreach(Texture n in vehicule.GetListChilds())
                 {
                     if(n.GetType().Name == "NPC") ((NPC)n).Animated(false);
                 }
             }
-            if (tram.GetX() < this.Width && !tram.IsInside())
+            if (vehicule.GetX() < this.Width && !vehicule.IsInside())
             {
                 CheckIfCharacterIsEnteringTheTram();
                 CheckIfCharacterIsLeavingTheTram();
@@ -151,11 +155,11 @@ namespace Learn_CTS
             }
             else
             {
-                if (!tram.IsInside() && tram.IsPlayerInside())
+                if (!vehicule.IsInside() && vehicule.IsPlayerInside())
                 {
                     ViewInside();
                 }
-                else if(tram.IsInside()) MoveBackground();
+                else if(vehicule.IsInside()) MoveBackground();
             }
             foreach(Texture t in GetAllTextures(list_textures))
             {
@@ -279,24 +283,24 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if the tram has to slow down.
+        /// Check if the vehicule has to slow down.
         /// </summary>
 
         private void CheckIfTheTramIsArrived()
         {
-            if (tram.GetState() == 2 && (tram.GetX()+tram.GetWidth() > platform.GetX() + platform.GetWidth() - tram.GetDistanceMaxStop()) && (tram.GetX() + tram.GetWidth() < platform.GetX() + platform.GetWidth() - tram.GetDistanceMaxStop() + 100))
+            if (vehicule.GetState() == 2 && (vehicule.GetX()+vehicule.GetWidth() > platform.GetX() + platform.GetWidth() - vehicule.GetDistanceMaxStop()) && (vehicule.GetX() + vehicule.GetWidth() < platform.GetX() + platform.GetWidth() - vehicule.GetDistanceMaxStop() + 100))
             {
-                tram.ChangeState();
+                vehicule.ChangeState();
             }
         }
 
         /// <summary>
-        /// Check if a character enters the tram, add him as a child of the tram and remove it from the platform.
+        /// Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform.
         /// </summary>
 
         private void CheckIfCharacterIsEnteringTheTram()
         {
-            if(tram.GetState() == 0)
+            if(vehicule.GetState() == 0)
             {
                 Texture t;
                 for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
@@ -304,9 +308,9 @@ namespace Learn_CTS
                     t = platform.GetListChilds()[i];
                     if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                     {
-                        if (t.GetZ() <= tram.GetY() + tram.GetHeight() && t.GetZ() > tram.GetY())
+                        if (t.GetZ() <= vehicule.GetY() + vehicule.GetHeight() && t.GetZ() > vehicule.GetY())
                         {
-                            tram.AddChild(t);
+                            vehicule.AddChild(t);
                             platform.RemoveChild(t);
                         }
                     }
@@ -315,23 +319,23 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if a character leaves the tram, remove it from the tram and add it to the platform.
+        /// Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform.
         /// </summary>
 
         private void CheckIfCharacterIsLeavingTheTram()
         {
-            if (tram.GetState() == 0)
+            if (vehicule.GetState() == 0)
             {
                 Texture t;
-                for (int i = tram.GetListChilds().Count - 1; i >= 0; i--)
+                for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
                 {
-                    t = tram.GetListChilds()[i];
+                    t = vehicule.GetListChilds()[i];
                     if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                     {
-                        if (t.GetZ() >= tram.GetY() + tram.GetHeight())
+                        if (t.GetZ() >= vehicule.GetY() + vehicule.GetHeight())
                         {
                             platform.AddChild(t);
-                            tram.RemoveChild(t);
+                            vehicule.RemoveChild(t);
                         }
                     }
                 }
@@ -355,12 +359,11 @@ namespace Learn_CTS
             {
                 int diff_x = e.ClipRectangle.Width - this.draw_surface_width;
                 int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
-                //Console.WriteLine(diff_x + ":" + diff_y);
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
                 foreach (Texture t in list_textures)
                 {
-                    if (tram.IsInside())
+                    if (vehicule.IsInside())
                     {
                         PlacePlayerMiddleScreen();
                     }
@@ -376,7 +379,7 @@ namespace Learn_CTS
 
         private void MoveBackground()
         {
-            background.Move(-tram.GetMaxSpeed(), 0);
+            background.Move(-vehicule.GetMaxSpeed(), 0);
         }
 
         /// <summary>
@@ -442,7 +445,7 @@ namespace Learn_CTS
 
         private bool SearchNPCDialog(List<Texture> list, int mx, int my)
         {
-            if (tram.IsInside())
+            if (vehicule.IsInside())
             {
                 foreach (NPC t in nm.GetList())
                 {
@@ -496,7 +499,7 @@ namespace Learn_CTS
             bool c_horizontal = true;
             if (this.Controls.Contains(d)) return;
             player.UpdateMovement(a, b);
-            if (!tram.IsInside())
+            if (!vehicule.IsInside())
             {
                 player.Move(a, 0);
                 if (IsCharacterCollidingWithTextures(player))
@@ -505,7 +508,7 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) || ((tram.GetX() > 0 || tram.GetX() + tram.GetWidth() < draw_surface_width) && player.GetY() < tram.GetY() + 200))
+                if (IsCharacterCollidingWithTextures(player) || ((vehicule.GetX() > 0 || vehicule.GetX() + vehicule.GetWidth() < draw_surface_width) && player.GetY() < vehicule.GetY() + 200))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -513,10 +516,10 @@ namespace Learn_CTS
             }
             else
             {
-                tram.Move(-a, 0);
+                vehicule.Move(-a, 0);
                 if (IsCharacterCollidingWithTextures(player))
                 {
-                    tram.Move(a, 0);
+                    vehicule.Move(a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);
@@ -622,21 +625,21 @@ namespace Learn_CTS
 
         private void StopTram()
         {
-            if (tram.GetState() == 2)
+            if (vehicule.GetState() == 2)
             {
-                if (tram.IsInside())
+                if (vehicule.IsInside())
                 {
                     Character.SetM(3);
-                    tram.ChangeInside();
+                    vehicule.ChangeInside();
                     list_textures.Remove(player);
-                    tram.AddChild(player);
-                    platform = new Platform(0, tram.GetY() + tram.GetHeight(), tram.GetZ() + 2);
-                    tram.SetSpeed(tram.GetMaxSpeed());
+                    vehicule.AddChild(player);
+                    platform = new Platform(0, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
+                    vehicule.SetSpeed(vehicule.GetMaxSpeed());
                     list_textures.Add(platform);
                     FillPlatformNPCs();
                 }
-                tram.SetX(-4000);
-                tram.SetSpeed(tram.GetMaxSpeed());
+                vehicule.SetX(-4000);
+                vehicule.SetSpeed(vehicule.GetMaxSpeed());
                 leave_npc = false;
             }
         }
@@ -656,9 +659,9 @@ namespace Learn_CTS
                 npc_name = npcs[line.Key]["npc"]["name"].ToString();
                 npc_folder = npcs[line.Key]["npc"]["folder"].ToString();
                 npc_quiz = line.Value["quizz"].ToObject<int>();
-                if (tram != null && (npc_x > tram.GetX() && npc_x < tram.GetX() + tram.GetWidth()) && (npc_y > tram.GetY() && npc_y < tram.GetY() + tram.GetHeight()))
+                if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y < vehicule.GetY() + vehicule.GetHeight()))
                 {
-                    tram.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
+                    vehicule.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
                 }
                 else
                 {
@@ -673,15 +676,15 @@ namespace Learn_CTS
         {
             if (!leave_npc)
             {
-                npcs_leaving_tram = SelectionNPCsLeavingTram();
+                npcs_leaving_vehicule = SelectionNPCsLeavingTram();
                 Random r = new Random();
                 int i;
-                foreach (NPC n in npcs_leaving_tram)
+                foreach (NPC n in npcs_leaving_vehicule)
                 {
                     n.Animated(true);
-                    i = tram.GetIndexNearestDoor(n.GetX());
-                    n.SetObjectiveX(tram.GetPosDoor(i));
-                    n.SetObjectiveY(tram.GetY() + tram.GetHeight() + r.Next(0, 100));
+                    i = vehicule.GetIndexNearestDoor(n.GetX());
+                    n.SetObjectiveX(vehicule.GetPosDoor(i));
+                    n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight() + r.Next(0, 100));
                     n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 2000);
                 }
                 leave_npc = true;
@@ -689,7 +692,7 @@ namespace Learn_CTS
             }
             else
             {
-                if (npcs_leaving_tram != null && enter_npc && HasAllNPCsLeavedTram(npcs_leaving_tram))
+                if (npcs_leaving_vehicule != null && enter_npc && HasAllNPCsLeavedTram(npcs_leaving_vehicule))
                 {
                     NPCEnterTram();
                 }
@@ -700,9 +703,9 @@ namespace Learn_CTS
         {
             Random r = new Random();
             List<NPC> list = new List<NPC>();
-            for(int i = 0; i< tram.GetListChilds().Count; i++)
+            for(int i = 0; i< vehicule.GetListChilds().Count; i++)
             {
-                if(tram.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)tram.GetListChilds()[i]).GetQuiz()<1 && r.Next(0,3)!=0) list.Add((NPC)tram.GetListChilds()[i]);
+                if(vehicule.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)vehicule.GetListChilds()[i]).GetQuiz()<1 && r.Next(0,3)!=0) list.Add((NPC)vehicule.GetListChilds()[i]);
             }
             return list;
         }
@@ -712,7 +715,7 @@ namespace Learn_CTS
             bool b = true;
             foreach(NPC n in l)
             {
-                if (n.GetY() <= tram.GetY() + tram.GetHeight()+10)
+                if (n.GetY() <= vehicule.GetY() + vehicule.GetHeight()+10)
                 {
                     b = false;
                 }
@@ -737,23 +740,23 @@ namespace Learn_CTS
             platform.RemoveAllChilds();
             list_textures.Remove(platform);
             platform.Dispose();
-            tram.ChangeInside();
-            tram.SetState(2);
-            tram.SetSpeed(0);
-            Character.SetM(6);
+            vehicule.ChangeInside();
+            vehicule.SetState(2);
+            vehicule.SetSpeed(0);
+            Character.SetM(4);
             PlacePlayerMiddleScreen();
             list_textures.Add(player);
         }
 
         private void PlacePlayerMiddleScreen()
         {
-            if (!tram.GetListChilds().Contains(player))
+            if (!vehicule.GetListChilds().Contains(player))
             {
-                tram.AddChild(player);
+                vehicule.AddChild(player);
             }
-            int px = player.GetX() + player.GetWidth() / 2 - tram.GetX();
-            tram.SetX(this.draw_surface_width / 2 - px);
-            tram.RemoveChild(player);
+            int px = player.GetX() + player.GetWidth() / 2 - vehicule.GetX();
+            vehicule.SetX(this.draw_surface_width / 2 - px);
+            vehicule.RemoveChild(player);
         }
 
         private void NPCEnterTram()
@@ -766,15 +769,15 @@ namespace Learn_CTS
                 if (t.GetType().Name == "NPC" && !((NPC)t).HasObjective())
                 {
                     n = (NPC)t;
-                    i = tram.GetIndexNearestDoor(n.GetX());
-                    n.SetObjectiveX(tram.GetPosDoor(i));
-                    if(r.Next(0,2) == 0) n.SetObjectiveY(tram.GetY() + 336 + r.Next(0, 4));
-                    else n.SetObjectiveY(tram.GetY() + 336 + r.Next(16, 20));
+                    i = vehicule.GetIndexNearestDoor(n.GetX());
+                    n.SetObjectiveX(vehicule.GetPosDoor(i));
+                    if(r.Next(0,2) == 0) n.SetObjectiveY(vehicule.GetY() + 336 + r.Next(0, 4));
+                    else n.SetObjectiveY(vehicule.GetY() + 336 + r.Next(16, 20));
                     if (i == 0)
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-64, 256));
                     }
-                    else if (i == tram.GetNumberDoors() - 1)
+                    else if (i == vehicule.GetNumberDoors() - 1)
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 64));
                     }
@@ -795,10 +798,10 @@ namespace Learn_CTS
             int y;
             for(int i = 0; i < max; i++)
             {
-                x = tram.GetX() + r.Next(460, tram.GetWidth() - 460);
-                if (r.Next(0, 2) == 0) y = tram.GetY() + 144 + r.Next(0, 5);
-                else y = tram.GetY() + 144 + r.Next(15, 20);
-                tram.AddChild(nm.CreateNPC(x,y,true));
+                x = vehicule.GetX() + r.Next(460, vehicule.GetWidth() - 460);
+                if (r.Next(0, 2) == 0) y = vehicule.GetY() + 144 + r.Next(0, 5);
+                else y = vehicule.GetY() + 144 + r.Next(15, 20);
+                vehicule.AddChild(nm.CreateNPC(x,y,true));
             }
         }
 
