@@ -23,8 +23,8 @@ namespace Learn_CTS
         private Tram tram;
         private Background background;
         private Platform platform;
-        private int DrawSurfaceWidth;
-        private int DrawSurfaceHeight;
+        private int draw_surface_width = 0;
+        private int draw_surface_height = 0;
         private bool go_up = false;
         private bool go_down = false;
         private bool go_left = false;
@@ -40,6 +40,7 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_tram;
         private int tick_tram_stopped = 0;
+        private int NPCsDensity = 10;
 
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace Learn_CTS
             tram = new Tram(-4000, 198);
             background = new Background(0);
             background.DisableCollisions();
-            platform = new Platform(0, tram.GetZ() + 2);
+            platform = new Platform(0, tram.GetY()+tram.GetHeight(), tram.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {
                 background,
@@ -152,15 +153,7 @@ namespace Learn_CTS
             {
                 if (!tram.IsInside() && tram.IsPlayerInside())
                 {
-                    ConsoleAvgFPS();
-                    platform.RemoveAllChilds();
-                    list_textures.Remove(platform);
-                    platform.Dispose();
-                    tram.ChangeInside();
-                    tram.SetState(2);
-                    tram.SetSpeed(0);
-                    //Character.SetM(6);
-                    PlacePlayerMiddleScreen();
+                    ViewInside();
                 }
                 else if(tram.IsInside()) MoveBackground();
             }
@@ -181,7 +174,7 @@ namespace Learn_CTS
 
         private void MoveTexturesIfPlayerMoves()
         {
-            if (player.GetX() + player.GetWidth() > DrawSurfaceWidth - 9)
+            if (player.GetX() + player.GetWidth() > draw_surface_width - 9)
             {
                 foreach (Texture t in list_textures)
                 {
@@ -286,18 +279,6 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Place the player at the middle of the user's screen
-        /// </summary>
-
-        private void PlacePlayerMiddleScreen()
-        {
-            int px = player.GetX() + player.GetWidth()/2 - tram.GetX();
-            tram.SetX(this.DrawSurfaceWidth / 2 - px);
-            tram.RemoveChild(player);
-            list_textures.Add(player);
-        }
-
-        /// <summary>
         /// Check if the tram has to slow down.
         /// </summary>
 
@@ -365,9 +346,28 @@ namespace Learn_CTS
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            this.DrawSurfaceWidth = e.ClipRectangle.Width;
-            this.DrawSurfaceHeight = e.ClipRectangle.Height;
-            UpdateTextures(e);
+            if(this.draw_surface_width == 0 && this.draw_surface_height == 0)
+            {
+                this.draw_surface_width = e.ClipRectangle.Width;
+                this.draw_surface_height = e.ClipRectangle.Height;
+            }
+            if(e.ClipRectangle.Width != this.draw_surface_width || this.draw_surface_height != e.ClipRectangle.Height)
+            {
+                int diff_x = e.ClipRectangle.Width - this.draw_surface_width;
+                int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
+                //Console.WriteLine(diff_x + ":" + diff_y);
+                this.draw_surface_width = e.ClipRectangle.Width;
+                this.draw_surface_height = e.ClipRectangle.Height;
+                foreach (Texture t in list_textures)
+                {
+                    if (tram.IsInside())
+                    {
+                        PlacePlayerMiddleScreen();
+                    }
+                    if (diff_y != 0) t.SetY(t.GetY() + diff_y / 2);
+                }
+            }
+            PaintAllTextures(e);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="e"></param>
 
-        private void UpdateTextures(PaintEventArgs e)
+        private void PaintAllTextures(PaintEventArgs e)
         {
             List<Texture> list_all_textures = GetAllTextures(list_textures);
             list_all_textures.Sort(Texture.Compare);
@@ -505,7 +505,7 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) || ((tram.GetX() > 0 || tram.GetX() + tram.GetWidth() < DrawSurfaceWidth) && player.GetY() < tram.GetY() + 200))
+                if (IsCharacterCollidingWithTextures(player) || ((tram.GetX() > 0 || tram.GetX() + tram.GetWidth() < draw_surface_width) && player.GetY() < tram.GetY() + 200))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -546,7 +546,7 @@ namespace Learn_CTS
             c.Move(a, 0);
             if (c.CollideWith(player))
             {
-                player.Move(-a, 0);
+                c.Move(-a, 0);
             }
             c.Move(0, b);
             if (c.CollideWith(player))
@@ -600,6 +600,7 @@ namespace Learn_CTS
 
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
+            timer.Stop();
             ConsoleAvgFPS();
             foreach(Texture t in list_textures)
             {
@@ -625,13 +626,14 @@ namespace Learn_CTS
             {
                 if (tram.IsInside())
                 {
-                    //Character.SetM(3);
+                    Character.SetM(3);
                     tram.ChangeInside();
                     list_textures.Remove(player);
                     tram.AddChild(player);
-                    platform = new Platform(tram.GetX(), tram.GetZ() + 2);
+                    platform = new Platform(0, tram.GetY() + tram.GetHeight(), tram.GetZ() + 2);
                     tram.SetSpeed(tram.GetMaxSpeed());
                     list_textures.Add(platform);
+                    FillPlatformNPCs();
                 }
                 tram.SetX(-4000);
                 tram.SetSpeed(tram.GetMaxSpeed());
@@ -663,7 +665,8 @@ namespace Learn_CTS
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
                 }
             }
-            FillGameNPCs();
+            FillTramNPCs();
+            FillPlatformNPCs();
         }
 
         private void NPCLeaveTram()
@@ -721,25 +724,52 @@ namespace Learn_CTS
         {
             for(int i = platform.GetListChilds().Count - 1; i>=0; i--)
             {
-                if(platform.GetListChilds()[i].GetY() > platform.GetY() + platform.GetHeight() && platform.GetListChilds()[i].GetType().Name == "NPC")
+                if(platform.GetListChilds()[i].GetY() > draw_surface_height && platform.GetListChilds()[i].GetType().Name == "NPC")
                 {
                     platform.RemoveChild(platform.GetListChilds()[i]);
                 }
             }
         }
 
+        private void ViewInside()
+        {
+            ConsoleAvgFPS();
+            platform.RemoveAllChilds();
+            list_textures.Remove(platform);
+            platform.Dispose();
+            tram.ChangeInside();
+            tram.SetState(2);
+            tram.SetSpeed(0);
+            Character.SetM(6);
+            PlacePlayerMiddleScreen();
+            list_textures.Add(player);
+        }
+
+        private void PlacePlayerMiddleScreen()
+        {
+            if (!tram.GetListChilds().Contains(player))
+            {
+                tram.AddChild(player);
+            }
+            int px = player.GetX() + player.GetWidth() / 2 - tram.GetX();
+            tram.SetX(this.draw_surface_width / 2 - px);
+            tram.RemoveChild(player);
+        }
+
         private void NPCEnterTram()
         {
             Random r = new Random();
             int i;
+            NPC n;
             foreach (Texture t in platform.GetListChilds())
             {
                 if (t.GetType().Name == "NPC" && !((NPC)t).HasObjective())
                 {
-                    NPC n = (NPC)t;
+                    n = (NPC)t;
                     i = tram.GetIndexNearestDoor(n.GetX());
                     n.SetObjectiveX(tram.GetPosDoor(i));
-                    n.SetObjectiveY(tram.GetY() + 336 + r.Next(0, 20));
+                    if(r.Next(0,2) == 0) n.SetObjectiveY(tram.GetY() + 336 + r.Next(0, 4));
+                    else n.SetObjectiveY(tram.GetY() + 336 + r.Next(16, 20));
                     if (i == 0)
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-64, 256));
@@ -757,19 +787,27 @@ namespace Learn_CTS
             enter_npc = false;
         }
 
-        private void FillGameNPCs()
+        private void FillTramNPCs()
         {
             Random r = new Random();
-            int max = r.Next(5, 10);
+            int max = r.Next(NPCsDensity / 4, NPCsDensity);
             int x;
             int y;
             for(int i = 0; i < max; i++)
             {
                 x = tram.GetX() + r.Next(460, tram.GetWidth() - 460);
-                y = tram.GetY() + 144 + r.Next(0, 20);
+                if (r.Next(0, 2) == 0) y = tram.GetY() + 144 + r.Next(0, 5);
+                else y = tram.GetY() + 144 + r.Next(15, 20);
                 tram.AddChild(nm.CreateNPC(x,y,true));
             }
-            max = r.Next(7, 12);
+        }
+
+        private void FillPlatformNPCs()
+        {
+            Random r = new Random();
+            int max = r.Next(NPCsDensity/4, NPCsDensity);
+            int x;
+            int y;
             for (int i = 0; i < max; i++)
             {
                 x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);

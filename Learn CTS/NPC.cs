@@ -44,6 +44,7 @@ namespace Learn_CTS
             if (this.quiz > 0)
             {
                 interact.SetX(this.GetX() + this.GetWidth() / 2 - interact.GetWidth() / 2);
+                interact.SetY(this.GetY() - interact.GetHeight() - 20);
                 this.AddChild(interact);
             }
         }

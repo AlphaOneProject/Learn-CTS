@@ -231,7 +231,7 @@ namespace Learn_CTS
             {
                 return false;
             }
-            if (this.collide_only_z && t.CollidesOnlyOnZ() && Math.Abs(this.GetZ() - t.GetZ()) > 8)
+            if (this.collide_only_z && t.CollidesOnlyOnZ() && Math.Abs(this.GetZ() - t.GetZ()) > 4)
             {
                 return false;
             }
@@ -268,6 +268,7 @@ namespace Learn_CTS
 
         public void Debug(PaintEventArgs e)
         {
+            if (this.hitbox == null) return;
             Graphics g = e.Graphics;
             Rectangle rect = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
             Pen pen = new Pen(Brushes.Red);
@@ -475,11 +476,15 @@ namespace Learn_CTS
 
         public void SetY(int y)
         {
-            this.y = y;
             foreach (Texture t in this.list_childs)
             {
-                t.SetY(y);
+                t.SetY(y + (t.GetY() - this.GetY()));
             }
+            if (this.z != null)
+            {
+                this.z += (y - this.GetY());
+            }
+            this.y = y;
         }
 
         /// <summary>
@@ -586,7 +591,7 @@ namespace Learn_CTS
                 t.Dispose();
             }
             this.image.Dispose();
-            this.hitbox.Dispose();
+            if(this.hitbox != null) this.hitbox.Dispose();
         }
 
         /// <summary>
@@ -605,5 +610,33 @@ namespace Learn_CTS
                 return this.name;
             }
         }
+
+        /*public void Resize(int width, int height)
+        {
+            float m_x = ((float)width / 1280);
+            float m_y = ((float)height / 720);
+            int w = (int)(this.GetWidth() * m_x);
+            int h = (int)(this.GetHeight() * m_y);
+            this.x = ((int)(this.GetX() * m_x));
+            this.y = ((int)(this.GetY() * m_y));
+            this.SetImage((Image)ResizeBitmap(new Bitmap(this.image), w, h));
+            if(this.hitbox != null) this.hitbox = ResizeBitmap(new Bitmap(this.hitbox), w, h);
+            foreach(Texture t in this.list_childs)
+            {
+                t.Resize(width, height);
+            }
+        }
+        private Bitmap ResizeBitmap(Bitmap bmp, int width, int height)
+        {
+            Console.WriteLine(this.GetName()+":"+width +":"+height);
+            Bitmap result = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                g.DrawImage(bmp, 0, 0, width, height);
+            }
+
+            return result;
+        }*/
+
     }
 }

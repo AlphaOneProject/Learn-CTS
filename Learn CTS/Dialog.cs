@@ -25,8 +25,8 @@ namespace Learn_CTS
         {
             this.Focus();
             npc.RemoveInteraction();
-            this.Set_Up(npc.GetQuiz().ToString());
             lbl_name.Text = npc.GetName();
+            this.Set_Up(npc.GetQuiz().ToString());
             Generate_Buttons_Choices();
             this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
         }

@@ -100,7 +100,7 @@ namespace Learn_CTS
         {
             if (this.GetState() == 1 && this.speed < this.max_speed)
             {
-                if (this.doors_left.GetX() <= this.GetX())
+                if (this.doors_left.GetX() < this.GetX())
                 {
                     CloseDoors();
                 }
