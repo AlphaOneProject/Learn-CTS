@@ -40,6 +40,28 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_Load(object sender, EventArgs e)
         {
+            // Set the window size as options size setting.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            if ((bool)options["maximized"])
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.Width = int.Parse((string)options["size"]["x"]);
+                this.Height = int.Parse((string)options["size"]["y"]);
+
+                // Place the windows at the center of the screen.
+                Rectangle pc_screen = Screen.FromControl(this).Bounds;
+                this.Location = new Point((pc_screen.Width - this.Width) / 2, (pc_screen.Height - this.Height) / 2);
+            }
+
+            // Place the windows at the center of the screen.
+            Rectangle screen = Screen.FromControl(this).Bounds;
+            this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
+
             this.displayed_menu = "main_menu";
 
             // Dynamically places the controls of the main menu.
@@ -421,11 +443,34 @@ namespace Learn_CTS
                 {
                     case "salut":
                         // Salut Antoine
+                        // Salut !
+                        // Cool comme fonction dis-donc !
                         break;
                     default:
                         break;
                 }
             }
+        }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Save_Options();
+        }
+
+        public void Save_Options()
+        {
+            // Save current Form's size.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            options["maximized"] = (this.WindowState == FormWindowState.Maximized);
+            JObject size = new JObject()
+            {
+                ["x"] = this.Width,
+                ["y"] = this.Height
+            };
+            options["size"] = size;
+            Tools.Set_To_JSON(options_path, options);
         }
     }
 }

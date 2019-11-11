@@ -45,7 +45,21 @@ namespace Learn_CTS
                                 "Confirmation de fermeture", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
             {
                 e.Cancel = true;
+                return;
             }
+
+            // Save current Editor's size.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            options["maximized"] = (this.WindowState == FormWindowState.Maximized);
+            JObject size = new JObject()
+            {
+                ["x"] = this.Width,
+                ["y"] = this.Height
+            };
+            options["size"] = size;
+            Tools.Set_To_JSON(options_path, options);
         }
 
         /// <summary>
@@ -97,10 +111,6 @@ namespace Learn_CTS
                 Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
             }
 
-            // Place the windows at the center of the screen.
-            Rectangle screen = Screen.FromControl(this).Bounds;
-            this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
-
             // Set the title and cut it if necessary.
             int char_space = (this.Width - menu.Width - 64) / 24;
             if (char_space < 12) { char_space = 12; } // Avoid a possible substring exception with a ridicularly little window.
@@ -129,6 +139,24 @@ namespace Learn_CTS
 
             menu.ExpandAll();
             menu.SelectedNode = menu.Nodes[0];
+
+            // Set the window size as options size setting.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            if((bool)options["maximized"])
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.Width = int.Parse((string)options["size"]["x"]);
+                this.Height = int.Parse((string)options["size"]["y"]);
+
+                // Place the windows at the center of the screen.
+                Rectangle screen = Screen.FromControl(this).Bounds;
+                this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
+            }
         }
 
         /// <summary>
