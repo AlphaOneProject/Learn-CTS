@@ -836,7 +836,8 @@ namespace Learn_CTS
                     ["answer"] = "Réponse 2",
                     ["score"] = 0,
                     ["redirect"] = 0
-                }
+                },
+                ["audio"] = 1
             };
             File.WriteAllText(@"" + dialogs_path + Path.DirectorySeparatorChar + new_id + ".json",
                               dialog_content.ToString());
