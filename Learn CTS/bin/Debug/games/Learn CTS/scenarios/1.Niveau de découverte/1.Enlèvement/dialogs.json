@@ -1,5 +1,5 @@
 {
-	1 : {x : -3200, y : 400, npc : {name : "Gerard", folder : "1"}, "quizz" : 1},
-	2 : {x : -2400, y : 430, npc : {name : "Richard", folder : "2"}, "quizz" : 2},
-	3 : {x : -1800, y : 420, npc : {name : "Veronique", folder : "3"}, "quizz" : 3}
+	1 : {x : -3200, y : 336, npc : {name : "Gerard", folder : "1"}, quizz : 1},
+	2 : {x : 100, y : 500, npc : {name : "Richard", folder : "2"}, quizz : 2},
+	3 : {x : -2500, y : 346, npc : {name : "Veronique", folder : "3"}, quizz : 3}
 }

@@ -784,9 +784,13 @@ namespace Learn_CTS
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 64));
                     }
+                    else if (i%2 == 0)
+                    {
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 384));
+                    }
                     else
                     {
-                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 256));
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-384, 256));
                     }
                 }
             }
