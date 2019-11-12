@@ -15,6 +15,8 @@ namespace Learn_CTS
         private string game_path;
         private JObject data;
         SpeechSynthesizer s;
+        private int audio;
+        private Thread t_audio;
 
         public Dialog(int id, string game)
         {
@@ -59,7 +61,11 @@ namespace Learn_CTS
         private void Set_Up(string q)
         {
             data = Get_From_JSON(q+".json");
-            txt_dialog_npc.Text = this.data["question"].ToString();
+            audio = (int)this.data["audio"];
+            if(audio != 2)
+            {
+                txt_dialog_npc.Text = this.data["question"].ToString();
+            }
         }
 
         private void Generate_Buttons_Choices()
@@ -113,6 +119,7 @@ namespace Learn_CTS
                     s.Speak("choix numéro " + i + this.data["c" + i.ToString()]["answer"].ToString());
                 }
             }
+            t_audio.Abort();
         }
 
         public void Answer_Event(object sender, EventArgs e)
@@ -141,6 +148,7 @@ namespace Learn_CTS
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            if (audio == 0) return;
             t_audio = new Thread(new ThreadStart(Listen));
             t_audio.Start();
         }

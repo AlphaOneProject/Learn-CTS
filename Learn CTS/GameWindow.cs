@@ -42,6 +42,10 @@ namespace Learn_CTS
         private int tick_stopped = 0;
         private int NPCsDensity = 100; //max 650
         private int score = 0;
+        private string scenario;
+        private string situation;
+        private string sc_aimed;
+        private string si_aimed;
 
 
         /// <summary>
@@ -51,15 +55,21 @@ namespace Learn_CTS
         public GameWindow(string game)
         {
             this.game = game;
-            this.game_path = this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
+            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
+            int aim = 0;
+            sc_aimed = Directory.GetDirectories(@"" + sc_path)[aim].Remove(0, sc_path.Length + 1);
+            si_aimed = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + sc_aimed)[aim].Remove(0, sc_path.Length + sc_aimed.Length + 2);
+
         }
 
         public GameWindow(string game, string scenario, string situation) : this(game)
         {
-
+            this.scenario = scenario;
+            this.situation = situation;
         }
 
         /// <summary>
@@ -611,6 +621,7 @@ namespace Learn_CTS
                 t.Dispose();
             }
             nm.Clear();
+            Application.Restart();
         }
 
         public JObject Get_From_JSON(string internal_path)
@@ -647,7 +658,7 @@ namespace Learn_CTS
 
         public void InitializeNPCs()
         {
-            JObject npcs = Get_From_JSON("library" + Path.DirectorySeparatorChar + "dialogs.json");
+            JObject npcs = Get_From_JSON("scenarios" + Path.DirectorySeparatorChar + sc_aimed + Path.DirectorySeparatorChar + si_aimed + Path.DirectorySeparatorChar + "dialogs.json");
             int npc_x;
             int npc_y;
             string npc_name;
@@ -660,11 +671,11 @@ namespace Learn_CTS
                 npc_name = npcs[line.Key]["npc"]["name"].ToString();
                 npc_folder = npcs[line.Key]["npc"]["folder"].ToString();
                 npc_quiz = line.Value["quizz"].ToObject<int>();
-                if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y < vehicule.GetY() + vehicule.GetHeight()))
+                if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
                 {
                     vehicule.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
                 }
-                else
+                else if (platform != null && (npc_x > platform.GetX() && npc_x < platform.GetX() + platform.GetWidth()) && (npc_y > platform.GetY() && npc_y + 192 < platform.GetY() + platform.GetHeight()))
                 {
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
                 }
@@ -773,9 +784,13 @@ namespace Learn_CTS
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 64));
                     }
+                    else if (i%2 == 0)
+                    {
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 384));
+                    }
                     else
                     {
-                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 256));
+                        n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-384, 256));
                     }
                 }
             }
