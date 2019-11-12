@@ -20,6 +20,7 @@ namespace Learn_CTS
         private string file_path;
         private JObject data;
         private int prev_line_loc = 50;
+        private List<String> cbo_audio_list = new List<string>() { "Texte uniquement", "Texte et audio", "Audio uniquement" };
         private List<string> cbo_redirect_list;
 
         // Methods.
@@ -61,14 +62,45 @@ namespace Learn_CTS
         /// </summary>
         public void Reload_Redirections()
         {
-            this.cbo_redirect_list = new List<string>() { "[FIN]" };
+            this.cbo_redirect_list = new List<string>() { "[_CONTINUE_]", "[_FIN_]" };
             JObject file_data;
             DirectoryInfo file_dir = Directory.GetParent(this.file_path);
+            int nbr_files = file_dir.GetFiles().Length;
             foreach (FileInfo f in file_dir.GetFiles())
             {
                 file_data = Tools.Get_From_JSON(f.FullName);
-                this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                if (nbr_files < 10)
+                {
+                    this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                }
+                else if (nbr_files < 100)
+                {
+                    if (f.Name.Split('.')[0].Length == 1)
+                    {
+                        this.cbo_redirect_list.Add("[0" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else
+                    {
+                        this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                }
+                else
+                {
+                    if (f.Name.Split('.')[0].Length == 1)
+                    {
+                        this.cbo_redirect_list.Add("[00" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else if (f.Name.Split('.')[0].Length == 2)
+                    {
+                        this.cbo_redirect_list.Add("[0" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else
+                    {
+                        this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                }
             }
+            cbo_redirect_list.Sort();
             foreach (Panel pan in this.Controls.OfType<Panel>())
             {
                 pan.Width = this.Width - 20;
@@ -97,7 +129,7 @@ namespace Learn_CTS
         private void Txt_Question_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
-            List<char> autorized_chars = new List<char>() { ' ', '?', '!', '-', '(', ')', ':' };
+            List<char> autorized_chars = new List<char>() { ' ', '\'', '.', ',', '?', '!', '-', '(', ')', ':' };
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
                 this.data["question"] = t.Text.Trim();
@@ -235,7 +267,7 @@ namespace Learn_CTS
                                "\nLa redirection vers [FIN] indique la fin de la situation.");
             try
             {
-                cbo_redirect.SelectedIndex = int.Parse(((JObject)data["c" + id])["redirect"].ToString());
+                cbo_redirect.SelectedIndex = int.Parse(((JObject)data["c" + id])["redirect"].ToString()) + 1;
             }
             catch (System.FormatException e)
             {
@@ -373,7 +405,7 @@ namespace Learn_CTS
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cbo = (ComboBox)sender;
-            ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex;
+            ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex - 1;
             Tools.Set_To_JSON(this.file_path, this.data);
         }
 
@@ -418,8 +450,9 @@ namespace Learn_CTS
         private void QuizzEdition_Resize(object sender, EventArgs e)
         {
             txt_question.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
-                                    this.Width - 10 - 30 - 8 - 10 - 8 - 30 - 10);
+                                    this.Width - 10 - 30 - 10 - cbo_audio.Width - 10 - 30 - 10);
             pb_add.Location = new Point(txt_question.Location.X + txt_question.Width + 8, 10);
+            cbo_audio.Location = new Point(pb_add.Location.X + pb_add.Width + 8, 9);
             pb_delete_all.Location = new Point(this.Width - pb_delete_all.Width - 10, 10);
             this.Height = this.prev_line_loc;
 
@@ -460,6 +493,12 @@ namespace Learn_CTS
         public void Delete_All(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Discard_Dialog(this);
+        }
+
+        private void Cbo_audio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            data["audio"] = cbo_audio.SelectedIndex;
+            Tools.Set_To_JSON(this.file_path, data);
         }
     }
 }

@@ -16,6 +16,11 @@ namespace Learn_CTS
         private readonly string img_path;
         private string gameFullName;
 
+        private static Image icon_play;
+        private static Image icon_edit;
+        private static Image icon_delete;
+
+
         public GameCard()
         {
             InitializeComponent();
@@ -24,12 +29,38 @@ namespace Learn_CTS
             {
                 BackColor = Color.Transparent
             };
-            pb_play.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + "gamecard-play-btn-x128.png"), 0.5f);
+            // Fetching icons and saving them in a static variable.
+            FetchIcons();
+            
+            pb_play.BackgroundImage = ChangeOpacity(icon_play, 0.5f);
             pb_play.BackColor = Color.Transparent;
-            pb_edit.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + "gamecard-edit-btn-x64.png"), 0.5f);
+            pb_edit.BackgroundImage = ChangeOpacity(icon_edit, 0.5f);
             pb_edit.BackColor = Color.Transparent;
-            pb_delete.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + "gamecard-delete-btn-x64.png"), 0.5f);
+            pb_delete.BackgroundImage = ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
+        }
+
+        private void FetchIcons()
+        {
+            try
+            {
+                if (icon_play == null)
+                {
+                    icon_play = Image.FromFile(img_path + "gamecard-play-btn-x128.png");
+                }
+                if (icon_edit == null)
+                {
+                    icon_edit = Image.FromFile(img_path + "gamecard-edit-btn-x64.png");
+                }
+                if (icon_delete == null)
+                {
+                    icon_delete = Image.FromFile(img_path + "gamecard-delete-btn-x64.png");
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public string Title
