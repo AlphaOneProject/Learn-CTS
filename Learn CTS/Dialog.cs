@@ -62,10 +62,8 @@ namespace Learn_CTS
         {
             data = Get_From_JSON(q+".json");
             audio = (int)this.data["audio"];
-            if(audio != 2)
-            {
-                txt_dialog_npc.Text = this.data["question"].ToString();
-            }
+            if (audio == 2) txt_dialog_npc.Text = "";
+            else txt_dialog_npc.Text = this.data["question"].ToString();
         }
 
         private void Generate_Buttons_Choices()
@@ -110,8 +108,8 @@ namespace Learn_CTS
             s.SetOutputToDefaultAudioDevice();
             if (s.State.ToString() == "Ready")
             {
-                s.Volume = 50;
-                s.Rate = -2;
+                s.Volume = 100;
+                s.Rate = -1;
                 s.Speak(this.data["question"].ToString());
                 int nbr_choices = (int)this.data["choices"];
                 for (int i = 1; i <= nbr_choices; i++)
@@ -147,6 +145,7 @@ namespace Learn_CTS
 
         public void Dialog_Closed(object sender, EventArgs e)
         {
+            if (npc.GetQuiz() > 0) npc.DisplayInteraction();
             ((GameWindow)this.FindForm()).RemoveDialog();
         }
 
