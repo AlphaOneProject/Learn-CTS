@@ -203,7 +203,7 @@ namespace Learn_CTS
             List<String> keeping_categories = new List<String>()
             { "npcs", "dialogs" };
 
-            if (!(this.old_category.Equals(name) && keeping_categories.Contains(name)))
+            if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
             {
                 // Empty the groupbox from precedent controls.
                 int nbr_ctrl = content.Controls.Count;
@@ -695,6 +695,13 @@ namespace Learn_CTS
             TableLayoutPanel tlp = (TableLayoutPanel)ctrl.Parent;
             int del_id = tlp.GetRow(ctrl) + 1;
 
+            // Prevent the user from suppressing the last NPC.
+            if (tlp.RowCount <= 1)
+            {
+                MessageBox.Show("Vous ne pouvez pas supprimer l'intégralité des personnages non-joueurs.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Removing the involved file.
             string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                       Path.DirectorySeparatorChar + "npcs";
@@ -892,6 +899,16 @@ namespace Learn_CTS
         /// <param name="sender">Instance of QuizzEdition calling the function, permits to identify which file delete.</param>
         public void Discard_Dialog(QuizzEdition sender)
         {
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+
+            // Disable suppression of all dialogs.
+            if (Directory.GetFiles(@"" + dialogs_path).Length <= 1)
+            {
+                MessageBox.Show("Vous ne pouvez pas supprimer l'intégralité des dialogues.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Ask for confirmation before suppression of the scenario.
             if ((MessageBox.Show("Confirmer la suppression du dialogue N°" + sender.Get_Id() + " ?", "Confirmation de suppression",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No))
@@ -899,8 +916,6 @@ namespace Learn_CTS
                 return;
             }
 
-            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
-                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
             // Deleting sender file.
             File.Delete(@"" + dialogs_path + sender.Get_Id() + ".json");
 
@@ -1381,14 +1396,30 @@ namespace Learn_CTS
             Directory.CreateDirectory(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation);
 
             // Add a "dialogs.json" to the newly created folder.
-            JObject dialogs_content = new JObject();
+            JObject dialogs_content = new JObject()
+            {
+                ["events"] = 1,
+                ["1"] = new JObject()
+                {
+                    ["x"] = 0,
+                    ["y"] = 0,
+                    ["npc"] = new JObject()
+                    {
+                        ["id"] = 1,
+                        ["name"] = "Gérard",
+                        ["folder"] = 1
+                    },
+                    ["quizz"] = 1
+                }
+            };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "dialogs.json",
                               dialogs_content.ToString());
 
             // Add a "environment.json" to the folder.
             JObject environment_content = new JObject()
             {
-                ["background"] = "default",
+                ["background"] = 0,
+                ["game_engine"] = "quizz",
                 ["scene_type"] = "tram_entrance"
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
@@ -1423,6 +1454,15 @@ namespace Learn_CTS
         /// </summary>
         public void Display_Situation()
         {
+            if (this.old_category == menu.SelectedNode.Name) // Trigger only on form resize.
+            {
+                foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+                {
+                    ee.Width = content.Width - 80;
+                }
+                return;
+            }
+
             // Creation of all controls.
 
             // Creation of two arrows allowing changement of the situations' order.
@@ -1513,6 +1553,131 @@ namespace Learn_CTS
             txt_rename_situation.Location = new Point(lbl_name_situation.Location.X, 0);
             pb_rename_situation.Location = new Point(lbl_name_situation.Location.X + lbl_name_situation.Width, 0);
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
+
+            // Generating basic Label & add PictureBox bellow the previous Controls in the content panel.
+
+            // Label displaying the area items.
+            Label lbl_events = new Label()
+            {
+                Name = "lbl_events",
+                Text = "Évènements",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_events);
+
+            // PictureBox allowing the addition of new events.
+            PictureBox pb_add_event = new PictureBox()
+            {
+                Name = "pb_add_event",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_event.Click += new EventHandler(this.Add_Event);
+            content.Controls.Add(pb_add_event);
+
+            // Place the controls just created.
+            lbl_events.Location = new Point(20, 240);
+            pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 240);
+
+            // Generating to all files' an EventEdition UserControl.
+            int last_pos = 300;
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
+            {
+                // Creating the UserControl responsible for the internal edition of the JSON file.
+                EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", i)
+                {
+                    Name = "EventEdition" + i,
+                    Width = content.Width - 80,
+                    Location = new Point(40, last_pos)
+                };
+                content.Controls.Add(EEdition);
+                last_pos += EEdition.Height + 20;
+            }
+        }
+
+        public void Add_Event(object sender, EventArgs e)
+        {
+            // Filling the matching file.
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            int new_event_id = int.Parse((string)situ_data["events"]) + 1;
+            situ_data["events"] = new_event_id;
+            situ_data[new_event_id.ToString()] = new JObject()
+            {
+                ["x"] = 0,
+                ["y"] = 0,
+                ["npc"] = new JObject()
+                {
+                    ["id"] = 1,
+                    ["name"] = "Gérard",
+                    ["folder"] = 1
+                },
+                ["quizz"] = 1
+            };
+            Tools.Set_To_JSON(situation_path + "dialogs.json", situ_data);
+
+            // Creating the correspondant UserControl.
+            // Creating the UserControl responsible for the internal edition of the JSON file.
+            EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", new_event_id)
+            {
+                Name = "EventEdition" + new_event_id,
+                Width = content.Width - 80,
+                Location = new Point(40, new_event_id)
+            };
+            content.Controls.Add(EEdition);
+
+            // Replacing all EventEdition UserControls in the right place.
+            int i = 1;
+            int last_pos = 300;
+            foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+            {
+                ee.Location = new Point(40, last_pos - content.VerticalScroll.Value);
+                last_pos += ee.Height + 20;
+                i++;
+            }
+        }
+
+        public void Discard_Event(EventEdition sender)
+        {
+
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            int nbr_events = int.Parse((string)situ_data["events"]);
+            if (nbr_events < 2)
+            {
+                MessageBox.Show("Vous allez supprimer l'intégralité des évènements de la situation.\nSi vous souhaitez supprimer la situation," +
+                                "merci de cliquer sur l'icône en à la droite du titre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Delete the event then reoder the others in the JSON file.
+            situ_data["events"] = nbr_events - 1;
+            for (int i = sender.Get_Event_Id(); i < nbr_events; i++)
+            {
+                situ_data[i.ToString()] = situ_data[(i + 1).ToString()];
+            }
+            situ_data.Property(nbr_events.ToString()).Remove();
+            Tools.Set_To_JSON(sender.Get_File_Path(), situ_data);
+
+            // Delete the UserControl linked to the event.
+            this.Controls.Remove(sender);
+            sender.Dispose();
+
+            // Reload all others Controls.
+            this.old_category = "reload_needed";
+            Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
         /// <summary>
