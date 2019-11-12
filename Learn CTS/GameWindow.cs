@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
-        private int NPCsDensity = 100;
+        private int NPCsDensity = 120;
 
 
         /// <summary>
