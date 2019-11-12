@@ -69,6 +69,15 @@ namespace Learn_CTS
                 file_data = Tools.Get_From_JSON(f.FullName);
                 this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
             }
+            foreach (Panel pan in this.Controls.OfType<Panel>())
+            {
+                pan.Width = this.Width - 20;
+                int id = int.Parse(pan.Name.Remove(0, "pan_choice".Length));
+
+                // Sizing of all contained controls.
+                ComboBox cbo_redirect = (ComboBox)pan.Controls.Find("cbo_redirect" + id, false)[0];
+                cbo_redirect.DataSource = cbo_redirect_list;
+            }
         }
 
         /// <summary>
