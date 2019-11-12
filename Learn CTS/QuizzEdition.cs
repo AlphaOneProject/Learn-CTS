@@ -61,14 +61,45 @@ namespace Learn_CTS
         /// </summary>
         public void Reload_Redirections()
         {
-            this.cbo_redirect_list = new List<string>() { "[FIN]" };
+            this.cbo_redirect_list = new List<string>() { "[_CONTINUE_]", "[_FIN_]" };
             JObject file_data;
             DirectoryInfo file_dir = Directory.GetParent(this.file_path);
+            int nbr_files = file_dir.GetFiles().Length;
             foreach (FileInfo f in file_dir.GetFiles())
             {
                 file_data = Tools.Get_From_JSON(f.FullName);
-                this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                if (nbr_files < 10)
+                {
+                    this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                }
+                else if (nbr_files < 100)
+                {
+                    if (f.Name.Split('.')[0].Length == 1)
+                    {
+                        this.cbo_redirect_list.Add("[0" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else
+                    {
+                        this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                }
+                else
+                {
+                    if (f.Name.Split('.')[0].Length == 1)
+                    {
+                        this.cbo_redirect_list.Add("[00" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else if (f.Name.Split('.')[0].Length == 2)
+                    {
+                        this.cbo_redirect_list.Add("[0" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                    else
+                    {
+                        this.cbo_redirect_list.Add("[" + f.Name.Split('.')[0] + "] > " + file_data["question"]);
+                    }
+                }
             }
+            cbo_redirect_list.Sort();
             foreach (Panel pan in this.Controls.OfType<Panel>())
             {
                 pan.Width = this.Width - 20;
@@ -235,7 +266,7 @@ namespace Learn_CTS
                                "\nLa redirection vers [FIN] indique la fin de la situation.");
             try
             {
-                cbo_redirect.SelectedIndex = int.Parse(((JObject)data["c" + id])["redirect"].ToString());
+                cbo_redirect.SelectedIndex = int.Parse(((JObject)data["c" + id])["redirect"].ToString()) + 1;
             }
             catch (System.FormatException e)
             {
@@ -373,7 +404,7 @@ namespace Learn_CTS
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cbo = (ComboBox)sender;
-            ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex;
+            ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex - 1;
             Tools.Set_To_JSON(this.file_path, this.data);
         }
 
