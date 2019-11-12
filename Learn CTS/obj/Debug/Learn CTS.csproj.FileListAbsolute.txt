@@ -92,3 +92,4 @@ C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.resources
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources

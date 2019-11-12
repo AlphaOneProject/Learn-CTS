@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
-        private int NPCsDensity = 120;
+        private int NPCsDensity = 100; //max 650
 
 
         /// <summary>
@@ -134,7 +134,6 @@ namespace Learn_CTS
             {
                 tick_stopped += 1;
                 NPCLeaveVehicule();
-                RemoveNPCsLeavingPlatform();
                 if (tick_stopped > 200)
                 {
                     vehicule.ChangeState();
@@ -333,7 +332,7 @@ namespace Learn_CTS
                     t = vehicule.GetListChilds()[i];
                     if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                     {
-                        if (t.GetZ() >= vehicule.GetY() + vehicule.GetHeight())
+                        if (t.GetZ() > vehicule.GetY() + vehicule.GetHeight())
                         {
                             platform.AddChild(t);
                             vehicule.RemoveChild(t);
@@ -509,7 +508,7 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) || ((vehicule.GetX() > 0 || vehicule.GetX() + vehicule.GetWidth() < draw_surface_width) && player.GetY() < vehicule.GetY() + 200))
+                if (IsCharacterCollidingWithTextures(player) || ((vehicule.GetX() > 0 || vehicule.GetX() + vehicule.GetWidth() < draw_surface_width) && b<0 && player.GetY() <= platform.GetY() - player.GetHeight()))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -634,7 +633,7 @@ namespace Learn_CTS
                     vehicule.ChangeInside();
                     list_textures.Remove(player);
                     vehicule.AddChild(player);
-                    platform = new Platform(0, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
+                    platform = new Platform(vehicule.GetX(), vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
                     vehicule.SetSpeed(vehicule.GetMaxSpeed());
                     list_textures.Add(platform);
                     FillPlatformNPCs();
@@ -724,23 +723,12 @@ namespace Learn_CTS
             return b;
         }
 
-        private void RemoveNPCsLeavingPlatform()
-        {
-            for(int i = platform.GetListChilds().Count - 1; i>=0; i--)
-            {
-                if(platform.GetListChilds()[i].GetY() > draw_surface_height && platform.GetListChilds()[i].GetType().Name == "NPC")
-                {
-                    platform.RemoveChild(platform.GetListChilds()[i]);
-                }
-            }
-        }
-
         private void ViewInside()
         {
             ConsoleAvgFPS();
-            platform.RemoveAllChilds();
-            list_textures.Remove(platform);
             platform.Dispose();
+            //platform.RemoveAllChilds();
+            list_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
             vehicule.SetSpeed(0);
@@ -765,15 +753,18 @@ namespace Learn_CTS
             Random r = new Random();
             int i;
             NPC n;
+            int y;
             foreach (Texture t in platform.GetListChilds())
             {
                 if (t.GetType().Name == "NPC" && !((NPC)t).HasObjective())
                 {
                     n = (NPC)t;
                     i = vehicule.GetIndexNearestDoor(n.GetX());
-                    n.SetObjectiveX(vehicule.GetPosDoor(i));
-                    if(r.Next(0,2) == 0) n.SetObjectiveY(vehicule.GetY() + 336 + r.Next(0, 4));
-                    else n.SetObjectiveY(vehicule.GetY() + 336 + r.Next(16, 20));
+                    /*n.SetObjectiveX(vehicule.GetPosDoor(i));
+                    n.SetObjectiveY(platform.GetY() - r.Next(10, 25));*/
+                    y = vehicule.GetY() + vehicule.GetHeight();
+                    n.SetObjective(vehicule.GetPosDoor(i), y);
+                    n.SetObjectiveY(platform.GetY() - r.Next(20, 35) + n.GetZ() - y);
                     if (i == 0)
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-64, 256));
@@ -794,12 +785,13 @@ namespace Learn_CTS
         private void FillVehiculeNPCs()
         {
             Random r = new Random();
-            int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
+            //int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
+            int max = NPCsDensity / 2;
             int x;
             int y;
             for(int i = 0; i < max; i++)
             {
-                x = vehicule.GetX() + r.Next(460, vehicule.GetWidth() - 460);
+                x = vehicule.GetX() + r.Next(492, vehicule.GetWidth() - 492);
                 if (r.Next(0, 2) == 0) y = vehicule.GetY() + 144 + r.Next(0, 5);
                 else y = vehicule.GetY() + 144 + r.Next(15, 20);
                 vehicule.AddChild(nm.CreateNPC(x,y,true));
@@ -809,7 +801,8 @@ namespace Learn_CTS
         private void FillPlatformNPCs()
         {
             Random r = new Random();
-            int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
+            //int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
+            int max = NPCsDensity / 2;
             int x;
             int y;
             for (int i = 0; i < max; i++)
