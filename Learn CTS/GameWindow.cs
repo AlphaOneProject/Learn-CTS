@@ -134,7 +134,6 @@ namespace Learn_CTS
             {
                 tick_stopped += 1;
                 NPCLeaveVehicule();
-                RemoveNPCsLeavingPlatform();
                 if (tick_stopped > 200)
                 {
                     vehicule.ChangeState();
@@ -333,7 +332,7 @@ namespace Learn_CTS
                     t = vehicule.GetListChilds()[i];
                     if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                     {
-                        if (t.GetZ() >= vehicule.GetY() + vehicule.GetHeight())
+                        if (t.GetZ() > vehicule.GetY() + vehicule.GetHeight())
                         {
                             platform.AddChild(t);
                             vehicule.RemoveChild(t);
@@ -724,23 +723,12 @@ namespace Learn_CTS
             return b;
         }
 
-        private void RemoveNPCsLeavingPlatform()
-        {
-            for(int i = platform.GetListChilds().Count - 1; i>=0; i--)
-            {
-                if(platform.GetListChilds()[i].GetY() > draw_surface_height && platform.GetListChilds()[i].GetType().Name == "NPC")
-                {
-                    platform.RemoveChild(platform.GetListChilds()[i]);
-                }
-            }
-        }
-
         private void ViewInside()
         {
             ConsoleAvgFPS();
-            platform.RemoveAllChilds();
-            list_textures.Remove(platform);
             platform.Dispose();
+            //platform.RemoveAllChilds();
+            list_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
             vehicule.SetSpeed(0);
