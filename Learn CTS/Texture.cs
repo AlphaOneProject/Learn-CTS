@@ -28,7 +28,6 @@ namespace Learn_CTS
         private bool collide_only_z = false;
         private int width;
         private int height;
-        private BufferedGraphics graphicsBuffer;
 
         /// <summary>
         /// Initialize the path of the folder of the images and hitboxes corresponding to the game.
@@ -134,7 +133,7 @@ namespace Learn_CTS
         /// <param name="a">Number that will be added to the x coordinate.</param>
         /// <param name="b">Number that will be added to the x coordinate.</param>
 
-        public virtual new void Move(int a, int b)
+        public virtual void Move(int a, int b)
         {
             this.x += a;
             this.y += b;
@@ -149,7 +148,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="e"></param>
 
-        public virtual new void OnPaint(PaintEventArgs e)
+        public virtual void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             
@@ -413,10 +412,6 @@ namespace Learn_CTS
             this.image = img;
             this.width = this.image.Width;
             this.height = this.image.Height;
-            /*using (Graphics graphics = CreateGraphics())
-            {
-                graphicsBuffer = BufferedGraphicsManager.Current.Allocate(graphics, new Rectangle(this.GetX(), this.GetY(), this.width, this.height));
-            }*/
         }
 
         /// <summary>
@@ -593,7 +588,7 @@ namespace Learn_CTS
             return this.collide_only_z;
         }
 
-        public virtual new void Dispose()
+        public virtual void Dispose()
         {
             foreach(Texture t in list_childs)
             {
