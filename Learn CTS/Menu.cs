@@ -358,6 +358,7 @@ namespace Learn_CTS
         {
             GameCreator gc = new GameCreator();
             this.Controls.Add(gc);
+            gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
             gc.BringToFront();
         }
 
