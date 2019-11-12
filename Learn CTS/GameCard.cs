@@ -115,9 +115,10 @@ namespace Learn_CTS
 
         private void Btn_edit_Click(object sender, EventArgs e)
         {
-            Form editor = new Editor(Title);
+            ((Menu)this.ParentForm).Save_Options();
+            Editor editor = new Editor(Title);
             editor.Show();
-            this.Parent.Parent.Hide();
+            this.ParentForm.Hide();
         }
 
         public static Bitmap ChangeOpacity(Image img, float opacityvalue)

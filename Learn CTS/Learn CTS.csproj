@@ -94,6 +94,9 @@
     </Compile>
     <Compile Include="NPC.cs" />
     <Compile Include="NPC_Manager.cs" />
+    <Compile Include="NumericUpDownFix.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="PNCWindow.cs">
       <SubType>Form</SubType>
@@ -101,6 +104,13 @@
     <Compile Include="PNCWindow.Designer.cs">
       <DependentUpon>PNCWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuizzEdition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuizzEdition.Designer.cs">
+      <DependentUpon>QuizzEdition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools.cs" />
     <Compile Include="Tram.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Platform.cs" />
@@ -147,6 +157,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuizzEdition.resx">
+      <DependentUpon>QuizzEdition.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

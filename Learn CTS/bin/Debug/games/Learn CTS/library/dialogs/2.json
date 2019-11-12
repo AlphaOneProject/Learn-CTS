@@ -1,0 +1,1 @@
+{"question":"Êtes-vous humain ?","choices":4,"c1":{"answer":"Oui","valid":true,"score":42,"redirect":3},"c2":{"answer":"Oui.","valid":true,"score":12,"redirect":""},"c3":{"answer":"Non","valid":false,"score":-12,"redirect":""},"c4":{"answer":"Non.","valid":false,"score":-50,"redirect":""}}

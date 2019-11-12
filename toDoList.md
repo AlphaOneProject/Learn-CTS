@@ -32,9 +32,9 @@
                 - [X] "Point & Click"
         - [ ] Éditeur
             - [X] Choix du moteur et options générales
-            - [ ] Création et gestion des PNJ (Personnages Non-Joueurs)
+            - [X] Création et gestion des PNJ (Personnages Non-Joueurs)
             - [ ] Personnalisation du personnage principal
-            - [ ] Entrée et gestion des dialogues sous la forme de QCM
+            - [X] Entrée et gestion des dialogues sous la forme de QCM
             - [X] Édition des différents scénarios
             - [ ] Modification des textures d'ambiance
     - [ ] Pédagogie
