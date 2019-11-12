@@ -57,10 +57,9 @@ namespace Learn_CTS
                     icon_delete = Image.FromFile(img_path + "gamecard-delete-btn-x64.png");
                 }
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
-                MessageBox.Show("L'image " + img.ToString() + " est introuvable. Vérifiez qu'elle existe.");
-                return null;
+                MessageBox.Show(ex.Message);
             }
         }
 
