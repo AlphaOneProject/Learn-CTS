@@ -454,7 +454,10 @@ namespace Learn_CTS
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Save_Options();
+            if (this.Visible)
+            {
+                Save_Options();
+            }
         }
 
         public void Save_Options()

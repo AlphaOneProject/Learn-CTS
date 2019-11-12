@@ -58,19 +58,6 @@ namespace Learn_CTS
                 e.Cancel = true;
                 return;
             }
-
-            // Save current Editor's size.
-            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
-                                  Path.DirectorySeparatorChar + "options.json";
-            JObject options = Tools.Get_From_JSON(options_path);
-            options["maximized"] = (this.WindowState == FormWindowState.Maximized);
-            JObject size = new JObject()
-            {
-                ["x"] = this.Width,
-                ["y"] = this.Height
-            };
-            options["size"] = size;
-            Tools.Set_To_JSON(options_path, options);
         }
 
         /// <summary>
@@ -91,6 +78,19 @@ namespace Learn_CTS
                 properties["state"] = "Inactif.";
             }
             Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", properties);
+
+            // Save current Editor's size.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            options["maximized"] = (this.WindowState == FormWindowState.Maximized);
+            JObject size = new JObject()
+            {
+                ["x"] = this.Width,
+                ["y"] = this.Height
+            };
+            options["size"] = size;
+            Tools.Set_To_JSON(options_path, options);
 
             Application.Restart();
         }
