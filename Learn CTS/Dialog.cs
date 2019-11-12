@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Speech.Synthesis;
+using System.Threading;
 
 namespace Learn_CTS
 {
@@ -12,6 +14,7 @@ namespace Learn_CTS
         NPC npc;
         private string game_path;
         private JObject data;
+        SpeechSynthesizer s;
 
         public Dialog(int id, string game)
         {
@@ -19,6 +22,7 @@ namespace Learn_CTS
             npc = nm.GetNPCByID(id);
             InitializeGamePath(game);
             this.DoubleBuffered = true;
+            this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
         }
 
         private void Dialog_Load(object sender, EventArgs e)
@@ -33,7 +37,7 @@ namespace Learn_CTS
 
         private void InitializeGamePath(string game)
         {
-            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar;
+            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
         }
 
         /// <summary>
@@ -54,8 +58,7 @@ namespace Learn_CTS
 
         private void Set_Up(string q)
         {
-            JObject dialog = Get_From_JSON("quizzes.json");
-            this.data = (JObject)dialog[q];
+            data = Get_From_JSON(q+".json");
             txt_dialog_npc.Text = this.data["question"].ToString();
         }
 
@@ -88,19 +91,39 @@ namespace Learn_CTS
             btn_leave.Location = new System.Drawing.Point(243, 6);
             btn_leave.Name = "btn_leave";
             btn_leave.AutoSize = true;
-            btn_leave.TabIndex = 5;
+            btn_leave.TabIndex = 0;
             btn_leave.Text = "Partir";
             btn_leave.UseVisualStyleBackColor = true;
             btn_leave.Click += new System.EventHandler(this.Dialog_Closed);
             return btn_leave;
         }
 
+        private void Listen()
+        {
+            s = new SpeechSynthesizer();
+            s.SetOutputToDefaultAudioDevice();
+            if (s.State.ToString() == "Ready")
+            {
+                s.Volume = 50;
+                s.Rate = -2;
+                s.Speak(this.data["question"].ToString());
+                int nbr_choices = (int)this.data["choices"];
+                for (int i = 1; i <= nbr_choices; i++)
+                {
+                    s.Speak("choix numéro " + i + this.data["c" + i.ToString()]["answer"].ToString());
+                }
+            }
+        }
+
         public void Answer_Event(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             string s = this.data["c" + btn.TabIndex.ToString()]["redirect"].ToString();
-            if(s.Length == 0)
+            int score = (int)this.data["c" + btn.TabIndex.ToString()]["score"];
+            ((GameWindow)this.FindForm()).SetScore(score);
+            if (s.Length == 0 || s == "0")
             {
+                npc.RemoveQuiz();
                 this.Dialog_Closed(sender,e);
             }
             else
@@ -113,8 +136,19 @@ namespace Learn_CTS
 
         public void Dialog_Closed(object sender, EventArgs e)
         {
-            npc.RemoveQuiz();
             ((GameWindow)this.FindForm()).RemoveDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            t_audio = new Thread(new ThreadStart(Listen));
+            t_audio.Start();
+        }
+
+        private void Dialog_Resize(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+            pbox_audio.Location = new Point(c.Width - pbox_audio.Width - 10, 10);
         }
     }
 }

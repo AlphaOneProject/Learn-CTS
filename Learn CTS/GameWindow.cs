@@ -41,6 +41,7 @@ namespace Learn_CTS
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
         private int NPCsDensity = 100; //max 650
+        private int score = 0;
 
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace Learn_CTS
             DoubleBuffered = true;
         }
 
-        public GameWindow(string game, string situation) : this(game)
+        public GameWindow(string game, string scenario, string situation) : this(game)
         {
 
         }
@@ -727,7 +728,6 @@ namespace Learn_CTS
         {
             ConsoleAvgFPS();
             platform.Dispose();
-            //platform.RemoveAllChilds();
             list_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
@@ -811,6 +811,11 @@ namespace Learn_CTS
                 y = platform.GetY() + r.Next(20, 192);
                 platform.AddChild(nm.CreateNPC(x, y, true));
             }
+        }
+
+        public void SetScore(int s)
+        {
+            this.score += s;
         }
     }
 }
