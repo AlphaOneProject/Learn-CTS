@@ -181,7 +181,8 @@ namespace Learn_CTS
                 BackColor = Color.FromArgb(56, 56, 56),
                 ForeColor = Color.White,
                 ShortcutsEnabled = false,
-                Tag = id
+                Tag = id,
+                BorderStyle = BorderStyle.FixedSingle
             };
             txt_answer.KeyPress += new KeyPressEventHandler(this.Txt_Answer_KeyPress);
             pan_choice.Controls.Add(txt_answer);
@@ -199,7 +200,8 @@ namespace Learn_CTS
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
                 ForeColor = Color.White,
-                Tag = id
+                Tag = id,
+                BorderStyle = BorderStyle.FixedSingle
             };
             nud_score.KeyPress += new KeyPressEventHandler(this.Nud_Score_KeyPress);
             pan_choice.Controls.Add(nud_score);
