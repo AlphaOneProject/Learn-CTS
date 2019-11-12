@@ -880,6 +880,7 @@ namespace Learn_CTS
                 content.Controls.Find("lbl_dialog_id" + i, false)[0].Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value -
                                                                                           content.Controls.Find("lbl_dialog_id" + i, false)[0].Height + 1);
                 last_pos += qe.Height + 40;
+                qe.Reload_Redirections();
                 i++;
             }
         }
