@@ -356,10 +356,21 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Display_create_game(Object sender, EventArgs e)
         {
-            GameCreator gc = new GameCreator();
-            this.Controls.Add(gc);
-            gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
-            gc.BringToFront();
+            GameCreator gc;
+            if (Controls.Find("games_menu_game_creator", true).Length == 0)
+            {
+                gc = new GameCreator();
+                gc.Name = "games_menu_game_creator";
+                gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
+                this.Controls.Add(gc);
+                gc.BringToFront();
+            }
+            else
+            {
+                gc = (GameCreator)Controls.Find("games_menu_game_creator", true)[0];
+                gc.Dispose();
+            }
+            
         }
 
         private void Menu_SizeChanged(object sender, EventArgs e)
@@ -389,6 +400,9 @@ namespace Learn_CTS
                     case "games_menu_pb_create_game":
                         c.Size = new Size(42, 42);
                         c.Location = new Point(this.Width - 68, 6);
+                        break;
+                    case "games_menu_game_creator":
+                        c.Location = new Point(this.Width - c.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
                         break;
                     case "games_menu_flp_games":
                         c.Location = new Point(0, this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);

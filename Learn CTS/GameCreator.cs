@@ -152,8 +152,6 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void GameCreator_SizeChanged(object sender, EventArgs e)
         {
-            pnl_bg.Location = new Point(this.Width / 2 - pnl_bg.Width / 2,
-                this.Height / 2 - pnl_bg.Height / 2);
             lbl_create.Location = new Point(pnl_bg.Width / 2 - lbl_create.Width / 2, 24);
         }
 
