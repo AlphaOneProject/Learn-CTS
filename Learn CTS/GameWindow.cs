@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
-        private int NPCsDensity = 10;
+        private int NPCsDensity = 100;
 
 
         /// <summary>
@@ -58,6 +58,7 @@ namespace Learn_CTS
 
         public GameWindow(string game, string situation) : this(game)
         {
+
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Learn_CTS
 
         private void InitializeTimer()
         {
-            timer.Interval = 20;
+            timer.Interval = 30;
             timer.Tick += new EventHandler(Timer_Tick);
         }
 
@@ -132,7 +133,7 @@ namespace Learn_CTS
             if (vehicule.GetState() == 0)
             {
                 tick_stopped += 1;
-                NPCLeaveTram();
+                NPCLeaveVehicule();
                 RemoveNPCsLeavingPlatform();
                 if (tick_stopped > 200)
                 {
@@ -149,9 +150,9 @@ namespace Learn_CTS
             }
             if (vehicule.GetX() < this.Width && !vehicule.IsInside())
             {
-                CheckIfCharacterIsEnteringTheTram();
-                CheckIfCharacterIsLeavingTheTram();
-                CheckIfTheTramIsArrived();
+                CheckIfCharacterIsEnteringTheVehicule();
+                CheckIfCharacterIsLeavingTheVehicule();
+                CheckIfTheVehiculeIsArrived();
             }
             else
             {
@@ -286,7 +287,7 @@ namespace Learn_CTS
         /// Check if the vehicule has to slow down.
         /// </summary>
 
-        private void CheckIfTheTramIsArrived()
+        private void CheckIfTheVehiculeIsArrived()
         {
             if (vehicule.GetState() == 2 && (vehicule.GetX()+vehicule.GetWidth() > platform.GetX() + platform.GetWidth() - vehicule.GetDistanceMaxStop()) && (vehicule.GetX() + vehicule.GetWidth() < platform.GetX() + platform.GetWidth() - vehicule.GetDistanceMaxStop() + 100))
             {
@@ -298,7 +299,7 @@ namespace Learn_CTS
         /// Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform.
         /// </summary>
 
-        private void CheckIfCharacterIsEnteringTheTram()
+        private void CheckIfCharacterIsEnteringTheVehicule()
         {
             if(vehicule.GetState() == 0)
             {
@@ -322,7 +323,7 @@ namespace Learn_CTS
         /// Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform.
         /// </summary>
 
-        private void CheckIfCharacterIsLeavingTheTram()
+        private void CheckIfCharacterIsLeavingTheVehicule()
         {
             if (vehicule.GetState() == 0)
             {
@@ -574,7 +575,7 @@ namespace Learn_CTS
                 case Keys.Down : go_down = true; break;
                 case Keys.D: this.debug = !debug; break;
                 case Keys.G: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
-                case Keys.F: this.StopTram(); ; break;
+                case Keys.F: this.StopVehicule(); ; break;
             }
         }
 
@@ -623,7 +624,7 @@ namespace Learn_CTS
             return output;
         }
 
-        private void StopTram()
+        private void StopVehicule()
         {
             if (vehicule.GetState() == 2)
             {
@@ -668,15 +669,15 @@ namespace Learn_CTS
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
                 }
             }
-            FillTramNPCs();
+            FillVehiculeNPCs();
             FillPlatformNPCs();
         }
 
-        private void NPCLeaveTram()
+        private void NPCLeaveVehicule()
         {
             if (!leave_npc)
             {
-                npcs_leaving_vehicule = SelectionNPCsLeavingTram();
+                npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
                 Random r = new Random();
                 int i;
                 foreach (NPC n in npcs_leaving_vehicule)
@@ -692,14 +693,14 @@ namespace Learn_CTS
             }
             else
             {
-                if (npcs_leaving_vehicule != null && enter_npc && HasAllNPCsLeavedTram(npcs_leaving_vehicule))
+                if (npcs_leaving_vehicule != null && enter_npc && HasAllNPCsLeavedVehicule(npcs_leaving_vehicule))
                 {
-                    NPCEnterTram();
+                    NPCEnterVehicule();
                 }
             }
         }
 
-        private List<NPC> SelectionNPCsLeavingTram()
+        private List<NPC> SelectionNPCsLeavingVehicule()
         {
             Random r = new Random();
             List<NPC> list = new List<NPC>();
@@ -710,7 +711,7 @@ namespace Learn_CTS
             return list;
         }
 
-        private bool HasAllNPCsLeavedTram(List<NPC> l)
+        private bool HasAllNPCsLeavedVehicule(List<NPC> l)
         {
             bool b = true;
             foreach(NPC n in l)
@@ -759,7 +760,7 @@ namespace Learn_CTS
             vehicule.RemoveChild(player);
         }
 
-        private void NPCEnterTram()
+        private void NPCEnterVehicule()
         {
             Random r = new Random();
             int i;
@@ -790,10 +791,10 @@ namespace Learn_CTS
             enter_npc = false;
         }
 
-        private void FillTramNPCs()
+        private void FillVehiculeNPCs()
         {
             Random r = new Random();
-            int max = r.Next(NPCsDensity / 4, NPCsDensity);
+            int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
             int x;
             int y;
             for(int i = 0; i < max; i++)
@@ -808,7 +809,7 @@ namespace Learn_CTS
         private void FillPlatformNPCs()
         {
             Random r = new Random();
-            int max = r.Next(NPCsDensity/4, NPCsDensity);
+            int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
             int x;
             int y;
             for (int i = 0; i < max; i++)
