@@ -31,6 +31,8 @@
             this.txt_dialog_npc = new System.Windows.Forms.RichTextBox();
             this.lbl_name = new System.Windows.Forms.Label();
             this.flp_choices = new System.Windows.Forms.FlowLayoutPanel();
+            this.pbox_audio = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_audio)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_dialog_npc
@@ -65,6 +67,15 @@
             this.flp_choices.Size = new System.Drawing.Size(0, 0);
             this.flp_choices.TabIndex = 8;
             // 
+            // pbox_audio
+            // 
+            this.pbox_audio.Location = new System.Drawing.Point(237, 3);
+            this.pbox_audio.Name = "pbox_audio";
+            this.pbox_audio.Size = new System.Drawing.Size(32, 32);
+            this.pbox_audio.TabIndex = 9;
+            this.pbox_audio.TabStop = false;
+            this.pbox_audio.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Dialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -74,6 +85,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.pbox_audio);
             this.Controls.Add(this.flp_choices);
             this.Controls.Add(this.lbl_name);
             this.Controls.Add(this.txt_dialog_npc);
@@ -82,6 +94,8 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Size = new System.Drawing.Size(272, 127);
             this.Load += new System.EventHandler(this.Dialog_Load);
+            this.Resize += new System.EventHandler(this.Dialog_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_audio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,5 +105,6 @@
         private System.Windows.Forms.RichTextBox txt_dialog_npc;
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.FlowLayoutPanel flp_choices;
+        private System.Windows.Forms.PictureBox pbox_audio;
     }
 }
