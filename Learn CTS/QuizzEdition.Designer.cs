@@ -34,6 +34,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pb_add = new System.Windows.Forms.PictureBox();
             this.pb_delete_all = new System.Windows.Forms.PictureBox();
+            this.cbo_audio = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete_all)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +46,7 @@
             this.txt_question.ForeColor = System.Drawing.Color.White;
             this.txt_question.Location = new System.Drawing.Point(10, 10);
             this.txt_question.MaximumSize = new System.Drawing.Size(920, 30);
-            this.txt_question.MinimumSize = new System.Drawing.Size(240, 30);
+            this.txt_question.MinimumSize = new System.Drawing.Size(60, 30);
             this.txt_question.Name = "txt_question";
             this.txt_question.ShortcutsEnabled = false;
             this.txt_question.Size = new System.Drawing.Size(420, 30);
@@ -86,11 +87,29 @@
             this.toolTip.SetToolTip(this.pb_delete_all, "Supprimer ce dialogue.");
             this.pb_delete_all.Click += new System.EventHandler(this.Delete_All);
             // 
+            // cbo_audio
+            // 
+            this.cbo_audio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.cbo_audio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbo_audio.ForeColor = System.Drawing.Color.White;
+            this.cbo_audio.FormattingEnabled = true;
+            this.cbo_audio.Items.AddRange(new object[] {
+            "Texte uniquement",
+            "Texte et audio",
+            "Audio uniquement"});
+            this.cbo_audio.Location = new System.Drawing.Point(492, 9);
+            this.cbo_audio.Name = "cbo_audio";
+            this.cbo_audio.Size = new System.Drawing.Size(180, 32);
+            this.cbo_audio.TabIndex = 3;
+            this.toolTip.SetToolTip(this.cbo_audio, "Gestion de l\'audio du dialogue.");
+            this.cbo_audio.SelectedIndexChanged += new System.EventHandler(this.Cbo_audio_SelectedIndexChanged);
+            // 
             // QuizzEdition
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.cbo_audio);
             this.Controls.Add(this.pb_delete_all);
             this.Controls.Add(this.pb_add);
             this.Controls.Add(this.txt_question);
@@ -112,5 +131,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox pb_add;
         private System.Windows.Forms.PictureBox pb_delete_all;
+        private System.Windows.Forms.ComboBox cbo_audio;
     }
 }

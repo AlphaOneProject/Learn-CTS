@@ -20,6 +20,7 @@ namespace Learn_CTS
         private string file_path;
         private JObject data;
         private int prev_line_loc = 50;
+        private List<String> cbo_audio_list = new List<string>() { "Texte uniquement", "Texte et audio", "Audio uniquement" };
         private List<string> cbo_redirect_list;
 
         // Methods.
@@ -449,8 +450,9 @@ namespace Learn_CTS
         private void QuizzEdition_Resize(object sender, EventArgs e)
         {
             txt_question.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
-                                    this.Width - 10 - 30 - 8 - 10 - 8 - 30 - 10);
+                                    this.Width - 10 - 30 - 10 - cbo_audio.Width - 10 - 30 - 10);
             pb_add.Location = new Point(txt_question.Location.X + txt_question.Width + 8, 10);
+            cbo_audio.Location = new Point(pb_add.Location.X + pb_add.Width + 8, 9);
             pb_delete_all.Location = new Point(this.Width - pb_delete_all.Width - 10, 10);
             this.Height = this.prev_line_loc;
 
@@ -491,6 +493,12 @@ namespace Learn_CTS
         public void Delete_All(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Discard_Dialog(this);
+        }
+
+        private void Cbo_audio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            data["audio"] = cbo_audio.SelectedIndex;
+            Tools.Set_To_JSON(this.file_path, data);
         }
     }
 }
