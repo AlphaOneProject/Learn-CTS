@@ -26,11 +26,6 @@ namespace Learn_CTS
 
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
 
-            this.Dock = DockStyle.Fill;
-
-            pnl_bg.Location = new Point(this.Width / 2 - pnl_bg.Width / 2,
-                this.Height / 2 - pnl_bg.Height / 2);
-
             lbl_create.Width = pnl_bg.Width;
             lbl_create.TextAlign = ContentAlignment.MiddleCenter;
             lbl_create.Location = new Point(pnl_bg.Width / 2 - lbl_create.Width / 2,
@@ -100,13 +95,23 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Creates the directories used by the game.
+        /// </summary>
+        /// <param name="nom"></param>
         private void Create_game(String nom)
         {
-
-            //TODO : verifier si le nom est unique
-            //Creation of the directories used by the game.
+            // ./Game
             Directory.CreateDirectory(@"" + this.games_path + nom);
+            // ./Game/library
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
+            // ./Game/library/dialogs
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs");
+            // ./Game/library/images
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
+            // ./Game/library/npcs
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs");
+            // ./Game/scenarios
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
 
             // Add a "properties.json" to the newly created folder.
@@ -118,16 +123,33 @@ namespace Learn_CTS
                               properties_content.ToString());
         }
 
+        /// <summary>
+        /// Called when the back arrow is clicked.
+        /// Hides the UC.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_back_create_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
+        /// <summary>
+        /// Called when the background is clicked.
+        /// Hides the UC.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pnl_greyout_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
+        /// <summary>
+        /// Called when the Size of the UC to have a responsive behavior.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameCreator_SizeChanged(object sender, EventArgs e)
         {
             pnl_bg.Location = new Point(this.Width / 2 - pnl_bg.Width / 2,
@@ -135,6 +157,11 @@ namespace Learn_CTS
             lbl_create.Location = new Point(pnl_bg.Width / 2 - lbl_create.Width / 2, 24);
         }
 
+        /// <summary>
+        /// Verifies the validity of the name given before calling the confirmation box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Create_game_verify(object sender, MouseEventArgs e)
         {
             if (!txt_create.Text.Equals(String.Empty) && Is_Game_Unique(txt_create.Text))
