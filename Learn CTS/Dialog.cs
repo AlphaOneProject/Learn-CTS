@@ -133,6 +133,10 @@ namespace Learn_CTS
                 npc.RemoveQuiz();
                 this.Dialog_Closed(sender,e);
             }
+            else if(s == "-1")
+            {
+                this.Dialog_Closed(sender, e);
+            }
             else
             {
                 this.Set_Up(s);
