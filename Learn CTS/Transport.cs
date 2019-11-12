@@ -22,14 +22,7 @@ namespace Learn_CTS
         private Texture inside;
         private int max_distance_stop;
         private bool player_inside = false;
-        private int[] pos_doors = new int[6]{
-            510,
-            920,
-            1528,
-            1944,
-            2552,
-            2928
-        };
+        private int[] pos_doors;
 
         /// <summary>
         /// Constructor of a vehicule.
@@ -37,8 +30,9 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Transport(string name, int x, int y) : base(name, x, y, -2000)
+        public Transport(string name, int x, int y, int[] pos_doors) : base(name, x, y, -2000)
         {
+            this.pos_doors = pos_doors;
             this.max_distance_stop = this.DistanceBeforeStopping();
             this.inside = new Texture(name + "Inside", this.GetX(), this.GetY(), this.GetZ() + 1);
             this.outside = new Texture(name + "Outside", this.GetX(), this.GetY(), true);
@@ -76,10 +70,13 @@ namespace Learn_CTS
             else
             {
                 this.doors_left.SetX(this.GetX());
+                this.doors_left.SetY(this.GetY());
                 this.AddChild(this.doors_left);
                 this.doors_right.SetX(this.GetX());
+                this.doors_right.SetY(this.GetY());
                 this.AddChild(this.doors_right);
                 this.outside.SetX(this.GetX());
+                this.outside.SetY(this.GetY());
                 this.AddChild(this.outside);
                 foreach (Texture t in this.GetListChilds())
                 {

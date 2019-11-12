@@ -39,6 +39,11 @@ namespace Learn_CTS
             return this.quiz;
         }
 
+        public void RemoveQuiz()
+        {
+            this.quiz = -1;
+        }
+
         public void DisplayInteraction()
         {
             if (this.quiz > 0)

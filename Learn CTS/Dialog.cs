@@ -113,7 +113,7 @@ namespace Learn_CTS
 
         public void Dialog_Closed(object sender, EventArgs e)
         {
-            npc.DisplayInteraction();
+            npc.RemoveQuiz();
             ((GameWindow)this.FindForm()).RemoveDialog();
         }
     }
