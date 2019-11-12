@@ -129,7 +129,7 @@ namespace Learn_CTS
         private void Txt_Question_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
-            List<char> autorized_chars = new List<char>() { ' ', '?', '!', '-', '(', ')', ':' };
+            List<char> autorized_chars = new List<char>() { ' ', '\'', '.', ',', '?', '!', '-', '(', ')', ':' };
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
                 this.data["question"] = t.Text.Trim();
