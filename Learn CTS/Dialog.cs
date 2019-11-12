@@ -151,9 +151,15 @@ namespace Learn_CTS
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (audio == 0) return;
-            t_audio = new Thread(new ThreadStart(Listen));
-            t_audio.Start();
+            if (audio == 0)
+            {
+                MessageBox.Show("Le son est désactivé pour ce dialogue.");
+            }
+            else
+            {
+                t_audio = new Thread(new ThreadStart(Listen));
+                t_audio.Start();
+            }
         }
 
         private void Dialog_Resize(object sender, EventArgs e)

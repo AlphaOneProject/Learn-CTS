@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
-        private int NPCsDensity = 100; //max 650
+        private int NPCsDensity = 50; //max 650
         private int score = 0;
         private string scenario;
         private string situation;
@@ -785,7 +785,7 @@ namespace Learn_CTS
                     n.SetObjectiveY(platform.GetY() - r.Next(10, 25));*/
                     y = vehicule.GetY() + vehicule.GetHeight();
                     n.SetObjective(vehicule.GetPosDoor(i), y);
-                    n.SetObjectiveY(platform.GetY() - r.Next(20, 32) + n.GetZ() - y);
+                    n.SetObjectiveY(platform.GetY() - r.Next(24, 30) + n.GetZ() - y);
                     if (i == 0)
                     {
                         n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-64, 256));
@@ -817,7 +817,6 @@ namespace Learn_CTS
             for(int i = vehicule.GetListChilds().Count -1; i>=0; i--)
             {
                 c = vehicule.GetListChilds()[i];
-                Console.WriteLine(c.GetName());
                 if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0)
                 {
                     vehicule.RemoveChild(c);
@@ -827,8 +826,7 @@ namespace Learn_CTS
             for(int i = 0; i < max; i++)
             {
                 x = vehicule.GetX() + r.Next(492, vehicule.GetWidth() - 492);
-                if (r.Next(0, 2) == 0) y = vehicule.GetY() + 144 + r.Next(0, 5);
-                else y = vehicule.GetY() + 144 + r.Next(15, 20);
+                y = vehicule.GetY() + 144 + r.Next(0, 14);
                 vehicule.AddChild(nm.CreateNPC(x,y,true));
             }
         }
