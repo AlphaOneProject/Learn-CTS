@@ -49,6 +49,7 @@ namespace Learn_CTS
         {
             // Add the question.
             txt_question.Text = (string)this.data["question"];
+            cbo_audio.SelectedIndex = int.Parse((string)this.data["audio"]);
 
             // Add existing choices to display.
             for (int i = 1; i <= int.Parse((string)data["choices"]); i++)
