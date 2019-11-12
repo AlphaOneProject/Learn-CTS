@@ -36,23 +36,31 @@ namespace Learn_CTS
             pb_play.BackColor = Color.Transparent;
             pb_edit.BackgroundImage = ChangeOpacity(icon_edit, 0.5f);
             pb_edit.BackColor = Color.Transparent;
-            pb_delete.BackgroundImage = ChangeOpacity(icon_edit, 0.5f);
+            pb_delete.BackgroundImage = ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
         }
 
         private void FetchIcons()
         {
-            if (icon_play == null)
+            try
             {
-                icon_play = Image.FromFile(img_path + "gamecard-play-btn-x128.png");
+                if (icon_play == null)
+                {
+                    icon_play = Image.FromFile(img_path + "gamecard-play-btn-x128.png");
+                }
+                if (icon_edit == null)
+                {
+                    icon_edit = Image.FromFile(img_path + "gamecard-edit-btn-x64.png");
+                }
+                if (icon_delete == null)
+                {
+                    icon_delete = Image.FromFile(img_path + "gamecard-delete-btn-x64.png");
+                }
             }
-            if (icon_edit == null)
+            catch (FileNotFoundException)
             {
-                icon_edit = Image.FromFile(img_path + "gamecard-edit-btn-x64.png");
-            }
-            if (icon_delete == null)
-            {
-                icon_delete = Image.FromFile(img_path + "gamecard-delete-btn-x64.png");
+                MessageBox.Show("L'image " + img.ToString() + " est introuvable. Vérifiez qu'elle existe.");
+                return null;
             }
         }
 
