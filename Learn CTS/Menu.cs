@@ -43,6 +43,20 @@ namespace Learn_CTS
             // Set the window size as options size setting.
             string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
                                   Path.DirectorySeparatorChar + "options.json";
+            if (!new FileInfo(options_path).Exists)
+            {
+                JObject options_setup = new JObject()
+                {
+                    ["theme"] = "dark",
+                    ["maximized"] = false,
+                    ["size"] = new JObject()
+                    {
+                        ["x"] = 900,
+                        ["y"] = 600
+                    }
+                };
+                Tools.Set_To_JSON(options_path, options_setup);
+            }
             JObject options = Tools.Get_From_JSON(options_path);
             if ((bool)options["maximized"])
             {
