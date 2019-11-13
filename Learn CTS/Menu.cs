@@ -21,6 +21,9 @@ namespace Learn_CTS
          * Default path of all the created games. 
          */
         private readonly String games_path;
+        private readonly String options_path;
+
+        private String application_theme;
 
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
@@ -29,6 +32,8 @@ namespace Learn_CTS
         {
             InitializeComponent();
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
+            this.options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
             this.DoubleBuffered = false;
             this.Activate();
         }
@@ -41,8 +46,6 @@ namespace Learn_CTS
         private void Menu_Load(object sender, EventArgs e)
         {
             // Set the window size as options size setting.
-            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
-                                  Path.DirectorySeparatorChar + "options.json";
             if (!new FileInfo(options_path).Exists)
             {
                 JObject options_setup = new JObject()
@@ -71,6 +74,9 @@ namespace Learn_CTS
                 Rectangle pc_screen = Screen.FromControl(this).Bounds;
                 this.Location = new Point((pc_screen.Width - this.Width) / 2, (pc_screen.Height - this.Height) / 2);
             }
+
+            // Gets the theme in the options file.
+            this.application_theme = options["theme"].ToString();
 
             // Place the windows at the center of the screen.
             Rectangle screen = Screen.FromControl(this).Bounds;
@@ -364,12 +370,53 @@ namespace Learn_CTS
             };
             options_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
-            this.Controls.Add(options_menu_pb_back_to_main_menu);
+            JCS.ToggleSwitch options_menu_tgs_theme = new JCS.ToggleSwitch()
+            {
+                Style = JCS.ToggleSwitch.ToggleSwitchStyle.PlainAndSimpel,
+                Location = new Point(200, 200),
+                TabIndex = 7,
+                ToggleOnButtonClick = true,
+                ToggleOnSideClick = true,
+            };
+            options_menu_tgs_theme.CheckedChanged += new JCS.ToggleSwitch.CheckedChangedDelegate(Options_Menu_Tgs_Theme_CheckedChanged);
+
+            this.Controls.AddRange(new Control[] { options_menu_pb_back_to_main_menu, options_menu_tgs_theme });
             // Amuse toi bien Antoine :-*
 
         }
-        
-        
+
+        private void Options_Menu_Tgs_Theme_CheckedChanged(object sender, EventArgs e)
+        {
+            JCS.ToggleSwitch tgs = (JCS.ToggleSwitch)sender;
+            // Récupération du fichier des options
+            JObject options = Tools.Get_From_JSON(options_path);
+
+            if (tgs.Checked)
+            {
+                this.application_theme = "light";
+                options["theme"] = "light";
+                tgs.SetRenderer(new JCS.ToggleSwitchPlainAndSimpleRenderer()
+                {
+                    InnerBackgroundColor = Color.FromArgb(30, 30, 30),
+                    ButtonColor = Color.White
+                });
+            }
+            else
+            {
+                this.application_theme = "dark";
+                options["theme"] = "dark";
+                tgs.SetRenderer(new JCS.ToggleSwitchPlainAndSimpleRenderer()
+                {
+                    InnerBackgroundColor = Color.White,
+                    ButtonColor = Color.FromArgb(30, 30, 30)
+                });
+            }
+
+            // Mise à jour du fichier des options
+            Tools.Set_To_JSON(options_path, options);
+        }
+
+
         /// <summary>
         /// Displays a custom box to create a game.
         /// </summary>
