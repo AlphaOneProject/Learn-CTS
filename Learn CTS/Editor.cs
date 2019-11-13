@@ -1587,7 +1587,7 @@ namespace Learn_CTS
             int last_pos = 300;
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
@@ -1608,7 +1608,7 @@ namespace Learn_CTS
             // Filling the matching file.
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
             int new_event_id = int.Parse((string)situ_data["events"]) + 1;
             situ_data["events"] = new_event_id;
@@ -1649,10 +1649,9 @@ namespace Learn_CTS
 
         public void Discard_Event(EventEdition sender)
         {
-
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Name.Remove(0, "situation".Length).Split('_')[1] + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
             int nbr_events = int.Parse((string)situ_data["events"]);
             if (nbr_events < 2)
@@ -1687,16 +1686,17 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Down_Situation(object sender, EventArgs e)
         {
-            int index = menu.SelectedNode.Index;
-            TreeNode tns = menu.SelectedNode.Parent;
+            TreeNode tn = menu.SelectedNode;
+            TreeNode tns = tn.Parent;
+            int index = tn.Index;
+            menu.SelectedNode = tns;
 
             // Return if last node.
             if (index == tns.LastNode.Index) { return; }
-            TreeNode tn = menu.SelectedNode;
-            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Remove(tn);
             tns.Nodes.Insert(index + 1, tn);
-            menu.SelectedNode = tn;
-            Order_Files_Situations();
+            
+            Order_Files_Situations(tn);
         }
 
         /// <summary>
@@ -1706,26 +1706,27 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Up_Situation(object sender, EventArgs e)
         {
-            int index = menu.SelectedNode.Index;
-            TreeNode tns = menu.SelectedNode.Parent;
+            TreeNode tn = menu.SelectedNode;
+            TreeNode tns = tn.Parent;
+            int index = tn.Index;
+            menu.SelectedNode = tns;
 
             // Return if fisrt node.
             if (index == 0) { return; }
-            TreeNode tn = menu.SelectedNode;
-            tns.Nodes.Remove(menu.SelectedNode);
+            tns.Nodes.Remove(tn);
             tns.Nodes.Insert(index - 1, tn);
-            menu.SelectedNode = tn;
-            Order_Files_Situations();
+
+            Order_Files_Situations(tn);
         }
 
         /// <summary>
         /// Technical function re-ordering all situations after a switch, both in the menu and in the folder.
         /// </summary>
-        private void Order_Files_Situations()
+        private void Order_Files_Situations(TreeNode tn)
         {
-            TreeNode tns = menu.SelectedNode.Parent;
+            TreeNode tns = tn.Parent;
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
-                             +(menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text;
+                             + (tns.Index + 1) + "." + tns.Text;
             foreach (string s in Directory.GetDirectories(@"" + sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
@@ -1757,6 +1758,7 @@ namespace Learn_CTS
             {
                 sc.Nodes[i].Name = "scenario" + (i + 1).ToString();
             }
+            menu.SelectedNode = tn;
         }
 
         /// <summary>
