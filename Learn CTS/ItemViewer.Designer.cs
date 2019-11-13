@@ -37,9 +37,9 @@
             // 
             // pb_item
             // 
-            this.pb_item.Location = new System.Drawing.Point(33, 31);
+            this.pb_item.Location = new System.Drawing.Point(64, 64);
             this.pb_item.Name = "pb_item";
-            this.pb_item.Size = new System.Drawing.Size(270, 230);
+            this.pb_item.Size = new System.Drawing.Size(102, 91);
             this.pb_item.TabIndex = 0;
             this.pb_item.TabStop = false;
             // 
@@ -47,7 +47,7 @@
             // 
             this.lbl_desc.AutoSize = true;
             this.lbl_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
-            this.lbl_desc.Location = new System.Drawing.Point(309, 82);
+            this.lbl_desc.Location = new System.Drawing.Point(296, 81);
             this.lbl_desc.Name = "lbl_desc";
             this.lbl_desc.Size = new System.Drawing.Size(107, 29);
             this.lbl_desc.TabIndex = 1;
@@ -67,7 +67,7 @@
             // 
             this.lbl_color.Location = new System.Drawing.Point(0, 0);
             this.lbl_color.Name = "lbl_color";
-            this.lbl_color.Size = new System.Drawing.Size(400, 246);
+            this.lbl_color.Size = new System.Drawing.Size(42, 39);
             this.lbl_color.TabIndex = 3;
             this.lbl_color.Click += new System.EventHandler(this.Lbl_color_Click);
             // 

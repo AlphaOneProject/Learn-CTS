@@ -37,6 +37,12 @@ namespace Learn_CTS
             pb_confirm.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-play-btn-x128.png");
 
+            
+        }
+
+        private void GameCreator_Load(object sender, EventArgs e)
+        {
+            txt_create.Focus();
         }
 
         /// <summary>
@@ -170,6 +176,11 @@ namespace Learn_CTS
             {
                 MessageBox.Show("Ce jeu existe déjà.");
             }
+        }
+
+        private void GameCreator_Leave(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

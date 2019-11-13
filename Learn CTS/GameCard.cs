@@ -202,7 +202,14 @@ namespace Learn_CTS
 
         private void Delete_Game()
         {
-            Directory.Delete(@"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName, true);
+            try
+            {
+                Directory.Delete(@"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName, true);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void Pb_Btn_MouseHover(object sender, EventArgs e)
