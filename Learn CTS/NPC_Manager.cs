@@ -56,6 +56,17 @@ namespace Learn_CTS
             return null;
         }
 
+        public void RemoveNPC(int id)
+        {
+            RemoveNPC(GetNPCByID(id));
+        }
+
+        public void RemoveNPC(NPC n)
+        {
+            n.Dispose();
+            list_npcs.Remove(n);
+        }
+
         public void DeleteNPCByID(int id)
         {
             for(int i = list_npcs.Count-1; i >= 0; i--)
@@ -74,6 +85,7 @@ namespace Learn_CTS
 
         public void Clear()
         {
+            foreach (NPC n in list_npcs) n.Dispose();
             list_npcs.Clear();
             npc_id = 1;
         }

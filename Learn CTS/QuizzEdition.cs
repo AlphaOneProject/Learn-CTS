@@ -20,7 +20,6 @@ namespace Learn_CTS
         private string file_path;
         private JObject data;
         private int prev_line_loc = 50;
-        private List<String> cbo_audio_list = new List<string>() { "Texte uniquement", "Texte et audio", "Audio uniquement" };
         private List<string> cbo_redirect_list;
 
         // Methods.
@@ -36,6 +35,7 @@ namespace Learn_CTS
             this.id = int.Parse(file_name.Split('.')[0]);
             this.file_path = file_path;
             this.data = Tools.Get_From_JSON(file_path);
+            this.DoubleBuffered = true;
 
             Reload_Redirections();
         }
@@ -49,6 +49,7 @@ namespace Learn_CTS
         {
             // Add the question.
             txt_question.Text = (string)this.data["question"];
+            cbo_audio.SelectedIndex = int.Parse((string)this.data["audio"]);
 
             // Add existing choices to display.
             for (int i = 1; i <= int.Parse((string)data["choices"]); i++)
@@ -108,7 +109,7 @@ namespace Learn_CTS
 
                 // Sizing of all contained controls.
                 ComboBox cbo_redirect = (ComboBox)pan.Controls.Find("cbo_redirect" + id, false)[0];
-                cbo_redirect.DataSource = cbo_redirect_list;
+                cbo_redirect.DataSource = new List<string>(cbo_redirect_list);
             }
         }
 
@@ -167,8 +168,8 @@ namespace Learn_CTS
             }
 
             // Adapt the TextBox's size.
-            t.Width = Tools.Min_Int(Tools.Get_Text_Width(this, t.Text, 20) + 12,
-                                    this.Width - 10 - 30 - 8 - 10 - 8 - 30 - 10);
+            t.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
+                                    this.Width - 10 - 30 - 10 - cbo_audio.Width - 10 - 30 - 10);
             pb_add.Location = new Point(txt_question.Location.X + txt_question.Width + 8, 10);
         }
 
@@ -425,7 +426,7 @@ namespace Learn_CTS
                 return;
             }
             
-            // Delete the choice reoder the others in the JSON file.
+            // Delete the choice then reoder the others in the JSON file.
             this.data["choices"] = nbr_choices - 1;
             for(int i = (int)((PictureBox)sender).Tag; i < nbr_choices; i++)
             {

@@ -67,6 +67,12 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventEdition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventEdition.Designer.cs">
+      <DependentUpon>EventEdition.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventEdition.resx">
+      <DependentUpon>EventEdition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameCard.resx">
       <DependentUpon>GameCard.cs</DependentUpon>
