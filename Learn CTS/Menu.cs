@@ -43,6 +43,20 @@ namespace Learn_CTS
             // Set the window size as options size setting.
             string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
                                   Path.DirectorySeparatorChar + "options.json";
+            if (!new FileInfo(options_path).Exists)
+            {
+                JObject options_setup = new JObject()
+                {
+                    ["theme"] = "dark",
+                    ["maximized"] = false,
+                    ["size"] = new JObject()
+                    {
+                        ["x"] = 900,
+                        ["y"] = 600
+                    }
+                };
+                Tools.Set_To_JSON(options_path, options_setup);
+            }
             JObject options = Tools.Get_From_JSON(options_path);
             if ((bool)options["maximized"])
             {
@@ -302,12 +316,13 @@ namespace Learn_CTS
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
             {
-                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
-                Location = new Point(0, games_menu_pnl_topbar.Height),
+                Size = new Size((int)(this.Width * 0.7), this.Height - games_menu_pnl_topbar.Height),
                 Name = "games_menu_flp_games",
+                Anchor = AnchorStyles.Top,
                 TabIndex = 3,
                 AutoScroll = true
             };
+            games_menu_flp_games.Location = new Point(this.Width / 2 - games_menu_flp_games.Width / 2, games_menu_pnl_topbar.Height);
 
             this.Controls.AddRange(new Control[] {
                 games_menu_pb_back_to_main_menu,
@@ -365,6 +380,7 @@ namespace Learn_CTS
                 gc = new GameCreator();
                 gc.Name = "games_menu_game_creator";
                 gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
+                gc.LostFocus += new EventHandler(GameCreator_Leave);
                 this.Controls.Add(gc);
                 gc.BringToFront();
             }
@@ -374,6 +390,15 @@ namespace Learn_CTS
                 gc.Dispose();
             }
             
+        }
+
+        private void GameCreator_Leave(object sender, EventArgs e)
+        {
+            if (Controls.Find("games_menu_game_creator", true).Length != 0)
+            {
+                GameCreator gc = (GameCreator)Controls.Find("games_menu_game_creator", true)[0];
+                gc.Dispose();
+            }
         }
 
         private void Menu_SizeChanged(object sender, EventArgs e)
@@ -405,11 +430,11 @@ namespace Learn_CTS
                         c.Location = new Point(this.Width - 68, 6);
                         break;
                     case "games_menu_game_creator":
-                        c.Location = new Point(this.Width - c.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
+                        c.Location = new Point(this.Width - c.Width, 54);
                         break;
                     case "games_menu_flp_games":
-                        c.Location = new Point(0, this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);
-                        c.Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, 54);
+                        c.Size = new Size((int)(this.Width * 0.7), this.Height - 54);
                         break;
                     case "games_menu_txt_name_game":
                         c.Location = new Point((this.Width / 2) - (c.Width / 2),

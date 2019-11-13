@@ -40,7 +40,7 @@ namespace Learn_CTS
             InitializeListTextures();
             Refresh();
         }
-        
+
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
@@ -116,8 +116,62 @@ namespace Learn_CTS
 
         private void HighlightItem(Item item)
         {
-            ItemViewer highlight = new ItemViewer(item.GetID());
-            this.Controls.Add(highlight);
+            // Panel used to darken the background elements
+            Panel hg_pnl_color = new Panel()
+            {
+                Location = new Point(0, 0),
+                Width = this.Width,
+                Height = this.Height,
+                Name = "hg_pnl_color",
+                BackColor = Color.FromArgb(80, 0, 0, 0)
+            };
+            hg_pnl_color.MouseDown += new MouseEventHandler(DisableHighlight);
+
+            // PictureBox to preview the item
+            PictureBox hg_pb_item = new PictureBox()
+            {
+                BackgroundImage = item.GetImage(),
+                Parent = hg_pnl_color,
+                Name = "hg_pb_item",
+                Height = item.GetImage().Height,
+                Width = item.GetImage().Width
+            };
+            hg_pb_item.Location = new Point((this.Width / 2) - (hg_pb_item.Width * 2), (this.Height / 2) - (hg_pb_item.Height / 2));
+
+            // Label to view the item description
+            Label hg_lbl_desc = new Label()
+            {
+                Text = item.GetDescription(),
+                BackColor = Color.Transparent,
+                Name = "hg_lbl_desc",
+                Parent = hg_pnl_color,
+                AutoSize = true,
+                MaximumSize = new Size(this.Width - ((this.Width / 2) + (this.Width / 20)), this.Height - hg_pb_item.Location.Y),
+            };
+            hg_lbl_desc.Location = new Point((this.Width / 2) + (this.Width / 20), (this.Height / 2) + (hg_lbl_desc.Height / 2));
+            hg_lbl_desc.MouseDown += new MouseEventHandler(DisableHighlight);
+
+            this.Controls.AddRange(new Control[] { hg_pb_item, hg_lbl_desc, hg_pnl_color });
+
+        }
+
+        private void DisableHighlight(object sender, MouseEventArgs e)
+        {
+            foreach (Control c in this.Controls)
+            {
+                switch (c.Name)
+                {
+                    case "hg_pnl_color":
+                        c.Dispose();
+                        break;
+                    case "hg_pb_item":
+                        c.Dispose();
+                        break;
+                    case "hg_lbl_desc":
+                        c.Dispose();
+                        break;
+                }
+            }
         }
 
         public static Bitmap ChangeOpacity(Image img, float opacityvalue)
@@ -135,6 +189,22 @@ namespace Learn_CTS
 
         private void PNCWindow_SizeChanged(object sender, EventArgs e)
         {
+            foreach (Control c in this.Controls)
+            {
+                switch (c.Name)
+                {
+                    case "hg_pnl_color":
+                        c.Width = this.Width;
+                        c.Height = this.Height;
+                        break;
+                    case "hg_pb_item":
+                        c.Location = new Point((this.Width / 2) - (c.Width * 2), (this.Height / 2) - (c.Height / 2));
+                        break;
+                    case "hg_lbl_desc":
+                        c.MaximumSize = new Size(this.Width - ((this.Width / 2) + (this.Width / 20)), this.Height - Controls.Find("hg_pb_item", true)[0].Location.Y);
+                        break;
+                }
+            }
         }
     }
 }

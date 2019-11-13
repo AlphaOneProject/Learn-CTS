@@ -101,7 +101,9 @@
             this.Controls.Add(this.pnl_bg);
             this.Name = "GameCreator";
             this.Size = new System.Drawing.Size(372, 160);
+            this.Load += new System.EventHandler(this.GameCreator_Load);
             this.SizeChanged += new System.EventHandler(this.GameCreator_SizeChanged);
+            this.Leave += new System.EventHandler(this.GameCreator_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pb_confirm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_back_create)).EndInit();
             this.pnl_bg.ResumeLayout(false);

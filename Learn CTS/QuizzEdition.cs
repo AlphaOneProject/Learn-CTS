@@ -21,6 +21,7 @@ namespace Learn_CTS
         private JObject data;
         private int prev_line_loc = 50;
         private List<string> cbo_redirect_list;
+        private bool loading = false;
 
         // Methods.
         
@@ -102,15 +103,20 @@ namespace Learn_CTS
                 }
             }
             cbo_redirect_list.Sort();
+            this.loading = true;
+            int i = 1;
             foreach (Panel pan in this.Controls.OfType<Panel>())
             {
                 pan.Width = this.Width - 20;
                 int id = int.Parse(pan.Name.Remove(0, "pan_choice".Length));
 
-                // Sizing of all contained controls.
                 ComboBox cbo_redirect = (ComboBox)pan.Controls.Find("cbo_redirect" + id, false)[0];
                 cbo_redirect.DataSource = new List<string>(cbo_redirect_list);
+                cbo_redirect.Name = "cbo_redirect" + i;
+                cbo_redirect.SelectedIndex = int.Parse((string)this.data["c" + i]["redirect"]) + 1;
+                i++;
             }
+            this.loading = false;
         }
 
         /// <summary>
@@ -405,6 +411,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this.loading) { return; }
             ComboBox cbo = (ComboBox)sender;
             ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex - 1;
             Tools.Set_To_JSON(this.file_path, this.data);
