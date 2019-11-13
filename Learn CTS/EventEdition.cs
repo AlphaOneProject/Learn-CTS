@@ -139,7 +139,7 @@ namespace Learn_CTS
         private void EventEdition_SizeChanged(object sender, EventArgs e)
         {
             // Sizing.
-            int size_left = this.Width - 15 - 10 - 10 - pb_delete.Width - 15;
+            int size_left = this.Width - 15 - btn_placement.Width - 10 - 10 - 10 - pb_delete.Width - 15;
             cbo_dialogs.Width = size_left / 2;
             cbo_npcs.Width = size_left / 2;
 
@@ -178,6 +178,11 @@ namespace Learn_CTS
         public void Discard(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Discard_Event(this);
+        }
+
+        private void Btn_placement_Click(object sender, EventArgs e)
+        {
+            ((Editor)this.ParentForm).Place_Event(this);
         }
     }
 }

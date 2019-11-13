@@ -34,6 +34,7 @@
             this.cbo_npcs = new System.Windows.Forms.ComboBox();
             this.cbo_dialogs = new System.Windows.Forms.ComboBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_placement = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,9 +58,9 @@
             this.cbo_npcs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbo_npcs.ForeColor = System.Drawing.Color.White;
             this.cbo_npcs.FormattingEnabled = true;
-            this.cbo_npcs.Location = new System.Drawing.Point(15, 14);
+            this.cbo_npcs.Location = new System.Drawing.Point(105, 14);
             this.cbo_npcs.Name = "cbo_npcs";
-            this.cbo_npcs.Size = new System.Drawing.Size(260, 32);
+            this.cbo_npcs.Size = new System.Drawing.Size(217, 32);
             this.cbo_npcs.TabIndex = 1;
             this.toolTip.SetToolTip(this.cbo_npcs, "Permet le choix du personnage.");
             this.cbo_npcs.SelectedIndexChanged += new System.EventHandler(this.Cbo_npcs_SelectedIndexChanged);
@@ -71,9 +72,9 @@
             this.cbo_dialogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbo_dialogs.ForeColor = System.Drawing.Color.White;
             this.cbo_dialogs.FormattingEnabled = true;
-            this.cbo_dialogs.Location = new System.Drawing.Point(285, 14);
+            this.cbo_dialogs.Location = new System.Drawing.Point(356, 14);
             this.cbo_dialogs.Name = "cbo_dialogs";
-            this.cbo_dialogs.Size = new System.Drawing.Size(260, 32);
+            this.cbo_dialogs.Size = new System.Drawing.Size(189, 32);
             this.cbo_dialogs.TabIndex = 2;
             this.toolTip.SetToolTip(this.cbo_dialogs, "Permet le choix du dialogue.");
             this.cbo_dialogs.SelectedIndexChanged += new System.EventHandler(this.Cbo_dialogs_SelectedIndexChanged);
@@ -83,11 +84,23 @@
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.ToolTipTitle = "Information";
             // 
+            // btn_placement
+            // 
+            this.btn_placement.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_placement.ForeColor = System.Drawing.Color.White;
+            this.btn_placement.Location = new System.Drawing.Point(15, 14);
+            this.btn_placement.Name = "btn_placement";
+            this.btn_placement.Size = new System.Drawing.Size(80, 32);
+            this.btn_placement.TabIndex = 3;
+            this.btn_placement.Text = "Placer";
+            this.btn_placement.Click += new System.EventHandler(this.Btn_placement_Click);
+            // 
             // EventEdition
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.btn_placement);
             this.Controls.Add(this.cbo_dialogs);
             this.Controls.Add(this.cbo_npcs);
             this.Controls.Add(this.pb_delete);
@@ -107,5 +120,6 @@
         private System.Windows.Forms.ComboBox cbo_npcs;
         private System.Windows.Forms.ComboBox cbo_dialogs;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button btn_placement;
     }
 }

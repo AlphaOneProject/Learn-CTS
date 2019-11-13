@@ -97,3 +97,4 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
+C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
