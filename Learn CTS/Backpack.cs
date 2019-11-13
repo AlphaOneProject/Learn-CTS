@@ -20,8 +20,8 @@ namespace Learn_CTS
 
         private void Backpack_Load(object sender, EventArgs e)
         {
-            Form f = (Form)this.FindForm();
-            this.Location = new Point(f.Width / 2 - this.Width /2, f.Height/2 - this.Height/2);
+            Form f = this.FindForm();
+            this.Location = new Point(f.Width / 2 - this.Width / 2, f.Height / 2 - this.Height / 2);
             string path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar;
             pbox_backpack.Image = Image.FromFile(path + "backpack.png");
             pbox_ticket.Image = Image.FromFile(path + "tickets.png");
@@ -35,6 +35,11 @@ namespace Learn_CTS
         private void Backpack_Closed(object sender, EventArgs e)
         {
             ((GameWindow)this.FindForm()).RemoveBackpack();
+        }
+
+        private void Backpack_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.B) Backpack_Closed(sender, e);
         }
     }
 }

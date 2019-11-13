@@ -21,7 +21,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public NPC(int id, string name, string folder, bool b, int x, int y, int quiz) : base(id, name, folder, b, x, y)
+        public NPC(int id, string name, string folder, int x, int y, int quiz) : base(id, name, folder, x, y)
         {
             interact = new Texture("Interaction", 0, 0);
             interact.SetX(this.GetX() + this.GetWidth() / 2 - interact.GetWidth() / 2);
@@ -29,7 +29,7 @@ namespace Learn_CTS
             this.quiz = quiz;
         }
 
-        public NPC(int id, bool b, int x, int y) : base(id, null, null, b, x, y)
+        public NPC(int id, int x, int y) : base(id, null, null, x, y)
         {
             this.quiz = -1;
         }

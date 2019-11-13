@@ -16,7 +16,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Player(String name, int x, int y) : base(0, name, "1", true, x, y)
+        public Player(String name, int x, int y) : base(0, name, "1", x, y)
         {
         }
 

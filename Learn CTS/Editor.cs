@@ -19,6 +19,7 @@ namespace Learn_CTS
         private JObject game_properties;
         private string old_category = "general";
         private bool saved;
+        private GameWindow preview = null;
 
         // Methods.
 
@@ -1520,7 +1521,7 @@ namespace Learn_CTS
             txt_rename_situation.KeyPress += new KeyPressEventHandler(this.Rename_Situation_Txt_Keypress);
             content.Controls.Add(txt_rename_situation);
 
-            // Creation of a picturebox allowing to rename the situation.
+            // Creation of a PictureBox allowing to rename the situation.
             PictureBox pb_rename_situation = new PictureBox()
             {
                 Name = "pb_rename_situation",
@@ -1533,7 +1534,7 @@ namespace Learn_CTS
             pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
             content.Controls.Add(pb_rename_situation);
 
-            // Creation of a button allowing to discard the situation.
+            // Creation of a PictureBox allowing to discard the situation.
             PictureBox pb_discard_situation = new PictureBox()
             {
                 Name = "pb_discard_situation",
@@ -1546,6 +1547,19 @@ namespace Learn_CTS
             pb_discard_situation.Click += new EventHandler(this.Discard_Situation);
             content.Controls.Add(pb_discard_situation);
 
+            // Creation of a PictureBox responsible for the preview display.
+            PictureBox pb_preview_situation = new PictureBox()
+            {
+                Name = "pb_preview_situation",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "eye.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_preview_situation.Click += new EventHandler(this.Preview_Situation);
+            content.Controls.Add(pb_preview_situation);
+
             // Set the correct location of the controls (responsive with the groupbox's size).
             pb_down_situation.Location = new Point(8, 0);
             pb_up_situation.Location = new Point(pb_down_situation.Location.X + pb_down_situation.Width + 2, 0);
@@ -1553,6 +1567,7 @@ namespace Learn_CTS
             txt_rename_situation.Location = new Point(lbl_name_situation.Location.X, 0);
             pb_rename_situation.Location = new Point(lbl_name_situation.Location.X + lbl_name_situation.Width, 0);
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
+            pb_preview_situation.Location = new Point(pb_discard_situation.Location.X + pb_discard_situation.Width + 2, 0);
 
             // Generating basic Label & add PictureBox bellow the previous Controls in the content panel.
 
@@ -1856,7 +1871,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="sender">Control calling the method.</param>
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        public void Discard_Situation(object sender, EventArgs e)
+        private void Discard_Situation(object sender, EventArgs e)
         {
             TreeNode select_node = menu.SelectedNode;
 
@@ -1893,6 +1908,25 @@ namespace Learn_CTS
                     Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + folder, @"" + sc_path + Path.DirectorySeparatorChar + j.ToString() + "." + folder.Split('.')[1]);
                 }
                 j++;
+            }
+        }
+
+        private void Preview_Situation(object sender, EventArgs e)
+        {
+            if (this.preview == null)
+            {
+                this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
+                                               (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
+                this.preview.Show();
+                this.preview.Size = new Size(600, 400);
+                Rectangle screen = Screen.FromControl(this).Bounds;
+                this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
+            }
+            else
+            {
+                this.preview.Close();
+                this.preview.Dispose();
+                this.preview = null;
             }
         }
 

@@ -112,6 +112,7 @@
             this.Name = "Backpack";
             this.Size = new System.Drawing.Size(489, 309);
             this.Load += new System.EventHandler(this.Backpack_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Backpack_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_ticket)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_map)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_phone)).EndInit();
