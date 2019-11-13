@@ -116,7 +116,7 @@ namespace Learn_CTS
             ((GameWindow)this.FindForm()).SetScore(score);
             if (s.Length == 0 || s == "0")
             {
-                //todo : situation suivante
+                ((GameWindow)this.FindForm()).SwitchSituation();
             }
             else if(s == "-1")
             {

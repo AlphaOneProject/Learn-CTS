@@ -28,7 +28,7 @@ namespace Learn_CTS
             pbox_map.Image = Image.FromFile(path + "map.png");
             pbox_phone.Image = Image.FromFile(path + "smartphone.png");
             pbox_close.Image = Image.FromFile(path + "gamecard-delete-btn-x64.png");
-            //pbox_close.Click += new EventHandler(Backpack_Closed);
+            pbox_close.Click += new EventHandler(Backpack_Closed);
             this.Show();
         }
 
@@ -40,11 +40,6 @@ namespace Learn_CTS
         private void Backpack_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.B) Backpack_Closed(sender, e);
-        }
-
-        private void pbox_close_Click(object sender, EventArgs e)
-        {
-            ((GameWindow)this.FindForm()).RemoveBackpack();
         }
     }
 }

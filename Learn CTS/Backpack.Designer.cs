@@ -98,7 +98,6 @@
             this.pbox_close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_close.TabIndex = 5;
             this.pbox_close.TabStop = false;
-            this.pbox_close.Click += new System.EventHandler(this.pbox_close_Click);
             // 
             // Backpack
             // 
