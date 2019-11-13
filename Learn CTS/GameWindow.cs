@@ -658,8 +658,25 @@ namespace Learn_CTS
             string npc_name;
             string npc_folder;
             int npc_quiz;
-            foreach (KeyValuePair<string, JToken> line in npcs)
+            for (int i = 1; i <= int.Parse((string)npcs["events"]); i++)
             {
+                npc_x = (int)npcs[i.ToString()]["x"];
+                npc_y = (int)npcs[i.ToString()]["y"];
+                npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
+                npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
+                npc_quiz = (int)npcs[i.ToString()]["quizz"];
+                if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
+                {
+                    vehicule.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
+                }
+                else if (platform != null && (npc_x > platform.GetX() && npc_x < platform.GetX() + platform.GetWidth()) && (npc_y > platform.GetY() && npc_y + 192 < platform.GetY() + platform.GetHeight()))
+                {
+                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
+                }
+            }
+            /*foreach (KeyValuePair<string, JToken> line in npcs)
+            {
+
                 npc_x = line.Value["x"].ToObject<int>();
                 npc_y = line.Value["y"].ToObject<int>();
                 npc_name = npcs[line.Key]["npc"]["name"].ToString();
@@ -673,7 +690,7 @@ namespace Learn_CTS
                 {
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
                 }
-            }
+            }*/
             FillVehiculeNPCs();
             FillPlatformNPCs();
         }

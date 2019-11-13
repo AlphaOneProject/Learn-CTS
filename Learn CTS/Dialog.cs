@@ -112,9 +112,13 @@ namespace Learn_CTS
                 s.Rate = -1;
                 s.Speak(this.data["question"].ToString());
                 int nbr_choices = (int)this.data["choices"];
+                string se;
                 for (int i = 1; i <= nbr_choices; i++)
                 {
-                    s.Speak("choix numéro " + i + this.data["c" + i.ToString()]["answer"].ToString());
+                    if (i == 1) se = "er";
+                    else if (i == 2) se = "nd";
+                    else se = "ème";
+                    s.Speak(i + se + " choix "+ this.data["c" + i.ToString()]["answer"].ToString());
                 }
             }
             t_audio.Abort();
@@ -146,6 +150,7 @@ namespace Learn_CTS
         public void Dialog_Closed(object sender, EventArgs e)
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
+            if (t_audio.IsAlive) t_audio.Abort();
             ((GameWindow)this.FindForm()).RemoveDialog();
         }
 

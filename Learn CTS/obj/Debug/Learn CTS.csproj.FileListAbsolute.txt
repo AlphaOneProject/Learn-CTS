@@ -45,7 +45,6 @@ C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Lear
 C:\Users\Antoine\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
-C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
@@ -94,4 +93,4 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition.resources
-C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition.resources
