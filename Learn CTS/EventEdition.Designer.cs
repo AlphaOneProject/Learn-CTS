@@ -39,6 +39,7 @@
             // 
             // pb_delete
             // 
+            this.pb_delete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_delete.Image = ((System.Drawing.Image)(resources.GetObject("pb_delete.Image")));
             this.pb_delete.Location = new System.Drawing.Point(555, 15);
             this.pb_delete.Name = "pb_delete";
