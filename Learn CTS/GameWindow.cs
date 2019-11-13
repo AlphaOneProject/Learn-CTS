@@ -32,6 +32,7 @@ namespace Learn_CTS
         private int ticks = 1;
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
         private Dialog d;
+        private Backpack bp;
         private string game;
         private string game_path;
         private bool debug = false;
@@ -40,12 +41,11 @@ namespace Learn_CTS
         private bool leave_npc = false;
         private List<NPC> npcs_leaving_vehicule;
         private int tick_stopped = 0;
-        private int NPCsDensity = 50; //max 650
+        private int NPCsDensity = 150; //max 650
         private int score = 0;
         private string scenario;
         private string situation;
-        private string sc_aimed;
-        private string si_aimed;
+        private Random r;
 
 
         /// <summary>
@@ -60,9 +60,8 @@ namespace Learn_CTS
             InitializeComponent();
             DoubleBuffered = true;
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
-            int aim = 0;
-            sc_aimed = Directory.GetDirectories(@"" + sc_path)[aim].Remove(0, sc_path.Length + 1);
-            si_aimed = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + sc_aimed)[aim].Remove(0, sc_path.Length + sc_aimed.Length + 2);
+            if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length + 1);
+            if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[0].Remove(0, sc_path.Length + scenario.Length + 2);
 
         }
 
@@ -114,12 +113,22 @@ namespace Learn_CTS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //SetUpWindow();
+            r = new Random();
             InitializeListTextures();
             InitializeTimer();
             lbl_score.Text = score.ToString();
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar;
             Show();
             timer.Enabled = true;
         }
+
+        /*private void SetUpWindow()
+        {
+            JObject options = Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
+            this.Width = (int)options["size"]["x"];
+            this.Height = (int)options["size"]["y"];
+        }*/
 
         /// <summary>
         /// Show the fps average at this moment.
@@ -501,7 +510,7 @@ namespace Learn_CTS
         {
             bool c_vertical = true;
             bool c_horizontal = true;
-            if (this.Controls.Contains(d)) return;
+            if (this.Controls.Contains(d) || this.Controls.Contains(bp)) return;
             player.UpdateMovement(a, b);
             if (!vehicule.IsInside())
             {
@@ -579,6 +588,8 @@ namespace Learn_CTS
                 case Keys.D: this.debug = !debug; break;
                 case Keys.G: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                 case Keys.F: this.StopVehicule(); ; break;
+                case Keys.M: this.Moise(); ; break;
+                case Keys.B: this.Open_Backpack(); ; break;
             }
         }
 
@@ -652,7 +663,7 @@ namespace Learn_CTS
 
         public void InitializeNPCs()
         {
-            JObject npcs = Get_From_JSON("scenarios" + Path.DirectorySeparatorChar + sc_aimed + Path.DirectorySeparatorChar + si_aimed + Path.DirectorySeparatorChar + "dialogs.json");
+            JObject npcs = Get_From_JSON("scenarios" + Path.DirectorySeparatorChar + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "dialogs.json");
             int npc_x;
             int npc_y;
             string npc_name;
@@ -672,6 +683,12 @@ namespace Learn_CTS
                 else if (platform != null && (npc_x > platform.GetX() && npc_x < platform.GetX() + platform.GetWidth()) && (npc_y > platform.GetY() && npc_y + 192 < platform.GetY() + platform.GetHeight()))
                 {
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, true));
+                }
+                else
+                {
+                    npc_x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
+                    npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
+                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder, false));
                 }
             }
             /*foreach (KeyValuePair<string, JToken> line in npcs)
@@ -700,7 +717,6 @@ namespace Learn_CTS
             if (!leave_npc)
             {
                 npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
-                Random r = new Random();
                 int i;
                 foreach (NPC n in npcs_leaving_vehicule)
                 {
@@ -724,11 +740,14 @@ namespace Learn_CTS
 
         private List<NPC> SelectionNPCsLeavingVehicule()
         {
-            Random r = new Random();
             List<NPC> list = new List<NPC>();
             for(int i = 0; i< vehicule.GetListChilds().Count; i++)
             {
-                if(vehicule.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)vehicule.GetListChilds()[i]).GetQuiz()<1 && r.Next(0,3)!=0) list.Add((NPC)vehicule.GetListChilds()[i]);
+                if(vehicule.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)vehicule.GetListChilds()[i]).GetQuiz()<1 && r.Next(0, 3) != 0)
+                {
+                    vehicule.GetListChilds()[i].DisableCollisions();
+                    list.Add((NPC)vehicule.GetListChilds()[i]);
+                } 
             }
             return list;
         }
@@ -788,7 +807,6 @@ namespace Learn_CTS
 
         private void NPCEnterVehicule()
         {
-            Random r = new Random();
             int i;
             NPC n;
             int y;
@@ -826,7 +844,6 @@ namespace Learn_CTS
 
         private void FillVehiculeNPCs()
         {
-            Random r = new Random();
             int max = NPCsDensity / 2;
             int x;
             int y;
@@ -850,7 +867,6 @@ namespace Learn_CTS
 
         private void FillPlatformNPCs()
         {
-            Random r = new Random();
             //int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
             int max = NPCsDensity / 2;
             int x;
@@ -859,7 +875,7 @@ namespace Learn_CTS
             for (int i = 0; i < max; i++)
             {
                 x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
-                y = platform.GetY() + r.Next(20, 192);
+                y = platform.GetY() + r.Next(20, platform.GetHeight());
                 platform.AddChild(nm.CreateNPC(x, y, true));
             }
             /*for (int i = 0; i < max; i++)
@@ -879,6 +895,69 @@ namespace Learn_CTS
         {
             score += s;
             lbl_score.Text = score.ToString();
+        }
+
+        private void Open_Backpack()
+        {
+            bp = new Backpack();
+            this.Controls.Add(bp);
+        }
+
+        public void RemoveBackpack()
+        {
+            this.Controls.Remove(bp);
+            this.Focus();
+        }
+
+        public void Moise()
+        {
+            int d = player.GetDirection();
+            NPC n;
+            foreach(Texture t in vehicule.GetListChilds())
+            {
+                if (t.GetType().Name == "NPC" )
+                {
+                    n = (NPC)t;
+                    if(d == 1 
+                    && n.GetX()+n.GetWidth()/2 > player.GetX() + player.GetWidth()/2
+                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 300
+                    && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
+                    {
+                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 32)
+                        {
+                            n.SetObjectiveY(n.GetZ() - 16);
+                        }
+                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - player.GetHeight())
+                        {
+                            n.SetObjectiveY(n.GetZ() + 16);
+                        }
+                        else
+                        {
+                            if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - 16);
+                            else n.SetObjectiveY(n.GetZ() + 16);
+                        }
+                    }
+                    else if (d == 3
+                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2
+                    && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 300
+                    && Math.Abs(n.GetZ() - player.GetZ()) < 8)
+                    {
+                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 32)
+                        {
+                            n.SetObjectiveY(n.GetZ() - 16);
+                        }
+                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - player.GetHeight())
+                        {
+                            n.SetObjectiveY(n.GetZ() + 16);
+                        }
+                        else
+                        {
+                            if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - 16);
+                            else n.SetObjectiveY(n.GetZ() + 16);
+                        }
+                    }
+                }
+            }
         }
     }
 }

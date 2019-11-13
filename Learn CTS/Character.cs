@@ -139,6 +139,11 @@ namespace Learn_CTS
             return this.name;
         }
 
+        public int GetDirection()
+        {
+            return this.last_direction;
+        }
+
         /// <summary>
         /// Set coordinates as objective
         /// </summary>

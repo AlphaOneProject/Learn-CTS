@@ -150,7 +150,7 @@ namespace Learn_CTS
         public void Dialog_Closed(object sender, EventArgs e)
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
-            if (t_audio.IsAlive) t_audio.Abort();
+            if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
             ((GameWindow)this.FindForm()).RemoveDialog();
         }
 

@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Backpack.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Backpack.Designer.cs">
+      <DependentUpon>Backpack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Character.cs" />
     <Compile Include="Dialog.cs">
       <SubType>UserControl</SubType>
@@ -130,6 +136,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transport.cs" />
+    <EmbeddedResource Include="Backpack.resx">
+      <DependentUpon>Backpack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
     </EmbeddedResource>
