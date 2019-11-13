@@ -20,18 +20,14 @@ namespace Learn_CTS
         private static Image icon_edit;
         private static Image icon_delete;
 
-
         public GameCard()
         {
             InitializeComponent();
             this.img_path = AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar;
-            PictureBox pb_play_parent = new PictureBox()
-            {
-                BackColor = Color.Transparent
-            };
+
             // Fetching icons and saving them in a static variable.
             FetchIcons();
-            
+
             pb_play.BackgroundImage = ChangeOpacity(icon_play, 0.5f);
             pb_play.BackColor = Color.Transparent;
             pb_edit.BackgroundImage = ChangeOpacity(icon_edit, 0.5f);
@@ -229,7 +225,7 @@ namespace Learn_CTS
             try
             {
                 if (pb.BackgroundImage != null) pb.BackgroundImage.Dispose();
-                pb.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 0.7f);
+                pb.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 0.5f);
             }
             catch (FileNotFoundException)
             {
