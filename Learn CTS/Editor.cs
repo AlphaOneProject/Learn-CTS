@@ -1052,7 +1052,7 @@ namespace Learn_CTS
             {
                 Name = "pb_down_scenario",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" + 
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1064,7 +1064,7 @@ namespace Learn_CTS
             {
                 Name = "pb_up_scenario",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1079,7 +1079,7 @@ namespace Learn_CTS
                 Text = menu.SelectedNode.Text,
                 Cursor = Cursors.Hand,
                 AutoSize = true,
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
             lbl_name_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
@@ -1091,11 +1091,11 @@ namespace Learn_CTS
                 Name = "txt_rename_scenario",
                 Text = menu.SelectedNode.Text,
                 Cursor = Cursors.IBeam,
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
                 ForeColor = Color.White,
-                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 16) + 24,
+                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 20) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -1107,7 +1107,7 @@ namespace Learn_CTS
             {
                 Name = "pb_rename_scenario",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1120,7 +1120,7 @@ namespace Learn_CTS
             {
                 Name = "pb_discard_scenario",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1470,7 +1470,7 @@ namespace Learn_CTS
             {
                 Name = "pb_down_situation",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1482,7 +1482,7 @@ namespace Learn_CTS
             {
                 Name = "pb_up_situation",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1497,7 +1497,7 @@ namespace Learn_CTS
                 Text = menu.SelectedNode.Text,
                 Cursor = Cursors.Hand,
                 AutoSize = true,
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
             lbl_name_situation.Click += new EventHandler(this.Ask_Rename_Situation);
@@ -1509,11 +1509,11 @@ namespace Learn_CTS
                 Name = "txt_rename_situation",
                 Text = menu.SelectedNode.Text,
                 Cursor = Cursors.IBeam,
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 BackColor = Color.FromArgb(56, 56, 56),
                 ForeColor = Color.White,
-                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 16) + 24,
+                Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 20) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
             };
@@ -1525,7 +1525,7 @@ namespace Learn_CTS
             {
                 Name = "pb_rename_situation",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -1538,7 +1538,7 @@ namespace Learn_CTS
             {
                 Name = "pb_discard_situation",
                 Cursor = Cursors.Hand,
-                Size = new Size(24, 24),
+                Size = new Size(32, 32),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
