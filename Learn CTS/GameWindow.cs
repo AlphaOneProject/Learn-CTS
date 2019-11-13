@@ -29,7 +29,7 @@ namespace Learn_CTS
         private bool go_down = false;
         private bool go_left = false;
         private bool go_right = false;
-        private int ticks = 1;
+        private int ticks = 0;
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
         private Dialog d;
         private Backpack bp;
@@ -37,12 +37,13 @@ namespace Learn_CTS
         private string game_path;
         private bool debug = false;
         private bool god = false;
-        private bool enter_npc = true;
-        private bool leave_npc = false;
+        /*private bool enter_npc = true;
+        private bool leave_npc = false;*/
         private List<NPC> npcs_leaving_vehicule;
-        private int tick_stopped = 0;
+        private int ticks_stopped = 0;
         private int NPCsDensity = 50; //max 650
         private int score = 0;
+        private string sc_path;
         private string scenario;
         private string situation;
         private Random r;
@@ -61,7 +62,7 @@ namespace Learn_CTS
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
-            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
+            sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length + 1);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[0].Remove(0, sc_path.Length + scenario.Length + 2);
 
@@ -90,6 +91,13 @@ namespace Learn_CTS
 
         private void InitializeListTextures()
         {
+            if(list_textures != null && list_textures.Count > 0)
+            {
+                foreach(Texture t in list_textures)
+                {
+                    t.Dispose();
+                }
+            }
             Texture.InitializePath(game);
             Character.SetM(3);
             player = new Player("Moi",600, 504);
@@ -116,12 +124,18 @@ namespace Learn_CTS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Load_Game();
+        }
+
+        private void Load_Game()
+        {
             //SetUpWindow();
+            RemoveDialog();
+            RemoveBackpack();
             r = new Random();
             InitializeListTextures();
             InitializeTimer();
             lbl_score.Text = score.ToString();
-            string path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar;
             Show();
             timer.Enabled = true;
         }
@@ -146,8 +160,9 @@ namespace Learn_CTS
         private void ConsoleAvgFPS()
         {
             double diff = ((DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds - start_milliseconds) / 1000;
-            Console.WriteLine("Fps moyen : " + (ticks / diff).ToString().Substring(0, 4));
-            ticks = 1;
+            if (ticks > 0 && diff > 0) Console.WriteLine("Fps moyen : " + (ticks / diff).ToString().Substring(0, 4));
+            else Console.WriteLine("Erreur fps");
+            ticks = 0;
             start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
         }
 
@@ -163,13 +178,20 @@ namespace Learn_CTS
             if(!vehicule.IsInside() && vehicule.GetState() == 0) MoveTexturesIfPlayerMoves();
             if (vehicule.GetState() == 0)
             {
-                tick_stopped += 1;
-                NPCLeaveVehicule();
+                ticks_stopped += 1;
+                if(ticks_stopped == 1)
+                {
+                    NPCLeaveVehicule();
+                }
+                if(ticks_stopped == 35)
+                {
+                    NPCEnterVehicule();
+                }
                 DeleteAllNPCsWhichLeavedScreen();
-                if (tick_stopped > 200)
+                if (ticks_stopped > 200)
                 {
                     vehicule.ChangeState();
-                    tick_stopped = 0;
+                    ticks_stopped = 0;
                 }
             }
             if (vehicule.GetX() < this.Width && !vehicule.IsInside())
@@ -294,7 +316,7 @@ namespace Learn_CTS
 
         public void RemoveDialog()
         {
-            this.Controls.Remove(d);
+            if (this.Controls.Contains(d)) this.Controls.Remove(d);
             this.Focus();
         }
 
@@ -634,8 +656,7 @@ namespace Learn_CTS
                 t.Dispose();
             }
             nm.Clear();
-            if (preview) this.Close();
-            else Application.Restart();
+            if (!preview) Application.Restart();
         }
 
         private void StopVehicule()
@@ -656,7 +677,7 @@ namespace Learn_CTS
                 else FillVehiculeNPCs();
                 vehicule.SetX(-4000);
                 vehicule.SetSpeed(vehicule.GetMaxSpeed());
-                leave_npc = false;
+                //leave_npc = false;
             }
         }
 
@@ -696,7 +717,16 @@ namespace Learn_CTS
 
         private void NPCLeaveVehicule()
         {
-            if (!leave_npc)
+            List<NPC> npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
+            int i;
+            foreach (NPC n in npcs_leaving_vehicule)
+            {
+                i = vehicule.GetIndexNearestDoor(n.GetX());
+                n.SetObjectiveX(vehicule.GetPosDoor(i));
+                n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight() + r.Next(0, 100));
+                n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 5000);
+            }
+            /*if (!leave_npc)
             {
                 npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
                 int i;
@@ -716,7 +746,7 @@ namespace Learn_CTS
                 {
                     NPCEnterVehicule();
                 }
-            }
+            }*/
         }
 
         private List<NPC> SelectionNPCsLeavingVehicule()
@@ -733,7 +763,7 @@ namespace Learn_CTS
             return list;
         }
 
-        private bool HasAllNPCsLeavedVehicule(List<NPC> l)
+        /*private bool HasAllNPCsLeavedVehicule(List<NPC> l)
         {
             bool b = true;
             foreach(NPC n in l)
@@ -744,7 +774,7 @@ namespace Learn_CTS
                 }
             }
             return b;
-        }
+        }*/
 
         private void DeleteAllNPCsWhichLeavedScreen()
         {
@@ -820,7 +850,6 @@ namespace Learn_CTS
                     }
                 }
             }
-            enter_npc = false;
         }
 
         private void FillVehiculeNPCs()
@@ -852,7 +881,6 @@ namespace Learn_CTS
 
         private void FillPlatformNPCs()
         {
-            //int max = r.Next(NPCsDensity / 4, NPCsDensity / 2);
             int max = NPCsDensity / 2;
             int x;
             int y;
@@ -893,7 +921,7 @@ namespace Learn_CTS
 
         public void RemoveBackpack()
         {
-            this.Controls.Remove(bp);
+            if(this.Controls.Contains(bp)) this.Controls.Remove(bp);
             this.Focus();
         }
 
@@ -909,7 +937,7 @@ namespace Learn_CTS
                     n = (NPC)t;
                     if(d == 1 
                     && n.GetX()+n.GetWidth()/2 > player.GetX() + player.GetWidth()/2
-                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 300
+                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 150
                     && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
                     {
                         if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 32)
@@ -946,6 +974,19 @@ namespace Learn_CTS
                         }
                     }
                 }
+            }
+        }
+
+        public void SwitchSituation()
+        {
+            situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[1].Remove(0, sc_path.Length + scenario.Length + 2);
+            if(situation != null)
+            {
+                Load_Game();
+            }
+            else
+            {
+                GameWindowClosed();
             }
         }
     }
