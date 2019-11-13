@@ -278,10 +278,11 @@ namespace Learn_CTS
             Label games_menu_pnl_topbar = new Label()
             {
                 Name = "games_menu_pnl_topbar",
-                Location = new Point(0, 0),
-                Size = new Size(this.Width, 54),
+                Location = new Point(-1, 0),
+                Size = new Size(this.Width, 80),
                 Text = "Mes jeux",
                 TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.FixedSingle,
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
             };
 
@@ -291,12 +292,12 @@ namespace Learn_CTS
                 Name = "games_menu_pb_back_to_main_menu",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
-                Location = new Point(6, 6),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Parent = games_menu_pnl_topbar
             };
+            games_menu_pb_back_to_main_menu.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back_to_main_menu.Height) / 2);
             games_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
 
             // Creation of the Button responsible to create a game.
@@ -305,20 +306,22 @@ namespace Learn_CTS
                 Name = "games_menu_pb_create_game",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
-                Location = new Point(this.Width - 68, 6),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Parent = games_menu_pnl_topbar
             };
+            games_menu_pb_create_game.Location = new Point(this.Width - 68, (games_menu_pnl_topbar.Height - games_menu_pb_create_game.Height) / 2);
             games_menu_pb_create_game.Click += new EventHandler(this.Display_create_game);
 
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
             {
-                Size = new Size((int)(this.Width * 0.7), this.Height - games_menu_pnl_topbar.Height),
+                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
                 Name = "games_menu_flp_games",
                 Anchor = AnchorStyles.Top,
+                BackColor = Color.FromArgb(26, 26, 26),
+                Padding = new Padding(this.Width / 8, 50, this.Width /8, 0),
                 TabIndex = 3,
                 AutoScroll = true
             };
@@ -425,16 +428,19 @@ namespace Learn_CTS
                     case "games_menu_pnl_topbar":
                         c.Width = this.Width;
                         break;
+                    case "games_menu_pb_back_to_main_menu":
+                        c.Location = new Point(6, (this.Controls.Find("games_menu_pnl_topbar", false)[0].Height - c.Height) / 2);
+                        break;
                     case "games_menu_pb_create_game":
                         c.Size = new Size(42, 42);
-                        c.Location = new Point(this.Width - 68, 6);
+                        c.Location = new Point(this.Width - 68, (this.Controls.Find("games_menu_pnl_topbar", false)[0].Height - c.Height) / 2);
                         break;
                     case "games_menu_game_creator":
-                        c.Location = new Point(this.Width - c.Width, 54);
+                        c.Location = new Point(this.Width - c.Width, this.Controls.Find("games_menu_pnl_topbar", false)[0].Height);
                         break;
                     case "games_menu_flp_games":
-                        c.Location = new Point(this.Width / 2 - c.Width / 2, 54);
-                        c.Size = new Size((int)(this.Width * 0.7), this.Height - 54);
+                        c.Location = new Point(0, 54);
+                        c.Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - 54);
                         break;
                     case "games_menu_txt_name_game":
                         c.Location = new Point((this.Width / 2) - (c.Width / 2),
