@@ -24,7 +24,8 @@ namespace Learn_CTS
             npc = nm.GetNPCByID(id);
             InitializeGamePath(game);
             this.DoubleBuffered = true;
-            this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
+            this.Set_Up(npc.GetQuiz().ToString());
+            Generate_Buttons_Choices();
         }
 
         private void Dialog_Load(object sender, EventArgs e)
@@ -32,8 +33,7 @@ namespace Learn_CTS
             this.Focus();
             npc.RemoveInteraction();
             lbl_name.Text = npc.GetName();
-            this.Set_Up(npc.GetQuiz().ToString());
-            Generate_Buttons_Choices();
+            this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
             this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
         }
 
@@ -42,25 +42,9 @@ namespace Learn_CTS
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
         }
 
-        /// <summary>
-        /// Recover the content of a JSON file at a specified path.
-        /// </summary>
-        /// <param name="internal_path">Path from the game folder to the targeted JSON file.</param>
-        /// <returns>Content of the JSON file under a JObject structure.</returns>
-        public JObject Get_From_JSON(string internal_path)
-        {
-            JObject output;
-            using (StreamReader stream_r = new StreamReader(@"" + this.game_path + internal_path))
-            {
-                string json_file = stream_r.ReadToEnd();
-                output = JObject.Parse(json_file);
-            }
-            return output;
-        }
-
         private void Set_Up(string q)
         {
-            data = Get_From_JSON(q+".json");
+            data = Tools.Get_From_JSON(this.game_path + q + ".json");
             audio = (int)this.data["audio"];
             if (audio == 2) txt_dialog_npc.Text = "";
             else txt_dialog_npc.Text = this.data["question"].ToString();
@@ -132,8 +116,7 @@ namespace Learn_CTS
             ((GameWindow)this.FindForm()).SetScore(score);
             if (s.Length == 0 || s == "0")
             {
-                npc.RemoveQuiz();
-                this.Dialog_Closed(sender,e);
+                //todo : situation suivante
             }
             else if(s == "-1")
             {
