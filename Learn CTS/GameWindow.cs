@@ -656,11 +656,7 @@ namespace Learn_CTS
                 t.Dispose();
             }
             nm.Clear();
-            if (preview)
-            {
-                this.Hide();
-            }
-            else Application.Restart();
+            if (!preview) Application.Restart();
         }
 
         private void StopVehicule()
