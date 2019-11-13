@@ -39,14 +39,15 @@
             // 
             this.txt_dialog_npc.BackColor = System.Drawing.Color.White;
             this.txt_dialog_npc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_dialog_npc.Cursor = System.Windows.Forms.Cursors.Default;
             this.txt_dialog_npc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_dialog_npc.ForeColor = System.Drawing.Color.Black;
             this.txt_dialog_npc.Location = new System.Drawing.Point(28, 52);
             this.txt_dialog_npc.Name = "txt_dialog_npc";
             this.txt_dialog_npc.ReadOnly = true;
-            this.txt_dialog_npc.Size = new System.Drawing.Size(241, 60);
+            this.txt_dialog_npc.Size = new System.Drawing.Size(223, 52);
             this.txt_dialog_npc.TabIndex = 1;
-            this.txt_dialog_npc.Text = "blablabla";
+            this.txt_dialog_npc.Text = "default";
             // 
             // lbl_name
             // 
@@ -69,6 +70,7 @@
             // 
             // pbox_audio
             // 
+            this.pbox_audio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbox_audio.Location = new System.Drawing.Point(237, 3);
             this.pbox_audio.Name = "pbox_audio";
             this.pbox_audio.Size = new System.Drawing.Size(32, 32);

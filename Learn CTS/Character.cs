@@ -25,7 +25,6 @@ namespace Learn_CTS
         private static int m;
         private string folder;
         private string name;
-        private bool animated = false;
 
         /// <summary>
         /// Constructor of character with a custom name.
@@ -34,14 +33,13 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Character(int id, String name, String folder, bool b, int x, int y) : base(x, y, true)
+        public Character(int id, String name, String folder, int x, int y) : base(x, y, true)
         {
             if (folder == null) folder = (id % 5 + 1).ToString();
             if (name == null) name = id.ToString();
             this.id = id;
             this.folder = folder;
             this.name = name;
-            this.animated = b;
             Random random = new Random();
             if (random.Next(2) == 0)
             {
@@ -76,7 +74,7 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (t % m == 0 && this.animated)
+            if (t % m == 0)
             {
                 t = 0;
                 if (a > 0)
@@ -142,6 +140,11 @@ namespace Learn_CTS
         public int GetDirection()
         {
             return this.last_direction;
+        }
+
+        public void SetDirection(int d)
+        {
+            this.last_direction = d;
         }
 
         /// <summary>
@@ -254,11 +257,6 @@ namespace Learn_CTS
         public void RemoveAllObjectives()
         {
             this.list_objectives.Clear();
-        }
-
-        public void Animated(bool b)
-        {
-            this.animated = b;
         }
 
         public override void Dispose()
