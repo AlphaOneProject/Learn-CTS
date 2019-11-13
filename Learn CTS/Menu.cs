@@ -87,6 +87,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Main_menu_btn_edit_Click(object sender, EventArgs e)
         {
+            this.Dispose_Controls();
             this.Controls.Clear();
             Display_games_menu();
         }
@@ -161,6 +162,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Main_menu_btn_options_Click(object sender, EventArgs e)
         {
+            this.Dispose_Controls();
             this.Controls.Clear();
             Display_options_menu();
         }
@@ -172,6 +174,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Back_to_main_menu(object sender, EventArgs e)
         {
+            this.Dispose_Controls();
             this.Controls.Clear();
             Display_Main_Menu();
         }
@@ -460,6 +463,7 @@ namespace Learn_CTS
                         // Salut Antoine
                         // Salut !
                         // Cool comme fonction dis-donc !
+                        // Merci !
                         break;
                     default:
                         break;
@@ -489,6 +493,14 @@ namespace Learn_CTS
             };
             options["size"] = size;
             Tools.Set_To_JSON(options_path, options);
+        }
+    
+        public void Dispose_Controls()
+        {
+            foreach (Control c in this.Controls)
+            {
+                c.Dispose();
+            }
         }
     }
 }

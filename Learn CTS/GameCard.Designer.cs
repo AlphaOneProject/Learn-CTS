@@ -64,12 +64,13 @@ namespace Learn_CTS
             // pb_edit
             // 
             this.pb_edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pb_edit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_edit.ErrorImage = null;
             this.pb_edit.ImageLocation = "gamecard-edit-btn-x64.png";
             this.pb_edit.Location = new System.Drawing.Point(93, 7);
             this.pb_edit.Name = "pb_edit";
-            this.pb_edit.Cursor = Cursors.Hand;
             this.pb_edit.Size = new System.Drawing.Size(42, 42);
+            this.pb_edit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_edit.TabIndex = 5;
             this.pb_edit.TabStop = false;
             this.pb_edit.Tag = "";
@@ -80,12 +81,13 @@ namespace Learn_CTS
             // pb_play
             // 
             this.pb_play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pb_play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_play.ErrorImage = null;
             this.pb_play.ImageLocation = "gamecard-play-btn-x128.png";
             this.pb_play.Location = new System.Drawing.Point(28, 28);
             this.pb_play.Name = "pb_play";
-            this.pb_play.Cursor = Cursors.Hand;
             this.pb_play.Size = new System.Drawing.Size(86, 86);
+            this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_play.TabIndex = 4;
             this.pb_play.TabStop = false;
             this.pb_play.Tag = "";
@@ -98,18 +100,20 @@ namespace Learn_CTS
             this.pb_thumbnail.Location = new System.Drawing.Point(6, 6);
             this.pb_thumbnail.Name = "pb_thumbnail";
             this.pb_thumbnail.Size = new System.Drawing.Size(128, 128);
+            this.pb_thumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_thumbnail.TabIndex = 3;
             this.pb_thumbnail.TabStop = false;
             // 
             // pb_delete
             // 
             this.pb_delete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pb_delete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_delete.ErrorImage = null;
             this.pb_delete.ImageLocation = "gamecard-delete-btn-x64.png";
             this.pb_delete.Location = new System.Drawing.Point(93, 92);
             this.pb_delete.Name = "pb_delete";
-            this.pb_delete.Cursor = Cursors.Hand;
             this.pb_delete.Size = new System.Drawing.Size(42, 42);
+            this.pb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_delete.TabIndex = 6;
             this.pb_delete.TabStop = false;
             this.pb_delete.Tag = "";
