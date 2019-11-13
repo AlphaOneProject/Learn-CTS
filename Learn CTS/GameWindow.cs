@@ -656,7 +656,10 @@ namespace Learn_CTS
                 t.Dispose();
             }
             nm.Clear();
-            if (preview) this.Close();
+            if (preview)
+            {
+                this.Hide();
+            }
             else Application.Restart();
         }
 
