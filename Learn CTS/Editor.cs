@@ -1984,21 +1984,12 @@ namespace Learn_CTS
 
         private void Preview_Situation(object sender, EventArgs e)
         {
-            if (this.preview == null)
-            {
-                this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
-                                               (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
-                this.preview.Show();
-                this.preview.Size = new Size(600, 400);
-                Rectangle screen = Screen.FromControl(this).Bounds;
-                this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
-            }
-            else
-            {
-                this.preview.Close();
-                this.preview.Dispose();
-                this.preview = null;
-            }
+            this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
+                                            (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
+            this.preview.Show();
+            this.preview.Size = new Size(600, 400);
+            Rectangle screen = Screen.FromControl(this).Bounds;
+            this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
         }
 
         /// <summary>
