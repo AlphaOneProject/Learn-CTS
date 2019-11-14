@@ -37,10 +37,8 @@ namespace Learn_CTS
         private string game_path;
         private bool debug = false;
         private bool god = false;
-        /*private bool enter_npc = true;
-        private bool leave_npc = false;*/
         private int ticks_stopped = 0;
-        private int NPCsDensity = 0; //max 650
+        private int NPCsDensity = 50; //max 650
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -131,6 +129,7 @@ namespace Learn_CTS
             //SetUpWindow();
             RemoveDialog();
             RemoveBackpack();
+            bp = new Backpack();
             r = new Random();
             InitializeListTextures();
             InitializeTimer();
@@ -613,7 +612,7 @@ namespace Learn_CTS
                 case Keys.G: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                 case Keys.F: this.StopVehicule(); ; break;
                 case Keys.M: this.Moise(); ; break;
-                case Keys.B: this.Open_Backpack(); ; break;
+                case Keys.B: if (!this.Controls.Contains(bp))this.Open_Backpack(); else this.RemoveBackpack() ; break;
                 case Keys.Escape: this.GameWindowClosed(); break;
             }
         }
@@ -695,11 +694,10 @@ namespace Learn_CTS
                 npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
                 npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
-                //check if tram entrance -> pos relatif
                 if(Tools.Get_From_JSON(this.game_path + "scenarios" + Path.DirectorySeparatorChar + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["scene_type"].ToString() == "tram_entrance")
                 {
-                    Console.WriteLine(npc_name);
-                    vehicule.AddChild(nm.CreateNPC(npc_name, vehicule.GetX() + npc_x, vehicule.GetY() + npc_y, npc_quiz, npc_folder));
+                    if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
+                        vehicule.AddChild(nm.CreateNPC(npc_name, vehicule.GetX() + npc_x, vehicule.GetY() + npc_y, npc_quiz, npc_folder));
                 }
                 else
                 {
@@ -887,6 +885,7 @@ namespace Learn_CTS
             NPC conductor = nm.CreateNPC(vehicule.GetX() + vehicule.GetWidth() - 192 - 100, vehicule.GetY() + vehicule.GetHeight() - 192 - 10);
             conductor.SetDirection(1);
             conductor.SetDefaultPose();
+            conductor.SetZ(vehicule.GetZ()-1);
             vehicule.AddChild(conductor);
         }
 
@@ -926,7 +925,6 @@ namespace Learn_CTS
             if (!this.Controls.Contains(bp))
             {
                 this.Controls.Add(bp);
-                bp = new Backpack();
             }
         }
 

@@ -491,6 +491,11 @@ namespace Learn_CTS
             this.y = y;
         }
 
+        public void SetZ(int z)
+        {
+            this.z = z;
+        }
+
         /// <summary>
         /// Get the hitbox used by the texture.
         /// </summary>
