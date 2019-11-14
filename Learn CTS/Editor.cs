@@ -36,6 +36,11 @@ namespace Learn_CTS
             this.DoubleBuffered = false;
         }
 
+        public string Get_Game()
+        {
+            return this.game;
+        }
+
         /// <summary>
         /// Accessor to the local parameter "saved".
         /// </summary>
