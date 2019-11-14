@@ -46,6 +46,7 @@ namespace Learn_CTS
         private Random r;
         private bool preview = false;
         private int speed_character = 8;
+        private int n_situation = 0;
 
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Learn_CTS
             pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
             sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length + 1);
-            if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[0].Remove(0, sc_path.Length + scenario.Length + 2);
+            if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 2);
         }
 
         public GameWindow(string game, string scenario, string situation) : this(game)
@@ -885,11 +886,10 @@ namespace Learn_CTS
             int max = NPCsDensity / 2;
             int x;
             int y;
-            //NPC n;
             for (int i = 0; i < max; i++)
             {
                 x = platform.GetX()-192 + r.Next(100, platform.GetWidth()-100);
-                y = platform.GetY()-192 + r.Next(0, platform.GetHeight());
+                y = platform.GetY()-192 + r.Next(10, platform.GetHeight());
                 platform.AddChild(nm.CreateNPC(x, y));
             }
             /*for (int i = 0; i < max; i++)
@@ -902,7 +902,6 @@ namespace Learn_CTS
                 Console.WriteLine((n.GetX() - platform.GetX()).ToString()+":"+ (platform.GetX() + platform.GetWidth() - n.GetX()).ToString());
                 n.SetObjective(r.Next(n.GetX() - platform.GetX(), platform.GetX()+platform.GetWidth() - n.GetX()), -r.Next(0, platform.GetHeight()));
             }*/
-
         }
 
         public void SetScore(int s)
@@ -979,14 +978,15 @@ namespace Learn_CTS
 
         public void SwitchSituation()
         {
-            situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[1].Remove(0, sc_path.Length + scenario.Length + 2);
-            if(situation != null)
+            n_situation++;
+            if(Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario).Length == n_situation)
             {
-                Load_Game();
+                this.Close();
             }
             else
             {
-                GameWindowClosed();
+                situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 2);
+                Load_Game();
             }
         }
 
