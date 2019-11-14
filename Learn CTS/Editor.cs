@@ -1320,7 +1320,9 @@ namespace Learn_CTS
             content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point(content.Controls.Find("lbl_name_scenario", false)[0].Location.X +
                                                                                        content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
             content.Controls.Find("pb_discard_scenario", false)[0].Location = new Point(content.Controls.Find("pb_rename_scenario", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+                                                                                        content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_scenario", false)[0].Location = new Point(content.Controls.Find("pb_discard_scenario", false)[0].Location.X +
+                                                                                        content.Controls.Find("pb_discard_scenario", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
@@ -1930,9 +1932,11 @@ namespace Learn_CTS
             t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
             content.Controls.Find("lbl_name_situation", false)[0].Text = menu.SelectedNode.Text;
             content.Controls.Find("pb_rename_situation", false)[0].Location = new Point(content.Controls.Find("lbl_name_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
+                                                                                        content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
             content.Controls.Find("pb_discard_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+                                                                                         content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_situation", false)[0].Location = new Point(content.Controls.Find("pb_discard_situation", false)[0].Location.X +
+                                                      content.Controls.Find("pb_discard_situation", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
             content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
         }

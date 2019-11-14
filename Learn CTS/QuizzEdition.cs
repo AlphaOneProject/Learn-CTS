@@ -177,6 +177,7 @@ namespace Learn_CTS
             t.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
                                     this.Width - 10 - 30 - 10 - cbo_audio.Width - 10 - 30 - 10);
             pb_add.Location = new Point(txt_question.Location.X + txt_question.Width + 8, 10);
+            cbo_audio.Location = new Point(pb_add.Location.X + pb_add.Width + 8, 9);
         }
 
         /// <summary>

@@ -156,6 +156,7 @@ namespace Learn_CTS
                                                       Path.DirectorySeparatorChar + "npcs");
             ComboBox cbo = (ComboBox)sender;
             int file_id = cbo.SelectedIndex + 1;
+            Console.WriteLine("Access: " + npcs_dir.FullName + Path.DirectorySeparatorChar + file_id + ".json" + "\nChoice: " + this.event_id + "\n");
             this.file_data[event_id.ToString()]["npc"] = Tools.Get_From_JSON(npcs_dir.FullName + Path.DirectorySeparatorChar +
                                                                         file_id + ".json");
             this.file_data[event_id.ToString()]["npc"]["id"] = file_id;

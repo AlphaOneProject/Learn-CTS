@@ -1,1 +1,1 @@
-{"question":"Quelle question placer ici ?","choices":2,"c1":{"answer":"Réponse 1","score":0,"redirect":-1},"c2":{"answer":"Réponse 4","score":0,"redirect":-1},"audio":1}
+{"question":"Suis-je utile ?","choices":2,"c1":{"answer":"Les étoiles scintillent cette douce nuit...","score":0,"redirect":2},"c2":{"answer":"...bercées dans l'immensité de la voûte céleste.","score":0,"redirect":1},"audio":1}
