@@ -43,6 +43,11 @@ namespace Learn_CTS
             return this.event_id;
         }
 
+        public void Set_File_Path(string new_file_path)
+        {
+            this.file_path = new_file_path;
+        }
+
         private void EventEdition_Load(object sender, EventArgs e)
         {
             List<string> cbo_npcs_list = new List<string>();
@@ -156,6 +161,7 @@ namespace Learn_CTS
                                                       Path.DirectorySeparatorChar + "npcs");
             ComboBox cbo = (ComboBox)sender;
             int file_id = cbo.SelectedIndex + 1;
+            Console.WriteLine("Access: " + npcs_dir.FullName + Path.DirectorySeparatorChar + file_id + ".json" + "\nChoice: " + this.event_id + "\n");
             this.file_data[event_id.ToString()]["npc"] = Tools.Get_From_JSON(npcs_dir.FullName + Path.DirectorySeparatorChar +
                                                                         file_id + ".json");
             this.file_data[event_id.ToString()]["npc"]["id"] = file_id;

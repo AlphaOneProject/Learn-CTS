@@ -1320,7 +1320,9 @@ namespace Learn_CTS
             content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point(content.Controls.Find("lbl_name_scenario", false)[0].Location.X +
                                                                                        content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
             content.Controls.Find("pb_discard_scenario", false)[0].Location = new Point(content.Controls.Find("pb_rename_scenario", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+                                                                                        content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_scenario", false)[0].Location = new Point(content.Controls.Find("pb_discard_scenario", false)[0].Location.X +
+                                                                                        content.Controls.Find("pb_discard_scenario", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
@@ -1924,15 +1926,24 @@ namespace Learn_CTS
             menu.SelectedNode.Text = new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
+            // Re-configuring path-sensitives UserControls.
+            foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+            {
+                ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name +
+                                 Path.DirectorySeparatorChar + "dialogs.json");
+            }
+
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
             t.Visible = false;
             t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
             content.Controls.Find("lbl_name_situation", false)[0].Text = menu.SelectedNode.Text;
             content.Controls.Find("pb_rename_situation", false)[0].Location = new Point(content.Controls.Find("lbl_name_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
+                                                                                        content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
             content.Controls.Find("pb_discard_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+                                                                                         content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_situation", false)[0].Location = new Point(content.Controls.Find("pb_discard_situation", false)[0].Location.X +
+                                                      content.Controls.Find("pb_discard_situation", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
             content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
         }
@@ -1984,6 +1995,11 @@ namespace Learn_CTS
 
         private void Preview_Situation(object sender, EventArgs e)
         {
+            if (this.preview != null)
+            {
+                this.preview.Close();
+                this.preview = null;
+            }
             this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
                                             (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
             this.preview.Show();
