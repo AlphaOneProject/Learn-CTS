@@ -59,10 +59,10 @@ namespace Learn_CTS
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
+            pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
             sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length + 1);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + Path.DirectorySeparatorChar + scenario)[0].Remove(0, sc_path.Length + scenario.Length + 2);
-
         }
 
         public GameWindow(string game, string scenario, string situation) : this(game)
@@ -308,7 +308,7 @@ namespace Learn_CTS
                 c.UpdateObjY(-b);
             }
             if(c.GetType().Name == "Player") MovePlayer(a, b);
-            else MoveCharacter(c, a, b);
+            else MoveNPC((NPC)c, a, b);
             if (c.ReachedObjective()) c.RemoveObjective();
         }
 
@@ -579,19 +579,24 @@ namespace Learn_CTS
         /// <param name="b"></param>
         /// <returns></returns>
 
-        private void MoveCharacter(Character c, int a, int b)
+        private void MoveNPC(NPC c, int a, int b)
         {
             c.UpdateMovement(a, b);
             c.Move(a, 0);
-            if (c.CollideWith(player) || c.CollideWith(vehicule))
+            if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
             {
                 c.Move(-a, 0);
             }
             c.Move(0, b);
-            if (c.CollideWith(player) || c.CollideWith(vehicule))
+            if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
             {
                 c.Move(0, -b);
             }
+        }
+
+        private bool IsOnScreen(Texture t)
+        {
+            return (t.GetX() + t.GetWidth() > 0 && t.GetX() < draw_surface_width && t.GetY() + t.GetHeight() > 0 && t.GetY() < draw_surface_height);
         }
 
         /// <summary>
@@ -772,30 +777,16 @@ namespace Learn_CTS
             return list;
         }
 
-        /*private bool HasAllNPCsLeavedVehicule(List<NPC> l)
-        {
-            bool b = true;
-            foreach(NPC n in l)
-            {
-                if (n.GetY() <= vehicule.GetY() + vehicule.GetHeight()+10)
-                {
-                    b = false;
-                }
-            }
-            return b;
-        }*/
-
         private void DeleteAllNPCsWhichLeavedScreen()
         {
             if(nm.GetList().Count > 0)
             {
                 for(int i = nm.GetList().Count - 1; i>=0; i--)
                 {
-                    if (nm.GetList()[i].GetY() > draw_surface_height)
+                    if (nm.GetList()[i].GetQuiz()<0 && nm.GetList()[i].GetY() > draw_surface_height)
                     {
                         platform.RemoveChild(nm.GetList()[i]);
                         nm.RemoveNPC(nm.GetList()[i]);
-                        nm.GetList().RemoveAt(i);
                     }
                 }
             }
@@ -997,6 +988,11 @@ namespace Learn_CTS
             {
                 GameWindowClosed();
             }
+        }
+
+        private void pbox_backpack_Click(object sender, EventArgs e)
+        {
+            Open_Backpack();
         }
     }
 }

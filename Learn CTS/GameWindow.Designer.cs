@@ -30,6 +30,8 @@
         {
             this.lbl_sc = new System.Windows.Forms.Label();
             this.lbl_score = new System.Windows.Forms.Label();
+            this.pbox_backpack = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_backpack)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_sc
@@ -60,12 +62,25 @@
             this.lbl_score.Text = "default";
             this.lbl_score.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // pbox_backpack
+            // 
+            this.pbox_backpack.BackColor = System.Drawing.Color.Silver;
+            this.pbox_backpack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbox_backpack.Location = new System.Drawing.Point(12, 56);
+            this.pbox_backpack.Name = "pbox_backpack";
+            this.pbox_backpack.Size = new System.Drawing.Size(96, 96);
+            this.pbox_backpack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbox_backpack.TabIndex = 2;
+            this.pbox_backpack.TabStop = false;
+            this.pbox_backpack.Click += new System.EventHandler(this.pbox_backpack_Click);
+            // 
             // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.pbox_backpack);
             this.Controls.Add(this.lbl_sc);
             this.Controls.Add(this.lbl_score);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -77,6 +92,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pbox_backpack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -85,6 +101,7 @@
         #endregion
         private System.Windows.Forms.Label lbl_sc;
         private System.Windows.Forms.Label lbl_score;
+        private System.Windows.Forms.PictureBox pbox_backpack;
     }
 }
 
