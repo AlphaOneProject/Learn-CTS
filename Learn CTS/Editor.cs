@@ -1741,7 +1741,7 @@ namespace Learn_CTS
             };
 
             this.event_placement = new PlacementEdition(this, placing_npc, list_placed_npcs, list_placed_npcs_points, pb_background);
-            this.event_placement.Show();
+            this.event_placement.ShowDialog();
         }
 
         public void Reset_Place_Event(int id, Point new_pos)

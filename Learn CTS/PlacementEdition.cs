@@ -26,7 +26,7 @@ namespace Learn_CTS
         {
             InitializeComponent();
 
-            this.DoubleBuffered = false;
+            this.DoubleBuffered = true;
             this.editor = sender;
             this.event_id = (int)pb_placing.Tag;
             this.Height = Tools.Min_Int(pb_environment.Height, 800) + 56; // 56 = Border + Scrollbar. (by deduction)
@@ -45,6 +45,7 @@ namespace Learn_CTS
             pb_placing.MouseMove += new MouseEventHandler(Pb_Placing_MouseMove);
             pb_placing.MouseUp += new MouseEventHandler(Pb_Placing_MouseUp);
             pb_placing.BorderStyle = BorderStyle.Fixed3D;
+            pb_placing.Cursor = Cursors.SizeAll;
             this.pb = pb_placing;
 
             pb_environment.SendToBack();
