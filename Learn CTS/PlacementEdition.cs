@@ -75,8 +75,20 @@ namespace Learn_CTS
 
         private void PlacementEdition_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.editor.Reset_Place_Event(this.event_id, new Point(this.pb.Location.X + pan_global.HorizontalScroll.Value,
-                                                                   this.pb.Location.Y + pan_global.VerticalScroll.Value));
+            Point current_pos = new Point(this.pb.Location.X + pan_global.HorizontalScroll.Value,
+                                                                   this.pb.Location.Y + pan_global.VerticalScroll.Value);
+            Texture.InitializePath(editor.Get_Game());
+            if (Tools.IsCollidingWithVehicule(new Tram(0, 0), current_pos))
+            {
+                if (MessageBox.Show("L'évènement rentre en collision avec la scène, rendant sa position invalide.\n" +
+                                    "Souhaitez-vous valider tout de même ? (Il sera alors placé aléatoirement.)", "Position invalide",
+                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            this.editor.Reset_Place_Event(this.event_id, current_pos);
         }
     }
 }
