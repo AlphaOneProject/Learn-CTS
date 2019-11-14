@@ -40,7 +40,7 @@ namespace Learn_CTS
         /*private bool enter_npc = true;
         private bool leave_npc = false;*/
         private int ticks_stopped = 0;
-        private int NPCsDensity = 50; //max 650
+        private int NPCsDensity = 0; //max 650
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -584,12 +584,12 @@ namespace Learn_CTS
         {
             c.UpdateMovement(a, b);
             c.Move(a, 0);
-            if (c.CollideWith(player))
+            if (c.CollideWith(player) || c.CollideWith(vehicule))
             {
                 c.Move(-a, 0);
             }
             c.Move(0, b);
-            if (c.CollideWith(player))
+            if (c.CollideWith(player) || c.CollideWith(vehicule))
             {
                 c.Move(0, -b);
             }
@@ -695,7 +695,19 @@ namespace Learn_CTS
                 npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
                 npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
-                if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
+                //check if tram entrance -> pos relatif
+                if(Tools.Get_From_JSON(this.game_path + "scenarios" + Path.DirectorySeparatorChar + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["scene_type"].ToString() == "tram_entrance")
+                {
+                    Console.WriteLine(npc_name);
+                    vehicule.AddChild(nm.CreateNPC(npc_name, vehicule.GetX() + npc_x, vehicule.GetY() + npc_y, npc_quiz, npc_folder));
+                }
+                else
+                {
+                    npc_x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
+                    npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
+                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
+                }
+                /*if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
                 {
                     vehicule.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
                 }
@@ -708,7 +720,7 @@ namespace Learn_CTS
                     npc_x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
                     npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
-                }
+                }*/
             }
             FillVehiculeNPCs();
             FillPlatformNPCs();
