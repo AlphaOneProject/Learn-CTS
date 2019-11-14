@@ -694,10 +694,10 @@ namespace Learn_CTS
                 npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
                 npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
-                if(Tools.Get_From_JSON(this.game_path + "scenarios" + Path.DirectorySeparatorChar + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["scene_type"].ToString() == "tram_entrance")
+                if(Tools.Get_From_JSON(this.game_path + "scenarios" + Path.DirectorySeparatorChar + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["scene_type"].ToString() == "tram_entrance"
+                    && vehicule != null & vehicule.GetX() + npc_x >= vehicule.GetX() + 492 && vehicule.GetX() + npc_x < vehicule.GetX() + vehicule.GetWidth() - 492 && vehicule.GetY() + npc_y >= vehicule.GetY() + 144 && vehicule.GetY() + npc_y <= vehicule.GetY() + 164)
                 {
-                    if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
-                        vehicule.AddChild(nm.CreateNPC(npc_name, vehicule.GetX() + npc_x, vehicule.GetY() + npc_y, npc_quiz, npc_folder));
+                    vehicule.AddChild(nm.CreateNPC(npc_name, vehicule.GetX() + npc_x, vehicule.GetY() + npc_y, npc_quiz, npc_folder));
                 }
                 else
                 {
@@ -879,7 +879,7 @@ namespace Learn_CTS
             for(int i = 0; i < max; i++)
             {
                 x = vehicule.GetX() + r.Next(492, vehicule.GetWidth() - 492);
-                y = vehicule.GetY() + 144 + r.Next(0, 14);
+                y = vehicule.GetY() + 144 + r.Next(0, 19);
                 vehicule.AddChild(nm.CreateNPC(x,y));
             }
             NPC conductor = nm.CreateNPC(vehicule.GetX() + vehicule.GetWidth() - 192 - 100, vehicule.GetY() + vehicule.GetHeight() - 192 - 10);
