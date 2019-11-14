@@ -121,7 +121,8 @@ namespace Learn_CTS
 
         public static bool IsCollidingWithVehicule(Point p1)
         {
-            Transport v = new Tram(0, 0);
+            Texture.InitializePath("Learn CTS"); //todo : préciser le jeu dans le constructeur
+            Transport v = new Tram(0, 0); //todo : pareil que ci-dessus
             v.ChangeInside();
             NPC n = new NPC(1, p1.X, p1.Y);
             bool b = v.CollideWith(n);

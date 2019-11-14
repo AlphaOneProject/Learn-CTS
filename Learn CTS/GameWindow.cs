@@ -39,7 +39,6 @@ namespace Learn_CTS
         private bool god = false;
         /*private bool enter_npc = true;
         private bool leave_npc = false;*/
-        private List<NPC> npcs_leaving_vehicule;
         private int ticks_stopped = 0;
         private int NPCsDensity = 50; //max 650
         private int score = 0;
@@ -717,9 +716,9 @@ namespace Learn_CTS
 
         private void NPCLeaveVehicule()
         {
-            List<NPC> npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
+            List<NPC> l = SelectionNPCsLeavingVehicule();
             int i;
-            foreach (NPC n in npcs_leaving_vehicule)
+            foreach (NPC n in l)
             {
                 i = vehicule.GetIndexNearestDoor(n.GetX());
                 n.SetObjectiveX(vehicule.GetPosDoor(i));
@@ -728,9 +727,9 @@ namespace Learn_CTS
             }
             /*if (!leave_npc)
             {
-                npcs_leaving_vehicule = SelectionNPCsLeavingVehicule();
+                nm.GetList() = SelectionNPCsLeavingVehicule();
                 int i;
-                foreach (NPC n in npcs_leaving_vehicule)
+                foreach (NPC n in nm.GetList())
                 {
                     i = vehicule.GetIndexNearestDoor(n.GetX());
                     n.SetObjectiveX(vehicule.GetPosDoor(i));
@@ -742,7 +741,7 @@ namespace Learn_CTS
             }
             else
             {
-                if (npcs_leaving_vehicule != null && enter_npc && HasAllNPCsLeavedVehicule(npcs_leaving_vehicule))
+                if (nm.GetList() != null && enter_npc && HasAllNPCsLeavedVehicule(nm.GetList()))
                 {
                     NPCEnterVehicule();
                 }
@@ -778,15 +777,15 @@ namespace Learn_CTS
 
         private void DeleteAllNPCsWhichLeavedScreen()
         {
-            if(npcs_leaving_vehicule != null && npcs_leaving_vehicule.Count > 0)
+            if(nm.GetList().Count > 0)
             {
-                for(int i = npcs_leaving_vehicule.Count - 1; i>=0; i--)
+                for(int i = nm.GetList().Count - 1; i>=0; i--)
                 {
-                    if (npcs_leaving_vehicule[i].GetY() > draw_surface_height)
+                    if (nm.GetList()[i].GetY() > draw_surface_height)
                     {
-                        platform.RemoveChild(npcs_leaving_vehicule[i]);
-                        nm.RemoveNPC(npcs_leaving_vehicule[i]);
-                        npcs_leaving_vehicule.RemoveAt(i);
+                        platform.RemoveChild(nm.GetList()[i]);
+                        nm.RemoveNPC(nm.GetList()[i]);
+                        nm.GetList().RemoveAt(i);
                     }
                 }
             }
