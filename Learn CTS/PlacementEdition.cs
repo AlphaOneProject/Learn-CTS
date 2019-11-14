@@ -26,18 +26,20 @@ namespace Learn_CTS
         {
             InitializeComponent();
 
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.DoubleBuffered = true;
             this.editor = sender;
             this.event_id = (int)pb_placing.Tag;
             this.Height = Tools.Min_Int(pb_environment.Height, 800) + 56; // 56 = Border + Scrollbar. (by deduction)
             this.Width = Tools.Min_Int(pb_environment.Width, 1200);
-            pan_global.Controls.Add(pb_environment);
+            pan_global.BackgroundImage = pb_environment.Image;
             pb_environment.Location = new Point(0, 0);
 
             for (int i = 0; i < pbs_placed.Count; i++)
             {
                 pan_global.Controls.Add(pbs_placed[i]);
                 pbs_placed[i].Location = pbs_placed_points[i];
+                pbs_placed[i].BackColor = Color.Transparent;
             }
 
             pan_global.Controls.Add(pb_placing);
@@ -46,6 +48,7 @@ namespace Learn_CTS
             pb_placing.MouseUp += new MouseEventHandler(Pb_Placing_MouseUp);
             pb_placing.BorderStyle = BorderStyle.Fixed3D;
             pb_placing.Cursor = Cursors.SizeAll;
+            pb_placing.BackColor = Color.Transparent;
             this.pb = pb_placing;
 
             pb_environment.SendToBack();

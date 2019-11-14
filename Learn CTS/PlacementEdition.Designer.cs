@@ -34,6 +34,7 @@
             // pan_global
             // 
             this.pan_global.AutoScroll = true;
+            this.pan_global.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pan_global.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pan_global.Location = new System.Drawing.Point(0, 0);
             this.pan_global.Name = "pan_global";

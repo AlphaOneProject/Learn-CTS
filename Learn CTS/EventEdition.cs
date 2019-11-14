@@ -43,6 +43,11 @@ namespace Learn_CTS
             return this.event_id;
         }
 
+        public void Set_File_Path(string new_file_path)
+        {
+            this.file_path = new_file_path;
+        }
+
         private void EventEdition_Load(object sender, EventArgs e)
         {
             List<string> cbo_npcs_list = new List<string>();

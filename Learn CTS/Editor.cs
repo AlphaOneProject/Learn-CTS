@@ -1926,6 +1926,13 @@ namespace Learn_CTS
             menu.SelectedNode.Text = new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
+            // Re-configuring path-sensitives UserControls.
+            foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+            {
+                ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name +
+                                 Path.DirectorySeparatorChar + "dialogs.json");
+            }
+
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
             t.Visible = false;
