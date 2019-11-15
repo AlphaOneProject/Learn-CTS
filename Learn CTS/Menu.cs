@@ -226,10 +226,10 @@ namespace Learn_CTS
             // Creation of the first part of the title
             Label main_menu_lbl_title1_dyna = new Label()
             {
-                Font = new System.Drawing.Font("Nirmala UI Semilight", 36F),
-                Location = new System.Drawing.Point(276, 31),
+                Font = new Font("Nirmala UI Semilight", 36F),
+                Location = new Point(276, 31),
                 Name = "main_menu_lbl_title1",
-                Size = new System.Drawing.Size(141, 65),
+                Size = new Size(141, 65),
                 Text = "Learn",
                 Tag = 5
             };
@@ -262,7 +262,7 @@ namespace Learn_CTS
                 Size = new Size(230, 60),
                 TabIndex = 2,
                 Text = "Mes jeux",
-                Tag = 3
+                Tag = 2
             };
             main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
                     (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_lbl_title1_dyna.Height / 2) + 2);
@@ -276,7 +276,7 @@ namespace Learn_CTS
                 Size = new Size(109, 30),
                 TabIndex = 4,
                 Text = "Quitter",
-                Tag = 3
+                Tag = 2
             };
             main_menu_btn_exit_dyna.Click += new EventHandler(this.Main_menu_btn_exit_Click);
 
@@ -288,7 +288,7 @@ namespace Learn_CTS
                 Size = new Size(109, 30),
                 TabIndex = 3,
                 Text = "Options",
-                Tag = 3
+                Tag = 2
             };
             main_menu_btn_options_dyna.Location = new Point(main_menu_btn_edit_dyna.Location.X,
                 (this.Height / 2) + (main_menu_btn_edit_dyna.Height / 2) + 10);
@@ -315,6 +315,7 @@ namespace Learn_CTS
                 Location = new Point(-1, 0),
                 Size = new Size(this.Width, 80),
                 Text = "Mes jeux",
+                Tag = 2,
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
@@ -359,7 +360,7 @@ namespace Learn_CTS
                 TabIndex = 3,
                 AutoScroll = true
             };
-            games_menu_flp_games.Location = new Point(this.Width / 2 - games_menu_flp_games.Width / 2, games_menu_pnl_topbar.Height);
+            games_menu_flp_games.Location = new Point(0, games_menu_pnl_topbar.Height);
             games_menu_flp_games.BackColor = Color.FromArgb(
                         (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["R"]),
                         (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["G"]),
@@ -455,7 +456,7 @@ namespace Learn_CTS
                 this.Controls.Find("options_menu_lbl_theme", false)[0].Text = "Thème de couleurs : light";
                 tgs.SetRenderer(new JCS.ToggleSwitchIOS5Renderer()
                 {
-                    
+
                 });
             }
             else
@@ -659,6 +660,11 @@ namespace Learn_CTS
                         );
                     } else
                     {
+                        c.ForeColor = Color.FromArgb(
+                            (int)(themes[this.options["theme"].ToString()]["5"]["R"]),
+                            (int)(themes[this.options["theme"].ToString()]["5"]["G"]),
+                            (int)(themes[this.options["theme"].ToString()]["5"]["B"])
+                        );
                         c.BackColor = Color.FromArgb(
                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),

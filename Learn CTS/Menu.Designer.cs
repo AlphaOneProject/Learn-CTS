@@ -45,7 +45,7 @@
             this.main_menu_btn_edit.Name = "main_menu_btn_edit";
             this.main_menu_btn_edit.Size = new System.Drawing.Size(230, 60);
             this.main_menu_btn_edit.TabIndex = 1;
-            this.main_menu_btn_edit.Tag = "3";
+            this.main_menu_btn_edit.Tag = "2";
             this.main_menu_btn_edit.Text = "Mes jeux";
             this.main_menu_btn_edit.UseVisualStyleBackColor = false;
             this.main_menu_btn_edit.Click += new System.EventHandler(this.Main_menu_btn_edit_Click);
@@ -59,7 +59,7 @@
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
             this.main_menu_btn_exit.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_exit.TabIndex = 4;
-            this.main_menu_btn_exit.Tag = "3";
+            this.main_menu_btn_exit.Tag = "2";
             this.main_menu_btn_exit.Text = "Quitter";
             this.main_menu_btn_exit.UseVisualStyleBackColor = false;
             this.main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
@@ -73,7 +73,7 @@
             this.main_menu_btn_options.Name = "main_menu_btn_options";
             this.main_menu_btn_options.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_options.TabIndex = 3;
-            this.main_menu_btn_options.Tag = "3";
+            this.main_menu_btn_options.Tag = "2";
             this.main_menu_btn_options.Text = "Options";
             this.main_menu_btn_options.UseVisualStyleBackColor = false;
             this.main_menu_btn_options.Click += new System.EventHandler(this.Main_menu_btn_options_Click);
