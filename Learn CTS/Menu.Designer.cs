@@ -82,10 +82,11 @@
             // 
             this.main_menu_lbl_title1.AutoSize = true;
             this.main_menu_lbl_title1.Font = new System.Drawing.Font("Nirmala UI Semilight", 36F);
-            this.main_menu_lbl_title1.Location = new System.Drawing.Point(276, 31);
+            this.main_menu_lbl_title1.Location = new System.Drawing.Point(267, 122);
             this.main_menu_lbl_title1.Name = "main_menu_lbl_title1";
             this.main_menu_lbl_title1.Size = new System.Drawing.Size(141, 65);
             this.main_menu_lbl_title1.TabIndex = 5;
+            this.main_menu_lbl_title1.Tag = "5";
             this.main_menu_lbl_title1.Text = "Learn";
             // 
             // main_menu_lbl_title2
@@ -93,7 +94,7 @@
             this.main_menu_lbl_title2.AutoSize = true;
             this.main_menu_lbl_title2.Font = new System.Drawing.Font("Nirmala UI", 44F, System.Drawing.FontStyle.Bold);
             this.main_menu_lbl_title2.ForeColor = System.Drawing.Color.Red;
-            this.main_menu_lbl_title2.Location = new System.Drawing.Point(398, 20);
+            this.main_menu_lbl_title2.Location = new System.Drawing.Point(389, 111);
             this.main_menu_lbl_title2.Name = "main_menu_lbl_title2";
             this.main_menu_lbl_title2.Size = new System.Drawing.Size(138, 78);
             this.main_menu_lbl_title2.TabIndex = 6;

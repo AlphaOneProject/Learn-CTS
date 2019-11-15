@@ -113,6 +113,8 @@ namespace Learn_CTS
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
             main_menu_btn_exit.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+
+            Change_Theme();
         }
 
         /// <summary>
@@ -230,7 +232,6 @@ namespace Learn_CTS
                 Size = new System.Drawing.Size(141, 65),
                 Text = "Learn",
                 Tag = 5
-                
             };
             ForeColor = Color.FromArgb(
                         (int)(this.themes[this.options["theme"].ToString()][main_menu_lbl_title1_dyna.Tag.ToString()]["R"]),
@@ -320,9 +321,9 @@ namespace Learn_CTS
             };
 
             // Creation of the Button responsible to go back to the main menu.
-            PictureBox games_menu_pb_back_to_main_menu = new PictureBox()
+            PictureBox games_menu_pb_back = new PictureBox()
             {
-                Name = "games_menu_pb_back_to_main_menu",
+                Name = "games_menu_pb_back",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
@@ -330,8 +331,8 @@ namespace Learn_CTS
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Parent = games_menu_pnl_topbar
             };
-            games_menu_pb_back_to_main_menu.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back_to_main_menu.Height) / 2);
-            games_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            games_menu_pb_back.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back.Height) / 2);
+            games_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
 
             // Creation of the Button responsible to create a game.
             PictureBox games_menu_pb_create_game = new PictureBox()
@@ -366,7 +367,7 @@ namespace Learn_CTS
                     );
 
             this.Controls.AddRange(new Control[] {
-                games_menu_pb_back_to_main_menu,
+                games_menu_pb_back,
                 games_menu_pb_create_game,
                 games_menu_pnl_topbar,
                 games_menu_flp_games
@@ -378,7 +379,7 @@ namespace Learn_CTS
             {
                 games_menu_flp_games.Controls.Add(gc);
             }
-            Change_Theme();
+            //Change_Theme();
             this.ResumeLayout();
         }
 
@@ -389,55 +390,80 @@ namespace Learn_CTS
         {
             this.displayed_menu = "options_menu";
 
-            // Creation of the Button responsible to go back to the main menu.
-            PictureBox options_menu_pb_back_to_main_menu = new PictureBox()
+            Label options_menu_pnl_topbar = new Label()
             {
-                Name = "options_menu_pb_back_to_main_menu",
+                Name = "options_menu_pnl_topbar",
+                Location = new Point(-1, 0),
+                Size = new Size(this.Width, 80),
+                Text = "Options",
+                Tag = 3,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.FixedSingle,
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
+            };
+
+            // Creation of the Button responsible to go back to the main menu.
+            PictureBox options_menu_pb_back = new PictureBox()
+            {
+                Name = "options_menu_pb_back",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
-                Location = new Point(6, 6),
-                Tag = 0,
+                Tag = 3,
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Parent = options_menu_pnl_topbar
             };
-            options_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            options_menu_pb_back.Location = new Point(6, (options_menu_pnl_topbar.Height - options_menu_pb_back.Height) / 2);
+            options_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
+
+            Label options_menu_lbl_theme = new Label()
+            {
+                Name = "options_menu_lbl_theme",
+                Font = new System.Drawing.Font("Nirmala UI Semilight", 14F),
+                Tag = 5,
+                Text = "Thème de couleurs : " + this.options["theme"].ToString(),
+                AutoSize = true
+            };
+            options_menu_lbl_theme.Location = new Point((int)(this.Width/2 - options_menu_lbl_theme.Width * 1.5),
+                this.Height / 2 + options_menu_lbl_theme.Height / 2);
 
             JCS.ToggleSwitch options_menu_tgs_theme = new JCS.ToggleSwitch()
             {
-                Style = JCS.ToggleSwitch.ToggleSwitchStyle.PlainAndSimpel,
-                Location = new Point(200, 200),
+                Style = JCS.ToggleSwitch.ToggleSwitchStyle.IOS5,
                 TabIndex = 7,
                 Tag = 0,
+                Size = new Size(80, 30),
                 ToggleOnButtonClick = true,
                 ToggleOnSideClick = true,
             };
-            if (this.options["theme"].ToString() == "light") options_menu_tgs_theme.Checked = true;
+            if (this.options["theme"].ToString() == "dark") options_menu_tgs_theme.Checked = true;
             options_menu_tgs_theme.CheckedChanged += new JCS.ToggleSwitch.CheckedChangedDelegate(Options_Menu_Tgs_Theme_CheckedChanged);
+            options_menu_tgs_theme.Location = new Point(this.Width / 2 + options_menu_tgs_theme.Width, this.Height / 2 + options_menu_tgs_theme.Height / 3);
 
-            this.Controls.AddRange(new Control[] { options_menu_pb_back_to_main_menu, options_menu_tgs_theme });
+            this.Controls.AddRange(new Control[] { options_menu_pb_back, options_menu_pnl_topbar, options_menu_tgs_theme, options_menu_lbl_theme });
+            Change_Theme();
         }
 
         private void Options_Menu_Tgs_Theme_CheckedChanged(object sender, EventArgs e)
         {
             JCS.ToggleSwitch tgs = (JCS.ToggleSwitch)sender;
             // Récupération du fichier des options
-            if (tgs.Checked)
+            if (!tgs.Checked)
             {
                 this.options["theme"] = "light";
-                tgs.SetRenderer(new JCS.ToggleSwitchPlainAndSimpleRenderer()
+                this.Controls.Find("options_menu_lbl_theme", false)[0].Text = "Thème de couleurs : light";
+                tgs.SetRenderer(new JCS.ToggleSwitchIOS5Renderer()
                 {
-                    InnerBackgroundColor = Color.FromArgb(30, 30, 30),
-                    ButtonColor = Color.White
+                    
                 });
             }
             else
             {
                 this.options["theme"] = "dark";
-                tgs.SetRenderer(new JCS.ToggleSwitchPlainAndSimpleRenderer()
+                this.Controls.Find("options_menu_lbl_theme", false)[0].Text = "Thème de couleurs : dark";
+                tgs.SetRenderer(new JCS.ToggleSwitchIOS5Renderer()
                 {
-                    InnerBackgroundColor = Color.White,
-                    ButtonColor = Color.FromArgb(30, 30, 30)
                 });
             }
 
@@ -507,7 +533,7 @@ namespace Learn_CTS
                     case "games_menu_pnl_topbar":
                         c.Width = this.Width;
                         break;
-                    case "games_menu_pb_back_to_main_menu":
+                    case "games_menu_pb_back":
                         c.Location = new Point(6, (this.Controls.Find("games_menu_pnl_topbar", false)[0].Height - c.Height) / 2);
                         break;
                     case "games_menu_pb_create_game":
@@ -624,13 +650,25 @@ namespace Learn_CTS
             {
                 if (c.Tag != null)
                 {
-                    c.BackColor = Color.FromArgb(
-                        (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
-                        (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),
-                        (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["B"])
-                    );
+                    if (int.Parse(c.Tag.ToString()) == 5)
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["B"])
+                        );
+                    } else
+                    {
+                        c.BackColor = Color.FromArgb(
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["B"])
+                       );
+                    }                  
+                    
                 }
             }
+
             this.BackColor = Color.FromArgb(
                         (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["R"]),
                         (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["G"]),
