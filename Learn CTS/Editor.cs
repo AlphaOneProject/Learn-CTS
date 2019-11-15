@@ -20,6 +20,7 @@ namespace Learn_CTS
         private string old_category = "general";
         private bool saved;
         private GameWindow preview = null;
+        private PlacementEdition event_placement = null;
 
         // Methods.
 
@@ -33,6 +34,11 @@ namespace Learn_CTS
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game;
             this.Text = "Éditeur : " + game;
             this.DoubleBuffered = false;
+        }
+
+        public string Get_Game()
+        {
+            return this.game;
         }
 
         /// <summary>
@@ -1314,7 +1320,9 @@ namespace Learn_CTS
             content.Controls.Find("pb_rename_scenario", false)[0].Location = new Point(content.Controls.Find("lbl_name_scenario", false)[0].Location.X +
                                                                                        content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
             content.Controls.Find("pb_discard_scenario", false)[0].Location = new Point(content.Controls.Find("pb_rename_scenario", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+                                                                                        content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_scenario", false)[0].Location = new Point(content.Controls.Find("pb_discard_scenario", false)[0].Location.X +
+                                                                                        content.Controls.Find("pb_discard_scenario", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
@@ -1694,6 +1702,71 @@ namespace Learn_CTS
             Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
+        public void Place_Event(EventEdition sender)
+        {
+            if (this.event_placement != null) { return; }
+
+            JObject situation_data = Tools.Get_From_JSON(sender.Get_File_Path());
+
+            PictureBox placing_npc = new PictureBox();
+            List<PictureBox> list_placed_npcs = new List<PictureBox>();
+            List<Point> list_placed_npcs_points = new List<Point>();
+            for (int i = 1; i <= int.Parse((string)situation_data["events"]); i++)
+            {
+                if (i == sender.Get_Event_Id() || int.Parse((string)situation_data[i.ToString()]["x"]) != 0 ||
+                    int.Parse((string)situation_data[i.ToString()]["y"]) != 0)
+                {
+                    PictureBox pb_temp = new PictureBox()
+                    {
+                        Name = "pb_temp" + i,
+                        Tag = i,
+                        Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
+                                               Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar +
+                                               (string)situation_data[i.ToString()]["npc"]["folder"] + Path.DirectorySeparatorChar + "1_0.png"),
+                        SizeMode = PictureBoxSizeMode.AutoSize
+                    };
+                    if (i == sender.Get_Event_Id())
+                    {
+                        placing_npc = pb_temp;
+                    }
+                    else
+                    {
+                        list_placed_npcs.Add(pb_temp);
+                        list_placed_npcs_points.Add(new Point(int.Parse((string)situation_data[i.ToString()]["x"]),
+                                                              int.Parse((string)situation_data[i.ToString()]["y"])));
+                    }
+                }
+            }
+
+            PictureBox pb_background = new PictureBox()
+            {
+                Name = "pb_background",
+                Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
+                                       Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "TramInside.png"),
+                SizeMode = PictureBoxSizeMode.AutoSize,
+                Location = new Point(0, 0)
+            };
+
+            this.event_placement = new PlacementEdition(this, placing_npc, list_placed_npcs, list_placed_npcs_points, pb_background);
+            this.event_placement.ShowDialog();
+        }
+
+        public void Reset_Place_Event(int id, Point new_pos)
+        {
+            // Reset of the PlacementEdition local Form.
+            this.event_placement.Dispose();
+            this.event_placement = null;
+
+            // Saving new event Point.
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            situ_data[id.ToString()]["x"] = new_pos.X;
+            situ_data[id.ToString()]["y"] = new_pos.Y;
+            Tools.Set_To_JSON(situation_path + "dialogs.json", situ_data);
+        }
+
         /// <summary>
         /// Switch the select situation with the one bellow it.
         /// </summary>
@@ -1853,15 +1926,24 @@ namespace Learn_CTS
             menu.SelectedNode.Text = new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
+            // Re-configuring path-sensitives UserControls.
+            foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+            {
+                ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name +
+                                 Path.DirectorySeparatorChar + "dialogs.json");
+            }
+
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
             t.Visible = false;
             t.Width = (menu.SelectedNode.Text.Length * 10) + 20;
             content.Controls.Find("lbl_name_situation", false)[0].Text = menu.SelectedNode.Text;
             content.Controls.Find("pb_rename_situation", false)[0].Location = new Point(content.Controls.Find("lbl_name_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
+                                                                                        content.Controls.Find("lbl_name_situation", false)[0].Width, 0);
             content.Controls.Find("pb_discard_situation", false)[0].Location = new Point(content.Controls.Find("pb_rename_situation", false)[0].Location.X +
-                                                                                       content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+                                                                                         content.Controls.Find("pb_rename_situation", false)[0].Width + 2, 0);
+            content.Controls.Find("pb_preview_situation", false)[0].Location = new Point(content.Controls.Find("pb_discard_situation", false)[0].Location.X +
+                                                      content.Controls.Find("pb_discard_situation", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_situation", false)[0].Visible = true;
             content.Controls.Find("lbl_name_situation", false)[0].Visible = true;
         }
@@ -1913,21 +1995,17 @@ namespace Learn_CTS
 
         private void Preview_Situation(object sender, EventArgs e)
         {
-            if (this.preview == null)
-            {
-                this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
-                                               (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
-                this.preview.Show();
-                this.preview.Size = new Size(600, 400);
-                Rectangle screen = Screen.FromControl(this).Bounds;
-                this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
-            }
-            else
+            if (this.preview != null)
             {
                 this.preview.Close();
-                this.preview.Dispose();
                 this.preview = null;
             }
+            this.preview = new GameWindow(this.game, (menu.SelectedNode.Parent.Index + 1) + "." + menu.SelectedNode.Parent.Text,
+                                            (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text);
+            this.preview.Show();
+            this.preview.Size = new Size(600, 400);
+            Rectangle screen = Screen.FromControl(this).Bounds;
+            this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
         }
 
         /// <summary>

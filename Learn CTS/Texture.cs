@@ -215,7 +215,16 @@ namespace Learn_CTS
         {
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
-                return !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
+                bool b = false;
+                try
+                {
+                    b = !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return b;
             }
             else
             {
@@ -489,6 +498,11 @@ namespace Learn_CTS
                 this.z += (y - this.GetY());
             }
             this.y = y;
+        }
+
+        public void SetZ(int z)
+        {
+            this.z = z;
         }
 
         /// <summary>

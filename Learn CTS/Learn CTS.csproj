@@ -113,6 +113,12 @@
     <Compile Include="NumericUpDownFix.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PlacementEdition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlacementEdition.Designer.cs">
+      <DependentUpon>PlacementEdition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="PNCWindow.cs">
       <SubType>Form</SubType>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlacementEdition.resx">
+      <DependentUpon>PlacementEdition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PNCWindow.resx">
       <DependentUpon>PNCWindow.cs</DependentUpon>

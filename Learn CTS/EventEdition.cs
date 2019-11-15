@@ -43,6 +43,11 @@ namespace Learn_CTS
             return this.event_id;
         }
 
+        public void Set_File_Path(string new_file_path)
+        {
+            this.file_path = new_file_path;
+        }
+
         private void EventEdition_Load(object sender, EventArgs e)
         {
             List<string> cbo_npcs_list = new List<string>();
@@ -139,7 +144,7 @@ namespace Learn_CTS
         private void EventEdition_SizeChanged(object sender, EventArgs e)
         {
             // Sizing.
-            int size_left = this.Width - 15 - 10 - 10 - pb_delete.Width - 15;
+            int size_left = this.Width - 15 - btn_placement.Width - 10 - 10 - 10 - pb_delete.Width - 15;
             cbo_dialogs.Width = size_left / 2;
             cbo_npcs.Width = size_left / 2;
 
@@ -156,6 +161,7 @@ namespace Learn_CTS
                                                       Path.DirectorySeparatorChar + "npcs");
             ComboBox cbo = (ComboBox)sender;
             int file_id = cbo.SelectedIndex + 1;
+            Console.WriteLine("Access: " + npcs_dir.FullName + Path.DirectorySeparatorChar + file_id + ".json" + "\nChoice: " + this.event_id + "\n");
             this.file_data[event_id.ToString()]["npc"] = Tools.Get_From_JSON(npcs_dir.FullName + Path.DirectorySeparatorChar +
                                                                         file_id + ".json");
             this.file_data[event_id.ToString()]["npc"]["id"] = file_id;
@@ -178,6 +184,11 @@ namespace Learn_CTS
         public void Discard(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Discard_Event(this);
+        }
+
+        private void Btn_placement_Click(object sender, EventArgs e)
+        {
+            ((Editor)this.ParentForm).Place_Event(this);
         }
     }
 }
