@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -18,7 +19,7 @@ namespace Learn_CTS
 
         private List<Texture> list_textures;
         private NPC_Manager nm = NPC_Manager.GetInstance();
-        private Timer timer = new Timer();
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private Player player;
         private Transport vehicule;
         private Background background;
@@ -47,7 +48,8 @@ namespace Learn_CTS
         private bool preview = false;
         private int speed_character = 8;
         private int n_situation = 0;
-
+        private Thread t_fps;
+        private float n_fps;
 
         /// <summary>
         /// Initialize the game window
@@ -74,6 +76,43 @@ namespace Learn_CTS
         }
 
         /// <summary>
+        /// When the form is loading, create a button "Launch", 
+        /// initialize the timer and the textures,
+        /// then show the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Texture.InitializePath(game);
+            Character.SetM(2);
+            InitializeTimer();
+            InitializeFPSThread();
+            timer.Enabled = true;
+            Load_Game();
+        }
+
+        private void Load_Game()
+        {
+            RemoveDialog();
+            RemoveBackpack();
+            bp = new Backpack();
+            r = new Random();
+            InitializeListTextures();
+            lbl_score.Text = score.ToString();
+            Show();
+            GameTick();
+            SetUpWindow();
+        }
+
+        private void InitializeFPSThread()
+        {
+            t_fps = new Thread(new ThreadStart(CalculFPS));
+            t_fps.Start();
+        }
+
+        /// <summary>
         /// Initialize the timer
         /// </summary>
 
@@ -89,20 +128,18 @@ namespace Learn_CTS
 
         private void InitializeListTextures()
         {
-            if(list_textures != null && list_textures.Count > 0)
+            if (list_textures != null && list_textures.Count > 0)
             {
-                foreach(Texture t in list_textures)
+                foreach (Texture t in list_textures)
                 {
                     t.Dispose();
                 }
             }
-            Texture.InitializePath(game);
-            Character.SetM(3);
-            player = new Player("Moi",600, 504);
+            player = new Player("Moi", 600, 504);
             vehicule = new Tram(-4000, 198);
             background = new Background(0);
             background.DisableCollisions();
-            platform = new Platform(0, vehicule.GetY()+vehicule.GetHeight(), vehicule.GetZ() + 2);
+            platform = new Platform(0, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {
                 background,
@@ -112,33 +149,6 @@ namespace Learn_CTS
             InitializeNPCs();
         }
 
-        /// <summary>
-        /// When the form is loading, create a button "Launch", 
-        /// initialize the timer and the textures,
-        /// then show the form.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Load_Game();
-        }
-
-        private void Load_Game()
-        {
-            //SetUpWindow();
-            RemoveDialog();
-            RemoveBackpack();
-            bp = new Backpack();
-            r = new Random();
-            InitializeListTextures();
-            InitializeTimer();
-            lbl_score.Text = score.ToString();
-            Show();
-            timer.Enabled = true;
-        }
-
         private void SetUpWindow()
         {
             JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
@@ -146,23 +156,24 @@ namespace Learn_CTS
             {
                 this.WindowState = FormWindowState.Maximized;
             }
-            else
-            {
-                this.Width = (int)options["size"]["x"];
-                this.Height = (int)options["size"]["y"];
-            }
+            this.Width = (int)options["size"]["x"];
+            this.Height = (int)options["size"]["y"];
         }
 
         /// <summary>
         /// Show the fps average at this moment.
         /// </summary>
-        private void ConsoleAvgFPS()
+        private void CalculFPS()
         {
-            double diff = ((DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds - start_milliseconds) / 1000;
-            if (ticks > 0 && diff > 0) Console.WriteLine("Fps moyen : " + (ticks / diff).ToString().Substring(0, 4));
-            else Console.WriteLine("Erreur fps");
-            ticks = 0;
-            start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
+            while (true)
+            {
+                Thread.Sleep(1000);
+                double diff = ((DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds - start_milliseconds) / 1000;
+                if (ticks > 0 && diff > 0) n_fps = (float)(ticks / diff);
+                else Console.WriteLine("Erreur fps");
+                ticks = 0;
+                start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
+            }
         }
 
         /// <summary>
@@ -173,16 +184,21 @@ namespace Learn_CTS
 
         private void Timer_Tick(object Sender, EventArgs e)
         {
+            GameTick();
+        }
+
+        private void GameTick()
+        {
             ticks += 1;
-            if(!vehicule.IsInside() && vehicule.GetState() == 0) MoveTexturesIfPlayerMoves();
+            if (!vehicule.IsInside() && vehicule.GetState() == 0) MoveTexturesIfPlayerMoves();
             if (vehicule.GetState() == 0)
             {
                 ticks_stopped += 1;
-                if(ticks_stopped == 1)
+                if (ticks_stopped == 1)
                 {
                     NPCLeaveVehicule();
                 }
-                if(ticks_stopped == 35)
+                if (ticks_stopped == 35)
                 {
                     NPCEnterVehicule();
                 }
@@ -205,9 +221,9 @@ namespace Learn_CTS
                 {
                     ViewInside();
                 }
-                else if(vehicule.IsInside()) MoveBackground();
+                else if (vehicule.IsInside()) MoveBackground();
             }
-            foreach(Texture t in GetAllTextures(list_textures))
+            foreach (Texture t in GetAllTextures(list_textures))
             {
                 if ((t.GetType().Name == "Player" || t.GetType().Name == "NPC") && ((Character)t).HasObjective())
                 {
@@ -387,14 +403,15 @@ namespace Learn_CTS
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if(this.draw_surface_width == 0 && this.draw_surface_height == 0)
+            if(n_fps>0) lbl_nfps.Text = n_fps.ToString().Substring(0, 4);
+            if (this.draw_surface_width == 0 && this.draw_surface_height == 0)
             {
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
             }
             if(e.ClipRectangle.Width != this.draw_surface_width || this.draw_surface_height != e.ClipRectangle.Height)
             {
-                int diff_x = e.ClipRectangle.Width - this.draw_surface_width;
+                //int diff_x = e.ClipRectangle.Width - this.draw_surface_width;
                 int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
@@ -545,7 +562,7 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) || ((vehicule.GetX() > 0 || vehicule.GetX() + vehicule.GetWidth() < draw_surface_width) && b<0 && player.GetY() <= platform.GetY() - player.GetHeight() + 2))
+                if (IsCharacterCollidingWithTextures(player) || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()) && b<0 && player.GetY() <= platform.GetY() - player.GetHeight() + 2)
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -654,13 +671,16 @@ namespace Learn_CTS
         public void GameWindowClosed()
         {
             timer.Stop();
-            ConsoleAvgFPS();
             foreach (Texture t in list_textures)
             {
                 t.Dispose();
             }
             nm.Clear();
-            if (!preview) Application.Restart();
+            if (!preview)
+            {
+                t_fps.Abort();
+                Application.Restart();
+            }
         }
 
         private void StopVehicule()
@@ -669,7 +689,6 @@ namespace Learn_CTS
             {
                 if (vehicule.IsInside())
                 {
-                    Character.SetM(3);
                     vehicule.ChangeInside();
                     list_textures.Remove(player);
                     vehicule.AddChild(player);
@@ -795,13 +814,11 @@ namespace Learn_CTS
 
         private void ViewInside()
         {
-            ConsoleAvgFPS();
             platform.Dispose();
             list_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
             vehicule.SetSpeed(0);
-            Character.SetM(4);
             PlacePlayerMiddleScreen();
             list_textures.Add(player);
         }

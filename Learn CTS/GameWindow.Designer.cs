@@ -31,6 +31,8 @@
             this.lbl_sc = new System.Windows.Forms.Label();
             this.lbl_score = new System.Windows.Forms.Label();
             this.pbox_backpack = new System.Windows.Forms.PictureBox();
+            this.lbl_fps = new System.Windows.Forms.Label();
+            this.lbl_nfps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_backpack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,7 +68,7 @@
             // 
             this.pbox_backpack.BackColor = System.Drawing.Color.Silver;
             this.pbox_backpack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbox_backpack.Location = new System.Drawing.Point(12, 56);
+            this.pbox_backpack.Location = new System.Drawing.Point(12, 110);
             this.pbox_backpack.Name = "pbox_backpack";
             this.pbox_backpack.Size = new System.Drawing.Size(96, 96);
             this.pbox_backpack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -74,12 +76,42 @@
             this.pbox_backpack.TabStop = false;
             this.pbox_backpack.Click += new System.EventHandler(this.pbox_backpack_Click);
             // 
+            // lbl_fps
+            // 
+            this.lbl_fps.AutoSize = true;
+            this.lbl_fps.BackColor = System.Drawing.Color.Black;
+            this.lbl_fps.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_fps.ForeColor = System.Drawing.Color.White;
+            this.lbl_fps.Location = new System.Drawing.Point(12, 51);
+            this.lbl_fps.Name = "lbl_fps";
+            this.lbl_fps.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbl_fps.Size = new System.Drawing.Size(82, 31);
+            this.lbl_fps.TabIndex = 3;
+            this.lbl_fps.Text = "FPS :";
+            this.lbl_fps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_nfps
+            // 
+            this.lbl_nfps.AutoSize = true;
+            this.lbl_nfps.BackColor = System.Drawing.Color.Black;
+            this.lbl_nfps.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nfps.ForeColor = System.Drawing.Color.White;
+            this.lbl_nfps.Location = new System.Drawing.Point(100, 51);
+            this.lbl_nfps.Name = "lbl_nfps";
+            this.lbl_nfps.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbl_nfps.Size = new System.Drawing.Size(29, 31);
+            this.lbl_nfps.TabIndex = 4;
+            this.lbl_nfps.Text = "0";
+            this.lbl_nfps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.lbl_nfps);
+            this.Controls.Add(this.lbl_fps);
             this.Controls.Add(this.pbox_backpack);
             this.Controls.Add(this.lbl_sc);
             this.Controls.Add(this.lbl_score);
@@ -102,6 +134,8 @@
         private System.Windows.Forms.Label lbl_sc;
         private System.Windows.Forms.Label lbl_score;
         private System.Windows.Forms.PictureBox pbox_backpack;
+        private System.Windows.Forms.Label lbl_fps;
+        private System.Windows.Forms.Label lbl_nfps;
     }
 }
 

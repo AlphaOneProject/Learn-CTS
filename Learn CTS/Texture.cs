@@ -215,7 +215,7 @@ namespace Learn_CTS
         {
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
-                bool b = true;
+                bool b = false;
                 try
                 {
                     b = !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
