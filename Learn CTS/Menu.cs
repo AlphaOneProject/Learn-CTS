@@ -22,6 +22,16 @@ namespace Learn_CTS
          */
         private readonly String games_path;
 
+        /**
+         * Local copy of the options
+         */
+        private JObject options;
+
+        /**
+         * Local copy of the themes
+         */
+        private JObject themes;
+
         /// <summary>
         /// Initialize the whole Form, as a constructor should.
         /// </summary>
@@ -40,9 +50,8 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_Load(object sender, EventArgs e)
         {
+            String options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json";
             // Set the window size as options size setting.
-            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
-                                  Path.DirectorySeparatorChar + "options.json";
             if (!new FileInfo(options_path).Exists)
             {
                 JObject options_setup = new JObject()
@@ -57,7 +66,9 @@ namespace Learn_CTS
                 };
                 Tools.Set_To_JSON(options_path, options_setup);
             }
+
             JObject options = Tools.Get_From_JSON(options_path);
+
             if ((bool)options["maximized"])
             {
                 this.WindowState = FormWindowState.Maximized;
@@ -72,11 +83,21 @@ namespace Learn_CTS
                 this.Location = new Point((pc_screen.Width - this.Width) / 2, (pc_screen.Height - this.Height) / 2);
             }
 
+            // Sets the options file as global variable.
+            this.options = options;
+
+            // Sets the themes file as gobal variable
+            this.themes = Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "themes.json");
+
             // Place the windows at the center of the screen.
             Rectangle screen = Screen.FromControl(this).Bounds;
             this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
 
+            // Sets displayed menu variable.
             this.displayed_menu = "main_menu";
+
+            // Sets forms Tag to enable theme support.
+            this.Tag = 0;
 
             // Dynamically places the controls of the main menu.
             main_menu_lbl_title1.Location = new Point((this.Width / 2) - (main_menu_lbl_title1.Width) + 15,
@@ -92,6 +113,8 @@ namespace Learn_CTS
                 (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
 
             main_menu_btn_exit.Location = new Point((this.Width / 2) + 6, (this.Height / 2) + (main_menu_btn_edit.Height / 2) + 10);
+
+            Change_Theme();
         }
 
         /// <summary>
@@ -203,12 +226,18 @@ namespace Learn_CTS
             // Creation of the first part of the title
             Label main_menu_lbl_title1_dyna = new Label()
             {
-                Font = new System.Drawing.Font("Nirmala UI Semilight", 36F),
-                Location = new System.Drawing.Point(276, 31),
+                Font = new Font("Nirmala UI Semilight", 36F),
+                Location = new Point(276, 31),
                 Name = "main_menu_lbl_title1",
-                Size = new System.Drawing.Size(141, 65),
-                Text = "Learn"
+                Size = new Size(141, 65),
+                Text = "Learn",
+                Tag = 5
             };
+            ForeColor = Color.FromArgb(
+                        (int)(this.themes[this.options["theme"].ToString()][main_menu_lbl_title1_dyna.Tag.ToString()]["R"]),
+                        (int)(this.themes[this.options["theme"].ToString()][main_menu_lbl_title1_dyna.Tag.ToString()]["G"]),
+                        (int)(this.themes[this.options["theme"].ToString()][main_menu_lbl_title1_dyna.Tag.ToString()]["B"])
+                    );
             main_menu_lbl_title1_dyna.Location = new Point((this.Width / 2) - (main_menu_lbl_title1_dyna.Width) + 15,
                                 (this.Height / 2) - (main_menu_lbl_title1_dyna.Height*2));
 
@@ -232,7 +261,8 @@ namespace Learn_CTS
                 Cursor = Cursors.Hand,
                 Size = new Size(230, 60),
                 TabIndex = 2,
-                Text = "Mes jeux"
+                Text = "Mes jeux",
+                Tag = 2
             };
             main_menu_btn_edit_dyna.Location = new Point((this.Width / 2) - (main_menu_btn_edit_dyna.Width / 2),
                     (this.Height / 2) - main_menu_btn_edit_dyna.Height + (main_menu_lbl_title1_dyna.Height / 2) + 2);
@@ -245,7 +275,8 @@ namespace Learn_CTS
                 Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 4,
-                Text = "Quitter"
+                Text = "Quitter",
+                Tag = 2
             };
             main_menu_btn_exit_dyna.Click += new EventHandler(this.Main_menu_btn_exit_Click);
 
@@ -256,11 +287,14 @@ namespace Learn_CTS
                 Cursor = Cursors.Hand,
                 Size = new Size(109, 30),
                 TabIndex = 3,
-                Text = "Options"
+                Text = "Options",
+                Tag = 2
             };
             main_menu_btn_options_dyna.Location = new Point(main_menu_btn_edit_dyna.Location.X,
                 (this.Height / 2) + (main_menu_btn_edit_dyna.Height / 2) + 10);
             main_menu_btn_options_dyna.Click += new EventHandler(this.Main_menu_btn_options_Click);
+
+            Change_Theme();
 
             this.Controls.AddRange(new Control[] { main_menu_lbl_title2_dyna, main_menu_lbl_title1_dyna, main_menu_btn_edit_dyna, main_menu_btn_exit_dyna, main_menu_btn_options_dyna });
         }
@@ -281,15 +315,16 @@ namespace Learn_CTS
                 Location = new Point(-1, 0),
                 Size = new Size(this.Width, 80),
                 Text = "Mes jeux",
+                Tag = 2,
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
                 Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
             };
 
             // Creation of the Button responsible to go back to the main menu.
-            PictureBox games_menu_pb_back_to_main_menu = new PictureBox()
+            PictureBox games_menu_pb_back = new PictureBox()
             {
-                Name = "games_menu_pb_back_to_main_menu",
+                Name = "games_menu_pb_back",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
@@ -297,8 +332,8 @@ namespace Learn_CTS
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Parent = games_menu_pnl_topbar
             };
-            games_menu_pb_back_to_main_menu.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back_to_main_menu.Height) / 2);
-            games_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            games_menu_pb_back.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back.Height) / 2);
+            games_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
 
             // Creation of the Button responsible to create a game.
             PictureBox games_menu_pb_create_game = new PictureBox()
@@ -320,15 +355,20 @@ namespace Learn_CTS
                 Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
                 Name = "games_menu_flp_games",
                 Anchor = AnchorStyles.Top,
-                BackColor = Color.FromArgb(26, 26, 26),
+                Tag = 2,
                 Padding = new Padding(this.Width / 8, 50, this.Width /8, 0),
                 TabIndex = 3,
                 AutoScroll = true
             };
-            games_menu_flp_games.Location = new Point(this.Width / 2 - games_menu_flp_games.Width / 2, games_menu_pnl_topbar.Height);
+            games_menu_flp_games.Location = new Point(0, games_menu_pnl_topbar.Height);
+            games_menu_flp_games.BackColor = Color.FromArgb(
+                        (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["R"]),
+                        (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["G"]),
+                        (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["B"])
+                    );
 
             this.Controls.AddRange(new Control[] {
-                games_menu_pb_back_to_main_menu,
+                games_menu_pb_back,
                 games_menu_pb_create_game,
                 games_menu_pnl_topbar,
                 games_menu_flp_games
@@ -340,7 +380,7 @@ namespace Learn_CTS
             {
                 games_menu_flp_games.Controls.Add(gc);
             }
-
+            //Change_Theme();
             this.ResumeLayout();
         }
 
@@ -351,25 +391,90 @@ namespace Learn_CTS
         {
             this.displayed_menu = "options_menu";
 
-            // Creation of the Button responsible to go back to the main menu.
-            PictureBox options_menu_pb_back_to_main_menu = new PictureBox()
+            Label options_menu_pnl_topbar = new Label()
             {
-                Name = "options_menu_pb_back_to_main_menu",
+                Name = "options_menu_pnl_topbar",
+                Location = new Point(-1, 0),
+                Size = new Size(this.Width, 80),
+                Text = "Options",
+                Tag = 3,
+                TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.FixedSingle,
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
+            };
+
+            // Creation of the Button responsible to go back to the main menu.
+            PictureBox options_menu_pb_back = new PictureBox()
+            {
+                Name = "options_menu_pb_back",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
-                Location = new Point(6, 6),
+                Tag = 3,
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
-                SizeMode = PictureBoxSizeMode.StretchImage
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Parent = options_menu_pnl_topbar
             };
-            options_menu_pb_back_to_main_menu.Click += new EventHandler(this.Back_to_main_menu);
+            options_menu_pb_back.Location = new Point(6, (options_menu_pnl_topbar.Height - options_menu_pb_back.Height) / 2);
+            options_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
 
-            this.Controls.Add(options_menu_pb_back_to_main_menu);
-            // Amuse toi bien Antoine :-*
+            Label options_menu_lbl_theme = new Label()
+            {
+                Name = "options_menu_lbl_theme",
+                Font = new System.Drawing.Font("Nirmala UI Semilight", 14F),
+                Tag = 5,
+                Text = "Thème de couleurs : " + this.options["theme"].ToString(),
+                AutoSize = true
+            };
+            options_menu_lbl_theme.Location = new Point((int)(this.Width/2 - options_menu_lbl_theme.Width * 1.5),
+                this.Height / 2 + options_menu_lbl_theme.Height / 2);
 
+            JCS.ToggleSwitch options_menu_tgs_theme = new JCS.ToggleSwitch()
+            {
+                Style = JCS.ToggleSwitch.ToggleSwitchStyle.IOS5,
+                TabIndex = 7,
+                Tag = 0,
+                Size = new Size(80, 30),
+                ToggleOnButtonClick = true,
+                ToggleOnSideClick = true,
+            };
+            if (this.options["theme"].ToString() == "dark") options_menu_tgs_theme.Checked = true;
+            options_menu_tgs_theme.CheckedChanged += new JCS.ToggleSwitch.CheckedChangedDelegate(Options_Menu_Tgs_Theme_CheckedChanged);
+            options_menu_tgs_theme.Location = new Point(this.Width / 2 + options_menu_tgs_theme.Width, this.Height / 2 + options_menu_tgs_theme.Height / 3);
+
+            this.Controls.AddRange(new Control[] { options_menu_pb_back, options_menu_pnl_topbar, options_menu_tgs_theme, options_menu_lbl_theme });
+            Change_Theme();
         }
-        
-        
+
+        private void Options_Menu_Tgs_Theme_CheckedChanged(object sender, EventArgs e)
+        {
+            JCS.ToggleSwitch tgs = (JCS.ToggleSwitch)sender;
+            // Récupération du fichier des options
+            if (!tgs.Checked)
+            {
+                this.options["theme"] = "light";
+                this.Controls.Find("options_menu_lbl_theme", false)[0].Text = "Thème de couleurs : light";
+                tgs.SetRenderer(new JCS.ToggleSwitchIOS5Renderer()
+                {
+
+                });
+            }
+            else
+            {
+                this.options["theme"] = "dark";
+                this.Controls.Find("options_menu_lbl_theme", false)[0].Text = "Thème de couleurs : dark";
+                tgs.SetRenderer(new JCS.ToggleSwitchIOS5Renderer()
+                {
+                });
+            }
+
+            this.Change_Theme();
+
+            // Mise à jour du fichier des options
+            Tools.Set_To_JSON(AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json", this.options);
+        }
+
+
         /// <summary>
         /// Displays a custom box to create a game.
         /// </summary>
@@ -392,7 +497,8 @@ namespace Learn_CTS
                 gc = (GameCreator)Controls.Find("games_menu_game_creator", true)[0];
                 gc.Dispose();
             }
-            
+
+            Change_Theme();
         }
 
         private void GameCreator_Leave(object sender, EventArgs e)
@@ -428,7 +534,7 @@ namespace Learn_CTS
                     case "games_menu_pnl_topbar":
                         c.Width = this.Width;
                         break;
-                    case "games_menu_pb_back_to_main_menu":
+                    case "games_menu_pb_back":
                         c.Location = new Point(6, (this.Controls.Find("games_menu_pnl_topbar", false)[0].Height - c.Height) / 2);
                         break;
                     case "games_menu_pb_create_game":
@@ -532,6 +638,48 @@ namespace Learn_CTS
             {
                 c.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Change the theme of all the controls of this form, according to the current theme in the options.
+        /// </summary>
+        public void Change_Theme()
+        {
+            JObject themes = Tools.Get_From_JSON(AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "themes.json");
+
+            foreach (Control c in this.Controls)
+            {
+                if (c.Tag != null)
+                {
+                    if (int.Parse(c.Tag.ToString()) == 5)
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),
+                            (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["B"])
+                        );
+                    } else
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            (int)(themes[this.options["theme"].ToString()]["5"]["R"]),
+                            (int)(themes[this.options["theme"].ToString()]["5"]["G"]),
+                            (int)(themes[this.options["theme"].ToString()]["5"]["B"])
+                        );
+                        c.BackColor = Color.FromArgb(
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["R"]),
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["G"]),
+                           (int)(themes[this.options["theme"].ToString()][c.Tag.ToString()]["B"])
+                       );
+                    }                  
+                    
+                }
+            }
+
+            this.BackColor = Color.FromArgb(
+                        (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["R"]),
+                        (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["G"]),
+                        (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["B"])
+                    );
         }
     }
 }
