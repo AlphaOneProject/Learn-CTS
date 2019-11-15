@@ -150,15 +150,10 @@ namespace Learn_CTS
 
         public virtual void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
             
             if ((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
             {
-                /*Graphics g = graphicsBuffer.Graphics;
-
-                g.DrawImage(this.image, this.x, this.y, this.GetWidth(), this.GetHeight());
-
-                graphicsBuffer.Render(e.Graphics);*/
+                Graphics g = e.Graphics;
                 g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
             }
         }

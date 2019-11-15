@@ -19,7 +19,7 @@ namespace Learn_CTS
 
         private List<Texture> list_textures;
         private NPC_Manager nm = NPC_Manager.GetInstance();
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer timer;
         private Player player;
         private Transport vehicule;
         private Background background;
@@ -86,11 +86,9 @@ namespace Learn_CTS
         private void Form1_Load(object sender, EventArgs e)
         {
             Texture.InitializePath(game);
-            Character.SetM(2);
-            InitializeTimer();
             InitializeFPSThread();
-            timer.Enabled = true;
             Load_Game();
+            InitializeTimer();
         }
 
         private void Load_Game()
@@ -102,7 +100,7 @@ namespace Learn_CTS
             InitializeListTextures();
             lbl_score.Text = score.ToString();
             Show();
-            GameTick();
+            GameTick();    
             SetUpWindow();
         }
 
@@ -118,8 +116,10 @@ namespace Learn_CTS
 
         private void InitializeTimer()
         {
-            timer.Interval = 30;
+            timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(Timer_Tick);
+            timer.Interval = 32;
+            timer.Start();
         }
 
         /// <summary>
@@ -172,6 +172,8 @@ namespace Learn_CTS
                 if (ticks > 0 && diff > 0) n_fps = (float)(ticks / diff);
                 else Console.WriteLine("Erreur fps");
                 ticks = 0;
+                Console.WriteLine((int)Math.Round(n_fps / 8));
+                if((int)Math.Round(n_fps / 8)>1) Character.SetM((int)Math.Round(n_fps/8));
                 start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
             }
         }
@@ -182,7 +184,7 @@ namespace Learn_CTS
         /// <param name="Sender"></param>
         /// <param name="e"></param>
 
-        private void Timer_Tick(object Sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             GameTick();
         }
@@ -670,7 +672,6 @@ namespace Learn_CTS
 
         public void GameWindowClosed()
         {
-            timer.Stop();
             foreach (Texture t in list_textures)
             {
                 t.Dispose();
@@ -678,6 +679,7 @@ namespace Learn_CTS
             nm.Clear();
             if (!preview)
             {
+                timer.Stop();
                 t_fps.Abort();
                 Application.Restart();
             }
@@ -700,7 +702,6 @@ namespace Learn_CTS
                 else FillVehiculeNPCs();
                 vehicule.SetX(-4000);
                 vehicule.SetSpeed(vehicule.GetMaxSpeed());
-                //leave_npc = false;
             }
         }
 
@@ -730,20 +731,6 @@ namespace Learn_CTS
                     npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
                 }
-                /*if (vehicule != null && (npc_x > vehicule.GetX() && npc_x < vehicule.GetX() + vehicule.GetWidth()) && (npc_y > vehicule.GetY() && npc_y + 192 < vehicule.GetY() + vehicule.GetHeight()))
-                {
-                    vehicule.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
-                }
-                else if (platform != null && (npc_x > platform.GetX() && npc_x < platform.GetX() + platform.GetWidth()) && (npc_y > platform.GetY() && npc_y + 192 < platform.GetY() + platform.GetHeight()))
-                {
-                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
-                }
-                else
-                {
-                    npc_x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
-                    npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
-                    platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
-                }*/
             }
             FillVehiculeNPCs();
             FillPlatformNPCs();
@@ -760,27 +747,6 @@ namespace Learn_CTS
                 n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight() + r.Next(0, 100));
                 n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 5000);
             }
-            /*if (!leave_npc)
-            {
-                nm.GetList() = SelectionNPCsLeavingVehicule();
-                int i;
-                foreach (NPC n in nm.GetList())
-                {
-                    i = vehicule.GetIndexNearestDoor(n.GetX());
-                    n.SetObjectiveX(vehicule.GetPosDoor(i));
-                    n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight() + r.Next(0, 100));
-                    n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 5000);
-                }
-                leave_npc = true;
-                enter_npc = true;
-            }
-            else
-            {
-                if (nm.GetList() != null && enter_npc && HasAllNPCsLeavedVehicule(nm.GetList()))
-                {
-                    NPCEnterVehicule();
-                }
-            }*/
         }
 
         private List<NPC> SelectionNPCsLeavingVehicule()
@@ -1010,6 +976,11 @@ namespace Learn_CTS
         private void pbox_backpack_Click(object sender, EventArgs e)
         {
             Open_Backpack();
+        }
+
+        private void GameWindow_Resize(object sender, EventArgs e)
+        {
+            lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
         }
     }
 }

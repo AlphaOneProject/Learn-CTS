@@ -16,13 +16,11 @@ namespace Learn_CTS
         private int id;
         private int c = 0;
         private int t = 0;
-        //private int? obj_x;
-        //private int? obj_y;
         private List<Image> animation_list_west = new List<Image>();
         private List<Image> animation_list_est = new List<Image>();
         private List<Point> list_objectives = new List<Point>();
         private int last_direction = 1;
-        private static int m;
+        private static int m = 4;
         private string folder;
         private string name;
 
@@ -100,7 +98,6 @@ namespace Learn_CTS
                 }
                 if (a != 0 || b!=0)
                 {
-                    //hasMoved = true;
                     this.c++;
                     if (c > 8)
                     {
