@@ -90,12 +90,12 @@
             this.lbl_nfps.TabIndex = 4;
             this.lbl_nfps.Text = "0,000";
             this.lbl_nfps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbl_nfps.Visible = false;
             // 
             // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.lbl_nfps);
             this.Controls.Add(this.pbox_backpack);

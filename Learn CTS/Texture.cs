@@ -28,6 +28,7 @@ namespace Learn_CTS
         private bool collide_only_z = false;
         private int width;
         private int height;
+        private bool visible = true;
 
         /// <summary>
         /// Initialize the path of the folder of the images and hitboxes corresponding to the game.
@@ -150,8 +151,7 @@ namespace Learn_CTS
 
         public virtual void OnPaint(PaintEventArgs e)
         {
-            
-            if ((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
+            if (visible)
             {
                 Graphics g = e.Graphics;
                 g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
@@ -299,7 +299,7 @@ namespace Learn_CTS
 
         public static int Compare(Texture t1, Texture t2)
         {
-            if (t1.GetZ() >= t2.GetZ())
+            if (t1.GetZ() > t2.GetZ())
             {
                 return 1;
             }
@@ -309,7 +309,14 @@ namespace Learn_CTS
             }
             else
             {
-                return 0;
+                if (t1.GetHashCode() > t2.GetHashCode())
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 
@@ -498,6 +505,11 @@ namespace Learn_CTS
         public void SetZ(int z)
         {
             this.z = z;
+        }
+
+        public void ChangeVisible()
+        {
+            this.visible = !this.visible;
         }
 
         /// <summary>

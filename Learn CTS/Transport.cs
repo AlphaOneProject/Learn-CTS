@@ -39,6 +39,7 @@ namespace Learn_CTS
             this.doors_left = new Texture(name + "DoorsLeft", this.GetX(), this.GetY(), this.outside.GetZ() + 1, true);
             this.doors_right = new Texture(name + "DoorsRight", this.GetX(), this.GetY(), this.outside.GetZ() + 1, true);
             this.inside.DisableCollisions();
+            this.inside.ChangeVisible();
             this.interior = new Texture(name + "Interior", this.GetX(), this.GetY(), true);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
