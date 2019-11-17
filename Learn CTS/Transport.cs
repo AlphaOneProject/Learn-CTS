@@ -36,11 +36,11 @@ namespace Learn_CTS
             this.max_distance_stop = this.DistanceBeforeStopping();
             this.inside = new Texture(name + "Inside", this.GetX(), this.GetY(), this.GetZ() + 1);
             this.outside = new Texture(name + "Outside", this.GetX(), this.GetY(), true);
-            this.doors_left = new Texture(name + "DoorsLeft", this.GetX(), this.GetY(), this.outside.GetZ() + 1, true);
-            this.doors_right = new Texture(name + "DoorsRight", this.GetX(), this.GetY(), this.outside.GetZ() + 1, true);
+            this.doors_left = new Texture(name + "DoorsLeft", this.GetX()+424, this.GetY()+112, this.outside.GetZ() + 1, true);
+            this.doors_right = new Texture(name + "DoorsRight", this.GetX()+512, this.GetY()+112, this.outside.GetZ() + 1, true);
             this.inside.DisableCollisions();
             this.inside.ChangeVisible();
-            this.interior = new Texture(name + "Interior", this.GetX(), this.GetY(), true);
+            this.interior = new Texture(name + "Interior", this.GetX()+480, this.GetY()+208, true);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
             this.AddChild(interior);
@@ -97,7 +97,7 @@ namespace Learn_CTS
         {
             if (this.GetState() == 1 && this.speed < this.max_speed)
             {
-                if (this.doors_left.GetX() < this.GetX())
+                if (this.doors_left.GetX() < this.GetX() + 424)
                 {
                     CloseDoors();
                 }
@@ -116,7 +116,7 @@ namespace Learn_CTS
             }
             else if (this.GetState() == 3 && this.speed <= 0)
             {
-                if (this.doors_left.GetX() >= this.GetX() - 76)
+                if (this.doors_left.GetX() >= this.GetX() + 348)
                 {
                     OpenDoors();
                 }
