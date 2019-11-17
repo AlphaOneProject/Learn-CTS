@@ -17,6 +17,8 @@ namespace Learn_CTS
         SpeechSynthesizer s;
         private int audio;
         private Thread t_audio;
+        private System.Windows.Forms.Timer timer_text;
+        private string question = "";
 
         public Dialog(int id, string game)
         {
@@ -24,17 +26,20 @@ namespace Learn_CTS
             npc = nm.GetNPCByID(id);
             InitializeGamePath(game);
             this.DoubleBuffered = true;
-            this.Set_Up(npc.GetQuiz().ToString());
-            Generate_Buttons_Choices();
         }
 
         private void Dialog_Load(object sender, EventArgs e)
         {
+            t_audio = new Thread(new ThreadStart(Listen));
+            InitializeTimerDisplayText();
+            this.Set_Up(npc.GetQuiz().ToString());
+            Generate_Buttons_Choices();
             this.Focus();
             npc.RemoveInteraction();
             lbl_name.Text = npc.GetName();
             this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
             this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+            timer_text.Start();
         }
 
         private void InitializeGamePath(string game)
@@ -46,8 +51,31 @@ namespace Learn_CTS
         {
             data = Tools.Get_From_JSON(this.game_path + q + ".json");
             audio = (int)this.data["audio"];
-            if (audio == 2) txt_dialog_npc.Text = "";
-            else txt_dialog_npc.Text = this.data["question"].ToString();
+            if (audio != 2) question = this.data["question"].ToString();
+            else
+            {
+                txt_dialog_npc.Text = "";
+                t_audio.Start();
+            }
+        }
+
+        private void InitializeTimerDisplayText()
+        {
+            timer_text = new System.Windows.Forms.Timer();
+            timer_text.Tick += new EventHandler(Question_Tick);
+            timer_text.Interval = 50;
+        }
+
+        private void Question_Tick(object sender, EventArgs e)
+        {
+            if(txt_dialog_npc.Text.Length < question.Length)
+            {
+                txt_dialog_npc.Text += question.Substring(txt_dialog_npc.Text.Length, 1);
+            }
+            else
+            {
+                timer_text.Stop();
+            }
         }
 
         private void Generate_Buttons_Choices()
@@ -127,6 +155,7 @@ namespace Learn_CTS
                 this.Set_Up(s);
                 Generate_Buttons_Choices();
                 this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+                timer_text.Start();
             }
         }
 
@@ -145,7 +174,6 @@ namespace Learn_CTS
             }
             else
             {
-                t_audio = new Thread(new ThreadStart(Listen));
                 t_audio.Start();
             }
         }

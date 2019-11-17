@@ -47,7 +47,7 @@
             this.txt_dialog_npc.ReadOnly = true;
             this.txt_dialog_npc.Size = new System.Drawing.Size(223, 52);
             this.txt_dialog_npc.TabIndex = 1;
-            this.txt_dialog_npc.Text = "default";
+            this.txt_dialog_npc.Text = "";
             // 
             // lbl_name
             // 

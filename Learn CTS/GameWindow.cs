@@ -50,6 +50,7 @@ namespace Learn_CTS
         private int n_situation = 0;
         private Thread t_fps;
         private float n_fps;
+        private List<Image> list_eggs;
 
         /// <summary>
         /// Initialize the game window
@@ -88,6 +89,8 @@ namespace Learn_CTS
         {
             Texture.InitializePath(game);
             InitializeFPSThread();
+            InitializeEggsList();
+            SetScore(1000);
             Load_Game();
             InitializeTimer();
         }
@@ -99,8 +102,6 @@ namespace Learn_CTS
             bp = new Backpack();
             r = new Random();
             InitializeListTextures();
-            lbl_score.Text = score.ToString();
-            //GameTick();
             SetUpWindow();
             this.Show();
         }
@@ -136,7 +137,7 @@ namespace Learn_CTS
                     t.Dispose();
                 }
             }
-            vehicule = new Tram(-4000, 298);
+            vehicule = new Tram(-4000, 298+80);
             background = new Background(0, -372);
             background.DisableCollisions();
             player = new Player("Moi", 600, 604);
@@ -148,6 +149,17 @@ namespace Learn_CTS
                 platform
             };
             InitializeNPCs();
+        }
+
+        private void InitializeEggsList()
+        {
+            list_eggs = new List<Image>();
+            string path_eggs = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "eggs" + Path.DirectorySeparatorChar;
+            for(int i = 0; i<6; i++)
+            {
+                list_eggs.Add(Image.FromFile(path_eggs + "egg" + i.ToString() + ".png"));
+            }
+            pbox_egg.Image = list_eggs[0];
         }
 
         private void SetUpWindow()
@@ -912,6 +924,10 @@ namespace Learn_CTS
         {
             score += s;
             lbl_score.Text = score.ToString();
+            if(score/200>=0 && score / 200 < 6)
+            {
+                pbox_egg.Image = list_eggs[5 - score / 200];
+            }
         }
 
         private void Open_Backpack()
