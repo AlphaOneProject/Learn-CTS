@@ -57,9 +57,9 @@ namespace Learn_CTS
             this.is_inside = !this.is_inside;
             if (this.is_inside)
             {
-                this.RemoveChild(this.doors_left);
-                this.RemoveChild(this.doors_right);
-                this.RemoveChild(this.outside);
+                this.doors_left.SetVisible(false);
+                this.doors_right.SetVisible(false);
+                this.outside.SetVisible(false);
                 foreach (Texture t in this.GetListChilds())
                 {
                     if (t.GetType().Name == "NPC")
@@ -70,15 +70,9 @@ namespace Learn_CTS
             }
             else
             {
-                this.doors_left.SetX(this.GetX());
-                this.doors_left.SetY(this.GetY());
-                this.AddChild(this.doors_left);
-                this.doors_right.SetX(this.GetX());
-                this.doors_right.SetY(this.GetY());
-                this.AddChild(this.doors_right);
-                this.outside.SetX(this.GetX());
-                this.outside.SetY(this.GetY());
-                this.AddChild(this.outside);
+                this.doors_left.SetVisible(true);
+                this.doors_right.SetVisible(true);
+                this.outside.SetVisible(true);
                 foreach (Texture t in this.GetListChilds())
                 {
                     if (t.GetType().Name == "NPC")

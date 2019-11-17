@@ -512,6 +512,11 @@ namespace Learn_CTS
             this.visible = !this.visible;
         }
 
+        public void SetVisible(bool b)
+        {
+            this.visible = b;
+        }
+
         /// <summary>
         /// Get the hitbox used by the texture.
         /// </summary>

@@ -120,7 +120,7 @@ namespace Learn_CTS
         {
             timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(Timer_Tick);
-            timer.Interval = 32;
+            timer.Interval = 25;
             timer.Start();
         }
 
