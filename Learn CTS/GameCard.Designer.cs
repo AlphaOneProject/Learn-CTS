@@ -75,8 +75,8 @@ namespace Learn_CTS
             this.pb_edit.TabStop = false;
             this.pb_edit.Tag = "";
             this.pb_edit.Click += new System.EventHandler(this.Pb_edit_Click);
+            this.pb_edit.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_edit.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_edit.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // pb_play
             // 
@@ -92,8 +92,8 @@ namespace Learn_CTS
             this.pb_play.TabStop = false;
             this.pb_play.Tag = "";
             this.pb_play.Click += new System.EventHandler(this.Pb_play_Click);
+            this.pb_play.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_play.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_play.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // pb_thumbnail
             // 
@@ -118,8 +118,8 @@ namespace Learn_CTS
             this.pb_delete.TabStop = false;
             this.pb_delete.Tag = "";
             this.pb_delete.Click += new System.EventHandler(this.Pb_delete_Click);
+            this.pb_delete.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_delete.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_delete.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // panel1
             // 
