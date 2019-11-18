@@ -28,11 +28,11 @@ namespace Learn_CTS
             // Fetching icons and saving them in a static variable.
             FetchIcons();
 
-            pb_play.BackgroundImage = ChangeOpacity(icon_play, 0.5f);
+            pb_play.BackgroundImage = Tools.ChangeOpacity(icon_play, 0.5f);
             pb_play.BackColor = Color.Transparent;
-            pb_edit.BackgroundImage = ChangeOpacity(icon_edit, 0.5f);
+            pb_edit.BackgroundImage = Tools.ChangeOpacity(icon_edit, 0.5f);
             pb_edit.BackColor = Color.Transparent;
-            pb_delete.BackgroundImage = ChangeOpacity(icon_delete, 0.5f);
+            pb_delete.BackgroundImage = Tools.ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
         }
 
@@ -148,27 +148,6 @@ namespace Learn_CTS
             this.ParentForm.Hide();
         }
 
-        public static Bitmap ChangeOpacity(Image img, float opacityvalue)
-        {
-            try
-            {
-                Bitmap bmp = new Bitmap(img.Width, img.Height); // Determining Width and Height of Source Image
-                Graphics graphics = Graphics.FromImage(bmp);
-                ColorMatrix colormatrix = new ColorMatrix();
-                colormatrix.Matrix33 = opacityvalue;
-                ImageAttributes imgAttribute = new ImageAttributes();
-                imgAttribute.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
-                graphics.Dispose();   // Releasing all resource used by graphics 
-                return bmp;
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("L'image " + img.ToString() + " est introuvable. Vérifiez qu'elle existe.");
-                return null;
-            }
-        }
-
         private void Pb_play_Click(object sender, EventArgs e)
         {
             Form game = new GameWindow(this.gameFullName);
@@ -218,7 +197,7 @@ namespace Learn_CTS
             try
             {
                 if (pb.BackgroundImage != null) pb.BackgroundImage.Dispose();
-                pb.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 1);
+                pb.BackgroundImage = Tools.ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 1);
             }
             catch (FileNotFoundException)
             {
@@ -232,7 +211,7 @@ namespace Learn_CTS
             try
             {
                 if (pb.BackgroundImage != null) pb.BackgroundImage.Dispose();
-                pb.BackgroundImage = ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 0.5f);
+                pb.BackgroundImage = Tools.ChangeOpacity(Image.FromFile(img_path + pb.ImageLocation), 0.5f);
             }
             catch (FileNotFoundException)
             {
