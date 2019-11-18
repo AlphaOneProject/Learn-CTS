@@ -86,6 +86,8 @@ namespace Learn_CTS
                 {
                     this.lbl_title.Text = value;
                 }
+                ToolTip tp_title = new ToolTip();
+                tp_title.SetToolTip(lbl_title, value);
                 // We need to know the game title in order to retrieve the thumbnail.
                 Show_Thumbnail(value);
             }
@@ -204,18 +206,23 @@ namespace Learn_CTS
 
         private void Copy_Game()
         {
+            int nb_copies = 1;
             String current_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName;
             String copy_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName + "-Copie";
             try
             {
-                Tools.DirectoryCopy(current_path, copy_path, true);
-                Form new_game = new GameWindow(this.gameFullName + "-Copie");
-                new_game.Show();
-                this.Parent.Parent.Hide();
+                Tools.DirectoryCopy(current_path, copy_path + nb_copies.ToString(), true);
             }
-            catch (Exception e)
+            catch (IOException)
             {
-                MessageBox.Show(e.Message);
+                nb_copies++;
+                Tools.DirectoryCopy(current_path, copy_path + nb_copies.ToString(), true);
+            }
+            finally
+            {
+            Form g = new Editor(this.gameFullName + "-Copie");
+                this.Hide();
+                g.Show();
             }
         }
 
