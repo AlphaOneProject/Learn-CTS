@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Learn_CTS
 {
@@ -129,6 +130,33 @@ namespace Learn_CTS
             v.Dispose();
             n.Dispose();
             return b;
+        }
+
+        /// <summary>
+        /// Changes the opacity of the image according to the opacity value given.
+        /// </summary>
+        /// <param name="img">Image to modify</param>
+        /// <param name="opacityvalue">Opacity value</param>
+        /// <returns></returns>
+        public static Bitmap ChangeOpacity(Image img, float opacityvalue)
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(img.Width, img.Height); // Determining Width and Height of Source Image
+                Graphics graphics = Graphics.FromImage(bmp);
+                ColorMatrix colormatrix = new ColorMatrix();
+                colormatrix.Matrix33 = opacityvalue;
+                ImageAttributes imgAttribute = new ImageAttributes();
+                imgAttribute.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
+                graphics.Dispose();   // Releasing all resource used by graphics 
+                return bmp;
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("L'image " + img.ToString() + " est introuvable. Vérifiez qu'elle existe.");
+                return null;
+            }
         }
     }
 }
