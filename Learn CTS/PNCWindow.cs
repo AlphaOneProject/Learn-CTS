@@ -93,17 +93,6 @@ namespace Learn_CTS
             return list_temp;
         }
 
-        public JObject Get_From_JSON(string internal_path)
-        {
-            JObject output;
-            using (StreamReader stream_r = new StreamReader(@"" + this.game_path + internal_path))
-            {
-                string json_file = stream_r.ReadToEnd();
-                output = JObject.Parse(json_file);
-            }
-            return output;
-        }
-
         private void PNCWindow_MouseDown(object sender, MouseEventArgs e)
         {
             int mouse_x = e.Location.X;

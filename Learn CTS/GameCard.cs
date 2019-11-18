@@ -18,6 +18,7 @@ namespace Learn_CTS
 
         private static Image icon_play;
         private static Image icon_edit;
+        private static Image icon_copy;
         private static Image icon_delete;
 
         public GameCard()
@@ -28,12 +29,15 @@ namespace Learn_CTS
             // Fetching icons and saving them in a static variable.
             FetchIcons();
 
+            // Setting the icons to 50% opacity by default.
             pb_play.BackgroundImage = Tools.ChangeOpacity(icon_play, 0.5f);
             pb_play.BackColor = Color.Transparent;
             pb_edit.BackgroundImage = Tools.ChangeOpacity(icon_edit, 0.5f);
             pb_edit.BackColor = Color.Transparent;
             pb_delete.BackgroundImage = Tools.ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
+            pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
+            pb_copy.BackColor = Color.Transparent;
         }
 
         private void FetchIcons()
@@ -51,6 +55,10 @@ namespace Learn_CTS
                 if (icon_delete == null)
                 {
                     icon_delete = Image.FromFile(img_path + "gamecard-delete-btn-x64.png");
+                }
+                if (icon_copy == null)
+                {
+                    icon_copy = Image.FromFile(img_path + "gamecard-copy-btn-x64.png");
                 }
             }
             catch (FileNotFoundException ex)
@@ -122,10 +130,13 @@ namespace Learn_CTS
                 // Setting the parent of the icons in order to make them transparent.
                 pb_play.Parent = pb_thumbnail;
                 pb_play.Location = new Point(64 - pb_play.Width/2, 64 - pb_play.Height/2);
+                pb_copy.Parent = pb_thumbnail;
+                pb_copy.Location = new Point(6, 128 - pb_copy.Height - 2);
                 pb_edit.Parent = pb_thumbnail;
                 pb_edit.Location = new Point(128 - pb_edit.Width, 0);
                 pb_delete.Parent = pb_thumbnail;
                 pb_delete.Location = new Point(128 - pb_delete.Width, 128 - pb_delete.Height);
+                pb_copy.BringToFront();
                 pb_edit.BringToFront();
                 pb_delete.BringToFront();
             }
@@ -191,6 +202,23 @@ namespace Learn_CTS
             }
         }
 
+        private void Copy_Game()
+        {
+            String current_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName;
+            String copy_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName + "-Copie";
+            try
+            {
+                Tools.DirectoryCopy(current_path, copy_path, true);
+                Form new_game = new GameWindow(this.gameFullName + "-Copie");
+                new_game.Show();
+                this.Parent.Parent.Hide();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
         private void Pb_Btn_MouseHover(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -217,6 +245,11 @@ namespace Learn_CTS
             {
                 pb.BackgroundImage = null;
             }
+        }
+
+        private void Pb_copy_Click(object sender, EventArgs e)
+        {
+            Copy_Game();
         }
     }
 }
