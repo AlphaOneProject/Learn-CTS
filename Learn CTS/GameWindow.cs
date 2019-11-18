@@ -98,7 +98,7 @@ namespace Learn_CTS
         private void Load_Game()
         {
             RemoveDialog();
-            RemoveBackpack();
+            if (this.Controls.Contains(bp)) OpenClose_Backpack();
             bp = new Backpack();
             r = new Random();
             InitializeListTextures();
@@ -661,8 +661,8 @@ namespace Learn_CTS
                 case Keys.Down : go_down = true; break;
                 case Keys.D: this.debug = !debug; break;
                 case Keys.G: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
-                case Keys.M: this.Moise(); ; break;
-                case Keys.B: if (!this.Controls.Contains(bp))this.Open_Backpack(); else this.RemoveBackpack() ; break;
+                case Keys.M: this.Moise(); break;
+                case Keys.B: OpenClose_Backpack(); break;
                 case Keys.Escape: this.Close(); break;
                 case Keys.F: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
             }
@@ -748,8 +748,8 @@ namespace Learn_CTS
                 }
                 else
                 {
-                    npc_x = platform.GetX() + r.Next(100, platform.GetWidth() - 100);
-                    npc_y = platform.GetY() + r.Next(20, platform.GetHeight());
+                    npc_x = platform.GetX() - 192 + r.Next(100, platform.GetWidth() - 100);
+                    npc_y = platform.GetY() - 192 + r.Next(10, platform.GetHeight());
                     platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
                 }
             }
@@ -930,18 +930,17 @@ namespace Learn_CTS
             }
         }
 
-        private void Open_Backpack()
+        public void OpenClose_Backpack()
         {
             if (!this.Controls.Contains(bp))
             {
                 this.Controls.Add(bp);
             }
-        }
-
-        public void RemoveBackpack()
-        {
-            if(this.Controls.Contains(bp)) this.Controls.Remove(bp);
-            this.Focus();
+            else
+            {
+                this.Controls.Remove(bp);
+                this.Focus();
+            }
         }
 
         public void Moise()
@@ -1012,7 +1011,7 @@ namespace Learn_CTS
 
         private void pbox_backpack_Click(object sender, EventArgs e)
         {
-            Open_Backpack();
+            OpenClose_Backpack();
         }
 
         private void GameWindow_Resize(object sender, EventArgs e)

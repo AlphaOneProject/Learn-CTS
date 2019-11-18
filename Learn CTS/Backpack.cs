@@ -34,7 +34,7 @@ namespace Learn_CTS
 
         private void Backpack_Closed(object sender, EventArgs e)
         {
-            ((GameWindow)this.FindForm()).RemoveBackpack();
+            ((GameWindow)this.FindForm()).OpenClose_Backpack();
         }
 
         private void Backpack_KeyDown(object sender, KeyEventArgs e)
