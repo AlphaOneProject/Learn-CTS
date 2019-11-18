@@ -28,6 +28,7 @@ namespace Learn_CTS
         private bool collide_only_z = false;
         private int width;
         private int height;
+        private bool visible = true;
 
         /// <summary>
         /// Initialize the path of the folder of the images and hitboxes corresponding to the game.
@@ -150,15 +151,9 @@ namespace Learn_CTS
 
         public virtual void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            
-            if ((this.GetX() + this.GetWidth() >= 0 && this.GetX() > e.ClipRectangle.Width) || (this.GetY() + this.GetHeight() >= 0 && this.GetY() < e.ClipRectangle.Height))
+            if (visible)
             {
-                /*Graphics g = graphicsBuffer.Graphics;
-
-                g.DrawImage(this.image, this.x, this.y, this.GetWidth(), this.GetHeight());
-
-                graphicsBuffer.Render(e.Graphics);*/
+                Graphics g = e.Graphics;
                 g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
             }
         }
@@ -215,7 +210,7 @@ namespace Learn_CTS
         {
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
-                bool b = true;
+                bool b = false;
                 try
                 {
                     b = !Color.Equals(this.hitbox.GetPixel(c - this.x, d - this.y), Color.FromArgb(0, 0, 0, 0));
@@ -304,7 +299,7 @@ namespace Learn_CTS
 
         public static int Compare(Texture t1, Texture t2)
         {
-            if (t1.GetZ() >= t2.GetZ())
+            if (t1.GetZ() > t2.GetZ())
             {
                 return 1;
             }
@@ -314,7 +309,14 @@ namespace Learn_CTS
             }
             else
             {
-                return 0;
+                if (t1.GetHashCode() > t2.GetHashCode())
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 
@@ -503,6 +505,16 @@ namespace Learn_CTS
         public void SetZ(int z)
         {
             this.z = z;
+        }
+
+        public void ChangeVisible()
+        {
+            this.visible = !this.visible;
+        }
+
+        public void SetVisible(bool b)
+        {
+            this.visible = b;
         }
 
         /// <summary>

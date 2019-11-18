@@ -45,7 +45,7 @@
             this.main_menu_btn_edit.Name = "main_menu_btn_edit";
             this.main_menu_btn_edit.Size = new System.Drawing.Size(230, 60);
             this.main_menu_btn_edit.TabIndex = 1;
-            this.main_menu_btn_edit.Tag = "main_menu";
+            this.main_menu_btn_edit.Tag = "2";
             this.main_menu_btn_edit.Text = "Mes jeux";
             this.main_menu_btn_edit.UseVisualStyleBackColor = false;
             this.main_menu_btn_edit.Click += new System.EventHandler(this.Main_menu_btn_edit_Click);
@@ -59,7 +59,7 @@
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
             this.main_menu_btn_exit.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_exit.TabIndex = 4;
-            this.main_menu_btn_exit.Tag = "main_menu";
+            this.main_menu_btn_exit.Tag = "2";
             this.main_menu_btn_exit.Text = "Quitter";
             this.main_menu_btn_exit.UseVisualStyleBackColor = false;
             this.main_menu_btn_exit.Click += new System.EventHandler(this.Main_menu_btn_exit_Click);
@@ -73,7 +73,7 @@
             this.main_menu_btn_options.Name = "main_menu_btn_options";
             this.main_menu_btn_options.Size = new System.Drawing.Size(109, 30);
             this.main_menu_btn_options.TabIndex = 3;
-            this.main_menu_btn_options.Tag = "main_menu";
+            this.main_menu_btn_options.Tag = "2";
             this.main_menu_btn_options.Text = "Options";
             this.main_menu_btn_options.UseVisualStyleBackColor = false;
             this.main_menu_btn_options.Click += new System.EventHandler(this.Main_menu_btn_options_Click);
@@ -82,10 +82,11 @@
             // 
             this.main_menu_lbl_title1.AutoSize = true;
             this.main_menu_lbl_title1.Font = new System.Drawing.Font("Nirmala UI Semilight", 36F);
-            this.main_menu_lbl_title1.Location = new System.Drawing.Point(276, 31);
+            this.main_menu_lbl_title1.Location = new System.Drawing.Point(267, 122);
             this.main_menu_lbl_title1.Name = "main_menu_lbl_title1";
             this.main_menu_lbl_title1.Size = new System.Drawing.Size(141, 65);
             this.main_menu_lbl_title1.TabIndex = 5;
+            this.main_menu_lbl_title1.Tag = "5";
             this.main_menu_lbl_title1.Text = "Learn";
             // 
             // main_menu_lbl_title2
@@ -93,7 +94,7 @@
             this.main_menu_lbl_title2.AutoSize = true;
             this.main_menu_lbl_title2.Font = new System.Drawing.Font("Nirmala UI", 44F, System.Drawing.FontStyle.Bold);
             this.main_menu_lbl_title2.ForeColor = System.Drawing.Color.Red;
-            this.main_menu_lbl_title2.Location = new System.Drawing.Point(398, 20);
+            this.main_menu_lbl_title2.Location = new System.Drawing.Point(389, 111);
             this.main_menu_lbl_title2.Name = "main_menu_lbl_title2";
             this.main_menu_lbl_title2.Size = new System.Drawing.Size(138, 78);
             this.main_menu_lbl_title2.TabIndex = 6;
@@ -114,6 +115,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Tag = "0";
             this.Text = "Learn CTS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.Load += new System.EventHandler(this.Menu_Load);

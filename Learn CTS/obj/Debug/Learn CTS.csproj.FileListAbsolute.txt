@@ -97,5 +97,8 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
-C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\ToggleSwitch.dll
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
