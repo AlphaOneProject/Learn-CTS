@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -35,8 +36,8 @@ namespace Learn_CTS
         private Dialog d;
         private Backpack bp;
         private string game;
-        private string game_path;
-        private bool debug = false;
+        private bool debug = true;
+        private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
         private int NPCsDensity = 50; //max 650
@@ -51,6 +52,10 @@ namespace Learn_CTS
         private Thread t_fps;
         private float n_fps;
         private List<Image> list_eggs;
+        private Transition tr;
+        private Thread t_audio;
+        private bool ticket_valid = false;
+        private static GameWindow instance;
 
         /// <summary>
         /// Initialize the game window
@@ -58,16 +63,23 @@ namespace Learn_CTS
 
         public GameWindow(string game)
         {
+            if (instance == null) instance = this;
+            else
+            {
+                MessageBox.Show("Vous ne pouvez avoir qu'une seule fenêtre de jeu ouverte en même temps.");
+                Application.Exit();
+            }
             this.Hide();
             this.game = game;
-            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
+            string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
             pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
-            sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+            sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
+
         }
 
         public GameWindow(string game, string scenario, string situation) : this(game)
@@ -75,6 +87,11 @@ namespace Learn_CTS
             this.preview = true;
             this.scenario = scenario;
             this.situation = situation;
+        }
+
+        public static GameWindow GetInstance()
+        {
+            return instance;
         }
 
         /// <summary>
@@ -89,7 +106,14 @@ namespace Learn_CTS
         {
             Texture.InitializePath(game);
             InitializeFPSThread();
-            InitializeEggsList();
+            try
+            {
+                InitializeEggsList();
+            }
+            catch(Exception ex)
+            {
+                //voilà
+            }
             SetScore(1000);
             Load_Game();
             InitializeTimer();
@@ -106,10 +130,33 @@ namespace Learn_CTS
             this.Show();
         }
 
+        private void Transition()
+        {
+            tr = new Transition(draw_surface_width, draw_surface_height);
+            list_textures.Add(tr);
+        }
+
         private void InitializeFPSThread()
         {
-            t_fps = new Thread(new ThreadStart(CalculFPS));
+            t_fps = new Thread(new ThreadStart(CalculFPSandM));
             t_fps.Start();
+        }
+
+        private void InitializeSoundThread()
+        {
+            t_audio = new Thread(new ThreadStart(AudioTextures));
+            t_audio.Start();
+        }
+
+        private void AudioTextures()
+        {
+            while (true)
+            {
+                foreach(Texture t in GetAllTextures(list_textures))
+                {
+                    if (t.GetCurrentAudio() != null) t.GetCurrentAudio().Play();
+                }
+            }
         }
 
         /// <summary>
@@ -140,7 +187,7 @@ namespace Learn_CTS
             vehicule = new Tram(-4000, 298+80);
             background = new Background(0, -372);
             background.DisableCollisions();
-            player = new Player("Moi", 600, 604);
+            player = Player.Construct("Moi", 600, 604);
             platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {
@@ -176,13 +223,13 @@ namespace Learn_CTS
         /// <summary>
         /// Show the fps average at this moment.
         /// </summary>
-        private void CalculFPS()
+        private void CalculFPSandM()
         {
             while (true)
             {
-                Thread.Sleep(1000);
-                double diff = ((DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds - start_milliseconds) / 1000;
-                if (ticks > 0 && diff > 0) n_fps = (float)(ticks / diff);
+                Thread.Sleep(250);
+                double diff = ((DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds - start_milliseconds) / 250;
+                if (ticks > 0 && diff > 0) n_fps = (float)(ticks / diff)*4;
                 else Console.WriteLine("Erreur fps");
                 ticks = 0;
                 if((int)Math.Round(n_fps / 8)>1) Character.SetM((int)Math.Round(n_fps/8));
@@ -211,8 +258,6 @@ namespace Learn_CTS
                 if(vehicule.GetState() == 0)
                 {
                     ticks_stopped++;
-                    CheckIfCharacterIsEnteringTheVehicule();
-                    CheckIfCharacterIsLeavingTheVehicule();
                     if (ticks_stopped == 1)
                     {
                         NPCLeaveVehicule();
@@ -221,30 +266,37 @@ namespace Learn_CTS
                     {
                         NPCEnterVehicule();
                     }
-                    DeleteNPCsLeaving();
                     if (ticks_stopped > 200)
                     {
                         vehicule.ChangeState();
                         ticks_stopped = 0;
                     }
                 }
-                else if(vehicule.IsPlayerInside() && vehicule.GetX()>draw_surface_width) ViewInside();
-                else if(!vehicule.IsPlayerInside() && vehicule.GetX() > draw_surface_width)
+                else if(vehicule.Contains(player) && vehicule.GetX() >= draw_surface_width) ViewInside();
+                else if(platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
                 {
                     ticks_stopped++;
                     if(ticks_stopped == 1)
                     {
                         NPCsComingPlatform();
                     }
-                    if (ticks_stopped > 100)
+                    else if (ticks_stopped > 100)
                     {
                         StopVehicule();
                         ticks_stopped = 0;
                     }
                 }
-                DeleteNPCsLeaving();
+                if (vehicule.GetState() != 2)
+                {
+                    CheckIfCharacterIsEnteringTheVehicule();
+                    CheckIfCharacterIsLeavingTheVehicule();
+                }
             }
-            else MoveBackground();
+            else
+            {
+                MoveBackground();
+                if(ticks%3==0) Moise();
+            }
             MoveAllCharactersToObjective();
             CheckArrowsPressed();
             Refresh();
@@ -380,19 +432,16 @@ namespace Learn_CTS
 
         private void CheckIfCharacterIsEnteringTheVehicule()
         {
-            if(vehicule.GetState() == 0)
+            Texture t;
+            for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
             {
-                Texture t;
-                for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
+                t = platform.GetListChilds()[i];
+                if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                 {
-                    t = platform.GetListChilds()[i];
-                    if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
+                    if (t.GetZ() <= vehicule.GetY() + vehicule.GetHeight() && t.GetZ() >= vehicule.GetY())
                     {
-                        if (t.GetZ() < vehicule.GetY() + vehicule.GetHeight() && t.GetZ() > vehicule.GetY())
-                        {
-                            vehicule.AddChild(t);
-                            platform.RemoveChild(t);
-                        }
+                        vehicule.AddChild(t);
+                        platform.RemoveChild(t);
                     }
                 }
             }
@@ -404,19 +453,16 @@ namespace Learn_CTS
 
         private void CheckIfCharacterIsLeavingTheVehicule()
         {
-            if (vehicule.GetState() == 0)
+            Texture t;
+            for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
             {
-                Texture t;
-                for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
+                t = vehicule.GetListChilds()[i];
+                if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                 {
-                    t = vehicule.GetListChilds()[i];
-                    if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
+                    if (t.GetZ() > vehicule.GetY() + vehicule.GetHeight())
                     {
-                        if (t.GetZ() >= vehicule.GetY() + vehicule.GetHeight())
-                        {
-                            platform.AddChild(t);
-                            vehicule.RemoveChild(t);
-                        }
+                        platform.AddChild(t);
+                        vehicule.RemoveChild(t);
                     }
                 }
             }
@@ -477,7 +523,7 @@ namespace Learn_CTS
             foreach (Texture t in list_all_textures)
             {
                 t.OnPaint(e);
-                if (debug)
+                if (showhitbox)
                 {
                     t.Debug(e);
                 }
@@ -511,7 +557,12 @@ namespace Learn_CTS
         {
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            if(!this.Controls.Contains(d) && !SearchNPCDialog(list_textures, mouse_x, mouse_y))
+            if (!ticket_valid && platform.IsTerminalHit(mouse_x, mouse_y))
+            {
+                ticket_valid = true;
+                MessageBox.Show("Vous avez bien validé votre ticket !");
+            }
+            else if(!this.Controls.Contains(d) && !SearchNPCDialog(mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
             }
@@ -525,7 +576,7 @@ namespace Learn_CTS
         /// <param name="my"></param>
         /// <returns></returns>
 
-        private bool SearchNPCDialog(List<Texture> list, int mx, int my)
+        private bool SearchNPCDialog(int mx, int my)
         {
             if (vehicule.IsInside())
             {
@@ -590,7 +641,9 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()) && b<0 && player.GetY() <= platform.GetY() - player.GetHeight() + 2)
+                if (IsCharacterCollidingWithTextures(player) 
+                    || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()) 
+                    && b<0 || !ticket_valid && player.GetY() <= platform.GetY() - player.GetHeight() + 2)
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -656,15 +709,25 @@ namespace Learn_CTS
             switch (e.KeyCode)
             {
                 case Keys.Left : go_left = true; break;
+                case Keys.Q: go_left = true; break;
                 case Keys.Right : go_right = true; break;
+                case Keys.D: go_right = true; break;
                 case Keys.Up : go_up = true; break;
+                case Keys.Z: go_up = true; break;
                 case Keys.Down : go_down = true; break;
-                case Keys.D: this.debug = !debug; break;
-                case Keys.G: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
-                case Keys.M: this.Moise(); break;
+                case Keys.S: go_down = true; break;
                 case Keys.B: OpenClose_Backpack(); break;
                 case Keys.Escape: this.Close(); break;
-                case Keys.F: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
+            }
+            if (debug)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.F1: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
+                    case Keys.F2: this.showhitbox = !showhitbox; break;
+                    case Keys.F3: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
+                    //case Keys.F4: this.VehiculeCrash(); break;
+                }
             }
         }
 
@@ -679,9 +742,13 @@ namespace Learn_CTS
             switch (e.KeyCode)
             {
                 case Keys.Left: go_left = false; break;
+                case Keys.Q: go_left = false; break;
                 case Keys.Right: go_right = false; break;
+                case Keys.D: go_right = false; break;
                 case Keys.Up: go_up = false; break;
+                case Keys.Z: go_up = false; break;
                 case Keys.Down: go_down = false; break;
+                case Keys.S: go_down = false; break;
             }
         }
 
@@ -702,6 +769,7 @@ namespace Learn_CTS
             {
                 timer.Stop();
                 t_fps.Abort();
+                instance = null;
                 Application.Restart();
             }
         }
@@ -720,7 +788,7 @@ namespace Learn_CTS
                     list_textures.Add(platform);
                     FillPlatformNPCs();
                 }
-                else FillVehiculeNPCs();
+                else ShuffleVehiculeNPCs();
                 vehicule.SetX(-4000);
                 vehicule.SetSpeed(vehicule.GetMaxSpeed());
             }
@@ -784,36 +852,38 @@ namespace Learn_CTS
             return list;
         }
 
-        private void DeleteNPCsLeaving()
+        /*private void DeleteNPCsLeaving()
         {
-            if(vehicule.GetX()>draw_surface_width && !vehicule.IsPlayerInside())
+            if(vehicule.GetState() == 1 && platform.Contains(player))
             {
                 Texture c;
                 for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
                 {
                     c = vehicule.GetListChilds()[i];
-                    if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0)
+                    if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0 && c.GetX() > draw_surface_width)
                     {
                         vehicule.RemoveChild(c);
                         nm.RemoveNPC((NPC)c);
                     }
                 }
             }
-            else
+            else if(vehicule.GetState() == 1 && vehicule.Contains(player))
             {
-                if (nm.GetList().Count > 0)
+                if (platform.GetListChilds().Count > 0)
                 {
-                    for (int i = nm.GetList().Count - 1; i >= 0; i--)
+                    Texture c;
+                    for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
                     {
-                        if (nm.GetList()[i].GetQuiz() < 0 && nm.GetList()[i].GetY() > background.GetY() + background.GetHeight())
+                        c = platform.GetListChilds()[i];
+                        if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0 && c.GetY() > draw_surface_height)
                         {
-                            platform.RemoveChild(nm.GetList()[i]);
-                            nm.RemoveNPC(nm.GetList()[i]);
+                            platform.RemoveChild(c);
+                            nm.RemoveNPC((NPC)c);
                         }
                     }
                 }
             }
-        }
+        }*/
 
         private void ViewInside()
         {
@@ -904,19 +974,41 @@ namespace Learn_CTS
             }
         }
 
-        private void NPCsComingPlatform()
+        private void ShuffleVehiculeNPCs()
         {
-            int max = NPCsDensity / 2;
             int x;
             int y;
             NPC n;
-            for (int i = 0; i < max; i++)
+            foreach (Texture t in vehicule.GetListChilds())
             {
-                x = platform.GetX() + r.Next(200, platform.GetWidth()-200);
-                y = this.Height+r.Next(0,500);
-                n = nm.CreateNPC(x, y);
-                platform.AddChild(n);
-                n.SetObjective(n.GetX() + r.Next(-200,200), platform.GetY() + r.Next(30, platform.GetHeight()));
+                if(t.GetType().Name == "NPC" && t.GetY() < vehicule.GetY() + vehicule.GetHeight() - 192 - 20)
+                {
+                    n = (NPC)t;
+                    x = vehicule.GetX() + r.Next(492, vehicule.GetWidth() - 492);
+                    y = vehicule.GetY() + 144 + r.Next(0, 19);
+                    n.SetX(x);
+                    n.SetY(y);
+                }
+            }
+        }
+
+        private void NPCsComingPlatform()
+        {
+            int x;
+            int y;
+            NPC n;
+            foreach(Texture t in platform.GetListChilds())
+            {
+                if(t.GetType().Name == "NPC" && t.GetZ() > draw_surface_height)
+                {
+                    n = (NPC)t;
+                    n.RemoveAllObjectives();
+                    x = platform.GetX() + r.Next(200, platform.GetWidth() - 200);
+                    y = draw_surface_height + r.Next(0, 500);
+                    n.SetX(x);
+                    n.SetY(y);
+                    n.SetObjective(n.GetX() + r.Next(-200, 200), platform.GetY() + r.Next(30, platform.GetHeight() - 30));
+                }
             }
         }
 
@@ -954,15 +1046,15 @@ namespace Learn_CTS
                 {
                     n = (NPC)t;
                     if(d == 1 
-                    && n.GetX()+n.GetWidth()/2 > player.GetX() + player.GetWidth()/2
-                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 150
+                    && n.GetX() + n.GetWidth()/2 > player.GetX() + player.GetWidth()/2
+                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 50
                     && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
                     {
-                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 32)
+                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
-                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - player.GetHeight() + 20)
+                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
                         {
                             n.SetObjectiveY(n.GetZ() + e);
                         }
@@ -974,14 +1066,14 @@ namespace Learn_CTS
                     }
                     else if (d == 3
                     && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2
-                    && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 150
+                    && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 50
                     && Math.Abs(n.GetZ() - player.GetZ()) < 8)
                     {
-                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 32)
+                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
-                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - player.GetHeight() + 20)
+                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
                         {
                             n.SetObjectiveY(n.GetZ() + e);
                         }

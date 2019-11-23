@@ -109,9 +109,15 @@
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="NPC.cs" />
-    <Compile Include="NPC_Manager.cs" />
+    <Compile Include="Character_Manager.cs" />
     <Compile Include="NumericUpDownFix.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Phone.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Phone.Designer.cs">
+      <DependentUpon>Phone.cs</DependentUpon>
     </Compile>
     <Compile Include="PlacementEdition.cs">
       <SubType>Form</SubType>
@@ -144,6 +150,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transition.cs" />
     <Compile Include="Transport.cs" />
     <EmbeddedResource Include="Backpack.resx">
       <DependentUpon>Backpack.cs</DependentUpon>
@@ -171,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Phone.resx">
+      <DependentUpon>Phone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlacementEdition.resx">
       <DependentUpon>PlacementEdition.cs</DependentUpon>

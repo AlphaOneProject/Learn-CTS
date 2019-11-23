@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -151,11 +152,17 @@ namespace Learn_CTS
 
         public virtual void OnPaint(PaintEventArgs e)
         {
-            if (visible)
+            if (this.visible && this.IsOnScreen(e))
             {
                 Graphics g = e.Graphics;
                 g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
             }
+        }
+
+        public bool IsOnScreen(PaintEventArgs e)
+        {
+            Rectangle screen = e.ClipRectangle;
+            return this.GetX() + this.GetWidth() >= screen.X && this.GetX() <= screen.X + screen.Width && this.GetY() + this.GetHeight() >= screen.Y && this.GetY() <= screen.Y + screen.Height;
         }
 
         /// <summary>
@@ -206,7 +213,7 @@ namespace Learn_CTS
         /// <param name="d">The y coordinate that will be tested.</param>
         /// <returns>True if the hitbox is hit, false otherwise.</returns>
 
-        public bool IsHitboxHit(int c, int d)
+        public virtual bool IsHitboxHit(int c, int d)
         {
             if (c - this.x >= 0 && c - this.x < this.width && d - this.y >= 0 && d - this.y < this.height)
             {
@@ -384,7 +391,7 @@ namespace Learn_CTS
         /// </summary>
         /// <returns>The texture's image</returns>
 
-        public Image GetImage()
+        public virtual Image GetImage()
         {
             if(this.image == null)
             {
@@ -562,6 +569,21 @@ namespace Learn_CTS
         public int GetHeight()
         {
             return this.height;
+        }
+
+        public virtual SoundPlayer GetCurrentAudio()
+        {
+            return null;
+        }
+
+        public bool Contains(Texture te)
+        {
+            foreach(Texture t in list_childs)
+            {
+                if (t == te) return true;
+                if (t.GetListChilds().Count > 0) t.Contains(te);
+            }
+            return false;
         }
 
         /// <summary>
