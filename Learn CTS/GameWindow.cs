@@ -185,7 +185,7 @@ namespace Learn_CTS
         {
             timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(Timer_Tick);
-            timer.Interval = 27;
+            timer.Interval = 30;
             timer.Start();
         }
 
@@ -543,7 +543,12 @@ namespace Learn_CTS
         {
             List<Texture> list_all_textures = GetAllTextures(list_textures);
             list_all_textures.Sort(Texture.Compare);
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            //e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Low;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
+            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
             foreach (Texture t in list_all_textures)
             {
                 t.OnPaint(e);
