@@ -12,6 +12,8 @@ namespace Learn_CTS
 
         private static Player player_instance = null;
 
+        private static string name = "Moi";
+
         /// <summary>
         /// Constructor of the player
         /// </summary>
@@ -28,16 +30,22 @@ namespace Learn_CTS
             else return player_instance;
         }
 
-        public static Player Construct(String name, int x, int y)
+        public static void SetName(string name)
+        {
+            Player.name = name;
+        }
+
+        public static Player Construct(int x, int y)
         {
             if (player_instance != null) throw new Exception();
-            player_instance = new Player(name, x, y);
+            player_instance = new Player(Player.name, x, y);
             return player_instance;
         }
 
         public override void Dispose()
         {
             player_instance = null;
+            name = "Moi";
             base.Dispose();
         }
 

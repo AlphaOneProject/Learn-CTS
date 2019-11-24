@@ -205,7 +205,7 @@ namespace Learn_CTS
             vehicule = new Tram(-4000, 298+80);
             background = new Background(0, -372);
             background.DisableCollisions();
-            player = Player.Construct("Moi", 600, 604);
+            player = Player.Construct(600, 604);
             platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
             platform.AddChild(player);
             list_textures = new List<Texture>() {

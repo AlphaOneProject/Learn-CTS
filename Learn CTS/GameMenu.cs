@@ -26,7 +26,7 @@ namespace Learn_CTS
 
         private void btn_launch_scenario_Click(object sender, EventArgs e)
         {
-            DisplayScenarioMenu();
+            DisplayNamePlayer();
         }
 
         private void button_leave_Click(object sender, EventArgs e)
@@ -35,9 +35,32 @@ namespace Learn_CTS
             Application.Restart();
         }
 
-        private void DisplayScenarioMenu()
+        private void DisplayNamePlayer()
         {
             this.Controls.Clear();
+            Label lbl_name_player = new Label();
+            lbl_name_player.Text = "Veuillez entrer votre prénom";
+            lbl_name_player.Location = new Point(10, 10);
+            lbl_name_player.AutoSize = true;
+            this.Controls.Add(lbl_name_player);
+            TextBox txtbox_name_player = new TextBox();
+            txtbox_name_player.Location = new Point(lbl_name_player.Location.X + lbl_name_player.Width + 10, lbl_name_player.Location.Y);
+            txtbox_name_player.KeyDown += new KeyEventHandler(txtbox_KeyDown);
+            this.Controls.Add(txtbox_name_player);
+        }
+
+        private void txtbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (((TextBox)sender).Text != null && e.KeyCode == Keys.Enter)
+            {
+                DisplayScenarioMenu(((TextBox)sender).Text);
+            }
+        }
+
+        private void DisplayScenarioMenu(string player_name)
+        {
+            this.Controls.Clear();
+            Player.SetName(player_name);
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             string sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             FlowLayoutPanel flp = new FlowLayoutPanel();
