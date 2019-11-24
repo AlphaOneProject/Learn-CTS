@@ -1321,8 +1321,6 @@ namespace Learn_CTS
                                                                                        content.Controls.Find("lbl_name_scenario", false)[0].Width, 0);
             content.Controls.Find("pb_discard_scenario", false)[0].Location = new Point(content.Controls.Find("pb_rename_scenario", false)[0].Location.X +
                                                                                         content.Controls.Find("pb_rename_scenario", false)[0].Width + 2, 0);
-            content.Controls.Find("pb_preview_scenario", false)[0].Location = new Point(content.Controls.Find("pb_discard_scenario", false)[0].Location.X +
-                                                                                        content.Controls.Find("pb_discard_scenario", false)[0].Width + 2, 0);
             content.Controls.Find("pb_rename_scenario", false)[0].Visible = true;
             content.Controls.Find("lbl_name_scenario", false)[0].Visible = true;
         }
