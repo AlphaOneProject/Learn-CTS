@@ -13,6 +13,7 @@ namespace Learn_CTS
 {
     public partial class Backpack : UserControl
     {
+
         public Backpack()
         {
             InitializeComponent();
@@ -34,12 +35,17 @@ namespace Learn_CTS
 
         private void Backpack_Closed(object sender, EventArgs e)
         {
-            ((GameWindow)this.FindForm()).RemoveBackpack();
+            ((GameWindow)this.FindForm()).OpenClose_Backpack();
         }
 
         private void Backpack_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.B) Backpack_Closed(sender, e);
+        }
+
+        private void pbox_phone_Click(object sender, EventArgs e)
+        {
+            this.FindForm().Controls.Add(new Phone());
         }
     }
 }

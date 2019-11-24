@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Learn_CTS
 {
@@ -129,6 +130,77 @@ namespace Learn_CTS
             v.Dispose();
             n.Dispose();
             return b;
+        }
+
+        /// <summary>
+        /// Changes the opacity of the image according to the opacity value given.
+        /// </summary>
+        /// <param name="img">Image to modify</param>
+        /// <param name="opacityvalue">Opacity value</param>
+        /// <returns></returns>
+        public static Bitmap ChangeOpacity(Image img, float opacityvalue)
+        {
+            try
+            {
+                Bitmap bmp = new Bitmap(img.Width, img.Height); // Determining Width and Height of Source Image
+                Graphics graphics = Graphics.FromImage(bmp);
+                ColorMatrix colormatrix = new ColorMatrix();
+                colormatrix.Matrix33 = opacityvalue;
+                ImageAttributes imgAttribute = new ImageAttributes();
+                imgAttribute.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
+                graphics.Dispose();   // Releasing all resource used by graphics 
+                return bmp;
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("L'image " + img.ToString() + " est introuvable. Vérifiez qu'elle existe.");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// This method recursively copies subdirectories by calling itself on each subdirectory until there are no more to copy.
+        /// </summary>
+        /// <param name="sourceDirName"></param>
+        /// <param name="destDirName"></param>
+        /// <param name="copySubDirs"></param>
+        public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            // If the destination directory doesn't exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // If copying subdirectories, copy them and their contents to new location.
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
         }
     }
 }

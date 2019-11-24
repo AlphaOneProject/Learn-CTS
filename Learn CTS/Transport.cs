@@ -17,11 +17,9 @@ namespace Learn_CTS
         private bool is_inside = false;
         private Texture doors_left;
         private Texture doors_right;
-        private Texture interior;
         private Texture outside;
         private Texture inside;
         private int max_distance_stop;
-        private bool player_inside = false;
         private int[] pos_doors;
 
         /// <summary>
@@ -38,12 +36,10 @@ namespace Learn_CTS
             this.outside = new Texture(name + "Outside", this.GetX(), this.GetY(), true);
             this.doors_left = new Texture(name + "DoorsLeft", this.GetX()+424, this.GetY()+112, this.outside.GetZ() + 1, true);
             this.doors_right = new Texture(name + "DoorsRight", this.GetX()+512, this.GetY()+112, this.outside.GetZ() + 1, true);
-            this.inside.DisableCollisions();
-            this.inside.ChangeVisible();
-            this.interior = new Texture(name + "Interior", this.GetX()+480, this.GetY()+208, true);
+            //this.inside.DisableCollisions();
+            this.inside.SetVisible(false);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
-            this.AddChild(interior);
             this.AddChild(outside);
             this.AddChild(this.inside);
         }
@@ -119,7 +115,25 @@ namespace Learn_CTS
                     this.ChangeState();
                 }
             }
-            this.Move(this.speed, 0);
+            if (this.Contains(Player.GetInstance()))
+            {
+                this.doors_left.DisableCollisions();
+                this.doors_right.DisableCollisions();
+            }
+            else
+            {
+                this.doors_left.EnableCollisions();
+                this.doors_right.EnableCollisions();
+            }
+            if (this.is_inside || this.Contains(Player.GetInstance()))
+            {
+                this.inside.EnableCollisions();
+            }
+            else
+            {
+                this.inside.DisableCollisions();
+            }
+            if (!this.is_inside) this.Move(this.speed, 0);
         }
 
         /// <summary>
@@ -179,24 +193,6 @@ namespace Learn_CTS
         public void ChangeState()
         {
             this.state++;
-            UpdateState();
-        }
-
-        public void UpdateState()
-        {
-            if (this.GetState() != 0 && player_inside)
-            {
-                this.inside.EnableCollisions();
-            }
-            else
-            {
-                this.inside.DisableCollisions();
-            }
-        }
-
-        public bool IsPlayerInside()
-        {
-            return this.player_inside;
         }
 
         /// <summary>
@@ -254,7 +250,6 @@ namespace Learn_CTS
         public void SetState(int s)
         {
             this.state = s;
-            UpdateState();
         }
 
         /// <summary>
@@ -281,28 +276,6 @@ namespace Learn_CTS
         public int GetDistanceMaxStop()
         {
             return this.max_distance_stop;
-        }
-
-        public override void AddChild(Texture t)
-        {
-            if (t.GetType().Name == "Player")
-            {
-                this.player_inside = true;
-                this.doors_left.DisableCollisions();
-                this.doors_right.DisableCollisions();
-            }
-            base.AddChild(t);
-        }
-
-        public override void RemoveChild(Texture t)
-        {
-            if (t.GetType().Name == "Player")
-            {
-                this.player_inside = false;
-                this.doors_left.EnableCollisions();
-                this.doors_right.EnableCollisions();
-            }
-            base.RemoveChild(t);
         }
 
         public int GetIndexNearestDoor(int pos_c)

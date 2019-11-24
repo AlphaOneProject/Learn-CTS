@@ -37,11 +37,13 @@ namespace Learn_CTS
             this.pb_thumbnail = new System.Windows.Forms.PictureBox();
             this.pb_delete = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pb_copy = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_play)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_thumbnail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_copy)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_title
@@ -75,8 +77,8 @@ namespace Learn_CTS
             this.pb_edit.TabStop = false;
             this.pb_edit.Tag = "";
             this.pb_edit.Click += new System.EventHandler(this.Pb_edit_Click);
+            this.pb_edit.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_edit.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_edit.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // pb_play
             // 
@@ -92,8 +94,8 @@ namespace Learn_CTS
             this.pb_play.TabStop = false;
             this.pb_play.Tag = "";
             this.pb_play.Click += new System.EventHandler(this.Pb_play_Click);
+            this.pb_play.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_play.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_play.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // pb_thumbnail
             // 
@@ -118,17 +120,35 @@ namespace Learn_CTS
             this.pb_delete.TabStop = false;
             this.pb_delete.Tag = "";
             this.pb_delete.Click += new System.EventHandler(this.Pb_delete_Click);
+            this.pb_delete.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_delete.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
-            this.pb_delete.MouseHover += new System.EventHandler(this.Pb_Btn_MouseHover);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.panel1.Controls.Add(this.pb_copy);
             this.panel1.Controls.Add(this.pb_edit);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(140, 140);
             this.panel1.TabIndex = 7;
+            // 
+            // pb_copy
+            // 
+            this.pb_copy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pb_copy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_copy.ErrorImage = null;
+            this.pb_copy.ImageLocation = "gamecard-copy-btn-x64.png";
+            this.pb_copy.Location = new System.Drawing.Point(6, 92);
+            this.pb_copy.Name = "pb_copy";
+            this.pb_copy.Size = new System.Drawing.Size(42, 42);
+            this.pb_copy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_copy.TabIndex = 8;
+            this.pb_copy.TabStop = false;
+            this.pb_copy.Tag = "";
+            this.pb_copy.Click += new System.EventHandler(this.Pb_copy_Click);
+            this.pb_copy.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
+            this.pb_copy.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
             // 
             // GameCard
             // 
@@ -150,6 +170,7 @@ namespace Learn_CTS
             ((System.ComponentModel.ISupportInitialize)(this.pb_thumbnail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_copy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,5 +184,6 @@ namespace Learn_CTS
         private System.Windows.Forms.PictureBox pb_edit;
         private System.Windows.Forms.PictureBox pb_delete;
         private System.Windows.Forms.Panel panel1;
+        private PictureBox pb_copy;
     }
 }
