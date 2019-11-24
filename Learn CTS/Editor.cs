@@ -17,6 +17,7 @@ namespace Learn_CTS
         private readonly String game;
         private readonly String game_path;
         private JObject game_properties;
+        private JObject theme;
         private string old_category = "general";
         private bool saved;
         private GameWindow preview = null;
@@ -36,9 +37,93 @@ namespace Learn_CTS
             this.DoubleBuffered = false;
         }
 
+        /// <summary>
+        /// Synchronize the Form with data from targeted game.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void Editor1_Load(object sender, EventArgs e)
+        {
+            // Marks the current game as in edition so it blocks any concurrent edition or playing.
+            this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
+            this.saved = true;
+            if (!this.game_properties["state"].ToString().Equals("Inactif."))
+            {
+                if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accéder ?",
+                                "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
+                {
+                    this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
+                    Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
+                    this.Close();
+                    return;
+                }
+            }
+            else
+            {
+                this.game_properties["state"] = "En cours d'édition...";
+                Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
+            }
+
+            // Set the title and cut it if necessary.
+            int char_space = (this.Width - menu.Width - 64) / 24;
+            if (char_space < 12) { char_space = 12; } // Avoid a possible substring exception with a ridicularly little window.
+            String cut_game = this.game;
+            if (cut_game.Length > char_space)
+            {
+                cut_game = cut_game.Substring(0, char_space - 3) + "...";
+            }
+            title.Text = "Édition de " + cut_game;
+            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Location.Y);
+
+            // Load already existing scenarios.
+            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
+            foreach (string scenario in Directory.GetDirectories(@"" + sc_path))
+            {
+                string[] sc_folder = scenario.Remove(0, sc_path.Length + 1).Split('.');
+                Add_Scenario(sc_folder[1]);
+
+                // Load existing situations in each scenario.
+                foreach (string situation in Directory.GetDirectories(@"" + scenario))
+                {
+                    string[] si_folder = situation.Remove(0, scenario.Length + 1).Split('.');
+                    Add_Situation(menu.Nodes.Find("scenarios", false)[0].LastNode.Name, si_folder[1]);
+                }
+            }
+
+            menu.ExpandAll();
+            menu.SelectedNode = menu.Nodes[0];
+
+            // Set the window size as options size setting.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+            if ((bool)options["maximized"])
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.Width = int.Parse((string)options["size"]["x"]);
+                this.Height = int.Parse((string)options["size"]["y"]);
+
+                // Place the windows at the center of the screen.
+                Rectangle screen = Screen.FromControl(this).Bounds;
+                this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
+            }
+
+            // Load the current color theme.
+            this.theme = (JObject)Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "internal"
+                         + Path.DirectorySeparatorChar + "themes.json")[(string)options["theme"]];
+        }
+
         public string Get_Game()
         {
             return this.game;
+        }
+
+        public JObject Get_Theme()
+        {
+            return this.theme;
         }
 
         /// <summary>
@@ -100,81 +185,6 @@ namespace Learn_CTS
             Tools.Set_To_JSON(options_path, options);
 
             Application.Restart();
-        }
-
-        /// <summary>
-        /// Synchronize the Form with data from targeted game.
-        /// </summary>
-        /// <param name="sender">Control calling the method.</param>
-        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        private void Editor1_Load(object sender, EventArgs e)
-        {
-            // Marks the current game as in edition so it blocks any concurrent edition or playing.
-            this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
-            this.saved = true;
-            if(!this.game_properties["state"].ToString().Equals("Inactif."))
-            {
-                if (MessageBox.Show("Le jeu " + '"' + this.game + '"' + " est déjà en cours d'édition ou d'utilisation sur cette machine.\nSouhaitez-vous tout de même y accéder ?",
-                                "Jeu en utilisation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.No)
-                {
-                    this.game_properties["state"] = "[DENIED]" + this.game_properties["state"];
-                    Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
-                    this.Close();
-                    return;
-                }
-            }
-            else
-            {
-                this.game_properties["state"] = "En cours d'édition...";
-                Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties);
-            }
-
-            // Set the title and cut it if necessary.
-            int char_space = (this.Width - menu.Width - 64) / 24;
-            if (char_space < 12) { char_space = 12; } // Avoid a possible substring exception with a ridicularly little window.
-            String cut_game = this.game;
-            if (cut_game.Length > char_space)
-            {
-                cut_game = cut_game.Substring(0, char_space - 3) + "...";
-            }
-            title.Text = "Édition de " + cut_game;
-            title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Location.Y);
-
-            // Load already existing scenarios.
-            string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
-            foreach (string scenario in Directory.GetDirectories(@"" + sc_path))
-            {
-                string[] sc_folder = scenario.Remove(0, sc_path.Length + 1).Split('.');
-                Add_Scenario(sc_folder[1]);
-
-                // Load existing situations in each scenario.
-                foreach (string situation in Directory.GetDirectories(@"" + scenario))
-                {
-                    string[] si_folder = situation.Remove(0, scenario.Length + 1).Split('.');
-                    Add_Situation(menu.Nodes.Find("scenarios", false)[0].LastNode.Name, si_folder[1]);
-                }
-            }
-
-            menu.ExpandAll();
-            menu.SelectedNode = menu.Nodes[0];
-
-            // Set the window size as options size setting.
-            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
-                                  Path.DirectorySeparatorChar + "options.json";
-            JObject options = Tools.Get_From_JSON(options_path);
-            if((bool)options["maximized"])
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.Width = int.Parse((string)options["size"]["x"]);
-                this.Height = int.Parse((string)options["size"]["y"]);
-
-                // Place the windows at the center of the screen.
-                Rectangle screen = Screen.FromControl(this).Bounds;
-                this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
-            }
         }
 
         /// <summary>
@@ -1288,17 +1298,19 @@ namespace Learn_CTS
         /// <param name="new_name">Name remplacing the precedent as identifier of the scenario.</param>
         private void Rename_Scenario(string new_name)
         {
+            string secured_new_name = new_name.Trim();
+
             // Exit if name is similar.
-            if(menu.SelectedNode.Text == new_name.Trim()) { return; }
+            if(menu.SelectedNode.Text == secured_new_name) { return; }
 
             // Exit and display an error message if the name is already in use.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             foreach (string s in Directory.GetDirectories(sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
-                if(folder[1] == new_name)
+                if(folder[1] == secured_new_name)
                 {
-                    MessageBox.Show("Le nom de scénario " + '"' + new_name + '"' + " est déjà utilisé, essayez un autre nom.",
+                    MessageBox.Show("Le nom de scénario " + '"' + secured_new_name + '"' + " est déjà utilisé, essayez un autre nom.",
                                     "Nom de scénario invalide", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -1306,10 +1318,10 @@ namespace Learn_CTS
 
             // Rename the scenario's folder.
             Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text,
-                           @"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + new_name);
+                           @"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + secured_new_name);
 
             // Rename the scenario's Node.
-            menu.SelectedNode.Text = new_name;
+            menu.SelectedNode.Text = secured_new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
             // Repositioning size-sensitives contents.
@@ -1899,8 +1911,10 @@ namespace Learn_CTS
         /// <param name="new_name">New name to be assigned to the situation.</param>
         private void Rename_Situation(string new_name)
         {
+            string secured_new_name = new_name.Trim();
+
             // Exit if name is similar.
-            if (menu.SelectedNode.Text == new_name.Trim()) { return; }
+            if (menu.SelectedNode.Text == secured_new_name) { return; }
 
             // Exit and display an error message if the name is already in use.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
@@ -1908,9 +1922,9 @@ namespace Learn_CTS
             foreach (string s in Directory.GetDirectories(sc_path))
             {
                 string[] folder = s.Remove(0, sc_path.Length + 1).Split('.');
-                if (folder[1] == new_name)
+                if (folder[1] == secured_new_name)
                 {
-                    MessageBox.Show("Le nom de la situation " + '"' + new_name + '"' + " est déjà utilisé, essayez un autre nom.",
+                    MessageBox.Show("Le nom de la situation " + '"' + secured_new_name + '"' + " est déjà utilisé, essayez un autre nom.",
                                     "Nom de scénario invalide", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -1918,16 +1932,16 @@ namespace Learn_CTS
 
             // Rename the situation's folder.
             Directory.Move(@"" + sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text,
-                           @"" + sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name);
+                           @"" + sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + secured_new_name);
 
             // Rename the situation's Node.
-            menu.SelectedNode.Text = new_name;
+            menu.SelectedNode.Text = secured_new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
             // Re-configuring path-sensitives UserControls.
             foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
             {
-                ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + new_name +
+                ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + secured_new_name +
                                  Path.DirectorySeparatorChar + "dialogs.json");
             }
 
