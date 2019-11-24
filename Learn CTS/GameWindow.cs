@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
-        private int NPCsDensity = 50; //max 650
+        private int NPCsDensity = 200; //max 800
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -715,7 +715,8 @@ namespace Learn_CTS
         private void MoveNPC(NPC c, int a, int b)
         {
             c.UpdateMovement(a, b);
-            c.Move(a, 0);
+            c.Move(a, b);
+            /*c.Move(a, 0);
             if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
             {
                 c.Move(-a, 0);
@@ -723,9 +724,8 @@ namespace Learn_CTS
             c.Move(0, b);
             if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
             {
-                Console.WriteLine(c.GetName());
                 c.Move(0, -b);
-            }
+            }*/
         }
 
         private bool IsOnScreen(Texture t)

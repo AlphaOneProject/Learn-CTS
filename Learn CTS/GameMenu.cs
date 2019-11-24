@@ -126,6 +126,13 @@ namespace Learn_CTS
 
         private void LaunchGame(object sender, EventArgs e)
         {
+            this.Controls.Clear();
+            Label lbl_loading = new Label();
+            lbl_loading.Text = "Chargement du jeu en cours";
+            lbl_loading.AutoSize = true;
+            lbl_loading.Location = new Point(this.Width / 2 - lbl_loading.Width / 2, this.Height / 2 - lbl_loading.Height / 2);
+            lbl_loading.Visible = true;
+            this.Controls.Add(lbl_loading);
             Button b = (Button)sender;
             Form game_window = new GameWindow(game,b.Text);
             game_window.Show();
