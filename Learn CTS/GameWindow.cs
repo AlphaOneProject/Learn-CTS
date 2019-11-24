@@ -185,7 +185,7 @@ namespace Learn_CTS
         {
             timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(Timer_Tick);
-            timer.Interval = 25;
+            timer.Interval = 27;
             timer.Start();
         }
 
@@ -790,6 +790,7 @@ namespace Learn_CTS
 
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
+            timer.Stop();
             foreach (Texture t in list_textures)
             {
                 t.Dispose();
@@ -797,7 +798,6 @@ namespace Learn_CTS
             nm.Clear();
             if (!preview)
             {
-                timer.Stop();
                 t_fps.Abort();
                 instance = null;
                 Application.Restart();
