@@ -79,7 +79,12 @@ namespace Learn_CTS
             sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
+        }
 
+        public GameWindow(string game, string scenario) : this(game)
+        {
+            this.preview = true;
+            this.scenario = scenario;
         }
 
         public GameWindow(string game, string scenario, string situation) : this(game)

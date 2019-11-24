@@ -103,3 +103,4 @@ C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdi
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\ToggleSwitch.dll
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Phone.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameMenu.resources
