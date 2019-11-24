@@ -15,6 +15,8 @@ namespace Learn_CTS
     public partial class GameMenu : Form
     {
         private string game;
+        private TextBox txtbox_name_player;
+        private FlowLayoutPanel flp_char;
 
         public GameMenu(string game)
         {
@@ -43,30 +45,74 @@ namespace Learn_CTS
             lbl_name_player.Location = new Point(10, 10);
             lbl_name_player.AutoSize = true;
             this.Controls.Add(lbl_name_player);
-            TextBox txtbox_name_player = new TextBox();
+            txtbox_name_player = new TextBox();
             txtbox_name_player.Location = new Point(lbl_name_player.Location.X + lbl_name_player.Width + 10, lbl_name_player.Location.Y);
             txtbox_name_player.KeyDown += new KeyEventHandler(txtbox_KeyDown);
             this.Controls.Add(txtbox_name_player);
+            string character_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar;
+            flp_char = new FlowLayoutPanel();
+            PictureBox pbox;
+            foreach (string dir in Directory.GetDirectories(@"" + character_path))
+            {
+                pbox = new PictureBox();
+                pbox.Size = new Size(128, 128);
+                pbox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pbox.Image = Image.FromFile(dir + Path.DirectorySeparatorChar + "1_0.png");
+                pbox.Name = dir.Substring(character_path.Length, dir.Length-character_path.Length);
+                pbox.Click += new EventHandler(SelectFolderChar);
+                flp_char.Controls.Add(pbox);
+            }
+            flp_char.AutoSize = true;
+            flp_char.AutoScroll = true;
+            flp_char.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
+            flp_char.Location = new Point(lbl_name_player.Location.X, lbl_name_player.Location.Y + lbl_name_player.Height + 10);
+            flp_char.WrapContents = false;
+            this.Controls.Add(flp_char);
+            Button btn = new Button();
+            btn.Text = "Confirmer";
+            btn.Click += new EventHandler(btn_confirm_Click);
+            btn.Location = new Point(10, flp_char.Location.Y + flp_char.Height + 10);
+            btn.AutoSize = true;
+            this.Controls.Add(btn);
         }
 
         private void txtbox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (((TextBox)sender).Text != null && e.KeyCode == Keys.Enter)
+            Player.SetName(((TextBox)sender).Text);
+        }
+
+        private void SelectFolderChar(object sender, EventArgs e)
+        {
+            foreach(Control p in flp_char.Controls){
+                ((PictureBox)p).BorderStyle = BorderStyle.None;
+            }
+            ((PictureBox)sender).BorderStyle = BorderStyle.Fixed3D;
+            Player.SetFolder(((PictureBox)sender).Name);
+        }
+
+        private void btn_confirm_Click(object sender, EventArgs e)
+        {
+            if(txtbox_name_player.Text == "")
             {
-                DisplayScenarioMenu(((TextBox)sender).Text);
+                MessageBox.Show("Vous n'avez pas choisi de prénom !");
+            }
+            else
+            {
+                Player.SetName(txtbox_name_player.Text);
+                DisplayScenarioMenu();
             }
         }
 
-        private void DisplayScenarioMenu(string player_name)
+        private void DisplayScenarioMenu()
         {
             this.Controls.Clear();
-            Player.SetName(player_name);
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             string sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             FlowLayoutPanel flp = new FlowLayoutPanel();
+            Button btn;
             foreach (string dir in Directory.GetDirectories(@"" + sc_path))
             {
-                Button btn = new Button();
+                btn = new Button();
                 btn.Text = dir.Remove(0, sc_path.Length);
                 btn.Click += new EventHandler(LaunchGame);
                 btn.AutoSize = true;
@@ -83,7 +129,7 @@ namespace Learn_CTS
             Button b = (Button)sender;
             Form game_window = new GameWindow(game,b.Text);
             game_window.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void GameMenu_Resize(object sender, EventArgs e)

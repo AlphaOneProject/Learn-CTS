@@ -14,13 +14,15 @@ namespace Learn_CTS
 
         private static string name = "Moi";
 
+        private static string folder;
+
         /// <summary>
         /// Constructor of the player
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        private Player(String name, int x, int y) : base(0, name, "1", x, y)
+        private Player(String name, int x, int y) : base(0, name, folder, x, y)
         {
         }
 
@@ -33,6 +35,11 @@ namespace Learn_CTS
         public static void SetName(string name)
         {
             Player.name = name;
+        }
+
+        public static void SetFolder(string folder)
+        {
+            Player.folder = folder;
         }
 
         public static Player Construct(int x, int y)
