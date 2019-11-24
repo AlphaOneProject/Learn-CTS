@@ -50,7 +50,6 @@
             this.pbox_ticket.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_ticket.TabIndex = 0;
             this.pbox_ticket.TabStop = false;
-            this.pbox_ticket.Click += new System.EventHandler(this.pbox_ticket_Click);
             // 
             // pbox_map
             // 

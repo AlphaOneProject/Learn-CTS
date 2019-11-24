@@ -52,10 +52,10 @@ namespace Learn_CTS
         private Thread t_fps;
         private float n_fps;
         private List<Image> list_eggs;
-        private Transition tr;
         private Thread t_audio;
         private bool ticket_valid = false;
         private static GameWindow instance;
+        private Transition tr;
 
         /// <summary>
         /// Initialize the game window
@@ -67,7 +67,7 @@ namespace Learn_CTS
             else
             {
                 MessageBox.Show("Vous ne pouvez avoir qu'une seule fenêtre de jeu ouverte en même temps.");
-                Application.Exit();
+                this.Close();
             }
             this.Hide();
             this.game = game;
@@ -130,12 +130,6 @@ namespace Learn_CTS
             this.Show();
         }
 
-        private void Transition()
-        {
-            tr = new Transition(draw_surface_width, draw_surface_height);
-            list_textures.Add(tr);
-        }
-
         private void InitializeFPSThread()
         {
             t_fps = new Thread(new ThreadStart(CalculFPSandM));
@@ -154,9 +148,28 @@ namespace Learn_CTS
             {
                 foreach(Texture t in GetAllTextures(list_textures))
                 {
-                    if (t.GetCurrentAudio() != null) t.GetCurrentAudio().Play();
+                    if (t.GetCurrentAudio() != null) t.GetCurrentAudio().PlaySync();
                 }
             }
+        }
+
+        private void InitializeTransition()
+        {
+            if(tr != null)
+            {
+                tr.Dispose();
+            }
+            tr = new Transition(draw_surface_width, draw_surface_height);
+        }
+
+        private void StartTransition()
+        {
+            if (tr != null && !list_textures.Contains(tr)) list_textures.Add(tr);
+        }
+
+        public void RemoveTransition()
+        {
+            list_textures.Remove(tr);
         }
 
         /// <summary>
@@ -255,7 +268,7 @@ namespace Learn_CTS
             {
                 CheckIfTheVehiculeIsArrived();
                 if (player.GetX()>=8 && player.GetX()+player.GetWidth()<=draw_surface_width - 8) MoveTexturesIfPlayerMoves();
-                if(vehicule.GetState() == 0)
+                if (vehicule.GetState() == 0)
                 {
                     ticks_stopped++;
                     if (ticks_stopped == 1)
@@ -264,7 +277,7 @@ namespace Learn_CTS
                     }
                     if (ticks_stopped == 35)
                     {
-                        NPCEnterVehicule();
+                        NPCEnteringVehicule();
                     }
                     if (ticks_stopped > 200)
                     {
@@ -272,11 +285,11 @@ namespace Learn_CTS
                         ticks_stopped = 0;
                     }
                 }
-                else if(vehicule.Contains(player) && vehicule.GetX() >= draw_surface_width) ViewInside();
-                else if(platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
+                else if (vehicule.Contains(player) && vehicule.GetX() >= draw_surface_width && tr.HasFinished()) ViewInside();
+                else if (platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
                 {
                     ticks_stopped++;
-                    if(ticks_stopped == 1)
+                    if (ticks_stopped == 1)
                     {
                         NPCsComingPlatform();
                     }
@@ -290,6 +303,10 @@ namespace Learn_CTS
                 {
                     CheckIfCharacterIsEnteringTheVehicule();
                     CheckIfCharacterIsLeavingTheVehicule();
+                }
+                else if (vehicule.Contains(player) && !list_textures.Contains(tr))
+                {
+                    StartTransition();
                 }
             }
             else
@@ -481,6 +498,7 @@ namespace Learn_CTS
             {
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
+                InitializeTransition();
             }
             if(e.ClipRectangle.Width != this.draw_surface_width || e.ClipRectangle.Height != this.draw_surface_height)
             {
@@ -488,6 +506,7 @@ namespace Learn_CTS
                 int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
+                InitializeTransition();
                 //Console.WriteLine(draw_surface_width + ":" + draw_surface_height);
                 foreach (Texture t in list_textures)
                 {
@@ -641,9 +660,12 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player) 
-                    || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()) 
-                    && b<0 || !ticket_valid && player.GetY() <= platform.GetY() - player.GetHeight() + 2)
+                if (IsCharacterCollidingWithTextures(player)
+                    || 
+                    (b<0
+                    && player.GetY() <= platform.GetY() - player.GetHeight() + 2
+                    && ((!ticket_valid && !god)
+                    || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()))))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
@@ -689,6 +711,7 @@ namespace Learn_CTS
             c.Move(0, b);
             if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
             {
+                Console.WriteLine(c.GetName());
                 c.Move(0, -b);
             }
         }
@@ -726,7 +749,7 @@ namespace Learn_CTS
                     case Keys.F1: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                     case Keys.F2: this.showhitbox = !showhitbox; break;
                     case Keys.F3: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
-                    //case Keys.F4: this.VehiculeCrash(); break;
+                    //case Keys.F4: this.InitializeTransition(); break;
                 }
             }
         }
@@ -852,39 +875,6 @@ namespace Learn_CTS
             return list;
         }
 
-        /*private void DeleteNPCsLeaving()
-        {
-            if(vehicule.GetState() == 1 && platform.Contains(player))
-            {
-                Texture c;
-                for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
-                {
-                    c = vehicule.GetListChilds()[i];
-                    if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0 && c.GetX() > draw_surface_width)
-                    {
-                        vehicule.RemoveChild(c);
-                        nm.RemoveNPC((NPC)c);
-                    }
-                }
-            }
-            else if(vehicule.GetState() == 1 && vehicule.Contains(player))
-            {
-                if (platform.GetListChilds().Count > 0)
-                {
-                    Texture c;
-                    for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
-                    {
-                        c = platform.GetListChilds()[i];
-                        if (c.GetType().Name == "NPC" && ((NPC)c).GetQuiz() < 0 && c.GetY() > draw_surface_height)
-                        {
-                            platform.RemoveChild(c);
-                            nm.RemoveNPC((NPC)c);
-                        }
-                    }
-                }
-            }
-        }*/
-
         private void ViewInside()
         {
             platform.Dispose();
@@ -894,6 +884,7 @@ namespace Learn_CTS
             vehicule.SetSpeed(0);
             PlacePlayerMiddleScreen();
             list_textures.Add(player);
+            tr.EndTransition();
         }
 
         private void PlacePlayerMiddleScreen()
@@ -907,7 +898,7 @@ namespace Learn_CTS
             vehicule.RemoveChild(player);
         }
 
-        private void NPCEnterVehicule()
+        private void NPCEnteringVehicule()
         {
             int i;
             NPC n;
@@ -1003,11 +994,11 @@ namespace Learn_CTS
                 {
                     n = (NPC)t;
                     n.RemoveAllObjectives();
-                    x = platform.GetX() + r.Next(200, platform.GetWidth() - 200);
+                    x = platform.GetX() + r.Next(400, platform.GetWidth() - 400);
                     y = draw_surface_height + r.Next(0, 500);
                     n.SetX(x);
                     n.SetY(y);
-                    n.SetObjective(n.GetX() + r.Next(-200, 200), platform.GetY() + r.Next(30, platform.GetHeight() - 30));
+                    n.SetObjective(n.GetX() + r.Next(-400, 400), platform.GetY() + r.Next(30, platform.GetHeight() - 30));
                 }
             }
         }

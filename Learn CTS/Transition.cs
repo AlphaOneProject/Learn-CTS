@@ -13,7 +13,9 @@ namespace Learn_CTS
 
         private bool t = true;
 
-        private float opacity = 0;
+        private int d = 0;
+
+        private List<Image> list_transitions = new List<Image>();
 
         public Transition(int w, int h) : base(0, 0)
         {
@@ -24,26 +26,49 @@ namespace Learn_CTS
             }
             this.SetImage((Image)bmp);
             this.SetZ(500000);
+            list_transitions.Add(this.GetImage());
+            for(int i = 1; i<=10; i++)
+            {
+                list_transitions.Add(Tools.ChangeOpacity(this.GetImage(), (float)i/10));
+            }
         }
 
         public void Update()
         {
             if (t)
             {
-                this.SetImage(Tools.ChangeOpacity(this.GetImage(), opacity));
-                opacity += (float)0.01;
-                if (opacity >= 1) t = !t;
+                if (d < 10) d++;
             }
             else
             {
-                this.SetImage(Tools.ChangeOpacity(this.GetImage(), opacity));
-                opacity -= (float)0.01;
+                if (d == 1) GameWindow.GetInstance().RemoveTransition();
+                else
+                {
+                    d--;
+                }
             }
         }
 
         public bool HasFinished()
         {
-            return opacity <= 0;
+            return d>=10;
+        }
+
+        public void EndTransition()
+        {
+            t = !t;
+        }
+
+        public override Image GetImage()
+        {
+            if (list_transitions.Count == 0) return base.GetImage();
+            return list_transitions[d];
+        }
+
+        public override void Dispose()
+        {
+            foreach (Image i in list_transitions) i.Dispose();
+            base.Dispose();
         }
 
         public override void OnPaint(PaintEventArgs e)

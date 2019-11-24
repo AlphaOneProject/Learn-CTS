@@ -109,7 +109,7 @@
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="NPC.cs" />
-    <Compile Include="Character_Manager.cs" />
+    <Compile Include="NPC_Manager.cs" />
     <Compile Include="NumericUpDownFix.cs">
       <SubType>Component</SubType>
     </Compile>

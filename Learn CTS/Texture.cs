@@ -427,6 +427,7 @@ namespace Learn_CTS
 
         public void SetImage(Image img)
         {
+            if(this.image != null) this.image.Dispose();
             this.image = img;
             this.width = this.image.Width;
             this.height = this.image.Height;
