@@ -526,7 +526,7 @@ namespace Learn_CTS
 
         private void MoveBackground()
         {
-            background.Move(-vehicule.GetMaxSpeed(), 0);
+            background.Move(-vehicule.GetSpeed(), 0);
         }
 
         /// <summary>
@@ -674,9 +674,11 @@ namespace Learn_CTS
             else
             {
                 vehicule.Move(-a, 0);
+                if(vehicule.GetState()==0) background.Move(-a, 0);
                 if (IsCharacterCollidingWithTextures(player))
                 {
-                    vehicule.Move(a, 0);
+                    if (vehicule.GetState() == 0) vehicule.Move(a, 0);
+                    background.Move(a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);
@@ -749,7 +751,7 @@ namespace Learn_CTS
                     case Keys.F1: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                     case Keys.F2: this.showhitbox = !showhitbox; break;
                     case Keys.F3: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
-                    //case Keys.F4: this.InitializeTransition(); break;
+                    case Keys.F4: this.StartVehiculeCrash(); break;
                 }
             }
         }
@@ -881,7 +883,7 @@ namespace Learn_CTS
             list_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
-            vehicule.SetSpeed(0);
+            //vehicule.SetSpeed(0);
             PlacePlayerMiddleScreen();
             list_textures.Add(player);
             tr.EndTransition();
@@ -1100,6 +1102,49 @@ namespace Learn_CTS
         private void GameWindow_Resize(object sender, EventArgs e)
         {
             lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
+        }
+
+        private void StartVehiculeCrash()
+        {
+            if (!vehicule.IsInside()) return;
+            timer.Stop();
+            timer.Tick -= new EventHandler(Timer_Tick);
+            timer.Tick += new EventHandler(TimerCrash);
+            timer.Start();
+        }
+
+        private void TimerCrash(object sender, EventArgs e)
+        {
+            ticks_stopped++;
+            int b;
+            if (ticks_stopped % 2 == 0)
+            {
+                b = 16;
+            }
+            else
+            {
+                b = -16;
+            }
+            foreach(Texture t in list_textures)
+            {
+                if(t.GetType().Name != "Transition") t.Move(0, b);
+            }
+            if(ticks_stopped >= 16)
+            {
+                tr.SetD(10);
+                StartTransition();
+            }
+            if (ticks_stopped ==64)
+            {
+                vehicule.SetSpeed(0);
+                vehicule.SetState(0);
+                MessageBox.Show("Tout le monde va bien ?");
+                timer.Tick += new EventHandler(Timer_Tick);
+                timer.Tick -= new EventHandler(TimerCrash);
+                tr.EndTransition();
+            }
+            MoveBackground();
+            Refresh();
         }
     }
 }

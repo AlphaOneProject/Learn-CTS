@@ -41,7 +41,11 @@ namespace Learn_CTS
             }
             else
             {
-                if (d == 1) GameWindow.GetInstance().RemoveTransition();
+                if (d == 1)
+                {
+                    t = true;
+                    GameWindow.GetInstance().RemoveTransition();
+                }
                 else
                 {
                     d--;
@@ -63,6 +67,11 @@ namespace Learn_CTS
         {
             if (list_transitions.Count == 0) return base.GetImage();
             return list_transitions[d];
+        }
+
+        public void SetD(int d)
+        {
+            this.d = d;
         }
 
         public override void Dispose()

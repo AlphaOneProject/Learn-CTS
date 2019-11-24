@@ -125,7 +125,7 @@ namespace Learn_CTS
                 this.doors_left.EnableCollisions();
                 this.doors_right.EnableCollisions();
             }
-            this.Move(this.speed, 0);
+            if(!this.is_inside) this.Move(this.speed, 0);
         }
 
         /// <summary>
