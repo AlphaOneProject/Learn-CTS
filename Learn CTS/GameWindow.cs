@@ -687,8 +687,8 @@ namespace Learn_CTS
                 if(vehicule.GetState()==0) background.Move(-a, 0);
                 if (IsCharacterCollidingWithTextures(player))
                 {
-                    if (vehicule.GetState() == 0) vehicule.Move(a, 0);
-                    background.Move(a, 0);
+                    if (vehicule.GetState() == 0) background.Move(a, 0);
+                    vehicule.Move(a, 0);
                     c_vertical = false;
                 }
                 player.Move(0, b);

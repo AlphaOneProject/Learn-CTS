@@ -292,7 +292,7 @@ namespace Learn_CTS
 
         public void Debug(PaintEventArgs e)
         {
-            if (this.hitbox == null) return;
+            if (this.hitbox == null || !this.collide) return;
             Graphics g = e.Graphics;
             Rectangle rect = new Rectangle(this.GetX(), this.GetY(), this.width, this.height);
             Pen pen = new Pen(Brushes.Red);

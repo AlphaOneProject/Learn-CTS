@@ -36,7 +36,7 @@ namespace Learn_CTS
             this.outside = new Texture(name + "Outside", this.GetX(), this.GetY(), true);
             this.doors_left = new Texture(name + "DoorsLeft", this.GetX()+424, this.GetY()+112, this.outside.GetZ() + 1, true);
             this.doors_right = new Texture(name + "DoorsRight", this.GetX()+512, this.GetY()+112, this.outside.GetZ() + 1, true);
-            this.inside.DisableCollisions();
+            //this.inside.DisableCollisions();
             this.inside.SetVisible(false);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
@@ -125,7 +125,15 @@ namespace Learn_CTS
                 this.doors_left.EnableCollisions();
                 this.doors_right.EnableCollisions();
             }
-            if(!this.is_inside) this.Move(this.speed, 0);
+            if (this.is_inside || this.Contains(Player.GetInstance()))
+            {
+                this.inside.EnableCollisions();
+            }
+            else
+            {
+                this.inside.DisableCollisions();
+            }
+            if (!this.is_inside) this.Move(this.speed, 0);
         }
 
         /// <summary>
@@ -185,19 +193,6 @@ namespace Learn_CTS
         public void ChangeState()
         {
             this.state++;
-            UpdateState();
-        }
-
-        public void UpdateState()
-        {
-            if (this.GetState() != 0 && this.Contains(Player.GetInstance()))
-            {
-                this.inside.EnableCollisions();
-            }
-            else
-            {
-                this.inside.DisableCollisions();
-            }
         }
 
         /// <summary>
@@ -255,7 +250,6 @@ namespace Learn_CTS
         public void SetState(int s)
         {
             this.state = s;
-            UpdateState();
         }
 
         /// <summary>
