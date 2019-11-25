@@ -16,8 +16,6 @@ namespace Learn_CTS
     public partial class PNCWindow : Form
     {
 
-        //TODO : Ajouter un endroit par scénario et le remplir de personnages selon le scénario
-
         private int DrawSurfaceWidth;
         private int DrawSurfaceHeight;
         private List<Texture> list_textures;
@@ -44,11 +42,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Item h1 = item_manager.CreateItem("Door", 23, 24);
-            list_textures = new List<Texture>
-            {
-                h1
-            };
+            list_textures = item_manager.GetItemsFromSituation(Tools.Get_From_JSON(game_path + "item_test.json"));
             Show();
         }
 
@@ -97,9 +91,9 @@ namespace Learn_CTS
         {
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            if (item_manager.GetItemOnPoint(mouse_x, mouse_y) != null)
+            foreach (Item t in list_textures)
             {
-                HighlightItem(item_manager.GetItemOnPoint(mouse_x, mouse_y));
+                if (t.IsHitboxHit(mouse_x, mouse_y)) HighlightItem(t);
             }
         }
 

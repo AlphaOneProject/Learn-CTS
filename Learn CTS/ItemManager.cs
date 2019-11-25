@@ -10,7 +10,6 @@ namespace Learn_CTS
     class ItemManager
     {
         private static ItemManager instance;
-        private static int item_id = 0;
         private static List<Item> list_items;
 
         public ItemManager()
@@ -27,10 +26,9 @@ namespace Learn_CTS
             return instance;
         }
 
-        public Item CreateItem(string name, int x, int y)
+        public Item CreateItem(int id, string name, int x, int y, string description)
         {
-            Item item = new Item(ItemManager.item_id, name, x, y);
-            ItemManager.item_id++;
+            Item item = new Item(id, name, x, y, description);
             list_items.Add(item);
             return item;
         }
@@ -66,28 +64,24 @@ namespace Learn_CTS
         public void Clear()
         {
             list_items.Clear();
-            item_id = 1;
         }
 
-        public Item GetItemOnPoint(int mx, int my)
+        public List<Texture> GetItemsFromSituation(JObject situation)
         {
-            Item res = null;
-            foreach (Item i in list_items)
+            List<Texture> items = new List<Texture>();
+            for (int i = 1; i <= int.Parse(situation["events"].ToString()); i++)
             {
-                if (i.GetXBoundaries()[0] < mx && mx < i.GetXBoundaries()[1]
-                    && i.GetYBoundaries()[0] < my && my < i.GetYBoundaries()[1])
-                {
-                    res = i;
-                }
+                String index = i.ToString();
+                Item item = new Item(
+                        int.Parse(situation[index]["item"]["id"].ToString()),
+                        situation[index]["item"]["name"].ToString(),
+                        int.Parse(situation[index]["x"].ToString()),
+                        int.Parse(situation[index]["x"].ToString()),
+                        situation[index]["item"]["description"].ToString()
+                    );
+                items.Add(item);
             }
-            return res;
-        }
-
-        public List<Item> GetItemsFromSituation(JObject situation)
-        {
-            List<Item> items = new List<Item>();
-            
-            return null;
+            return items;
         }
     }
 }
