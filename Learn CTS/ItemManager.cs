@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,13 @@ namespace Learn_CTS
                 }
             }
             return res;
+        }
+
+        public List<Item> GetItemsFromSituation(JObject situation)
+        {
+            List<Item> items = new List<Item>();
+            
+            return null;
         }
     }
 }
