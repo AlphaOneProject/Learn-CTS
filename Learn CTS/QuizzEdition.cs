@@ -261,6 +261,7 @@ namespace Learn_CTS
                 BorderStyle = BorderStyle.FixedSingle
             };
             nud_score.KeyPress += new KeyPressEventHandler(this.Nud_Score_KeyPress);
+            nud_score.ValueChanged += new EventHandler(this.Nud_Score_ValueChanged);
             pan_choice.Controls.Add(nud_score);
             toolTip.SetToolTip(nud_score, "Score donné ou retiré au choix de cette réponse, négatif " +
                                "\npour une réponse fausse et positif pour réponse juste.");
@@ -375,7 +376,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Nud_Score_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumericUpDown t = (NumericUpDown)sender;
+            NumericUpDownFix t = (NumericUpDownFix)sender;
             List<char> autorized_chars = new List<char>() { ' ', ',', '!', '-', '(', ')', ':' };
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
@@ -411,6 +412,13 @@ namespace Learn_CTS
                 t.BackColor = Color.FromArgb(56, 32, 32);
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
+        }
+
+        private void Nud_Score_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDownFix nud = (NumericUpDownFix)sender;
+            nud.BackColor = Color.FromArgb(56, 32, 32);
+            ((Editor)this.ParentForm).Set_Saved(false);
         }
 
         /// <summary>
