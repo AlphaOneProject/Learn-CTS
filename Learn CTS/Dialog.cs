@@ -39,7 +39,7 @@ namespace Learn_CTS
             lbl_name.Text = npc.GetName();
             this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
             this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
-            timer_text.Start();
+            if(audio != 2) timer_text.Start();
         }
 
         private void InitializeGamePath(string game)
@@ -51,8 +51,8 @@ namespace Learn_CTS
         {
             data = Tools.Get_From_JSON(this.game_path + q + ".json");
             audio = (int)this.data["audio"];
-            if (audio != 2) question = this.data["question"].ToString();
-            else
+            question = this.data["question"].ToString().Replace("<Nom>", Player.GetInstance().GetName());
+            if (audio == 2)
             {
                 txt_dialog_npc.Text = "";
                 t_audio.Start();
@@ -122,7 +122,7 @@ namespace Learn_CTS
             {
                 s.Volume = 100;
                 s.Rate = -1;
-                s.Speak(this.data["question"].ToString());
+                s.Speak(question);
                 int nbr_choices = (int)this.data["choices"];
                 string se;
                 for (int i = 1; i <= nbr_choices; i++)

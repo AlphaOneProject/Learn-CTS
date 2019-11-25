@@ -37,6 +37,8 @@
             // 
             // txt_dialog_npc
             // 
+            this.txt_dialog_npc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_dialog_npc.BackColor = System.Drawing.Color.White;
             this.txt_dialog_npc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_dialog_npc.Cursor = System.Windows.Forms.Cursors.Default;

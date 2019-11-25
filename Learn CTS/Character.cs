@@ -33,7 +33,7 @@ namespace Learn_CTS
 
         public Character(int id, String name, String folder, int x, int y) : base(x, y, true)
         {
-            if (folder == null) folder = (id % 5 + 1).ToString();
+            if (folder == null) folder = (id % 5+1).ToString();
             if (name == null) name = id.ToString();
             this.id = id;
             this.folder = folder;
@@ -56,17 +56,21 @@ namespace Learn_CTS
             }
         }
 
+        public override Image GetImage()
+        {
+            if(last_direction == 1)
+            {
+                return animation_list_est[c];
+            }
+            else
+            {
+                return animation_list_west[c];
+            }
+        }
+
         public void SetDefaultPose()
         {
-            if (animation_list_est.Count == 0 || animation_list_west.Count == 0) return;
-            if (last_direction == 1)
-            {
-                this.SetImage(animation_list_est[0]);
-            }
-            else /*(last_direction == 3)*/
-            {
-                this.SetImage(animation_list_west[0]);
-            }
+            this.c = 0;
         }
 
         public void UpdateMovement(int a, int b)
@@ -77,24 +81,11 @@ namespace Learn_CTS
                 t = 0;
                 if (a > 0)
                 {
-                    this.SetImage(animation_list_est[c]);
                     this.last_direction = 1;
                 }
                 if (a < 0)
                 {
-                    this.SetImage(animation_list_west[c]);
                     this.last_direction = 3;
-                }
-                if(b != 0)
-                {
-                    if(this.last_direction == 1)
-                    {
-                        this.SetImage(animation_list_est[c]);
-                    }
-                    else if(this.last_direction == 3)
-                    {
-                        this.SetImage(animation_list_west[c]);
-                    }
                 }
                 if (a != 0 || b!=0)
                 {

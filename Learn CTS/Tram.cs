@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Learn_CTS
@@ -29,6 +30,14 @@ namespace Learn_CTS
 
         public Tram(int x, int y) : base("Tram", x, y, pos_doors)
         {
+            this.AddChild(new Texture("TramInterior", this.GetX() + 480, this.GetY() + 208, true));
+        }
+
+        public override SoundPlayer GetCurrentAudio()
+        {
+            new SoundPlayer(@"c:\Windows\Media\chimes.wav");
+
+            return base.GetCurrentAudio();
         }
     }
 }

@@ -166,8 +166,8 @@ namespace Learn_CTS
 
         private void Pb_play_Click(object sender, EventArgs e)
         {
-            Form game = new GameWindow(this.gameFullName);
-            game.Show();
+            Form game_menu = new GameMenu(this.gameFullName);
+            game_menu.Show();
             this.Parent.Parent.Hide();
         }
 

@@ -70,6 +70,7 @@
             this.pbox_phone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_phone.TabIndex = 2;
             this.pbox_phone.TabStop = false;
+            this.pbox_phone.Click += new System.EventHandler(this.pbox_phone_Click);
             // 
             // lbl_backpack
             // 
