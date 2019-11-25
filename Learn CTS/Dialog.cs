@@ -51,7 +51,7 @@ namespace Learn_CTS
         {
             data = Tools.Get_From_JSON(this.game_path + q + ".json");
             audio = (int)this.data["audio"];
-            question = this.data["question"].ToString().Replace("player", Player.GetInstance().GetName());
+            question = this.data["question"].ToString().Replace("<Nom>", Player.GetInstance().GetName());
             if (audio == 2)
             {
                 txt_dialog_npc.Text = "";

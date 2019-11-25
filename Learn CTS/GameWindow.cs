@@ -18,7 +18,8 @@ namespace Learn_CTS
     {
         /// Attributes
 
-        private List<Texture> list_textures;
+        private List<Texture> list_game_textures;
+        private List<Texture> list_hud_textures;
         private NPC_Manager nm = NPC_Manager.GetInstance();
         private System.Windows.Forms.Timer timer;
         private Player player;
@@ -36,11 +37,10 @@ namespace Learn_CTS
         private Dialog d;
         private Backpack bp;
         private string game;
-        private bool debug = true;
         private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
-        private int NPCsDensity = 200; //max 800
+        private int NPCsDensity = 50; //max 800
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -51,11 +51,12 @@ namespace Learn_CTS
         private int n_situation = 0;
         private Thread t_fps;
         private float n_fps;
-        private List<Image> list_eggs;
         private Thread t_audio;
         private bool ticket_valid = false;
         private static GameWindow instance;
         private Transition tr;
+        private Texture backpack;
+        private Egg egg;
 
         /// <summary>
         /// Initialize the game window
@@ -75,7 +76,7 @@ namespace Learn_CTS
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
-            pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
+            //pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
             sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
@@ -83,7 +84,6 @@ namespace Learn_CTS
 
         public GameWindow(string game, string scenario) : this(game)
         {
-            this.preview = true;
             this.scenario = scenario;
         }
 
@@ -111,16 +111,9 @@ namespace Learn_CTS
         {
             Texture.InitializePath(game);
             InitializeFPSThread();
-            try
-            {
-                InitializeEggsList();
-            }
-            catch(Exception ex)
-            {
-                //voilà
-            }
             SetScore(1000);
             Load_Game();
+            InitializeHUD();
             InitializeTimer();
         }
 
@@ -151,7 +144,7 @@ namespace Learn_CTS
         {
             while (true)
             {
-                foreach(Texture t in GetAllTextures(list_textures))
+                foreach(Texture t in GetAllTextures(list_game_textures))
                 {
                     if (t.GetCurrentAudio() != null) t.GetCurrentAudio().PlaySync();
                 }
@@ -169,12 +162,12 @@ namespace Learn_CTS
 
         private void StartTransition()
         {
-            if (tr != null && !list_textures.Contains(tr)) list_textures.Add(tr);
+            if (tr != null && !list_game_textures.Contains(tr)) list_game_textures.Add(tr);
         }
 
         public void RemoveTransition()
         {
-            list_textures.Remove(tr);
+            list_game_textures.Remove(tr);
         }
 
         /// <summary>
@@ -184,7 +177,7 @@ namespace Learn_CTS
         private void InitializeTimer()
         {
             timer = new System.Windows.Forms.Timer();
-            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Tick += new EventHandler(GameTick);
             timer.Interval = 30;
             timer.Start();
         }
@@ -195,9 +188,9 @@ namespace Learn_CTS
 
         private void InitializeListTextures()
         {
-            if (list_textures != null && list_textures.Count > 0)
+            if (list_game_textures != null && list_game_textures.Count > 0)
             {
-                foreach (Texture t in list_textures)
+                foreach (Texture t in list_game_textures)
                 {
                     t.Dispose();
                 }
@@ -208,7 +201,7 @@ namespace Learn_CTS
             player = Player.Construct(600, 604);
             platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
             platform.AddChild(player);
-            list_textures = new List<Texture>() {
+            list_game_textures = new List<Texture>() {
                 background,
                 vehicule,
                 platform
@@ -216,15 +209,14 @@ namespace Learn_CTS
             InitializeNPCs();
         }
 
-        private void InitializeEggsList()
+        private void InitializeHUD()
         {
-            list_eggs = new List<Image>();
-            string path_eggs = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "eggs" + Path.DirectorySeparatorChar;
-            for(int i = 0; i<6; i++)
-            {
-                list_eggs.Add(Image.FromFile(path_eggs + "egg" + i.ToString() + ".png"));
-            }
-            pbox_egg.Image = list_eggs[0];
+            egg = new Egg(12, 10);
+            backpack = new Texture("Backpack", 12, 145);
+            list_hud_textures = new List<Texture>(){
+                backpack,
+                egg
+            };
         }
 
         private void SetUpWindow()
@@ -256,23 +248,19 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Instructions executed every 15ms
+        /// Instructions executed every tick
         /// </summary>
         /// <param name="Sender"></param>
         /// <param name="e"></param>
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            GameTick();
-        }
-
-        private void GameTick()
+        private void GameTick(object sender, EventArgs e)
         {
             ticks++;
+            if (ticks % 3 == 0) Moise();
             if (!vehicule.IsInside())
             {
                 CheckIfTheVehiculeIsArrived();
-                if (player.GetX()>=8 && player.GetX()+player.GetWidth()<=draw_surface_width - 8) MoveTexturesIfPlayerMoves();
+                if (player.GetX()>=8 && player.GetX()+player.GetWidth()<=draw_surface_width - 8 && !vehicule.Contains(player)) MoveTexturesIfPlayerMoves();
                 if (vehicule.GetState() == 0)
                 {
                     ticks_stopped++;
@@ -309,7 +297,7 @@ namespace Learn_CTS
                     CheckIfCharacterIsEnteringTheVehicule();
                     CheckIfCharacterIsLeavingTheVehicule();
                 }
-                else if (vehicule.Contains(player) && !list_textures.Contains(tr))
+                else if (vehicule.Contains(player) && !list_game_textures.Contains(tr))
                 {
                     StartTransition();
                 }
@@ -317,7 +305,6 @@ namespace Learn_CTS
             else
             {
                 MoveBackground();
-                if(ticks%3==0) Moise();
             }
             MoveAllCharactersToObjective();
             CheckArrowsPressed();
@@ -326,7 +313,7 @@ namespace Learn_CTS
 
         private void MoveAllCharactersToObjective()
         {
-            foreach (Texture t in GetAllTextures(list_textures))
+            foreach (Texture t in GetAllTextures(list_game_textures))
             {
                 if ((t.GetType().Name == "Player" || t.GetType().Name == "NPC") && ((Character)t).HasObjective())
                 {
@@ -343,14 +330,14 @@ namespace Learn_CTS
         {
             if (player.GetX() + player.GetWidth() > draw_surface_width - 9)
             {
-                foreach (Texture t in list_textures)
+                foreach (Texture t in list_game_textures)
                 {
                     t.Move(-speed_character, 0);
                 }
             }
             else if (player.GetX() <= 9)
             {
-                foreach (Texture t in list_textures)
+                foreach (Texture t in list_game_textures)
                 {
                     t.Move(speed_character, 0);
                 }
@@ -513,7 +500,7 @@ namespace Learn_CTS
                 this.draw_surface_height = e.ClipRectangle.Height;
                 InitializeTransition();
                 //Console.WriteLine(draw_surface_width + ":" + draw_surface_height);
-                foreach (Texture t in list_textures)
+                foreach (Texture t in list_game_textures)
                 {
                     if (vehicule.IsInside())
                     {
@@ -541,7 +528,7 @@ namespace Learn_CTS
 
         private void PaintAllTextures(PaintEventArgs e)
         {
-            List<Texture> list_all_textures = GetAllTextures(list_textures);
+            List<Texture> list_all_textures = GetAllTextures(list_game_textures);
             list_all_textures.Sort(Texture.Compare);
             //e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Low;
@@ -556,6 +543,10 @@ namespace Learn_CTS
                 {
                     t.Debug(e);
                 }
+            }
+            foreach(Texture t in list_hud_textures)
+            {
+                t.OnPaint(e);
             }
         }
 
@@ -591,7 +582,8 @@ namespace Learn_CTS
                 ticket_valid = true;
                 MessageBox.Show("Vous avez bien validé votre ticket !");
             }
-            else if(!this.Controls.Contains(d) && !SearchNPCDialog(mouse_x, mouse_y))
+            if (backpack.IsHitboxHit(mouse_x, mouse_y)) OpenClose_Backpack();
+            else if (!this.Controls.Contains(d) && !SearchNPCDialog(mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
             }
@@ -638,7 +630,7 @@ namespace Learn_CTS
 
         private bool IsCharacterCollidingWithTextures(Character c)
         {
-            foreach(Texture t in list_textures)
+            foreach(Texture t in list_game_textures)
             {
                 if (t.CollideWith(c))
                 {
@@ -754,7 +746,7 @@ namespace Learn_CTS
                 case Keys.B: OpenClose_Backpack(); break;
                 case Keys.Escape: this.Close(); break;
             }
-            if (debug)
+            if (e.Control)
             {
                 switch (e.KeyCode)
                 {
@@ -795,14 +787,14 @@ namespace Learn_CTS
 
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            timer.Stop();
-            foreach (Texture t in list_textures)
+            foreach (Texture t in list_game_textures)
             {
                 t.Dispose();
             }
             nm.Clear();
             if (!preview)
             {
+                timer.Stop();
                 t_fps.Abort();
                 instance = null;
                 Application.Restart();
@@ -816,11 +808,11 @@ namespace Learn_CTS
                 if (vehicule.IsInside())
                 {
                     vehicule.ChangeInside();
-                    list_textures.Remove(player);
+                    list_game_textures.Remove(player);
                     vehicule.AddChild(player);
                     platform = new Platform(vehicule.GetX(), vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
                     vehicule.SetSpeed(vehicule.GetMaxSpeed());
-                    list_textures.Add(platform);
+                    list_game_textures.Add(platform);
                     FillPlatformNPCs();
                 }
                 else ShuffleVehiculeNPCs();
@@ -890,12 +882,12 @@ namespace Learn_CTS
         private void ViewInside()
         {
             platform.Dispose();
-            list_textures.Remove(platform);
+            list_game_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
             //vehicule.SetSpeed(0);
             PlacePlayerMiddleScreen();
-            list_textures.Add(player);
+            list_game_textures.Add(player);
             tr.EndTransition();
         }
 
@@ -1019,9 +1011,9 @@ namespace Learn_CTS
         {
             score += s;
             lbl_score.Text = score.ToString();
-            if(score/200>=0 && score / 200 < 6)
+            if(egg != null && score/200>=0 && score / 200 < 6)
             {
-                pbox_egg.Image = list_eggs[5 - score / 200];
+                egg.SetD(5 - score / 200);
             }
         }
 
@@ -1035,6 +1027,7 @@ namespace Learn_CTS
             {
                 this.Controls.Remove(bp);
                 this.Focus();
+                Refresh();
             }
         }
 
@@ -1043,7 +1036,7 @@ namespace Learn_CTS
             int d = player.GetDirection();
             NPC n;
             int e = 16;
-            foreach(Texture t in vehicule.GetListChilds())
+            foreach(Texture t in nm.GetList())
             {
                 if (t.GetType().Name == "NPC" )
                 {
@@ -1118,7 +1111,7 @@ namespace Learn_CTS
         {
             if (!vehicule.IsInside()) return;
             timer.Stop();
-            timer.Tick -= new EventHandler(Timer_Tick);
+            timer.Tick -= new EventHandler(GameTick);
             timer.Tick += new EventHandler(TimerCrash);
             timer.Start();
         }
@@ -1135,7 +1128,7 @@ namespace Learn_CTS
             {
                 b = -16;
             }
-            foreach(Texture t in list_textures)
+            foreach(Texture t in list_game_textures)
             {
                 if(t.GetType().Name != "Transition") t.Move(0, b);
             }
@@ -1149,7 +1142,7 @@ namespace Learn_CTS
                 vehicule.SetSpeed(0);
                 vehicule.SetState(0);
                 MessageBox.Show("Tout le monde va bien ?");
-                timer.Tick += new EventHandler(Timer_Tick);
+                timer.Tick += new EventHandler(GameTick);
                 timer.Tick -= new EventHandler(TimerCrash);
                 tr.EndTransition();
             }
