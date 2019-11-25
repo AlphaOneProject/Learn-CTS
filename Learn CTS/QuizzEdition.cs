@@ -153,6 +153,13 @@ namespace Learn_CTS
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
+            else if (e.KeyChar == '<')
+            {
+                t.Text += "<Nom>";
+                e.Handled = true;
+                t.Focus();
+                t.SelectionStart = t.Text.Length;
+            }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
             {
                 e.Handled = true;
@@ -172,6 +179,7 @@ namespace Learn_CTS
                 t.BackColor = Color.FromArgb(56, 32, 32);
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
+            Console.WriteLine("Hehe");
 
             // Adapt the TextBox's size.
             t.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
