@@ -47,7 +47,5 @@ namespace Learn_CTS
             lbl_desc.Width = this.Width - pb_item.Width - 6;
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24, this.Height - 6 - btn_exit.Height);
         }
-
-        
     }
 }
