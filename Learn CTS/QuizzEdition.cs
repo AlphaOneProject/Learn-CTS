@@ -153,7 +153,7 @@ namespace Learn_CTS
             {
                 this.data["question"] = t.Text.Trim();
                 Tools.Set_To_JSON(this.file_path, this.data);
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
@@ -161,7 +161,7 @@ namespace Learn_CTS
             {
                 t.Text = (string)this.data["question"];
                 t.SelectionStart = t.Text.Length;
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
@@ -180,7 +180,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
-                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                     ((Editor)this.ParentForm).Set_Saved(false);
                     return; // Let you erase regardless of the length.
                 }
@@ -188,7 +188,7 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.FromArgb(56, 32, 32);
+                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
             Console.WriteLine("Hehe");
@@ -234,7 +234,8 @@ namespace Learn_CTS
             Panel pan_choice = new Panel()
             {
                 Name = "pan_choice" + id,
-                BackColor = Color.FromArgb(46, 46, 46),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["1"]["R"]), int.Parse((string)this.theme["1"]["G"]), int.Parse((string)this.theme["1"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Width = this.Width - 20,
                 Height = 50
             };
@@ -247,8 +248,8 @@ namespace Learn_CTS
                 Text = (string)((JObject)data["c" + id])["answer"],
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 ShortcutsEnabled = false,
                 Tag = id,
                 BorderStyle = BorderStyle.FixedSingle
@@ -267,8 +268,8 @@ namespace Learn_CTS
                 Text = int.Parse(((JObject)data["c" + id])["score"].ToString()).ToString(),
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Tag = id,
                 BorderStyle = BorderStyle.FixedSingle
             };
@@ -286,8 +287,8 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Tag = id
             };
             cbo_redirect.SelectedIndexChanged += new EventHandler(this.Cbo_Redirect_SelectedIndexChanged);
@@ -348,7 +349,7 @@ namespace Learn_CTS
             {
                 ((JObject)this.data["c" + t.Tag])["answer"] = t.Text.Trim();
                 Tools.Set_To_JSON(this.file_path, this.data); // Set the entered setting as a stored blueprint for npc.
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
@@ -356,7 +357,7 @@ namespace Learn_CTS
             {
                 t.Text = (string)((JObject)this.data["c" + t.Tag])["answer"];
                 t.SelectionStart = t.Text.Length;
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
@@ -368,7 +369,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
-                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                     ((Editor)this.ParentForm).Set_Saved(false);
                     return; // Let you erase regardless of the length.
                 }
@@ -376,7 +377,7 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.FromArgb(56, 32, 32);
+                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
         }
@@ -394,14 +395,14 @@ namespace Learn_CTS
             {
                 ((JObject)this.data["c" + t.Tag])["score"] = int.Parse(t.Text.Trim());
                 Tools.Set_To_JSON(this.file_path, this.data);
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
             else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
                 t.Text = (string)((JObject)this.data["c" + t.Tag])["score"];
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 ((Editor)this.ParentForm).Set_Saved(true);
                 e.Handled = true;
             }
@@ -413,7 +414,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
-                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                     ((Editor)this.ParentForm).Set_Saved(false);
                     return; // Let you erase regardless of the length.
                 }
@@ -421,7 +422,7 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.FromArgb(56, 32, 32);
+                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
         }

@@ -1641,7 +1641,7 @@ namespace Learn_CTS
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
-                EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", i)
+                EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", i)
                 {
                     Name = "EventEdition" + i,
                     Width = content.Width - 80,
@@ -1677,7 +1677,7 @@ namespace Learn_CTS
 
             // Creating the correspondant UserControl.
             // Creating the UserControl responsible for the internal edition of the JSON file.
-            EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", new_event_id)
+            EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", new_event_id)
             {
                 Name = "EventEdition" + new_event_id,
                 Width = content.Width - 80,
