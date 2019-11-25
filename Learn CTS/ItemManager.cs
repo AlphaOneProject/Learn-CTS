@@ -10,11 +10,11 @@ namespace Learn_CTS
     class ItemManager
     {
         private static ItemManager instance;
-        private static List<Item> list_items;
+        private static List<Texture> list_items;
 
         public ItemManager()
         {
-            list_items = new List<Item>();
+            list_items = new List<Texture>();
         }
 
         public static ItemManager GetInstance()
@@ -49,14 +49,14 @@ namespace Learn_CTS
         {
             for (int i = list_items.Count - 1; i >= 0; i--)
             {
-                if (list_items[i].GetID() == id)
+                if (((Item)list_items[i]).GetID() == id)
                 {
                     list_items.Remove(list_items[i]);
                 }
             }
         }
 
-        public List<Item> GetList()
+        public List<Texture> GetList()
         {
             return list_items;
         }
@@ -66,9 +66,8 @@ namespace Learn_CTS
             list_items.Clear();
         }
 
-        public List<Texture> GetItemsFromSituation(JObject situation)
+        public void GetItemsFromSituation(JObject situation)
         {
-            List<Texture> items = new List<Texture>();
             for (int i = 1; i <= int.Parse(situation["events"].ToString()); i++)
             {
                 String index = i.ToString();
@@ -79,9 +78,9 @@ namespace Learn_CTS
                         int.Parse(situation[index]["x"].ToString()),
                         situation[index]["item"]["description"].ToString()
                     );
-                items.Add(item);
+                list_items.Add(item);
             }
-            return items;
         }
+
     }
 }

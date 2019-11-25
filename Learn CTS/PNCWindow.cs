@@ -42,7 +42,8 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            list_textures = item_manager.GetItemsFromSituation(Tools.Get_From_JSON(game_path + "item_test.json"));
+            item_manager.GetItemsFromSituation(Tools.Get_From_JSON(game_path + "item_test.json"));
+            list_textures = item_manager.GetList();
             Show();
         }
 
