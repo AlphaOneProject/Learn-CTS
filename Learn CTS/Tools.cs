@@ -160,46 +160,36 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// This method recursively copies subdirectories by calling itself on each subdirectory until there are no more to copy.
+        /// Copy directory and its content.
         /// </summary>
-        /// <param name="sourceDirName"></param>
-        /// <param name="destDirName"></param>
-        /// <param name="copySubDirs"></param>
-        public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        /// <param name="source">Source directory to copy</param>
+        /// <param name="target">Target directoty to copy source dir. into</param>
+        public static void DirectoryCopy(DirectoryInfo source, DirectoryInfo target)
         {
-            // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-            if (!dir.Exists)
+            if (source.FullName.ToLower() == target.FullName.ToLower())
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                return;
             }
 
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            // If the destination directory doesn't exist, create it.
-            if (!Directory.Exists(destDirName))
+            // Check if the target directory exists, if not, create it.
+            if (Directory.Exists(target.FullName) == false)
             {
-                Directory.CreateDirectory(destDirName);
+                Directory.CreateDirectory(target.FullName);
             }
 
-            // Get the files in the directory and copy them to the new location.
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
+            // Copy each file into it's new directory.
+            foreach (FileInfo fi in source.GetFiles())
             {
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
+                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
             }
 
-            // If copying subdirectories, copy them and their contents to new location.
-            if (copySubDirs)
+            // Copy each subdirectory using recursion.
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
-                foreach (DirectoryInfo subdir in dirs)
-                {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
-                }
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                DirectoryCopy(diSourceSubDir, nextTargetSubDir);
             }
         }
     }

@@ -13,20 +13,20 @@ namespace Learn_CTS
         int y_pos;
         String description;
 
-        public Item(int id, String name, int x, int y) : base(name, x, y)
+        public Item(int id, String name, int x, int y, String description) : base(name, x, y)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = "salut c'est "+ name;
+            this.description = description;
         }
 
-        public Item(int id, String name, int x, int y, int z) : base(name, x, y, z)
+        public Item(int id, String name, int x, int y, int z, String description) : base(name, x, y, z)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = "salut c'est " + name;
+            this.description = description;
         }
 
         public int GetID()

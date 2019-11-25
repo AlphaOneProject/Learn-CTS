@@ -117,3 +117,29 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.Gener
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.exe
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.pdb
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.exe.config
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.exe
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Learn CTS.pdb
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.dll
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\bin\Debug\Newtonsoft.Json.xml
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csprojAssemblyReference.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Backpack.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Dialog.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Editor.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.EventEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCard.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameCreator.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameMenu.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameWindow.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ItemViewer.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Menu.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Phone.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PlacementEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.PNCWindow.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Properties.Resources.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.QuizzEdition.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.GenerateResource.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CoreCompileInputs.cache
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyComplete
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.exe
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.pdb

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -36,8 +37,10 @@ namespace Learn_CTS
             pb_edit.BackColor = Color.Transparent;
             pb_delete.BackgroundImage = Tools.ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
-            pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
-            pb_copy.BackColor = Color.Transparent;
+
+            pb_copy.Hide();
+            //pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
+            //pb_copy.BackColor = Color.Transparent;
         }
 
         private void FetchIcons()
@@ -204,26 +207,44 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// marche pa
+        /// </summary>
         private void Copy_Game()
         {
-            int nb_copies = 1;
-            String current_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName;
-            String copy_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName + "-Copie";
-            try
+            String source_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName;
+            String target_path = @"" + System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName + "-Copie";
+            DirectoryInfo dir_source = new DirectoryInfo(source_path);
+            
+            Boolean valid_name = false;
+            int copy_number = 1;
+            while (!valid_name)
             {
-                Tools.DirectoryCopy(current_path, copy_path + nb_copies.ToString(), true);
+                try
+                {
+                    DirectoryInfo dir_target = new DirectoryInfo(target_path + copy_number.ToString());
+
+                    while (dir_target.Exists)
+                    {
+                        copy_number++;
+                        dir_target = new DirectoryInfo(target_path + copy_number.ToString());
+                    }
+                    Tools.DirectoryCopy(dir_source, dir_target);
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show(e.Message);
+                }
             }
-            catch (IOException)
-            {
-                nb_copies++;
-                Tools.DirectoryCopy(current_path, copy_path + nb_copies.ToString(), true);
-            }
-            finally
-            {
-            Form g = new Editor(this.gameFullName + "-Copie");
-                this.Hide();
-                g.Show();
-            }
+            JObject properties_content = Tools.Get_From_JSON(target_path + copy_number.ToString() +
+                Path.DirectorySeparatorChar + "properties.json");
+            properties_content["default"] = false;
+            File.WriteAllText(@"" + target_path + copy_number.ToString() + Path.DirectorySeparatorChar + "properties.json",
+                                properties_content.ToString());
+
+            Form g = new Editor(this.gameFullName + "-Copie" + copy_number.ToString());
+            this.Hide();
+            g.Show();
         }
 
         private void Pb_Btn_MouseHover(object sender, EventArgs e)
