@@ -33,12 +33,20 @@ namespace Learn_CTS
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initializes the textures on load.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PNCWindow_Load(object sender, EventArgs e)
         {
             InitializeListTextures();
             Refresh();
         }
 
+        /// <summary>
+        /// Get the items from the situation.
+        /// </summary>
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
@@ -88,8 +96,15 @@ namespace Learn_CTS
             return list_temp;
         }
 
+        /// <summary>
+        /// Called when the window is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PNCWindow_MouseDown(object sender, MouseEventArgs e)
         {
+            // Checks if the item is clicked, to then highlight it. 
+            // The items need a hitbox.
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
             foreach (Item t in list_textures)
@@ -98,6 +113,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Creates an ItemViewer to view the item in details.
+        /// </summary>
+        /// <param name="item">The item to be highlighted.</param>
         private void HighlightItem(Item item)
         {
             ItemViewer iv = new ItemViewer(item.GetID())
@@ -109,6 +128,11 @@ namespace Learn_CTS
             this.Controls.Add(iv);
         }
 
+        /// <summary>
+        /// Called when the window resizes, to have a responsive behavior.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PNCWindow_SizeChanged(object sender, EventArgs e)
         {
             foreach (Control c in this.Controls)
