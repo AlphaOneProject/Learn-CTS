@@ -29,11 +29,7 @@
         private void InitializeComponent()
         {
             this.lbl_score = new System.Windows.Forms.Label();
-            this.pbox_backpack = new System.Windows.Forms.PictureBox();
             this.lbl_nfps = new System.Windows.Forms.Label();
-            this.pbox_egg = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_backpack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_egg)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_score
@@ -49,18 +45,6 @@
             this.lbl_score.TabIndex = 0;
             this.lbl_score.Text = "default";
             this.lbl_score.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pbox_backpack
-            // 
-            this.pbox_backpack.BackColor = System.Drawing.Color.Silver;
-            this.pbox_backpack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbox_backpack.Location = new System.Drawing.Point(12, 145);
-            this.pbox_backpack.Name = "pbox_backpack";
-            this.pbox_backpack.Size = new System.Drawing.Size(96, 96);
-            this.pbox_backpack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_backpack.TabIndex = 2;
-            this.pbox_backpack.TabStop = false;
-            this.pbox_backpack.Click += new System.EventHandler(this.pbox_backpack_Click);
             // 
             // lbl_nfps
             // 
@@ -79,23 +63,12 @@
             this.lbl_nfps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbl_nfps.Visible = false;
             // 
-            // pbox_egg
-            // 
-            this.pbox_egg.Location = new System.Drawing.Point(12, 12);
-            this.pbox_egg.Name = "pbox_egg";
-            this.pbox_egg.Size = new System.Drawing.Size(96, 96);
-            this.pbox_egg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbox_egg.TabIndex = 5;
-            this.pbox_egg.TabStop = false;
-            // 
             // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.pbox_egg);
             this.Controls.Add(this.lbl_nfps);
-            this.Controls.Add(this.pbox_backpack);
             this.Controls.Add(this.lbl_score);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
@@ -107,8 +80,6 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameWindow_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
             this.Resize += new System.EventHandler(this.GameWindow_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_backpack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbox_egg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,9 +87,7 @@
 
         #endregion
         private System.Windows.Forms.Label lbl_score;
-        private System.Windows.Forms.PictureBox pbox_backpack;
         private System.Windows.Forms.Label lbl_nfps;
-        private System.Windows.Forms.PictureBox pbox_egg;
     }
 }
 

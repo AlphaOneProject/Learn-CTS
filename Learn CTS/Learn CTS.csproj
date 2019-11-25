@@ -76,6 +76,7 @@
     <Compile Include="Editor.Designer.cs">
       <DependentUpon>Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Egg.cs" />
     <Compile Include="EventEdition.cs">
       <SubType>UserControl</SubType>
     </Compile>
