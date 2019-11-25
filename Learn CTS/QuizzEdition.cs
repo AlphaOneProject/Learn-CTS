@@ -19,6 +19,7 @@ namespace Learn_CTS
         private int id;
         private string file_path;
         private JObject data;
+        private JObject theme;
         private int prev_line_loc = 50;
         private List<string> cbo_redirect_list;
         private bool loading = false;
@@ -29,7 +30,7 @@ namespace Learn_CTS
         /// Setup the parameters necessary to the UserControl.
         /// </summary>
         /// <param name="file_path">Absolute path of the linked file.</param>
-        public QuizzEdition(string file_path)
+        public QuizzEdition(Editor editor, string file_path)
         {
             InitializeComponent();
             string file_name = file_path.Split(Path.DirectorySeparatorChar).Last();
@@ -37,6 +38,7 @@ namespace Learn_CTS
             this.file_path = file_path;
             this.data = Tools.Get_From_JSON(file_path);
             this.DoubleBuffered = true;
+            this.theme = editor.Get_Theme();
 
             Reload_Redirections();
         }
@@ -48,6 +50,16 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void QuizzEdition_Load(object sender, EventArgs e)
         {
+            // Setup the theme to match the one of the editor.
+            this.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            this.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            txt_question.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
+            txt_question.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            cbo_audio.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
+            cbo_audio.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
             // Add the question.
             txt_question.Text = (string)this.data["question"];
             cbo_audio.SelectedIndex = int.Parse((string)this.data["audio"]);
