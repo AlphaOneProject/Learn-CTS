@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
-        private int NPCsDensity = 50; //max 800
+        private int NPCsDensity = 150; //max 800
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -70,13 +70,11 @@ namespace Learn_CTS
                 MessageBox.Show("Vous ne pouvez avoir qu'une seule fenêtre de jeu ouverte en même temps.");
                 this.Close();
             }
-            this.Hide();
             this.game = game;
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
             InitializeComponent();
             DoubleBuffered = true;
-            //pbox_backpack.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "backpack.png");
             sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
@@ -107,7 +105,7 @@ namespace Learn_CTS
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void GameWindow_Load(object sender, EventArgs e)
         {
             Texture.InitializePath(game);
             InitializeFPSThread();
@@ -119,13 +117,12 @@ namespace Learn_CTS
 
         private void Load_Game()
         {
-            RemoveDialog();
+            OpenCloseDialog();
             if (this.Controls.Contains(bp)) OpenClose_Backpack();
             bp = new Backpack();
             r = new Random();
             InitializeListTextures();
             SetUpWindow();
-            this.Show();
         }
 
         private void InitializeFPSThread()
@@ -417,10 +414,19 @@ namespace Learn_CTS
             if (c.ReachedObjective()) c.RemoveObjective();
         }
 
-        public void RemoveDialog()
+        public void OpenCloseDialog()
         {
-            if (this.Controls.Contains(d)) this.Controls.Remove(d);
-            this.Focus();
+            Refresh();
+            if (this.Controls.Contains(d))
+            {
+                this.Controls.Remove(d);
+                this.Focus();
+            }
+            else
+            {
+                if(d!=null) this.Controls.Add(d);
+            }
+            Refresh();
         }
 
         /// <summary>
@@ -608,7 +614,7 @@ namespace Learn_CTS
                         if(Math.Abs((t.GetX()+t.GetWidth()/2 - (player.GetX()+player.GetWidth()/2))) < 256 && Math.Abs((t.GetY() - player.GetY())) < 256)
                         {
                             d = new Dialog(t.GetID(), game);
-                            this.Controls.Add(d);
+                            OpenCloseDialog();
                         }
                         else
                         {
@@ -885,7 +891,6 @@ namespace Learn_CTS
             list_game_textures.Remove(platform);
             vehicule.ChangeInside();
             vehicule.SetState(2);
-            //vehicule.SetSpeed(0);
             PlacePlayerMiddleScreen();
             list_game_textures.Add(player);
             tr.EndTransition();
@@ -1019,6 +1024,7 @@ namespace Learn_CTS
 
         public void OpenClose_Backpack()
         {
+            Refresh();
             if (!this.Controls.Contains(bp))
             {
                 this.Controls.Add(bp);
@@ -1097,11 +1103,6 @@ namespace Learn_CTS
             }
         }
 
-        private void pbox_backpack_Click(object sender, EventArgs e)
-        {
-            OpenClose_Backpack();
-        }
-
         private void GameWindow_Resize(object sender, EventArgs e)
         {
             lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
@@ -1148,6 +1149,38 @@ namespace Learn_CTS
             }
             MoveBackground();
             Refresh();
+        }
+
+        private void DisplaySettings()
+        {
+            timer.Stop();
+            ControlsSettings();
+        }
+
+        private void ControlsSettings()
+        {
+            this.SuspendLayout();
+            Panel p_settings = new Panel();
+            p_settings.BackColor = Color.Transparent;
+            p_settings.Size = new Size(this.Width, this.Height);
+            p_settings.Resize += new EventHandler(delegate (object sender, EventArgs e) { this.Size = new Size(this.Width, this.Height); });
+            Button btn_continue = new Button();
+            btn_continue.Click += new EventHandler(delegate(object sender, EventArgs e) { this.Controls.Remove(p_settings); timer.Start(); });
+            btn_continue.Size = new Size(100, 30);
+            btn_continue.Location = new Point(200, 300);
+            btn_continue.BackColor = Color.White;
+            Button btn_settings = new Button();
+            btn_settings.Size = btn_continue.Size;
+            btn_settings.Location = new Point(btn_continue.Location.X, btn_continue.Location.Y + btn_continue.Height + 20);
+            btn_settings.BackColor = Color.White;
+            Button btn_leave = new Button();
+            btn_leave.Size = btn_continue.Size;
+            btn_leave.Location = new Point(btn_continue.Location.X, btn_settings.Location.Y + btn_settings.Height + 20);
+            btn_leave.Click += new EventHandler(delegate(object sender, EventArgs e) { this.Close(); });
+            btn_leave.BackColor = Color.White;
+            p_settings.Controls.AddRange(new Control[3] { btn_continue, btn_settings, btn_leave });
+            this.Controls.Add(p_settings);
+            this.ResumeLayout();
         }
     }
 }

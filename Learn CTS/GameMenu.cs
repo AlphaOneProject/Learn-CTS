@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -131,8 +132,9 @@ namespace Learn_CTS
             lbl_loading.Text = "Chargement du jeu en cours";
             lbl_loading.AutoSize = true;
             lbl_loading.Location = new Point(this.Width / 2 - lbl_loading.Width / 2, this.Height / 2 - lbl_loading.Height / 2);
-            lbl_loading.Visible = true;
             this.Controls.Add(lbl_loading);
+            lbl_loading.Visible = true;
+            Thread.Sleep(50);
             Button b = (Button)sender;
             Form game_window = new GameWindow(game,b.Text);
             game_window.Show();
