@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Learn_CTS
 {
@@ -22,6 +23,7 @@ namespace Learn_CTS
         private bool saved;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
+        private bool value_cooldown = false;
 
         // Methods.
 
@@ -110,6 +112,8 @@ namespace Learn_CTS
                 Rectangle screen = Screen.FromControl(this).Bounds;
                 this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
             }
+
+            menu.CollapseAll();
 
             // Load already existing scenarios.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
@@ -226,9 +230,11 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            TreeView t = (TreeView)sender;
+            if (t.SelectedNode == null) { return; }
+
             Tools.Begin_Control_Update(content);
 
-            TreeView t = (TreeView)sender;
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
@@ -1491,6 +1497,10 @@ namespace Learn_CTS
         {
             if (this.old_category == menu.SelectedNode.Name) // Trigger only on form resize.
             {
+                TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
+                Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
+                tb.Width = content.Width - lbl.Width - 10 - 100;
+
                 foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
                 {
                     ee.Width = content.Width - 80;
@@ -1603,7 +1613,42 @@ namespace Learn_CTS
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
             pb_preview_situation.Location = new Point(pb_discard_situation.Location.X + pb_discard_situation.Width + 2, 0);
 
-            // Generating basic Label & add PictureBox bellow the previous Controls in the content panel.
+            // Recovering data from the JSON files.
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+
+            // Creates primary Controls of the situation.
+            Label lbl_tb = new Label()
+            {
+                Name = "lbl_tb",
+                Text = "Densité de PNJs : " + (string)envi_data["npc_density"],
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_tb);
+
+            TrackBar tb_npc_density = new TrackBar()
+            {
+                Name = "tb_npc_density",
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                Minimum = 0,
+                Maximum = 100,
+                TickStyle = TickStyle.Both,
+                Value = int.Parse((string)envi_data["npc_density"]),
+                Width = content.Width - lbl_tb.Width - 10 - 100
+            };
+            tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
+            content.Controls.Add(tb_npc_density);
+
+            // Places Controls.
+            lbl_tb.Location = new Point(20, 100 + ((tb_npc_density.Height - lbl_tb.Height) / 2));
+            tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 10, 100);
+
+            // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
             // Label displaying the area items.
             Label lbl_events = new Label()
@@ -1634,10 +1679,6 @@ namespace Learn_CTS
 
             // Generating to all files' an EventEdition UserControl.
             int last_pos = 300;
-            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
-            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
@@ -1650,6 +1691,27 @@ namespace Learn_CTS
                 content.Controls.Add(EEdition);
                 last_pos += EEdition.Height + 20;
             }
+        }
+
+        public void Npc_Density_Update(object sender, EventArgs e)
+        {
+            if (this.value_cooldown) { Thread.Sleep(100); }
+            // Diplay the new value.
+            TrackBar tb = (TrackBar)sender;
+            Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
+            lbl.Text = "Densité de PNJs : " + tb.Value.ToString();
+            tb.Width = content.Width - lbl.Width - 10 - 100;
+            tb.Location = new Point(lbl.Location.X + lbl.Width + 10, 100);
+
+            // Save the new value.
+            this.value_cooldown = true;
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            envi_data["npc_density"] = tb.Value;
+            Tools.Set_To_JSON(situation_path + "environment.json", envi_data);
+            this.value_cooldown = false;
         }
 
         public void Add_Event(object sender, EventArgs e)
