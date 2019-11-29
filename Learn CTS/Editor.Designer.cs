@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Joueur");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Non-joueurs");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Personnages");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Décors");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12,
-            treeNode13,
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Scénarios");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Joueur");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Non-joueurs");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Personnages");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Décors");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Label();
@@ -58,28 +58,28 @@
             this.menu.ItemHeight = 32;
             this.menu.Location = new System.Drawing.Point(12, 12);
             this.menu.Name = "menu";
-            treeNode10.Name = "global";
-            treeNode10.Text = "Général";
-            treeNode11.Name = "player";
-            treeNode11.Text = "Joueur";
-            treeNode12.Name = "npcs";
-            treeNode12.Text = "Non-joueurs";
-            treeNode13.Name = "dialogs";
-            treeNode13.Text = "Dialogues";
-            treeNode14.Name = "sprites";
-            treeNode14.Text = "Personnages";
-            treeNode15.Name = "backgrounds";
-            treeNode15.Text = "Décors";
-            treeNode16.Name = "images";
-            treeNode16.Text = "Images";
-            treeNode17.Name = "models";
-            treeNode17.Text = "Modèles";
-            treeNode18.Name = "scenarios";
-            treeNode18.Text = "Scénarios";
+            treeNode1.Name = "global";
+            treeNode1.Text = "Général";
+            treeNode2.Name = "player";
+            treeNode2.Text = "Joueur";
+            treeNode3.Name = "npcs";
+            treeNode3.Text = "Non-joueurs";
+            treeNode4.Name = "dialogs";
+            treeNode4.Text = "Dialogues";
+            treeNode5.Name = "sprites";
+            treeNode5.Text = "Personnages";
+            treeNode6.Name = "backgrounds";
+            treeNode6.Text = "Décors";
+            treeNode7.Name = "images";
+            treeNode7.Text = "Images";
+            treeNode8.Name = "models";
+            treeNode8.Text = "Modèles";
+            treeNode9.Name = "scenarios";
+            treeNode9.Text = "Scénarios";
             this.menu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode17,
-            treeNode18});
+            treeNode1,
+            treeNode8,
+            treeNode9});
             this.menu.PathSeparator = " / ";
             this.menu.ShowLines = false;
             this.menu.ShowNodeToolTips = true;

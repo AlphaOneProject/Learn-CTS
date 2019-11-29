@@ -20,16 +20,18 @@ namespace Learn_CTS
         private string file_path;
         private int event_id;
         private JObject file_data;
+        private JObject theme;
         private bool loading;
 
         // Methods.
 
-        public EventEdition(string file_path, int event_id)
+        public EventEdition(Editor editor, string file_path, int event_id)
         {
             InitializeComponent();
             this.file_path = file_path;
             this.event_id = event_id;
             this.file_data = Tools.Get_From_JSON(file_path);
+            this.theme = editor.Get_Theme();
             this.DoubleBuffered = true;
         }
 
@@ -139,6 +141,19 @@ namespace Learn_CTS
             cbo_npcs.SelectedIndex = int.Parse((string)this.file_data[this.event_id.ToString()]["npc"]["id"]) - 1;
             cbo_dialogs.SelectedIndex = int.Parse((string)this.file_data[this.event_id.ToString()]["quizz"]) - 1;
             this.loading = false;
+
+            // Setup the theme to match the one of the editor.
+            this.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            this.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            cbo_dialogs.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
+            cbo_dialogs.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            cbo_npcs.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
+            cbo_npcs.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            btn_placement.BackColor = Color.FromArgb(int.Parse((string)this.theme["0"]["R"]), int.Parse((string)this.theme["0"]["G"]), int.Parse((string)this.theme["0"]["B"]));
+            btn_placement.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
         }
 
         private void EventEdition_SizeChanged(object sender, EventArgs e)

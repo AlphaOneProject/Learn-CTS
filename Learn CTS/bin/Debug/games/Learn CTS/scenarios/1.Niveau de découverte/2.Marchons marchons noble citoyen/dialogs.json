@@ -1,1 +1,1 @@
-{"events":1,"1":{"x":0,"y":0,"npc":{"id":1,"name":"Gérard","folder":1},"quizz":3}}
+{"events":4,"1":{"x":672,"y":154,"npc":{"id":1,"name":"Gérard","folder":1},"quizz":7},"2":{"x":0,"y":0,"npc":{"name":"Véronique","folder":"2","id":2},"quizz":3},"3":{"x":0,"y":0,"npc":{"name":"Bernard","folder":"4","id":4},"quizz":2},"4":{"x":0,"y":0,"npc":{"name":"Louis","folder":"5","id":5},"quizz":5}}

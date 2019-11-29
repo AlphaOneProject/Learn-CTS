@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Learn_CTS
 {
@@ -22,6 +23,7 @@ namespace Learn_CTS
         private bool saved;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
+        private bool value_cooldown = false;
 
         // Methods.
 
@@ -75,6 +77,44 @@ namespace Learn_CTS
             title.Text = "Édition de " + cut_game;
             title.Location = new Point(((this.Width - menu.Width - title.Width) / 2) + menu.Width, title.Location.Y);
 
+            // Set the window size as options size setting.
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                                  Path.DirectorySeparatorChar + "options.json";
+            JObject options = Tools.Get_From_JSON(options_path);
+
+            // Load the current color theme.
+            this.theme = (JObject)Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "internal"
+                         + Path.DirectorySeparatorChar + "themes.json")[(string)options["theme"]];
+
+            // Apply the current color theme.
+            this.BackColor = Color.FromArgb(int.Parse((string)this.theme["0"]["R"]), int.Parse((string)this.theme["0"]["G"]), int.Parse((string)this.theme["0"]["B"]));
+            this.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            menu.BackColor = Color.FromArgb(int.Parse((string)this.theme["1"]["R"]), int.Parse((string)this.theme["1"]["G"]), int.Parse((string)this.theme["1"]["B"]));
+            menu.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            content.BackColor = Color.FromArgb(int.Parse((string)this.theme["1"]["R"]), int.Parse((string)this.theme["1"]["G"]), int.Parse((string)this.theme["1"]["B"]));
+            content.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            lbl_path.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            lbl_path.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+
+            if ((bool)options["maximized"])
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.Width = int.Parse((string)options["size"]["x"]);
+                this.Height = int.Parse((string)options["size"]["y"]);
+
+                // Place the windows at the center of the screen.
+                Rectangle screen = Screen.FromControl(this).Bounds;
+                this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
+            }
+
+            menu.CollapseAll();
+
             // Load already existing scenarios.
             string sc_path = this.game_path + Path.DirectorySeparatorChar + "scenarios";
             foreach (string scenario in Directory.GetDirectories(@"" + sc_path))
@@ -92,28 +132,6 @@ namespace Learn_CTS
 
             menu.ExpandAll();
             menu.SelectedNode = menu.Nodes[0];
-
-            // Set the window size as options size setting.
-            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
-                                  Path.DirectorySeparatorChar + "options.json";
-            JObject options = Tools.Get_From_JSON(options_path);
-            if ((bool)options["maximized"])
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.Width = int.Parse((string)options["size"]["x"]);
-                this.Height = int.Parse((string)options["size"]["y"]);
-
-                // Place the windows at the center of the screen.
-                Rectangle screen = Screen.FromControl(this).Bounds;
-                this.Location = new Point((screen.Width - this.Width) / 2, (screen.Height - this.Height) / 2);
-            }
-
-            // Load the current color theme.
-            this.theme = (JObject)Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "internal"
-                         + Path.DirectorySeparatorChar + "themes.json")[(string)options["theme"]];
         }
 
         public string Get_Game()
@@ -212,9 +230,11 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            TreeView t = (TreeView)sender;
+            if (t.SelectedNode == null) { return; }
+
             Tools.Begin_Control_Update(content);
 
-            TreeView t = (TreeView)sender;
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
@@ -298,8 +318,8 @@ namespace Learn_CTS
                 Text = (string)this.game_properties["description"],
                 Cursor = Cursors.IBeam,
                 Multiline = true,
-                ForeColor = Color.White,
-                BackColor = Color.FromArgb(56, 56, 56),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 BorderStyle = BorderStyle.Fixed3D,
                 Margin = new Padding(8, 8, 8, 8),
                 ShortcutsEnabled = false
@@ -342,7 +362,7 @@ namespace Learn_CTS
                 this.game_properties["description"] = t.Text;
                 Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
                 t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "";
 
@@ -354,7 +374,7 @@ namespace Learn_CTS
             {
                 t.Text = (string)this.game_properties["description"];
                 t.SelectionStart = t.Text.Length;
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "";
             }
@@ -366,7 +386,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
-                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"])*0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                     content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
                     this.saved = false;
                     return; // Let you erase regardless of the length.
@@ -376,7 +396,7 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.FromArgb(56, 32, 32);
+                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
                 this.saved = false;
             }
@@ -489,8 +509,8 @@ namespace Learn_CTS
                     Name = "npc_name" + (i + 1),
                     Text = (string)data_pnj["name"],
                     Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                    ForeColor = Color.White,
-                    BackColor = Color.FromArgb(56, 56, 56),
+                    BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                     Dock = DockStyle.Fill,
                     ShortcutsEnabled = false,
                     AutoSize = true
@@ -503,8 +523,8 @@ namespace Learn_CTS
                     Name = "npc_folder" + (i + 1),
                     Text = (string)data_pnj["folder"],
                     Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                    ForeColor = Color.White,
-                    BackColor = Color.FromArgb(56, 56, 56),
+                    BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                     Dock = DockStyle.Fill,
                     ShortcutsEnabled = false,
                     AutoSize = true
@@ -580,8 +600,8 @@ namespace Learn_CTS
                 Name = "npc_name" + new_id,
                 Text = "Nom",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                ForeColor = Color.White,
-                BackColor = Color.FromArgb(56, 56, 56),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Dock = DockStyle.Fill,
                 AutoSize = true
             };
@@ -593,8 +613,8 @@ namespace Learn_CTS
                 Name = "npc_folder" + new_id,
                 Text = "",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                ForeColor = Color.White,
-                BackColor = Color.FromArgb(56, 56, 56),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Dock = DockStyle.Fill,
                 AutoSize = true
             };
@@ -650,7 +670,7 @@ namespace Learn_CTS
                         break;
                 }
                 Tools.Set_To_JSON(this.game_path + txt_path, data_npc); // Set the entered setting as a stored blueprint for npc.
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
                 e.Handled = true;
             }
@@ -674,7 +694,7 @@ namespace Learn_CTS
                         break;
                 }
                 t.SelectionStart = t.Text.Length;
-                t.BackColor = Color.FromArgb(56, 56, 56);
+                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
                 e.Handled = true;
             }
@@ -686,7 +706,7 @@ namespace Learn_CTS
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
-                    t.BackColor = Color.FromArgb(56, 32, 32);
+                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                     this.saved = false;
                     return; // Let you erase regardless of the length.
                 }
@@ -694,7 +714,7 @@ namespace Learn_CTS
             }
             else
             {
-                t.BackColor = Color.FromArgb(56, 32, 32);
+                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 this.saved = false;
             }
         }
@@ -805,7 +825,7 @@ namespace Learn_CTS
             foreach (string file in Directory.GetFiles(dialogs_path))
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
-                QuizzEdition QEdition = new QuizzEdition(@"" + dialogs_path + i + ".json")
+                QuizzEdition QEdition = new QuizzEdition(this, @"" + dialogs_path + i + ".json")
                 {
                     Name = "QuizzEdition" + i,
                     Width = content.Width - 80,
@@ -821,7 +841,8 @@ namespace Learn_CTS
                     Text = "N°" + i,
                     Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                     AutoSize = true,
-                    BackColor = Color.FromArgb(46, 46, 46),
+                    BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
+                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                     BorderStyle = BorderStyle.FixedSingle
                 };
                 content.Controls.Add(lbl_dialog_id);
@@ -867,7 +888,7 @@ namespace Learn_CTS
                               dialog_content.ToString());
 
             // Creating the UserControl responsible for the internal edition of the JSON file.
-            QuizzEdition QEdition = new QuizzEdition(@"" + dialogs_path + new_id + ".json")
+            QuizzEdition QEdition = new QuizzEdition(this, @"" + dialogs_path + new_id + ".json")
             {
                 Name = "QuizzEdition" + new_id,
                 Width = content.Width - 80,
@@ -882,7 +903,8 @@ namespace Learn_CTS
                 Text = "N°" + new_id,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true,
-                BackColor = Color.FromArgb(46, 46, 46),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 BorderStyle = BorderStyle.FixedSingle
             };
             content.Controls.Add(lbl_dialog_id);
@@ -1110,8 +1132,8 @@ namespace Learn_CTS
                 Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 20) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
@@ -1475,6 +1497,10 @@ namespace Learn_CTS
         {
             if (this.old_category == menu.SelectedNode.Name) // Trigger only on form resize.
             {
+                TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
+                Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
+                tb.Width = content.Width - lbl.Width - 10 - 100;
+
                 foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
                 {
                     ee.Width = content.Width - 80;
@@ -1530,8 +1556,8 @@ namespace Learn_CTS
                 Cursor = Cursors.IBeam,
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(56, 56, 56),
-                ForeColor = Color.White,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
                 Width = Tools.Get_Text_Width(this, menu.SelectedNode.Text, 20) + 24,
                 ShortcutsEnabled = false,
                 Visible = false
@@ -1587,7 +1613,42 @@ namespace Learn_CTS
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
             pb_preview_situation.Location = new Point(pb_discard_situation.Location.X + pb_discard_situation.Width + 2, 0);
 
-            // Generating basic Label & add PictureBox bellow the previous Controls in the content panel.
+            // Recovering data from the JSON files.
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+
+            // Creates primary Controls of the situation.
+            Label lbl_tb = new Label()
+            {
+                Name = "lbl_tb",
+                Text = "Densité de PNJs : " + (string)envi_data["npc_density"],
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_tb);
+
+            TrackBar tb_npc_density = new TrackBar()
+            {
+                Name = "tb_npc_density",
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                Minimum = 0,
+                Maximum = 100,
+                TickStyle = TickStyle.Both,
+                Value = int.Parse((string)envi_data["npc_density"]),
+                Width = content.Width - lbl_tb.Width - 10 - 100
+            };
+            tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
+            content.Controls.Add(tb_npc_density);
+
+            // Places Controls.
+            lbl_tb.Location = new Point(20, 100 + ((tb_npc_density.Height - lbl_tb.Height) / 2));
+            tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 10, 100);
+
+            // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
             // Label displaying the area items.
             Label lbl_events = new Label()
@@ -1618,14 +1679,10 @@ namespace Learn_CTS
 
             // Generating to all files' an EventEdition UserControl.
             int last_pos = 300;
-            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
-            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
-                EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", i)
+                EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", i)
                 {
                     Name = "EventEdition" + i,
                     Width = content.Width - 80,
@@ -1634,6 +1691,27 @@ namespace Learn_CTS
                 content.Controls.Add(EEdition);
                 last_pos += EEdition.Height + 20;
             }
+        }
+
+        public void Npc_Density_Update(object sender, EventArgs e)
+        {
+            if (this.value_cooldown) { Thread.Sleep(100); }
+            // Diplay the new value.
+            TrackBar tb = (TrackBar)sender;
+            Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
+            lbl.Text = "Densité de PNJs : " + tb.Value.ToString();
+            tb.Width = content.Width - lbl.Width - 10 - 100;
+            tb.Location = new Point(lbl.Location.X + lbl.Width + 10, 100);
+
+            // Save the new value.
+            this.value_cooldown = true;
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            envi_data["npc_density"] = tb.Value;
+            Tools.Set_To_JSON(situation_path + "environment.json", envi_data);
+            this.value_cooldown = false;
         }
 
         public void Add_Event(object sender, EventArgs e)
@@ -1661,7 +1739,7 @@ namespace Learn_CTS
 
             // Creating the correspondant UserControl.
             // Creating the UserControl responsible for the internal edition of the JSON file.
-            EventEdition EEdition = new EventEdition(@"" + situation_path + "dialogs.json", new_event_id)
+            EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", new_event_id)
             {
                 Name = "EventEdition" + new_event_id,
                 Width = content.Width - 80,
