@@ -40,7 +40,7 @@ namespace Learn_CTS
         private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
-        private int NPCsDensity = 150; //max 800
+        private int NPCsDensity = 0; //max 800
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -542,6 +542,7 @@ namespace Learn_CTS
             e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
             e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+            if(list_all_textures != null)
             foreach (Texture t in list_all_textures)
             {
                 t.OnPaint(e);
@@ -550,6 +551,7 @@ namespace Learn_CTS
                     t.Debug(e);
                 }
             }
+            if(list_hud_textures != null)
             foreach(Texture t in list_hud_textures)
             {
                 t.OnPaint(e);
@@ -830,6 +832,7 @@ namespace Learn_CTS
         public void InitializeNPCs()
         {
             JObject npcs = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "dialogs.json");
+            NPCsDensity = (int)Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["npc_density"];
             int npc_x;
             int npc_y;
             string npc_name;
@@ -1052,7 +1055,7 @@ namespace Learn_CTS
                     && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 50
                     && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
                     {
-                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12)
+                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
@@ -1071,7 +1074,7 @@ namespace Learn_CTS
                     && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 50
                     && Math.Abs(n.GetZ() - player.GetZ()) < 8)
                     {
-                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12)
+                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
@@ -1106,6 +1109,8 @@ namespace Learn_CTS
         private void GameWindow_Resize(object sender, EventArgs e)
         {
             lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
+            if (this.Controls.Contains(bp)) bp.Location = new Point(this.Width / 2 - bp.Width / 2, this.Height / 2 - bp.Height / 2);
+            Refresh();
         }
 
         private void StartVehiculeCrash()
@@ -1149,6 +1154,11 @@ namespace Learn_CTS
             }
             MoveBackground();
             Refresh();
+        }
+
+        private void DisplayTutorial()
+        {
+
         }
 
         private void DisplaySettings()

@@ -37,9 +37,10 @@
             // lbl_name_game
             // 
             this.lbl_name_game.AutoSize = true;
-            this.lbl_name_game.Location = new System.Drawing.Point(350, 99);
+            this.lbl_name_game.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_name_game.Location = new System.Drawing.Point(300, 89);
             this.lbl_name_game.Name = "lbl_name_game";
-            this.lbl_name_game.Size = new System.Drawing.Size(67, 13);
+            this.lbl_name_game.Size = new System.Drawing.Size(166, 31);
             this.lbl_name_game.TabIndex = 0;
             this.lbl_name_game.Text = "LE JEUUUU";
             // 
@@ -83,6 +84,8 @@
             this.Controls.Add(this.lbl_name_game);
             this.Name = "GameMenu";
             this.Text = "GameMenu";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameMenu_FormClosed);
+            this.Load += new System.EventHandler(this.GameMenu_Load);
             this.Resize += new System.EventHandler(this.GameMenu_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
