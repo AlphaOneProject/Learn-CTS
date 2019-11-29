@@ -800,11 +800,11 @@ namespace Learn_CTS
                 t.Dispose();
             }
             nm.Clear();
+            instance = null;
+            timer.Stop();
+            t_fps.Abort();
             if (!preview)
             {
-                timer.Stop();
-                t_fps.Abort();
-                instance = null;
                 Application.Restart();
             }
         }
