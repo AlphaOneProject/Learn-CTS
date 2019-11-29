@@ -1461,7 +1461,8 @@ namespace Learn_CTS
             {
                 ["background"] = 0,
                 ["game_engine"] = "quizz",
-                ["scene_type"] = "tram_entrance"
+                ["scene_type"] = "tram_entrance",
+                ["npc_density"] = 10
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
                               environment_content.ToString());
@@ -1636,7 +1637,7 @@ namespace Learn_CTS
                 Name = "tb_npc_density",
                 BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
                 Minimum = 0,
-                Maximum = 100,
+                Maximum = 800,
                 TickStyle = TickStyle.Both,
                 Value = int.Parse((string)envi_data["npc_density"]),
                 Width = content.Width - lbl_tb.Width - 10 - 100
