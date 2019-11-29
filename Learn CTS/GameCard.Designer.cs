@@ -36,13 +36,13 @@ namespace Learn_CTS
             this.pb_play = new System.Windows.Forms.PictureBox();
             this.pb_thumbnail = new System.Windows.Forms.PictureBox();
             this.pb_delete = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_border = new System.Windows.Forms.Panel();
             this.pb_copy = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_play)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_thumbnail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnl_border.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_copy)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,6 +53,7 @@ namespace Learn_CTS
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(158, 28);
             this.lbl_title.TabIndex = 0;
+            this.lbl_title.Tag = "2";
             this.lbl_title.Text = "Titre";
             // 
             // lbl_description
@@ -61,6 +62,7 @@ namespace Learn_CTS
             this.lbl_description.Name = "lbl_description";
             this.lbl_description.Size = new System.Drawing.Size(158, 100);
             this.lbl_description.TabIndex = 2;
+            this.lbl_description.Tag = "2";
             this.lbl_description.Text = "Description";
             // 
             // pb_edit
@@ -123,15 +125,16 @@ namespace Learn_CTS
             this.pb_delete.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_delete.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
             // 
-            // panel1
+            // pnl_border
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.panel1.Controls.Add(this.pb_copy);
-            this.panel1.Controls.Add(this.pb_edit);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(140, 140);
-            this.panel1.TabIndex = 7;
+            this.pnl_border.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.pnl_border.Controls.Add(this.pb_copy);
+            this.pnl_border.Controls.Add(this.pb_edit);
+            this.pnl_border.Location = new System.Drawing.Point(0, 0);
+            this.pnl_border.Name = "pnl_border";
+            this.pnl_border.Size = new System.Drawing.Size(140, 140);
+            this.pnl_border.TabIndex = 7;
+            this.pnl_border.Tag = "4";
             // 
             // pb_copy
             // 
@@ -160,16 +163,18 @@ namespace Learn_CTS
             this.Controls.Add(this.pb_thumbnail);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_title);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnl_border);
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "GameCard";
             this.Size = new System.Drawing.Size(314, 140);
+            this.Tag = "2";
+            this.Load += new System.EventHandler(this.GameCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_play)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_thumbnail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pnl_border.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb_copy)).EndInit();
             this.ResumeLayout(false);
 
@@ -183,7 +188,7 @@ namespace Learn_CTS
         private System.Windows.Forms.PictureBox pb_play;
         private System.Windows.Forms.PictureBox pb_edit;
         private System.Windows.Forms.PictureBox pb_delete;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_border;
         private PictureBox pb_copy;
     }
 }

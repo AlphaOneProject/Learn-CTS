@@ -138,7 +138,7 @@ namespace Learn_CTS
             ArrayList game_card_list = new ArrayList();
             foreach (string s in Directory.GetDirectories(this.games_path))
             {
-                GameCard gc = new GameCard();
+                GameCard gc = new GameCard(this);
                 gc.Title = s.Remove(0, games_path.Length);
                 gc.Description = Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "description");
                 switch (Get_Var_From_JSON(s.ToString() + Path.DirectorySeparatorChar + "properties.json", "default"))
@@ -680,6 +680,11 @@ namespace Learn_CTS
                         (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["G"]),
                         (int)(themes[this.options["theme"].ToString()][this.Tag.ToString()]["B"])
                     );
+        }
+
+        public JObject GetTheme()
+        {
+            return (JObject)this.themes[this.options["theme"].ToString()];
         }
     }
 }

@@ -16,16 +16,20 @@ namespace Learn_CTS
         private bool isDefaultGame;
         private readonly string img_path;
         private string gameFullName;
+        private Menu menu;
+        private JObject theme;
 
         private static Image icon_play;
         private static Image icon_edit;
         private static Image icon_copy;
         private static Image icon_delete;
 
-        public GameCard()
+        public GameCard(Menu menu)
         {
             InitializeComponent();
             this.img_path = AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar;
+            this.menu = menu;
+            this.theme = menu.GetTheme();
 
             // Fetching icons and saving them in a static variable.
             FetchIcons();
@@ -41,6 +45,17 @@ namespace Learn_CTS
             pb_copy.Hide();
             //pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
             //pb_copy.BackColor = Color.Transparent;
+        }
+
+        /// <summary>
+        /// Called when the gamecard is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GameCard_Load(object sender, EventArgs e)
+        {
+            //Setting the colors for the controls accoring to the theme
+            Change_Theme();
         }
 
         private void FetchIcons()
@@ -278,6 +293,47 @@ namespace Learn_CTS
         private void Pb_copy_Click(object sender, EventArgs e)
         {
             Copy_Game();
+        }
+
+        /// <summary>
+        /// Change the theme of all the controls of this form, according to the current theme in the options.
+        /// </summary>
+        public void Change_Theme()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c.Tag != null)
+                {
+                    if (int.Parse(c.Tag.ToString()) == 5)
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            int.Parse((string)this.theme[c.Tag.ToString()]["R"]),
+                            int.Parse((string)this.theme[c.Tag.ToString()]["G"]),
+                            int.Parse((string)this.theme[c.Tag.ToString()]["B"])
+                        );
+                    }
+                    else
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            int.Parse((string)this.theme["5"]["R"]),
+                            int.Parse((string)this.theme["5"]["G"]),
+                            int.Parse((string)this.theme["5"]["B"])
+                        );
+                        c.BackColor = Color.FromArgb(
+                           int.Parse((string)this.theme[c.Tag.ToString()]["R"]),
+                           int.Parse((string)this.theme[c.Tag.ToString()]["G"]),
+                           int.Parse((string)this.theme[c.Tag.ToString()]["B"])
+                       );
+                    }
+
+                }
+            }
+
+            this.BackColor = Color.FromArgb(
+                        int.Parse((string)this.theme[this.Tag.ToString()]["R"]),
+                        int.Parse((string)this.theme[this.Tag.ToString()]["G"]),
+                        int.Parse((string)this.theme[this.Tag.ToString()]["B"])
+                    );
         }
     }
 }
