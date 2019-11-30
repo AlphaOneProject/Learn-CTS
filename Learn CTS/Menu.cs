@@ -508,7 +508,7 @@ namespace Learn_CTS
             GameCreator gc;
             if (Controls.Find("games_menu_game_creator", true).Length == 0)
             {
-                gc = new GameCreator();
+                gc = new GameCreator(this);
                 gc.Name = "games_menu_game_creator";
                 gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
                 gc.LostFocus += new EventHandler(GameCreator_Leave);

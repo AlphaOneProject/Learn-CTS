@@ -19,17 +19,19 @@ namespace Learn_CTS
          * Default path of all the created games. 
          */
         private readonly String games_path;
+        private JObject theme;
+        private Menu menu;
 
-        public GameCreator()
+        public GameCreator(Menu menu)
         {
             InitializeComponent();
 
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
+            this.menu = menu;
+            this.theme = menu.GetTheme();
 
             lbl_create.Width = pnl_bg.Width;
             lbl_create.TextAlign = ContentAlignment.MiddleCenter;
-            lbl_create.Location = new Point(pnl_bg.Width / 2 - lbl_create.Width / 2,
-                24);
 
             pb_back_create.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png");
@@ -43,6 +45,7 @@ namespace Learn_CTS
         private void GameCreator_Load(object sender, EventArgs e)
         {
             txt_create.Focus();
+            Change_Theme();
         }
 
         /// <summary>
@@ -233,6 +236,47 @@ namespace Learn_CTS
         private void GameCreator_Leave(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        /// <summary>
+        /// Change the theme of all the controls of this form, according to the current theme in the options.
+        /// </summary>
+        public void Change_Theme()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c.Tag != null)
+                {
+                    if (int.Parse(c.Tag.ToString()) == 5)
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            int.Parse((string)this.theme[c.Tag.ToString()]["R"]),
+                            int.Parse((string)this.theme[c.Tag.ToString()]["G"]),
+                            int.Parse((string)this.theme[c.Tag.ToString()]["B"])
+                        );
+                    }
+                    else
+                    {
+                        c.ForeColor = Color.FromArgb(
+                            int.Parse((string)this.theme["5"]["R"]),
+                            int.Parse((string)this.theme["5"]["G"]),
+                            int.Parse((string)this.theme["5"]["B"])
+                        );
+                        c.BackColor = Color.FromArgb(
+                           int.Parse((string)this.theme[c.Tag.ToString()]["R"]),
+                           int.Parse((string)this.theme[c.Tag.ToString()]["G"]),
+                           int.Parse((string)this.theme[c.Tag.ToString()]["B"])
+                       );
+                    }
+
+                }
+            }
+
+            this.BackColor = Color.FromArgb(
+                        int.Parse((string)this.theme[this.Tag.ToString()]["R"]),
+                        int.Parse((string)this.theme[this.Tag.ToString()]["G"]),
+                        int.Parse((string)this.theme[this.Tag.ToString()]["B"])
+                    );
         }
     }
 }
