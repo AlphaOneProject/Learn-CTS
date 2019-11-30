@@ -163,7 +163,7 @@ namespace Learn_CTS
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
             if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
-            ((GameWindow)this.FindForm()).RemoveDialog();
+            ((GameWindow)this.FindForm()).OpenCloseDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,11 +43,11 @@ namespace Learn_CTS
             this.Controls.Clear();
             Label lbl_name_player = new Label();
             lbl_name_player.Text = "Veuillez entrer votre prénom";
-            lbl_name_player.Location = new Point(10, 10);
+            lbl_name_player.Location = new Point(this.Width / 2 - lbl_name_player.Width / 2, 10);
             lbl_name_player.AutoSize = true;
             this.Controls.Add(lbl_name_player);
             txtbox_name_player = new TextBox();
-            txtbox_name_player.Location = new Point(lbl_name_player.Location.X + lbl_name_player.Width + 10, lbl_name_player.Location.Y);
+            txtbox_name_player.Location = new Point(this.Width/2 - txtbox_name_player.Width/2, lbl_name_player.Location.Y + lbl_name_player.Height + 20);
             txtbox_name_player.KeyDown += new KeyEventHandler(txtbox_KeyDown);
             this.Controls.Add(txtbox_name_player);
             string character_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar;
@@ -65,13 +66,13 @@ namespace Learn_CTS
             flp_char.AutoSize = true;
             flp_char.AutoScroll = true;
             flp_char.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
-            flp_char.Location = new Point(lbl_name_player.Location.X, lbl_name_player.Location.Y + lbl_name_player.Height + 10);
             flp_char.WrapContents = false;
+            flp_char.Location = new Point(this.Width / 2 - flp_char.Width / 2, txtbox_name_player.Location.Y + txtbox_name_player.Height + 10);
             this.Controls.Add(flp_char);
             Button btn = new Button();
             btn.Text = "Confirmer";
             btn.Click += new EventHandler(btn_confirm_Click);
-            btn.Location = new Point(10, flp_char.Location.Y + flp_char.Height + 10);
+            btn.Location = new Point(this.Width/2 - btn.Width/2, flp_char.Location.Y + flp_char.Height + 10);
             btn.AutoSize = true;
             this.Controls.Add(btn);
         }
@@ -120,7 +121,7 @@ namespace Learn_CTS
             }
             flp.AutoSize = true;
             flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            flp.Location = new Point(this.Width/2 - flp.Width/2, this.Height/2 - flp.Height/2);
+            flp.Location = new Point(this.Width/2 - flp.Width/2, (this.Height/2 - flp.Height/2)/2);
             this.Controls.Add(flp);
         }
 
@@ -130,18 +131,43 @@ namespace Learn_CTS
             Label lbl_loading = new Label();
             lbl_loading.Text = "Chargement du jeu en cours";
             lbl_loading.AutoSize = true;
+            lbl_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             lbl_loading.Location = new Point(this.Width / 2 - lbl_loading.Width / 2, this.Height / 2 - lbl_loading.Height / 2);
-            lbl_loading.Visible = true;
             this.Controls.Add(lbl_loading);
+            Refresh();
             Button b = (Button)sender;
             Form game_window = new GameWindow(game,b.Text);
             game_window.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void GameMenu_Resize(object sender, EventArgs e)
         {
-
+            foreach(Control c in this.Controls)
+            {
+                c.Location = new Point(this.Width / 2 - c.Width / 2, c.Location.Y);
+            }
         }
+
+        private void GameMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(GameWindow.GetInstance() == null) Application.Restart();
+        }
+
+        private void GameMenu_Load(object sender, EventArgs e)
+        {
+            SetUpWindow();
+        }
+        private void SetUpWindow()
+        {
+            JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
+            if ((bool)options["maximized"])
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            this.Width = (int)options["size"]["x"];
+            this.Height = (int)options["size"]["y"];
+        }
+
     }
 }
