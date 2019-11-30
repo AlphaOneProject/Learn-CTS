@@ -53,7 +53,7 @@ namespace Learn_CTS
             this.lbl_title.Name = "lbl_title";
             this.lbl_title.Size = new System.Drawing.Size(158, 28);
             this.lbl_title.TabIndex = 0;
-            this.lbl_title.Tag = "2";
+            this.lbl_title.Tag = "3";
             this.lbl_title.Text = "Titre";
             // 
             // lbl_description
@@ -62,7 +62,7 @@ namespace Learn_CTS
             this.lbl_description.Name = "lbl_description";
             this.lbl_description.Size = new System.Drawing.Size(158, 100);
             this.lbl_description.TabIndex = 2;
-            this.lbl_description.Tag = "2";
+            this.lbl_description.Tag = "3";
             this.lbl_description.Text = "Description";
             // 
             // pb_edit
@@ -168,7 +168,7 @@ namespace Learn_CTS
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "GameCard";
             this.Size = new System.Drawing.Size(314, 140);
-            this.Tag = "2";
+            this.Tag = "3";
             this.Load += new System.EventHandler(this.GameCard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_play)).EndInit();
