@@ -1,8 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Learn_CTS
 {
-    public class NumericUpDownFix : System.Windows.Forms.NumericUpDown
+    class ComboBoxFix : ComboBox
     {
         /// <summary>
         /// Disable or recalculates the action of the scroll upon the Control.
@@ -10,7 +11,8 @@ namespace Learn_CTS
         /// <param name="e">Arguments of the action performed.</param>
         protected override void OnMouseWheel(MouseEventArgs e)
         {
-            return; // Disable scroll value control.
+            ((HandledMouseEventArgs)e).Handled = true;
+            return;
         }
     }
 }

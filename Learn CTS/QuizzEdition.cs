@@ -280,7 +280,7 @@ namespace Learn_CTS
                                "\npour une réponse fausse et positif pour réponse juste.");
 
             // ComboBox for the redirection (or not) to another existing dialog.
-            ComboBox cbo_redirect = new ComboBox()
+            ComboBoxFix cbo_redirect = new ComboBoxFix()
             {
                 Name = "cbo_redirect" + id,
                 DataSource = new List<string>(cbo_redirect_list),
@@ -442,7 +442,7 @@ namespace Learn_CTS
         private void Cbo_Redirect_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.loading) { return; }
-            ComboBox cbo = (ComboBox)sender;
+            ComboBoxFix cbo = (ComboBoxFix)sender;
             ((JObject)this.data["c" + cbo.Tag])["redirect"] = cbo.SelectedIndex - 1;
             Tools.Set_To_JSON(this.file_path, this.data);
         }

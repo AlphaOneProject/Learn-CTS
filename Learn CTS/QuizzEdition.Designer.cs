@@ -34,7 +34,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pb_add = new System.Windows.Forms.PictureBox();
             this.pb_delete_all = new System.Windows.Forms.PictureBox();
-            this.cbo_audio = new System.Windows.Forms.ComboBox();
+            this.cbo_audio = new ComboBoxFix();
             ((System.ComponentModel.ISupportInitialize)(this.pb_add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete_all)).BeginInit();
             this.SuspendLayout();
@@ -132,6 +132,6 @@
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox pb_add;
         private System.Windows.Forms.PictureBox pb_delete_all;
-        private System.Windows.Forms.ComboBox cbo_audio;
+        private ComboBoxFix cbo_audio;
     }
 }
