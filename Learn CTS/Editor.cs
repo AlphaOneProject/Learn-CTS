@@ -408,28 +408,42 @@ namespace Learn_CTS
         private void Display_Models()
         {
             // Creation of the PictureBox responsible for copying game's library from another game.
-            PictureBox pb_copy_npcs = new PictureBox()
+            PictureBox pb_import_lib = new PictureBox()
             {
-                Name = "pb_copy_npcs",
+                Name = "pb_import_lib",
                 Cursor = Cursors.Hand,
-                Size = new Size(48, 48),
+                Size = new Size(64, 64),
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-copy-btn-x64.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_copy_npcs.Click += new EventHandler(this.Copy_Library);
-            content.Controls.Add(pb_copy_npcs);
+            pb_import_lib.Click += new EventHandler(this.Import_Library);
+            content.Controls.Add(pb_import_lib);
 
-            pb_copy_npcs.Location = new Point(content.Width - pb_copy_npcs.Width - 10, 10);
+            Label lbl_import_lib = new Label()
+            {
+                Name = "lbl_import_lib",
+                Text = "Importer les modèles d'un autre jeu",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true,
+                Cursor = Cursors.Hand
+            };
+            lbl_import_lib.Click += new EventHandler(this.Import_Library);
+            content.Controls.Add(lbl_import_lib);
+
+            pb_import_lib.Location = new Point((content.Width - pb_import_lib.Width - 8 - lbl_import_lib.Width) / 2, 20);
+            lbl_import_lib.Location = new Point(pb_import_lib.Location.X + pb_import_lib.Width + 8, pb_import_lib.Location.Y +
+                                                (pb_import_lib.Height - lbl_import_lib.Height) / 2);
         }
 
-        private void Copy_Library(object sender, EventArgs e)
+        private void Import_Library(object sender, EventArgs e)
         {
             GameSelection gs = new GameSelection(this);
             gs.ShowDialog();
         }
 
-        public void Copy_Selected_Library(string game_name)
+        public void Import_Selected_Library(string game_name)
         {
             if (game_name.Length == 0) { return; }
 
