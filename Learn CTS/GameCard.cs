@@ -147,13 +147,8 @@ namespace Learn_CTS
             {
                 // Setting the parent of the icons in order to make them transparent.
                 pb_play.Parent = pb_thumbnail;
-                //pb_play.Location = new Point(64 - pb_play.Width/2, 64 - pb_play.Height/2);
-                pb_copy.Parent = this;
-                //pb_copy.Location = new Point(6, 128 - pb_copy.Height - 2);
-                pb_edit.Parent = this;
-                //pb_edit.Location = new Point(128 - pb_edit.Width, 0);
-                pb_delete.Parent = this;
-                //pb_delete.Location = new Point(128 - pb_delete.Width, 128 - pb_delete.Height);
+
+                // Bringing the controls to the front
                 pb_copy.BringToFront();
                 pb_edit.BringToFront();
                 pb_delete.BringToFront();
