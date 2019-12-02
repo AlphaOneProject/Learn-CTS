@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,31 +14,22 @@ namespace Learn_CTS
     /// </summary>
     class ItemManager
     {
-        // Instance of the manager
-        private static ItemManager instance;
 
-        // List of the items 
-        private static List<Texture> list_items;
+        private List<Texture> list_items = new List<Texture>();
+        private string game;
+        private string situation_path;
+        private string library_path;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ItemManager()
+        public ItemManager(string game, string situation_path)
         {
-            list_items = new List<Texture>();
-        }
-
-        /// <summary>
-        /// Returns an instance of the manager, according to the singleton pattern.
-        /// </summary>
-        /// <returns></returns>
-        public static ItemManager GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ItemManager();
-            }
-            return instance;
+            this.game = game;
+            this.situation_path = situation_path;
+            this.library_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + 
+                Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + 
+                Path.DirectorySeparatorChar + "library";
         }
 
         /// <summary>
@@ -49,9 +41,10 @@ namespace Learn_CTS
         /// <param name="y"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public Item CreateItem(int id, string name, int x, int y, string description)
+        public Item CreateItem(int id, string name, int x, int y, JObject actions)
         {
-            Item item = new Item(id, name, x, y, description);
+            Item item = new Item(id, name, x, y);
+            item.SetActions(actions);
             list_items.Add(item);
             return item;
         }
@@ -109,18 +102,22 @@ namespace Learn_CTS
         /// Retrieves all the items used for a specific situation and puts them in the list.
         /// </summary>
         /// <param name="situation">JObject of the situation</param>
-        public void GetItemsFromSituation(JObject situation)
+        public void GetItemsFromSituation()
         {
+            JObject situation = Tools.Get_From_JSON(situation_path + Path.DirectorySeparatorChar + "item_test.json");
             for (int i = 1; i <= int.Parse(situation["events"].ToString()); i++)
             {
-                String index = i.ToString();
+                string index = i.ToString();
                 Item item = new Item(
                         int.Parse(situation[index]["item"]["id"].ToString()),
                         situation[index]["item"]["name"].ToString(),
                         int.Parse(situation[index]["x"].ToString()),
-                        int.Parse(situation[index]["x"].ToString()),
-                        situation[index]["item"]["description"].ToString()
+                        int.Parse(situation[index]["x"].ToString())
                     );
+                string nb_quizz = situation[index]["quizz"].ToString();
+                item.SetActions( (JObject)(Tools.Get_From_JSON(library_path + Path.DirectorySeparatorChar + 
+                    "dialogs" + Path.DirectorySeparatorChar + nb_quizz + ".json")) );
+                item.SetDescription(item.GetActions()["question"].ToString());
                 list_items.Add(item);
             }
         }

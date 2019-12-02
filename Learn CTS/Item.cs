@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,21 @@ namespace Learn_CTS
         int id;
         int x_pos;
         int y_pos;
-        String description;
+        string description;
+        JObject actions;
 
-        public Item(int id, String name, int x, int y, String description) : base(name, x, y)
+        public Item(int id, string name, int x, int y) : base(name, x, y)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = description;
         }
 
-        public Item(int id, String name, int x, int y, int z, String description) : base(name, x, y, z)
+        public Item(int id, string name, int x, int y, int z) : base(name, x, y, z)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = description;
         }
 
         public int GetID()
@@ -34,9 +34,36 @@ namespace Learn_CTS
             return id;
         }
 
-        public String GetDescription()
+        /// <summary>
+        /// Set the actions of the item
+        /// </summary>
+        /// <param name="actions">Actions of the item</param>
+        public void SetActions(JObject actions)
+        {
+            this.actions = actions;
+        }
+
+        /// <summary>
+        /// Returns the actions of the item
+        /// </summary>
+        /// <returns></returns>
+        public JObject GetActions()
+        {
+            return actions;
+        }
+
+        /// <summary>
+        /// Returns the description of the item
+        /// </summary>
+        /// <returns>Description of the item</returns>
+        public string GetDescription()
         {
             return description;
+        }
+
+        public void SetDescription(string desc)
+        {
+            this.description = desc;
         }
 
         /// <summary>

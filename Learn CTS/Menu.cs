@@ -15,12 +15,12 @@ namespace Learn_CTS
          * "games_menu" is the menu where the games are displayed.
          * "options" means that the options are displayed.
          */
-        private String displayed_menu;
+        private string displayed_menu;
 
         /**
          * Default path of all the created games. 
          */
-        private readonly String games_path;
+        private readonly string games_path;
 
         /**
          * Local copy of the options
@@ -50,7 +50,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_Load(object sender, EventArgs e)
         {
-            String options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json";
+            string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json";
             // Set the window size as options size setting.
             if (!new FileInfo(options_path).Exists)
             {

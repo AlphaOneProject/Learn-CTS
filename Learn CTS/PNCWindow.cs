@@ -18,19 +18,46 @@ namespace Learn_CTS
 
         private int DrawSurfaceWidth;
         private int DrawSurfaceHeight;
-        private List<Texture> list_textures;
-        private String game;
-        private String game_path;
+        private List<Texture> list_textures = new List<Texture>();
+        private string game;
+        private string game_path;
+        private string scenario;
+        private string scenario_path;
+        private string situation;
+        private string situation_path;
+        private string library_path;
         private ItemManager item_manager;
 
-        public PNCWindow(String game)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="game">Name of the current game</param>
+        /// <param name="scenario">Name of the scenario</param>
+        /// <param name="situation">Name of the situation</param>
+        public PNCWindow(string game, string scenario ,string situation)
         {
             this.game = game;
-            this.game_path = this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
+            this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
-            item_manager = ItemManager.GetInstance();
+            this.library_path = this.game_path + Path.DirectorySeparatorChar + "library";
+            this.scenario = scenario;
+            this.scenario_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + scenario;
+            this.situation = situation;
+            this.situation_path = this.scenario_path + Path.DirectorySeparatorChar + situation;
+
+            item_manager = new ItemManager(game, situation_path);
             DoubleBuffered = true;
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Setter for the situation. Updates the path to the situation
+        /// </summary>
+        /// <param name="situation">Full situation name, with the number</param>
+        public void SetSituation(string situation)
+        {
+            this.situation = situation;
+            this.situation_path = this.scenario_path + Path.DirectorySeparatorChar + situation;
         }
 
         /// <summary>
@@ -50,7 +77,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            item_manager.GetItemsFromSituation(Tools.Get_From_JSON(game_path + "item_test.json"));
+            item_manager.GetItemsFromSituation();
             list_textures = item_manager.GetList();
             Show();
         }
@@ -103,7 +130,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void PNCWindow_MouseDown(object sender, MouseEventArgs e)
         {
-            // Checks if the item is clicked, to then highlight it. 
+            // Checks if the item is clicked, then highlights it. 
             // The items need a hitbox.
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
@@ -119,7 +146,7 @@ namespace Learn_CTS
         /// <param name="item">The item to be highlighted.</param>
         private void HighlightItem(Item item)
         {
-            ItemViewer iv = new ItemViewer(item.GetID())
+            ItemViewer iv = new ItemViewer(item.GetID(), item_manager)
             {
                 Name = "iv",
                 Width = this.Width

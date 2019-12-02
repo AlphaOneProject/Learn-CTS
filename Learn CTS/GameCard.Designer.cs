@@ -60,7 +60,7 @@ namespace Learn_CTS
             // 
             this.lbl_description.Location = new System.Drawing.Point(153, 34);
             this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(158, 100);
+            this.lbl_description.Size = new System.Drawing.Size(158, 53);
             this.lbl_description.TabIndex = 2;
             this.lbl_description.Tag = "3";
             this.lbl_description.Text = "Description";
@@ -71,13 +71,13 @@ namespace Learn_CTS
             this.pb_edit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_edit.ErrorImage = null;
             this.pb_edit.ImageLocation = "gamecard-edit-btn-x64.png";
-            this.pb_edit.Location = new System.Drawing.Point(93, 7);
+            this.pb_edit.Location = new System.Drawing.Point(207, 90);
             this.pb_edit.Name = "pb_edit";
             this.pb_edit.Size = new System.Drawing.Size(42, 42);
             this.pb_edit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_edit.TabIndex = 5;
             this.pb_edit.TabStop = false;
-            this.pb_edit.Tag = "";
+            this.pb_edit.Tag = "3";
             this.pb_edit.Click += new System.EventHandler(this.Pb_edit_Click);
             this.pb_edit.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_edit.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
@@ -88,9 +88,9 @@ namespace Learn_CTS
             this.pb_play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_play.ErrorImage = null;
             this.pb_play.ImageLocation = "gamecard-play-btn-x128.png";
-            this.pb_play.Location = new System.Drawing.Point(28, 28);
+            this.pb_play.Location = new System.Drawing.Point(24, 24);
             this.pb_play.Name = "pb_play";
-            this.pb_play.Size = new System.Drawing.Size(86, 86);
+            this.pb_play.Size = new System.Drawing.Size(91, 92);
             this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_play.TabIndex = 4;
             this.pb_play.TabStop = false;
@@ -114,13 +114,13 @@ namespace Learn_CTS
             this.pb_delete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_delete.ErrorImage = null;
             this.pb_delete.ImageLocation = "gamecard-delete-btn-x64.png";
-            this.pb_delete.Location = new System.Drawing.Point(93, 92);
+            this.pb_delete.Location = new System.Drawing.Point(259, 90);
             this.pb_delete.Name = "pb_delete";
             this.pb_delete.Size = new System.Drawing.Size(42, 42);
             this.pb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_delete.TabIndex = 6;
             this.pb_delete.TabStop = false;
-            this.pb_delete.Tag = "";
+            this.pb_delete.Tag = "3";
             this.pb_delete.Click += new System.EventHandler(this.Pb_delete_Click);
             this.pb_delete.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_delete.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
@@ -128,8 +128,8 @@ namespace Learn_CTS
             // pnl_border
             // 
             this.pnl_border.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
-            this.pnl_border.Controls.Add(this.pb_copy);
-            this.pnl_border.Controls.Add(this.pb_edit);
+            this.pnl_border.Controls.Add(this.pb_play);
+            this.pnl_border.Controls.Add(this.pb_thumbnail);
             this.pnl_border.Location = new System.Drawing.Point(0, 0);
             this.pnl_border.Name = "pnl_border";
             this.pnl_border.Size = new System.Drawing.Size(140, 140);
@@ -142,13 +142,13 @@ namespace Learn_CTS
             this.pb_copy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_copy.ErrorImage = null;
             this.pb_copy.ImageLocation = "gamecard-copy-btn-x64.png";
-            this.pb_copy.Location = new System.Drawing.Point(6, 92);
+            this.pb_copy.Location = new System.Drawing.Point(155, 90);
             this.pb_copy.Name = "pb_copy";
             this.pb_copy.Size = new System.Drawing.Size(42, 42);
             this.pb_copy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_copy.TabIndex = 8;
             this.pb_copy.TabStop = false;
-            this.pb_copy.Tag = "";
+            this.pb_copy.Tag = "3";
             this.pb_copy.Click += new System.EventHandler(this.Pb_copy_Click);
             this.pb_copy.MouseEnter += new System.EventHandler(this.Pb_Btn_MouseHover);
             this.pb_copy.MouseLeave += new System.EventHandler(this.Pb_Btn_MouseLeave);
@@ -159,10 +159,10 @@ namespace Learn_CTS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.Controls.Add(this.pb_delete);
-            this.Controls.Add(this.pb_play);
-            this.Controls.Add(this.pb_thumbnail);
+            this.Controls.Add(this.pb_copy);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_title);
+            this.Controls.Add(this.pb_edit);
             this.Controls.Add(this.pnl_border);
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(6);
