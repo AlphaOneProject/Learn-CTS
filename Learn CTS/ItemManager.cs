@@ -41,9 +41,9 @@ namespace Learn_CTS
         /// <param name="y"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public Item CreateItem(int id, string name, int x, int y, string description, JObject actions)
+        public Item CreateItem(int id, string name, int x, int y, JObject actions)
         {
-            Item item = new Item(id, name, x, y, description);
+            Item item = new Item(id, name, x, y);
             item.SetActions(actions);
             list_items.Add(item);
             return item;
@@ -112,12 +112,12 @@ namespace Learn_CTS
                         int.Parse(situation[index]["item"]["id"].ToString()),
                         situation[index]["item"]["name"].ToString(),
                         int.Parse(situation[index]["x"].ToString()),
-                        int.Parse(situation[index]["x"].ToString()),
-                        situation[index]["item"]["description"].ToString()
+                        int.Parse(situation[index]["x"].ToString())
                     );
                 string nb_quizz = situation[index]["quizz"].ToString();
                 item.SetActions( (JObject)(Tools.Get_From_JSON(library_path + Path.DirectorySeparatorChar + 
                     "dialogs" + Path.DirectorySeparatorChar + nb_quizz + ".json")) );
+                item.SetDescription(item.GetActions()["question"].ToString());
                 list_items.Add(item);
             }
         }

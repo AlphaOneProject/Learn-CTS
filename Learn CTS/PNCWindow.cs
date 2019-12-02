@@ -130,7 +130,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void PNCWindow_MouseDown(object sender, MouseEventArgs e)
         {
-            // Checks if the item is clicked, to then highlight it. 
+            // Checks if the item is clicked, then highlights it. 
             // The items need a hitbox.
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;

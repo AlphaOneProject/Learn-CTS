@@ -15,20 +15,18 @@ namespace Learn_CTS
         string description;
         JObject actions;
 
-        public Item(int id, string name, int x, int y, string description) : base(name, x, y)
+        public Item(int id, string name, int x, int y) : base(name, x, y)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = description;
         }
 
-        public Item(int id, string name, int x, int y, int z, string description) : base(name, x, y, z)
+        public Item(int id, string name, int x, int y, int z) : base(name, x, y, z)
         {
             this.id = id;
             this.x_pos = x;
             this.y_pos = y;
-            this.description = description;
         }
 
         public int GetID()
@@ -61,6 +59,11 @@ namespace Learn_CTS
         public string GetDescription()
         {
             return description;
+        }
+
+        public void SetDescription(string desc)
+        {
+            this.description = desc;
         }
 
         /// <summary>
