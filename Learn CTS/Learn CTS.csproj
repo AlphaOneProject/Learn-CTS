@@ -64,6 +64,12 @@
       <DependentUpon>Backpack.cs</DependentUpon>
     </Compile>
     <Compile Include="Character.cs" />
+    <Compile Include="ChooseCharacter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChooseCharacter.Designer.cs">
+      <DependentUpon>ChooseCharacter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +106,12 @@
     </Compile>
     <Compile Include="GameMenu.Designer.cs">
       <DependentUpon>GameMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameSelection.Designer.cs">
+      <DependentUpon>GameSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemManager.cs" />
@@ -162,6 +174,9 @@
     <EmbeddedResource Include="Backpack.resx">
       <DependentUpon>Backpack.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChooseCharacter.resx">
+      <DependentUpon>ChooseCharacter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameMenu.resx">
       <DependentUpon>GameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameSelection.resx">
+      <DependentUpon>GameSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>

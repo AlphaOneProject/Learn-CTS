@@ -407,7 +407,59 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Models()
         {
-            // WIP
+            // Creation of the PictureBox responsible for copying game's library from another game.
+            PictureBox pb_copy_npcs = new PictureBox()
+            {
+                Name = "pb_copy_npcs",
+                Cursor = Cursors.Hand,
+                Size = new Size(48, 48),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-copy-btn-x64.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_copy_npcs.Click += new EventHandler(this.Copy_Library);
+            content.Controls.Add(pb_copy_npcs);
+
+            pb_copy_npcs.Location = new Point(content.Width - pb_copy_npcs.Width - 10, 10);
+        }
+
+        private void Copy_Library(object sender, EventArgs e)
+        {
+            GameSelection gs = new GameSelection(this);
+            gs.ShowDialog();
+        }
+
+        public void Copy_Selected_Library(string game_name)
+        {
+            if (game_name.Length == 0) { return; }
+
+            DirectoryInfo source_library = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar +
+                                         "games" + Path.DirectorySeparatorChar + game_name + Path.DirectorySeparatorChar +
+                                         "library" + Path.DirectorySeparatorChar);
+            DirectoryInfo dest_library = new DirectoryInfo(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar);
+
+            int npcs_nbr = new DirectoryInfo(dest_library.FullName + "npcs").GetFiles().Length;
+            int i = 1;
+            foreach (FileInfo fi in new DirectoryInfo(source_library + "npcs").GetFiles())
+            {
+                fi.CopyTo(dest_library.FullName + "npcs" + Path.DirectorySeparatorChar + (npcs_nbr + i).ToString() +
+                          ".json");
+                i++;
+            }
+
+            int dialogs_nbr = new DirectoryInfo(dest_library.FullName + "dialogs").GetFiles().Length;
+            i = 1;
+            foreach (FileInfo fi in new DirectoryInfo(source_library + "dialogs").GetFiles())
+            {
+                fi.CopyTo(dest_library.FullName + "dialogs" + Path.DirectorySeparatorChar + (dialogs_nbr + i).ToString() +
+                          ".json");
+                i++;
+            }
+
+            Tools.DirectoryCopy(new DirectoryInfo(source_library.FullName + "images"), new DirectoryInfo(dest_library.FullName + "images"));
+
+            MessageBox.Show("La copie des modèles du jeu <" + game_name + "> a bien été effectuée !", "Copie réussie",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -426,10 +478,10 @@ namespace Learn_CTS
             if (this.old_category.Equals("npcs")) // Trigger only on form resize.
             {
                 TableLayoutPanel tlp = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
-                Button btn_add = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
+                PictureBox pb_add = (PictureBox)content.Controls.Find("pb_add_lib_npc", false)[0];
 
                 tlp.Width = content.Width - 80;
-                btn_add.Location = new Point((content.Width - btn_add.Width) / 2, tlp.Location.Y + tlp.Height + 8);
+                pb_add.Location = new Point((content.Width - pb_add.Width) / 2, tlp.Location.Y + tlp.Height + 8);
                 return;
             }
 
