@@ -101,6 +101,12 @@
     <Compile Include="GameMenu.Designer.cs">
       <DependentUpon>GameMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameSelection.Designer.cs">
+      <DependentUpon>GameSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemManager.cs" />
     <Compile Include="ItemViewer.cs">
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameMenu.resx">
       <DependentUpon>GameMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameSelection.resx">
+      <DependentUpon>GameSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameWindow.resx">
       <DependentUpon>GameWindow.cs</DependentUpon>
