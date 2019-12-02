@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Learn_CTS
         int x_pos;
         int y_pos;
         String description;
+        JObject actions;
 
         public Item(int id, String name, int x, int y, String description) : base(name, x, y)
         {
@@ -34,6 +36,28 @@ namespace Learn_CTS
             return id;
         }
 
+        /// <summary>
+        /// Set the actions of the item
+        /// </summary>
+        /// <param name="actions">Actions of the item</param>
+        public void SetActions(JObject actions)
+        {
+            this.actions = actions;
+        }
+
+        /// <summary>
+        /// Returns the actions of the item
+        /// </summary>
+        /// <returns></returns>
+        public JObject GetActions()
+        {
+            return actions;
+        }
+
+        /// <summary>
+        /// Returns the description of the item
+        /// </summary>
+        /// <returns>Description of the item</returns>
         public String GetDescription()
         {
             return description;

@@ -49,9 +49,10 @@ namespace Learn_CTS
         /// <param name="y"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public Item CreateItem(int id, string name, int x, int y, string description)
+        public Item CreateItem(int id, string name, int x, int y, string description, JObject actions)
         {
             Item item = new Item(id, name, x, y, description);
+            item.SetActions(actions);
             list_items.Add(item);
             return item;
         }

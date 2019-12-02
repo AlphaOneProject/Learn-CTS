@@ -16,7 +16,7 @@ namespace Learn_CTS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu());
+            Application.Run(new PNCWindow("Learn CTS", "1.Niveau de découverte", "1.Enlèvement"));
         }
     }
 }
