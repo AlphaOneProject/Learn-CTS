@@ -12,10 +12,10 @@ namespace Learn_CTS
         int id;
         int x_pos;
         int y_pos;
-        String description;
+        string description;
         JObject actions;
 
-        public Item(int id, String name, int x, int y, String description) : base(name, x, y)
+        public Item(int id, string name, int x, int y, string description) : base(name, x, y)
         {
             this.id = id;
             this.x_pos = x;
@@ -23,7 +23,7 @@ namespace Learn_CTS
             this.description = description;
         }
 
-        public Item(int id, String name, int x, int y, int z, String description) : base(name, x, y, z)
+        public Item(int id, string name, int x, int y, int z, string description) : base(name, x, y, z)
         {
             this.id = id;
             this.x_pos = x;
@@ -58,7 +58,7 @@ namespace Learn_CTS
         /// Returns the description of the item
         /// </summary>
         /// <returns>Description of the item</returns>
-        public String GetDescription()
+        public string GetDescription()
         {
             return description;
         }

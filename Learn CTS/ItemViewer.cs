@@ -12,15 +12,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Learn_CTS
 {
-    public partial class ItemViewer : UserControl
+    partial class ItemViewer : UserControl
     {
         private Item item;
         private ItemManager manager;
 
-        public ItemViewer(int item_id)
+        public ItemViewer(int item_id, ItemManager manager)
         {
             InitializeComponent();
-            this.manager = ItemManager.GetInstance();
+            this.manager = manager;
             this.item = manager.GetItemByID(item_id);
         }
 
@@ -36,6 +36,8 @@ namespace Learn_CTS
 
             // Properties of the hide button
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24 , this.Height - 6 - btn_exit.Height);
+
+            DisplayActions();
         }
 
         private void Btn_exit_Click(object sender, EventArgs e)
