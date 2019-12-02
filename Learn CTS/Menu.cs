@@ -315,11 +315,22 @@ namespace Learn_CTS
                 Location = new Point(-1, 0),
                 Size = new Size(this.Width, 80),
                 Text = "Mes jeux",
-                Tag = 2,
+                Tag = 3,
                 TextAlign = ContentAlignment.MiddleCenter,
                 BorderStyle = BorderStyle.FixedSingle,
-                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0)
+                Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                ForeColor = Color.FromArgb(
+                        (int)(this.themes[this.options["theme"].ToString()]["5"]["R"]),
+                        (int)(this.themes[this.options["theme"].ToString()]["5"]["G"]),
+                        (int)(this.themes[this.options["theme"].ToString()]["5"]["B"])
+                    )
             };
+            games_menu_pnl_topbar.BackColor = Color.FromArgb(
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pnl_topbar.Tag.ToString()]["R"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pnl_topbar.Tag.ToString()]["G"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pnl_topbar.Tag.ToString()]["B"])
+                ); // Forcing theme change
+
 
             // Creation of the Button responsible to go back to the main menu.
             PictureBox games_menu_pb_back = new PictureBox()
@@ -327,6 +338,7 @@ namespace Learn_CTS
                 Name = "games_menu_pb_back",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
+                Tag = 3,
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -334,6 +346,11 @@ namespace Learn_CTS
             };
             games_menu_pb_back.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back.Height) / 2);
             games_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
+            games_menu_pb_back.BackColor = Color.FromArgb(
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_back.Tag.ToString()]["R"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_back.Tag.ToString()]["G"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_back.Tag.ToString()]["B"])
+                );
 
             // Creation of the Button responsible to create a game.
             PictureBox games_menu_pb_create_game = new PictureBox()
@@ -341,6 +358,7 @@ namespace Learn_CTS
                 Name = "games_menu_pb_create_game",
                 Cursor = Cursors.Hand,
                 Size = new Size(42, 42),
+                Tag = 3,
                 Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -348,6 +366,11 @@ namespace Learn_CTS
             };
             games_menu_pb_create_game.Location = new Point(this.Width - 68, (games_menu_pnl_topbar.Height - games_menu_pb_create_game.Height) / 2);
             games_menu_pb_create_game.Click += new EventHandler(this.Display_create_game);
+            games_menu_pb_create_game.BackColor = Color.FromArgb(
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_create_game.Tag.ToString()]["R"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_create_game.Tag.ToString()]["G"]),
+                    (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_create_game.Tag.ToString()]["B"])
+                );
 
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
@@ -485,7 +508,7 @@ namespace Learn_CTS
             GameCreator gc;
             if (Controls.Find("games_menu_game_creator", true).Length == 0)
             {
-                gc = new GameCreator();
+                gc = new GameCreator(this);
                 gc.Name = "games_menu_game_creator";
                 gc.Location = new Point(this.Width - gc.Width, this.Controls.Find("games_menu_pnl_topbar", true)[0].Height);
                 gc.LostFocus += new EventHandler(GameCreator_Leave);
