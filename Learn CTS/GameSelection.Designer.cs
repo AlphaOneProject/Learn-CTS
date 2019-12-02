@@ -36,7 +36,7 @@
             this.flp_global.AutoScroll = true;
             this.flp_global.Location = new System.Drawing.Point(12, 12);
             this.flp_global.Name = "flp_global";
-            this.flp_global.Size = new System.Drawing.Size(776, 426);
+            this.flp_global.Size = new System.Drawing.Size(560, 426);
             this.flp_global.TabIndex = 0;
             // 
             // GameSelection
@@ -44,10 +44,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(584, 461);
             this.Controls.Add(this.flp_global);
             this.ForeColor = System.Drawing.Color.White;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(600, 500);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "GameSelection";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choix du jeu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameSelection_FormClosing);
             this.Load += new System.EventHandler(this.GameSelection_Load);

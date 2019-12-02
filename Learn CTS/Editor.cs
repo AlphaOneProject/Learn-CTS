@@ -433,13 +433,33 @@ namespace Learn_CTS
         {
             if (game_name.Length == 0) { return; }
 
-            MessageBox.Show(game_name.ToString());
+            DirectoryInfo source_library = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar +
+                                         "games" + Path.DirectorySeparatorChar + game_name + Path.DirectorySeparatorChar +
+                                         "library" + Path.DirectorySeparatorChar);
+            DirectoryInfo dest_library = new DirectoryInfo(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar);
 
-            // Copier dans un dossier temporaire les NPCs de ce jeu.
-            // Renommer de manière appropriée ces NPCs.
-            // Ajouter ces NPCs à la librairie en cours d'édition.
-            // Supprimer les fichiers temporaires.
-            // Actualiser l'affichage.
+            int npcs_nbr = new DirectoryInfo(dest_library.FullName + "npcs").GetFiles().Length;
+            int i = 1;
+            foreach (FileInfo fi in new DirectoryInfo(source_library + "npcs").GetFiles())
+            {
+                fi.CopyTo(dest_library.FullName + "npcs" + Path.DirectorySeparatorChar + (npcs_nbr + i).ToString() +
+                          ".json");
+                i++;
+            }
+
+            int dialogs_nbr = new DirectoryInfo(dest_library.FullName + "dialogs").GetFiles().Length;
+            i = 1;
+            foreach (FileInfo fi in new DirectoryInfo(source_library + "dialogs").GetFiles())
+            {
+                fi.CopyTo(dest_library.FullName + "dialogs" + Path.DirectorySeparatorChar + (dialogs_nbr + i).ToString() +
+                          ".json");
+                i++;
+            }
+
+            Tools.DirectoryCopy(new DirectoryInfo(source_library.FullName + "images"), new DirectoryInfo(dest_library.FullName + "images"));
+
+            MessageBox.Show("La copie des modèles du jeu <" + game_name + "> a bien été effectuée !", "Copie réussie",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
