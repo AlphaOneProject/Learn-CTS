@@ -32,12 +32,5 @@ namespace Learn_CTS
         {
             this.AddChild(new Texture("TramInterior", this.GetX() + 480, this.GetY() + 208, true));
         }
-
-        public override SoundPlayer GetCurrentAudio()
-        {
-            new SoundPlayer(@"c:\Windows\Media\chimes.wav");
-
-            return base.GetCurrentAudio();
-        }
     }
 }

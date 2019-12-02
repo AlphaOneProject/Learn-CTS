@@ -36,9 +36,9 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="game">The name of the game.</param>
 
-        public static void InitializePath(string game)
+        public static void InitializePath(string path)
         {
-            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
+            Texture.projectDir = path;
         }
 
         /// <summary>
@@ -579,11 +579,6 @@ namespace Learn_CTS
         public int GetHeight()
         {
             return this.height;
-        }
-
-        public virtual SoundPlayer GetCurrentAudio()
-        {
-            return null;
         }
 
         public bool Contains(Texture te)
