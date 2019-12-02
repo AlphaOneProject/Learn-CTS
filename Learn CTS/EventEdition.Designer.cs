@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventEdition));
             this.pb_delete = new System.Windows.Forms.PictureBox();
-            this.cbo_npcs = new System.Windows.Forms.ComboBox();
-            this.cbo_dialogs = new System.Windows.Forms.ComboBox();
+            this.cbo_npcs = new ComboBoxFix();
+            this.cbo_dialogs = new ComboBoxFix();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btn_placement = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
@@ -117,8 +117,8 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pb_delete;
-        private System.Windows.Forms.ComboBox cbo_npcs;
-        private System.Windows.Forms.ComboBox cbo_dialogs;
+        private ComboBoxFix cbo_npcs;
+        private ComboBoxFix cbo_dialogs;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button btn_placement;
     }

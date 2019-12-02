@@ -174,7 +174,7 @@ namespace Learn_CTS
             DirectoryInfo game_dir = Directory.GetParent(this.file_path).Parent.Parent.Parent;
             DirectoryInfo npcs_dir = new DirectoryInfo(game_dir.FullName + Path.DirectorySeparatorChar + "library" +
                                                       Path.DirectorySeparatorChar + "npcs");
-            ComboBox cbo = (ComboBox)sender;
+            ComboBoxFix cbo = (ComboBoxFix)sender;
             int file_id = cbo.SelectedIndex + 1;
             Console.WriteLine("Access: " + npcs_dir.FullName + Path.DirectorySeparatorChar + file_id + ".json" + "\nChoice: " + this.event_id + "\n");
             this.file_data[event_id.ToString()]["npc"] = Tools.Get_From_JSON(npcs_dir.FullName + Path.DirectorySeparatorChar +
@@ -186,7 +186,7 @@ namespace Learn_CTS
         private void Cbo_dialogs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.loading) { return; }
-            ComboBox cbo = (ComboBox)sender;
+            ComboBoxFix cbo = (ComboBoxFix)sender;
             this.file_data[event_id.ToString()]["quizz"] = cbo.SelectedIndex + 1;
             Tools.Set_To_JSON(this.file_path, this.file_data);
         }
