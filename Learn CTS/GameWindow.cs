@@ -36,11 +36,13 @@ namespace Learn_CTS
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
         private Dialog d;
         private Backpack bp;
+        private Label lbl_score;
+        private Label lbl_nfps;
         private string game;
         private bool showhitbox = false;
         private bool god = false;
         private int ticks_stopped = 0;
-        private int NPCsDensity = 0; //max 800
+        private int NPCsDensity = 0;
         private int score = 0;
         private string sc_path;
         private string scenario;
@@ -51,7 +53,6 @@ namespace Learn_CTS
         private int n_situation = 0;
         private Thread t_fps;
         private float n_fps;
-        private Thread t_audio;
         private bool ticket_valid = false;
         private static GameWindow instance;
         private Transition tr;
@@ -62,7 +63,7 @@ namespace Learn_CTS
         /// Initialize the game window
         /// </summary>
 
-        public GameWindow(string game)
+        private GameWindow(string game)
         {
             if (instance == null) instance = this;
             else
@@ -80,10 +81,23 @@ namespace Learn_CTS
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
         }
 
+        /// <summary>
+        /// Launch the game with at a scenario
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="scenario"></param>
+
         public GameWindow(string game, string scenario) : this(game)
         {
             this.scenario = scenario;
         }
+
+        /// <summary>
+        /// Launch a game, at a situation in a scenario
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="scenario"></param>
+        /// <param name="situation"></param>
 
         public GameWindow(string game, string scenario, string situation) : this(game)
         {
@@ -91,6 +105,11 @@ namespace Learn_CTS
             this.scenario = scenario;
             this.situation = situation;
         }
+
+        /// <summary>
+        /// Get the instance of the current game window.
+        /// </summary>
+        /// <returns></returns>
 
         public static GameWindow GetInstance()
         {
@@ -107,23 +126,50 @@ namespace Learn_CTS
 
         private void GameWindow_Load(object sender, EventArgs e)
         {
-            Texture.InitializePath(game);
-            InitializeFPSThread();
-            SetScore(1000);
+            SetUpWindow();
+            this.BackColor = Color.Black;
+            DisplayLoading();
+            Texture.InitializePath(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
             Load_Game();
+            this.Controls.Clear();
             InitializeHUD();
+            InitializeFPSThread();
             InitializeTimer();
+            SetScore(1000);
+            this.BackColor = Color.White;
         }
+
+        private void DisplayLoading()
+        {
+            Label lbl_loading = new Label();
+            lbl_loading.AutoSize = true;
+            lbl_loading.BackColor = System.Drawing.Color.Black;
+            lbl_loading.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_loading.ForeColor = System.Drawing.Color.White;
+            lbl_loading.Name = "lbl_score";
+            lbl_loading.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            lbl_loading.TabIndex = 0;
+            lbl_loading.Text = "Chargement...";
+            lbl_loading.Location = new System.Drawing.Point(this.Width / 2 - lbl_loading.Width / 2, this.Height / 2 - lbl_loading.Height / 2);
+            lbl_loading.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Controls.Add(lbl_loading);
+            this.Show();
+            Refresh();
+        }
+
+        /// <summary>
+        /// Load every objects needed 
+        /// </summary>
 
         private void Load_Game()
         {
-            OpenCloseDialog();
-            if (this.Controls.Contains(bp)) OpenClose_Backpack();
-            bp = new Backpack();
             r = new Random();
             InitializeListTextures();
-            SetUpWindow();
         }
+
+        /// <summary>
+        /// Initialize the thread which calculate the fps.
+        /// </summary>
 
         private void InitializeFPSThread()
         {
@@ -131,22 +177,9 @@ namespace Learn_CTS
             t_fps.Start();
         }
 
-        private void InitializeSoundThread()
-        {
-            t_audio = new Thread(new ThreadStart(AudioTextures));
-            t_audio.Start();
-        }
-
-        private void AudioTextures()
-        {
-            while (true)
-            {
-                foreach(Texture t in GetAllTextures(list_game_textures))
-                {
-                    if (t.GetCurrentAudio() != null) t.GetCurrentAudio().PlaySync();
-                }
-            }
-        }
+        /// <summary>
+        /// Initialize the transition.
+        /// </summary>
 
         private void InitializeTransition()
         {
@@ -157,18 +190,26 @@ namespace Learn_CTS
             tr = new Transition(draw_surface_width, draw_surface_height);
         }
 
+        /// <summary>
+        /// Start the transition.
+        /// </summary>
+
         private void StartTransition()
         {
             if (tr != null && !list_game_textures.Contains(tr)) list_game_textures.Add(tr);
         }
 
+        /// <summary>
+        /// Remove the transition on screen.
+        /// </summary>
+
         public void RemoveTransition()
         {
-            list_game_textures.Remove(tr);
+            if (list_game_textures.Contains(tr)) list_game_textures.Remove(tr);
         }
 
         /// <summary>
-        /// Initialize the timer
+        /// Initialize the game timer.
         /// </summary>
 
         private void InitializeTimer()
@@ -180,7 +221,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Initialize all the textures
+        /// Initialize all the textures of the game.
         /// </summary>
 
         private void InitializeListTextures()
@@ -206,8 +247,13 @@ namespace Learn_CTS
             InitializeNPCs();
         }
 
+        /// <summary>
+        /// Initialize the textures of the hud, like the egg and the backpack icons.
+        /// </summary>
+
         private void InitializeHUD()
         {
+            Load_Controls_HUD();
             egg = new Egg(12, 10);
             backpack = new Texture("Backpack", 12, 145);
             list_hud_textures = new List<Texture>(){
@@ -215,6 +261,45 @@ namespace Learn_CTS
                 egg
             };
         }
+
+        private void Load_Controls_HUD()
+        {
+            this.Controls.Clear();
+            bp = new Backpack();
+            lbl_score = new System.Windows.Forms.Label();
+            lbl_nfps = new System.Windows.Forms.Label();
+            lbl_score.AutoSize = true;
+            lbl_score.BackColor = System.Drawing.Color.Black;
+            lbl_score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_score.ForeColor = System.Drawing.Color.White;
+            lbl_score.Location = new System.Drawing.Point(12, 111);
+            lbl_score.Name = "lbl_score";
+            lbl_score.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            lbl_score.Size = new System.Drawing.Size(96, 31);
+            lbl_score.TabIndex = 0;
+            lbl_score.Text = "default";
+            lbl_score.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            lbl_nfps.Anchor = System.Windows.Forms.AnchorStyles.None;
+            lbl_nfps.AutoEllipsis = true;
+            lbl_nfps.AutoSize = true;
+            lbl_nfps.BackColor = System.Drawing.Color.Black;
+            lbl_nfps.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_nfps.ForeColor = System.Drawing.Color.White;
+            lbl_nfps.Location = new System.Drawing.Point(1170, 9);
+            lbl_nfps.Name = "lbl_nfps";
+            lbl_nfps.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            lbl_nfps.Size = new System.Drawing.Size(82, 31);
+            lbl_nfps.TabIndex = 4;
+            lbl_nfps.Text = "0,000";
+            lbl_nfps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            lbl_nfps.Visible = false;
+            this.Controls.Add(lbl_nfps);
+            this.Controls.Add(lbl_score);
+        }
+
+        /// <summary>
+        /// Setup the window according to the general settings of the application stored in the options.json
+        /// </summary>
 
         private void SetUpWindow()
         {
@@ -308,6 +393,10 @@ namespace Learn_CTS
             Refresh();
         }
 
+        /// <summary>
+        /// Move all the the characters towards its objective if he has any.
+        /// </summary>
+
         private void MoveAllCharactersToObjective()
         {
             foreach (Texture t in GetAllTextures(list_game_textures))
@@ -378,7 +467,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Move the player toward his objective
+        /// Move the character toward his objective
         /// </summary>
 
         private void MoveCharacterToObjective(Character c)
@@ -413,6 +502,10 @@ namespace Learn_CTS
             else MoveNPC((NPC)c, a, b);
             if (c.ReachedObjective()) c.RemoveObjective();
         }
+
+        /// <summary>
+        /// Open or close the dialog if its already on screen.
+        /// </summary>
 
         public void OpenCloseDialog()
         {
@@ -488,7 +581,6 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="e"></param>
 
-
         protected override void OnPaint(PaintEventArgs e)
         {
             if(n_fps>0) lbl_nfps.Text = n_fps.ToString().Substring(0, 4);
@@ -500,12 +592,10 @@ namespace Learn_CTS
             }
             if(e.ClipRectangle.Width != this.draw_surface_width || e.ClipRectangle.Height != this.draw_surface_height)
             {
-                //int diff_x = e.ClipRectangle.Width - this.draw_surface_width;
                 int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
                 this.draw_surface_width = e.ClipRectangle.Width;
                 this.draw_surface_height = e.ClipRectangle.Height;
                 InitializeTransition();
-                //Console.WriteLine(draw_surface_width + ":" + draw_surface_height);
                 foreach (Texture t in list_game_textures)
                 {
                     if (vehicule.IsInside())
@@ -567,6 +657,7 @@ namespace Learn_CTS
         private List<Texture> GetAllTextures(List<Texture> list)
         {
             List<Texture> list_temp = new List<Texture>();
+            if(list != null)
             foreach(Texture t in list)
             {
                 list_temp.Add(t);
@@ -578,8 +669,8 @@ namespace Learn_CTS
         /// <summary>
         /// When the player clicks on the mouse.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
 
         private void GameWindow_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -734,7 +825,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if the player presses down the arrows.
+        /// Check if the player presses down the keys
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1044,7 +1135,7 @@ namespace Learn_CTS
         {
             int d = player.GetDirection();
             NPC n;
-            int e = 16;
+            int e = 8;
             foreach(Texture t in nm.GetList())
             {
                 if (t.GetType().Name == "NPC" )
@@ -1055,7 +1146,20 @@ namespace Learn_CTS
                     && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 50
                     && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
                     {
-                        if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
+                        n.Move(0, -e);
+                        if (n.CollideWith(vehicule))
+                        {
+                            n.Move(0, 2 * e);
+                            if (n.CollideWith(vehicule))
+                            {
+                                n.Move(0, -2 * e);
+                            }
+                            else
+                            {
+                                n.Move(0, -e);
+                            }
+                        }
+                        /*if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
@@ -1067,14 +1171,27 @@ namespace Learn_CTS
                         {
                             if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
                             else n.SetObjectiveY(n.GetZ() + e);
-                        }
+                        }*/
                     }
                     else if (d == 3
                     && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2
                     && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 50
                     && Math.Abs(n.GetZ() - player.GetZ()) < 8)
                     {
-                        if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
+                        n.Move(0, -e);
+                        if (n.CollideWith(vehicule))
+                        {
+                            n.Move(0, 2 * e);
+                            if (n.CollideWith(vehicule))
+                            {
+                                n.Move(0, -2*e);
+                            }
+                            else
+                            {
+                                n.Move(0, -e);
+                            }
+                        }
+                        /*if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
                         {
                             n.SetObjectiveY(n.GetZ() - e);
                         }
@@ -1086,7 +1203,7 @@ namespace Learn_CTS
                         {
                             if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
                             else n.SetObjectiveY(n.GetZ() + e);
-                        }
+                        }*/
                     }
                 }
             }
@@ -1108,7 +1225,7 @@ namespace Learn_CTS
 
         private void GameWindow_Resize(object sender, EventArgs e)
         {
-            lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
+            if (this.Controls.Contains(lbl_nfps)) lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
             if (this.Controls.Contains(bp)) bp.Location = new Point(this.Width / 2 - bp.Width / 2, this.Height / 2 - bp.Height / 2);
             Refresh();
         }

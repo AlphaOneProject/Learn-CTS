@@ -41,10 +41,8 @@ namespace Learn_CTS
             pb_edit.BackColor = Color.Transparent;
             pb_delete.BackgroundImage = Tools.ChangeOpacity(icon_delete, 0.5f);
             pb_delete.BackColor = Color.Transparent;
-
-            pb_copy.Hide();
-            //pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
-            //pb_copy.BackColor = Color.Transparent;
+            pb_copy.BackgroundImage = Tools.ChangeOpacity(icon_copy, 0.5f);
+            pb_copy.BackColor = Color.Transparent;
         }
 
         /// <summary>
@@ -120,7 +118,7 @@ namespace Learn_CTS
 
             set
             {
-                int char_space = 164; // Number of characters that can be seen in the label
+                int char_space = 134; // Number of characters that can be seen in the label
                 if (value.Length > char_space)
                 {
                     this.lbl_description.Text = value.Substring(0, char_space - 3) + "...";
@@ -149,13 +147,13 @@ namespace Learn_CTS
             {
                 // Setting the parent of the icons in order to make them transparent.
                 pb_play.Parent = pb_thumbnail;
-                pb_play.Location = new Point(64 - pb_play.Width/2, 64 - pb_play.Height/2);
-                pb_copy.Parent = pb_thumbnail;
-                pb_copy.Location = new Point(6, 128 - pb_copy.Height - 2);
-                pb_edit.Parent = pb_thumbnail;
-                pb_edit.Location = new Point(128 - pb_edit.Width, 0);
-                pb_delete.Parent = pb_thumbnail;
-                pb_delete.Location = new Point(128 - pb_delete.Width, 128 - pb_delete.Height);
+                //pb_play.Location = new Point(64 - pb_play.Width/2, 64 - pb_play.Height/2);
+                pb_copy.Parent = this;
+                //pb_copy.Location = new Point(6, 128 - pb_copy.Height - 2);
+                pb_edit.Parent = this;
+                //pb_edit.Location = new Point(128 - pb_edit.Width, 0);
+                pb_delete.Parent = this;
+                //pb_delete.Location = new Point(128 - pb_delete.Width, 128 - pb_delete.Height);
                 pb_copy.BringToFront();
                 pb_edit.BringToFront();
                 pb_delete.BringToFront();
@@ -237,6 +235,7 @@ namespace Learn_CTS
             {
                 try
                 {
+                    // We try to create the new directory
                     DirectoryInfo dir_target = new DirectoryInfo(target_path + copy_number.ToString());
 
                     while (dir_target.Exists)
@@ -244,6 +243,7 @@ namespace Learn_CTS
                         copy_number++;
                         dir_target = new DirectoryInfo(target_path + copy_number.ToString());
                     }
+                    valid_name = true;
                     Tools.DirectoryCopy(dir_source, dir_target);
                 }
                 catch (IOException e)

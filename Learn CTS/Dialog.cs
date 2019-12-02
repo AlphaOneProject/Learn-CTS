@@ -183,5 +183,10 @@ namespace Learn_CTS
             Control c = (Control)sender;
             pbox_audio.Location = new Point(c.Width - pbox_audio.Width - 10, 10);
         }
+
+        private void Dialog_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) Dialog_Closed(sender, e);
+        }
     }
 }

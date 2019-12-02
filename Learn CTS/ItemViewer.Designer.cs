@@ -31,6 +31,7 @@
             this.pb_item = new System.Windows.Forms.PictureBox();
             this.lbl_desc = new System.Windows.Forms.Label();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.flp_actions = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pb_item)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             this.lbl_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.lbl_desc.Location = new System.Drawing.Point(134, 3);
             this.lbl_desc.Name = "lbl_desc";
-            this.lbl_desc.Size = new System.Drawing.Size(623, 121);
+            this.lbl_desc.Size = new System.Drawing.Size(623, 73);
             this.lbl_desc.TabIndex = 1;
             this.lbl_desc.Text = "lbl_desc";
             // 
@@ -63,11 +64,19 @@
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
             // 
+            // flp_actions
+            // 
+            this.flp_actions.Location = new System.Drawing.Point(134, 79);
+            this.flp_actions.Name = "flp_actions";
+            this.flp_actions.Size = new System.Drawing.Size(542, 45);
+            this.flp_actions.TabIndex = 3;
+            // 
             // ItemViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.flp_actions);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.lbl_desc);
             this.Controls.Add(this.pb_item);
@@ -85,5 +94,6 @@
         private System.Windows.Forms.PictureBox pb_item;
         private System.Windows.Forms.Label lbl_desc;
         private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.FlowLayoutPanel flp_actions;
     }
 }

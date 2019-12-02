@@ -98,6 +98,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Size = new System.Drawing.Size(272, 127);
             this.Load += new System.EventHandler(this.Dialog_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Dialog_KeyDown);
             this.Resize += new System.EventHandler(this.Dialog_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_audio)).EndInit();
             this.ResumeLayout(false);

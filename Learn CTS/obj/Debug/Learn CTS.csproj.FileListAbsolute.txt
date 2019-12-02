@@ -144,3 +144,4 @@ C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.csproj.CopyC
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.exe
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn CTS.pdb
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.GameSelection.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ChooseCharacter.resources
