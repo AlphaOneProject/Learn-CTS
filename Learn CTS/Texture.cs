@@ -39,7 +39,6 @@ namespace Learn_CTS
         public static void InitializePath(string path)
         {
             Texture.projectDir = path;
-            MessageBox.Show("path" +path);
         }
 
         /// <summary>

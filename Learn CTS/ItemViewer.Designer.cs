@@ -62,7 +62,7 @@
             this.btn_exit.TabIndex = 2;
             this.btn_exit.Text = "OK";
             this.btn_exit.UseVisualStyleBackColor = true;
-            this.btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
+            this.btn_exit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Btn_exit_MouseDown);
             // 
             // flp_actions
             // 
@@ -84,6 +84,7 @@
             this.Size = new System.Drawing.Size(760, 128);
             this.Load += new System.EventHandler(this.ItemViewer_Load);
             this.ClientSizeChanged += new System.EventHandler(this.ItemViewer_ClientSizeChanged);
+            this.Leave += new System.EventHandler(this.ItemViewer_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pb_item)).EndInit();
             this.ResumeLayout(false);
 

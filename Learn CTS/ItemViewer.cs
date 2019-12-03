@@ -68,5 +68,15 @@ namespace Learn_CTS
                 flp_actions.Controls.Add(btn);
             }
         }
+
+        private void Btn_exit_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void ItemViewer_Leave(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

@@ -134,9 +134,28 @@ namespace Learn_CTS
             // The items need a hitbox.
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            foreach (Item t in list_textures)
+            Boolean found = false;
+            try
             {
-                if (t.IsHitboxHit(mouse_x, mouse_y)) HighlightItem(t);
+                this.Controls.Find("iv", false)[0].Dispose();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                
+            } 
+            finally
+            {
+                foreach (Item t in list_textures)
+                {
+                    if (!found)
+                    {
+                        if (t.IsHitboxHit(mouse_x, mouse_y))
+                        {
+                            HighlightItem(t);
+                            found = true;
+                        }
+                    }
+                }
             }
         }
 

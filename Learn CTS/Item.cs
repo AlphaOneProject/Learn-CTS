@@ -65,33 +65,5 @@ namespace Learn_CTS
         {
             this.description = desc;
         }
-
-        /// <summary>
-        /// Returns the X boundaries of the Item :
-        /// [0] = Position, 
-        /// [1] = Width relative to position.
-        /// </summary>
-        /// <returns></returns>
-        public int[] GetXBoundaries()
-        {
-            int[] boundaries = new int[2];
-            boundaries[0] = this.x_pos;
-            boundaries[1] = this.x_pos + this.GetWidth();
-            return boundaries;
-        }
-
-        /// <summary>
-        /// Returns the Y boundaries of the Item :
-        /// [0] = Position, 
-        /// [1] = Width relative to position.
-        /// </summary>
-        /// <returns></returns>
-        public int[] GetYBoundaries()
-        {
-            int[] boundaries = new int[2];
-            boundaries[0] = this.y_pos;
-            boundaries[1] = this.y_pos + this.GetHeight();
-            return boundaries;
-        }
     }
 }
