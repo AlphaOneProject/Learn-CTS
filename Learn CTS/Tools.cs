@@ -181,7 +181,7 @@ namespace Learn_CTS
             foreach (FileInfo fi in source.GetFiles())
             {
                 Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
-                fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
+                fi.CopyTo(Path.Combine(target.ToString(), fi.Name), false);
             }
 
             // Copy each subdirectory using recursion.
