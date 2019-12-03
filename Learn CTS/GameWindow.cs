@@ -129,7 +129,7 @@ namespace Learn_CTS
             SetUpWindow();
             this.BackColor = Color.Black;
             DisplayLoading();
-            Texture.InitializePath(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
+            Texture.InitializePath("games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
             Load_Game();
             this.Controls.Clear();
             InitializeHUD();

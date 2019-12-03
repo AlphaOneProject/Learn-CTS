@@ -38,7 +38,7 @@ namespace Learn_CTS
 
         public static void InitializePath(string path)
         {
-            Texture.projectDir = path;
+            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + path;
         }
 
         /// <summary>

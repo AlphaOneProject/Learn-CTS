@@ -81,8 +81,7 @@ namespace Learn_CTS
         {
             Point current_pos = new Point(this.pb.Location.X + pan_global.HorizontalScroll.Value,
                                                                    this.pb.Location.Y + pan_global.VerticalScroll.Value);
-            Texture.InitializePath(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games"
-                                   + Path.DirectorySeparatorChar + editor.Get_Game());
+            Texture.InitializePath("games" + Path.DirectorySeparatorChar + editor.Get_Game());
             if (Tools.IsCollidingWithVehicule(new Tram(0, 0), current_pos))
             {
                 if (MessageBox.Show("L'évènement rentre en collision avec la scène, rendant sa position invalide.\n" +

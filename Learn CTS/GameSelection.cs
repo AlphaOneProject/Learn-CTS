@@ -64,7 +64,7 @@ namespace Learn_CTS
 
         private void GameSelection_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.editor.Copy_Selected_Library(this.selected_game);
+            this.editor.Import_Selected_Library(this.selected_game);
         }
     }
 }
