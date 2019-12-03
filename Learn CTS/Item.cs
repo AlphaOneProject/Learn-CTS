@@ -15,7 +15,7 @@ namespace Learn_CTS
         string description;
         JObject actions;
 
-        public Item(int id, string name, int x, int y) : base(name, x, y)
+        public Item(int id, int x, int y) : base(x, y)
         {
             this.id = id;
             this.x_pos = x;

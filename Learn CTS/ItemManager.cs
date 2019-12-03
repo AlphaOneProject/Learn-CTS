@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Learn_CTS
 {
@@ -19,6 +20,7 @@ namespace Learn_CTS
         private string game;
         private string situation_path;
         private string library_path;
+        private string items_lib_path;
 
         /// <summary>
         /// Constructor
@@ -28,8 +30,9 @@ namespace Learn_CTS
             this.game = game;
             this.situation_path = situation_path;
             this.library_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + 
-                Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + 
-                Path.DirectorySeparatorChar + "library";
+                Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library";
+            this.items_lib_path = library_path + Path.DirectorySeparatorChar + "images" +
+                Path.DirectorySeparatorChar + "items";
         }
 
         /// <summary>
@@ -43,7 +46,8 @@ namespace Learn_CTS
         /// <returns></returns>
         public Item CreateItem(int id, string name, int x, int y, JObject actions)
         {
-            Item item = new Item(id, name, x, y);
+            Item item = new Item(id, x, y);
+            item.SetImage(item.CreateImage(name));
             item.SetActions(actions);
             list_items.Add(item);
             return item;
@@ -108,15 +112,18 @@ namespace Learn_CTS
             for (int i = 1; i <= int.Parse(situation["events"].ToString()); i++)
             {
                 string index = i.ToString();
-                Item item = new Item(
-                        int.Parse(situation[index]["item"]["id"].ToString()),
-                        situation[index]["item"]["name"].ToString(),
-                        int.Parse(situation[index]["x"].ToString()),
-                        int.Parse(situation[index]["x"].ToString())
-                    );
                 string nb_quizz = situation[index]["quizz"].ToString();
-                item.SetActions( (JObject)(Tools.Get_From_JSON(library_path + Path.DirectorySeparatorChar + 
-                    "dialogs" + Path.DirectorySeparatorChar + nb_quizz + ".json")) );
+                Item item = this.CreateItem(
+                        int.Parse(situation[index]["item"]["id"].ToString()),
+                        items_lib_path + Path.DirectorySeparatorChar +
+                            situation[index]["item"]["name"].ToString() + ".png",
+                        int.Parse(situation[index]["x"].ToString()),
+                        int.Parse(situation[index]["y"].ToString()),
+                        Tools.Get_From_JSON(library_path + Path.DirectorySeparatorChar +
+                            "dialogs" + Path.DirectorySeparatorChar + nb_quizz + ".json")
+                    );
+                item.SetHitbox(item.CreateHitbox(items_lib_path + Path.DirectorySeparatorChar +
+                            situation[index]["item"]["name"].ToString() + "Hitbox.png"));
                 item.SetDescription(item.GetActions()["question"].ToString());
                 list_items.Add(item);
             }
