@@ -123,7 +123,7 @@ namespace Learn_CTS
                             "dialogs" + Path.DirectorySeparatorChar + nb_quizz + ".json")
                     );
                 item.SetHitbox(item.CreateHitbox(items_lib_path + Path.DirectorySeparatorChar +
-                            situation[index]["item"]["name"].ToString() + "Hitbox.png"));
+                            situation[index]["item"]["name"].ToString() + ".png"));
                 item.SetDescription(item.GetActions()["question"].ToString());
                 list_items.Add(item);
             }
