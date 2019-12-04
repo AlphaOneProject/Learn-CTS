@@ -36,9 +36,9 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="game">The name of the game.</param>
 
-        public static void InitializePath(string path)
+        public static void InitializePath(string game)
         {
-            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + path;
+            Texture.projectDir = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images";
         }
 
         /// <summary>
@@ -75,8 +75,32 @@ namespace Learn_CTS
         public Texture(String name, int x, int y) : this(x,y)
         {
             this.name = name;
-            this.path_image = GetCustomPathImage(name);
-            this.path_hitbox = GetCustomPathHitbox(name);
+            this.path_image = GetDefaultPathImage(name);
+            this.path_hitbox = GetDefaultPathHitbox(name);
+            try
+            {
+                this.SetImage(CreateImage(this.path_image));
+                this.SetHitbox(CreateHitbox(this.path_hitbox));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Constructor of a texture with a custom name, a custom folder, placed at the specified coordinates x,y
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="folder"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+
+        public Texture(string name, string folder, int x, int y) : this(x, y)
+        {
+            this.name = name;
+            this.path_image = GetCustomPathImage(folder, name);
+            this.path_hitbox = GetCustomPathHitbox(folder, name);
             try
             {
                 this.SetImage(CreateImage(this.path_image));
@@ -597,9 +621,9 @@ namespace Learn_CTS
         /// <param name="name">The name of the texture.</param>
         /// <returns></returns>
 
-        public String GetCustomPathImage(string name)
+        public String GetCustomPathImage(string folder, string name)
         {
-            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + ".png";
+            return projectDir + Path.DirectorySeparatorChar + folder + Path.DirectorySeparatorChar + name + ".png";
         }
 
         /// <summary>
@@ -608,9 +632,19 @@ namespace Learn_CTS
         /// <param name="name">The name of the texture.</param>
         /// <returns></returns>
 
-        public String GetCustomPathHitbox(string name)
+        public String GetCustomPathHitbox(string folder, string name)
         {
-            return projectDir + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + name + "Hitbox.png";
+            return projectDir + Path.DirectorySeparatorChar + folder + Path.DirectorySeparatorChar + name + "Hitbox.png";
+        }
+        
+        public String GetDefaultPathImage(string name)
+        {
+            return this.GetCustomPathImage("others", this.GetName());
+        }
+
+        public String GetDefaultPathHitbox(string name)
+        {
+            return this.GetCustomPathHitbox("others", this.GetName());
         }
 
         /// <summary>
