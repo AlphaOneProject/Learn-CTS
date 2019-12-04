@@ -77,8 +77,11 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
+            Texture background = new Texture("Background", 0, 0, -100);
+            list_textures.Add(background); // Adding the background first
+
             item_manager.GetItemsFromSituation();
-            list_textures = item_manager.GetList();
+            list_textures.AddRange(item_manager.GetList()); // Adding the items from the situation
             Show();
         }
 
@@ -145,16 +148,20 @@ namespace Learn_CTS
             } 
             finally
             {
-                foreach (Item t in list_textures)
+                foreach (Texture t in list_textures)
                 {
-                    if (!found)
+                    if (t.GetType().Equals(new Item(0, 0, 0).GetType()))
                     {
-                        if (t.IsHitboxHit(mouse_x, mouse_y))
+                        if (!found)
                         {
-                            HighlightItem(t);
-                            found = true;
+                            if (t.IsHitboxHit(mouse_x, mouse_y))
+                            {
+                                HighlightItem((Item)t);
+                                found = true;
+                            }
                         }
                     }
+                    
                 }
             }
         }

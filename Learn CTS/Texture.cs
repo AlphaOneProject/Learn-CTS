@@ -100,6 +100,7 @@ namespace Learn_CTS
         {
             this.name = name;
             this.path_image = GetCustomPathImage(folder, name);
+            MessageBox.Show("Texture.cs:103 : " + this.path_image);
             this.path_hitbox = GetCustomPathHitbox(folder, name);
             try
             {
