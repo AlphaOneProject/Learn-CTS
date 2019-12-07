@@ -20,7 +20,6 @@ namespace Learn_CTS
         private Item item;
         private ItemManager manager;
         SpeechSynthesizer s;
-        private int audio;
         private Thread t_audio;
 
         public ItemViewer(int item_id, ItemManager manager)
@@ -43,6 +42,8 @@ namespace Learn_CTS
             // Properties of the hide button
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24 , this.Height - 6 - btn_exit.Height);
             pb_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
+
+            this.t_audio = new Thread(new ThreadStart(Listen));
             DisplayActions();
         }
 
@@ -83,14 +84,7 @@ namespace Learn_CTS
 
         private void Pb_audio_Click(object sender, EventArgs e)
         {
-            if (audio == 0)
-            {
-                MessageBox.Show("Le son est désactivé pour ce dialogue.");
-            }
-            else
-            {
-                t_audio.Start();
-            }
+            t_audio.Start();
         }
 
         private void Listen()
