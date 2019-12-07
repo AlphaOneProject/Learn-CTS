@@ -72,7 +72,7 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Texture(String name, int x, int y) : this(x,y)
+        public Texture(string name, int x, int y) : this(x,y)
         {
             this.name = name;
             this.path_image = GetDefaultPathImage(name);
@@ -100,7 +100,6 @@ namespace Learn_CTS
         {
             this.name = name;
             this.path_image = GetCustomPathImage(folder, name);
-            MessageBox.Show("Texture.cs:103 : " + this.path_image);
             this.path_hitbox = GetCustomPathHitbox(folder, name);
             try
             {
@@ -121,7 +120,7 @@ namespace Learn_CTS
         /// <param name="y">The y coordinate.</param>
         /// <param name="b">Specifies if the texture collides only when the depth is the same as the other texture.</param>
 
-        public Texture(String name, int x, int y, bool b) : this(name, x, y)
+        public Texture(string name, string folder, int x, int y, bool b) : this(name, folder, x, y)
         {
             this.collide_only_z = b;
         }
@@ -134,7 +133,7 @@ namespace Learn_CTS
         /// <param name="y">The y coordinate.</param>
         /// <param name="z">THe depth position compared to the other textures.</param>
 
-        public Texture(String name, int x, int y, int z) : this(name, x, y)
+        public Texture(string name, string folder, int x, int y, int z) : this(name, folder, x, y)
         {
             this.z = z;
         }
@@ -148,7 +147,7 @@ namespace Learn_CTS
         /// <param name="z">THe depth position compared to the other textures.</param>
         /// <param name="b">Specifies if the texture collides only when the depth is the same as the other texture.</param>
 
-        public Texture(String name, int x, int y, int z, bool b) : this(name, x, y, b)
+        public Texture(string name, string folder, int x, int y, int z, bool b) : this(name, folder, x, y, b)
         {
             this.z = z;
         }
@@ -272,9 +271,10 @@ namespace Learn_CTS
         /// Check if the instance is colliding with the texture t or its childs
         /// </summary>
         /// <param name="t">The texture that will be tested.</param>
+        /// /// <param name="b">Check if t collides with the childs</param>
         /// <returns>true if this hit the hitbox of t or one of its childs, false otherwise.</returns>
 
-        public virtual bool CollideWith(Texture t)
+        public virtual bool CollideWith(Texture t, bool b)
         {
             if (this.hitbox == null || Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
             {
@@ -299,11 +299,14 @@ namespace Learn_CTS
                         }
                     }
                 }
-                foreach (Texture c in this.list_childs)
+                if (b)
                 {
-                    if (c.CollideWith(t))
+                    foreach (Texture c in this.list_childs)
                     {
-                        return true;
+                        if (c.CollideWith(t,b))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -427,10 +430,6 @@ namespace Learn_CTS
 
         public virtual Image GetImage()
         {
-            if(this.image == null)
-            {
-                MessageBox.Show(this.name);
-            }
             return this.image;
         }
 
@@ -622,7 +621,7 @@ namespace Learn_CTS
         /// <param name="name">The name of the texture.</param>
         /// <returns></returns>
 
-        public String GetCustomPathImage(string folder, string name)
+        public string GetCustomPathImage(string folder, string name)
         {
             return projectDir + Path.DirectorySeparatorChar + folder + Path.DirectorySeparatorChar + name + ".png";
         }
@@ -633,17 +632,17 @@ namespace Learn_CTS
         /// <param name="name">The name of the texture.</param>
         /// <returns></returns>
 
-        public String GetCustomPathHitbox(string folder, string name)
+        public string GetCustomPathHitbox(string folder, string name)
         {
             return projectDir + Path.DirectorySeparatorChar + folder + Path.DirectorySeparatorChar + name + "Hitbox.png";
         }
         
-        public String GetDefaultPathImage(string name)
+        public string GetDefaultPathImage(string name)
         {
             return this.GetCustomPathImage("others", this.GetName());
         }
 
-        public String GetDefaultPathHitbox(string name)
+        public string GetDefaultPathHitbox(string name)
         {
             return this.GetCustomPathHitbox("others", this.GetName());
         }

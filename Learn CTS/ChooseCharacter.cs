@@ -36,7 +36,11 @@ namespace Learn_CTS
                 list_images_char.Add(Image.FromFile(dir + Path.DirectorySeparatorChar + "1_0.png"));
             }
             if (list_images_char.Count == 0) MessageBox.Show("Aucunes textures de personnage n'a été trouvée !");
-            else pbox_char.Image = list_images_char[0];
+            else
+            {
+                pbox_char.Image = list_images_char[0];
+                Player.SetFolder((i_current_img+1).ToString());
+            }
         }
 
         private void pbox_arrow_right_MouseDown(object sender, MouseEventArgs e)
@@ -47,7 +51,7 @@ namespace Learn_CTS
                 i_current_img = list_images_char.Count - 1;
             }
             pbox_char.Image = list_images_char[i_current_img];
-            Player.SetFolder(i_current_img.ToString());
+            Player.SetFolder((i_current_img+1).ToString());
         }
 
         private void pbox_arrow_left_MouseDown(object sender, MouseEventArgs e)
@@ -58,7 +62,7 @@ namespace Learn_CTS
                 i_current_img = 0;
             }
             pbox_char.Image = list_images_char[i_current_img];
-            Player.SetFolder(i_current_img.ToString());
+            Player.SetFolder((i_current_img + 1).ToString());
         }
     }
 }

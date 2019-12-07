@@ -27,6 +27,7 @@ namespace Learn_CTS
             r.Size = new System.Drawing.Size(flp_talk.Width / 2, 96);
             r.TabIndex = 1;
             r.Text = text;
+            r.BorderStyle = BorderStyle.FixedSingle;
             using (Graphics g = CreateGraphics())
             {
                 r.Height = (int)g.MeasureString(r.Text,
@@ -45,6 +46,7 @@ namespace Learn_CTS
             r.Size = new System.Drawing.Size(flp_talk.Width/2, 96);
             r.TabIndex = 2;
             r.Text = text;
+            r.BorderStyle = BorderStyle.FixedSingle;
             using (Graphics g = CreateGraphics())
             {
                 r.Height = (int)g.MeasureString(r.Text,
@@ -62,6 +64,8 @@ namespace Learn_CTS
 
         private void Phone_Load(object sender, EventArgs e)
         {
+            Form f = this.FindForm();
+            this.Location = new Point(f.Width / 2 - this.Width / 2, f.Height / 2 - this.Height / 2);
             AddAnswer("coucou");
             Addjsp("hey");
             AddAnswer("comment ça va ?");
@@ -81,6 +85,7 @@ namespace Learn_CTS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ((GameWindow)this.FindForm()).OpenClose_Backpack();
             this.FindForm().Controls.Remove(this);
         }
     }

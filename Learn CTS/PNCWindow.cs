@@ -77,7 +77,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Texture background = new Texture("Background", 0, 0, -100);
+            Texture background = new Texture("Background", "background", 0, 0, -100);
             list_textures.Add(background); // Adding the background first
 
             item_manager.GetItemsFromSituation();

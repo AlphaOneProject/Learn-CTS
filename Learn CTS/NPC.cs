@@ -23,7 +23,7 @@ namespace Learn_CTS
 
         public NPC(int id, string name, string folder, int x, int y, int quiz) : base(id, name, folder, x, y)
         {
-            interact = new Texture("Interaction", 0, 0);
+            interact = new Texture("Interaction", "characters", 0, 0);
             interact.SetX(this.GetX() + this.GetWidth() / 2 - interact.GetWidth() / 2);
             interact.SetY(this.GetY()-interact.GetHeight()-20);
             this.quiz = quiz;

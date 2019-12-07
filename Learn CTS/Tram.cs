@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Learn_CTS
 {
-    class Tram : Transport
+    class Tram : Vehicule
     {
 
         // Attributes
@@ -28,9 +28,8 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Tram(int x, int y) : base("Tram", x, y, pos_doors)
+        public Tram(int x, int y) : base("tram", x, y, pos_doors)
         {
-            this.AddChild(new Texture("TramInterior", this.GetX() + 480, this.GetY() + 208, true));
         }
     }
 }

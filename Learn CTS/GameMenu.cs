@@ -105,6 +105,13 @@ namespace Learn_CTS
         private void DisplayScenarioMenu()
         {
             this.Controls.Clear();
+            Label lbl_choice_scenario = new Label();
+            lbl_choice_scenario.Text = "Quel scénario voulez-vous lancer ?";
+            lbl_choice_scenario.Location = new Point(this.Width / 2 - lbl_choice_scenario.Width / 2, 10);
+            lbl_choice_scenario.AutoSize = true;
+            lbl_choice_scenario.BackColor = Color.Transparent;
+            lbl_choice_scenario.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+            this.Controls.Add(lbl_choice_scenario);
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             string sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             FlowLayoutPanel flp = new FlowLayoutPanel();
