@@ -300,7 +300,7 @@ namespace Learn_CTS
         private void GameTick(object sender, EventArgs e) //todo : séparer dans deux timers différents
         {
             ticks++;
-            if (ticks % 3 == 0) Moise();
+            if (ticks % 3 == 0) PassThroughNPCs();
             if (!vehicule.IsInside())
             {
                 CheckIfTheVehiculeIsArrived();
@@ -590,7 +590,7 @@ namespace Learn_CTS
         {
             List<Texture> list_all_textures = GetAllTextures(list_game_textures);
             list_all_textures.Sort(Texture.Compare);
-            OptimizeGraphics(e.Graphics);
+            OptimizeGraphics(e);
             if(list_all_textures != null)
             foreach (Texture t in list_all_textures)
             {
@@ -607,13 +607,13 @@ namespace Learn_CTS
             }
         }
 
-        private void OptimizeGraphics(Graphics g)
+        private void OptimizeGraphics(PaintEventArgs e)
         {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
-            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
+            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
         }
 
         /// <summary>
@@ -1095,7 +1095,7 @@ namespace Learn_CTS
             Refresh();
         }
 
-        public void Moise()
+        public void PassThroughNPCs()
         {
             int d = player.GetDirection();
             foreach(NPC n in nm.GetList())
@@ -1128,10 +1128,10 @@ namespace Learn_CTS
                         m = (int)(1.5 * Character.GetCharacterSpeed());
                     }
                     n.Move(0, m);
-                    if (n.CollideWith(vehicule, false))
+                    if (vehicule.CollideWith(n, false))
                     {
                         n.Move(0, -2 * m);
-                        if (n.CollideWith(vehicule, false))
+                        if (vehicule.CollideWith(n, false))
                         {
                             n.Move(0, m);
                         }
@@ -1165,10 +1165,10 @@ namespace Learn_CTS
                         m = (int)(1.5 * Character.GetCharacterSpeed());
                     }
                     n.Move(0, m);
-                    if (n.CollideWith(vehicule, false))
+                    if (vehicule.CollideWith(n, false))
                     {
                         n.Move(0, -2 * m);
-                        if (n.CollideWith(vehicule, false))
+                        if (vehicule.CollideWith(n, false))
                         {
                             n.Move(0, m);
                         }

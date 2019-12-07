@@ -309,7 +309,7 @@ namespace Learn_CTS
         {
             if (!b)
             {
-                if (doors_left.CollideWith(t, false) || doors_right.CollideWith(t, false) || outside.CollideWith(t, false) || inside.CollideWith(t, false)) return true;
+                if (outside.CollideWith(t, false) || inside.CollideWith(t, false)) return true;
             }
             return base.CollideWith(t, b);
         }
