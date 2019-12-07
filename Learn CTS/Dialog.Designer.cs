@@ -42,6 +42,7 @@
             this.txt_dialog_npc.BackColor = System.Drawing.Color.White;
             this.txt_dialog_npc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_dialog_npc.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txt_dialog_npc.Enabled = false;
             this.txt_dialog_npc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_dialog_npc.ForeColor = System.Drawing.Color.Black;
             this.txt_dialog_npc.Location = new System.Drawing.Point(28, 52);

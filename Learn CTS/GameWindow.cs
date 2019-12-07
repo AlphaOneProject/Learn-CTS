@@ -18,46 +18,41 @@ namespace Learn_CTS
     {
         /// Attributes
 
+        private static GameWindow instance;
+        private NPC_Manager nm = NPC_Manager.GetInstance();
         private List<Texture> list_game_textures;
         private List<Texture> list_hud_textures;
-        private NPC_Manager nm = NPC_Manager.GetInstance();
+        private List<string> list_comments;
         private System.Windows.Forms.Timer timer;
         private Player player;
-        private Transport vehicule;
+        private Vehicule vehicule;
         private Background background;
         private Platform platform;
         private int draw_surface_width = 0;
         private int draw_surface_height = 0;
-        private bool go_up = false;
-        private bool go_down = false;
-        private bool go_left = false;
-        private bool go_right = false;
+        private bool[] movement = { false, false, false, false};
         private int ticks = 0;
+        private int ticks_temp = 0;
         private double start_milliseconds = (DateTime.Now - new DateTime(2019, 1, 1)).TotalMilliseconds;
-        private Dialog d;
-        private Backpack bp;
-        private Label lbl_score;
-        private Label lbl_nfps;
         private string game;
-        private bool showhitbox = false;
-        private bool god = false;
-        private int ticks_stopped = 0;
         private int NPCsDensity = 0;
-        private int score = 0;
+        private int score = -1;
+        private int step_score = -1;
         private string sc_path;
         private string scenario;
         private string situation;
         private Random r;
         private bool preview = false;
-        private int speed_character = 8;
         private int n_situation = 0;
         private Thread t_fps;
         private float n_fps;
         private bool ticket_valid = false;
-        private static GameWindow instance;
         private Transition tr;
         private Texture backpack;
         private Egg egg;
+        // development
+        private bool showhitbox = false;
+        private bool god = false;
 
         /// <summary>
         /// Initialize the game window
@@ -65,6 +60,7 @@ namespace Learn_CTS
 
         private GameWindow(string game)
         {
+            InitializeComponent();
             if (instance == null) instance = this;
             else
             {
@@ -74,8 +70,6 @@ namespace Learn_CTS
             this.game = game;
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             this.Text = game;
-            InitializeComponent();
-            DoubleBuffered = true;
             sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
             if(scenario == null) scenario = Directory.GetDirectories(@"" + sc_path)[0].Remove(0, sc_path.Length);
             if (situation == null) situation = Directory.GetDirectories(@"" + sc_path + scenario)[n_situation].Remove(0, sc_path.Length + scenario.Length + 1);
@@ -131,12 +125,15 @@ namespace Learn_CTS
             DisplayLoading();
             Texture.InitializePath(game);
             Load_Game();
-            this.Controls.Clear();
+            tr.SetD(10);
+            StartTransition();
             InitializeHUD();
             InitializeFPSThread();
             InitializeTimer();
+            list_comments = new List<string>();
             SetScore(1000);
             this.BackColor = Color.White;
+            tr.EndTransition();
         }
 
         private void DisplayLoading()
@@ -165,6 +162,7 @@ namespace Learn_CTS
         {
             r = new Random();
             InitializeListTextures();
+            this.Controls.Clear();
         }
 
         /// <summary>
@@ -253,48 +251,12 @@ namespace Learn_CTS
 
         private void InitializeHUD()
         {
-            Load_Controls_HUD();
             egg = new Egg(12, 10);
             backpack = new Texture("Backpack", 12, 145);
             list_hud_textures = new List<Texture>(){
                 backpack,
                 egg
             };
-        }
-
-        private void Load_Controls_HUD()
-        {
-            this.Controls.Clear();
-            bp = new Backpack();
-            lbl_score = new System.Windows.Forms.Label();
-            lbl_nfps = new System.Windows.Forms.Label();
-            lbl_score.AutoSize = true;
-            lbl_score.BackColor = System.Drawing.Color.Black;
-            lbl_score.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lbl_score.ForeColor = System.Drawing.Color.White;
-            lbl_score.Location = new System.Drawing.Point(12, 111);
-            lbl_score.Name = "lbl_score";
-            lbl_score.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            lbl_score.Size = new System.Drawing.Size(96, 31);
-            lbl_score.TabIndex = 0;
-            lbl_score.Text = "default";
-            lbl_score.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            lbl_nfps.Anchor = System.Windows.Forms.AnchorStyles.None;
-            lbl_nfps.AutoEllipsis = true;
-            lbl_nfps.AutoSize = true;
-            lbl_nfps.BackColor = System.Drawing.Color.Black;
-            lbl_nfps.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lbl_nfps.ForeColor = System.Drawing.Color.White;
-            lbl_nfps.Location = new System.Drawing.Point(1170, 9);
-            lbl_nfps.Name = "lbl_nfps";
-            lbl_nfps.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            lbl_nfps.Size = new System.Drawing.Size(82, 31);
-            lbl_nfps.TabIndex = 4;
-            lbl_nfps.Text = "0,000";
-            lbl_nfps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            lbl_nfps.Visible = false;
-            this.Controls.Add(lbl_nfps);
-            this.Controls.Add(lbl_score);
         }
 
         /// <summary>
@@ -335,7 +297,7 @@ namespace Learn_CTS
         /// <param name="Sender"></param>
         /// <param name="e"></param>
 
-        private void GameTick(object sender, EventArgs e)
+        private void GameTick(object sender, EventArgs e) //todo : séparer dans deux timers différents
         {
             ticks++;
             if (ticks % 3 == 0) Moise();
@@ -345,33 +307,33 @@ namespace Learn_CTS
                 if (player.GetX()>=8 && player.GetX()+player.GetWidth()<=draw_surface_width - 8 && !vehicule.Contains(player)) MoveTexturesIfPlayerMoves();
                 if (vehicule.GetState() == 0)
                 {
-                    ticks_stopped++;
-                    if (ticks_stopped == 1)
+                    ticks_temp++;
+                    if (ticks_temp == 1)
                     {
                         NPCLeaveVehicule();
                     }
-                    if (ticks_stopped == 35)
+                    if (ticks_temp == 35)
                     {
                         NPCEnteringVehicule();
                     }
-                    if (ticks_stopped > 200)
+                    if (ticks_temp > 200)
                     {
                         vehicule.ChangeState();
-                        ticks_stopped = 0;
+                        ticks_temp = 0;
                     }
                 }
                 else if (vehicule.Contains(player) && vehicule.GetX() >= draw_surface_width && tr.HasFinished()) ViewInside();
                 else if (platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
                 {
-                    ticks_stopped++;
-                    if (ticks_stopped == 1)
+                    ticks_temp++;
+                    if (ticks_temp == 1)
                     {
                         NPCsComingPlatform();
                     }
-                    else if (ticks_stopped > 100)
+                    else if (ticks_temp > 100)
                     {
                         StopVehicule();
-                        ticks_stopped = 0;
+                        ticks_temp = 0;
                     }
                 }
                 if (vehicule.GetState() != 2)
@@ -418,14 +380,14 @@ namespace Learn_CTS
             {
                 foreach (Texture t in list_game_textures)
                 {
-                    t.Move(-speed_character, 0);
+                    t.Move(-Character.GetCharacterSpeed(), 0);
                 }
             }
             else if (player.GetX() <= 9)
             {
                 foreach (Texture t in list_game_textures)
                 {
-                    t.Move(speed_character, 0);
+                    t.Move(Character.GetCharacterSpeed(), 0);
                 }
             }
         }
@@ -439,21 +401,21 @@ namespace Learn_CTS
             int a = 0;
             int b = 0;
 
-            if (go_left)
+            if (movement[0])
             {
-                a -= speed_character;
+                a -= Character.GetCharacterSpeed();
             }
-            else if (go_right)
+            if (movement[1])
             {
-                a += speed_character;
+                a += Character.GetCharacterSpeed();
             }
-            if (go_up)
+            if (movement[2])
             {
-                b -= speed_character;
+                b -= Character.GetCharacterSpeed();
             }
-            if (go_down)
+            if (movement[3])
             {
-                b += speed_character;
+                b += Character.GetCharacterSpeed();
             }
             if(a != 0 || b != 0)
             {
@@ -476,30 +438,33 @@ namespace Learn_CTS
             int b = 0;
             if (!c.ReachedObjX())
             {
-                if (c.GetObjX() > speed_character)
+                if (c.GetObjX() > Character.GetCharacterSpeed())
                 {
-                    a = speed_character;
+                    a = Character.GetCharacterSpeed();
                 }
-                else if (c.GetObjX() < -speed_character)
+                else if (c.GetObjX() < -Character.GetCharacterSpeed())
                 {
-                    a = -speed_character;
+                    a = -Character.GetCharacterSpeed();
                 }
                 c.UpdateObjX(-a);
             }
             if (!c.ReachedObjY())
             {
-                if (c.GetObjY() > speed_character)
+                if (c.GetObjY() > Character.GetCharacterSpeed())
                 {
-                    b = speed_character;
+                    b = Character.GetCharacterSpeed();
                 }
-                else if (c.GetObjY() < -speed_character)
+                else if (c.GetObjY() < -Character.GetCharacterSpeed())
                 {
-                    b = -speed_character;
+                    b = -Character.GetCharacterSpeed();
                 }
                 c.UpdateObjY(-b);
             }
-            if(c.GetType().Name == "Player") MovePlayer(a, b);
-            else MoveNPC((NPC)c, a, b);
+            if (c.GetType().Name == "Player") MovePlayer(a, b);
+            else
+            {
+                MoveNPC((NPC)c, a, b);
+            }
             if (c.ReachedObjective()) c.RemoveObjective();
         }
 
@@ -507,17 +472,17 @@ namespace Learn_CTS
         /// Open or close the dialog if its already on screen.
         /// </summary>
 
-        public void OpenCloseDialog()
+        public void OpenCloseDialog(int id_npc)
         {
             Refresh();
-            if (this.Controls.Contains(d))
+            if (this.Controls.Find("Dialog", true).Length > 0 && id_npc < 0)
             {
-                this.Controls.Remove(d);
+                this.Controls.Remove(this.Controls.Find("Dialog", true)[0]);
                 this.Focus();
             }
             else
             {
-                if(d!=null) this.Controls.Add(d);
+                this.Controls.Add(new Dialog(id_npc, game));
             }
             Refresh();
         }
@@ -583,7 +548,6 @@ namespace Learn_CTS
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if(n_fps>0) lbl_nfps.Text = n_fps.ToString().Substring(0, 4);
             if (this.draw_surface_width == 0 && this.draw_surface_height == 0)
             {
                 this.draw_surface_width = e.ClipRectangle.Width;
@@ -626,12 +590,7 @@ namespace Learn_CTS
         {
             List<Texture> list_all_textures = GetAllTextures(list_game_textures);
             list_all_textures.Sort(Texture.Compare);
-            //e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Low;
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
-            e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+            OptimizeGraphics(e.Graphics);
             if(list_all_textures != null)
             foreach (Texture t in list_all_textures)
             {
@@ -646,6 +605,15 @@ namespace Learn_CTS
             {
                 t.OnPaint(e);
             }
+        }
+
+        private void OptimizeGraphics(Graphics g)
+        {
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.None;
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
         }
 
         /// <summary>
@@ -682,9 +650,16 @@ namespace Learn_CTS
                 MessageBox.Show("Vous avez bien validé votre ticket !");
             }
             if (backpack.IsHitboxHit(mouse_x, mouse_y)) OpenClose_Backpack();
-            else if (!this.Controls.Contains(d) && !SearchNPCDialog(mouse_x, mouse_y))
+            else if (this.Controls.Count <= 1 && !SearchNPCDialog(mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
+            }
+            foreach(Control c in this.Controls)
+            {
+                if ((mouse_x < c.Location.X || mouse_x > c.Location.X + c.Width) && (mouse_y < c.Location.Y || mouse_y > c.Location.Y + c.Height))
+                {
+                    this.Controls.Clear();
+                }
             }
         }
 
@@ -706,8 +681,7 @@ namespace Learn_CTS
                     {
                         if(Math.Abs((t.GetX()+t.GetWidth()/2 - (player.GetX()+player.GetWidth()/2))) < 256 && Math.Abs((t.GetY() - player.GetY())) < 256)
                         {
-                            d = new Dialog(t.GetID(), game);
-                            OpenCloseDialog();
+                            OpenCloseDialog(t.GetID());
                         }
                         else
                         {
@@ -731,7 +705,7 @@ namespace Learn_CTS
         {
             foreach(Texture t in list_game_textures)
             {
-                if (t.CollideWith(c))
+                if (t.CollideWith(c,true))
                 {
                     return true;
                 }
@@ -750,7 +724,7 @@ namespace Learn_CTS
         {
             bool c_vertical = true;
             bool c_horizontal = true;
-            if (this.Controls.Contains(d) || this.Controls.Contains(bp)) return;
+            if (this.Controls.Count > 0) return;
             player.UpdateMovement(a, b);
             if (!vehicule.IsInside())
             {
@@ -761,15 +735,23 @@ namespace Learn_CTS
                     c_vertical = false;
                 }
                 player.Move(0, b);
-                if (IsCharacterCollidingWithTextures(player)
-                    || 
-                    (b<0
-                    && player.GetY() <= platform.GetY() - player.GetHeight() + 2
-                    && ((!ticket_valid && !god)
-                    || (player.GetX() < vehicule.GetX() || player.GetX()+player.GetWidth() > vehicule.GetX()+vehicule.GetWidth()))))
+                if (IsCharacterCollidingWithTextures(player))
                 {
                     player.Move(0, -b);
                     c_horizontal = false;
+                }
+                if(b < 0
+                    && player.GetY() <= platform.GetY() - player.GetHeight() + 2
+                    && ((!ticket_valid && !god)
+                    || (player.GetX() < vehicule.GetX() || player.GetX() + player.GetWidth() > vehicule.GetX() + vehicule.GetWidth())))
+                {
+                    player.Move(0, -b);
+                    c_horizontal = false;
+                    if (!ticket_valid && this.Controls.Find("GameMessage", true).Length == 0 && IsOnScreen(vehicule))
+                    {
+                        movement[0] = false; movement[1] = false; movement[2] = false; movement[3] = false;
+                        this.Controls.Add(new GameMessage("Vous devez d'abord valider votre ticket !"));
+                    }
                 }
             }
             else
@@ -795,33 +777,14 @@ namespace Learn_CTS
             }
         }
 
-        /// <summary>
-        /// Move the character
-        /// </summary>
-        /// <param name="c">The character</param>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-
-        private void MoveNPC(NPC c, int a, int b)
+        private void MoveNPC(NPC n, int a, int b)
         {
-            c.UpdateMovement(a, b);
-            c.Move(a, b);
-            /*c.Move(a, 0);
-            if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
+            n.UpdateMovement(a, b);
+            n.Move(a, b);
+            /*if (n.HasObjective() && n.CollideWith(vehicule,false))
             {
-                c.Move(-a, 0);
-            }
-            c.Move(0, b);
-            if (c.GetQuiz() < 0 && IsOnScreen(c) && (c.CollideWith(player) || c.CollideWith(vehicule)))
-            {
-                c.Move(0, -b);
+                n.Move(0, -b);
             }*/
-        }
-
-        private bool IsOnScreen(Texture t)
-        {
-            return (t.GetX() + t.GetWidth() > 0 && t.GetX() < draw_surface_width && t.GetY() + t.GetHeight() > 0 && t.GetY() < draw_surface_height);
         }
 
         /// <summary>
@@ -834,14 +797,14 @@ namespace Learn_CTS
         {
             switch (e.KeyCode)
             {
-                case Keys.Left : go_left = true; break;
-                case Keys.Q: go_left = true; break;
-                case Keys.Right : go_right = true; break;
-                case Keys.D: go_right = true; break;
-                case Keys.Up : go_up = true; break;
-                case Keys.Z: go_up = true; break;
-                case Keys.Down : go_down = true; break;
-                case Keys.S: go_down = true; break;
+                case Keys.Left : movement[0] = true; break;
+                case Keys.Q: movement[0] = true; break;
+                case Keys.Right : movement[1] = true; break;
+                case Keys.D: movement[1] = true; break;
+                case Keys.Up : movement[2] = true; break;
+                case Keys.Z: movement[2] = true; break;
+                case Keys.Down : movement[3] = true; break;
+                case Keys.S: movement[3] = true; break;
                 case Keys.B: OpenClose_Backpack(); break;
                 case Keys.Escape: this.Close(); break;
             }
@@ -851,8 +814,7 @@ namespace Learn_CTS
                 {
                     case Keys.F1: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                     case Keys.F2: this.showhitbox = !showhitbox; break;
-                    case Keys.F3: this.lbl_nfps.Visible = !this.lbl_nfps.Visible; break;
-                    case Keys.F4: this.StartVehiculeCrash(); break;
+                    case Keys.F3: this.StartVehiculeCrash(); break;
                 }
             }
         }
@@ -867,14 +829,14 @@ namespace Learn_CTS
         {
             switch (e.KeyCode)
             {
-                case Keys.Left: go_left = false; break;
-                case Keys.Q: go_left = false; break;
-                case Keys.Right: go_right = false; break;
-                case Keys.D: go_right = false; break;
-                case Keys.Up: go_up = false; break;
-                case Keys.Z: go_up = false; break;
-                case Keys.Down: go_down = false; break;
-                case Keys.S: go_down = false; break;
+                case Keys.Left: movement[0] = false; break;
+                case Keys.Q: movement[0] = false; break;
+                case Keys.Right: movement[1] = false; break;
+                case Keys.D: movement[1] = false; break;
+                case Keys.Up: movement[2] = false; break;
+                case Keys.Z: movement[2] = false; break;
+                case Keys.Down: movement[3] = false; break;
+                case Keys.S: movement[3] = false; break;
             }
         }
 
@@ -922,6 +884,7 @@ namespace Learn_CTS
 
         public void InitializeNPCs()
         {
+            nm.Clear();
             JObject npcs = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "dialogs.json");
             NPCsDensity = (int)Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["npc_density"];
             int npc_x;
@@ -972,7 +935,6 @@ namespace Learn_CTS
             {
                 if(vehicule.GetListChilds()[i].GetType().Name == "NPC" && ((NPC)vehicule.GetListChilds()[i]).GetQuiz()<1 && r.Next(0, 3) != 0 && vehicule.GetListChilds()[i].GetX()<vehicule.GetX()+vehicule.GetWidth() - 192 - 200)
                 {
-                    vehicule.GetListChilds()[i].DisableCollisions();
                     list.Add((NPC)vehicule.GetListChilds()[i]);
                 } 
             }
@@ -1012,8 +974,6 @@ namespace Learn_CTS
                 {
                     n = (NPC)t;
                     i = vehicule.GetIndexNearestDoor(n.GetX());
-                    /*n.SetObjectiveX(vehicule.GetPosDoor(i));
-                    n.SetObjectiveY(platform.GetY() - r.Next(10, 25));*/
                     y = vehicule.GetY() + vehicule.GetHeight();
                     n.SetObjective(vehicule.GetPosDoor(i), y);
                     n.SetObjectiveY(platform.GetY() - r.Next(24, 30) + n.GetZ() - y);
@@ -1108,9 +1068,13 @@ namespace Learn_CTS
 
         public void SetScore(int s)
         {
+            if(step_score < 0)
+            {
+                step_score = s / 6;
+            }
             score += s;
-            lbl_score.Text = score.ToString();
-            if(egg != null && score/200>=0 && score / 200 < 6)
+            Console.WriteLine(score);
+            if(egg != null && score/step_score>=0 && score / step_score < 6)
             {
                 egg.SetD(5 - score / 200);
             }
@@ -1119,92 +1083,122 @@ namespace Learn_CTS
         public void OpenClose_Backpack()
         {
             Refresh();
-            if (!this.Controls.Contains(bp))
+            if (this.Controls.Find("Backpack", true).Length == 0)
             {
-                this.Controls.Add(bp);
+                this.Controls.Add(new Backpack());
             }
             else
             {
-                this.Controls.Remove(bp);
+                this.Controls.Remove((this.Controls.Find("Backpack", true)[0]));
                 this.Focus();
-                Refresh();
             }
+            Refresh();
         }
 
         public void Moise()
         {
             int d = player.GetDirection();
-            NPC n;
-            int e = 8;
-            foreach(Texture t in nm.GetList())
+            foreach(NPC n in nm.GetList())
             {
-                if (t.GetType().Name == "NPC" )
-                {
-                    n = (NPC)t;
-                    if(d == 1 
-                    && n.GetX() + n.GetWidth()/2 > player.GetX() + player.GetWidth()/2
-                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth()/2 + 50
+                if (d == 1
+                    && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2
+                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2 + 50
                     && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
+                {
+                    /*if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - (int)(1.5 * Character.GetCharacterSpeed()));
+                    else n.SetObjectiveY(n.GetZ() + (int)(1.5 * Character.GetCharacterSpeed()));*/
+                    /*n.Move(0, -2 * e);
+                    Console.WriteLine("1 " + n.CollideWith(vehicule, false));
+                    if (n.CollideWith(vehicule, false))
                     {
-                        n.Move(0, -e);
-                        if (n.CollideWith(vehicule))
+                        n.Move(0, 4 * e);
+                        Console.WriteLine("2 " + n.CollideWith(vehicule, false));
+                        if (n.CollideWith(vehicule, false))
                         {
-                            n.Move(0, 2 * e);
-                            if (n.CollideWith(vehicule))
-                            {
-                                n.Move(0, -2 * e);
-                            }
-                            else
-                            {
-                                n.Move(0, -e);
-                            }
+                            n.Move(0, -2 * e);
                         }
-                        /*if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
-                        {
-                            n.SetObjectiveY(n.GetZ() - e);
-                        }
-                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
-                        {
-                            n.SetObjectiveY(n.GetZ() + e);
-                        }
-                        else
-                        {
-                            if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
-                            else n.SetObjectiveY(n.GetZ() + e);
-                        }*/
-                    }
-                    else if (d == 3
-                    && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2
-                    && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 50
-                    && Math.Abs(n.GetZ() - player.GetZ()) < 8)
+                    }*/
+                    int m;
+                    if (r.Next(0, 2) == 0)
                     {
-                        n.Move(0, -e);
-                        if (n.CollideWith(vehicule))
-                        {
-                            n.Move(0, 2 * e);
-                            if (n.CollideWith(vehicule))
-                            {
-                                n.Move(0, -2*e);
-                            }
-                            else
-                            {
-                                n.Move(0, -e);
-                            }
-                        }
-                        /*if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
-                        {
-                            n.SetObjectiveY(n.GetZ() - e);
-                        }
-                        else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
-                        {
-                            n.SetObjectiveY(n.GetZ() + e);
-                        }
-                        else
-                        {
-                            if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
-                            else n.SetObjectiveY(n.GetZ() + e);
-                        }*/
+                        m = -(int)(1.5 * Character.GetCharacterSpeed());
                     }
+                    else
+                    {
+                        m = (int)(1.5 * Character.GetCharacterSpeed());
+                    }
+                    n.Move(0, m);
+                    if (n.CollideWith(vehicule, false))
+                    {
+                        n.Move(0, -2 * m);
+                        if (n.CollideWith(vehicule, false))
+                        {
+                            n.Move(0, m);
+                        }
+                    }
+                    /*if(n.GetZ() >= vehicule.GetY()+vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
+                    {
+                        n.SetObjectiveY(n.GetZ() - e);
+                    }
+                    else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
+                    {
+                        n.SetObjectiveY(n.GetZ() + e);
+                    }
+                    else
+                    {
+                        if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
+                        else n.SetObjectiveY(n.GetZ() + e);
+                    }*/
+                }
+                else if (d == 3
+                && n.GetX() + n.GetWidth() / 2 < player.GetX() + player.GetWidth() / 2
+                && n.GetX() + n.GetWidth() / 2 > player.GetX() + player.GetWidth() / 2 - 50
+                && Math.Abs(n.GetZ() - player.GetZ()) <= 8)
+                {
+                    int m;
+                    if (r.Next(0, 2) == 0)
+                    {
+                        m = -(int)(1.5 * Character.GetCharacterSpeed());
+                    }
+                    else
+                    {
+                        m = (int)(1.5 * Character.GetCharacterSpeed());
+                    }
+                    n.Move(0, m);
+                    if (n.CollideWith(vehicule, false))
+                    {
+                        n.Move(0, -2 * m);
+                        if (n.CollideWith(vehicule, false))
+                        {
+                            n.Move(0, m);
+                        }
+                    }
+                    /*if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - (int)(1.5 * Character.GetCharacterSpeed()));
+                    else n.SetObjectiveY(n.GetZ() + (int)(1.5 * Character.GetCharacterSpeed()));*/
+                    /*n.Move(0, -2*e);
+                    Console.WriteLine("1 " + n.CollideWith(vehicule, false));
+                    if (n.CollideWith(vehicule, false))
+                    {
+                        n.Move(0, 4 * e);
+                        Console.WriteLine("2 " + n.CollideWith(vehicule, false));
+                        if (n.CollideWith(vehicule, false))
+                        {
+                            n.Move(0, -2*e);
+                        }
+                    }*/
+                    /*if (n.GetZ() >= vehicule.GetY() + vehicule.GetHeight() - 12 || n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 8)
+                    {
+                        n.SetObjectiveY(n.GetZ() - e);
+                    }
+                    else if (n.GetZ() <= vehicule.GetY() + vehicule.GetHeight() - 32)
+                    {
+                        n.SetObjectiveY(n.GetZ() + e);
+                    }
+                    else
+                    {
+                        if (r.Next(0, 2) == 0) n.SetObjectiveY(n.GetZ() - e);
+                        else n.SetObjectiveY(n.GetZ() + e);
+                    }*/
                 }
             }
         }
@@ -1214,7 +1208,8 @@ namespace Learn_CTS
             n_situation++;
             if(Directory.GetDirectories(@"" + sc_path + scenario).Length == n_situation)
             {
-                this.Close();
+                StartTransition();
+                timer.Tick += new EventHandler(EndTimer);
             }
             else
             {
@@ -1223,10 +1218,22 @@ namespace Learn_CTS
             }
         }
 
+        public void EndTimer(object sender, EventArgs e)
+        {
+            if (tr.HasFinished())
+            {
+                this.Controls.Clear();
+                //this.Controls.Add();
+                this.Close();
+            }
+        }
+
         private void GameWindow_Resize(object sender, EventArgs e)
         {
-            if (this.Controls.Contains(lbl_nfps)) lbl_nfps.Location = new Point(Width - lbl_nfps.Width - 30, 10);
-            if (this.Controls.Contains(bp)) bp.Location = new Point(this.Width / 2 - bp.Width / 2, this.Height / 2 - bp.Height / 2);
+            foreach(Control c in this.Controls)
+            {
+                c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+            }
             Refresh();
         }
 
@@ -1241,9 +1248,9 @@ namespace Learn_CTS
 
         private void TimerCrash(object sender, EventArgs e)
         {
-            ticks_stopped++;
+            ticks_temp++;
             int b;
-            if (ticks_stopped % 2 == 0)
+            if (ticks_temp % 2 == 0)
             {
                 b = 16;
             }
@@ -1255,27 +1262,32 @@ namespace Learn_CTS
             {
                 if(t.GetType().Name != "Transition") t.Move(0, b);
             }
-            if(ticks_stopped >= 16)
+            if(ticks_temp == 16)
             {
                 tr.SetD(10);
                 StartTransition();
             }
-            if (ticks_stopped ==64)
+            else if (ticks_temp == 64)
             {
                 vehicule.SetSpeed(0);
                 vehicule.SetState(0);
-                MessageBox.Show("Tout le monde va bien ?");
+                MessageBox.Show("Tout le monde va bien ?"); //remplacer par un dialogue
+                //this.Controls.Add(new Dialog("Conducteur", "T", game, 2));
                 timer.Tick += new EventHandler(GameTick);
                 timer.Tick -= new EventHandler(TimerCrash);
                 tr.EndTransition();
+            }
+            else if(ticks_temp == 128)
+            {
+                this.Controls.Clear();
             }
             MoveBackground();
             Refresh();
         }
 
-        private void DisplayTutorial()
+        private bool IsOnScreen(Texture t)
         {
-
+            return (t.GetX() + t.GetWidth() > 0 && t.GetX() < draw_surface_width && t.GetY() + t.GetHeight() > 0 && t.GetY() < draw_surface_height);
         }
 
         private void DisplaySettings()
@@ -1308,6 +1320,11 @@ namespace Learn_CTS
             p_settings.Controls.AddRange(new Control[3] { btn_continue, btn_settings, btn_leave });
             this.Controls.Add(p_settings);
             this.ResumeLayout();
+        }
+
+        public void AddComment(string comment)
+        {
+            list_comments.Add(comment);
         }
     }
 }

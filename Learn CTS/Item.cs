@@ -22,7 +22,7 @@ namespace Learn_CTS
             this.y_pos = y;
         }
 
-        public Item(int id, string name, int x, int y, int z) : base(name, x, y, z)
+        public Item(int id, string name, int x, int y, int z) : base(name, "items", x, y, z)
         {
             this.id = id;
             this.x_pos = x;

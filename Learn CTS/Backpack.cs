@@ -46,6 +46,7 @@ namespace Learn_CTS
         private void pbox_phone_Click(object sender, EventArgs e)
         {
             this.FindForm().Controls.Add(new Phone());
+            ((GameWindow)this.FindForm()).OpenClose_Backpack();
         }
     }
 }

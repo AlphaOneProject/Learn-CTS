@@ -16,7 +16,7 @@ namespace Learn_CTS
         public Egg(int x, int y) : base(x, y)
         {
             list_eggs = new List<Image>();
-            string path_eggs = Texture.GetDirImages() + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "eggs" + Path.DirectorySeparatorChar;
+            string path_eggs = Texture.GetDirImages() + Path.DirectorySeparatorChar + "eggs" + Path.DirectorySeparatorChar;
             for (int i = 0; i < 6; i++)
             {
                 list_eggs.Add(Image.FromFile(path_eggs + "egg" + i.ToString() + ".png"));

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -8,17 +9,23 @@ namespace Learn_CTS
     class Platform : Texture
     {
 
-        Texture terminals;
+        private List<Texture> list_terminals;
 
         /// <summary>
         /// Constructor of platform.
         /// </summary>
         /// <param name="x">The x coordinate.</param>
 
-        public Platform(int x, int y, int z) : base("Platform", x, y, z)
+        public Platform(int x, int y, int z) : base("Platform", "platform", x, y, z)
         {
-            terminals = new Texture("Terminals", x+840, y+32, true);
-            this.AddChild(terminals);
+            list_terminals = new List<Texture>();
+            Texture t;
+            for (int i = 0; i < 4; i++)
+            {
+                t = new Texture("Terminal", "platform", x + this.GetWidth()/6 + i* this.GetWidth() / 6, y + 32, true);
+                list_terminals.Add(t);
+                this.AddChild(t);
+            }
         }
 
         /// <summary>
@@ -36,8 +43,13 @@ namespace Learn_CTS
 
         public bool IsTerminalHit(int c, int d)
         {
-            if (terminals.IsHitboxHit(c, d)) return true;
-            else return false;
+            bool res = false;
+            Texture p = Player.GetInstance();
+            foreach (Texture t in list_terminals)
+            {
+                if (t.IsHitboxHit(c, d) && Math.Abs((t.GetX()+t.GetWidth()/2) - (p.GetX()+p.GetWidth()/2))<50 && t.GetZ() - p.GetZ() < 100 && t.GetZ() - p.GetZ() > 0) res = true;
+            }
+            return res;
         }
     }
 }

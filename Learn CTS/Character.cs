@@ -23,6 +23,12 @@ namespace Learn_CTS
         private static int m = 4;
         private string folder;
         private string name;
+        private static int speed_character = 8;
+
+        public static int GetCharacterSpeed()
+        {
+            return speed_character;
+        }
 
         /// <summary>
         /// Constructor of character with a custom name.
@@ -31,13 +37,13 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Character(int id, String name, String folder, int x, int y) : base(x, y, true)
+        public Character(int id, string name, string npc_folder, int x, int y) : base(x, y, true)
         {
-            if (folder == null) folder = (id % 5+1).ToString();
+            if (npc_folder == null) this.folder = (id % 5+1).ToString();
+            else this.folder = npc_folder;
             if (name == null) name = id.ToString();
+            else this.name = name;
             this.id = id;
-            this.folder = folder;
-            this.name = name;
             Random random = new Random();
             if (random.Next(2) == 0)
             {
