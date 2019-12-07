@@ -31,8 +31,8 @@
             this.pb_confirm = new System.Windows.Forms.PictureBox();
             this.txt_create = new System.Windows.Forms.TextBox();
             this.pb_back_create = new System.Windows.Forms.PictureBox();
-            this.lbl_create = new System.Windows.Forms.Label();
             this.pnl_bg = new System.Windows.Forms.Panel();
+            this.lbl_create = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_confirm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_back_create)).BeginInit();
             this.pnl_bg.SuspendLayout();
@@ -53,9 +53,10 @@
             // 
             // txt_create
             // 
-            this.txt_create.Location = new System.Drawing.Point(69, 48);
+            this.txt_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.txt_create.Location = new System.Drawing.Point(69, 39);
             this.txt_create.Name = "txt_create";
-            this.txt_create.Size = new System.Drawing.Size(231, 20);
+            this.txt_create.Size = new System.Drawing.Size(231, 29);
             this.txt_create.TabIndex = 2;
             this.txt_create.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_create_KeyPress);
             // 
@@ -72,18 +73,6 @@
             this.pb_back_create.Tag = "3";
             this.pb_back_create.Click += new System.EventHandler(this.Pb_back_create_Click);
             // 
-            // lbl_create
-            // 
-            this.lbl_create.AutoSize = true;
-            this.lbl_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lbl_create.ForeColor = System.Drawing.Color.White;
-            this.lbl_create.Location = new System.Drawing.Point(70, 18);
-            this.lbl_create.Name = "lbl_create";
-            this.lbl_create.Size = new System.Drawing.Size(194, 24);
-            this.lbl_create.TabIndex = 4;
-            this.lbl_create.Tag = "5";
-            this.lbl_create.Text = "Créer un nouveau jeu";
-            // 
             // pnl_bg
             // 
             this.pnl_bg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -96,6 +85,18 @@
             this.pnl_bg.Size = new System.Drawing.Size(336, 133);
             this.pnl_bg.TabIndex = 5;
             this.pnl_bg.Tag = "3";
+            // 
+            // lbl_create
+            // 
+            this.lbl_create.AutoSize = true;
+            this.lbl_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.lbl_create.ForeColor = System.Drawing.Color.White;
+            this.lbl_create.Location = new System.Drawing.Point(66, 12);
+            this.lbl_create.Name = "lbl_create";
+            this.lbl_create.Size = new System.Drawing.Size(194, 24);
+            this.lbl_create.TabIndex = 4;
+            this.lbl_create.Tag = "5";
+            this.lbl_create.Text = "Créer un nouveau jeu";
             // 
             // GameCreator
             // 
@@ -122,7 +123,7 @@
         private System.Windows.Forms.PictureBox pb_confirm;
         private System.Windows.Forms.TextBox txt_create;
         private System.Windows.Forms.PictureBox pb_back_create;
-        private System.Windows.Forms.Label lbl_create;
         private System.Windows.Forms.Panel pnl_bg;
+        private System.Windows.Forms.Label lbl_create;
     }
 }
