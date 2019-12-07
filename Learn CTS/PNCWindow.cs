@@ -140,7 +140,8 @@ namespace Learn_CTS
             Boolean found = false;
             try
             {
-                this.Controls.Find("iv", false)[0].Dispose();
+                ItemViewer[] iv_list = Controls.Find("iv", false).OfType<ItemViewer>().ToArray();
+                iv_list[0].Exit();
             }
             catch (IndexOutOfRangeException)
             {

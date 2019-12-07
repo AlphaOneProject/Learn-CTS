@@ -82,6 +82,7 @@
             this.pb_audio.Size = new System.Drawing.Size(32, 32);
             this.pb_audio.TabIndex = 10;
             this.pb_audio.TabStop = false;
+            this.pb_audio.Click += new System.EventHandler(this.Pb_audio_Click);
             // 
             // ItemViewer
             // 

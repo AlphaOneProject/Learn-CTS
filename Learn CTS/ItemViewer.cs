@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Speech.Synthesis;
+using System.Threading;
 
 namespace Learn_CTS
 {
@@ -17,6 +19,9 @@ namespace Learn_CTS
     {
         private Item item;
         private ItemManager manager;
+        SpeechSynthesizer s;
+        private int audio;
+        private Thread t_audio;
 
         public ItemViewer(int item_id, ItemManager manager)
         {
@@ -76,13 +81,54 @@ namespace Learn_CTS
             
         }
 
+        private void Pb_audio_Click(object sender, EventArgs e)
+        {
+            if (audio == 0)
+            {
+                MessageBox.Show("Le son est désactivé pour ce dialogue.");
+            }
+            else
+            {
+                t_audio.Start();
+            }
+        }
+
+        private void Listen()
+        {
+            JObject actions = item.GetActions();
+            int nbr_choices = (int)actions["choices"];
+            s = new SpeechSynthesizer();
+            s.SetOutputToDefaultAudioDevice();
+            if (s.State.ToString() == "Ready")
+            {
+                s.Volume = 100;
+                s.Rate = -1;
+                s.Speak(actions["question"].ToString());
+                string se;
+                for (int i = 1; i <= nbr_choices; i++)
+                {
+                    if (i == 1) se = "er";
+                    else if (i == 2) se = "nd";
+                    else se = "ème";
+                    s.Speak(i + se + " choix " + actions["c" + i.ToString()]["answer"].ToString());
+                }
+            }
+            t_audio.Abort();
+        }
+
         private void Btn_exit_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Dispose();
+            Exit();
         }
 
         private void ItemViewer_Leave(object sender, EventArgs e)
         {
+            Exit();
+        }
+
+        public void Exit()
+        {
+            if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
             this.Dispose();
         }
     }
