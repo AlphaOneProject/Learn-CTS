@@ -14,6 +14,7 @@ namespace Learn_CTS
 
         public Background(int x, int y) : base("Background", "background", x, y, -5000)
         {
+            this.DisableCollisions();
         }
 
         /// <summary>
@@ -37,6 +38,19 @@ namespace Learn_CTS
             g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
             g.DrawImage(this.GetImage(), new Point(this.GetWidth()+this.GetX(), this.GetY()));
             g.CompositingMode = c;
+            foreach (Texture t in this.GetListChilds())
+            {
+                if (t.GetX() < -t.GetWidth())
+                {
+                    t.SetX(this.GetX() + t.GetWidth());
+                }
+                if (t.GetX() > 0)
+                {
+                    t.SetX(-t.GetWidth());
+                }
+                g.DrawImage(t.GetImage(), new Point(t.GetX(), t.GetY()));
+                g.DrawImage(t.GetImage(), new Point(t.GetWidth() + t.GetX(), t.GetY()));
+            }
         }
     }
 }
