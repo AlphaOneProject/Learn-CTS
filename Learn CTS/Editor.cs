@@ -1610,7 +1610,7 @@ namespace Learn_CTS
 
                 t1.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
                 t2.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
-                tb.Width = content.Width - lbl.Width - 10 - 100;
+                tb.Width = content.Width - lbl.Width - 10 - 80;
 
                 foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
                 {
@@ -1806,21 +1806,21 @@ namespace Learn_CTS
                 TickFrequency = 5,
                 TickStyle = TickStyle.Both,
                 Value = int.Parse((string)envi_data["npc_density"]),
-                Width = content.Width - lbl_tb.Width - 10 - 100
+                Width = content.Width - lbl_tb.Width - 10 - 80
             };
             tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
             content.Controls.Add(tb_npc_density);
 
             // Places Controls.
             int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
-            lbl_scene_name.Location = new Point(20, 50);
-            txt_scene_name.Location = new Point(sync_loc, 50);
+            lbl_scene_name.Location = new Point(20, 75);
+            txt_scene_name.Location = new Point(sync_loc, 75);
             lbl_scene_intro.Location = new Point(20, txt_scene_name.Location.Y + txt_scene_name.Height + 10);
             txt_scene_intro.Location = new Point(sync_loc, txt_scene_name.Location.Y + txt_scene_name.Height + 10);
-            lbl_tb.Location = new Point(20, txt_scene_intro.Location.Y + txt_scene_intro.Height + 20 +
+            lbl_tb.Location = new Point(20, txt_scene_intro.Location.Y + txt_scene_intro.Height + 15 +
                                             ((tb_npc_density.Height - lbl_tb.Height) / 2));
             tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 50, txt_scene_intro.Location.Y + 
-                                                txt_scene_intro.Height + 20);
+                                                txt_scene_intro.Height + 15);
 
             // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
