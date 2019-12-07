@@ -20,26 +20,47 @@ namespace Learn_CTS
         private System.Windows.Forms.Timer timer_text;
         private string question = "";
 
-        public Dialog(int id, string game)
+        public Dialog(string game)
         {
             InitializeComponent();
-            npc = nm.GetNPCByID(id);
             InitializeGamePath(game);
             this.DoubleBuffered = true;
+        }
+
+        public Dialog(int id, string game) : this(game)
+        {
+            npc = nm.GetNPCByID(id);
+            this.Set_Up(npc.GetQuiz().ToString());
+            Generate_Buttons_Choices();
+            npc.RemoveInteraction();
+            lbl_name.Text = npc.GetName();
+        }
+
+        public Dialog(string nom, string question, string game, int audio) : this(game)
+        {
+            this.question = question;
+            this.audio = audio;
+            lbl_name.Text = nom;
         }
 
         private void Dialog_Load(object sender, EventArgs e)
         {
             t_audio = new Thread(new ThreadStart(Listen));
             InitializeTimerDisplayText();
-            this.Set_Up(npc.GetQuiz().ToString());
-            Generate_Buttons_Choices();
             this.Focus();
-            npc.RemoveInteraction();
-            lbl_name.Text = npc.GetName();
             this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
-            this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+            if (npc != null) this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+            else
+            {
+                Form f = this.FindForm();
+                this.Location = new Point(f.Width / 2 - this.Width / 2, f.Height / 2 - this.Height / 2);
+            }
             if(audio != 2) timer_text.Start();
+            else
+            {
+                txt_dialog_npc.Text = "";
+                if (!t_audio.IsAlive) t_audio.Start();
+            }
         }
 
         private void InitializeGamePath(string game)
@@ -52,11 +73,6 @@ namespace Learn_CTS
             data = Tools.Get_From_JSON(this.game_path + q + ".json");
             audio = (int)this.data["audio"];
             question = this.data["question"].ToString().Replace("<Nom>", Player.GetInstance().GetName());
-            if (audio == 2)
-            {
-                txt_dialog_npc.Text = "";
-                t_audio.Start();
-            }
         }
 
         private void InitializeTimerDisplayText()
@@ -116,24 +132,27 @@ namespace Learn_CTS
 
         private void Listen()
         {
-            s = new SpeechSynthesizer();
-            s.SetOutputToDefaultAudioDevice();
-            if (s.State.ToString() == "Ready")
+            if (!t_audio.IsAlive)
             {
-                s.Volume = 100;
-                s.Rate = -1;
-                s.Speak(question);
-                int nbr_choices = (int)this.data["choices"];
-                string se;
-                for (int i = 1; i <= nbr_choices; i++)
+                s = new SpeechSynthesizer();
+                s.SetOutputToDefaultAudioDevice();
+                if (s.State.ToString() == "Ready")
                 {
-                    if (i == 1) se = "er";
-                    else if (i == 2) se = "nd";
-                    else se = "ème";
-                    s.Speak(i + se + " choix "+ this.data["c" + i.ToString()]["answer"].ToString());
+                    s.Volume = 100;
+                    s.Rate = -1;
+                    s.Speak(question);
+                    int nbr_choices = (int)this.data["choices"];
+                    string se;
+                    for (int i = 1; i <= nbr_choices; i++)
+                    {
+                        if (i == 1) se = "er";
+                        else if (i == 2) se = "nd";
+                        else se = "ème";
+                        s.Speak(i + se + " choix " + this.data["c" + i.ToString()]["answer"].ToString());
+                    }
                 }
+                t_audio.Abort();
             }
-            t_audio.Abort();
         }
 
         public void Answer_Event(object sender, EventArgs e)
@@ -163,7 +182,7 @@ namespace Learn_CTS
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
             if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
-            ((GameWindow)this.FindForm()).OpenCloseDialog();
+            ((GameWindow)this.FindForm()).OpenCloseDialog(-1);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -174,7 +193,8 @@ namespace Learn_CTS
             }
             else
             {
-                t_audio.Start();
+                try { if (!t_audio.IsAlive) t_audio.Start(); }
+                catch (Exception except) { return; }
             }
         }
 

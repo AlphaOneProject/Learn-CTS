@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Learn_CTS
 {
-    abstract class Transport : Texture
+    abstract class Vehicule : Texture
     {
         // Attributes
 
@@ -28,16 +29,17 @@ namespace Learn_CTS
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        public Transport(string name, int x, int y, int[] pos_doors) : base(name, x, y, -2000)
+        public Vehicule(string name, int x, int y, int[] pos_doors) : base(name, "vehicule" + Path.DirectorySeparatorChar + name, x, y, -2000)
         {
             this.pos_doors = pos_doors;
             this.max_distance_stop = this.DistanceBeforeStopping();
-            this.inside = new Texture(name + "Inside", this.GetX(), this.GetY(), this.GetZ() + 1);
-            this.outside = new Texture(name + "Outside", this.GetX(), this.GetY(), true);
-            this.doors_left = new Texture(name + "DoorsLeft", this.GetX()+424, this.GetY()+112, this.outside.GetZ() + 1, true);
-            this.doors_right = new Texture(name + "DoorsRight", this.GetX()+512, this.GetY()+112, this.outside.GetZ() + 1, true);
+            this.inside = new Texture(name + "Inside", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), this.GetZ() + 1);
+            this.outside = new Texture(name + "Outside", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), true);
+            this.doors_left = new Texture(name + "DoorsLeft", "vehicule" + Path.DirectorySeparatorChar + name,this.GetX()+424, this.GetY()+112, this.outside.GetZ() + 1, true);
+            this.doors_right = new Texture(name + "DoorsRight", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX()+512, this.GetY()+112, this.outside.GetZ() + 1, true);
             //this.inside.DisableCollisions();
             this.inside.SetVisible(false);
+            this.AddChild(new Texture(name + "Interior", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX() + 480, this.GetY() + 208, true));
             this.AddChild(doors_left);
             this.AddChild(doors_right);
             this.AddChild(outside);
@@ -301,6 +303,15 @@ namespace Learn_CTS
         public int GetNumberDoors()
         {
             return this.pos_doors.Length;
+        }
+
+        public override bool CollideWith(Texture t, bool b)
+        {
+            if (!b)
+            {
+                if (outside.CollideWith(t, false) || inside.CollideWith(t, false)) return true;
+            }
+            return base.CollideWith(t, b);
         }
     }
 }
