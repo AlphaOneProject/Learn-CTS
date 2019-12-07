@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Learn_CTS
 {
@@ -36,7 +37,7 @@ namespace Learn_CTS
 
             // Properties of the hide button
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24 , this.Height - 6 - btn_exit.Height);
-
+            pb_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
             DisplayActions();
         }
 
@@ -49,6 +50,7 @@ namespace Learn_CTS
         {
             lbl_desc.Width = this.Width - pb_item.Width - 6;
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24, this.Height - 6 - btn_exit.Height);
+            pb_audio.Location = new Point(this.Width - pb_audio.Width - 24, 6);
         }
 
         private void DisplayActions()
@@ -64,9 +66,14 @@ namespace Learn_CTS
                 btn.Cursor = Cursors.Hand;
                 btn.Text = actions["c" + i.ToString()]["answer"].ToString();
                 btn.UseVisualStyleBackColor = true;
-                //btn.Click += new System.EventHandler(this.Answer_Event);
+                btn.Click += new System.EventHandler(this.Action_Event);
                 flp_actions.Controls.Add(btn);
             }
+        }
+
+        private void Action_Event(object sender, EventArgs e)
+        {
+            
         }
 
         private void Btn_exit_MouseDown(object sender, MouseEventArgs e)
