@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Joueur");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Non-joueurs");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Objets");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Figurants");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Dialogues");
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Personnages");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Décors");
@@ -60,10 +60,10 @@
             this.menu.Name = "menu";
             treeNode1.Name = "global";
             treeNode1.Text = "Général";
-            treeNode2.Name = "player";
-            treeNode2.Text = "Joueur";
+            treeNode2.Name = "items";
+            treeNode2.Text = "Objets";
             treeNode3.Name = "npcs";
-            treeNode3.Text = "Non-joueurs";
+            treeNode3.Text = "Figurants";
             treeNode4.Name = "dialogs";
             treeNode4.Text = "Dialogues";
             treeNode5.Name = "sprites";

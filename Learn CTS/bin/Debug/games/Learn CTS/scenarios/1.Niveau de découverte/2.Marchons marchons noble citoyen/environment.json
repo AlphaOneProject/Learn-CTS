@@ -2,5 +2,5 @@
   "background": 0,
   "game_engine": "quizz",
   "scene_type": "tram_entrance",
-  "npc_density":10
+  "npc_density":10,"scene_name":"","scene_intro":""
 }

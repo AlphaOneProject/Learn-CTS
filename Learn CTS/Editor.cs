@@ -271,8 +271,8 @@ namespace Learn_CTS
                         Display_Global(); break;
                     case "models":
                         Display_Models(); break;
-                    case "player":
-                        Display_Player(); break;
+                    case "items":
+                        Display_Items(); break;
                     case "npcs":
                         Display_NPCs(); break;
                     case "dialogs":
@@ -315,6 +315,7 @@ namespace Learn_CTS
             TextBox txt_desc = new TextBox()
             {
                 Name = "txt_desc",
+                Tag = "properties.json",
                 Text = (string)this.game_properties["description"],
                 Cursor = Cursors.IBeam,
                 Multiline = true,
@@ -326,7 +327,7 @@ namespace Learn_CTS
             };
             txt_desc.Width = content.Width - 100;
             txt_desc.Height = ((int)((txt_desc.Text.Length * 12) / txt_desc.Width) + 1) * 40;
-            txt_desc.KeyPress += new KeyPressEventHandler(this.Desc_Txt_Keypress);
+            txt_desc.KeyPress += new KeyPressEventHandler(this.Txt_Keypress);
             content.Controls.Add(txt_desc);
 
             // Creation of a label used for showing messages regarding the description's modification.
@@ -347,36 +348,60 @@ namespace Learn_CTS
 
         /// <summary>
         /// Handle all keypresses and validate, cancel or even forbid the action.
-        /// Upon validation will save the new description in the "properties.json" file.
+        /// Upon validation will save the new data piece in the file Tagged by the TextBox.
         /// </summary>
-        /// <param name="sender">Control calling the method.</param>
+        /// <param name="sender">Control calling the method, carrying the path of the
+        /// relevant file in Tag.</param>
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        private void Desc_Txt_Keypress(object sender, KeyPressEventArgs e)
+        private void Txt_Keypress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
+            string data_path = (string)t.Tag;
+            string data_piece = "";
+            JObject data = Tools.Get_From_JSON(data_path);
+
+            switch(t.Name)
+            {
+                case "txt_desc":
+                    data_piece = "description";
+                    break;
+                case "txt_scene_name":
+                    data_piece = "scene_name";
+                    break;
+                case "txt_scene_intro":
+                    data_piece = "scene_intro";
+                    break;
+                default:
+                    throw new InvalidDataException("Data wasn't found for Txt_Keypress function in the Editor.cs file!");
+            }
+
             List<char> autorized_chars = new List<char>() { ' ', '.', ',', '\'', '?', '!', '-', '°', '(', ')', ':' };
             if (e.KeyChar == (char)13) // (char)13 => Enter.
             {
-                // Block the renaming if the new name is empty.
-                if (t.Text.Equals(string.Empty)) { return; }
-                this.game_properties["description"] = t.Text;
-                Tools.Set_To_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json", this.game_properties); // Set the entered description as valid description.
+                data[data_piece] = t.Text;
+                Tools.Set_To_JSON(data_path, data); // Set the entered value as new file's value.
                 t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
                 t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
-                content.Controls.Find("lbl_desc_state", false)[0].Text = "";
+                if (t.Name == "txt_desc")
+                {
+                    content.Controls.Find("lbl_desc_state", false)[0].Text = "";
 
-                // Resize all controls inside "content".
-                Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
+                    // Resize all controls inside "content".
+                    Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
+                }
                 e.Handled = true;
             }
             else if (e.KeyChar == (char)27) // (char)27 => Escape.
             {
-                t.Text = (string)this.game_properties["description"];
+                t.Text = (string)data[data_piece];
                 t.SelectionStart = t.Text.Length;
                 t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
-                content.Controls.Find("lbl_desc_state", false)[0].Text = "";
+                if (t.Name == "txt_desc")
+                {
+                    content.Controls.Find("lbl_desc_state", false)[0].Text = "";
+                }
             }
             else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
             {
@@ -387,17 +412,27 @@ namespace Learn_CTS
                 if (e.KeyChar == (char)8) // Still backspace.
                 {
                     t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"])*0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
-                    content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                    if (t.Name == "txt_desc")
+                    {
+                        content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                    }
+                    e.Handled = true;
                     this.saved = false;
                     return; // Let you erase regardless of the length.
                 }
-                content.Controls.Find("lbl_desc_state", false)[0].Text = "Limite de caractères atteinte !";
+                if (t.Name == "txt_desc")
+                {
+                    content.Controls.Find("lbl_desc_state", false)[0].Text = "Limite de caractères atteinte !";
+                }
                 e.Handled = true;
             }
             else
             {
                 t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
-                content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                if (t.Name == "txt_desc")
+                {
+                    content.Controls.Find("lbl_desc_state", false)[0].Text = "Sauvegardez en appuyant sur 'Entrée' ou annulez avec 'Echap'";
+                }
                 this.saved = false;
             }
         }
@@ -477,9 +512,9 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Load controls for player's content.
+        /// Load controls for items' content.
         /// </summary>
-        private void Display_Player()
+        private void Display_Items()
         {
             // WIP
         }
@@ -1527,7 +1562,9 @@ namespace Learn_CTS
             {
                 ["background"] = 0,
                 ["game_engine"] = "quizz",
+                ["scene_name"] = "",
                 ["scene_type"] = "tram_entrance",
+                ["scene_intro"] = "",
                 ["npc_density"] = 10
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
@@ -1564,9 +1601,16 @@ namespace Learn_CTS
         {
             if (this.old_category == menu.SelectedNode.Name) // Trigger only on form resize.
             {
+                Label l1 = (Label)content.Controls.Find("lbl_scene_name", true)[0];
+                Label l2 = (Label)content.Controls.Find("lbl_scene_intro", true)[0];
+                TextBox t1 = (TextBox)content.Controls.Find("txt_scene_name", true)[0];
+                TextBox t2 = (TextBox)content.Controls.Find("txt_scene_intro", true)[0];
                 TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
                 Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
-                tb.Width = content.Width - lbl.Width - 10 - 100;
+
+                t1.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
+                t2.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
+                tb.Width = content.Width - lbl.Width - 10 - 80;
 
                 foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
                 {
@@ -1688,6 +1732,61 @@ namespace Learn_CTS
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
 
             // Creates primary Controls of the situation.
+
+            Label lbl_scene_name = new Label()
+            {
+                Name = "lbl_scene_name",
+                Text = "Nom du lieu : ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_scene_name);
+
+            Label lbl_scene_intro = new Label()
+            {
+                Name = "lbl_scene_intro",
+                Text = "Texte d'introduction : ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_scene_intro);
+
+            TextBox txt_scene_name = new TextBox()
+            {
+                Name = "txt_scene_name",
+                Text = (string)envi_data["scene_name"],
+                Tag = situation_path + "environment.json",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
+                BorderStyle = BorderStyle.Fixed3D,
+                Margin = new Padding(8, 8, 8, 8),
+                ShortcutsEnabled = false,
+                Width = content.Width - Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) - 10 - 40
+            };
+            txt_scene_name.KeyPress += new KeyPressEventHandler(Txt_Keypress);
+            content.Controls.Add(txt_scene_name);
+
+            TextBox txt_scene_intro = new TextBox()
+            {
+                Name = "txt_scene_intro",
+                Tag = situation_path + "environment.json",
+                Text = (string)envi_data["scene_intro"],
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
+                BorderStyle = BorderStyle.Fixed3D,
+                Margin = new Padding(8, 8, 8, 8),
+                ShortcutsEnabled = false,
+                Width = content.Width - Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) - 10 - 40
+            };
+            txt_scene_intro.KeyPress += new KeyPressEventHandler(Txt_Keypress);
+            content.Controls.Add(txt_scene_intro);
+
             Label lbl_tb = new Label()
             {
                 Name = "lbl_tb",
@@ -1703,17 +1802,25 @@ namespace Learn_CTS
                 Name = "tb_npc_density",
                 BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
                 Minimum = 0,
-                Maximum = 800,
+                Maximum = 275,
+                TickFrequency = 5,
                 TickStyle = TickStyle.Both,
                 Value = int.Parse((string)envi_data["npc_density"]),
-                Width = content.Width - lbl_tb.Width - 10 - 100
+                Width = content.Width - lbl_tb.Width - 10 - 80
             };
             tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
             content.Controls.Add(tb_npc_density);
 
             // Places Controls.
-            lbl_tb.Location = new Point(20, 100 + ((tb_npc_density.Height - lbl_tb.Height) / 2));
-            tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 10, 100);
+            int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
+            lbl_scene_name.Location = new Point(20, 75);
+            txt_scene_name.Location = new Point(sync_loc, 75);
+            lbl_scene_intro.Location = new Point(20, txt_scene_name.Location.Y + txt_scene_name.Height + 10);
+            txt_scene_intro.Location = new Point(sync_loc, txt_scene_name.Location.Y + txt_scene_name.Height + 10);
+            lbl_tb.Location = new Point(20, txt_scene_intro.Location.Y + txt_scene_intro.Height + 15 +
+                                            ((tb_npc_density.Height - lbl_tb.Height) / 2));
+            tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 50, txt_scene_intro.Location.Y + 
+                                                txt_scene_intro.Height + 15);
 
             // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
@@ -1762,23 +1869,18 @@ namespace Learn_CTS
 
         public void Npc_Density_Update(object sender, EventArgs e)
         {
-            if (this.value_cooldown) { Thread.Sleep(100); }
             // Diplay the new value.
             TrackBar tb = (TrackBar)sender;
             Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
             lbl.Text = "Densité de PNJs : " + tb.Value.ToString();
-            tb.Width = content.Width - lbl.Width - 10 - 100;
-            tb.Location = new Point(lbl.Location.X + lbl.Width + 10, 100);
 
             // Save the new value.
-            this.value_cooldown = true;
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                                   Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
             envi_data["npc_density"] = tb.Value;
-            Tools.Set_To_JSON(situation_path + "environment.json", envi_data);
-            this.value_cooldown = false;
+            try { Tools.Set_To_JSON(situation_path + "environment.json", envi_data); } catch (Exception except) { return; }
         }
 
         public void Add_Event(object sender, EventArgs e)

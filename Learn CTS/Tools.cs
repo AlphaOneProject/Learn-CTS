@@ -115,6 +115,19 @@ namespace Learn_CTS
         }
 
         /// <summary>
+        /// Return the maximum between two specified integers.
+        /// </summary>
+        /// <param name="nbr1">First integer.</param>
+        /// <param name="nbr2">Second integer.</param>
+        /// <returns>Maximum of both parameters.</returns>
+        public static int Max_Int(int nbr1, int nbr2)
+        {
+            int output = nbr1;
+            if (nbr2 > output) { output = nbr2; }
+            return output;
+        }
+
+        /// <summary>
         /// Check if a npc is colliding at a point is colliding with a vehicule.
         /// </summary>
         /// <param name="p1">The position of the npc.</param>
