@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Learn_CTS
 {
@@ -137,7 +138,12 @@ namespace Learn_CTS
                 + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "thumbnail.png";
             try
             {
-                pb_thumbnail.BackgroundImage = Image.FromFile(thumbnail_path);
+                Image img;
+                using (var bmpTemp = new Bitmap(thumbnail_path))
+                {
+                    img = new Bitmap(bmpTemp);
+                }
+                pb_thumbnail.BackgroundImage = img;
             }
             catch (Exception)
             {
@@ -197,8 +203,8 @@ namespace Learn_CTS
                 if ((MessageBox.Show("Confirmer la suppression du jeu " + this.gameFullName + " ?", "Confirmation de suppression",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes))
                 {
-                    Delete_Game();
                     this.Parent.Controls.Remove(this);
+                    Delete_Game();
                 }
             }            
         }

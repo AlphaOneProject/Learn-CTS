@@ -163,23 +163,23 @@ namespace Learn_CTS
                 ["c1"] = new JObject()
                 {
                     ["answer"] = "Réponse 1",
-                    ["score"] = 0,
+                    ["score"] = 1,
                     ["redirect"] = 0
                 },
                 ["c2"] = new JObject()
                 {
                     ["answer"] = "Réponse 2",
-                    ["score"] = 0,
+                    ["score"] = -1,
                     ["redirect"] = 0
                 },
                 ["audio"] = 1
             };
             File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                 "dialogs" + Path.DirectorySeparatorChar + "1.json", default_dialog_content.ToString());
-            default_dialog_content["question"] = "Quelle seconde question  écrire ?";
+            default_dialog_content["question"] = "Quelle seconde question écrire ?";
             File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                 "dialogs" + Path.DirectorySeparatorChar + "2.json", default_dialog_content.ToString());
-            default_dialog_content["question"] = "Quelle troisième question  écrire ?";
+            default_dialog_content["question"] = "Quelle troisième question écrire ?";
             File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                 "dialogs" + Path.DirectorySeparatorChar + "3.json", default_dialog_content.ToString());
         }

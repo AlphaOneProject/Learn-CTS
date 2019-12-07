@@ -124,7 +124,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Main_menu_btn_edit_Click(object sender, EventArgs e)
         {
-            this.Dispose_Controls();
+            Dispose_Controls(this);
             this.Controls.Clear();
             Display_games_menu();
         }
@@ -199,7 +199,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Main_menu_btn_options_Click(object sender, EventArgs e)
         {
-            this.Dispose_Controls();
+            Dispose_Controls(this);
             this.Controls.Clear();
             Display_options_menu();
         }
@@ -211,7 +211,7 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Back_to_main_menu(object sender, EventArgs e)
         {
-            this.Dispose_Controls();
+            Dispose_Controls(this);
             this.Controls.Clear();
             Display_Main_Menu();
         }
@@ -497,7 +497,6 @@ namespace Learn_CTS
             Tools.Set_To_JSON(AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json", this.options);
         }
 
-
         /// <summary>
         /// Displays a custom box to create a game.
         /// </summary>
@@ -655,11 +654,11 @@ namespace Learn_CTS
             Tools.Set_To_JSON(options_path, options);
         }
     
-        public void Dispose_Controls()
+        public void Dispose_Controls(Control control)
         {
-            foreach (Control c in this.Controls)
+            foreach (Control c in control.Controls)
             {
-                c.Dispose();
+                Dispose_Controls(c);
             }
         }
 

@@ -5,7 +5,7 @@ Projet d'intégration des allochtones souhaitant s'initier à la citoyenneté fr
 ## Présentation rapide du logiciel
 
 Vous avez bien lu !
-Contrairement aux apparences, "Learn CTS" n'est pas un jeu à proprement parler mais bien un logiciel.
+Contrairement aux apparences, "Learn CTS" n'est pas un jeu à proprement parler mais bien un **logiciel**.
 
 En effet, il s'agit d'un **éditeur** couplé à plusieurs **moteurs de jeu**.
 
