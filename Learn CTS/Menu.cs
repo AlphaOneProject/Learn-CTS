@@ -469,6 +469,11 @@ namespace Learn_CTS
             Change_Theme();
         }
 
+        /// <summary>
+        /// Called when the ToogleSwitch is changed, to directly update the colors of the current form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Options_Menu_Tgs_Theme_CheckedChanged(object sender, EventArgs e)
         {
             JCS.ToggleSwitch tgs = (JCS.ToggleSwitch)sender;
@@ -523,6 +528,11 @@ namespace Learn_CTS
             Change_Theme();
         }
 
+        /// <summary>
+        /// Called when the GameCreator loses focus.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameCreator_Leave(object sender, EventArgs e)
         {
             if (Controls.Find("games_menu_game_creator", true).Length != 0)
@@ -532,6 +542,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the size of the window has changed.
+        /// Is used for responsive behavior.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_SizeChanged(object sender, EventArgs e)
         {
             switch (this.displayed_menu)
@@ -547,6 +563,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called by Menu_SizeChanged(), if the user is browsing the Games Menu.
+        /// </summary>
         private void Responsive_Resize_games_menu()
         {
             foreach (Control c in this.Controls)
@@ -582,6 +601,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called by Menu_SizeChanged(), if the user is browsing the Main Menu.
+        /// </summary>
         private void Responsive_Resize_Main_Menu()
         {
             foreach (Control c in this.Controls)
@@ -612,6 +634,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called by Menu_SizeChanged(), if the user is browsing the Options Menu.
+        /// </summary>
         private void Responsive_Resize_Options_Menu()
         {
             foreach (Control c in this.Controls)
@@ -630,6 +655,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the form is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.Visible)
@@ -638,6 +668,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Saves the local copy of the options into the options file.
+        /// </summary>
         public void Save_Options()
         {
             // Save current Form's size.
@@ -654,6 +687,10 @@ namespace Learn_CTS
             Tools.Set_To_JSON(options_path, options);
         }
     
+        /// <summary>
+        /// Recursively disposes all the controls of the form.
+        /// </summary>
+        /// <param name="control"></param>
         public void Dispose_Controls(Control control)
         {
             foreach (Control c in control.Controls)
@@ -704,6 +741,10 @@ namespace Learn_CTS
                     );
         }
 
+        /// <summary>
+        /// Returns the current theme of the application.
+        /// </summary>
+        /// <returns>JObject of the current theme.</returns>
         public JObject GetTheme()
         {
             return (JObject)this.themes[this.options["theme"].ToString()];

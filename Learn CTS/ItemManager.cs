@@ -11,7 +11,6 @@ namespace Learn_CTS
 {
     /// <summary>
     /// Manager of the items for the point and click game mode.
-    /// Works as a singleton.
     /// </summary>
     class ItemManager
     {

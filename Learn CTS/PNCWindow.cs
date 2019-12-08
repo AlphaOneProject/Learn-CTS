@@ -13,6 +13,9 @@ using System.Windows.Forms;
 
 namespace Learn_CTS
 {
+    /// <summary>
+    /// Window responsible for the point and click game mode
+    /// </summary>
     public partial class PNCWindow : Form
     {
 

@@ -15,6 +15,10 @@ using System.Threading;
 
 namespace Learn_CTS
 {
+    /// <summary>
+    /// Control used to view the question and actions choices for a specific item in the point and click game mode,
+    /// Allows to interact with the item.
+    /// </summary>
     partial class ItemViewer : UserControl
     {
         private Item item;
@@ -22,6 +26,11 @@ namespace Learn_CTS
         SpeechSynthesizer s;
         private Thread t_audio;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="item_id">ID of the item viewed.</param>
+        /// <param name="manager">Manager of the situation, which contains the item.</param>
         public ItemViewer(int item_id, ItemManager manager)
         {
             InitializeComponent();
@@ -29,6 +38,11 @@ namespace Learn_CTS
             this.item = manager.GetItemByID(item_id);
         }
 
+        /// <summary>
+        /// Called when the ItemViewer is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemViewer_Load(object sender, EventArgs e)
         {
             // Properties of the item image picturebox
@@ -47,11 +61,22 @@ namespace Learn_CTS
             DisplayActions();
         }
 
+        /// <summary>
+        /// Hides the form when the exit button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_exit_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
+        /// <summary>
+        /// Called when the size of the window changes.
+        /// Is used for responsive behavior.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemViewer_ClientSizeChanged(object sender, EventArgs e)
         {
             lbl_desc.Width = this.Width - pb_item.Width - 6;
@@ -59,6 +84,9 @@ namespace Learn_CTS
             pb_audio.Location = new Point(this.Width - pb_audio.Width - 24, 6);
         }
 
+        /// <summary>
+        /// Displays one button for each actions possible with the item.
+        /// </summary>
         private void DisplayActions()
         {
             JObject actions = item.GetActions();
@@ -77,16 +105,30 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when a button defining an action of the item is clicked.
+        /// Processes the action.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Action_Event(object sender, EventArgs e)
         {
             
         }
 
+        /// <summary>
+        /// Called when the audiodescription PictureBox is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_audio_Click(object sender, EventArgs e)
         {
             t_audio.Start();
         }
 
+        /// <summary>
+        /// Audiodescription for the viewed items quesion and choices of actions.
+        /// </summary>
         private void Listen()
         {
             JObject actions = item.GetActions();
@@ -110,16 +152,30 @@ namespace Learn_CTS
             t_audio.Abort();
         }
 
+        /// <summary>
+        /// Called when the exit button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_exit_MouseDown(object sender, MouseEventArgs e)
         {
             Exit();
         }
 
+        /// <summary>
+        /// Called when the ItemViewer loses focus.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemViewer_Leave(object sender, EventArgs e)
         {
             Exit();
         }
 
+        /// <summary>
+        /// Called to exit the ItemViewer.
+        /// Aborts the audiodescription thread if it exists and disposes the control.
+        /// </summary>
         public void Exit()
         {
             if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
