@@ -12,6 +12,9 @@ namespace Learn_CTS
 {
     public partial class Editor : Form
     {
+        // Constants.
+
+        private const int dialogs_per_page = 5;
 
         // Attributes.
 
@@ -20,10 +23,9 @@ namespace Learn_CTS
         private JObject game_properties;
         private JObject theme;
         private string old_category = "general";
-        private bool saved;
+        private bool saved = true;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
-        private bool value_cooldown = false;
 
         // Methods.
 
@@ -918,11 +920,71 @@ namespace Learn_CTS
             lbl_dialogs.Location = new Point(20, 20);
             pb_add_dialog.Location = new Point(lbl_dialogs.Location.X + lbl_dialogs.Width + 20, 20);
 
+            // Generating Controls associated to the pages.
+            // Choosen pattern: << < P > >>
+            Button btn_fast_backward = new Button()
+            {
+                Name = "btn_fast_backward",
+                Text = "<<",
+                AutoSize = true
+            };
+            btn_fast_backward.Click += new EventHandler(Dialog_Fast_Backward);
+            content.Controls.Add(btn_fast_backward);
+
+            Button btn_backward = new Button()
+            {
+                Name = "btn_backward",
+                Text = "<",
+                AutoSize = true
+            };
+            btn_backward.Click += new EventHandler(Dialog_Backward);
+            content.Controls.Add(btn_backward);
+
+            Label lbl_page_number = new Label()
+            {
+                Name = "lbl_page_number",
+                Text = "1/1",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            lbl_page_number.TextChanged += new EventHandler(Dialog_Page_Update);
+            content.Controls.Add(lbl_page_number);
+
+            Button btn_forward = new Button()
+            {
+                Name = "btn_forward",
+                Text = ">",
+                AutoSize = true
+            };
+            btn_forward.Click += new EventHandler(Dialog_Forward);
+            content.Controls.Add(btn_forward);
+
+            Button btn_fast_forward = new Button()
+            {
+                Name = "btn_fast_forward",
+                Text = ">>",
+                AutoSize = true
+            };
+            btn_fast_forward.Click += new EventHandler(Dialog_Fast_Forward);
+            content.Controls.Add(btn_fast_forward);
+
+            // Placement of said Controls.
+            btn_fast_forward.Location = new Point(content.Width - btn_fast_forward.Width - 40, 20);
+            btn_forward.Location = new Point(btn_fast_forward.Location.X - btn_forward.Width - 4, 20);
+            lbl_page_number.Location = new Point(btn_forward.Location.X - lbl_page_number.Width - 10,
+                                                 20 + ((btn_fast_forward.Height - lbl_page_number.Height) / 2));
+            btn_backward.Location = new Point(lbl_page_number.Location.X - btn_backward.Width - 10, 20);
+            btn_fast_backward.Location = new Point(btn_backward.Location.X - btn_fast_backward.Width - 4, 20);
+
             // Generating to all files' a QuizzEdition UserControl.
             int i = 1;
             int last_pos = 0;
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int total_pages = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            lbl_page_number.Text = "1/" + total_pages.ToString();
+
             foreach (string file in Directory.GetFiles(dialogs_path))
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
@@ -940,7 +1002,8 @@ namespace Learn_CTS
                 {
                     Name = "lbl_dialog_id" + i,
                     Text = "N°" + i,
-                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                     AutoSize = true,
                     BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
                     ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
@@ -950,7 +1013,132 @@ namespace Learn_CTS
 
                 lbl_dialog_id.Location = new Point(QEdition.Location.X, QEdition.Location.Y - lbl_dialog_id.Height + 1);
                 i++;
+
+                if (i > dialogs_per_page)
+                {
+                    return;
+                }
             }
+        }
+
+        public void Dialog_Page_Update(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int current_page = int.Parse(lbl.Text.Split('/')[0]);
+            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+
+            List<int> ids = new List<int>();
+            foreach(QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
+            {
+                ids.Add(qe.Get_Id());
+                content.Controls.Remove(qe);
+            }
+            foreach (int id in ids)
+            {
+                    content.Controls.Remove(content.Controls.Find("lbl_dialog_id" + id, true)[0]);
+            }
+
+            Control fast_backward = content.Controls.Find("btn_fast_backward", true)[0];
+            Control backward = content.Controls.Find("btn_backward", true)[0];
+            Control forward = content.Controls.Find("btn_forward", true)[0];
+            Control fast_forward = content.Controls.Find("btn_fast_forward", true)[0];
+
+            fast_backward.Enabled = true;
+            backward.Enabled = true;
+            forward.Enabled = true;
+            fast_forward.Enabled = true;
+
+            if (current_page == 1)
+            {
+                fast_backward.Enabled = false;
+                backward.Enabled = false;
+            }
+            if (current_page == max_page)
+            {
+                forward.Enabled = false;
+                fast_forward.Enabled = false;
+            }
+
+            int i = 1;
+            int last_pos = 0;
+
+            foreach (string file in Directory.GetFiles(dialogs_path))
+            {
+                if (i < ((current_page - 1) * dialogs_per_page) + 1)
+                {
+                    i++;
+                    continue;
+                }
+
+                // Creating the UserControl responsible for the internal edition of the JSON file.
+                QuizzEdition QEdition = new QuizzEdition(this, @"" + dialogs_path + i + ".json")
+                {
+                    Name = "QuizzEdition" + i,
+                    Width = content.Width - 80,
+                    Location = new Point(40, 100 + last_pos)
+                };
+                content.Controls.Add(QEdition);
+                last_pos += QEdition.Height + 40;
+
+                // Label over the UserControl, displaying dialog's id.
+                Label lbl_dialog_id = new Label()
+                {
+                    Name = "lbl_dialog_id" + i,
+                    Text = "N°" + i,
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
+                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+                content.Controls.Add(lbl_dialog_id);
+
+                lbl_dialog_id.Location = new Point(QEdition.Location.X, QEdition.Location.Y - lbl_dialog_id.Height + 1);
+                i++;
+
+                if (i > (dialogs_per_page * current_page))
+                {
+                    return;
+                }
+            }
+        }
+
+        public void Dialog_Fast_Backward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = "1/" + ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Backward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) - 1).ToString() + "/" +
+                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Forward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) + 1).ToString() + "/" +
+                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Fast_Forward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            lbl.Text = max_page.ToString() + "/" + max_page.ToString();
         }
 
         /// <summary>
