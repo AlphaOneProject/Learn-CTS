@@ -136,11 +136,21 @@ namespace Learn_CTS
             menu.SelectedNode = menu.Nodes[0];
         }
 
+        /// <summary>
+        /// Allow external Forms or UserControls to access the name of the game edited by
+        /// an instance of Editor and thus, the game they are asked to focus on.
+        /// </summary>
+        /// <returns>Name of the game currently edited.</returns>
         public string Get_Game()
         {
             return this.game;
         }
 
+        /// <summary>
+        /// Transmit the data object already read when starting the Editor and thus
+        /// optimizing the I/O memory access.
+        /// </summary>
+        /// <returns>Object containing the whole pallet of colors to display.</returns>
         public JObject Get_Theme()
         {
             return this.theme;
@@ -474,12 +484,25 @@ namespace Learn_CTS
                                                 (pb_import_lib.Height - lbl_import_lib.Height) / 2);
         }
 
+        /// <summary>
+        /// Launch the Form "GameSelection" with full focus to get the selected game
+        /// upon its end.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Import_Library(object sender, EventArgs e)
         {
             GameSelection gs = new GameSelection(this);
             gs.ShowDialog();
         }
 
+        /// <summary>
+        /// Recover and process the name of the selected game.
+        /// If the name is not empty then the library of the game will
+        /// be copied in the current game.
+        /// </summary>
+        /// <param name="game_name">Legacy parameter from the "GameSelection" Form,
+        /// name of the selected game.</param>
         public void Import_Selected_Library(string game_name)
         {
             if (game_name.Length == 0) { return; }
@@ -1831,7 +1854,7 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_down_situation.Click += new EventHandler(this.Down_Situation);
+            pb_down_situation.Click += new EventHandler(Down_Situation);
             content.Controls.Add(pb_down_situation);
 
             PictureBox pb_up_situation = new PictureBox()
@@ -1843,7 +1866,7 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_up_situation.Click += new EventHandler(this.Up_Situation);
+            pb_up_situation.Click += new EventHandler(Up_Situation);
             content.Controls.Add(pb_up_situation);
 
             // Creation of a label reminding the situation's name.
@@ -1856,7 +1879,7 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
-            lbl_name_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            lbl_name_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(lbl_name_situation);
 
             // Creation of the hidden textbox allowing to enter a new situation's name.
@@ -1873,7 +1896,7 @@ namespace Learn_CTS
                 ShortcutsEnabled = false,
                 Visible = false
             };
-            txt_rename_situation.KeyPress += new KeyPressEventHandler(this.Rename_Situation_Txt_Keypress);
+            txt_rename_situation.KeyPress += new KeyPressEventHandler(Rename_Situation_Txt_Keypress);
             content.Controls.Add(txt_rename_situation);
 
             // Creation of a PictureBox allowing to rename the situation.
@@ -1886,7 +1909,7 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            pb_rename_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(pb_rename_situation);
 
             // Creation of a PictureBox allowing to discard the situation.
@@ -1899,7 +1922,7 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_discard_situation.Click += new EventHandler(this.Discard_Situation);
+            pb_discard_situation.Click += new EventHandler(Discard_Situation);
             content.Controls.Add(pb_discard_situation);
 
             // Creation of a PictureBox responsible for the preview display.
@@ -2124,7 +2147,7 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_add_event.Click += new EventHandler(this.Add_Event);
+            pb_add_event.Click += new EventHandler(Add_Event);
             content.Controls.Add(pb_add_event);
 
             // Place the Controls just created.
@@ -2550,6 +2573,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Display a preview of the current situation.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Preview_Situation(object sender, EventArgs e)
         {
             if (this.preview != null)
