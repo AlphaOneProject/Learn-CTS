@@ -16,14 +16,18 @@ namespace Learn_CTS
 
         private static string folder;
 
+        private static bool move_vertically = true;
+
         /// <summary>
         /// Constructor of the player
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
 
-        private Player(String name, int x, int y) : base(0, name, folder, x, y)
+        public Player(int x, int y) : base(0, Player.name, folder, x, y)
         {
+            if (player_instance != null) throw new Exception();
+            player_instance = this;
         }
 
         public static Player GetInstance()
@@ -42,17 +46,10 @@ namespace Learn_CTS
             Player.folder = folder;
         }
 
-        public static Player Construct(int x, int y)
-        {
-            if (player_instance != null) throw new Exception();
-            player_instance = new Player(Player.name, x, y);
-            return player_instance;
-        }
-
         public override void Dispose()
         {
             player_instance = null;
-            name = "Moi";
+            name = "";
             base.Dispose();
         }
 
@@ -60,6 +57,16 @@ namespace Learn_CTS
         {
             this.RemoveAllObjectives();
             base.SetObjective(x, y);
+        }
+
+        public static void SetMovingVertically(bool v)
+        {
+            move_vertically = v;
+        }
+
+        public static bool IsMovingVertically()
+        {
+            return move_vertically;
         }
     }
 }
