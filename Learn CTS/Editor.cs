@@ -1736,7 +1736,7 @@ namespace Learn_CTS
             Label lbl_scene_name = new Label()
             {
                 Name = "lbl_scene_name",
-                Text = "Nom du lieu : ",
+                Text = "Nom du lieu   ",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
@@ -1746,7 +1746,7 @@ namespace Learn_CTS
             Label lbl_scene_intro = new Label()
             {
                 Name = "lbl_scene_intro",
-                Text = "Texte d'introduction : ",
+                Text = "Texte d'introduction   ",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
@@ -1811,7 +1811,68 @@ namespace Learn_CTS
             tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
             content.Controls.Add(tb_npc_density);
 
-            // Places Controls.
+            // Filling with the existing backgrounds.
+            string bg_path = this.game_path + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                             "background" + Path.DirectorySeparatorChar;
+            List<string> list_bg = new List<string>();
+            foreach (string fi in Directory.GetFiles(@"" + bg_path))
+            {
+                string file_name = fi.Split(Path.DirectorySeparatorChar).Last().Split('.')[0];
+                if (!file_name.Contains("Hitbox"))
+                {
+                    list_bg.Add(file_name);
+                }
+            }
+
+            Label lbl_background = new Label()
+            {
+                Name = "lbl_background",
+                Text = "Décor   ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_background);
+
+            Label lbl_scene_type = new Label()
+            {
+                Name = "lbl_scene_type",
+                Text = "Type de scène   ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_scene_type);
+
+            ComboBoxFix cbo_background = new ComboBoxFix()
+            {
+                Name = "cbo_background",
+                DataSource = list_bg,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
+            };
+            content.Controls.Add(cbo_background);
+
+            List<string> list_scenes = new List<string>()
+            {
+                "Montée dans le tram", "Trajet en tram", "Descente du tram"
+            };
+            ComboBoxFix cbo_scene_type = new ComboBoxFix()
+            {
+                Name = "cbo_scene_type",
+                DataSource = list_scenes,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
+            };
+            content.Controls.Add(cbo_scene_type);
+
+            // Places Controls just created.
             int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
             lbl_scene_name.Location = new Point(20, 75);
             txt_scene_name.Location = new Point(sync_loc, 75);
@@ -1821,6 +1882,12 @@ namespace Learn_CTS
                                             ((tb_npc_density.Height - lbl_tb.Height) / 2));
             tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 50, txt_scene_intro.Location.Y + 
                                                 txt_scene_intro.Height + 15);
+            lbl_background.Location = new Point();
+            cbo_background.Location = new Point();
+            lbl_scene_type.Location = new Point();
+            cbo_scene_type.Location = new Point();
+
+
 
             // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
