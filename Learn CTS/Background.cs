@@ -7,14 +7,24 @@ namespace Learn_CTS
     class Background : Texture
     {
 
-        /// <summary>
-        /// Constructor of background.
-        /// </summary>
-        /// <param name="x">The x coordinate.</param>
+        private Texture double_b;
 
-        public Background(int x, int y) : base("Background", "background", x, y, -5000)
+        /// <summary>
+        /// Constructor of background
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+
+        public Background(string name, int x, int y) : base(name, "background", x, y, -5000)
         {
-            this.DisableCollisions();
+            double_b = new Texture(name, "background", this.GetWidth() + this.GetX(), y, -5000);
+            this.AddChild(double_b);
+        }
+
+        public override bool CollideWith(Texture t, bool b)
+        {
+            return double_b.CollideWith(t, b) || base.CollideWith(t, b);
         }
 
         /// <summary>
@@ -36,21 +46,8 @@ namespace Learn_CTS
                 this.SetX(-this.GetWidth());
             }
             g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
-            g.DrawImage(this.GetImage(), new Point(this.GetWidth()+this.GetX(), this.GetY()));
+            g.DrawImage(double_b.GetImage(), new Point(double_b.GetX(), double_b.GetY()));
             g.CompositingMode = c;
-            foreach (Texture t in this.GetListChilds())
-            {
-                if (t.GetX() < -t.GetWidth())
-                {
-                    t.SetX(this.GetX() + t.GetWidth());
-                }
-                if (t.GetX() > 0)
-                {
-                    t.SetX(-t.GetWidth());
-                }
-                g.DrawImage(t.GetImage(), new Point(t.GetX(), t.GetY()));
-                g.DrawImage(t.GetImage(), new Point(t.GetWidth() + t.GetX(), t.GetY()));
-            }
         }
     }
 }
