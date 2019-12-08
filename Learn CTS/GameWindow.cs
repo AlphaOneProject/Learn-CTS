@@ -50,7 +50,7 @@ namespace Learn_CTS
         private Texture backpack;
         private Egg egg;
         private EventHandler current_scene_tick;
-        private string scene_type;
+        private int scene_type;
         // development
         private bool showhitbox = false;
         private bool god = false;
@@ -205,8 +205,8 @@ namespace Learn_CTS
         private void Load_Game()
         {
             JObject environment = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json");
-            this.scene_type = environment["scene_type"].ToString();
-            if(scene_type == "tram_entrance") //todo : in a method
+            this.scene_type = (int)environment["scene_type"];
+            if(scene_type == 0) //todo : in a method
             {
                 this.MouseDown += new System.Windows.Forms.MouseEventHandler(delegate(object sender, System.Windows.Forms.MouseEventArgs e) {
                 if (!ticket_valid && platform.IsTerminalHit(e.Location.X, e.Location.Y))
@@ -289,8 +289,8 @@ namespace Learn_CTS
             }
             switch (scene_type)
             {
-                case "tram_entrance": current_scene_tick = OnPlatform_Tick;  break;
-                case "park": current_scene_tick = Park_Tick; break;
+                case 0: current_scene_tick = OnPlatform_Tick;  break;
+                case 8: current_scene_tick = Park_Tick; break;
                 default: MessageBox.Show("Erreur : Le type de scène n'a pas été reconnu."); this.Close(); break;
             }
             timer.Tick += new EventHandler(current_scene_tick);
@@ -313,7 +313,7 @@ namespace Learn_CTS
             
             player = new Player(this.Width/2-96, 650);
             list_game_textures = new List<Texture>();
-            if (scene_type == "tram_entrance")
+            if (scene_type == 0)
             {
                 background = new Background("backgroundCity", 0, -372);
                 vehicule = new Tram(-4000, 298 + 80);
@@ -322,7 +322,7 @@ namespace Learn_CTS
                 list_game_textures.Add(vehicule);
                 list_game_textures.Add(platform);
             }
-            else if (scene_type == "park")
+            else if (scene_type == 8)
             {
                 background = new Background("parkBackground", 0, -372);
                 background.EnableCollisions();
@@ -990,7 +990,7 @@ namespace Learn_CTS
                 npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
                 npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
-                if(scene_type == "tram_entrance")
+                if(scene_type == 0)
                 {
                     if (vehicule != null & vehicule.GetX() + npc_x >= vehicule.GetX() + 492 && vehicule.GetX() + npc_x < vehicule.GetX() + vehicule.GetWidth() - 492 && vehicule.GetY() + npc_y >= vehicule.GetY() + 144 && vehicule.GetY() + npc_y <= vehicule.GetY() + 164)
                     {
@@ -1003,17 +1003,17 @@ namespace Learn_CTS
                         platform.AddChild(nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder));
                     }
                 }
-                else if(scene_type == "park")
+                else if(scene_type == 8)
                 {
                     //do things
                 }
             }
-            if(scene_type == "tram_entrance")
+            if(scene_type == 0)
             {
                 FillVehiculeNPCs();
                 FillPlatformNPCs();
             }
-            else if(scene_type == "park")
+            else if(scene_type == 8)
             {
                 FillParkNPCs();
             }
