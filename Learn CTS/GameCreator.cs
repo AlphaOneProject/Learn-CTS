@@ -116,12 +116,22 @@ namespace Learn_CTS
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
             // ./Game/library/dialogs
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs");
+            // ./Game/library/dialogs
+            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "audio");
             // ./Game/library/images
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
             // ./Game/library/npcs
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs");
             // ./Game/scenarios
             Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
+
+            List<string> dir_list = new List<string>() {
+                "background", "characters", "eggs", "items", "others", "park", "platform", "vehicule"
+            };
+            foreach(string d in dir_list){
+                Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar +
+                    "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + d);
+            }
 
             // Add a "properties.json" to the newly created folder.
             JObject properties_content = new JObject();
