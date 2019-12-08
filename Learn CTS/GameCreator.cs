@@ -12,6 +12,10 @@ using Newtonsoft.Json.Linq;
 
 namespace Learn_CTS
 {
+    /// <summary>
+    /// Control used to create a new game.
+    /// Typically called in the Games Menu.
+    /// </summary>
     public partial class GameCreator : UserControl
     {
 
@@ -19,9 +23,14 @@ namespace Learn_CTS
          * Default path of all the created games. 
          */
         private readonly String games_path;
+
         private JObject theme;
         private Menu menu;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="menu">The Menu calling the GameCreator</param>
         public GameCreator(Menu menu)
         {
             InitializeComponent();
@@ -42,6 +51,11 @@ namespace Learn_CTS
             
         }
 
+        /// <summary>
+        /// Called when the GameCreator is loaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameCreator_Load(object sender, EventArgs e)
         {
             txt_create.Focus();
@@ -243,6 +257,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the GameCreator loses the focus.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameCreator_Leave(object sender, EventArgs e)
         {
             this.Dispose();
