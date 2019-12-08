@@ -1,5 +1,7 @@
 {
   "background": 0,
   "scene_type": 0,
-  "npc_density":10,"scene_name":"","scene_intro":""
+  "npc_density":10,
+  "scene_name":"",
+  "scene_intro":""
 }

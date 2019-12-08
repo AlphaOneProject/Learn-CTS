@@ -161,11 +161,19 @@ namespace Learn_CTS
 
         public virtual void Move(int a, int b)
         {
+            this.Move(a, b, true);
+        }
+
+        public virtual void Move(int a, int b, bool mc)
+        {
             this.x += a;
             this.y += b;
-            foreach (Texture t in this.list_childs)
+            if (mc)
             {
-                t.Move(a, b);
+                foreach (Texture t in this.list_childs)
+                {
+                    t.Move(a, b, mc);
+                }
             }
         }
 
