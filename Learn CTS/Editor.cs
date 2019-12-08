@@ -887,6 +887,19 @@ namespace Learn_CTS
         {
             if (this.old_category == "dialogs") // Trigger only on form resize.
             {
+                Button btn_ff = (Button)content.Controls.Find("btn_fast_forward", true)[0];
+                Button btn_f = (Button)content.Controls.Find("btn_forward", true)[0];
+                Label lbl_pn = (Label)content.Controls.Find("lbl_page_number", true)[0];
+                Button btn_b = (Button)content.Controls.Find("btn_backward", true)[0];
+                Button btn_fb = (Button)content.Controls.Find("btn_fast_backward", true)[0];
+
+                btn_ff.Location = new Point(content.Width - btn_ff.Width - 40, 20);
+                btn_f.Location = new Point(btn_ff.Location.X - btn_f.Width - 4, 20);
+                lbl_pn.Location = new Point(btn_f.Location.X - lbl_pn.Width - 10,
+                                                     20 + ((btn_ff.Height - lbl_pn.Height) / 2));
+                btn_b.Location = new Point(lbl_pn.Location.X - btn_b.Width - 10, 20);
+                btn_fb.Location = new Point(btn_b.Location.X - btn_fb.Width - 4, 20);
+
                 foreach (QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
                 {
                     qe.Width = content.Width - 80;
