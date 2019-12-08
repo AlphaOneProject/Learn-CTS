@@ -1560,12 +1560,11 @@ namespace Learn_CTS
             // Add a "environment.json" to the folder.
             JObject environment_content = new JObject()
             {
-                ["background"] = 0,
-                ["game_engine"] = "quizz",
                 ["scene_name"] = "",
-                ["scene_type"] = "tram_entrance",
                 ["scene_intro"] = "",
-                ["npc_density"] = 10
+                ["npc_density"] = 10,
+                ["background"] = 0,
+                ["scene_type"] = 0
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
                               environment_content.ToString());
@@ -1724,6 +1723,8 @@ namespace Learn_CTS
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
             pb_preview_situation.Location = new Point(pb_discard_situation.Location.X + pb_discard_situation.Width + 2, 0);
 
+
+
             // Recovering data from the JSON files.
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
@@ -1812,12 +1813,12 @@ namespace Learn_CTS
             content.Controls.Add(tb_npc_density);
 
             // Filling with the existing backgrounds.
-            string bg_path = this.game_path + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
-                             "background" + Path.DirectorySeparatorChar;
+            string bg_path = this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                             "images" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar;
             List<string> list_bg = new List<string>();
             foreach (string fi in Directory.GetFiles(@"" + bg_path))
             {
-                string file_name = fi.Split(Path.DirectorySeparatorChar).Last().Split('.')[0];
+                string file_name = fi.Split(Path.DirectorySeparatorChar).Last();
                 if (!file_name.Contains("Hitbox"))
                 {
                     list_bg.Add(file_name);
@@ -1848,29 +1849,38 @@ namespace Learn_CTS
             {
                 Name = "cbo_background",
                 DataSource = list_bg,
+                Tag = situation_path + "environment.json",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = content.Width - Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) - 40 - 10,
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
                 ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
             };
+            cbo_background.SelectedIndexChanged += new EventHandler(Situation_Background_Changed);
             content.Controls.Add(cbo_background);
+            cbo_background.SelectedItem = (string)envi_data["background"];
 
             List<string> list_scenes = new List<string>()
             {
-                "Montée dans le tram", "Trajet en tram", "Descente du tram"
+                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "Montée dans le bus", "Trajet en bus",
+                "Descente du bus", "Accident de bus", "Marche dans un parc"
             };
             ComboBoxFix cbo_scene_type = new ComboBoxFix()
             {
                 Name = "cbo_scene_type",
                 DataSource = list_scenes,
+                Tag = situation_path + "environment.json",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = content.Width - Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) - 40 - 10,
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
                 ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
             };
+            cbo_scene_type.SelectedIndexChanged += new EventHandler(Scene_Type_Changed);
             content.Controls.Add(cbo_scene_type);
+            cbo_scene_type.SelectedIndex = int.Parse((string)envi_data["scene_type"]);
 
             // Places Controls just created.
             int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
@@ -1882,10 +1892,12 @@ namespace Learn_CTS
                                             ((tb_npc_density.Height - lbl_tb.Height) / 2));
             tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 50, txt_scene_intro.Location.Y + 
                                                 txt_scene_intro.Height + 15);
-            lbl_background.Location = new Point();
-            cbo_background.Location = new Point();
-            lbl_scene_type.Location = new Point();
-            cbo_scene_type.Location = new Point();
+
+            sync_loc = Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) + 20 + 10;
+            lbl_background.Location = new Point(20, tb_npc_density.Location.Y + tb_npc_density.Height + 15);
+            cbo_background.Location = new Point(sync_loc, lbl_background.Location.Y);
+            lbl_scene_type.Location = new Point(20, cbo_background.Location.Y + cbo_background.Height + 10);
+            cbo_scene_type.Location = new Point(sync_loc, lbl_scene_type.Location.Y);
 
 
 
@@ -1914,12 +1926,12 @@ namespace Learn_CTS
             pb_add_event.Click += new EventHandler(this.Add_Event);
             content.Controls.Add(pb_add_event);
 
-            // Place the controls just created.
-            lbl_events.Location = new Point(20, 240);
-            pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 240);
+            // Place the Controls just created.
+            lbl_events.Location = new Point(20, 360);
+            pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 360);
 
             // Generating to all files' an EventEdition UserControl.
-            int last_pos = 300;
+            int last_pos = 420;
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
@@ -1948,6 +1960,24 @@ namespace Learn_CTS
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
             envi_data["npc_density"] = tb.Value;
             try { Tools.Set_To_JSON(situation_path + "environment.json", envi_data); } catch (Exception except) { return; }
+        }
+
+        public void Situation_Background_Changed(object sender, EventArgs e)
+        {
+            ComboBoxFix cbo = (ComboBoxFix)sender;
+
+            JObject data = Tools.Get_From_JSON((string)cbo.Tag);
+            data["background"] = cbo.Text;
+            Tools.Set_To_JSON((string)cbo.Tag, data);
+        }
+
+        public void Scene_Type_Changed(object sender, EventArgs e)
+        {
+            ComboBoxFix cbo = (ComboBoxFix)sender;
+
+            JObject data = Tools.Get_From_JSON((string)cbo.Tag);
+            data["scene_type"] = cbo.SelectedIndex;
+            Tools.Set_To_JSON((string)cbo.Tag, data);
         }
 
         public void Add_Event(object sender, EventArgs e)
@@ -1985,7 +2015,7 @@ namespace Learn_CTS
 
             // Replacing all EventEdition UserControls in the right place.
             int i = 1;
-            int last_pos = 300;
+            int last_pos = 420;
             foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
             {
                 ee.Location = new Point(40, last_pos - content.VerticalScroll.Value);
