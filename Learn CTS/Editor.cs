@@ -1031,7 +1031,7 @@ namespace Learn_CTS
             int last_pos = 0;
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
-            int total_pages = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            int total_pages = Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page);
             lbl_page_number.Text = "1/" + total_pages.ToString();
 
             foreach (string file in Directory.GetFiles(dialogs_path))
@@ -1070,13 +1070,13 @@ namespace Learn_CTS
             }
         }
 
-        public void Dialog_Page_Update(object sender, EventArgs e)
+        private void Dialog_Page_Update(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
             int current_page = int.Parse(lbl.Text.Split('/')[0]);
-            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            int max_page = Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page);
 
             List<int> ids = new List<int>();
             foreach(QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
@@ -1155,38 +1155,38 @@ namespace Learn_CTS
             }
         }
 
-        public void Dialog_Fast_Backward(object sender, EventArgs e)
+        private void Dialog_Fast_Backward(object sender, EventArgs e)
         {
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
-            lbl.Text = "1/" + ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+            lbl.Text = "1/" + Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
-        public void Dialog_Backward(object sender, EventArgs e)
+        private void Dialog_Backward(object sender, EventArgs e)
         {
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
             lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) - 1).ToString() + "/" +
-                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+                       Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
-        public void Dialog_Forward(object sender, EventArgs e)
+        private void Dialog_Forward(object sender, EventArgs e)
         {
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
             lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) + 1).ToString() + "/" +
-                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+                       Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
-        public void Dialog_Fast_Forward(object sender, EventArgs e)
+        private void Dialog_Fast_Forward(object sender, EventArgs e)
         {
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
-            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            int max_page = Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page);
             lbl.Text = max_page.ToString() + "/" + max_page.ToString();
         }
 
@@ -1196,7 +1196,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="sender">Control calling the method.</param>
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        public void Add_Dialog(object sender, EventArgs e)
+        private void Add_Dialog(object sender, EventArgs e)
         {
             // Generates the new dialog's id.
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
@@ -1257,17 +1257,19 @@ namespace Learn_CTS
         /// </summary>
         public void Update_Dialogs()
         {
-            int i = 1;
             int last_pos = 0;
             foreach (QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
             {
                 qe.Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value);
-                content.Controls.Find("lbl_dialog_id" + i, false)[0].Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value -
-                                                                                          content.Controls.Find("lbl_dialog_id" + i, false)[0].Height + 1);
+                content.Controls.Find("lbl_dialog_id" +
+                                      qe.Get_Id(), false)[0].Location = new Point(40, 100 + last_pos - content.VerticalScroll.Value -
+                                                             content.Controls.Find("lbl_dialog_id" + qe.Get_Id(), false)[0].Height + 1);
                 last_pos += qe.Height + 40;
                 qe.Reload_Redirections();
-                i++;
             }
+
+            // Reload page count and go to the last page.
+            Dialog_Fast_Forward(this, new EventArgs());
         }
 
         /// <summary>
