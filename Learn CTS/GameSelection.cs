@@ -54,6 +54,7 @@ namespace Learn_CTS
                 };
                 lbl_game.Click += new EventHandler(Game_Clicked);
                 flp_global.Controls.Add(lbl_game);
+                tlt_GameSelection.SetToolTip(lbl_game, "Cliquez pour importer les modèles de ce jeu");
             }
         }
 

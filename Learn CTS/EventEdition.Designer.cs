@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EventEdition));
             this.pb_delete = new System.Windows.Forms.PictureBox();
-            this.cbo_npcs = new ComboBoxFix();
-            this.cbo_dialogs = new ComboBoxFix();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.cbo_npcs = new Learn_CTS.ComboBoxFix();
+            this.cbo_dialogs = new Learn_CTS.ComboBoxFix();
+            this.tlt_Event_Edition = new System.Windows.Forms.ToolTip(this.components);
             this.btn_placement = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             this.pb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_delete.TabIndex = 0;
             this.pb_delete.TabStop = false;
-            this.toolTip.SetToolTip(this.pb_delete, "Supprime l\'évènement.");
+            this.tlt_Event_Edition.SetToolTip(this.pb_delete, "Supprime l\'évènement.");
             this.pb_delete.Click += new System.EventHandler(this.Discard);
             // 
             // cbo_npcs
@@ -62,7 +62,7 @@
             this.cbo_npcs.Name = "cbo_npcs";
             this.cbo_npcs.Size = new System.Drawing.Size(217, 32);
             this.cbo_npcs.TabIndex = 1;
-            this.toolTip.SetToolTip(this.cbo_npcs, "Permet le choix du personnage.");
+            this.tlt_Event_Edition.SetToolTip(this.cbo_npcs, "Permet le choix du personnage.");
             this.cbo_npcs.SelectedIndexChanged += new System.EventHandler(this.Cbo_npcs_SelectedIndexChanged);
             // 
             // cbo_dialogs
@@ -76,13 +76,16 @@
             this.cbo_dialogs.Name = "cbo_dialogs";
             this.cbo_dialogs.Size = new System.Drawing.Size(189, 32);
             this.cbo_dialogs.TabIndex = 2;
-            this.toolTip.SetToolTip(this.cbo_dialogs, "Permet le choix du dialogue.");
+            this.tlt_Event_Edition.SetToolTip(this.cbo_dialogs, "Permet le choix du dialogue.");
             this.cbo_dialogs.SelectedIndexChanged += new System.EventHandler(this.Cbo_dialogs_SelectedIndexChanged);
             // 
-            // toolTip
+            // tlt_Event_Edition
             // 
-            this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTip.ToolTipTitle = "Information";
+            this.tlt_Event_Edition.AutoPopDelay = 5000;
+            this.tlt_Event_Edition.InitialDelay = 300;
+            this.tlt_Event_Edition.ReshowDelay = 100;
+            this.tlt_Event_Edition.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.tlt_Event_Edition.ToolTipTitle = "Information";
             // 
             // btn_placement
             // 
@@ -93,6 +96,7 @@
             this.btn_placement.Size = new System.Drawing.Size(80, 32);
             this.btn_placement.TabIndex = 3;
             this.btn_placement.Text = "Placer";
+            this.tlt_Event_Edition.SetToolTip(this.btn_placement, "Place le figurant dans le décor");
             this.btn_placement.Click += new System.EventHandler(this.Btn_placement_Click);
             // 
             // EventEdition
@@ -119,7 +123,7 @@
         private System.Windows.Forms.PictureBox pb_delete;
         private ComboBoxFix cbo_npcs;
         private ComboBoxFix cbo_dialogs;
-        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.ToolTip tlt_Event_Edition;
         private System.Windows.Forms.Button btn_placement;
     }
 }

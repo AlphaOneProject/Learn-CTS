@@ -291,6 +291,8 @@ namespace Learn_CTS
                         Display_Dialogs(); break;
                     case "images":
                         Display_Images(); break;
+                    case "item_images":
+                        Display_Item_Images(); break;
                     case "sprites":
                         Display_Sprites(); break;
                     case "backgrounds":
@@ -341,6 +343,7 @@ namespace Learn_CTS
             txt_desc.Height = ((int)((txt_desc.Text.Length * 12) / txt_desc.Width) + 1) * 40;
             txt_desc.KeyPress += new KeyPressEventHandler(this.Txt_Keypress);
             content.Controls.Add(txt_desc);
+            tlt_global.SetToolTip(txt_desc, "Description du jeu");
 
             // Creation of a label used for showing messages regarding the description's modification.
             Label lbl_desc_state = new Label()
@@ -466,6 +469,7 @@ namespace Learn_CTS
             };
             pb_import_lib.Click += new EventHandler(this.Import_Library);
             content.Controls.Add(pb_import_lib);
+            tlt_global.SetToolTip(pb_import_lib, "Permet d'importer les modèles d'un jeu quelconque dans celui-ci");
 
             Label lbl_import_lib = new Label()
             {
@@ -478,6 +482,7 @@ namespace Learn_CTS
             };
             lbl_import_lib.Click += new EventHandler(this.Import_Library);
             content.Controls.Add(lbl_import_lib);
+            tlt_global.SetToolTip(lbl_import_lib, "Permet d'importer les modèles d'un jeu quelconque dans celui-ci");
 
             pb_import_lib.Location = new Point((content.Width - pb_import_lib.Width - 8 - lbl_import_lib.Width) / 2, 20);
             lbl_import_lib.Location = new Point(pb_import_lib.Location.X + pb_import_lib.Width + 8, pb_import_lib.Location.Y +
@@ -582,6 +587,7 @@ namespace Learn_CTS
             };
             pb_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
             content.Controls.Add(pb_add_lib_npc);
+            tlt_global.SetToolTip(pb_add_lib_npc, "Ajouter un nouveau figurant");
 
             // TableLayoutPanel, keeping the generated elements in rows.
             TableLayoutPanel tlp_npcs = new TableLayoutPanel()
@@ -643,6 +649,7 @@ namespace Learn_CTS
                 };
                 npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
                 tlp_npcs.Controls.Add(npc_name, 0, i);
+                tlt_global.SetToolTip(npc_name, "Nom du figurant");
 
                 TextBox npc_folder = new TextBox()
                 {
@@ -951,6 +958,7 @@ namespace Learn_CTS
             };
             pb_add_dialog.Click += new EventHandler(this.Add_Dialog);
             content.Controls.Add(pb_add_dialog);
+            tlt_global.SetToolTip(pb_add_dialog, "Ajouter un nouveau dialogue");
 
             // Place the controls just created.
             lbl_dialogs.Location = new Point(20, 20);
@@ -966,6 +974,7 @@ namespace Learn_CTS
             };
             btn_fast_backward.Click += new EventHandler(Dialog_Fast_Backward);
             content.Controls.Add(btn_fast_backward);
+            tlt_global.SetToolTip(btn_fast_backward, "Retourner à la première page");
 
             Button btn_backward = new Button()
             {
@@ -975,6 +984,7 @@ namespace Learn_CTS
             };
             btn_backward.Click += new EventHandler(Dialog_Backward);
             content.Controls.Add(btn_backward);
+            tlt_global.SetToolTip(btn_backward, "Aller à la page précédente");
 
             Label lbl_page_number = new Label()
             {
@@ -986,6 +996,7 @@ namespace Learn_CTS
             };
             lbl_page_number.TextChanged += new EventHandler(Dialog_Page_Update);
             content.Controls.Add(lbl_page_number);
+            tlt_global.SetToolTip(lbl_page_number, "Page actuelle");
 
             Button btn_forward = new Button()
             {
@@ -995,6 +1006,7 @@ namespace Learn_CTS
             };
             btn_forward.Click += new EventHandler(Dialog_Forward);
             content.Controls.Add(btn_forward);
+            tlt_global.SetToolTip(btn_forward, "Aller à la page suivante");
 
             Button btn_fast_forward = new Button()
             {
@@ -1004,6 +1016,7 @@ namespace Learn_CTS
             };
             btn_fast_forward.Click += new EventHandler(Dialog_Fast_Forward);
             content.Controls.Add(btn_fast_forward);
+            tlt_global.SetToolTip(btn_fast_forward, "Aller à la dernière page");
 
             // Placement of said Controls.
             btn_fast_forward.Location = new Point(content.Width - btn_fast_forward.Width - 40, 20);
@@ -1307,6 +1320,14 @@ namespace Learn_CTS
         }
 
         /// <summary>
+        /// Load controls for item images' content.
+        /// </summary>
+        private void Display_Item_Images()
+        {
+            // WIP
+        }
+
+        /// <summary>
         /// Load controls for sprites' content.
         /// </summary>
         private void Display_Sprites()
@@ -1423,6 +1444,7 @@ namespace Learn_CTS
             };
             pb_down_scenario.Click += new EventHandler(this.Down_Scenario);
             content.Controls.Add(pb_down_scenario);
+            tlt_global.SetToolTip(pb_down_scenario, "Inverse la position de ce scénario avec le suivant");
 
             PictureBox pb_up_scenario = new PictureBox()
             {
@@ -1435,6 +1457,7 @@ namespace Learn_CTS
             };
             pb_up_scenario.Click += new EventHandler(this.Up_Scenario);
             content.Controls.Add(pb_up_scenario);
+            tlt_global.SetToolTip(pb_up_scenario, "Inverse la position de ce scénario avec le précédent");
 
             // Creation of a label reminding the scenario's name.
             Label lbl_name_scenario = new Label()
@@ -1448,6 +1471,7 @@ namespace Learn_CTS
             };
             lbl_name_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(lbl_name_scenario);
+            tlt_global.SetToolTip(lbl_name_scenario, "Renomme le scénario");
             
             // Creation of the hidden textbox allowing to enter a new scenario's name.
             TextBox txt_rename_scenario = new TextBox()
@@ -1478,6 +1502,7 @@ namespace Learn_CTS
             };
             pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(pb_rename_scenario);
+            tlt_global.SetToolTip(pb_rename_scenario, "Renomme le scénario");
 
             // Creation of a button allowing to discard the scenario.
             PictureBox pb_discard_scenario = new PictureBox()
@@ -1491,6 +1516,7 @@ namespace Learn_CTS
             };
             pb_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
             content.Controls.Add(pb_discard_scenario);
+            tlt_global.SetToolTip(pb_discard_scenario, "Supprime le scénario et ses situations");
 
             // Creation of the button responsible for the situations' creation.
             Button btn_add_situation = new Button()
@@ -1856,6 +1882,7 @@ namespace Learn_CTS
             };
             pb_down_situation.Click += new EventHandler(Down_Situation);
             content.Controls.Add(pb_down_situation);
+            tlt_global.SetToolTip(pb_down_situation, "Inverse la position de cette situation avec la suivante");
 
             PictureBox pb_up_situation = new PictureBox()
             {
@@ -1868,6 +1895,7 @@ namespace Learn_CTS
             };
             pb_up_situation.Click += new EventHandler(Up_Situation);
             content.Controls.Add(pb_up_situation);
+            tlt_global.SetToolTip(pb_up_situation, "Inverse la position de cette situation avec la précédente");
 
             // Creation of a label reminding the situation's name.
             Label lbl_name_situation = new Label()
@@ -1881,6 +1909,7 @@ namespace Learn_CTS
             };
             lbl_name_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(lbl_name_situation);
+            tlt_global.SetToolTip(lbl_name_situation, "Renomme la situation");
 
             // Creation of the hidden textbox allowing to enter a new situation's name.
             TextBox txt_rename_situation = new TextBox()
@@ -1911,6 +1940,7 @@ namespace Learn_CTS
             };
             pb_rename_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(pb_rename_situation);
+            tlt_global.SetToolTip(pb_rename_situation, "Renomme la situation");
 
             // Creation of a PictureBox allowing to discard the situation.
             PictureBox pb_discard_situation = new PictureBox()
@@ -1924,6 +1954,7 @@ namespace Learn_CTS
             };
             pb_discard_situation.Click += new EventHandler(Discard_Situation);
             content.Controls.Add(pb_discard_situation);
+            tlt_global.SetToolTip(pb_discard_situation, "Supprime la situation");
 
             // Creation of a PictureBox responsible for the preview display.
             PictureBox pb_preview_situation = new PictureBox()
@@ -1937,6 +1968,7 @@ namespace Learn_CTS
             };
             pb_preview_situation.Click += new EventHandler(this.Preview_Situation);
             content.Controls.Add(pb_preview_situation);
+            tlt_global.SetToolTip(pb_preview_situation, "Affiche un aperçu de la situation");
 
             // Set the correct location of the controls (responsive with the groupbox's size).
             pb_down_situation.Location = new Point(8, 0);
@@ -1994,6 +2026,7 @@ namespace Learn_CTS
             };
             txt_scene_name.KeyPress += new KeyPressEventHandler(Txt_Keypress);
             content.Controls.Add(txt_scene_name);
+            tlt_global.SetToolTip(txt_scene_name, "Nom du lieu où se déroule la scène, affiché en haut à droite de l'écran");
 
             TextBox txt_scene_intro = new TextBox()
             {
@@ -2011,6 +2044,7 @@ namespace Learn_CTS
             };
             txt_scene_intro.KeyPress += new KeyPressEventHandler(Txt_Keypress);
             content.Controls.Add(txt_scene_intro);
+            tlt_global.SetToolTip(txt_scene_intro, "Texte d'introdution à la situation, affiché avant celle-ci");
 
             Label lbl_tb = new Label()
             {
@@ -2035,6 +2069,7 @@ namespace Learn_CTS
             };
             tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
             content.Controls.Add(tb_npc_density);
+            tlt_global.SetToolTip(tb_npc_density, "Modifie la densité des personnages non joueurs sans dialogue disposés aléatoirement");
 
             // Filling with the existing backgrounds.
             string bg_path = this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
@@ -2084,6 +2119,7 @@ namespace Learn_CTS
             cbo_background.SelectedIndexChanged += new EventHandler(Situation_Background_Changed);
             content.Controls.Add(cbo_background);
             cbo_background.SelectedItem = (string)envi_data["background"];
+            tlt_global.SetToolTip(cbo_background, "Décor présent à l'arrière-plan");
 
             List<string> list_scenes = new List<string>()
             {
@@ -2105,6 +2141,7 @@ namespace Learn_CTS
             cbo_scene_type.SelectedIndexChanged += new EventHandler(Scene_Type_Changed);
             content.Controls.Add(cbo_scene_type);
             cbo_scene_type.SelectedIndex = int.Parse((string)envi_data["scene_type"]);
+            tlt_global.SetToolTip(cbo_scene_type, "Type de situation se présentant au joueur");
 
             // Places Controls just created.
             int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
@@ -2149,6 +2186,7 @@ namespace Learn_CTS
             };
             pb_add_event.Click += new EventHandler(Add_Event);
             content.Controls.Add(pb_add_event);
+            tlt_global.SetToolTip(pb_add_event, "Ajoute un nouvel évènement");
 
             // Place the Controls just created.
             lbl_events.Location = new Point(20, 360);

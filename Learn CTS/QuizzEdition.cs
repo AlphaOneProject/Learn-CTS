@@ -76,7 +76,7 @@ namespace Learn_CTS
         /// </summary>
         public void Reload_Redirections()
         {
-            this.cbo_redirect_list = new List<string>() { "[_CONTINUE_]", "[_FIN_]" };
+            this.cbo_redirect_list = new List<string>() { "[_CONTINUER_]", "[_FIN_]" };
             JObject file_data;
             DirectoryInfo file_dir = Directory.GetParent(this.file_path);
             int nbr_files = file_dir.GetFiles().Length;
@@ -294,7 +294,8 @@ namespace Learn_CTS
             cbo_redirect.SelectedIndexChanged += new EventHandler(this.Cbo_Redirect_SelectedIndexChanged);
             pan_choice.Controls.Add(cbo_redirect);
             toolTip.SetToolTip(cbo_redirect, "Dialogue vers lequel le joueur sera redirigé lors de ce choix." +
-                               "\nLa redirection vers [FIN] indique la fin de la situation.");
+                                             "\nLa redirection vers [_FIN_] indique la fin de la situation et" +
+                                             "\n[_CONTINUER_] l'absence de redirection.");
             try
             {
                 cbo_redirect.SelectedIndex = int.Parse(((JObject)data["c" + id])["redirect"].ToString()) + 1;
@@ -317,6 +318,7 @@ namespace Learn_CTS
             };
             pb_discard_choice.Click += new EventHandler(this.Discard_Choice);
             pan_choice.Controls.Add(pb_discard_choice);
+            toolTip.SetToolTip(pb_discard_choice, "Supprimer cette réponse");
 
             // Sizing of all created controls.
             int size_taken = 10*2 + 8*3 + nud_score.Width + pb_discard_choice.Width;

@@ -34,7 +34,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pb_add = new System.Windows.Forms.PictureBox();
             this.pb_delete_all = new System.Windows.Forms.PictureBox();
-            this.cbo_audio = new ComboBoxFix();
+            this.cbo_audio = new Learn_CTS.ComboBoxFix();
             ((System.ComponentModel.ISupportInitialize)(this.pb_add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete_all)).BeginInit();
             this.SuspendLayout();
@@ -56,8 +56,11 @@
             // 
             // toolTip
             // 
+            this.toolTip.AutoPopDelay = 5000;
+            this.toolTip.InitialDelay = 300;
             this.toolTip.IsBalloon = true;
             this.toolTip.OwnerDraw = true;
+            this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip.ToolTipTitle = "Information";
             // 
