@@ -1,0 +1,298 @@
+\hypertarget{class_learn___c_t_s_1_1_item_viewer}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Item\+Viewer Class Reference}
+\label{class_learn___c_t_s_1_1_item_viewer}\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+
+
+Control used to view the question and actions choices for a specific item in the point and click game mode, Allows to interact with the item.  
+
+
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Item\+Viewer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_item_viewer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_ac0c79e8d7416490bf7c7b8a141ff7135}{Item\+Viewer}} (int item\+\_\+id, \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager}{Item\+Manager}} manager)
+\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_ab6b1e4d71651072c3d041a923b029247}{Exit}} ()
+\begin{DoxyCompactList}\small\item\em Called to exit the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}}. Aborts the audiodescription thread if it exists and disposes the control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_abacf44bccd6475556e17aac99b81f4a5}{Item\+Viewer\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} is loaded. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a020660e4ed102cc93a06d6eb7ad940cd}{Btn\+\_\+exit\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Hides the form when the exit button is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a9689fac2fbe3d752179f92654a3b3c25}{Item\+Viewer\+\_\+\+Client\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the size of the window changes. Is used for responsive behavior. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a304ca03bcf033ec886392135607d922f}{Display\+Actions}} ()
+\begin{DoxyCompactList}\small\item\em Displays one button for each actions possible with the item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a4ac954f1d03e0e122bf0f9b10fb5c0c1}{Action\+\_\+\+Event}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when a button defining an action of the item is clicked. Processes the action. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_ac7cd56a2abd7a1b26deed489a89b0f2a}{Pb\+\_\+audio\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the audiodescription Picture\+Box is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_af50eff982bb43a2b58a6ff51f155eb0a}{Listen}} ()
+\begin{DoxyCompactList}\small\item\em Audiodescription for the viewed items quesion and choices of actions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a578b16da961890178e8d9451cd525b6d}{Btn\+\_\+exit\+\_\+\+Mouse\+Down}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the exit button is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a10e5411c2f09f629f2e54b8054323d10}{Item\+Viewer\+\_\+\+Leave}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} loses focus. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a0cc42442328ac90a3a0feeaa4049af6b}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_a2859d9e0214a5471a099926925f1577f}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_ad10361354ad20091aa847ec3306cbdfb}\label{class_learn___c_t_s_1_1_item_viewer_ad10361354ad20091aa847ec3306cbdfb}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} {\bfseries item}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a7fe81441649b712426dcda7912e8cfdb}\label{class_learn___c_t_s_1_1_item_viewer_a7fe81441649b712426dcda7912e8cfdb}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager}{Item\+Manager}} {\bfseries manager}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a31ec77eb2fd23c2e6e552a7178225242}\label{class_learn___c_t_s_1_1_item_viewer_a31ec77eb2fd23c2e6e552a7178225242}} 
+Speech\+Synthesizer {\bfseries s}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a815742ebf6ea807e4389bcb3226eeb82}\label{class_learn___c_t_s_1_1_item_viewer_a815742ebf6ea807e4389bcb3226eeb82}} 
+Thread {\bfseries t\+\_\+audio}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer_aad873bbfea521559c8ce9d659443ff9c}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a7d422f157742e99e6a4dae5f5f4492a9}\label{class_learn___c_t_s_1_1_item_viewer_a7d422f157742e99e6a4dae5f5f4492a9}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+item}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a64c8011d8be3a9ed82bb203c5de10bb9}\label{class_learn___c_t_s_1_1_item_viewer_a64c8011d8be3a9ed82bb203c5de10bb9}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+desc}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a3a5e811073906739fef3121b4356e134}\label{class_learn___c_t_s_1_1_item_viewer_a3a5e811073906739fef3121b4356e134}} 
+private System Windows Forms Button {\bfseries btn\+\_\+exit}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a774c0badb6542d196e27c859cf3e7786}\label{class_learn___c_t_s_1_1_item_viewer_a774c0badb6542d196e27c859cf3e7786}} 
+private System Windows Forms Flow\+Layout\+Panel {\bfseries flp\+\_\+actions}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a311b036413e9d36ed43d90bacd339090}\label{class_learn___c_t_s_1_1_item_viewer_a311b036413e9d36ed43d90bacd339090}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+audio}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Control used to view the question and actions choices for a specific item in the point and click game mode, Allows to interact with the item. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_ac0c79e8d7416490bf7c7b8a141ff7135}\label{class_learn___c_t_s_1_1_item_viewer_ac0c79e8d7416490bf7c7b8a141ff7135}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!ItemViewer@{ItemViewer}}
+\index{ItemViewer@{ItemViewer}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{ItemViewer()}{ItemViewer()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Item\+Viewer (\begin{DoxyParamCaption}\item[{int}]{item\+\_\+id,  }\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager}{Item\+Manager}}}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+\_\+id} & ID of the item viewed.\\
+\hline
+{\em manager} & Manager of the situation, which contains the item.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a4ac954f1d03e0e122bf0f9b10fb5c0c1}\label{class_learn___c_t_s_1_1_item_viewer_a4ac954f1d03e0e122bf0f9b10fb5c0c1}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Action\_Event@{Action\_Event}}
+\index{Action\_Event@{Action\_Event}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Action\_Event()}{Action\_Event()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Action\+\_\+\+Event (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when a button defining an action of the item is clicked. Processes the action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a020660e4ed102cc93a06d6eb7ad940cd}\label{class_learn___c_t_s_1_1_item_viewer_a020660e4ed102cc93a06d6eb7ad940cd}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Btn\_exit\_Click@{Btn\_exit\_Click}}
+\index{Btn\_exit\_Click@{Btn\_exit\_Click}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Btn\_exit\_Click()}{Btn\_exit\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Btn\+\_\+exit\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Hides the form when the exit button is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a578b16da961890178e8d9451cd525b6d}\label{class_learn___c_t_s_1_1_item_viewer_a578b16da961890178e8d9451cd525b6d}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Btn\_exit\_MouseDown@{Btn\_exit\_MouseDown}}
+\index{Btn\_exit\_MouseDown@{Btn\_exit\_MouseDown}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Btn\_exit\_MouseDown()}{Btn\_exit\_MouseDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Btn\+\_\+exit\+\_\+\+Mouse\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the exit button is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a304ca03bcf033ec886392135607d922f}\label{class_learn___c_t_s_1_1_item_viewer_a304ca03bcf033ec886392135607d922f}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!DisplayActions@{DisplayActions}}
+\index{DisplayActions@{DisplayActions}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{DisplayActions()}{DisplayActions()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Display\+Actions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Displays one button for each actions possible with the item. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a0cc42442328ac90a3a0feeaa4049af6b}\label{class_learn___c_t_s_1_1_item_viewer_a0cc42442328ac90a3a0feeaa4049af6b}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_ab6b1e4d71651072c3d041a923b029247}\label{class_learn___c_t_s_1_1_item_viewer_ab6b1e4d71651072c3d041a923b029247}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Exit@{Exit}}
+\index{Exit@{Exit}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Exit()}{Exit()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Called to exit the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}}. Aborts the audiodescription thread if it exists and disposes the control. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a2859d9e0214a5471a099926925f1577f}\label{class_learn___c_t_s_1_1_item_viewer_a2859d9e0214a5471a099926925f1577f}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a9689fac2fbe3d752179f92654a3b3c25}\label{class_learn___c_t_s_1_1_item_viewer_a9689fac2fbe3d752179f92654a3b3c25}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!ItemViewer\_ClientSizeChanged@{ItemViewer\_ClientSizeChanged}}
+\index{ItemViewer\_ClientSizeChanged@{ItemViewer\_ClientSizeChanged}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{ItemViewer\_ClientSizeChanged()}{ItemViewer\_ClientSizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Item\+Viewer\+\_\+\+Client\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the size of the window changes. Is used for responsive behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_a10e5411c2f09f629f2e54b8054323d10}\label{class_learn___c_t_s_1_1_item_viewer_a10e5411c2f09f629f2e54b8054323d10}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!ItemViewer\_Leave@{ItemViewer\_Leave}}
+\index{ItemViewer\_Leave@{ItemViewer\_Leave}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{ItemViewer\_Leave()}{ItemViewer\_Leave()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Item\+Viewer\+\_\+\+Leave (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} loses focus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_abacf44bccd6475556e17aac99b81f4a5}\label{class_learn___c_t_s_1_1_item_viewer_abacf44bccd6475556e17aac99b81f4a5}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!ItemViewer\_Load@{ItemViewer\_Load}}
+\index{ItemViewer\_Load@{ItemViewer\_Load}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{ItemViewer\_Load()}{ItemViewer\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Item\+Viewer\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} is loaded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_af50eff982bb43a2b58a6ff51f155eb0a}\label{class_learn___c_t_s_1_1_item_viewer_af50eff982bb43a2b58a6ff51f155eb0a}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Listen@{Listen}}
+\index{Listen@{Listen}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Listen()}{Listen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Listen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Audiodescription for the viewed items quesion and choices of actions. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_ac7cd56a2abd7a1b26deed489a89b0f2a}\label{class_learn___c_t_s_1_1_item_viewer_ac7cd56a2abd7a1b26deed489a89b0f2a}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!Pb\_audio\_Click@{Pb\_audio\_Click}}
+\index{Pb\_audio\_Click@{Pb\_audio\_Click}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{Pb\_audio\_Click()}{Pb\_audio\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+Pb\+\_\+audio\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the audiodescription Picture\+Box is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_viewer_aad873bbfea521559c8ce9d659443ff9c}\label{class_learn___c_t_s_1_1_item_viewer_aad873bbfea521559c8ce9d659443ff9c}} 
+\index{Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}!components@{components}}
+\index{components@{components}!Learn\_CTS.ItemViewer@{Learn\_CTS.ItemViewer}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Item\+Viewer.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Item\+Viewer.\+cs\item 
+Item\+Viewer.\+Designer.\+cs\end{DoxyCompactItemize}

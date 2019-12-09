@@ -1,0 +1,297 @@
+\hypertarget{class_learn___c_t_s_1_1_p_n_c_window}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window Class Reference}
+\label{class_learn___c_t_s_1_1_p_n_c_window}\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+
+
+Window responsible for the point and click game mode  
+
+
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_p_n_c_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a0016f659a46fd1c8eb56c248fb3a7214}{P\+N\+C\+Window}} (string game, string scenario, string situation)
+\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}{Set\+Situation}} (string situation)
+\begin{DoxyCompactList}\small\item\em Setter for the situation. Updates the path to the situation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_af0f8298c9152a4090c9679e1c160ed46}{On\+Paint}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Paint the textures at the user\textquotesingle{}s screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a541f9748ced1a62eb88ecdaaf438b145}{P\+N\+C\+Window\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Initializes the textures on load. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_acfa789619c67d7aef025f8b0528d8fca}{Initialize\+List\+Textures}} ()
+\begin{DoxyCompactList}\small\item\em Get the items from the situation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_ac1ff9ea6d2bc6c38b9547b7541bd6d6a}{Update\+Textures}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Retrieve all the textures, sort them by depth then are paint on the window. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_aac9ed3da0eeb00013cd490940fe7f7a9}{Get\+All\+Textures}} (List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ list)
+\begin{DoxyCompactList}\small\item\em Retrieve all the textures and the childs of each textures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a15bd658fbc1824e45e8b37bcab8bfb2e}{P\+N\+C\+Window\+\_\+\+Mouse\+Down}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the window is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051870b6e7b8e48}{Highlight\+Item}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} item)
+\begin{DoxyCompactList}\small\item\em Creates an \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} to view the item in details. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a5d6b5c9755ee312f805f604bc252d901}{P\+N\+C\+Window\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the window resizes, to have a responsive behavior. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a2d06ca2c7e7486290906c49db0bf04db}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a1bcb65209bd7b29fff727e8de17bce99}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Required method for Designer support -\/ do not modify the contents of this method with the code editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a40b0da3244e856ac2861fbe40d79e399}\label{class_learn___c_t_s_1_1_p_n_c_window_a40b0da3244e856ac2861fbe40d79e399}} 
+int {\bfseries Draw\+Surface\+Width}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a4eb34b06958f1d53ffb3e300c402acf9}\label{class_learn___c_t_s_1_1_p_n_c_window_a4eb34b06958f1d53ffb3e300c402acf9}} 
+int {\bfseries Draw\+Surface\+Height}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a2286d2d38367f5de691d94c1bff3154e}\label{class_learn___c_t_s_1_1_p_n_c_window_a2286d2d38367f5de691d94c1bff3154e}} 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseries list\+\_\+textures} = new List$<$\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}$>$()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_af45f12b6b1288823b877700002eb58e8}\label{class_learn___c_t_s_1_1_p_n_c_window_af45f12b6b1288823b877700002eb58e8}} 
+string {\bfseries game}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a5b33cc02b739fdc966ac765a18d04987}\label{class_learn___c_t_s_1_1_p_n_c_window_a5b33cc02b739fdc966ac765a18d04987}} 
+string {\bfseries game\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a8804e0e3c90874987b63703031a5cdf3}\label{class_learn___c_t_s_1_1_p_n_c_window_a8804e0e3c90874987b63703031a5cdf3}} 
+string {\bfseries scenario}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_aec4d52d11ff30323f5b383d73555cb71}\label{class_learn___c_t_s_1_1_p_n_c_window_aec4d52d11ff30323f5b383d73555cb71}} 
+string {\bfseries scenario\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_ae10f0b10d879166aba788a678bcc3c12}\label{class_learn___c_t_s_1_1_p_n_c_window_ae10f0b10d879166aba788a678bcc3c12}} 
+string {\bfseries situation}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a5b29ebe1f398d787ec26e70c1cf8dbab}\label{class_learn___c_t_s_1_1_p_n_c_window_a5b29ebe1f398d787ec26e70c1cf8dbab}} 
+string {\bfseries situation\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a961960e3f34968225400fb3660baab27}\label{class_learn___c_t_s_1_1_p_n_c_window_a961960e3f34968225400fb3660baab27}} 
+string {\bfseries library\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a6efdc952681d51cabb008d599ae2080e}\label{class_learn___c_t_s_1_1_p_n_c_window_a6efdc952681d51cabb008d599ae2080e}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager}{Item\+Manager}} {\bfseries item\+\_\+manager}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a2ee3b0f23cef1a34238ca9387202865b}{components}} = null
+\begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Window responsible for the point and click game mode 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a0016f659a46fd1c8eb56c248fb3a7214}\label{class_learn___c_t_s_1_1_p_n_c_window_a0016f659a46fd1c8eb56c248fb3a7214}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!PNCWindow@{PNCWindow}}
+\index{PNCWindow@{PNCWindow}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{PNCWindow()}{PNCWindow()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+P\+N\+C\+Window (\begin{DoxyParamCaption}\item[{string}]{game,  }\item[{string}]{scenario,  }\item[{string}]{situation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Name of the current game\\
+\hline
+{\em scenario} & Name of the scenario\\
+\hline
+{\em situation} & Name of the situation\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a2d06ca2c7e7486290906c49db0bf04db}\label{class_learn___c_t_s_1_1_p_n_c_window_a2d06ca2c7e7486290906c49db0bf04db}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Clean up any resources being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true if managed resources should be disposed; otherwise, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_aac9ed3da0eeb00013cd490940fe7f7a9}\label{class_learn___c_t_s_1_1_p_n_c_window_aac9ed3da0eeb00013cd490940fe7f7a9}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!GetAllTextures@{GetAllTextures}}
+\index{GetAllTextures@{GetAllTextures}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{GetAllTextures()}{GetAllTextures()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}$>$ Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Get\+All\+Textures (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Retrieve all the textures and the childs of each textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051870b6e7b8e48}\label{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051870b6e7b8e48}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!HighlightItem@{HighlightItem}}
+\index{HighlightItem@{HighlightItem}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{HighlightItem()}{HighlightItem()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Highlight\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}}}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates an \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} to view the item in details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to be highlighted.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a1bcb65209bd7b29fff727e8de17bce99}\label{class_learn___c_t_s_1_1_p_n_c_window_a1bcb65209bd7b29fff727e8de17bce99}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_acfa789619c67d7aef025f8b0528d8fca}\label{class_learn___c_t_s_1_1_p_n_c_window_acfa789619c67d7aef025f8b0528d8fca}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!InitializeListTextures@{InitializeListTextures}}
+\index{InitializeListTextures@{InitializeListTextures}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeListTextures()}{InitializeListTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Initialize\+List\+Textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Get the items from the situation. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_af0f8298c9152a4090c9679e1c160ed46}\label{class_learn___c_t_s_1_1_p_n_c_window_af0f8298c9152a4090c9679e1c160ed46}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!OnPaint@{OnPaint}}
+\index{OnPaint@{OnPaint}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{OnPaint()}{OnPaint()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+On\+Paint (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Paint the textures at the user\textquotesingle{}s screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a541f9748ced1a62eb88ecdaaf438b145}\label{class_learn___c_t_s_1_1_p_n_c_window_a541f9748ced1a62eb88ecdaaf438b145}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!PNCWindow\_Load@{PNCWindow\_Load}}
+\index{PNCWindow\_Load@{PNCWindow\_Load}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{PNCWindow\_Load()}{PNCWindow\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+P\+N\+C\+Window\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initializes the textures on load. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a15bd658fbc1824e45e8b37bcab8bfb2e}\label{class_learn___c_t_s_1_1_p_n_c_window_a15bd658fbc1824e45e8b37bcab8bfb2e}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!PNCWindow\_MouseDown@{PNCWindow\_MouseDown}}
+\index{PNCWindow\_MouseDown@{PNCWindow\_MouseDown}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{PNCWindow\_MouseDown()}{PNCWindow\_MouseDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+P\+N\+C\+Window\+\_\+\+Mouse\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the window is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a5d6b5c9755ee312f805f604bc252d901}\label{class_learn___c_t_s_1_1_p_n_c_window_a5d6b5c9755ee312f805f604bc252d901}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!PNCWindow\_SizeChanged@{PNCWindow\_SizeChanged}}
+\index{PNCWindow\_SizeChanged@{PNCWindow\_SizeChanged}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{PNCWindow\_SizeChanged()}{PNCWindow\_SizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+P\+N\+C\+Window\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the window resizes, to have a responsive behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}\label{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!SetSituation@{SetSituation}}
+\index{SetSituation@{SetSituation}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{SetSituation()}{SetSituation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Set\+Situation (\begin{DoxyParamCaption}\item[{string}]{situation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setter for the situation. Updates the path to the situation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em situation} & Full situation name, with the number\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_ac1ff9ea6d2bc6c38b9547b7541bd6d6a}\label{class_learn___c_t_s_1_1_p_n_c_window_ac1ff9ea6d2bc6c38b9547b7541bd6d6a}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!UpdateTextures@{UpdateTextures}}
+\index{UpdateTextures@{UpdateTextures}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{UpdateTextures()}{UpdateTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Update\+Textures (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Retrieve all the textures, sort them by depth then are paint on the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a2ee3b0f23cef1a34238ca9387202865b}\label{class_learn___c_t_s_1_1_p_n_c_window_a2ee3b0f23cef1a34238ca9387202865b}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!components@{components}}
+\index{components@{components}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Required designer variable. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+P\+N\+C\+Window.\+cs\item 
+P\+N\+C\+Window.\+Designer.\+cs\end{DoxyCompactItemize}

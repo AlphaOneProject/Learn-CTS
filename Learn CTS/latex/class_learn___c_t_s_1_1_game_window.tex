@@ -1,0 +1,831 @@
+\hypertarget{class_learn___c_t_s_1_1_game_window}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Game\+Window Class Reference}
+\label{class_learn___c_t_s_1_1_game_window}\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+
+
+Window where the game is displayed  
+
+
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_game_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}{Game\+Window}} (string game, string scenario)
+\begin{DoxyCompactList}\small\item\em Launch the game with at a scenario \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}{Game\+Window}} (string game, string scenario, string situation)
+\begin{DoxyCompactList}\small\item\em Launch a game, at a situation in a scenario \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}{Remove\+Transition}} ()
+\begin{DoxyCompactList}\small\item\em Remove the transition on screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}{Open\+Close\+Dialog}} (int id\+\_\+npc)
+\begin{DoxyCompactList}\small\item\em Open or close the dialog if its already on screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad6a379f4f9995449c6f6b4bda4d40fcc}\label{class_learn___c_t_s_1_1_game_window_ad6a379f4f9995449c6f6b4bda4d40fcc}} 
+void {\bfseries Initialize\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}\label{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}} 
+void {\bfseries Set\+Score} (int s)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}\label{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}} 
+void {\bfseries Open\+Close\+\_\+\+Backpack} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}\label{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}} 
+void {\bfseries Pass\+Through\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}\label{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}} 
+void {\bfseries Switch\+Situation} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a2a1a500fc3d4f6de76ab2aaa8dd77534}\label{class_learn___c_t_s_1_1_game_window_a2a1a500fc3d4f6de76ab2aaa8dd77534}} 
+void {\bfseries End\+Timer} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_adb7b05714889125e21b754bfd6af1eeb}\label{class_learn___c_t_s_1_1_game_window_adb7b05714889125e21b754bfd6af1eeb}} 
+void {\bfseries Add\+Comment} (string comment)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a98cbed952571733fd49da06629926d02}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the instance of the current game window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}{On\+Paint}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Paint the textures at the user\textquotesingle{}s screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a66efb13b961a7434d1201035750ed92f}{Game\+Window}} (string game)
+\begin{DoxyCompactList}\small\item\em Initialize the game window \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}{Game\+Window\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em When the form is loading, create a button \char`\"{}\+Launch\char`\"{}, initialize the timer and the textures, then show the form. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}\label{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}} 
+void {\bfseries Display\+Loading} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}\label{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}} 
+void {\bfseries Display\+Intro} (string scene\+\_\+name, string scene\+\_\+intro)
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}{Load\+\_\+\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Load every objects needed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a231d20ad5f1bb539704fcb1482d22404}{Initialize\+F\+P\+S\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the thread which calculate the fps. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}{Initialize\+Transition}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the transition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a537716f0840642c801dab8f5f893b1d8}{Start\+Transition}} ()
+\begin{DoxyCompactList}\small\item\em Start the transition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}{Initialize\+Timer}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the game timer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}{Initialize\+List\+Textures}} ()
+\begin{DoxyCompactList}\small\item\em Initialize all the textures of the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}{Initialize\+H\+UD}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the textures of the hud, like the egg and the backpack icons. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}{Set\+Up\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Setup the window according to the general settings of the application stored in the options.\+json \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}{Calcul\+F\+P\+SandM}} ()
+\begin{DoxyCompactList}\small\item\em Show the fps average at this moment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}{Game\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed every tick \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}\label{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}} 
+void {\bfseries On\+Platform\+\_\+\+Tick} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a56ab0093c607ef99f8433ebea811e13f}\label{class_learn___c_t_s_1_1_game_window_a56ab0093c607ef99f8433ebea811e13f}} 
+void {\bfseries Inside\+Vehicule\+\_\+\+Tick} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}\label{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}} 
+void {\bfseries Park\+\_\+\+Tick} (object sender, Event\+Args e)
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}{Move\+All\+Characters\+To\+Objective}} ()
+\begin{DoxyCompactList}\small\item\em Move all the the characters towards its objective if he has any. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}{Move\+Textures\+If\+Player\+Moves}} ()
+\begin{DoxyCompactList}\small\item\em Move the textures if the player reaches the borders of the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}{Check\+Arrows\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Check if arrows are pressed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}{Move\+Character\+To\+Objective}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} c)
+\begin{DoxyCompactList}\small\item\em Move the character toward his objective \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}{Check\+If\+The\+Vehicule\+Is\+Arrived}} ()
+\begin{DoxyCompactList}\small\item\em Check if the vehicule has to slow down. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}{Check\+If\+Character\+Is\+Entering\+The\+Vehicule}} ()
+\begin{DoxyCompactList}\small\item\em Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}{Check\+If\+Character\+Is\+Leaving\+The\+Vehicule}} ()
+\begin{DoxyCompactList}\small\item\em Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aca36807f7ae0973094fcae225c330b95}\label{class_learn___c_t_s_1_1_game_window_aca36807f7ae0973094fcae225c330b95}} 
+void {\bfseries Resize\+Game\+Window} (Paint\+Event\+Args e)
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}{Move\+Background}} ()
+\begin{DoxyCompactList}\small\item\em Move the background. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}{Paint\+All\+Textures}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Retrieve all the textures, sort them by depth then are paint on the window. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}\label{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}} 
+void {\bfseries Optimize\+Graphics} (Paint\+Event\+Args e)
+\item 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a735ef1e3a9126d519a718133e5f2abeb}{Get\+All\+Textures}} (List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ list)
+\begin{DoxyCompactList}\small\item\em Retrieve all the textures and the childs of each textures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}{Game\+Window\+\_\+\+Mouse\+Down}} (object sender, System.\+Windows.\+Forms.\+Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em When the player clicks on the mouse. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}{Search\+N\+P\+C\+Dialog}} (int mx, int my)
+\begin{DoxyCompactList}\small\item\em Activate a dialog if the player clicks on a \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}{Is\+Character\+Colliding\+With\+Textures}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} c)
+\begin{DoxyCompactList}\small\item\em Check if a character is colliding with the other textures in the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}{Move\+Player}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Move the player if there are no collisions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}\label{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}} 
+void {\bfseries Move\+All\+Textures\+Except\+Player} (int a, int b)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}\label{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}} 
+void {\bfseries Move\+N\+PC} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} n, int a, int b)
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}{Game\+Window\+\_\+\+Key\+Down}} (object sender, System.\+Windows.\+Forms.\+Key\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Check if the player presses down the keys \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}{Game\+Window\+\_\+\+Key\+Up}} (object sender, System.\+Windows.\+Forms.\+Key\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Check if the player presses up the arrows. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}{Game\+Window\+\_\+\+Form\+Closed}} (object sender, Form\+Closed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Display the average F\+PS during the game session. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae30977e7feb0711b503b5336e6ec4b74}\label{class_learn___c_t_s_1_1_game_window_ae30977e7feb0711b503b5336e6ec4b74}} 
+void {\bfseries Stop\+Vehicule} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa562e54bf8f039626984e91f79b74be7}\label{class_learn___c_t_s_1_1_game_window_aa562e54bf8f039626984e91f79b74be7}} 
+void {\bfseries N\+P\+C\+Leave\+Vehicule} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a7a7c31e6c7e9c48f78e6ad9f35431d25}\label{class_learn___c_t_s_1_1_game_window_a7a7c31e6c7e9c48f78e6ad9f35431d25}} 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} $>$ {\bfseries Selection\+N\+P\+Cs\+Leaving\+Vehicule} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5ae2e8bd5d1b9950d0a5ae76b0b66be9}\label{class_learn___c_t_s_1_1_game_window_a5ae2e8bd5d1b9950d0a5ae76b0b66be9}} 
+void {\bfseries View\+Inside} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}\label{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}} 
+void {\bfseries Change\+Current\+Tick} (Event\+Handler eh)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}\label{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}} 
+void {\bfseries Place\+Player\+Middle\+Screen} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a744ff376b60b6c0f5883b64be6cd5dc9}\label{class_learn___c_t_s_1_1_game_window_a744ff376b60b6c0f5883b64be6cd5dc9}} 
+void {\bfseries N\+P\+C\+Entering\+Vehicule} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a26b2e10c1af70c557b13421b36ac55ec}\label{class_learn___c_t_s_1_1_game_window_a26b2e10c1af70c557b13421b36ac55ec}} 
+void {\bfseries Fill\+Vehicule\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa7eae8298c0f7366f1d0dc1cde6b465e}\label{class_learn___c_t_s_1_1_game_window_aa7eae8298c0f7366f1d0dc1cde6b465e}} 
+void {\bfseries Fill\+Platform\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a7313471ed1a236a12cf1c560c92cf102}\label{class_learn___c_t_s_1_1_game_window_a7313471ed1a236a12cf1c560c92cf102}} 
+void {\bfseries Fill\+Park\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1acbb38d8c7203f0b4cee3a33b4cc990}\label{class_learn___c_t_s_1_1_game_window_a1acbb38d8c7203f0b4cee3a33b4cc990}} 
+void {\bfseries Respawn\+N\+P\+C\+Outside\+Screen} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aac71e90bcc6e6aaaeb9b66ffae80261e}\label{class_learn___c_t_s_1_1_game_window_aac71e90bcc6e6aaaeb9b66ffae80261e}} 
+void {\bfseries Shuffle\+Vehicule\+N\+P\+Cs} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}\label{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}} 
+void {\bfseries N\+P\+Cs\+Coming\+Platform} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}\label{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}} 
+void {\bfseries Game\+Window\+\_\+\+Resize} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1dcafcc9689c18758daf3d75e9080c93}\label{class_learn___c_t_s_1_1_game_window_a1dcafcc9689c18758daf3d75e9080c93}} 
+void {\bfseries Start\+Vehicule\+Crash} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aaab9187c0cc7e603c0514b9da3f8d103}\label{class_learn___c_t_s_1_1_game_window_aaab9187c0cc7e603c0514b9da3f8d103}} 
+void {\bfseries Vehicule\+Crashed\+\_\+\+Tick} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}\label{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}} 
+bool {\bfseries Is\+On\+Screen} (\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} t)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac858a774f1ad38af7d346b3aa86b9257}\label{class_learn___c_t_s_1_1_game_window_ac858a774f1ad38af7d346b3aa86b9257}} 
+void {\bfseries Display\+Settings} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a131181789c2cdcabadb3c15d3e623daf}\label{class_learn___c_t_s_1_1_game_window_a131181789c2cdcabadb3c15d3e623daf}} 
+void {\bfseries Controls\+Settings} ()
+\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa3ba73fbcc7274a489e327cafbc7fb71}\label{class_learn___c_t_s_1_1_game_window_aa3ba73fbcc7274a489e327cafbc7fb71}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager}{N\+P\+C\+\_\+\+Manager}} {\bfseries nm} = N\+P\+C\+\_\+\+Manager.\+Get\+Instance()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa99c466754b3738b9d4ad503b48c5da9}\label{class_learn___c_t_s_1_1_game_window_aa99c466754b3738b9d4ad503b48c5da9}} 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseries list\+\_\+game\+\_\+textures}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af963ecd720907188955a83e32a8080ee}\label{class_learn___c_t_s_1_1_game_window_af963ecd720907188955a83e32a8080ee}} 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseries list\+\_\+hud\+\_\+textures}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a3a898cc2722c6f1cdbc63d37376f72e5}\label{class_learn___c_t_s_1_1_game_window_a3a898cc2722c6f1cdbc63d37376f72e5}} 
+List$<$ string $>$ {\bfseries list\+\_\+comments}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af045cc706e41b0543933442cd6f87e65}\label{class_learn___c_t_s_1_1_game_window_af045cc706e41b0543933442cd6f87e65}} 
+System.\+Windows.\+Forms.\+Timer {\bfseries timer}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af723c753aea72ed0ab90c1d474c1a2a2}\label{class_learn___c_t_s_1_1_game_window_af723c753aea72ed0ab90c1d474c1a2a2}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_player}{Player}} {\bfseries player}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a386fc0cc0b82da503ca5226551795126}\label{class_learn___c_t_s_1_1_game_window_a386fc0cc0b82da503ca5226551795126}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule}{Vehicule}} {\bfseries vehicule}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9f311acec424b19084694f6e3594829d}\label{class_learn___c_t_s_1_1_game_window_a9f311acec424b19084694f6e3594829d}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_background}{Background}} {\bfseries background}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a88e1bedc899d665b4e520ca2dbe69c19}\label{class_learn___c_t_s_1_1_game_window_a88e1bedc899d665b4e520ca2dbe69c19}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_platform}{Platform}} {\bfseries platform}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa241e56c9a9d967efb05e143c6d4cc8c}\label{class_learn___c_t_s_1_1_game_window_aa241e56c9a9d967efb05e143c6d4cc8c}} 
+int {\bfseries draw\+\_\+surface\+\_\+width} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad4d02c90d489ef076f0e00c9d81ae732}\label{class_learn___c_t_s_1_1_game_window_ad4d02c90d489ef076f0e00c9d81ae732}} 
+int {\bfseries draw\+\_\+surface\+\_\+height} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acb154cc03621717b8b1372757c456837}\label{class_learn___c_t_s_1_1_game_window_acb154cc03621717b8b1372757c456837}} 
+bool\mbox{[}$\,$\mbox{]} {\bfseries movement} = \{ false, false, false, false\}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab8cbe81ba626f748e5ffde9cdd7bd508}\label{class_learn___c_t_s_1_1_game_window_ab8cbe81ba626f748e5ffde9cdd7bd508}} 
+int {\bfseries ticks} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac0c966bf6142476f9a2b57b0fac7088c}\label{class_learn___c_t_s_1_1_game_window_ac0c966bf6142476f9a2b57b0fac7088c}} 
+int {\bfseries ticks\+\_\+temp} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a464e205da361f1987deb9a16134c9b9e}\label{class_learn___c_t_s_1_1_game_window_a464e205da361f1987deb9a16134c9b9e}} 
+double {\bfseries start\+\_\+milliseconds} = (Date\+Time.\+Now -\/ new Date\+Time(2019, 1, 1)).Total\+Milliseconds
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6854634813a63e3b7d848460d89fb659}\label{class_learn___c_t_s_1_1_game_window_a6854634813a63e3b7d848460d89fb659}} 
+int {\bfseries N\+P\+Cs\+Density} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_addf5b1bd4d591def5290ef93506edf36}\label{class_learn___c_t_s_1_1_game_window_addf5b1bd4d591def5290ef93506edf36}} 
+int {\bfseries score} = -\/1
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad20dfc61f4a1f11dfff22b2bcce03ba1}\label{class_learn___c_t_s_1_1_game_window_ad20dfc61f4a1f11dfff22b2bcce03ba1}} 
+int {\bfseries step\+\_\+score} = -\/1
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af1c869016659282987cf2f88f2b54e86}\label{class_learn___c_t_s_1_1_game_window_af1c869016659282987cf2f88f2b54e86}} 
+string {\bfseries sc\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab4c7f52930614b8e9b7022b1e92c5d56}\label{class_learn___c_t_s_1_1_game_window_ab4c7f52930614b8e9b7022b1e92c5d56}} 
+string {\bfseries scenario}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad7697efd972002fe34406a025365c7aa}\label{class_learn___c_t_s_1_1_game_window_ad7697efd972002fe34406a025365c7aa}} 
+string {\bfseries situation}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9c945a08a993cc92037c13c93ba91bfd}\label{class_learn___c_t_s_1_1_game_window_a9c945a08a993cc92037c13c93ba91bfd}} 
+Random {\bfseries r}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac270b450a82b50cad27c18aa88d1e0dd}\label{class_learn___c_t_s_1_1_game_window_ac270b450a82b50cad27c18aa88d1e0dd}} 
+bool {\bfseries preview} = false
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a898363abf9a685fe6b3a93193ea5b3ca}\label{class_learn___c_t_s_1_1_game_window_a898363abf9a685fe6b3a93193ea5b3ca}} 
+int {\bfseries n\+\_\+situation} = 0
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a67cd3b432b77d8bb68045e1a53de1afd}\label{class_learn___c_t_s_1_1_game_window_a67cd3b432b77d8bb68045e1a53de1afd}} 
+Thread {\bfseries t\+\_\+fps}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afbcfcbbf3cd432e09ee544eaf2eed1e9}\label{class_learn___c_t_s_1_1_game_window_afbcfcbbf3cd432e09ee544eaf2eed1e9}} 
+float {\bfseries n\+\_\+fps}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab77f01f037515320a41ad6bde31f98ea}\label{class_learn___c_t_s_1_1_game_window_ab77f01f037515320a41ad6bde31f98ea}} 
+bool {\bfseries ticket\+\_\+valid} = false
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aba58deff62541731adfbe4bb92576b00}\label{class_learn___c_t_s_1_1_game_window_aba58deff62541731adfbe4bb92576b00}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_transition}{Transition}} {\bfseries tr}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a3fd42d46bae4dc6fc8516702164aca4d}\label{class_learn___c_t_s_1_1_game_window_a3fd42d46bae4dc6fc8516702164aca4d}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries backpack}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9421ec8ab8c37f9c668b27b0669bc062}\label{class_learn___c_t_s_1_1_game_window_a9421ec8ab8c37f9c668b27b0669bc062}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_egg}{Egg}} {\bfseries egg}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0f27043a102751c489e22d07e762a75e}\label{class_learn___c_t_s_1_1_game_window_a0f27043a102751c489e22d07e762a75e}} 
+Event\+Handler {\bfseries current\+\_\+scene\+\_\+tick}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a063c815af472cad436d779acefd1e75e}\label{class_learn___c_t_s_1_1_game_window_a063c815af472cad436d779acefd1e75e}} 
+int {\bfseries scene\+\_\+type}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a4bc0fe948f7476445ae7b8323ceb0d79}\label{class_learn___c_t_s_1_1_game_window_a4bc0fe948f7476445ae7b8323ceb0d79}} 
+bool {\bfseries showhitbox} = false
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac1b8e0f820bfa6d6888ac6874ce25a48}\label{class_learn___c_t_s_1_1_game_window_ac1b8e0f820bfa6d6888ac6874ce25a48}} 
+bool {\bfseries god} = false
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a1efc218d12b9a81a1aba718e1bbd8567}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a51c87d82e8822088ac8dd194de97922a}\label{class_learn___c_t_s_1_1_game_window_a51c87d82e8822088ac8dd194de97922a}} 
+static \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a51c87d82e8822088ac8dd194de97922a}{instance}}
+\begin{DoxyCompactList}\small\item\em Attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Window where the game is displayed 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a66efb13b961a7434d1201035750ed92f}\label{class_learn___c_t_s_1_1_game_window_a66efb13b961a7434d1201035750ed92f}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow@{GameWindow}}
+\index{GameWindow@{GameWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow()}{GameWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window (\begin{DoxyParamCaption}\item[{string}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the game window 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}\label{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow@{GameWindow}}
+\index{GameWindow@{GameWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow()}{GameWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window (\begin{DoxyParamCaption}\item[{string}]{game,  }\item[{string}]{scenario }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Launch the game with at a scenario 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & \\
+\hline
+{\em scenario} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}\label{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow@{GameWindow}}
+\index{GameWindow@{GameWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow()}{GameWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window (\begin{DoxyParamCaption}\item[{string}]{game,  }\item[{string}]{scenario,  }\item[{string}]{situation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Launch a game, at a situation in a scenario 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & \\
+\hline
+{\em scenario} & \\
+\hline
+{\em situation} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}\label{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CalculFPSandM@{CalculFPSandM}}
+\index{CalculFPSandM@{CalculFPSandM}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CalculFPSandM()}{CalculFPSandM()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Calcul\+F\+P\+SandM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Show the fps average at this moment. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}\label{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckArrowsPressed@{CheckArrowsPressed}}
+\index{CheckArrowsPressed@{CheckArrowsPressed}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckArrowsPressed()}{CheckArrowsPressed()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+Arrows\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if arrows are pressed 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}\label{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsEnteringTheVehicule@{CheckIfCharacterIsEnteringTheVehicule}}
+\index{CheckIfCharacterIsEnteringTheVehicule@{CheckIfCharacterIsEnteringTheVehicule}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsEnteringTheVehicule()}{CheckIfCharacterIsEnteringTheVehicule()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Entering\+The\+Vehicule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}\label{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsLeavingTheVehicule@{CheckIfCharacterIsLeavingTheVehicule}}
+\index{CheckIfCharacterIsLeavingTheVehicule@{CheckIfCharacterIsLeavingTheVehicule}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsLeavingTheVehicule()}{CheckIfCharacterIsLeavingTheVehicule()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Leaving\+The\+Vehicule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}\label{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfTheVehiculeIsArrived@{CheckIfTheVehiculeIsArrived}}
+\index{CheckIfTheVehiculeIsArrived@{CheckIfTheVehiculeIsArrived}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckIfTheVehiculeIsArrived()}{CheckIfTheVehiculeIsArrived()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+The\+Vehicule\+Is\+Arrived (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the vehicule has to slow down. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}\label{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}\label{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameTick@{GameTick}}
+\index{GameTick@{GameTick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameTick()}{GameTick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed every tick 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}\label{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_FormClosed@{GameWindow\_FormClosed}}
+\index{GameWindow\_FormClosed@{GameWindow\_FormClosed}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_FormClosed()}{GameWindow\_FormClosed()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Form\+Closed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closed\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display the average F\+PS during the game session. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}\label{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_KeyDown@{GameWindow\_KeyDown}}
+\index{GameWindow\_KeyDown@{GameWindow\_KeyDown}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_KeyDown()}{GameWindow\_KeyDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Key\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{System.\+Windows.\+Forms.\+Key\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the player presses down the keys 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}\label{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_KeyUp@{GameWindow\_KeyUp}}
+\index{GameWindow\_KeyUp@{GameWindow\_KeyUp}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_KeyUp()}{GameWindow\_KeyUp()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Key\+Up (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{System.\+Windows.\+Forms.\+Key\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the player presses up the arrows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}\label{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_Load@{GameWindow\_Load}}
+\index{GameWindow\_Load@{GameWindow\_Load}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_Load()}{GameWindow\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+When the form is loading, create a button \char`\"{}\+Launch\char`\"{}, initialize the timer and the textures, then show the form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}\label{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_MouseDown@{GameWindow\_MouseDown}}
+\index{GameWindow\_MouseDown@{GameWindow\_MouseDown}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_MouseDown()}{GameWindow\_MouseDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Mouse\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{System.\+Windows.\+Forms.\+Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+When the player clicks on the mouse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a735ef1e3a9126d519a718133e5f2abeb}\label{class_learn___c_t_s_1_1_game_window_a735ef1e3a9126d519a718133e5f2abeb}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GetAllTextures@{GetAllTextures}}
+\index{GetAllTextures@{GetAllTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GetAllTextures()}{GetAllTextures()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}$>$ Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Get\+All\+Textures (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Retrieve all the textures and the childs of each textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a98cbed952571733fd49da06629926d02}\label{class_learn___c_t_s_1_1_game_window_a98cbed952571733fd49da06629926d02}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the instance of the current game window. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}\label{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a231d20ad5f1bb539704fcb1482d22404}\label{class_learn___c_t_s_1_1_game_window_a231d20ad5f1bb539704fcb1482d22404}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeFPSThread@{InitializeFPSThread}}
+\index{InitializeFPSThread@{InitializeFPSThread}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeFPSThread()}{InitializeFPSThread()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+F\+P\+S\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the thread which calculate the fps. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}\label{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeHUD@{InitializeHUD}}
+\index{InitializeHUD@{InitializeHUD}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeHUD()}{InitializeHUD()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+H\+UD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the textures of the hud, like the egg and the backpack icons. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}\label{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeListTextures@{InitializeListTextures}}
+\index{InitializeListTextures@{InitializeListTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeListTextures()}{InitializeListTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+List\+Textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize all the textures of the game. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}\label{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeTimer@{InitializeTimer}}
+\index{InitializeTimer@{InitializeTimer}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeTimer()}{InitializeTimer()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the game timer. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}\label{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeTransition@{InitializeTransition}}
+\index{InitializeTransition@{InitializeTransition}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeTransition()}{InitializeTransition()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Transition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the transition. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}\label{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!IsCharacterCollidingWithTextures@{IsCharacterCollidingWithTextures}}
+\index{IsCharacterCollidingWithTextures@{IsCharacterCollidingWithTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{IsCharacterCollidingWithTextures()}{IsCharacterCollidingWithTextures()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Is\+Character\+Colliding\+With\+Textures (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}}}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if a character is colliding with the other textures in the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}\label{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Load\_Game@{Load\_Game}}
+\index{Load\_Game@{Load\_Game}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{Load\_Game()}{Load\_Game()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Load\+\_\+\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load every objects needed 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}\label{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveAllCharactersToObjective@{MoveAllCharactersToObjective}}
+\index{MoveAllCharactersToObjective@{MoveAllCharactersToObjective}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveAllCharactersToObjective()}{MoveAllCharactersToObjective()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+All\+Characters\+To\+Objective (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move all the the characters towards its objective if he has any. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}\label{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveBackground@{MoveBackground}}
+\index{MoveBackground@{MoveBackground}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveBackground()}{MoveBackground()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the background. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}\label{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveCharacterToObjective@{MoveCharacterToObjective}}
+\index{MoveCharacterToObjective@{MoveCharacterToObjective}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveCharacterToObjective()}{MoveCharacterToObjective()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Character\+To\+Objective (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}}}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the character toward his objective 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}\label{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MovePlayer@{MovePlayer}}
+\index{MovePlayer@{MovePlayer}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MovePlayer()}{MovePlayer()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Player (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the player if there are no collisions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Move the player of a\\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the player has moved, false otherwise.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}\label{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveTexturesIfPlayerMoves@{MoveTexturesIfPlayerMoves}}
+\index{MoveTexturesIfPlayerMoves@{MoveTexturesIfPlayerMoves}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveTexturesIfPlayerMoves()}{MoveTexturesIfPlayerMoves()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Textures\+If\+Player\+Moves (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the textures if the player reaches the borders of the screen. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}\label{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OnPaint@{OnPaint}}
+\index{OnPaint@{OnPaint}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{OnPaint()}{OnPaint()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+On\+Paint (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Paint the textures at the user\textquotesingle{}s screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}\label{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OpenCloseDialog@{OpenCloseDialog}}
+\index{OpenCloseDialog@{OpenCloseDialog}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{OpenCloseDialog()}{OpenCloseDialog()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Open\+Close\+Dialog (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+npc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Open or close the dialog if its already on screen. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}\label{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!PaintAllTextures@{PaintAllTextures}}
+\index{PaintAllTextures@{PaintAllTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{PaintAllTextures()}{PaintAllTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Paint\+All\+Textures (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Retrieve all the textures, sort them by depth then are paint on the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}\label{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RemoveTransition@{RemoveTransition}}
+\index{RemoveTransition@{RemoveTransition}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RemoveTransition()}{RemoveTransition()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Remove\+Transition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Remove the transition on screen. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}\label{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SearchNPCDialog@{SearchNPCDialog}}
+\index{SearchNPCDialog@{SearchNPCDialog}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{SearchNPCDialog()}{SearchNPCDialog()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Search\+N\+P\+C\+Dialog (\begin{DoxyParamCaption}\item[{int}]{mx,  }\item[{int}]{my }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Activate a dialog if the player clicks on a \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & \\
+\hline
+{\em mx} & \\
+\hline
+{\em my} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}\label{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SetUpWindow@{SetUpWindow}}
+\index{SetUpWindow@{SetUpWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{SetUpWindow()}{SetUpWindow()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Set\+Up\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup the window according to the general settings of the application stored in the options.\+json 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a537716f0840642c801dab8f5f893b1d8}\label{class_learn___c_t_s_1_1_game_window_a537716f0840642c801dab8f5f893b1d8}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!StartTransition@{StartTransition}}
+\index{StartTransition@{StartTransition}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{StartTransition()}{StartTransition()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Start\+Transition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Start the transition. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1efc218d12b9a81a1aba718e1bbd8567}\label{class_learn___c_t_s_1_1_game_window_a1efc218d12b9a81a1aba718e1bbd8567}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!components@{components}}
+\index{components@{components}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Window.\+cs\item 
+Game\+Window.\+Designer.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,379 @@
+\hypertarget{class_learn___c_t_s_1_1_quizz_edition}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition Class Reference}
+\label{class_learn___c_t_s_1_1_quizz_edition}\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_quizz_edition}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_aff2f83cbec9ce1cdf5f33586925891da}{Quizz\+Edition}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor, string file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Setup the parameters necessary to the User\+Control. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_abed1cb069eec8bd100a75c15f1fad705}{Reload\+\_\+\+Redirections}} ()
+\begin{DoxyCompactList}\small\item\em Reload the existing dialogs upon signal from the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a601ab138592b600845a68b544c8b1c12}{Get\+\_\+\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Get method for the \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}}\textquotesingle{}s id. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a80855624fd1355c43c626add8479c84e}{Add\+\_\+\+Choice}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Triggers upon click on the Picture\+Box. Add a new choice to the file through a new J\+Object inserted into the file\textquotesingle{}s data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a691c413d9303d560c4a34be617b952ae}{Add\+\_\+\+Choice}} (int id)
+\begin{DoxyCompactList}\small\item\em Creates and adds all necessary Controls to the \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} for displaying a choice of the specified id. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a26b0bab0170eb4d13cfc3b53b4725853}{Txt\+\_\+\+Answer\+\_\+\+Key\+Press}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Verify, save or cancel the input data to the linked file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a5175479246578cd52ec8d038f9f39255}{Nud\+\_\+\+Score\+\_\+\+Key\+Press}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Verify, save or cancel the input data to the linked file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a4171626ee7de5a8632b89113f0adb345}{Discard\+\_\+\+Choice}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Discard a choice identified by the sender\textquotesingle{}s Tag. Both in the J\+S\+ON file and on the display. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a6aa1d08c99588ba94ab6cc6713744da3}{Delete\+\_\+\+All}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Asks to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to delete both this \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} and his linked file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a057f77413223e112c488ee66a7507495}{Quizz\+Edition\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Load and display the data of the linked file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a5ee506c0e114bd4b70f2a6dc9e36a529}{Txt\+\_\+\+Question\+\_\+\+Key\+Press}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Verify, save or cancel the input data to the linked file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a5af5c12b2c061233cb89825598257d9e}{Nud\+\_\+\+Score\+\_\+\+Value\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Triggers upon using the built-\/in arrows from the Numeric\+Up\+Down Control. Set the saved state to false due to the value modification. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a538e78fb89a50c8111a9edd60e9add22}{Cbo\+\_\+\+Redirect\+\_\+\+Selected\+Index\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Save the input data to the linked file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a3ed15f8cc3822c8cecfe3d4cf939a2be}{Quizz\+Edition\+\_\+\+Resize}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Resize the Controls in order to match the new size of the User\+Control. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_af6c36a0bd64f88f48b4b86eefb277a6b}{Cbo\+\_\+audio\+\_\+\+Selected\+Index\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Save the audio option selected through the Combo\+Box (as an integer). \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a8cf5d0b9f8bd4a8e303f9da17904a841}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a08dd0bb5136416b86a18cf157bf50b06}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a87e419e3ebf332bef19236a087d3ab01}\label{class_learn___c_t_s_1_1_quizz_edition_a87e419e3ebf332bef19236a087d3ab01}} 
+int {\bfseries id}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a9944c98ae7fcf8e7deaff42cc1177b50}\label{class_learn___c_t_s_1_1_quizz_edition_a9944c98ae7fcf8e7deaff42cc1177b50}} 
+string {\bfseries file\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a1429d560d8abc64fe7dbdd08af0e3211}\label{class_learn___c_t_s_1_1_quizz_edition_a1429d560d8abc64fe7dbdd08af0e3211}} 
+J\+Object {\bfseries data}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a9e3fa54fcbc8b7fec25c2f27d19772b7}\label{class_learn___c_t_s_1_1_quizz_edition_a9e3fa54fcbc8b7fec25c2f27d19772b7}} 
+J\+Object {\bfseries theme}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a91efdd2520d112037027b35990e76755}\label{class_learn___c_t_s_1_1_quizz_edition_a91efdd2520d112037027b35990e76755}} 
+int {\bfseries prev\+\_\+line\+\_\+loc} = 50
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_afc5d17b79d3d65afb32e611c7ebc9638}\label{class_learn___c_t_s_1_1_quizz_edition_afc5d17b79d3d65afb32e611c7ebc9638}} 
+List$<$ string $>$ {\bfseries cbo\+\_\+redirect\+\_\+list}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a62f3e17db66a4c428dd33126b50ca9b0}\label{class_learn___c_t_s_1_1_quizz_edition_a62f3e17db66a4c428dd33126b50ca9b0}} 
+bool {\bfseries loading} = false
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition_a02d818cbb00af91326a0e69f8408d967}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_acd22b0097c598a07a5e3d07b30f65c9c}\label{class_learn___c_t_s_1_1_quizz_edition_acd22b0097c598a07a5e3d07b30f65c9c}} 
+private System Windows Forms Text\+Box {\bfseries txt\+\_\+question}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a00cd94fe375a4780c9c7e1372565a522}\label{class_learn___c_t_s_1_1_quizz_edition_a00cd94fe375a4780c9c7e1372565a522}} 
+private System Windows Forms Tool\+Tip {\bfseries tool\+Tip}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a86496f83e78ee6ac960206de3a11a522}\label{class_learn___c_t_s_1_1_quizz_edition_a86496f83e78ee6ac960206de3a11a522}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+add}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_ad0eb71db7907126252978a6352011e28}\label{class_learn___c_t_s_1_1_quizz_edition_ad0eb71db7907126252978a6352011e28}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+delete\+\_\+all}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a7f19fb82d0fa86bbb78e295ef6af65ba}\label{class_learn___c_t_s_1_1_quizz_edition_a7f19fb82d0fa86bbb78e295ef6af65ba}} 
+private \mbox{\hyperlink{class_learn___c_t_s_1_1_combo_box_fix}{Combo\+Box\+Fix}} {\bfseries cbo\+\_\+audio}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_aff2f83cbec9ce1cdf5f33586925891da}\label{class_learn___c_t_s_1_1_quizz_edition_aff2f83cbec9ce1cdf5f33586925891da}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!QuizzEdition@{QuizzEdition}}
+\index{QuizzEdition@{QuizzEdition}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{QuizzEdition()}{QuizzEdition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Quizz\+Edition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{editor,  }\item[{string}]{file\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup the parameters necessary to the User\+Control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & Absolute path of the linked file.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a691c413d9303d560c4a34be617b952ae}\label{class_learn___c_t_s_1_1_quizz_edition_a691c413d9303d560c4a34be617b952ae}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Add\_Choice@{Add\_Choice}}
+\index{Add\_Choice@{Add\_Choice}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Add\_Choice()}{Add\_Choice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Add\+\_\+\+Choice (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and adds all necessary Controls to the \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} for displaying a choice of the specified id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Id of the choice which need Controls management.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a80855624fd1355c43c626add8479c84e}\label{class_learn___c_t_s_1_1_quizz_edition_a80855624fd1355c43c626add8479c84e}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Add\_Choice@{Add\_Choice}}
+\index{Add\_Choice@{Add\_Choice}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Add\_Choice()}{Add\_Choice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Add\+\_\+\+Choice (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Triggers upon click on the Picture\+Box. Add a new choice to the file through a new J\+Object inserted into the file\textquotesingle{}s data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_af6c36a0bd64f88f48b4b86eefb277a6b}\label{class_learn___c_t_s_1_1_quizz_edition_af6c36a0bd64f88f48b4b86eefb277a6b}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Cbo\_audio\_SelectedIndexChanged@{Cbo\_audio\_SelectedIndexChanged}}
+\index{Cbo\_audio\_SelectedIndexChanged@{Cbo\_audio\_SelectedIndexChanged}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Cbo\_audio\_SelectedIndexChanged()}{Cbo\_audio\_SelectedIndexChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Cbo\+\_\+audio\+\_\+\+Selected\+Index\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Save the audio option selected through the Combo\+Box (as an integer). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a538e78fb89a50c8111a9edd60e9add22}\label{class_learn___c_t_s_1_1_quizz_edition_a538e78fb89a50c8111a9edd60e9add22}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Cbo\_Redirect\_SelectedIndexChanged@{Cbo\_Redirect\_SelectedIndexChanged}}
+\index{Cbo\_Redirect\_SelectedIndexChanged@{Cbo\_Redirect\_SelectedIndexChanged}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Cbo\_Redirect\_SelectedIndexChanged()}{Cbo\_Redirect\_SelectedIndexChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Cbo\+\_\+\+Redirect\+\_\+\+Selected\+Index\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Save the input data to the linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a6aa1d08c99588ba94ab6cc6713744da3}\label{class_learn___c_t_s_1_1_quizz_edition_a6aa1d08c99588ba94ab6cc6713744da3}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Delete\_All@{Delete\_All}}
+\index{Delete\_All@{Delete\_All}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Delete\_All()}{Delete\_All()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Delete\+\_\+\+All (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Asks to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to delete both this \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} and his linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a4171626ee7de5a8632b89113f0adb345}\label{class_learn___c_t_s_1_1_quizz_edition_a4171626ee7de5a8632b89113f0adb345}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Discard\_Choice@{Discard\_Choice}}
+\index{Discard\_Choice@{Discard\_Choice}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Discard\_Choice()}{Discard\_Choice()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Discard\+\_\+\+Choice (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Discard a choice identified by the sender\textquotesingle{}s Tag. Both in the J\+S\+ON file and on the display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a8cf5d0b9f8bd4a8e303f9da17904a841}\label{class_learn___c_t_s_1_1_quizz_edition_a8cf5d0b9f8bd4a8e303f9da17904a841}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a601ab138592b600845a68b544c8b1c12}\label{class_learn___c_t_s_1_1_quizz_edition_a601ab138592b600845a68b544c8b1c12}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Get\_Id@{Get\_Id}}
+\index{Get\_Id@{Get\_Id}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Get\_Id()}{Get\_Id()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Get\+\_\+\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get method for the \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}}\textquotesingle{}s id. 
+
+\begin{DoxyReturn}{Returns}
+Instance\textquotesingle{}s id.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a08dd0bb5136416b86a18cf157bf50b06}\label{class_learn___c_t_s_1_1_quizz_edition_a08dd0bb5136416b86a18cf157bf50b06}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a5175479246578cd52ec8d038f9f39255}\label{class_learn___c_t_s_1_1_quizz_edition_a5175479246578cd52ec8d038f9f39255}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Nud\_Score\_KeyPress@{Nud\_Score\_KeyPress}}
+\index{Nud\_Score\_KeyPress@{Nud\_Score\_KeyPress}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Nud\_Score\_KeyPress()}{Nud\_Score\_KeyPress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Nud\+\_\+\+Score\+\_\+\+Key\+Press (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Verify, save or cancel the input data to the linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a5af5c12b2c061233cb89825598257d9e}\label{class_learn___c_t_s_1_1_quizz_edition_a5af5c12b2c061233cb89825598257d9e}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Nud\_Score\_ValueChanged@{Nud\_Score\_ValueChanged}}
+\index{Nud\_Score\_ValueChanged@{Nud\_Score\_ValueChanged}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Nud\_Score\_ValueChanged()}{Nud\_Score\_ValueChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Nud\+\_\+\+Score\+\_\+\+Value\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Triggers upon using the built-\/in arrows from the Numeric\+Up\+Down Control. Set the saved state to false due to the value modification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a057f77413223e112c488ee66a7507495}\label{class_learn___c_t_s_1_1_quizz_edition_a057f77413223e112c488ee66a7507495}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!QuizzEdition\_Load@{QuizzEdition\_Load}}
+\index{QuizzEdition\_Load@{QuizzEdition\_Load}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{QuizzEdition\_Load()}{QuizzEdition\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Quizz\+Edition\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load and display the data of the linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a3ed15f8cc3822c8cecfe3d4cf939a2be}\label{class_learn___c_t_s_1_1_quizz_edition_a3ed15f8cc3822c8cecfe3d4cf939a2be}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!QuizzEdition\_Resize@{QuizzEdition\_Resize}}
+\index{QuizzEdition\_Resize@{QuizzEdition\_Resize}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{QuizzEdition\_Resize()}{QuizzEdition\_Resize()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Quizz\+Edition\+\_\+\+Resize (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Resize the Controls in order to match the new size of the User\+Control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_abed1cb069eec8bd100a75c15f1fad705}\label{class_learn___c_t_s_1_1_quizz_edition_abed1cb069eec8bd100a75c15f1fad705}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Reload\_Redirections@{Reload\_Redirections}}
+\index{Reload\_Redirections@{Reload\_Redirections}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Reload\_Redirections()}{Reload\_Redirections()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Reload\+\_\+\+Redirections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reload the existing dialogs upon signal from the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a26b0bab0170eb4d13cfc3b53b4725853}\label{class_learn___c_t_s_1_1_quizz_edition_a26b0bab0170eb4d13cfc3b53b4725853}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Txt\_Answer\_KeyPress@{Txt\_Answer\_KeyPress}}
+\index{Txt\_Answer\_KeyPress@{Txt\_Answer\_KeyPress}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Txt\_Answer\_KeyPress()}{Txt\_Answer\_KeyPress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Txt\+\_\+\+Answer\+\_\+\+Key\+Press (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Verify, save or cancel the input data to the linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a5ee506c0e114bd4b70f2a6dc9e36a529}\label{class_learn___c_t_s_1_1_quizz_edition_a5ee506c0e114bd4b70f2a6dc9e36a529}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!Txt\_Question\_KeyPress@{Txt\_Question\_KeyPress}}
+\index{Txt\_Question\_KeyPress@{Txt\_Question\_KeyPress}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{Txt\_Question\_KeyPress()}{Txt\_Question\_KeyPress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+Txt\+\_\+\+Question\+\_\+\+Key\+Press (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Verify, save or cancel the input data to the linked file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_quizz_edition_a02d818cbb00af91326a0e69f8408d967}\label{class_learn___c_t_s_1_1_quizz_edition_a02d818cbb00af91326a0e69f8408d967}} 
+\index{Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}!components@{components}}
+\index{components@{components}!Learn\_CTS.QuizzEdition@{Learn\_CTS.QuizzEdition}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Quizz\+Edition.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Quizz\+Edition.\+cs\item 
+Quizz\+Edition.\+Designer.\+cs\end{DoxyCompactItemize}

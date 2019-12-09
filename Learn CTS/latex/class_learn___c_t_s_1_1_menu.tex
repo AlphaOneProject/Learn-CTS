@@ -1,0 +1,487 @@
+\hypertarget{class_learn___c_t_s_1_1_menu}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Menu Class Reference}
+\label{class_learn___c_t_s_1_1_menu}\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_menu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a1bd6f45f02d3cec6a26eac4f8aa5ae7c}{Menu}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the whole Form, as a constructor should. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_af3de9a7143a8bb2c8102e53fd327c065}{Get\+\_\+\+Var\+\_\+\+From\+\_\+\+J\+S\+ON}} (string internal\+\_\+path, string var\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Recover the content of a variable in a J\+S\+ON file at a specified path. Cast this content as a string before returning it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a7aab91068e91f174a2f36ce1ceba3eb4}{Save\+\_\+\+Options}} ()
+\begin{DoxyCompactList}\small\item\em Saves the local copy of the options into the options file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_af9f4c36f004ad56c3f5867a19810dced}{Dispose\+\_\+\+Controls}} (Control control)
+\begin{DoxyCompactList}\small\item\em Recursively disposes all the controls of the form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_ac318baad62fa3ff2219532412627898c}{Change\+\_\+\+Theme}} ()
+\begin{DoxyCompactList}\small\item\em Change the theme of all the controls of this form, according to the current theme in the options. \end{DoxyCompactList}\item 
+J\+Object \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a49084f026b08b06caae08e4130c7a076}{Get\+Theme}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current theme of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a843c4c435994681c7551519150f06214}{Menu\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Fonction called at the start of this form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a2b98a0904ae338fec3c90f0d0b516564}{Main\+\_\+menu\+\_\+btn\+\_\+edit\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em On click, hides the main menu and displays the editor menu. \end{DoxyCompactList}\item 
+Array\+List \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a346a58c60944e1469be74a6487ff6a42}{Get\+\_\+\+Games\+\_\+\+List}} ()
+\begin{DoxyCompactList}\small\item\em Fetches all existing games into a list of \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card}{Game\+Card}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a1796aa86f1267a527f713c6d6f5940f4}{Main\+\_\+menu\+\_\+btn\+\_\+exit\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Closes the form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a428537a82a6f98fea476cdc728d09149}{Main\+\_\+menu\+\_\+btn\+\_\+options\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the main\+\_\+menu\+\_\+btn\+\_\+options is clicked. Displays the options menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afacc4f17ed8af8dbb498e602eb2e46ca}{Back\+\_\+to\+\_\+main\+\_\+menu}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when a button to return to the main menu is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}{Display\+\_\+\+Main\+\_\+\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Creates all controls necessary to display the main menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afc66b1e8385e7a661efdd94d6fde0f45}{Display\+\_\+games\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Creates all controls necessary to display the editor menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}{Display\+\_\+options\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Creates all controls necessary to display the options menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_ab30f685e9826ccd59225f3e12bdd3d80}{Options\+\_\+\+Menu\+\_\+\+Tgs\+\_\+\+Theme\+\_\+\+Checked\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Toogle\+Switch is changed, to directly update the colors of the current form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afb5b1138a95dc7ed85f2d97a53b1d867}{Display\+\_\+create\+\_\+game}} (Object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Displays a custom box to create a game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a0bfa9205f71c4cc0802208b3d95bbce2}{Game\+Creator\+\_\+\+Leave}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} loses focus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the size of the window has changed. Is used for responsive behavior. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a3845476a21c5bb64dfc0af0f1ea08894}{Responsive\+\_\+\+Resize\+\_\+games\+\_\+menu}} ()
+\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}{Responsive\+\_\+\+Resize\+\_\+\+Main\+\_\+\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}{Responsive\+\_\+\+Resize\+\_\+\+Options\+\_\+\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_ac796242a3d3afb00413da6332fdcf1f1}{Menu\+\_\+\+Form\+Closing}} (object sender, Form\+Closing\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the form is closed. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a7b6bf03efe7158b5b13ff63218057d7c}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a82eb823a69a01a5ae557000734e6cb20}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Required method for Designer support -\/ do not modify the contents of this method with the code editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a1f3557f678a0917fed85ce91f23a601d}{displayed\+\_\+menu}}
+\item 
+readonly string \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a064ead06582299043540a80fd35aaeea}{games\+\_\+path}}
+\item 
+J\+Object \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a27abd0acf63bea5f6339b8dd22258019}{options}}
+\item 
+J\+Object \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a626bb9cc9b78c8c560021a51703eec25}{themes}}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a20b48b50bde525e7ae28c2c0ff3b9e7d}{components}} = null
+\begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_acf89d70d4ea6eec68c00ce7346442f25}\label{class_learn___c_t_s_1_1_menu_acf89d70d4ea6eec68c00ce7346442f25}} 
+private System Windows Forms Button {\bfseries main\+\_\+menu\+\_\+btn\+\_\+edit}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a8fc03d8c76e655ba504b3111d003a8d3}\label{class_learn___c_t_s_1_1_menu_a8fc03d8c76e655ba504b3111d003a8d3}} 
+private System Windows Forms Button {\bfseries main\+\_\+menu\+\_\+btn\+\_\+exit}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a109403d8ac7c648e261a7308d7c6c572}\label{class_learn___c_t_s_1_1_menu_a109403d8ac7c648e261a7308d7c6c572}} 
+private System Windows Forms Button {\bfseries main\+\_\+menu\+\_\+btn\+\_\+options}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a13ee88bb0836102087d0b2c8e1fe82d8}\label{class_learn___c_t_s_1_1_menu_a13ee88bb0836102087d0b2c8e1fe82d8}} 
+private System Windows Forms Label {\bfseries main\+\_\+menu\+\_\+lbl\+\_\+title1}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a7e97988744e5dcfed29524766d67eda4}\label{class_learn___c_t_s_1_1_menu_a7e97988744e5dcfed29524766d67eda4}} 
+private System Windows Forms Label {\bfseries main\+\_\+menu\+\_\+lbl\+\_\+title2}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a1bd6f45f02d3cec6a26eac4f8aa5ae7c}\label{class_learn___c_t_s_1_1_menu_a1bd6f45f02d3cec6a26eac4f8aa5ae7c}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize the whole Form, as a constructor should. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_afacc4f17ed8af8dbb498e602eb2e46ca}\label{class_learn___c_t_s_1_1_menu_afacc4f17ed8af8dbb498e602eb2e46ca}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Back\_to\_main\_menu@{Back\_to\_main\_menu}}
+\index{Back\_to\_main\_menu@{Back\_to\_main\_menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Back\_to\_main\_menu()}{Back\_to\_main\_menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Back\+\_\+to\+\_\+main\+\_\+menu (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when a button to return to the main menu is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_ac318baad62fa3ff2219532412627898c}\label{class_learn___c_t_s_1_1_menu_ac318baad62fa3ff2219532412627898c}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Change\_Theme@{Change\_Theme}}
+\index{Change\_Theme@{Change\_Theme}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Change\_Theme()}{Change\_Theme()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Change\+\_\+\+Theme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Change the theme of all the controls of this form, according to the current theme in the options. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_afb5b1138a95dc7ed85f2d97a53b1d867}\label{class_learn___c_t_s_1_1_menu_afb5b1138a95dc7ed85f2d97a53b1d867}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_create\_game@{Display\_create\_game}}
+\index{Display\_create\_game@{Display\_create\_game}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Display\_create\_game()}{Display\_create\_game()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Display\+\_\+create\+\_\+game (\begin{DoxyParamCaption}\item[{Object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Displays a custom box to create a game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_afc66b1e8385e7a661efdd94d6fde0f45}\label{class_learn___c_t_s_1_1_menu_afc66b1e8385e7a661efdd94d6fde0f45}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_games\_menu@{Display\_games\_menu}}
+\index{Display\_games\_menu@{Display\_games\_menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Display\_games\_menu()}{Display\_games\_menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Display\+\_\+games\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates all controls necessary to display the editor menu. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}\label{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_Main\_Menu@{Display\_Main\_Menu}}
+\index{Display\_Main\_Menu@{Display\_Main\_Menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Display\_Main\_Menu()}{Display\_Main\_Menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Display\+\_\+\+Main\+\_\+\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates all controls necessary to display the main menu. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}\label{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_options\_menu@{Display\_options\_menu}}
+\index{Display\_options\_menu@{Display\_options\_menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Display\_options\_menu()}{Display\_options\_menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Display\+\_\+options\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates all controls necessary to display the options menu. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a7b6bf03efe7158b5b13ff63218057d7c}\label{class_learn___c_t_s_1_1_menu_a7b6bf03efe7158b5b13ff63218057d7c}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Menu.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Clean up any resources being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true if managed resources should be disposed; otherwise, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_af9f4c36f004ad56c3f5867a19810dced}\label{class_learn___c_t_s_1_1_menu_af9f4c36f004ad56c3f5867a19810dced}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Dispose\_Controls@{Dispose\_Controls}}
+\index{Dispose\_Controls@{Dispose\_Controls}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Dispose\_Controls()}{Dispose\_Controls()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Dispose\+\_\+\+Controls (\begin{DoxyParamCaption}\item[{Control}]{control }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recursively disposes all the controls of the form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a0bfa9205f71c4cc0802208b3d95bbce2}\label{class_learn___c_t_s_1_1_menu_a0bfa9205f71c4cc0802208b3d95bbce2}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!GameCreator\_Leave@{GameCreator\_Leave}}
+\index{GameCreator\_Leave@{GameCreator\_Leave}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{GameCreator\_Leave()}{GameCreator\_Leave()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Game\+Creator\+\_\+\+Leave (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} loses focus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a346a58c60944e1469be74a6487ff6a42}\label{class_learn___c_t_s_1_1_menu_a346a58c60944e1469be74a6487ff6a42}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Get\_Games\_List@{Get\_Games\_List}}
+\index{Get\_Games\_List@{Get\_Games\_List}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Get\_Games\_List()}{Get\_Games\_List()}}
+{\footnotesize\ttfamily Array\+List Learn\+\_\+\+C\+T\+S.\+Menu.\+Get\+\_\+\+Games\+\_\+\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fetches all existing games into a list of \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card}{Game\+Card}}. 
+
+\begin{DoxyReturn}{Returns}
+An Array\+List of \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card}{Game\+Card}}
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_af3de9a7143a8bb2c8102e53fd327c065}\label{class_learn___c_t_s_1_1_menu_af3de9a7143a8bb2c8102e53fd327c065}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Get\_Var\_From\_JSON@{Get\_Var\_From\_JSON}}
+\index{Get\_Var\_From\_JSON@{Get\_Var\_From\_JSON}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Get\_Var\_From\_JSON()}{Get\_Var\_From\_JSON()}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Menu.\+Get\+\_\+\+Var\+\_\+\+From\+\_\+\+J\+S\+ON (\begin{DoxyParamCaption}\item[{string}]{internal\+\_\+path,  }\item[{string}]{var\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recover the content of a variable in a J\+S\+ON file at a specified path. Cast this content as a string before returning it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em internal\+\_\+path} & Path from the game folder to the targeted J\+S\+ON file.\\
+\hline
+{\em var\+\_\+name} & Variable name in the J\+S\+ON file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a49084f026b08b06caae08e4130c7a076}\label{class_learn___c_t_s_1_1_menu_a49084f026b08b06caae08e4130c7a076}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!GetTheme@{GetTheme}}
+\index{GetTheme@{GetTheme}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{GetTheme()}{GetTheme()}}
+{\footnotesize\ttfamily J\+Object Learn\+\_\+\+C\+T\+S.\+Menu.\+Get\+Theme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the current theme of the application. 
+
+\begin{DoxyReturn}{Returns}
+J\+Object of the current theme.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a82eb823a69a01a5ae557000734e6cb20}\label{class_learn___c_t_s_1_1_menu_a82eb823a69a01a5ae557000734e6cb20}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Menu.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a2b98a0904ae338fec3c90f0d0b516564}\label{class_learn___c_t_s_1_1_menu_a2b98a0904ae338fec3c90f0d0b516564}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Main\_menu\_btn\_edit\_Click@{Main\_menu\_btn\_edit\_Click}}
+\index{Main\_menu\_btn\_edit\_Click@{Main\_menu\_btn\_edit\_Click}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Main\_menu\_btn\_edit\_Click()}{Main\_menu\_btn\_edit\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Main\+\_\+menu\+\_\+btn\+\_\+edit\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+On click, hides the main menu and displays the editor menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a1796aa86f1267a527f713c6d6f5940f4}\label{class_learn___c_t_s_1_1_menu_a1796aa86f1267a527f713c6d6f5940f4}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Main\_menu\_btn\_exit\_Click@{Main\_menu\_btn\_exit\_Click}}
+\index{Main\_menu\_btn\_exit\_Click@{Main\_menu\_btn\_exit\_Click}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Main\_menu\_btn\_exit\_Click()}{Main\_menu\_btn\_exit\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Main\+\_\+menu\+\_\+btn\+\_\+exit\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Closes the form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a428537a82a6f98fea476cdc728d09149}\label{class_learn___c_t_s_1_1_menu_a428537a82a6f98fea476cdc728d09149}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Main\_menu\_btn\_options\_Click@{Main\_menu\_btn\_options\_Click}}
+\index{Main\_menu\_btn\_options\_Click@{Main\_menu\_btn\_options\_Click}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Main\_menu\_btn\_options\_Click()}{Main\_menu\_btn\_options\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Main\+\_\+menu\+\_\+btn\+\_\+options\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the main\+\_\+menu\+\_\+btn\+\_\+options is clicked. Displays the options menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_ac796242a3d3afb00413da6332fdcf1f1}\label{class_learn___c_t_s_1_1_menu_ac796242a3d3afb00413da6332fdcf1f1}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_FormClosing@{Menu\_FormClosing}}
+\index{Menu\_FormClosing@{Menu\_FormClosing}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Menu\_FormClosing()}{Menu\_FormClosing()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu\+\_\+\+Form\+Closing (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closing\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the form is closed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a843c4c435994681c7551519150f06214}\label{class_learn___c_t_s_1_1_menu_a843c4c435994681c7551519150f06214}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_Load@{Menu\_Load}}
+\index{Menu\_Load@{Menu\_Load}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Menu\_Load()}{Menu\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fonction called at the start of this form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}\label{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_SizeChanged@{Menu\_SizeChanged}}
+\index{Menu\_SizeChanged@{Menu\_SizeChanged}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Menu\_SizeChanged()}{Menu\_SizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the size of the window has changed. Is used for responsive behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_ab30f685e9826ccd59225f3e12bdd3d80}\label{class_learn___c_t_s_1_1_menu_ab30f685e9826ccd59225f3e12bdd3d80}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Options\_Menu\_Tgs\_Theme\_CheckedChanged@{Options\_Menu\_Tgs\_Theme\_CheckedChanged}}
+\index{Options\_Menu\_Tgs\_Theme\_CheckedChanged@{Options\_Menu\_Tgs\_Theme\_CheckedChanged}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Options\_Menu\_Tgs\_Theme\_CheckedChanged()}{Options\_Menu\_Tgs\_Theme\_CheckedChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Options\+\_\+\+Menu\+\_\+\+Tgs\+\_\+\+Theme\+\_\+\+Checked\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Toogle\+Switch is changed, to directly update the colors of the current form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a3845476a21c5bb64dfc0af0f1ea08894}\label{class_learn___c_t_s_1_1_menu_a3845476a21c5bb64dfc0af0f1ea08894}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Responsive\_Resize\_games\_menu@{Responsive\_Resize\_games\_menu}}
+\index{Responsive\_Resize\_games\_menu@{Responsive\_Resize\_games\_menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Responsive\_Resize\_games\_menu()}{Responsive\_Resize\_games\_menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Responsive\+\_\+\+Resize\+\_\+games\+\_\+menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}\label{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Responsive\_Resize\_Main\_Menu@{Responsive\_Resize\_Main\_Menu}}
+\index{Responsive\_Resize\_Main\_Menu@{Responsive\_Resize\_Main\_Menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Responsive\_Resize\_Main\_Menu()}{Responsive\_Resize\_Main\_Menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Responsive\+\_\+\+Resize\+\_\+\+Main\+\_\+\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}\label{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Responsive\_Resize\_Options\_Menu@{Responsive\_Resize\_Options\_Menu}}
+\index{Responsive\_Resize\_Options\_Menu@{Responsive\_Resize\_Options\_Menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Responsive\_Resize\_Options\_Menu()}{Responsive\_Resize\_Options\_Menu()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Responsive\+\_\+\+Resize\+\_\+\+Options\+\_\+\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a7aab91068e91f174a2f36ce1ceba3eb4}\label{class_learn___c_t_s_1_1_menu_a7aab91068e91f174a2f36ce1ceba3eb4}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Save\_Options@{Save\_Options}}
+\index{Save\_Options@{Save\_Options}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Save\_Options()}{Save\_Options()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Save\+\_\+\+Options (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Saves the local copy of the options into the options file. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a20b48b50bde525e7ae28c2c0ff3b9e7d}\label{class_learn___c_t_s_1_1_menu_a20b48b50bde525e7ae28c2c0ff3b9e7d}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!components@{components}}
+\index{components@{components}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Menu.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Required designer variable. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a1f3557f678a0917fed85ce91f23a601d}\label{class_learn___c_t_s_1_1_menu_a1f3557f678a0917fed85ce91f23a601d}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!displayed\_menu@{displayed\_menu}}
+\index{displayed\_menu@{displayed\_menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{displayed\_menu}{displayed\_menu}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Menu.\+displayed\+\_\+menu\hspace{0.3cm}{\ttfamily [private]}}
+
+displayed\+\_\+menu is meant to keep track which part of the menu is currently displaying. \char`\"{}main\+\_\+menu\char`\"{} is the main menu. \char`\"{}games\+\_\+menu\char`\"{} is the menu where the games are displayed. \char`\"{}options\char`\"{} means that the options are displayed. \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a064ead06582299043540a80fd35aaeea}\label{class_learn___c_t_s_1_1_menu_a064ead06582299043540a80fd35aaeea}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!games\_path@{games\_path}}
+\index{games\_path@{games\_path}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{games\_path}{games\_path}}
+{\footnotesize\ttfamily readonly string Learn\+\_\+\+C\+T\+S.\+Menu.\+games\+\_\+path\hspace{0.3cm}{\ttfamily [private]}}
+
+Default path of all the created games. \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a27abd0acf63bea5f6339b8dd22258019}\label{class_learn___c_t_s_1_1_menu_a27abd0acf63bea5f6339b8dd22258019}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!options@{options}}
+\index{options@{options}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily J\+Object Learn\+\_\+\+C\+T\+S.\+Menu.\+options\hspace{0.3cm}{\ttfamily [private]}}
+
+Local copy of the options \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a626bb9cc9b78c8c560021a51703eec25}\label{class_learn___c_t_s_1_1_menu_a626bb9cc9b78c8c560021a51703eec25}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!themes@{themes}}
+\index{themes@{themes}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{themes}{themes}}
+{\footnotesize\ttfamily J\+Object Learn\+\_\+\+C\+T\+S.\+Menu.\+themes\hspace{0.3cm}{\ttfamily [private]}}
+
+Local copy of the themes 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Menu.\+cs\item 
+Menu.\+Designer.\+cs\end{DoxyCompactItemize}
