@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -18,13 +19,13 @@ namespace Learn_CTS
 
         public Background(string name, int x, int y) : base(name, "background", x, y, -5000)
         {
-            double_b = new Texture(name, "background", this.GetWidth() + this.GetX(), y, -5000);
-            this.AddChild(double_b);
+            this.double_b = new Texture(name, "background", this.GetX() + this.GetWidth(), y, -5000);
         }
 
         public override bool CollideWith(Texture t, bool b)
         {
-            return double_b.CollideWith(t, b) || base.CollideWith(t, b);
+            this.double_b.SetX(this.GetX() + this.GetWidth());
+            return this.double_b.CollideWith(t, b) || base.CollideWith(t, b);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Learn_CTS
             Graphics g = e.Graphics;
             CompositingMode c = g.CompositingMode;
             g.CompositingMode = CompositingMode.SourceCopy;
-            if (this.GetX()< -this.GetWidth())
+            if (this.GetX() < -this.GetWidth())
             {
                 this.SetX(this.GetX() + this.GetWidth());
             }
@@ -46,7 +47,7 @@ namespace Learn_CTS
                 this.SetX(-this.GetWidth());
             }
             g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
-            g.DrawImage(double_b.GetImage(), new Point(double_b.GetX(), double_b.GetY()));
+            g.DrawImage(this.GetImage(), new Point(this.GetX() + this.GetWidth(), this.GetY()));
             g.CompositingMode = c;
         }
     }
