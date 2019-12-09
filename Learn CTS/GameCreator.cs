@@ -24,7 +24,14 @@ namespace Learn_CTS
          */
         private readonly String games_path;
 
+        /**
+         * Current theme of the application
+         */
         private JObject theme;
+
+        /**
+         * Menu calling the GameCreator
+         */
         private Menu menu;
 
         /// <summary>

@@ -89,6 +89,7 @@ namespace Learn_CTS
         /// </summary>
         private void DisplayActions()
         {
+            flp_actions.Controls.Clear();
             JObject actions = item.GetActions();
             int nbr_choices = (int)actions["choices"];
             for (int i = 1; i <= nbr_choices; i++)
@@ -113,7 +114,25 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Action_Event(object sender, EventArgs e)
         {
-            
+            Button btn = (Button)sender;
+            string s = item.GetActions()["c" + btn.TabIndex.ToString()]["redirect"].ToString();
+            int score = (int)item.GetActions()["c" + btn.TabIndex.ToString()]["score"];
+            GameWindow.GetInstance().SetScore(score);
+            if (s.Length == 0 || s == "0")
+            {
+                PNCWindow window = ((PNCWindow)this.FindForm());
+                window.setItemsLeft(window.getItemsLeft() - 1);
+            }
+            else if (s == "-1")
+            {
+                Exit();
+            }
+            else
+            {
+                JObject new_actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar + "dialogs" + s + ".json");
+                item.SetActions(new_actions);
+                DisplayActions();
+            }
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace Learn_CTS
 {
     /// <summary>
-    /// Window responsible for the point and click game mode
+    /// Window responsible for a situation of the point and click game mode.
     /// </summary>
     public partial class PNCWindow : Form
     {
@@ -31,8 +31,11 @@ namespace Learn_CTS
         private string library_path;
         private ItemManager item_manager;
 
+        /* Number of items that the player need to valid in order to finish the situation. */
+        private int items_left;
+
         /// <summary>
-        /// Constructor
+        /// Constructor of the window.
         /// </summary>
         /// <param name="game">Name of the current game</param>
         /// <param name="scenario">Name of the scenario</param>
@@ -117,7 +120,7 @@ namespace Learn_CTS
         /// Retrieve all the textures and the childs of each textures.
         /// </summary>
         /// <param name="list"></param>
-        /// <returns></returns>
+        /// <returns>The textures from the list of textures.</returns>
         private List<Texture> GetAllTextures(List<Texture> list)
         {
             List<Texture> list_temp = new List<Texture>();
@@ -202,6 +205,29 @@ namespace Learn_CTS
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets the number of items that needs to be validated in order to complete the situation.
+        /// Calls the GameWindow to switch situation if all the items are validated.
+        /// </summary>
+        /// <param name="n">Number of items</param>
+        public void setItemsLeft(int n)
+        {
+            this.items_left = n;
+            if (n == 0)
+            {
+                GameWindow.GetInstance().SwitchSituation();
+            }
+        }
+
+        /// <summary>
+        /// Returns the number of items that needs to be validated in order to complete the situation.
+        /// </summary>
+        /// <returns>Number of items</returns>
+        public int getItemsLeft()
+        {
+            return items_left;
         }
     }
 }
