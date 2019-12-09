@@ -12,7 +12,7 @@ using System.Drawing.Imaging;
 
 namespace Learn_CTS
 {
-    class Tools
+    static class Tools
     {
         /// <summary>
         /// Recover the content of a JSON file at a specified path.
@@ -125,6 +125,18 @@ namespace Learn_CTS
             int output = nbr1;
             if (nbr2 > output) { output = nbr2; }
             return output;
+        }
+
+        public static int Round_Up(double nbr)
+        {
+            if ((int)nbr != nbr)
+            {
+                return (int)nbr + 1;
+            }
+            else
+            {
+                return (int)nbr;
+            }
         }
 
         /// <summary>
