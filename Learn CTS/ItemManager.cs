@@ -128,5 +128,38 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Returns the number of items that need to be validated in order to complete the situation.
+        /// </summary>
+        /// <returns>Number of items</returns>
+        public int GetNumberOfItemsToValidate()
+        {
+            int counter = 0;
+            if (!list_items.Any())
+            {
+                GetItemsFromSituation();
+            }
+            else
+            {
+                foreach (Item item in list_items)
+                {
+                    int nb_choices = (int)item.GetActions()["choices"];
+
+                    for (int i = 1; i <= nb_choices; i++)
+                    {
+                        if ( int.Parse(item.GetActions()["c" + i.ToString()]["redirect"].ToString()) == 0)
+                        {
+                            counter++;
+                        } 
+                    }
+                }
+            }
+            return counter;
+        }
+
+        public string GetLibraryPath()
+        {
+            return library_path;
+        }
     }
 }
