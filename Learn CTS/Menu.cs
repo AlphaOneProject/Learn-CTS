@@ -40,7 +40,6 @@ namespace Learn_CTS
             InitializeComponent();
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
             this.DoubleBuffered = false;
-            this.Activate();
         }
 
         /// <summary>
@@ -50,6 +49,8 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_Load(object sender, EventArgs e)
         {
+            this.Activate();
+
             string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json";
             // Set the window size as options size setting.
             if (!new FileInfo(options_path).Exists)

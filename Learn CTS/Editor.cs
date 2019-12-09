@@ -12,6 +12,9 @@ namespace Learn_CTS
 {
     public partial class Editor : Form
     {
+        // Constants.
+
+        private const int dialogs_per_page = 5;
 
         // Attributes.
 
@@ -20,10 +23,9 @@ namespace Learn_CTS
         private JObject game_properties;
         private JObject theme;
         private string old_category = "general";
-        private bool saved;
+        private bool saved = true;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
-        private bool value_cooldown = false;
 
         // Methods.
 
@@ -134,11 +136,21 @@ namespace Learn_CTS
             menu.SelectedNode = menu.Nodes[0];
         }
 
+        /// <summary>
+        /// Allow external Forms or UserControls to access the name of the game edited by
+        /// an instance of Editor and thus, the game they are asked to focus on.
+        /// </summary>
+        /// <returns>Name of the game currently edited.</returns>
         public string Get_Game()
         {
             return this.game;
         }
 
+        /// <summary>
+        /// Transmit the data object already read when starting the Editor and thus
+        /// optimizing the I/O memory access.
+        /// </summary>
+        /// <returns>Object containing the whole pallet of colors to display.</returns>
         public JObject Get_Theme()
         {
             return this.theme;
@@ -279,6 +291,8 @@ namespace Learn_CTS
                         Display_Dialogs(); break;
                     case "images":
                         Display_Images(); break;
+                    case "item_images":
+                        Display_Item_Images(); break;
                     case "sprites":
                         Display_Sprites(); break;
                     case "backgrounds":
@@ -329,6 +343,7 @@ namespace Learn_CTS
             txt_desc.Height = ((int)((txt_desc.Text.Length * 12) / txt_desc.Width) + 1) * 40;
             txt_desc.KeyPress += new KeyPressEventHandler(this.Txt_Keypress);
             content.Controls.Add(txt_desc);
+            tlt_global.SetToolTip(txt_desc, "Description du jeu");
 
             // Creation of a label used for showing messages regarding the description's modification.
             Label lbl_desc_state = new Label()
@@ -454,6 +469,7 @@ namespace Learn_CTS
             };
             pb_import_lib.Click += new EventHandler(this.Import_Library);
             content.Controls.Add(pb_import_lib);
+            tlt_global.SetToolTip(pb_import_lib, "Permet d'importer les modèles d'un jeu quelconque dans celui-ci");
 
             Label lbl_import_lib = new Label()
             {
@@ -466,18 +482,32 @@ namespace Learn_CTS
             };
             lbl_import_lib.Click += new EventHandler(this.Import_Library);
             content.Controls.Add(lbl_import_lib);
+            tlt_global.SetToolTip(lbl_import_lib, "Permet d'importer les modèles d'un jeu quelconque dans celui-ci");
 
             pb_import_lib.Location = new Point((content.Width - pb_import_lib.Width - 8 - lbl_import_lib.Width) / 2, 20);
             lbl_import_lib.Location = new Point(pb_import_lib.Location.X + pb_import_lib.Width + 8, pb_import_lib.Location.Y +
                                                 (pb_import_lib.Height - lbl_import_lib.Height) / 2);
         }
 
+        /// <summary>
+        /// Launch the Form "GameSelection" with full focus to get the selected game
+        /// upon its end.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Import_Library(object sender, EventArgs e)
         {
             GameSelection gs = new GameSelection(this);
             gs.ShowDialog();
         }
 
+        /// <summary>
+        /// Recover and process the name of the selected game.
+        /// If the name is not empty then the library of the game will
+        /// be copied in the current game.
+        /// </summary>
+        /// <param name="game_name">Legacy parameter from the "GameSelection" Form,
+        /// name of the selected game.</param>
         public void Import_Selected_Library(string game_name)
         {
             if (game_name.Length == 0) { return; }
@@ -557,6 +587,7 @@ namespace Learn_CTS
             };
             pb_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
             content.Controls.Add(pb_add_lib_npc);
+            tlt_global.SetToolTip(pb_add_lib_npc, "Ajouter un nouveau figurant");
 
             // TableLayoutPanel, keeping the generated elements in rows.
             TableLayoutPanel tlp_npcs = new TableLayoutPanel()
@@ -618,6 +649,7 @@ namespace Learn_CTS
                 };
                 npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
                 tlp_npcs.Controls.Add(npc_name, 0, i);
+                tlt_global.SetToolTip(npc_name, "Nom du figurant");
 
                 TextBox npc_folder = new TextBox()
                 {
@@ -885,6 +917,19 @@ namespace Learn_CTS
         {
             if (this.old_category == "dialogs") // Trigger only on form resize.
             {
+                Button btn_ff = (Button)content.Controls.Find("btn_fast_forward", true)[0];
+                Button btn_f = (Button)content.Controls.Find("btn_forward", true)[0];
+                Label lbl_pn = (Label)content.Controls.Find("lbl_page_number", true)[0];
+                Button btn_b = (Button)content.Controls.Find("btn_backward", true)[0];
+                Button btn_fb = (Button)content.Controls.Find("btn_fast_backward", true)[0];
+
+                btn_ff.Location = new Point(content.Width - btn_ff.Width - 40, 20);
+                btn_f.Location = new Point(btn_ff.Location.X - btn_f.Width - 4, 20);
+                lbl_pn.Location = new Point(btn_f.Location.X - lbl_pn.Width - 10,
+                                                     20 + ((btn_ff.Height - lbl_pn.Height) / 2));
+                btn_b.Location = new Point(lbl_pn.Location.X - btn_b.Width - 10, 20);
+                btn_fb.Location = new Point(btn_b.Location.X - btn_fb.Width - 4, 20);
+
                 foreach (QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
                 {
                     qe.Width = content.Width - 80;
@@ -913,16 +958,82 @@ namespace Learn_CTS
             };
             pb_add_dialog.Click += new EventHandler(this.Add_Dialog);
             content.Controls.Add(pb_add_dialog);
+            tlt_global.SetToolTip(pb_add_dialog, "Ajouter un nouveau dialogue");
 
             // Place the controls just created.
             lbl_dialogs.Location = new Point(20, 20);
             pb_add_dialog.Location = new Point(lbl_dialogs.Location.X + lbl_dialogs.Width + 20, 20);
+
+            // Generating Controls associated to the pages.
+            // Choosen pattern: << < P > >>
+            Button btn_fast_backward = new Button()
+            {
+                Name = "btn_fast_backward",
+                Text = "<<",
+                AutoSize = true
+            };
+            btn_fast_backward.Click += new EventHandler(Dialog_Fast_Backward);
+            content.Controls.Add(btn_fast_backward);
+            tlt_global.SetToolTip(btn_fast_backward, "Retourner à la première page");
+
+            Button btn_backward = new Button()
+            {
+                Name = "btn_backward",
+                Text = "<",
+                AutoSize = true
+            };
+            btn_backward.Click += new EventHandler(Dialog_Backward);
+            content.Controls.Add(btn_backward);
+            tlt_global.SetToolTip(btn_backward, "Aller à la page précédente");
+
+            Label lbl_page_number = new Label()
+            {
+                Name = "lbl_page_number",
+                Text = "1/1",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            lbl_page_number.TextChanged += new EventHandler(Dialog_Page_Update);
+            content.Controls.Add(lbl_page_number);
+            tlt_global.SetToolTip(lbl_page_number, "Page actuelle");
+
+            Button btn_forward = new Button()
+            {
+                Name = "btn_forward",
+                Text = ">",
+                AutoSize = true
+            };
+            btn_forward.Click += new EventHandler(Dialog_Forward);
+            content.Controls.Add(btn_forward);
+            tlt_global.SetToolTip(btn_forward, "Aller à la page suivante");
+
+            Button btn_fast_forward = new Button()
+            {
+                Name = "btn_fast_forward",
+                Text = ">>",
+                AutoSize = true
+            };
+            btn_fast_forward.Click += new EventHandler(Dialog_Fast_Forward);
+            content.Controls.Add(btn_fast_forward);
+            tlt_global.SetToolTip(btn_fast_forward, "Aller à la dernière page");
+
+            // Placement of said Controls.
+            btn_fast_forward.Location = new Point(content.Width - btn_fast_forward.Width - 40, 20);
+            btn_forward.Location = new Point(btn_fast_forward.Location.X - btn_forward.Width - 4, 20);
+            lbl_page_number.Location = new Point(btn_forward.Location.X - lbl_page_number.Width - 10,
+                                                 20 + ((btn_fast_forward.Height - lbl_page_number.Height) / 2));
+            btn_backward.Location = new Point(lbl_page_number.Location.X - btn_backward.Width - 10, 20);
+            btn_fast_backward.Location = new Point(btn_backward.Location.X - btn_fast_backward.Width - 4, 20);
 
             // Generating to all files' a QuizzEdition UserControl.
             int i = 1;
             int last_pos = 0;
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int total_pages = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            lbl_page_number.Text = "1/" + total_pages.ToString();
+
             foreach (string file in Directory.GetFiles(dialogs_path))
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
@@ -940,7 +1051,8 @@ namespace Learn_CTS
                 {
                     Name = "lbl_dialog_id" + i,
                     Text = "N°" + i,
-                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                     AutoSize = true,
                     BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
                     ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
@@ -950,7 +1062,132 @@ namespace Learn_CTS
 
                 lbl_dialog_id.Location = new Point(QEdition.Location.X, QEdition.Location.Y - lbl_dialog_id.Height + 1);
                 i++;
+
+                if (i > dialogs_per_page)
+                {
+                    return;
+                }
             }
+        }
+
+        public void Dialog_Page_Update(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int current_page = int.Parse(lbl.Text.Split('/')[0]);
+            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+
+            List<int> ids = new List<int>();
+            foreach(QuizzEdition qe in content.Controls.OfType<QuizzEdition>())
+            {
+                ids.Add(qe.Get_Id());
+                content.Controls.Remove(qe);
+            }
+            foreach (int id in ids)
+            {
+                    content.Controls.Remove(content.Controls.Find("lbl_dialog_id" + id, true)[0]);
+            }
+
+            Control fast_backward = content.Controls.Find("btn_fast_backward", true)[0];
+            Control backward = content.Controls.Find("btn_backward", true)[0];
+            Control forward = content.Controls.Find("btn_forward", true)[0];
+            Control fast_forward = content.Controls.Find("btn_fast_forward", true)[0];
+
+            fast_backward.Enabled = true;
+            backward.Enabled = true;
+            forward.Enabled = true;
+            fast_forward.Enabled = true;
+
+            if (current_page == 1)
+            {
+                fast_backward.Enabled = false;
+                backward.Enabled = false;
+            }
+            if (current_page == max_page)
+            {
+                forward.Enabled = false;
+                fast_forward.Enabled = false;
+            }
+
+            int i = 1;
+            int last_pos = 0;
+
+            foreach (string file in Directory.GetFiles(dialogs_path))
+            {
+                if (i < ((current_page - 1) * dialogs_per_page) + 1)
+                {
+                    i++;
+                    continue;
+                }
+
+                // Creating the UserControl responsible for the internal edition of the JSON file.
+                QuizzEdition QEdition = new QuizzEdition(this, @"" + dialogs_path + i + ".json")
+                {
+                    Name = "QuizzEdition" + i,
+                    Width = content.Width - 80,
+                    Location = new Point(40, 100 + last_pos)
+                };
+                content.Controls.Add(QEdition);
+                last_pos += QEdition.Height + 40;
+
+                // Label over the UserControl, displaying dialog's id.
+                Label lbl_dialog_id = new Label()
+                {
+                    Name = "lbl_dialog_id" + i,
+                    Text = "N°" + i,
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                    AutoSize = true,
+                    BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"])),
+                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+                content.Controls.Add(lbl_dialog_id);
+
+                lbl_dialog_id.Location = new Point(QEdition.Location.X, QEdition.Location.Y - lbl_dialog_id.Height + 1);
+                i++;
+
+                if (i > (dialogs_per_page * current_page))
+                {
+                    return;
+                }
+            }
+        }
+
+        public void Dialog_Fast_Backward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = "1/" + ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Backward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) - 1).ToString() + "/" +
+                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Forward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            lbl.Text = (int.Parse(lbl.Text.Split('/')[0]) + 1).ToString() + "/" +
+                       ((Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1).ToString();
+        }
+
+        public void Dialog_Fast_Forward(object sender, EventArgs e)
+        {
+            Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
+            string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                                  Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
+            int max_page = (Directory.GetFiles(dialogs_path).Length / dialogs_per_page) + 1;
+            lbl.Text = max_page.ToString() + "/" + max_page.ToString();
         }
 
         /// <summary>
@@ -1083,6 +1320,14 @@ namespace Learn_CTS
         }
 
         /// <summary>
+        /// Load controls for item images' content.
+        /// </summary>
+        private void Display_Item_Images()
+        {
+            // WIP
+        }
+
+        /// <summary>
         /// Load controls for sprites' content.
         /// </summary>
         private void Display_Sprites()
@@ -1199,6 +1444,7 @@ namespace Learn_CTS
             };
             pb_down_scenario.Click += new EventHandler(this.Down_Scenario);
             content.Controls.Add(pb_down_scenario);
+            tlt_global.SetToolTip(pb_down_scenario, "Inverse la position de ce scénario avec le suivant");
 
             PictureBox pb_up_scenario = new PictureBox()
             {
@@ -1211,6 +1457,7 @@ namespace Learn_CTS
             };
             pb_up_scenario.Click += new EventHandler(this.Up_Scenario);
             content.Controls.Add(pb_up_scenario);
+            tlt_global.SetToolTip(pb_up_scenario, "Inverse la position de ce scénario avec le précédent");
 
             // Creation of a label reminding the scenario's name.
             Label lbl_name_scenario = new Label()
@@ -1224,6 +1471,7 @@ namespace Learn_CTS
             };
             lbl_name_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(lbl_name_scenario);
+            tlt_global.SetToolTip(lbl_name_scenario, "Renomme le scénario");
             
             // Creation of the hidden textbox allowing to enter a new scenario's name.
             TextBox txt_rename_scenario = new TextBox()
@@ -1254,6 +1502,7 @@ namespace Learn_CTS
             };
             pb_rename_scenario.Click += new EventHandler(this.Ask_Rename_Scenario);
             content.Controls.Add(pb_rename_scenario);
+            tlt_global.SetToolTip(pb_rename_scenario, "Renomme le scénario");
 
             // Creation of a button allowing to discard the scenario.
             PictureBox pb_discard_scenario = new PictureBox()
@@ -1267,6 +1516,7 @@ namespace Learn_CTS
             };
             pb_discard_scenario.Click += new System.EventHandler(this.Discard_Scenario);
             content.Controls.Add(pb_discard_scenario);
+            tlt_global.SetToolTip(pb_discard_scenario, "Supprime le scénario et ses situations");
 
             // Creation of the button responsible for the situations' creation.
             Button btn_add_situation = new Button()
@@ -1560,12 +1810,11 @@ namespace Learn_CTS
             // Add a "environment.json" to the folder.
             JObject environment_content = new JObject()
             {
-                ["background"] = 0,
-                ["game_engine"] = "quizz",
                 ["scene_name"] = "",
-                ["scene_type"] = "tram_entrance",
                 ["scene_intro"] = "",
-                ["npc_density"] = 10
+                ["npc_density"] = 10,
+                ["background"] = 0,
+                ["scene_type"] = 0
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
                               environment_content.ToString());
@@ -1631,8 +1880,9 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_down.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_down_situation.Click += new EventHandler(this.Down_Situation);
+            pb_down_situation.Click += new EventHandler(Down_Situation);
             content.Controls.Add(pb_down_situation);
+            tlt_global.SetToolTip(pb_down_situation, "Inverse la position de cette situation avec la suivante");
 
             PictureBox pb_up_situation = new PictureBox()
             {
@@ -1643,8 +1893,9 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_up.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_up_situation.Click += new EventHandler(this.Up_Situation);
+            pb_up_situation.Click += new EventHandler(Up_Situation);
             content.Controls.Add(pb_up_situation);
+            tlt_global.SetToolTip(pb_up_situation, "Inverse la position de cette situation avec la précédente");
 
             // Creation of a label reminding the situation's name.
             Label lbl_name_situation = new Label()
@@ -1656,8 +1907,9 @@ namespace Learn_CTS
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)))
             };
-            lbl_name_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            lbl_name_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(lbl_name_situation);
+            tlt_global.SetToolTip(lbl_name_situation, "Renomme la situation");
 
             // Creation of the hidden textbox allowing to enter a new situation's name.
             TextBox txt_rename_situation = new TextBox()
@@ -1673,7 +1925,7 @@ namespace Learn_CTS
                 ShortcutsEnabled = false,
                 Visible = false
             };
-            txt_rename_situation.KeyPress += new KeyPressEventHandler(this.Rename_Situation_Txt_Keypress);
+            txt_rename_situation.KeyPress += new KeyPressEventHandler(Rename_Situation_Txt_Keypress);
             content.Controls.Add(txt_rename_situation);
 
             // Creation of a PictureBox allowing to rename the situation.
@@ -1686,8 +1938,9 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "edit.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_rename_situation.Click += new EventHandler(this.Ask_Rename_Situation);
+            pb_rename_situation.Click += new EventHandler(Ask_Rename_Situation);
             content.Controls.Add(pb_rename_situation);
+            tlt_global.SetToolTip(pb_rename_situation, "Renomme la situation");
 
             // Creation of a PictureBox allowing to discard the situation.
             PictureBox pb_discard_situation = new PictureBox()
@@ -1699,8 +1952,9 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "delete.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_discard_situation.Click += new EventHandler(this.Discard_Situation);
+            pb_discard_situation.Click += new EventHandler(Discard_Situation);
             content.Controls.Add(pb_discard_situation);
+            tlt_global.SetToolTip(pb_discard_situation, "Supprime la situation");
 
             // Creation of a PictureBox responsible for the preview display.
             PictureBox pb_preview_situation = new PictureBox()
@@ -1714,6 +1968,7 @@ namespace Learn_CTS
             };
             pb_preview_situation.Click += new EventHandler(this.Preview_Situation);
             content.Controls.Add(pb_preview_situation);
+            tlt_global.SetToolTip(pb_preview_situation, "Affiche un aperçu de la situation");
 
             // Set the correct location of the controls (responsive with the groupbox's size).
             pb_down_situation.Location = new Point(8, 0);
@@ -1723,6 +1978,8 @@ namespace Learn_CTS
             pb_rename_situation.Location = new Point(lbl_name_situation.Location.X + lbl_name_situation.Width, 0);
             pb_discard_situation.Location = new Point(pb_rename_situation.Location.X + pb_rename_situation.Width + 2, 0);
             pb_preview_situation.Location = new Point(pb_discard_situation.Location.X + pb_discard_situation.Width + 2, 0);
+
+
 
             // Recovering data from the JSON files.
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
@@ -1736,7 +1993,7 @@ namespace Learn_CTS
             Label lbl_scene_name = new Label()
             {
                 Name = "lbl_scene_name",
-                Text = "Nom du lieu : ",
+                Text = "Nom du lieu   ",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
@@ -1746,7 +2003,7 @@ namespace Learn_CTS
             Label lbl_scene_intro = new Label()
             {
                 Name = "lbl_scene_intro",
-                Text = "Texte d'introduction : ",
+                Text = "Texte d'introduction   ",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
                                                System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
@@ -1769,6 +2026,7 @@ namespace Learn_CTS
             };
             txt_scene_name.KeyPress += new KeyPressEventHandler(Txt_Keypress);
             content.Controls.Add(txt_scene_name);
+            tlt_global.SetToolTip(txt_scene_name, "Nom du lieu où se déroule la scène, affiché en haut à droite de l'écran");
 
             TextBox txt_scene_intro = new TextBox()
             {
@@ -1786,6 +2044,7 @@ namespace Learn_CTS
             };
             txt_scene_intro.KeyPress += new KeyPressEventHandler(Txt_Keypress);
             content.Controls.Add(txt_scene_intro);
+            tlt_global.SetToolTip(txt_scene_intro, "Texte d'introdution à la situation, affiché avant celle-ci");
 
             Label lbl_tb = new Label()
             {
@@ -1810,8 +2069,81 @@ namespace Learn_CTS
             };
             tb_npc_density.ValueChanged += new EventHandler(Npc_Density_Update);
             content.Controls.Add(tb_npc_density);
+            tlt_global.SetToolTip(tb_npc_density, "Modifie la densité des personnages non joueurs sans dialogue disposés aléatoirement");
 
-            // Places Controls.
+            // Filling with the existing backgrounds.
+            string bg_path = this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                             "images" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar;
+            List<string> list_bg = new List<string>();
+            foreach (string fi in Directory.GetFiles(@"" + bg_path))
+            {
+                string file_name = fi.Split(Path.DirectorySeparatorChar).Last();
+                if (!file_name.Contains("Hitbox"))
+                {
+                    list_bg.Add(file_name);
+                }
+            }
+
+            Label lbl_background = new Label()
+            {
+                Name = "lbl_background",
+                Text = "Décor   ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_background);
+
+            Label lbl_scene_type = new Label()
+            {
+                Name = "lbl_scene_type",
+                Text = "Type de scène   ",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_scene_type);
+
+            ComboBoxFix cbo_background = new ComboBoxFix()
+            {
+                Name = "cbo_background",
+                DataSource = list_bg,
+                Tag = situation_path + "environment.json",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = content.Width - Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) - 40 - 10,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
+            };
+            cbo_background.SelectedIndexChanged += new EventHandler(Situation_Background_Changed);
+            content.Controls.Add(cbo_background);
+            cbo_background.SelectedItem = (string)envi_data["background"];
+            tlt_global.SetToolTip(cbo_background, "Décor présent à l'arrière-plan");
+
+            List<string> list_scenes = new List<string>()
+            {
+                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "Montée dans le bus", "Trajet en bus",
+                "Descente du bus", "Accident de bus", "Marche dans un parc"
+            };
+            ComboBoxFix cbo_scene_type = new ComboBoxFix()
+            {
+                Name = "cbo_scene_type",
+                DataSource = list_scenes,
+                Tag = situation_path + "environment.json",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Width = content.Width - Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) - 40 - 10,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
+                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]))
+            };
+            cbo_scene_type.SelectedIndexChanged += new EventHandler(Scene_Type_Changed);
+            content.Controls.Add(cbo_scene_type);
+            cbo_scene_type.SelectedIndex = int.Parse((string)envi_data["scene_type"]);
+            tlt_global.SetToolTip(cbo_scene_type, "Type de situation se présentant au joueur");
+
+            // Places Controls just created.
             int sync_loc = Tools.Max_Int(lbl_scene_name.Width, lbl_scene_intro.Width) + 20 + 10;
             lbl_scene_name.Location = new Point(20, 75);
             txt_scene_name.Location = new Point(sync_loc, 75);
@@ -1821,6 +2153,14 @@ namespace Learn_CTS
                                             ((tb_npc_density.Height - lbl_tb.Height) / 2));
             tb_npc_density.Location = new Point(lbl_tb.Location.X + lbl_tb.Width + 50, txt_scene_intro.Location.Y + 
                                                 txt_scene_intro.Height + 15);
+
+            sync_loc = Tools.Max_Int(lbl_background.Width, lbl_scene_type.Width) + 20 + 10;
+            lbl_background.Location = new Point(20, tb_npc_density.Location.Y + tb_npc_density.Height + 15);
+            cbo_background.Location = new Point(sync_loc, lbl_background.Location.Y);
+            lbl_scene_type.Location = new Point(20, cbo_background.Location.Y + cbo_background.Height + 10);
+            cbo_scene_type.Location = new Point(sync_loc, lbl_scene_type.Location.Y);
+
+
 
             // Generates basic Label & add PictureBox bellow the previous Controls in the content panel.
 
@@ -1844,15 +2184,16 @@ namespace Learn_CTS
                                        Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            pb_add_event.Click += new EventHandler(this.Add_Event);
+            pb_add_event.Click += new EventHandler(Add_Event);
             content.Controls.Add(pb_add_event);
+            tlt_global.SetToolTip(pb_add_event, "Ajoute un nouvel évènement");
 
-            // Place the controls just created.
-            lbl_events.Location = new Point(20, 240);
-            pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 240);
+            // Place the Controls just created.
+            lbl_events.Location = new Point(20, 360);
+            pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 360);
 
             // Generating to all files' an EventEdition UserControl.
-            int last_pos = 300;
+            int last_pos = 420;
             for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
@@ -1881,6 +2222,24 @@ namespace Learn_CTS
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
             envi_data["npc_density"] = tb.Value;
             try { Tools.Set_To_JSON(situation_path + "environment.json", envi_data); } catch (Exception except) { return; }
+        }
+
+        public void Situation_Background_Changed(object sender, EventArgs e)
+        {
+            ComboBoxFix cbo = (ComboBoxFix)sender;
+
+            JObject data = Tools.Get_From_JSON((string)cbo.Tag);
+            data["background"] = cbo.Text;
+            Tools.Set_To_JSON((string)cbo.Tag, data);
+        }
+
+        public void Scene_Type_Changed(object sender, EventArgs e)
+        {
+            ComboBoxFix cbo = (ComboBoxFix)sender;
+
+            JObject data = Tools.Get_From_JSON((string)cbo.Tag);
+            data["scene_type"] = cbo.SelectedIndex;
+            Tools.Set_To_JSON((string)cbo.Tag, data);
         }
 
         public void Add_Event(object sender, EventArgs e)
@@ -1918,7 +2277,7 @@ namespace Learn_CTS
 
             // Replacing all EventEdition UserControls in the right place.
             int i = 1;
-            int last_pos = 300;
+            int last_pos = 420;
             foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
             {
                 ee.Location = new Point(40, last_pos - content.VerticalScroll.Value);
@@ -2252,6 +2611,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Display a preview of the current situation.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Preview_Situation(object sender, EventArgs e)
         {
             if (this.preview != null)

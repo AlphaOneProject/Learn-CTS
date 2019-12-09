@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flp_global = new System.Windows.Forms.FlowLayoutPanel();
+            this.tlt_GameSelection = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // flp_global
@@ -38,6 +40,12 @@
             this.flp_global.Name = "flp_global";
             this.flp_global.Size = new System.Drawing.Size(560, 426);
             this.flp_global.TabIndex = 0;
+            // 
+            // tlt_GameSelection
+            // 
+            this.tlt_GameSelection.AutoPopDelay = 5000;
+            this.tlt_GameSelection.InitialDelay = 300;
+            this.tlt_GameSelection.ReshowDelay = 100;
             // 
             // GameSelection
             // 
@@ -53,7 +61,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "GameSelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Choix du jeu";
+            this.Text = "Choix du jeu à importer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameSelection_FormClosing);
             this.Load += new System.EventHandler(this.GameSelection_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameSelection_KeyDown);
@@ -64,5 +72,6 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flp_global;
+        private System.Windows.Forms.ToolTip tlt_GameSelection;
     }
 }

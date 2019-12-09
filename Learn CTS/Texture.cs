@@ -161,11 +161,19 @@ namespace Learn_CTS
 
         public virtual void Move(int a, int b)
         {
+            this.Move(a, b, true);
+        }
+
+        public virtual void Move(int a, int b, bool mc)
+        {
             this.x += a;
             this.y += b;
-            foreach (Texture t in this.list_childs)
+            if (mc)
             {
-                t.Move(a, b);
+                foreach (Texture t in this.list_childs)
+                {
+                    t.Move(a, b, mc);
+                }
             }
         }
 
@@ -276,7 +284,7 @@ namespace Learn_CTS
 
         public virtual bool CollideWith(Texture t, bool b)
         {
-            if (this.hitbox == null || Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
+            if (Texture.ReferenceEquals(this, t) || !this.collide || !t.CanCollide())
             {
                 return false;
             }
@@ -289,6 +297,7 @@ namespace Learn_CTS
             if (r1.IntersectsWith(r2))
             {
                 Rectangle r3 = Rectangle.Intersect(r1, r2);
+                if(this.hitbox != null)
                 for (int i = 0; i < r3.Width; i += 8)
                 {
                     for (int j = 0; j < r3.Height; j += 8)

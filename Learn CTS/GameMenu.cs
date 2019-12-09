@@ -35,7 +35,7 @@ namespace Learn_CTS
         private void button_leave_Click(object sender, EventArgs e)
         {
             this.Close();
-            Application.Restart();
+            //Application.Restart();
         }
 
         private void DisplayNamePlayer()

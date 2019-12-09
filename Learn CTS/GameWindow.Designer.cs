@@ -28,25 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_fps = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // lbl_fps
-            // 
-            this.lbl_fps.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbl_fps.AutoEllipsis = true;
-            this.lbl_fps.AutoSize = true;
-            this.lbl_fps.BackColor = System.Drawing.Color.Black;
-            this.lbl_fps.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_fps.ForeColor = System.Drawing.Color.White;
-            this.lbl_fps.Location = new System.Drawing.Point(1170, 9);
-            this.lbl_fps.Name = "lbl_fps";
-            this.lbl_fps.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbl_fps.Size = new System.Drawing.Size(82, 31);
-            this.lbl_fps.TabIndex = 4;
-            this.lbl_fps.Text = "0,000";
-            this.lbl_fps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbl_fps.Visible = false;
             // 
             // GameWindow
             // 
@@ -54,7 +36,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.lbl_fps);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
@@ -67,13 +48,10 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
             this.Resize += new System.EventHandler(this.GameWindow_Resize);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbl_fps;
     }
 }
 

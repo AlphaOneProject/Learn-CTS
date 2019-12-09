@@ -42,7 +42,6 @@ namespace Learn_CTS
         {
             RichTextBox r = new RichTextBox();
             r.BackColor = System.Drawing.Color.White;
-            r.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             r.Size = new System.Drawing.Size(flp_talk.Width/2, 96);
             r.TabIndex = 2;
             r.Text = text;

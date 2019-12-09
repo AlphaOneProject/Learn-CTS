@@ -63,6 +63,7 @@
     <Compile Include="Backpack.Designer.cs">
       <DependentUpon>Backpack.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bus.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="ChooseCharacter.cs">
       <SubType>UserControl</SubType>

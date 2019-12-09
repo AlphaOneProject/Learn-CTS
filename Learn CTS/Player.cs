@@ -16,8 +16,6 @@ namespace Learn_CTS
 
         private static string folder;
 
-        private static bool move_vertically = true;
-
         /// <summary>
         /// Constructor of the player
         /// </summary>
@@ -57,16 +55,6 @@ namespace Learn_CTS
         {
             this.RemoveAllObjectives();
             base.SetObjective(x, y);
-        }
-
-        public static void SetMovingVertically(bool v)
-        {
-            move_vertically = v;
-        }
-
-        public static bool IsMovingVertically()
-        {
-            return move_vertically;
         }
     }
 }

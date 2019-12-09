@@ -13,6 +13,7 @@ namespace Learn_CTS
 
         private int quiz;
         private Texture interact;
+        private bool interactive = false;
 
         /// <summary>
         /// Constructor of NPC with custom names.
@@ -44,10 +45,16 @@ namespace Learn_CTS
             this.quiz = -1;
         }
 
+        public bool IsInteractive()
+        {
+            return this.interactive;
+        }
+
         public void DisplayInteraction()
         {
             if (this.quiz > 0)
             {
+                interactive = true;
                 interact.SetX(this.GetX() + this.GetWidth() / 2 - interact.GetWidth() / 2);
                 interact.SetY(this.GetY() - interact.GetHeight() - 20);
                 this.AddChild(interact);
@@ -56,7 +63,11 @@ namespace Learn_CTS
 
         public void RemoveInteraction()
         {
-            if (this.quiz > 0) this.RemoveChild(interact);
+            if (this.quiz > 0)
+            {
+                interactive = false;
+                this.RemoveChild(interact);
+            }
         }
     }
 }
