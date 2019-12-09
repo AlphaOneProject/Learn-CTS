@@ -180,9 +180,19 @@ namespace Learn_CTS
 
         private void Pb_play_Click(object sender, EventArgs e)
         {
-            Form game_menu = new GameMenu(this.gameFullName);
-            game_menu.Show();
-            this.Parent.Parent.Hide();
+            bool isGameBusy = (Tools.Get_From_JSON(AppDomain.CurrentDomain.BaseDirectory + "games"
+                + Path.DirectorySeparatorChar + this.gameFullName + 
+                Path.DirectorySeparatorChar + "properties.json")["state"].ToString()).Equals("En cours d'édition...");
+            if (!isGameBusy)
+            {
+                Form game_menu = new GameMenu(this.gameFullName);
+                game_menu.Show();
+                this.Parent.Parent.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Ce jeu est en cours d'édition sur votre ordinateur, vous ne pouvez pas le lancer.");
+            }
         }
 
         private void Pb_edit_Click(object sender, EventArgs e)
