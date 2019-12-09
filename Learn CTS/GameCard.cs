@@ -8,6 +8,10 @@ using System.Linq;
 
 namespace Learn_CTS
 {
+    /// <summary>
+    /// UserControl used for displaying a game.
+    /// Allow user to launch the game, start the editor of the game, copying it or deleting it.
+    /// </summary>
     public partial class GameCard : UserControl
     {
         /**
@@ -25,6 +29,10 @@ namespace Learn_CTS
         private static Image icon_copy;
         private static Image icon_delete;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="menu">Menu calling the GameCard.</param>
         public GameCard(Menu menu)
         {
             InitializeComponent();
@@ -57,6 +65,9 @@ namespace Learn_CTS
             Change_Theme();
         }
 
+        /// <summary>
+        /// Gets the images of the icons from the library and stores them in local variables.
+        /// </summary>
         private void FetchIcons()
         {
             try
@@ -84,6 +95,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Title of the game, truncated if necessary.
+        /// </summary>
         public string Title
         {
             get
@@ -110,6 +124,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Description of the game, truncated if necessary.
+        /// </summary>
         public string Description
         {
             get
@@ -131,6 +148,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Fetches the game thumbnail in the library.
+        /// </summary>
+        /// <param name="game">Name of the game of the thumbnail.</param>
         public void Show_Thumbnail(string game)
         {
             string thumbnail_path = AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game
@@ -161,6 +182,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Is the game a default game.
+        /// </summary>
         public bool IsDefault
         {
             get
@@ -170,6 +194,11 @@ namespace Learn_CTS
             set => this.isDefaultGame = value;
         }
 
+        /// <summary>
+        /// Called when the button to edit the game is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_edit_Click(object sender, EventArgs e)
         {
             ((Menu)this.ParentForm).Save_Options();
@@ -178,6 +207,11 @@ namespace Learn_CTS
             this.ParentForm.Hide();
         }
 
+        /// <summary>
+        /// Called when the PictureBox to launch the game is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_play_Click(object sender, EventArgs e)
         {
             bool isGameBusy = (Tools.Get_From_JSON(AppDomain.CurrentDomain.BaseDirectory + "games"
@@ -195,6 +229,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the PictureBox to edit the game is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_edit_Click(object sender, EventArgs e)
         {
             Form editor = new Editor(this.gameFullName);
@@ -202,6 +241,11 @@ namespace Learn_CTS
             this.Parent.Parent.Hide();
         }
 
+        /// <summary>
+        /// Called when the PictureBox to delete the game is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_delete_Click(object sender, EventArgs e)
         {
             if (IsDefault)
@@ -219,6 +263,9 @@ namespace Learn_CTS
             }            
         }
 
+        /// <summary>
+        /// Deletes the game from the file system.
+        /// </summary>
         private void Delete_Game()
         {
             try
@@ -232,7 +279,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// marche pa
+        /// Creates a copy of the game in the fil system and launches the editor of the newly created game.
         /// </summary>
         private void Copy_Game()
         {
@@ -273,6 +320,11 @@ namespace Learn_CTS
             g.Show();
         }
 
+        /// <summary>
+        /// Called when the mouse hovers a PictureBox used to interact with the card.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_Btn_MouseHover(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -287,6 +339,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the mouse leaves a PictureBox used to interact with the card.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_Btn_MouseLeave(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -301,6 +358,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Called when the PictureBox to copy a game is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Pb_copy_Click(object sender, EventArgs e)
         {
             Copy_Game();
