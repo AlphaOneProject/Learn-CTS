@@ -20,6 +20,11 @@ namespace Learn_CTS
 
         // Methods.
 
+        /// <summary>
+        /// Constructor this Form allowing the selection of a game amongst
+        /// the existing ones.
+        /// </summary>
+        /// <param name="editor">Editor parent of this Form.</param>
         public GameSelection(Editor editor)
         {
             InitializeComponent();
@@ -27,6 +32,11 @@ namespace Learn_CTS
             this.Size = new Size(600, 500);
         }
 
+        /// <summary>
+        /// Load each existing game as a Label.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameSelection_Load(object sender, EventArgs e)
         {
             DirectoryInfo games_path = new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "games");
@@ -47,6 +57,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Trigger upon click on a Label displayed.
+        /// Set it as the "selected_game" and close this Form.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Game_Clicked(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
@@ -54,6 +70,11 @@ namespace Learn_CTS
             this.Close();
         }
 
+        /// <summary>
+        /// Bind "Escape" key as closing key for this Form.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameSelection_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -62,6 +83,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Calls the parent Editor to handle the selected game upon form closing.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameSelection_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.editor.Import_Selected_Library(this.selected_game);

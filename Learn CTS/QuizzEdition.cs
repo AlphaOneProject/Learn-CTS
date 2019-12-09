@@ -427,6 +427,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Triggers upon using the built-in arrows from the NumericUpDown Control.
+        /// Set the saved state to false due to the value modification.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Nud_Score_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDownFix nud = (NumericUpDownFix)sender;
@@ -533,6 +539,11 @@ namespace Learn_CTS
             ((Editor)this.ParentForm).Discard_Dialog(this);
         }
 
+        /// <summary>
+        /// Save the audio option selected through the ComboBox (as an integer).
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Cbo_audio_SelectedIndexChanged(object sender, EventArgs e)
         {
             data["audio"] = cbo_audio.SelectedIndex;
