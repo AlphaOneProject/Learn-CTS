@@ -1,0 +1,972 @@
+\hypertarget{class_learn___c_t_s_1_1_editor}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Editor Class Reference}
+\label{class_learn___c_t_s_1_1_editor}\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Editor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_editor}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a02be799d6498514718f569afcdb7522c}{Editor}} (String game)
+\begin{DoxyCompactList}\small\item\em Initialize the whole Form, as a constructor should. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a1d339d8721c385cc01df442e23d9de50}{Get\+\_\+\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Allow external Forms or User\+Controls to access the name of the game edited by an instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and thus, the game they are asked to focus on. \end{DoxyCompactList}\item 
+J\+Object \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a2a25c7d2a8b988e034bc2b8cf489b144}{Get\+\_\+\+Theme}} ()
+\begin{DoxyCompactList}\small\item\em Transmit the data object already read when starting the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and thus optimizing the I/O memory access. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a9190ea4b3ed820767532056a981f04a9}{Set\+\_\+\+Saved}} (bool saved)
+\begin{DoxyCompactList}\small\item\em Accessor to the local parameter \char`\"{}saved\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a29d22983b12f237a43f2640fdc07228c}{Import\+\_\+\+Selected\+\_\+\+Library}} (string game\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Recover and process the name of the selected game. If the name is not empty then the library of the game will be copied in the current game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a48a6b2161653cc87819de8d9659ed6f6}{Add\+\_\+\+Lib\+\_\+\+N\+PC}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Add a new \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} to the library, both in the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and in the dedicated folder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a89da44cd64d8217acad25eeabada3785}{Text\+\_\+\+Changed\+\_\+\+Lib\+\_\+\+N\+PC}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Checks the action made into the Text\+Box and depending on this action, save, cancel or edit the content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ac8e1a29d48e0d2422c7c3e7c709a6bd6}{Discard\+\_\+\+Lib\+\_\+\+N\+PC}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Discard the file matching the sender position in his Table\+Layout\+Panel. Then discard the row in the above-\/mentionned Table\+Layout\+Panel. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ac65de335d7f5d21cf88a2a01bf328a46}\label{class_learn___c_t_s_1_1_editor_ac65de335d7f5d21cf88a2a01bf328a46}} 
+void {\bfseries Dialog\+\_\+\+Page\+\_\+\+Update} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a6dd36bb0e224ec34f253c3612b41de91}\label{class_learn___c_t_s_1_1_editor_a6dd36bb0e224ec34f253c3612b41de91}} 
+void {\bfseries Dialog\+\_\+\+Fast\+\_\+\+Backward} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a990731fdc5465cbe0863e0195396c2c8}\label{class_learn___c_t_s_1_1_editor_a990731fdc5465cbe0863e0195396c2c8}} 
+void {\bfseries Dialog\+\_\+\+Backward} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a515df0340355c75bc38cc516c014c130}\label{class_learn___c_t_s_1_1_editor_a515df0340355c75bc38cc516c014c130}} 
+void {\bfseries Dialog\+\_\+\+Forward} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_aa231c6ed5fe30c2e7f8195c8646e1e22}\label{class_learn___c_t_s_1_1_editor_aa231c6ed5fe30c2e7f8195c8646e1e22}} 
+void {\bfseries Dialog\+\_\+\+Fast\+\_\+\+Forward} (object sender, Event\+Args e)
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ace28c1f678c3c028f5256b97c136d45c}{Add\+\_\+\+Dialog}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Creates a new dialog file and it\textquotesingle{}s Controls. Then call Update\+\_\+\+Dialogs in order to place them. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a11e14c1ae7c879d8d2bbf3d51a42d10f}{Update\+\_\+\+Dialogs}} ()
+\begin{DoxyCompactList}\small\item\em Update positions of all \char`\"{}\+Quizz\+Edition\char`\"{} User\+Controls in content based on their heights. Called when height of one contained User\+Control is changed through \char`\"{}\+Parent\char`\"{} attribute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a1a8be04d892cfbcbb3630973bcf30307}{Discard\+\_\+\+Dialog}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} sender)
+\begin{DoxyCompactList}\small\item\em Delete a specified instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} and his reference\textquotesingle{}s file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ab5376fdd0bf26d954756fa76bbe0d2dc}{Add\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em This function has to be launched with the corresponding scenario selected. It will create an entire situation linked to the scenario and set the values to default settings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a90e06d22fc6bff96ac33836d6336e24a}{Display\+\_\+\+Situation}} ()
+\begin{DoxyCompactList}\small\item\em Generates all controls necessary to a situation depending on which situation is selected. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a5e4ba6160df00e47a8e6b755dced1d36}\label{class_learn___c_t_s_1_1_editor_a5e4ba6160df00e47a8e6b755dced1d36}} 
+void {\bfseries Npc\+\_\+\+Density\+\_\+\+Update} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_af567368f6723cc7e6c60aac413757d40}\label{class_learn___c_t_s_1_1_editor_af567368f6723cc7e6c60aac413757d40}} 
+void {\bfseries Situation\+\_\+\+Background\+\_\+\+Changed} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae34b9193ec7ba8458732dfcc7e5b6b31}\label{class_learn___c_t_s_1_1_editor_ae34b9193ec7ba8458732dfcc7e5b6b31}} 
+void {\bfseries Scene\+\_\+\+Type\+\_\+\+Changed} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a2ea8bedcc5150b925aff8b92ae083e34}\label{class_learn___c_t_s_1_1_editor_a2ea8bedcc5150b925aff8b92ae083e34}} 
+void {\bfseries Add\+\_\+\+Event} (object sender, Event\+Args e)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a5e41efb48836a53e502e8d7a5ff0f705}\label{class_learn___c_t_s_1_1_editor_a5e41efb48836a53e502e8d7a5ff0f705}} 
+void {\bfseries Discard\+\_\+\+Event} (\mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition}{Event\+Edition}} sender)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a051379705efc19439270b104a2695341}\label{class_learn___c_t_s_1_1_editor_a051379705efc19439270b104a2695341}} 
+void {\bfseries Place\+\_\+\+Event} (\mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition}{Event\+Edition}} sender)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a5e90b292c1be2e2fa36f4d7f32111e26}\label{class_learn___c_t_s_1_1_editor_a5e90b292c1be2e2fa36f4d7f32111e26}} 
+void {\bfseries Reset\+\_\+\+Place\+\_\+\+Event} (int id, Point new\+\_\+pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_aec46664d3fc87287d49f77af7928350d}{Editor1\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Synchronize the Form with data from targeted game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ac2d37d97e7ea5a631f7c10ee1029c675}{Editor\+\_\+\+Form\+Closing}} (object sender, Form\+Closing\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Triggers while the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} began a closing operation, checks first if there is unsaved work and if there is ask the user to confirm his decision. Upon confirmation, or without modification, the window parameters will be saved into \char`\"{}/internal/options.\+json\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a26af3644775f56bcd5045481ef852b4e}{Editor\+\_\+\+Form\+Closed}} (object sender, Form\+Closed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Restart the application when closing the editor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a227ec54b3cdf566b52fc63c463fde97d}{Menu\+\_\+\+Before\+Select}} (object sender, Tree\+View\+Cancel\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Ask for confirmation before switching from selected item if the current dataset was modified. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a6dd5716cc1c7722370332ef6c8dcf080}{Menu\+\_\+\+After\+Select}} (object sender, Tree\+View\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Change the content display when the user select another category from the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ae0eaa7f968b1346fe3bbb9df7a8fc7e0}{Display\+\_\+\+Global}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for general content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a2e1418600841b847e07705453a3aa613}{Txt\+\_\+\+Keypress}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Handle all keypresses and validate, cancel or even forbid the action. Upon validation will save the new data piece in the file Tagged by the Text\+Box. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a74793b6c2abd8ea2c37be926c37d533b}{Display\+\_\+\+Models}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for models\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_adbc03b2ef15773903f613ba8ba8c238d}{Import\+\_\+\+Library}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Launch the Form \char`\"{}\+Game\+Selection\char`\"{} with full focus to get the selected game upon its end. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a1810c88f5796f0df9e46851beb4a0157}{Display\+\_\+\+Items}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for items\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a175ca52d78b02e2200b770bc9961401a}{Display\+\_\+\+N\+P\+Cs}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for N\+P\+Cs\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ae99bf21a4a256d952f08c2bfc01e5ef5}{Display\+\_\+\+Dialogs}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for Choices\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a9c54649f359cc026cc4a1126a959ad56}{Display\+\_\+\+Images}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for images\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ae7a126a3d56b1e2b95fc9ca7317d1ea4}{Display\+\_\+\+Item\+\_\+\+Images}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for item images\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a39839ec12ba3a212472eddf7d208b7c5}{Display\+\_\+\+Sprites}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for sprites\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ad67be29dad28dd5f49a0468428b50c37}{Display\+\_\+\+Backgrounds}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for backgrounds\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ae4708bcc0e059cf963879ae32a92f920}{Display\+\_\+\+Scenarios}} ()
+\begin{DoxyCompactList}\small\item\em Load controls for scenarios\textquotesingle{} content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a8449cacc328e29f5aba3eb0dee15b633}{Add\+\_\+\+Scenario}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Add a new node to the \char`\"{}scenarios\char`\"{} in the Tree\+View and initialize it. Called from the node \char`\"{}scenarios\char`\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_af58783de5cbfcdda8625056425ee8416}{Add\+\_\+\+Scenario}} (string new\+\_\+scenario)
+\begin{DoxyCompactList}\small\item\em Add a new node to the \char`\"{}scenarios\char`\"{} in the Tree\+View and initialize it. Called with any string as the scenario\textquotesingle{}s name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ade58dd18d1fcd5d3b8b4c31c949c6156}{Display\+\_\+\+Scenario}} ()
+\begin{DoxyCompactList}\small\item\em Load the selected scenario into the \char`\"{}content\char`\"{} groupbox. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a5449e817af100945c6e830088e24d5f1}{Down\+\_\+\+Scenario}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Switch the selected scenario with the one upside it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a66158d36e214a94d830f32556beecb4e}{Up\+\_\+\+Scenario}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Switch the selected scenario with the one upside it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a0a85306cb81317a84550cf1ae5312a69}{Order\+\_\+\+Files\+\_\+\+Scenarios}} ()
+\begin{DoxyCompactList}\small\item\em Technical function re-\/ordering all scenarios after a switch, both in the menu and in the folder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_aecb9540d5c28fede4645d13f21aaae00}{Ask\+\_\+\+Rename\+\_\+\+Scenario}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Makes visible the textbox permitting to rename a scenario. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a1e1255f84304ffdd84749b9cf45317f1}{Rename\+\_\+\+Scenario\+\_\+\+Txt\+\_\+\+Keypress}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Checks each keypress from the textbox responsible of renaming a scenario. Allows only alphanumerics as content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a0fdfd952f5c430b85e74bb0bfdf3ee95}{Rename\+\_\+\+Scenario}} (string new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Rename a scenario with a custom name, rename the scenario\textquotesingle{}s folder and Node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a941a0477f00b24f74ff2e39d4a09614b}{Discard\+\_\+\+Scenario}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Delete an existing scenario, taking the one currently selected as target. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ae6e64112aba680a6b9f5ccfcf3efc819}{Add\+\_\+\+Situation}} (string scenario, string new\+\_\+situation)
+\begin{DoxyCompactList}\small\item\em Add a new situation to an existing scenario, only manages the menu, the files have to be created through \char`\"{}\+Add\+\_\+\+Situation(object sender, Event\+Args e)\char`\"{}. This function will then trigger this one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ab7cfc65b6ea43a128dcaef775d59f88d}{Down\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Switch the select situation with the one bellow it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a623aedc8e93fed2a0456490650d3a2c4}{Up\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Switch the selected situation with the one upside it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a1abea4f42d3ed40782d71e157c6720f4}{Order\+\_\+\+Files\+\_\+\+Situations}} (Tree\+Node tn)
+\begin{DoxyCompactList}\small\item\em Technical function re-\/ordering all situations after a switch, both in the menu and in the folder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a3476cc28a2738c97fae09e04e8fe0671}{Ask\+\_\+\+Rename\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Display the renaming textbox and hides the picturebox while editing the name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_aa3201b6643f981041d3d43136f41364f}{Rename\+\_\+\+Situation\+\_\+\+Txt\+\_\+\+Keypress}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Handle all keypresses and validate, cancel or even forbid the action. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a75e04452486821dee0d7c22913b19f84}{Rename\+\_\+\+Situation}} (string new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Set the given name as the one of the selected situation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_aa76425c85a7d905e01749ff2ddc9ed39}{Discard\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Discard the currently selected situation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ac70c35cb530378478817d70500c5eff6}{Preview\+\_\+\+Situation}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Display a preview of the current situation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_ac2b98d7583f9d3bf5bc4a348ed188db8}{Editor1\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Adapt the size and positions of elements in the Form during a resize. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_abb8b2ddbb5a769d771a7b87472baa631}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a5255a55d4808e433defa0420ebce2a9f}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Required method for Designer support -\/ do not modify the contents of this method with the code editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a763f3a7dd9c05c32a84c8071a418ee54}\label{class_learn___c_t_s_1_1_editor_a763f3a7dd9c05c32a84c8071a418ee54}} 
+readonly String {\bfseries game}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ade04ceacd60dbbb5e6fd276ed0d43ff4}\label{class_learn___c_t_s_1_1_editor_ade04ceacd60dbbb5e6fd276ed0d43ff4}} 
+readonly String {\bfseries game\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a208154589a5647be81dbe04187a0960b}\label{class_learn___c_t_s_1_1_editor_a208154589a5647be81dbe04187a0960b}} 
+J\+Object {\bfseries game\+\_\+properties}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_afa2613571f34aadd1dec62a096a15a71}\label{class_learn___c_t_s_1_1_editor_afa2613571f34aadd1dec62a096a15a71}} 
+J\+Object {\bfseries theme}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a8d082f1c23512c3ec2ddcc00f5d8bdd6}\label{class_learn___c_t_s_1_1_editor_a8d082f1c23512c3ec2ddcc00f5d8bdd6}} 
+string {\bfseries old\+\_\+category} = \char`\"{}general\char`\"{}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a83059359c6d2ba74da31f78ef6f79555}\label{class_learn___c_t_s_1_1_editor_a83059359c6d2ba74da31f78ef6f79555}} 
+bool {\bfseries saved} = true
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a326e941c84b579a187f7b3ae5889eaf4}\label{class_learn___c_t_s_1_1_editor_a326e941c84b579a187f7b3ae5889eaf4}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} {\bfseries preview} = null
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a0e875714fe16056f8be12bc1b600560a}\label{class_learn___c_t_s_1_1_editor_a0e875714fe16056f8be12bc1b600560a}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition}{Placement\+Edition}} {\bfseries event\+\_\+placement} = null
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_editor_a32bfdd864edd4eef9552513a0748bb18}{components}} = null
+\begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a7a8f9e37bc264f69f81defc6eb8550fd}\label{class_learn___c_t_s_1_1_editor_a7a8f9e37bc264f69f81defc6eb8550fd}} 
+private System Windows Forms Tree\+View {\bfseries menu}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a08ad21a740b5d3eb4e280135a3e32090}\label{class_learn___c_t_s_1_1_editor_a08ad21a740b5d3eb4e280135a3e32090}} 
+private System Windows Forms Label {\bfseries title}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_adf2313e231a7031f6bb34d543c995698}\label{class_learn___c_t_s_1_1_editor_adf2313e231a7031f6bb34d543c995698}} 
+private System Windows Forms Panel {\bfseries content}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a0e6e07259547b8ceaa1e017610d0d57d}\label{class_learn___c_t_s_1_1_editor_a0e6e07259547b8ceaa1e017610d0d57d}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a296bae7d907d4f93f74c2d64c205175a}\label{class_learn___c_t_s_1_1_editor_a296bae7d907d4f93f74c2d64c205175a}} 
+private System Windows Forms Tool\+Tip {\bfseries tlt\+\_\+global}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a4558410b91773d5bed2b20d362e691d0}\label{class_learn___c_t_s_1_1_editor_a4558410b91773d5bed2b20d362e691d0}} 
+const int {\bfseries dialogs\+\_\+per\+\_\+page} = 5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a02be799d6498514718f569afcdb7522c}\label{class_learn___c_t_s_1_1_editor_a02be799d6498514718f569afcdb7522c}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Editor@{Editor}}
+\index{Editor@{Editor}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Editor()}{Editor()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Editor.\+Editor (\begin{DoxyParamCaption}\item[{String}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize the whole Form, as a constructor should. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ace28c1f678c3c028f5256b97c136d45c}\label{class_learn___c_t_s_1_1_editor_ace28c1f678c3c028f5256b97c136d45c}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Dialog@{Add\_Dialog}}
+\index{Add\_Dialog@{Add\_Dialog}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Dialog()}{Add\_Dialog()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Dialog (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new dialog file and it\textquotesingle{}s Controls. Then call Update\+\_\+\+Dialogs in order to place them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a48a6b2161653cc87819de8d9659ed6f6}\label{class_learn___c_t_s_1_1_editor_a48a6b2161653cc87819de8d9659ed6f6}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Lib\_NPC@{Add\_Lib\_NPC}}
+\index{Add\_Lib\_NPC@{Add\_Lib\_NPC}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Lib\_NPC()}{Add\_Lib\_NPC()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Lib\+\_\+\+N\+PC (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a new \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} to the library, both in the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and in the dedicated folder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a8449cacc328e29f5aba3eb0dee15b633}\label{class_learn___c_t_s_1_1_editor_a8449cacc328e29f5aba3eb0dee15b633}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Scenario@{Add\_Scenario}}
+\index{Add\_Scenario@{Add\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Scenario()}{Add\_Scenario()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Add a new node to the \char`\"{}scenarios\char`\"{} in the Tree\+View and initialize it. Called from the node \char`\"{}scenarios\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method, here it will always be the button from \char`\"{}\+Scenario\char`\"{} content.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_af58783de5cbfcdda8625056425ee8416}\label{class_learn___c_t_s_1_1_editor_af58783de5cbfcdda8625056425ee8416}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Scenario@{Add\_Scenario}}
+\index{Add\_Scenario@{Add\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Scenario()}{Add\_Scenario()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{string}]{new\+\_\+scenario }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Add a new node to the \char`\"{}scenarios\char`\"{} in the Tree\+View and initialize it. Called with any string as the scenario\textquotesingle{}s name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+scenario} & Name of the scenario to create.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ab5376fdd0bf26d954756fa76bbe0d2dc}\label{class_learn___c_t_s_1_1_editor_ab5376fdd0bf26d954756fa76bbe0d2dc}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Situation@{Add\_Situation}}
+\index{Add\_Situation@{Add\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Situation()}{Add\_Situation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This function has to be launched with the corresponding scenario selected. It will create an entire situation linked to the scenario and set the values to default settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae6e64112aba680a6b9f5ccfcf3efc819}\label{class_learn___c_t_s_1_1_editor_ae6e64112aba680a6b9f5ccfcf3efc819}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Add\_Situation@{Add\_Situation}}
+\index{Add\_Situation@{Add\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Add\_Situation()}{Add\_Situation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Add\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{string}]{scenario,  }\item[{string}]{new\+\_\+situation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Add a new situation to an existing scenario, only manages the menu, the files have to be created through \char`\"{}\+Add\+\_\+\+Situation(object sender, Event\+Args e)\char`\"{}. This function will then trigger this one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scenario} & Name of the scenario in which the situation will be added.\\
+\hline
+{\em new\+\_\+situation} & Name of the new situation to create.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_aecb9540d5c28fede4645d13f21aaae00}\label{class_learn___c_t_s_1_1_editor_aecb9540d5c28fede4645d13f21aaae00}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Ask\_Rename\_Scenario@{Ask\_Rename\_Scenario}}
+\index{Ask\_Rename\_Scenario@{Ask\_Rename\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Ask\_Rename\_Scenario()}{Ask\_Rename\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Ask\+\_\+\+Rename\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Makes visible the textbox permitting to rename a scenario. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a3476cc28a2738c97fae09e04e8fe0671}\label{class_learn___c_t_s_1_1_editor_a3476cc28a2738c97fae09e04e8fe0671}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Ask\_Rename\_Situation@{Ask\_Rename\_Situation}}
+\index{Ask\_Rename\_Situation@{Ask\_Rename\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Ask\_Rename\_Situation()}{Ask\_Rename\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Ask\+\_\+\+Rename\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display the renaming textbox and hides the picturebox while editing the name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a1a8be04d892cfbcbb3630973bcf30307}\label{class_learn___c_t_s_1_1_editor_a1a8be04d892cfbcbb3630973bcf30307}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Discard\_Dialog@{Discard\_Dialog}}
+\index{Discard\_Dialog@{Discard\_Dialog}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Discard\_Dialog()}{Discard\_Dialog()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Discard\+\_\+\+Dialog (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}}}]{sender }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Delete a specified instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} and his reference\textquotesingle{}s file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_quizz_edition}{Quizz\+Edition}} calling the function, permits to identify which file delete.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ac8e1a29d48e0d2422c7c3e7c709a6bd6}\label{class_learn___c_t_s_1_1_editor_ac8e1a29d48e0d2422c7c3e7c709a6bd6}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Discard\_Lib\_NPC@{Discard\_Lib\_NPC}}
+\index{Discard\_Lib\_NPC@{Discard\_Lib\_NPC}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Discard\_Lib\_NPC()}{Discard\_Lib\_NPC()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Discard\+\_\+\+Lib\+\_\+\+N\+PC (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Discard the file matching the sender position in his Table\+Layout\+Panel. Then discard the row in the above-\/mentionned Table\+Layout\+Panel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a941a0477f00b24f74ff2e39d4a09614b}\label{class_learn___c_t_s_1_1_editor_a941a0477f00b24f74ff2e39d4a09614b}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Discard\_Scenario@{Discard\_Scenario}}
+\index{Discard\_Scenario@{Discard\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Discard\_Scenario()}{Discard\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Discard\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Delete an existing scenario, taking the one currently selected as target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_aa76425c85a7d905e01749ff2ddc9ed39}\label{class_learn___c_t_s_1_1_editor_aa76425c85a7d905e01749ff2ddc9ed39}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Discard\_Situation@{Discard\_Situation}}
+\index{Discard\_Situation@{Discard\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Discard\_Situation()}{Discard\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Discard\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Discard the currently selected situation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ad67be29dad28dd5f49a0468428b50c37}\label{class_learn___c_t_s_1_1_editor_ad67be29dad28dd5f49a0468428b50c37}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Backgrounds@{Display\_Backgrounds}}
+\index{Display\_Backgrounds@{Display\_Backgrounds}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Backgrounds()}{Display\_Backgrounds()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Backgrounds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for backgrounds\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae99bf21a4a256d952f08c2bfc01e5ef5}\label{class_learn___c_t_s_1_1_editor_ae99bf21a4a256d952f08c2bfc01e5ef5}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Dialogs@{Display\_Dialogs}}
+\index{Display\_Dialogs@{Display\_Dialogs}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Dialogs()}{Display\_Dialogs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Dialogs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for Choices\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae0eaa7f968b1346fe3bbb9df7a8fc7e0}\label{class_learn___c_t_s_1_1_editor_ae0eaa7f968b1346fe3bbb9df7a8fc7e0}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Global@{Display\_Global}}
+\index{Display\_Global@{Display\_Global}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Global()}{Display\_Global()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Global (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for general content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a9c54649f359cc026cc4a1126a959ad56}\label{class_learn___c_t_s_1_1_editor_a9c54649f359cc026cc4a1126a959ad56}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Images@{Display\_Images}}
+\index{Display\_Images@{Display\_Images}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Images()}{Display\_Images()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Images (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for images\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae7a126a3d56b1e2b95fc9ca7317d1ea4}\label{class_learn___c_t_s_1_1_editor_ae7a126a3d56b1e2b95fc9ca7317d1ea4}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Item\_Images@{Display\_Item\_Images}}
+\index{Display\_Item\_Images@{Display\_Item\_Images}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Item\_Images()}{Display\_Item\_Images()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Item\+\_\+\+Images (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for item images\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a1810c88f5796f0df9e46851beb4a0157}\label{class_learn___c_t_s_1_1_editor_a1810c88f5796f0df9e46851beb4a0157}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Items@{Display\_Items}}
+\index{Display\_Items@{Display\_Items}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Items()}{Display\_Items()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for items\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a74793b6c2abd8ea2c37be926c37d533b}\label{class_learn___c_t_s_1_1_editor_a74793b6c2abd8ea2c37be926c37d533b}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Models@{Display\_Models}}
+\index{Display\_Models@{Display\_Models}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Models()}{Display\_Models()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for models\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a175ca52d78b02e2200b770bc9961401a}\label{class_learn___c_t_s_1_1_editor_a175ca52d78b02e2200b770bc9961401a}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_NPCs@{Display\_NPCs}}
+\index{Display\_NPCs@{Display\_NPCs}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_NPCs()}{Display\_NPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+N\+P\+Cs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for N\+P\+Cs\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ade58dd18d1fcd5d3b8b4c31c949c6156}\label{class_learn___c_t_s_1_1_editor_ade58dd18d1fcd5d3b8b4c31c949c6156}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Scenario@{Display\_Scenario}}
+\index{Display\_Scenario@{Display\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Scenario()}{Display\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Scenario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load the selected scenario into the \char`\"{}content\char`\"{} groupbox. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ae4708bcc0e059cf963879ae32a92f920}\label{class_learn___c_t_s_1_1_editor_ae4708bcc0e059cf963879ae32a92f920}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Scenarios@{Display\_Scenarios}}
+\index{Display\_Scenarios@{Display\_Scenarios}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Scenarios()}{Display\_Scenarios()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Scenarios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for scenarios\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a90e06d22fc6bff96ac33836d6336e24a}\label{class_learn___c_t_s_1_1_editor_a90e06d22fc6bff96ac33836d6336e24a}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Situation@{Display\_Situation}}
+\index{Display\_Situation@{Display\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Situation()}{Display\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Situation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generates all controls necessary to a situation depending on which situation is selected. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a39839ec12ba3a212472eddf7d208b7c5}\label{class_learn___c_t_s_1_1_editor_a39839ec12ba3a212472eddf7d208b7c5}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Display\_Sprites@{Display\_Sprites}}
+\index{Display\_Sprites@{Display\_Sprites}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Display\_Sprites()}{Display\_Sprites()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Display\+\_\+\+Sprites (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load controls for sprites\textquotesingle{} content. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_abb8b2ddbb5a769d771a7b87472baa631}\label{class_learn___c_t_s_1_1_editor_abb8b2ddbb5a769d771a7b87472baa631}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Editor.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Clean up any resources being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true if managed resources should be disposed; otherwise, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a5449e817af100945c6e830088e24d5f1}\label{class_learn___c_t_s_1_1_editor_a5449e817af100945c6e830088e24d5f1}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Down\_Scenario@{Down\_Scenario}}
+\index{Down\_Scenario@{Down\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Down\_Scenario()}{Down\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Down\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Switch the selected scenario with the one upside it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ab7cfc65b6ea43a128dcaef775d59f88d}\label{class_learn___c_t_s_1_1_editor_ab7cfc65b6ea43a128dcaef775d59f88d}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Down\_Situation@{Down\_Situation}}
+\index{Down\_Situation@{Down\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Down\_Situation()}{Down\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Down\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Switch the select situation with the one bellow it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_aec46664d3fc87287d49f77af7928350d}\label{class_learn___c_t_s_1_1_editor_aec46664d3fc87287d49f77af7928350d}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Editor1\_Load@{Editor1\_Load}}
+\index{Editor1\_Load@{Editor1\_Load}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Editor1\_Load()}{Editor1\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Editor1\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Synchronize the Form with data from targeted game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ac2b98d7583f9d3bf5bc4a348ed188db8}\label{class_learn___c_t_s_1_1_editor_ac2b98d7583f9d3bf5bc4a348ed188db8}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Editor1\_SizeChanged@{Editor1\_SizeChanged}}
+\index{Editor1\_SizeChanged@{Editor1\_SizeChanged}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Editor1\_SizeChanged()}{Editor1\_SizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Editor1\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Adapt the size and positions of elements in the Form during a resize. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a26af3644775f56bcd5045481ef852b4e}\label{class_learn___c_t_s_1_1_editor_a26af3644775f56bcd5045481ef852b4e}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Editor\_FormClosed@{Editor\_FormClosed}}
+\index{Editor\_FormClosed@{Editor\_FormClosed}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Editor\_FormClosed()}{Editor\_FormClosed()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Editor\+\_\+\+Form\+Closed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closed\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Restart the application when closing the editor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ac2d37d97e7ea5a631f7c10ee1029c675}\label{class_learn___c_t_s_1_1_editor_ac2d37d97e7ea5a631f7c10ee1029c675}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Editor\_FormClosing@{Editor\_FormClosing}}
+\index{Editor\_FormClosing@{Editor\_FormClosing}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Editor\_FormClosing()}{Editor\_FormClosing()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Editor\+\_\+\+Form\+Closing (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closing\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Triggers while the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} began a closing operation, checks first if there is unsaved work and if there is ask the user to confirm his decision. Upon confirmation, or without modification, the window parameters will be saved into \char`\"{}/internal/options.\+json\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a1d339d8721c385cc01df442e23d9de50}\label{class_learn___c_t_s_1_1_editor_a1d339d8721c385cc01df442e23d9de50}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Get\_Game@{Get\_Game}}
+\index{Get\_Game@{Get\_Game}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Get\_Game()}{Get\_Game()}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Editor.\+Get\+\_\+\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Allow external Forms or User\+Controls to access the name of the game edited by an instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and thus, the game they are asked to focus on. 
+
+\begin{DoxyReturn}{Returns}
+Name of the game currently edited.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a2a25c7d2a8b988e034bc2b8cf489b144}\label{class_learn___c_t_s_1_1_editor_a2a25c7d2a8b988e034bc2b8cf489b144}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Get\_Theme@{Get\_Theme}}
+\index{Get\_Theme@{Get\_Theme}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Get\_Theme()}{Get\_Theme()}}
+{\footnotesize\ttfamily J\+Object Learn\+\_\+\+C\+T\+S.\+Editor.\+Get\+\_\+\+Theme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Transmit the data object already read when starting the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} and thus optimizing the I/O memory access. 
+
+\begin{DoxyReturn}{Returns}
+Object containing the whole pallet of colors to display.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_adbc03b2ef15773903f613ba8ba8c238d}\label{class_learn___c_t_s_1_1_editor_adbc03b2ef15773903f613ba8ba8c238d}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Import\_Library@{Import\_Library}}
+\index{Import\_Library@{Import\_Library}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Import\_Library()}{Import\_Library()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Import\+\_\+\+Library (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Launch the Form \char`\"{}\+Game\+Selection\char`\"{} with full focus to get the selected game upon its end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a29d22983b12f237a43f2640fdc07228c}\label{class_learn___c_t_s_1_1_editor_a29d22983b12f237a43f2640fdc07228c}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Import\_Selected\_Library@{Import\_Selected\_Library}}
+\index{Import\_Selected\_Library@{Import\_Selected\_Library}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Import\_Selected\_Library()}{Import\_Selected\_Library()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Import\+\_\+\+Selected\+\_\+\+Library (\begin{DoxyParamCaption}\item[{string}]{game\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Recover and process the name of the selected game. If the name is not empty then the library of the game will be copied in the current game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+\_\+name} & Legacy parameter from the \char`\"{}\+Game\+Selection\char`\"{} Form, name of the selected game.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a5255a55d4808e433defa0420ebce2a9f}\label{class_learn___c_t_s_1_1_editor_a5255a55d4808e433defa0420ebce2a9f}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Editor.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a6dd5716cc1c7722370332ef6c8dcf080}\label{class_learn___c_t_s_1_1_editor_a6dd5716cc1c7722370332ef6c8dcf080}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Menu\_AfterSelect@{Menu\_AfterSelect}}
+\index{Menu\_AfterSelect@{Menu\_AfterSelect}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Menu\_AfterSelect()}{Menu\_AfterSelect()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Menu\+\_\+\+After\+Select (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Tree\+View\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Change the content display when the user select another category from the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method, here it will always be the menu.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a227ec54b3cdf566b52fc63c463fde97d}\label{class_learn___c_t_s_1_1_editor_a227ec54b3cdf566b52fc63c463fde97d}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Menu\_BeforeSelect@{Menu\_BeforeSelect}}
+\index{Menu\_BeforeSelect@{Menu\_BeforeSelect}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Menu\_BeforeSelect()}{Menu\_BeforeSelect()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Menu\+\_\+\+Before\+Select (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Tree\+View\+Cancel\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Ask for confirmation before switching from selected item if the current dataset was modified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a0a85306cb81317a84550cf1ae5312a69}\label{class_learn___c_t_s_1_1_editor_a0a85306cb81317a84550cf1ae5312a69}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Order\_Files\_Scenarios@{Order\_Files\_Scenarios}}
+\index{Order\_Files\_Scenarios@{Order\_Files\_Scenarios}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Order\_Files\_Scenarios()}{Order\_Files\_Scenarios()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Order\+\_\+\+Files\+\_\+\+Scenarios (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Technical function re-\/ordering all scenarios after a switch, both in the menu and in the folder. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a1abea4f42d3ed40782d71e157c6720f4}\label{class_learn___c_t_s_1_1_editor_a1abea4f42d3ed40782d71e157c6720f4}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Order\_Files\_Situations@{Order\_Files\_Situations}}
+\index{Order\_Files\_Situations@{Order\_Files\_Situations}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Order\_Files\_Situations()}{Order\_Files\_Situations()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Order\+\_\+\+Files\+\_\+\+Situations (\begin{DoxyParamCaption}\item[{Tree\+Node}]{tn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Technical function re-\/ordering all situations after a switch, both in the menu and in the folder. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_ac70c35cb530378478817d70500c5eff6}\label{class_learn___c_t_s_1_1_editor_ac70c35cb530378478817d70500c5eff6}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Preview\_Situation@{Preview\_Situation}}
+\index{Preview\_Situation@{Preview\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Preview\_Situation()}{Preview\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Preview\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display a preview of the current situation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a0fdfd952f5c430b85e74bb0bfdf3ee95}\label{class_learn___c_t_s_1_1_editor_a0fdfd952f5c430b85e74bb0bfdf3ee95}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Rename\_Scenario@{Rename\_Scenario}}
+\index{Rename\_Scenario@{Rename\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Rename\_Scenario()}{Rename\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Rename\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{string}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Rename a scenario with a custom name, rename the scenario\textquotesingle{}s folder and Node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+name} & Name remplacing the precedent as identifier of the scenario.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a1e1255f84304ffdd84749b9cf45317f1}\label{class_learn___c_t_s_1_1_editor_a1e1255f84304ffdd84749b9cf45317f1}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Rename\_Scenario\_Txt\_Keypress@{Rename\_Scenario\_Txt\_Keypress}}
+\index{Rename\_Scenario\_Txt\_Keypress@{Rename\_Scenario\_Txt\_Keypress}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Rename\_Scenario\_Txt\_Keypress()}{Rename\_Scenario\_Txt\_Keypress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Rename\+\_\+\+Scenario\+\_\+\+Txt\+\_\+\+Keypress (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Checks each keypress from the textbox responsible of renaming a scenario. Allows only alphanumerics as content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method, here details from the keypress.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a75e04452486821dee0d7c22913b19f84}\label{class_learn___c_t_s_1_1_editor_a75e04452486821dee0d7c22913b19f84}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Rename\_Situation@{Rename\_Situation}}
+\index{Rename\_Situation@{Rename\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Rename\_Situation()}{Rename\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Rename\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{string}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the given name as the one of the selected situation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+name} & New name to be assigned to the situation.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_aa3201b6643f981041d3d43136f41364f}\label{class_learn___c_t_s_1_1_editor_aa3201b6643f981041d3d43136f41364f}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Rename\_Situation\_Txt\_Keypress@{Rename\_Situation\_Txt\_Keypress}}
+\index{Rename\_Situation\_Txt\_Keypress@{Rename\_Situation\_Txt\_Keypress}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Rename\_Situation\_Txt\_Keypress()}{Rename\_Situation\_Txt\_Keypress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Rename\+\_\+\+Situation\+\_\+\+Txt\+\_\+\+Keypress (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Handle all keypresses and validate, cancel or even forbid the action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a9190ea4b3ed820767532056a981f04a9}\label{class_learn___c_t_s_1_1_editor_a9190ea4b3ed820767532056a981f04a9}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Set\_Saved@{Set\_Saved}}
+\index{Set\_Saved@{Set\_Saved}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Set\_Saved()}{Set\_Saved()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Set\+\_\+\+Saved (\begin{DoxyParamCaption}\item[{bool}]{saved }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor to the local parameter \char`\"{}saved\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em saved} & New desired value for \char`\"{}saved\char`\"{}.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a89da44cd64d8217acad25eeabada3785}\label{class_learn___c_t_s_1_1_editor_a89da44cd64d8217acad25eeabada3785}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Text\_Changed\_Lib\_NPC@{Text\_Changed\_Lib\_NPC}}
+\index{Text\_Changed\_Lib\_NPC@{Text\_Changed\_Lib\_NPC}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Text\_Changed\_Lib\_NPC()}{Text\_Changed\_Lib\_NPC()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Text\+\_\+\+Changed\+\_\+\+Lib\+\_\+\+N\+PC (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks the action made into the Text\+Box and depending on this action, save, cancel or edit the content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a2e1418600841b847e07705453a3aa613}\label{class_learn___c_t_s_1_1_editor_a2e1418600841b847e07705453a3aa613}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Txt\_Keypress@{Txt\_Keypress}}
+\index{Txt\_Keypress@{Txt\_Keypress}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Txt\_Keypress()}{Txt\_Keypress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Txt\+\_\+\+Keypress (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Handle all keypresses and validate, cancel or even forbid the action. Upon validation will save the new data piece in the file Tagged by the Text\+Box. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method, carrying the path of the relevant file in Tag.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a66158d36e214a94d830f32556beecb4e}\label{class_learn___c_t_s_1_1_editor_a66158d36e214a94d830f32556beecb4e}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Up\_Scenario@{Up\_Scenario}}
+\index{Up\_Scenario@{Up\_Scenario}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Up\_Scenario()}{Up\_Scenario()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Up\+\_\+\+Scenario (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Switch the selected scenario with the one upside it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a623aedc8e93fed2a0456490650d3a2c4}\label{class_learn___c_t_s_1_1_editor_a623aedc8e93fed2a0456490650d3a2c4}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Up\_Situation@{Up\_Situation}}
+\index{Up\_Situation@{Up\_Situation}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Up\_Situation()}{Up\_Situation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Up\+\_\+\+Situation (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Switch the selected situation with the one upside it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a11e14c1ae7c879d8d2bbf3d51a42d10f}\label{class_learn___c_t_s_1_1_editor_a11e14c1ae7c879d8d2bbf3d51a42d10f}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!Update\_Dialogs@{Update\_Dialogs}}
+\index{Update\_Dialogs@{Update\_Dialogs}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{Update\_Dialogs()}{Update\_Dialogs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Editor.\+Update\+\_\+\+Dialogs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update positions of all \char`\"{}\+Quizz\+Edition\char`\"{} User\+Controls in content based on their heights. Called when height of one contained User\+Control is changed through \char`\"{}\+Parent\char`\"{} attribute. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_editor_a32bfdd864edd4eef9552513a0748bb18}\label{class_learn___c_t_s_1_1_editor_a32bfdd864edd4eef9552513a0748bb18}} 
+\index{Learn\_CTS.Editor@{Learn\_CTS.Editor}!components@{components}}
+\index{components@{components}!Learn\_CTS.Editor@{Learn\_CTS.Editor}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Editor.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Required designer variable. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Editor.\+cs\item 
+Editor.\+Designer.\+cs\end{DoxyCompactItemize}

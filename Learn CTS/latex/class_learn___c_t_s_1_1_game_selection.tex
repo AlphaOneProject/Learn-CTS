@@ -1,0 +1,178 @@
+\hypertarget{class_learn___c_t_s_1_1_game_selection}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Game\+Selection Class Reference}
+\label{class_learn___c_t_s_1_1_game_selection}\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Selection\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_game_selection}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_ab8928491f39b5246fe1f127607b8817c}{Game\+Selection}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor)
+\begin{DoxyCompactList}\small\item\em Constructor this Form allowing the selection of a game amongst the existing ones. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_aa1550c0cb6e1c8609abfdfe9f7698db3}{Game\+Selection\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Load each existing game as a Label. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_ad3c5ec1ab0ecbb36723945dc882424d6}{Game\+\_\+\+Clicked}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Trigger upon click on a Label displayed. Set it as the \char`\"{}selected\+\_\+game\char`\"{} and close this Form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_a64f697429e4ab309d85b19645ae5d6b4}{Game\+Selection\+\_\+\+Key\+Down}} (object sender, Key\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Bind \char`\"{}\+Escape\char`\"{} key as closing key for this Form. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_ad363a12a23ca3e6f48ca5a6cfa4f6254}{Game\+Selection\+\_\+\+Form\+Closing}} (object sender, Form\+Closing\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Calls the parent \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to handle the selected game upon form closing. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_a5389e36c3cc2807c11fe263b85c815a4}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_acfc4cfd0aaecf128ea26ae9cb757e9dd}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Required method for Designer support -\/ do not modify the contents of this method with the code editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_adf857247dd1f9f47808cbb2a8029b6ea}\label{class_learn___c_t_s_1_1_game_selection_adf857247dd1f9f47808cbb2a8029b6ea}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} {\bfseries editor}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_a9f3fcf2de88798e29eba831b4d991db3}\label{class_learn___c_t_s_1_1_game_selection_a9f3fcf2de88798e29eba831b4d991db3}} 
+string {\bfseries selected\+\_\+game} = \char`\"{}\char`\"{}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_game_selection_ab1abf55a496ab1d45a92a8d602b15023}{components}} = null
+\begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_a268f5a6e5fddf44e513947c78ca144b2}\label{class_learn___c_t_s_1_1_game_selection_a268f5a6e5fddf44e513947c78ca144b2}} 
+private System Windows Forms Flow\+Layout\+Panel {\bfseries flp\+\_\+global}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_a14954fdaef862fd9b145d1bf34a3389a}\label{class_learn___c_t_s_1_1_game_selection_a14954fdaef862fd9b145d1bf34a3389a}} 
+private System Windows Forms Tool\+Tip {\bfseries tlt\+\_\+\+Game\+Selection}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_ab8928491f39b5246fe1f127607b8817c}\label{class_learn___c_t_s_1_1_game_selection_ab8928491f39b5246fe1f127607b8817c}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!GameSelection@{GameSelection}}
+\index{GameSelection@{GameSelection}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{GameSelection()}{GameSelection()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Game\+Selection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{editor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor this Form allowing the selection of a game amongst the existing ones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em editor} & \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} parent of this Form.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_a5389e36c3cc2807c11fe263b85c815a4}\label{class_learn___c_t_s_1_1_game_selection_a5389e36c3cc2807c11fe263b85c815a4}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Clean up any resources being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true if managed resources should be disposed; otherwise, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_ad3c5ec1ab0ecbb36723945dc882424d6}\label{class_learn___c_t_s_1_1_game_selection_ad3c5ec1ab0ecbb36723945dc882424d6}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!Game\_Clicked@{Game\_Clicked}}
+\index{Game\_Clicked@{Game\_Clicked}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{Game\_Clicked()}{Game\_Clicked()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Game\+\_\+\+Clicked (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Trigger upon click on a Label displayed. Set it as the \char`\"{}selected\+\_\+game\char`\"{} and close this Form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_ad363a12a23ca3e6f48ca5a6cfa4f6254}\label{class_learn___c_t_s_1_1_game_selection_ad363a12a23ca3e6f48ca5a6cfa4f6254}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!GameSelection\_FormClosing@{GameSelection\_FormClosing}}
+\index{GameSelection\_FormClosing@{GameSelection\_FormClosing}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{GameSelection\_FormClosing()}{GameSelection\_FormClosing()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Game\+Selection\+\_\+\+Form\+Closing (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closing\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Calls the parent \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to handle the selected game upon form closing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_a64f697429e4ab309d85b19645ae5d6b4}\label{class_learn___c_t_s_1_1_game_selection_a64f697429e4ab309d85b19645ae5d6b4}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!GameSelection\_KeyDown@{GameSelection\_KeyDown}}
+\index{GameSelection\_KeyDown@{GameSelection\_KeyDown}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{GameSelection\_KeyDown()}{GameSelection\_KeyDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Game\+Selection\+\_\+\+Key\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Bind \char`\"{}\+Escape\char`\"{} key as closing key for this Form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_aa1550c0cb6e1c8609abfdfe9f7698db3}\label{class_learn___c_t_s_1_1_game_selection_aa1550c0cb6e1c8609abfdfe9f7698db3}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!GameSelection\_Load@{GameSelection\_Load}}
+\index{GameSelection\_Load@{GameSelection\_Load}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{GameSelection\_Load()}{GameSelection\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Game\+Selection\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load each existing game as a Label. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_acfc4cfd0aaecf128ea26ae9cb757e9dd}\label{class_learn___c_t_s_1_1_game_selection_acfc4cfd0aaecf128ea26ae9cb757e9dd}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_selection_ab1abf55a496ab1d45a92a8d602b15023}\label{class_learn___c_t_s_1_1_game_selection_ab1abf55a496ab1d45a92a8d602b15023}} 
+\index{Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}!components@{components}}
+\index{components@{components}!Learn\_CTS.GameSelection@{Learn\_CTS.GameSelection}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Game\+Selection.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Required designer variable. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Selection.\+cs\item 
+Game\+Selection.\+Designer.\+cs\end{DoxyCompactItemize}

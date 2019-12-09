@@ -1,0 +1,213 @@
+\hypertarget{class_learn___c_t_s_1_1_tools}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Tools Class Reference}
+\label{class_learn___c_t_s_1_1_tools}\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static J\+Object \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_ace624585349fd0976215234463d59775}{Get\+\_\+\+From\+\_\+\+J\+S\+ON}} (string path)
+\begin{DoxyCompactList}\small\item\em Recover the content of a J\+S\+ON file at a specified path. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_aa3b8dff33874b084c5dd8c66e1a060db}{Set\+\_\+\+To\+\_\+\+J\+S\+ON}} (string path, J\+Object new\+\_\+content)
+\begin{DoxyCompactList}\small\item\em Set the content of the J\+S\+ON file at the specified path. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_a14aedfb0a7806c75741bee84e358660f}{Begin\+\_\+\+Control\+\_\+\+Update}} (Control control)
+\begin{DoxyCompactList}\small\item\em Stops the render update on a specified Control. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_a156de198c035c58b4bdfb573d01b5377}{End\+\_\+\+Control\+\_\+\+Update}} (Control control)
+\begin{DoxyCompactList}\small\item\em Resumes the render update on a specified Control. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_a1a342f747bc5940ad0a9e16adee67305}{Get\+\_\+\+Text\+\_\+\+Width}} (Control ctrl, string text, int font\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Allows the user to input a text and his font size in order to get the final number of pixels it will use, in a textbox for example. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_ae1d5c17504be40ea98a934f1e56c6540}{Min\+\_\+\+Int}} (int nbr1, int nbr2)
+\begin{DoxyCompactList}\small\item\em Return the minimum between two specified integers. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_a09e91e92ee119eefab8f90985c1fdd87}{Max\+\_\+\+Int}} (int nbr1, int nbr2)
+\begin{DoxyCompactList}\small\item\em Return the maximum between two specified integers. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_aa40b8fc0824daffd02a87b1b8f4dcd70}{Is\+Colliding\+With\+Vehicule}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule}{Vehicule}} v, Point p1)
+\begin{DoxyCompactList}\small\item\em Check if a npc is colliding at a point is colliding with a vehicule. \end{DoxyCompactList}\item 
+static Bitmap \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_aaee48ef21065e1d811aa44eb865e7c44}{Change\+Opacity}} (Image img, float opacityvalue)
+\begin{DoxyCompactList}\small\item\em Changes the opacity of the image according to the opacity value given. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_learn___c_t_s_1_1_tools_a2fc113807126d7446391b5ce375b9d3c}{Directory\+Copy}} (Directory\+Info source, Directory\+Info target)
+\begin{DoxyCompactList}\small\item\em Copy directory and its content. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_a14aedfb0a7806c75741bee84e358660f}\label{class_learn___c_t_s_1_1_tools_a14aedfb0a7806c75741bee84e358660f}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Begin\_Control\_Update@{Begin\_Control\_Update}}
+\index{Begin\_Control\_Update@{Begin\_Control\_Update}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Begin\_Control\_Update()}{Begin\_Control\_Update()}}
+{\footnotesize\ttfamily static void Learn\+\_\+\+C\+T\+S.\+Tools.\+Begin\+\_\+\+Control\+\_\+\+Update (\begin{DoxyParamCaption}\item[{Control}]{control }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Stops the render update on a specified Control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & Targeted Control.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_aaee48ef21065e1d811aa44eb865e7c44}\label{class_learn___c_t_s_1_1_tools_aaee48ef21065e1d811aa44eb865e7c44}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!ChangeOpacity@{ChangeOpacity}}
+\index{ChangeOpacity@{ChangeOpacity}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{ChangeOpacity()}{ChangeOpacity()}}
+{\footnotesize\ttfamily static Bitmap Learn\+\_\+\+C\+T\+S.\+Tools.\+Change\+Opacity (\begin{DoxyParamCaption}\item[{Image}]{img,  }\item[{float}]{opacityvalue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Changes the opacity of the image according to the opacity value given. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & Image to modify\\
+\hline
+{\em opacityvalue} & Opacity value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_a2fc113807126d7446391b5ce375b9d3c}\label{class_learn___c_t_s_1_1_tools_a2fc113807126d7446391b5ce375b9d3c}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!DirectoryCopy@{DirectoryCopy}}
+\index{DirectoryCopy@{DirectoryCopy}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{DirectoryCopy()}{DirectoryCopy()}}
+{\footnotesize\ttfamily static void Learn\+\_\+\+C\+T\+S.\+Tools.\+Directory\+Copy (\begin{DoxyParamCaption}\item[{Directory\+Info}]{source,  }\item[{Directory\+Info}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Copy directory and its content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & Source directory to copy\\
+\hline
+{\em target} & Target directoty to copy source dir. into\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_a156de198c035c58b4bdfb573d01b5377}\label{class_learn___c_t_s_1_1_tools_a156de198c035c58b4bdfb573d01b5377}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!End\_Control\_Update@{End\_Control\_Update}}
+\index{End\_Control\_Update@{End\_Control\_Update}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{End\_Control\_Update()}{End\_Control\_Update()}}
+{\footnotesize\ttfamily static void Learn\+\_\+\+C\+T\+S.\+Tools.\+End\+\_\+\+Control\+\_\+\+Update (\begin{DoxyParamCaption}\item[{Control}]{control }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Resumes the render update on a specified Control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & Targeted Control.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_ace624585349fd0976215234463d59775}\label{class_learn___c_t_s_1_1_tools_ace624585349fd0976215234463d59775}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Get\_From\_JSON@{Get\_From\_JSON}}
+\index{Get\_From\_JSON@{Get\_From\_JSON}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Get\_From\_JSON()}{Get\_From\_JSON()}}
+{\footnotesize\ttfamily static J\+Object Learn\+\_\+\+C\+T\+S.\+Tools.\+Get\+\_\+\+From\+\_\+\+J\+S\+ON (\begin{DoxyParamCaption}\item[{string}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Recover the content of a J\+S\+ON file at a specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the targeted J\+S\+ON file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Content of the J\+S\+ON file under a J\+Object structure.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_a1a342f747bc5940ad0a9e16adee67305}\label{class_learn___c_t_s_1_1_tools_a1a342f747bc5940ad0a9e16adee67305}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Get\_Text\_Width@{Get\_Text\_Width}}
+\index{Get\_Text\_Width@{Get\_Text\_Width}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Get\_Text\_Width()}{Get\_Text\_Width()}}
+{\footnotesize\ttfamily static int Learn\+\_\+\+C\+T\+S.\+Tools.\+Get\+\_\+\+Text\+\_\+\+Width (\begin{DoxyParamCaption}\item[{Control}]{ctrl,  }\item[{string}]{text,  }\item[{int}]{font\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Allows the user to input a text and his font size in order to get the final number of pixels it will use, in a textbox for example. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Text needing estimation.\\
+\hline
+{\em font\+\_\+size} & Font size desired.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of pixels used by the text.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_aa40b8fc0824daffd02a87b1b8f4dcd70}\label{class_learn___c_t_s_1_1_tools_aa40b8fc0824daffd02a87b1b8f4dcd70}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!IsCollidingWithVehicule@{IsCollidingWithVehicule}}
+\index{IsCollidingWithVehicule@{IsCollidingWithVehicule}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{IsCollidingWithVehicule()}{IsCollidingWithVehicule()}}
+{\footnotesize\ttfamily static bool Learn\+\_\+\+C\+T\+S.\+Tools.\+Is\+Colliding\+With\+Vehicule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule}{Vehicule}}}]{v,  }\item[{Point}]{p1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if a npc is colliding at a point is colliding with a vehicule. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & The position of the npc.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the npc is colliding with the vehicule, false otherwise.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_a09e91e92ee119eefab8f90985c1fdd87}\label{class_learn___c_t_s_1_1_tools_a09e91e92ee119eefab8f90985c1fdd87}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Max\_Int@{Max\_Int}}
+\index{Max\_Int@{Max\_Int}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Max\_Int()}{Max\_Int()}}
+{\footnotesize\ttfamily static int Learn\+\_\+\+C\+T\+S.\+Tools.\+Max\+\_\+\+Int (\begin{DoxyParamCaption}\item[{int}]{nbr1,  }\item[{int}]{nbr2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Return the maximum between two specified integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nbr1} & First integer.\\
+\hline
+{\em nbr2} & Second integer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Maximum of both parameters.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_ae1d5c17504be40ea98a934f1e56c6540}\label{class_learn___c_t_s_1_1_tools_ae1d5c17504be40ea98a934f1e56c6540}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Min\_Int@{Min\_Int}}
+\index{Min\_Int@{Min\_Int}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Min\_Int()}{Min\_Int()}}
+{\footnotesize\ttfamily static int Learn\+\_\+\+C\+T\+S.\+Tools.\+Min\+\_\+\+Int (\begin{DoxyParamCaption}\item[{int}]{nbr1,  }\item[{int}]{nbr2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Return the minimum between two specified integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nbr1} & First integer.\\
+\hline
+{\em nbr2} & Second integer.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Minimum of both parameters.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tools_aa3b8dff33874b084c5dd8c66e1a060db}\label{class_learn___c_t_s_1_1_tools_aa3b8dff33874b084c5dd8c66e1a060db}} 
+\index{Learn\_CTS.Tools@{Learn\_CTS.Tools}!Set\_To\_JSON@{Set\_To\_JSON}}
+\index{Set\_To\_JSON@{Set\_To\_JSON}!Learn\_CTS.Tools@{Learn\_CTS.Tools}}
+\doxysubsubsection{\texorpdfstring{Set\_To\_JSON()}{Set\_To\_JSON()}}
+{\footnotesize\ttfamily static void Learn\+\_\+\+C\+T\+S.\+Tools.\+Set\+\_\+\+To\+\_\+\+J\+S\+ON (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{J\+Object}]{new\+\_\+content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Set the content of the J\+S\+ON file at the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the targeted J\+S\+ON file.\\
+\hline
+{\em new\+\_\+content} & J\+Object containing the variables needed in the file.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Tools.\+cs\end{DoxyCompactItemize}

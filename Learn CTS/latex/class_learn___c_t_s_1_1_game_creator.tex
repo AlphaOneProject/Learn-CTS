@@ -1,0 +1,328 @@
+\hypertarget{class_learn___c_t_s_1_1_game_creator}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Game\+Creator Class Reference}
+\label{class_learn___c_t_s_1_1_game_creator}\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+
+
+Control used to create a new game. Typically called in the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}.  
+
+
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Creator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_game_creator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a53916062492557c1e8146d034b7e1e63}{Game\+Creator}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} menu)
+\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_afa771198f1395b2126f050a655968ce0}{Change\+\_\+\+Theme}} ()
+\begin{DoxyCompactList}\small\item\em Change the theme of all the controls of this form, according to the current theme in the options. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_aaaa6811e89465c964b5766d2361e295b}{Game\+Creator\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} is loaded. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_afcb1c9675f259c398446eada20605f10}{Txt\+\_\+create\+\_\+\+Key\+Press}} (object sender, Key\+Press\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} filtering for the game name. \end{DoxyCompactList}\item 
+Boolean \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a32dfa397bde26717b443eb05f287a8ac}{Is\+\_\+\+Game\+\_\+\+Unique}} (String nom)
+\begin{DoxyCompactList}\small\item\em Checks if the given name is already taken by an existing game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a99fb8ae21273f01f44d2adffb713b8af}{games\+\_\+menu\+\_\+confirm\+\_\+box}} (String nom)
+\begin{DoxyCompactList}\small\item\em Displays a confirmation Message\+Box \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_ad8bfec289c41b5d30a965bb752c3af18}{Create\+\_\+game}} (String nom)
+\begin{DoxyCompactList}\small\item\em Creates the directories used by the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a4fd0ee17af0a346d410376e41c0c747d}{Pb\+\_\+back\+\_\+create\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the back arrow is clicked. Hides the UC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a9c1b70b90bc31df5e0270e30daee3e4f}{Pnl\+\_\+greyout\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the background is clicked. Hides the UC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a96da7efb07e448d82160d0f52a1409f5}{Game\+Creator\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Size of the UC to have a responsive behavior. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_af09692fe3a87c957a708a8dba5333113}{Create\+\_\+game\+\_\+verify}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Verifies the validity of the name given before calling the confirmation box. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_ae1193f573859a53feb712c70bdf2f23e}{Game\+Creator\+\_\+\+Leave}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} loses the focus. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a25363c74bfeef81b7af288e107d29493}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_af627239c34289c79b49263aeef287f65}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly String \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_ae6d115d8b2a5d87d0c85cffe6cae7341}{games\+\_\+path}}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a19bc96632c6f6c39074834ccb026c09d}\label{class_learn___c_t_s_1_1_game_creator_a19bc96632c6f6c39074834ccb026c09d}} 
+J\+Object {\bfseries theme}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a3fa6b7cb39d11579360d6c22b3ce71f5}\label{class_learn___c_t_s_1_1_game_creator_a3fa6b7cb39d11579360d6c22b3ce71f5}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} {\bfseries menu}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator_a230efd764945562d27018d886a6be945}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a35e93522290d7fda97092adac55fd842}\label{class_learn___c_t_s_1_1_game_creator_a35e93522290d7fda97092adac55fd842}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+confirm}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a2533f0ee11530f6f4d13300b5c2d765a}\label{class_learn___c_t_s_1_1_game_creator_a2533f0ee11530f6f4d13300b5c2d765a}} 
+private System Windows Forms Text\+Box {\bfseries txt\+\_\+create}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a41c4f5357d383b1416850ca8551590f0}\label{class_learn___c_t_s_1_1_game_creator_a41c4f5357d383b1416850ca8551590f0}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+back\+\_\+create}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a68989900bc106e648acc2baf61215004}\label{class_learn___c_t_s_1_1_game_creator_a68989900bc106e648acc2baf61215004}} 
+private System Windows Forms Panel {\bfseries pnl\+\_\+bg}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_af3d21a2cd4371ae080a12b30a270281a}\label{class_learn___c_t_s_1_1_game_creator_af3d21a2cd4371ae080a12b30a270281a}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+create}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Control used to create a new game. Typically called in the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a53916062492557c1e8146d034b7e1e63}\label{class_learn___c_t_s_1_1_game_creator_a53916062492557c1e8146d034b7e1e63}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!GameCreator@{GameCreator}}
+\index{GameCreator@{GameCreator}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{GameCreator()}{GameCreator()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Game\+Creator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}}]{menu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu} & The \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} calling the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}}\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_afa771198f1395b2126f050a655968ce0}\label{class_learn___c_t_s_1_1_game_creator_afa771198f1395b2126f050a655968ce0}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Change\_Theme@{Change\_Theme}}
+\index{Change\_Theme@{Change\_Theme}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Change\_Theme()}{Change\_Theme()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Change\+\_\+\+Theme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Change the theme of all the controls of this form, according to the current theme in the options. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_ad8bfec289c41b5d30a965bb752c3af18}\label{class_learn___c_t_s_1_1_game_creator_ad8bfec289c41b5d30a965bb752c3af18}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Create\_game@{Create\_game}}
+\index{Create\_game@{Create\_game}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Create\_game()}{Create\_game()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Create\+\_\+game (\begin{DoxyParamCaption}\item[{String}]{nom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates the directories used by the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_af09692fe3a87c957a708a8dba5333113}\label{class_learn___c_t_s_1_1_game_creator_af09692fe3a87c957a708a8dba5333113}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Create\_game\_verify@{Create\_game\_verify}}
+\index{Create\_game\_verify@{Create\_game\_verify}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Create\_game\_verify()}{Create\_game\_verify()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Create\+\_\+game\+\_\+verify (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Verifies the validity of the name given before calling the confirmation box. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a25363c74bfeef81b7af288e107d29493}\label{class_learn___c_t_s_1_1_game_creator_a25363c74bfeef81b7af288e107d29493}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_ae1193f573859a53feb712c70bdf2f23e}\label{class_learn___c_t_s_1_1_game_creator_ae1193f573859a53feb712c70bdf2f23e}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!GameCreator\_Leave@{GameCreator\_Leave}}
+\index{GameCreator\_Leave@{GameCreator\_Leave}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{GameCreator\_Leave()}{GameCreator\_Leave()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Game\+Creator\+\_\+\+Leave (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} loses the focus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_aaaa6811e89465c964b5766d2361e295b}\label{class_learn___c_t_s_1_1_game_creator_aaaa6811e89465c964b5766d2361e295b}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!GameCreator\_Load@{GameCreator\_Load}}
+\index{GameCreator\_Load@{GameCreator\_Load}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{GameCreator\_Load()}{GameCreator\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Game\+Creator\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} is loaded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a96da7efb07e448d82160d0f52a1409f5}\label{class_learn___c_t_s_1_1_game_creator_a96da7efb07e448d82160d0f52a1409f5}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!GameCreator\_SizeChanged@{GameCreator\_SizeChanged}}
+\index{GameCreator\_SizeChanged@{GameCreator\_SizeChanged}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{GameCreator\_SizeChanged()}{GameCreator\_SizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Game\+Creator\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Size of the UC to have a responsive behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a99fb8ae21273f01f44d2adffb713b8af}\label{class_learn___c_t_s_1_1_game_creator_a99fb8ae21273f01f44d2adffb713b8af}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!games\_menu\_confirm\_box@{games\_menu\_confirm\_box}}
+\index{games\_menu\_confirm\_box@{games\_menu\_confirm\_box}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{games\_menu\_confirm\_box()}{games\_menu\_confirm\_box()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+games\+\_\+menu\+\_\+confirm\+\_\+box (\begin{DoxyParamCaption}\item[{String}]{nom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Displays a confirmation Message\+Box 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_af627239c34289c79b49263aeef287f65}\label{class_learn___c_t_s_1_1_game_creator_af627239c34289c79b49263aeef287f65}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a32dfa397bde26717b443eb05f287a8ac}\label{class_learn___c_t_s_1_1_game_creator_a32dfa397bde26717b443eb05f287a8ac}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Is\_Game\_Unique@{Is\_Game\_Unique}}
+\index{Is\_Game\_Unique@{Is\_Game\_Unique}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Is\_Game\_Unique()}{Is\_Game\_Unique()}}
+{\footnotesize\ttfamily Boolean Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Is\+\_\+\+Game\+\_\+\+Unique (\begin{DoxyParamCaption}\item[{String}]{nom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Checks if the given name is already taken by an existing game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a4fd0ee17af0a346d410376e41c0c747d}\label{class_learn___c_t_s_1_1_game_creator_a4fd0ee17af0a346d410376e41c0c747d}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Pb\_back\_create\_Click@{Pb\_back\_create\_Click}}
+\index{Pb\_back\_create\_Click@{Pb\_back\_create\_Click}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Pb\_back\_create\_Click()}{Pb\_back\_create\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Pb\+\_\+back\+\_\+create\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the back arrow is clicked. Hides the UC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a9c1b70b90bc31df5e0270e30daee3e4f}\label{class_learn___c_t_s_1_1_game_creator_a9c1b70b90bc31df5e0270e30daee3e4f}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Pnl\_greyout\_Click@{Pnl\_greyout\_Click}}
+\index{Pnl\_greyout\_Click@{Pnl\_greyout\_Click}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Pnl\_greyout\_Click()}{Pnl\_greyout\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Pnl\+\_\+greyout\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the background is clicked. Hides the UC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_afcb1c9675f259c398446eada20605f10}\label{class_learn___c_t_s_1_1_game_creator_afcb1c9675f259c398446eada20605f10}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!Txt\_create\_KeyPress@{Txt\_create\_KeyPress}}
+\index{Txt\_create\_KeyPress@{Txt\_create\_KeyPress}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{Txt\_create\_KeyPress()}{Txt\_create\_KeyPress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+Txt\+\_\+create\+\_\+\+Key\+Press (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Press\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} filtering for the game name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_a230efd764945562d27018d886a6be945}\label{class_learn___c_t_s_1_1_game_creator_a230efd764945562d27018d886a6be945}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!components@{components}}
+\index{components@{components}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_creator_ae6d115d8b2a5d87d0c85cffe6cae7341}\label{class_learn___c_t_s_1_1_game_creator_ae6d115d8b2a5d87d0c85cffe6cae7341}} 
+\index{Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}!games\_path@{games\_path}}
+\index{games\_path@{games\_path}!Learn\_CTS.GameCreator@{Learn\_CTS.GameCreator}}
+\doxysubsubsection{\texorpdfstring{games\_path}{games\_path}}
+{\footnotesize\ttfamily readonly String Learn\+\_\+\+C\+T\+S.\+Game\+Creator.\+games\+\_\+path\hspace{0.3cm}{\ttfamily [private]}}
+
+Default path of all the created games. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Creator.\+cs\item 
+Game\+Creator.\+Designer.\+cs\end{DoxyCompactItemize}

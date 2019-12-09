@@ -1,0 +1,312 @@
+\hypertarget{class_learn___c_t_s_1_1_vehicule}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Vehicule Class Reference}
+\label{class_learn___c_t_s_1_1_vehicule}\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Vehicule\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_learn___c_t_s_1_1_vehicule}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_acb90bf5a7a5234f40dcec3952ba9082f}{Vehicule}} (string name, int x, int y, int\mbox{[}$\,$\mbox{]} pos\+\_\+doors)
+\begin{DoxyCompactList}\small\item\em Constructor of a vehicule. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a23735e4517b510e99ec542032b83598e}{Change\+Inside}} ()
+\begin{DoxyCompactList}\small\item\em Switch between outside and inside, which results in a change of hitbox, doors and the outside aspect. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_af3f87a4efcf38821b52a59b3ff5e1ece}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Depending of the state of the vehicule, changes the hitbox, moves the vehicule or the doors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a907e8ec3e97bc7f1ae496d3e75f4fb3f}{Open\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Open the doors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_aa234125e65a1c1a2a04f16b4a430ad6d}{Close\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Close the doors. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a2594ef7a92ec78ace351f005fd37a56c}{Is\+Inside}} ()
+\begin{DoxyCompactList}\small\item\em Check if the player is inside the vehicule. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_af4ce884e8af80795924035c4e8beab30}{Get\+Max\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Return the maximal speed of the vehicule. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a9cd6063bb90bbab52fecd51732b4835d}{Set\+Speed}} (int v)
+\begin{DoxyCompactList}\small\item\em Set the speed of the vehicule. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a8fff760b8114b01278fa9a59935c9b1c}{Change\+State}} ()
+\begin{DoxyCompactList}\small\item\em Change the state of the vehicule. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_aad1e5381ab2cc588b0f418340b89823c}{Get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Return the state of the vehicule. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a6e825c88ee816d193306ef2fbe337539}{Get\+State\+String}} ()
+\begin{DoxyCompactList}\small\item\em Return the state of the vehicule in a string. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_afb0d91ab308f92885ddd425eeb853bf9}{Get\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Get the actual speed of the vehicule. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a939012bb38623c19ec1fa29ae7ce4f9f}{Set\+State}} (int s)
+\begin{DoxyCompactList}\small\item\em Set the state of the vehicule. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_a01ce85ab728c9f2f10f9d5cf2d0bfe1f}{On\+Paint}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Update the vehicule then paint it on the screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_adfd1ac0b7c66208319e394dd4550f992}\label{class_learn___c_t_s_1_1_vehicule_adfd1ac0b7c66208319e394dd4550f992}} 
+int {\bfseries Get\+Distance\+Max\+Stop} ()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_aa1303af3d2a892c1f579e3fa281949a3}\label{class_learn___c_t_s_1_1_vehicule_aa1303af3d2a892c1f579e3fa281949a3}} 
+int {\bfseries Get\+Index\+Nearest\+Door} (int pos\+\_\+c)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a91547013c078d019797d4d2352735e30}\label{class_learn___c_t_s_1_1_vehicule_a91547013c078d019797d4d2352735e30}} 
+int {\bfseries Get\+Pos\+Door} (int i)
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_aa4d034794a683fccfd2dbda7ec040613}\label{class_learn___c_t_s_1_1_vehicule_aa4d034794a683fccfd2dbda7ec040613}} 
+int {\bfseries Get\+Number\+Doors} ()
+\item 
+override bool \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule_acb8d18de5b447ca3fb2ad5ab8f3b710a}{Collide\+With}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} t, bool b)
+\begin{DoxyCompactList}\small\item\em Check if the instance is colliding with the texture t or its childs \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a3e76cd01cd4d0f1651cb58c26dd6ca47}\label{class_learn___c_t_s_1_1_vehicule_a3e76cd01cd4d0f1651cb58c26dd6ca47}} 
+int {\bfseries Distance\+Before\+Stopping} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a2bdc243d89900c7d752a866b09a02b2c}\label{class_learn___c_t_s_1_1_vehicule_a2bdc243d89900c7d752a866b09a02b2c}} 
+int {\bfseries state} = 2
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a5ee438481280a828f95ba6312ee5ff40}\label{class_learn___c_t_s_1_1_vehicule_a5ee438481280a828f95ba6312ee5ff40}} 
+int {\bfseries max\+\_\+speed} = 50
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a2d5a14cdca9073257a6ad410974a3f75}\label{class_learn___c_t_s_1_1_vehicule_a2d5a14cdca9073257a6ad410974a3f75}} 
+int {\bfseries speed} = 50
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_ab40491c7dcf50a54f71a54d4c04e9ae1}\label{class_learn___c_t_s_1_1_vehicule_ab40491c7dcf50a54f71a54d4c04e9ae1}} 
+bool {\bfseries is\+\_\+inside} = false
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a3d4402b9f306b1ca86583843aaf3610a}\label{class_learn___c_t_s_1_1_vehicule_a3d4402b9f306b1ca86583843aaf3610a}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries doors\+\_\+left}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a2caab064ac519d2ab226c37865aec123}\label{class_learn___c_t_s_1_1_vehicule_a2caab064ac519d2ab226c37865aec123}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries doors\+\_\+right}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a1ae99f6c268778639dc0376052fd8d67}\label{class_learn___c_t_s_1_1_vehicule_a1ae99f6c268778639dc0376052fd8d67}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries outside}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_aa26253287fc5a037e9cf323641f708a0}\label{class_learn___c_t_s_1_1_vehicule_aa26253287fc5a037e9cf323641f708a0}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries inside}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a3a880bcf70317dd93d03791701b56cd2}\label{class_learn___c_t_s_1_1_vehicule_a3a880bcf70317dd93d03791701b56cd2}} 
+int {\bfseries max\+\_\+distance\+\_\+stop}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a66924e9335e259bf293107d6957142fb}\label{class_learn___c_t_s_1_1_vehicule_a66924e9335e259bf293107d6957142fb}} 
+int\mbox{[}$\,$\mbox{]} {\bfseries pos\+\_\+doors}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_acb90bf5a7a5234f40dcec3952ba9082f}\label{class_learn___c_t_s_1_1_vehicule_acb90bf5a7a5234f40dcec3952ba9082f}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!Vehicule@{Vehicule}}
+\index{Vehicule@{Vehicule}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{Vehicule()}{Vehicule()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Vehicule (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int\mbox{[}$\,$\mbox{]}}]{pos\+\_\+doors }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor of a vehicule. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate.\\
+\hline
+{\em y} & The y coordinate.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a23735e4517b510e99ec542032b83598e}\label{class_learn___c_t_s_1_1_vehicule_a23735e4517b510e99ec542032b83598e}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!ChangeInside@{ChangeInside}}
+\index{ChangeInside@{ChangeInside}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{ChangeInside()}{ChangeInside()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Change\+Inside (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch between outside and inside, which results in a change of hitbox, doors and the outside aspect. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a8fff760b8114b01278fa9a59935c9b1c}\label{class_learn___c_t_s_1_1_vehicule_a8fff760b8114b01278fa9a59935c9b1c}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!ChangeState@{ChangeState}}
+\index{ChangeState@{ChangeState}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{ChangeState()}{ChangeState()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Change\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Change the state of the vehicule. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_aa234125e65a1c1a2a04f16b4a430ad6d}\label{class_learn___c_t_s_1_1_vehicule_aa234125e65a1c1a2a04f16b4a430ad6d}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!CloseDoors@{CloseDoors}}
+\index{CloseDoors@{CloseDoors}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{CloseDoors()}{CloseDoors()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Close\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close the doors. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_acb8d18de5b447ca3fb2ad5ab8f3b710a}\label{class_learn___c_t_s_1_1_vehicule_acb8d18de5b447ca3fb2ad5ab8f3b710a}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!CollideWith@{CollideWith}}
+\index{CollideWith@{CollideWith}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{CollideWith()}{CollideWith()}}
+{\footnotesize\ttfamily override bool Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Collide\+With (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}}]{t,  }\item[{bool}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Check if the instance is colliding with the texture t or its childs 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The texture that will be tested.\\
+\hline
+\end{DoxyParams}
+/// 
+\begin{DoxyParams}{Parameters}
+{\em b} & Check if t collides with the childs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if this hit the hitbox of t or one of its childs, false otherwise.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_aabe7572a2631784f118f9f66b3b5a225}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_af4ce884e8af80795924035c4e8beab30}\label{class_learn___c_t_s_1_1_vehicule_af4ce884e8af80795924035c4e8beab30}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!GetMaxSpeed@{GetMaxSpeed}}
+\index{GetMaxSpeed@{GetMaxSpeed}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{GetMaxSpeed()}{GetMaxSpeed()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Get\+Max\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the maximal speed of the vehicule. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_afb0d91ab308f92885ddd425eeb853bf9}\label{class_learn___c_t_s_1_1_vehicule_afb0d91ab308f92885ddd425eeb853bf9}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!GetSpeed@{GetSpeed}}
+\index{GetSpeed@{GetSpeed}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{GetSpeed()}{GetSpeed()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the actual speed of the vehicule. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_aad1e5381ab2cc588b0f418340b89823c}\label{class_learn___c_t_s_1_1_vehicule_aad1e5381ab2cc588b0f418340b89823c}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!GetState@{GetState}}
+\index{GetState@{GetState}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the state of the vehicule. 
+
+\begin{DoxyReturn}{Returns}
+0 = Stopped 1 = Accelerating 2 = Moving at maximal speed 3 = Deccelerating 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a6e825c88ee816d193306ef2fbe337539}\label{class_learn___c_t_s_1_1_vehicule_a6e825c88ee816d193306ef2fbe337539}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!GetStateString@{GetStateString}}
+\index{GetStateString@{GetStateString}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{GetStateString()}{GetStateString()}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Get\+State\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the state of the vehicule in a string. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a2594ef7a92ec78ace351f005fd37a56c}\label{class_learn___c_t_s_1_1_vehicule_a2594ef7a92ec78ace351f005fd37a56c}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!IsInside@{IsInside}}
+\index{IsInside@{IsInside}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{IsInside()}{IsInside()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Is\+Inside (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the player is inside the vehicule. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a01ce85ab728c9f2f10f9d5cf2d0bfe1f}\label{class_learn___c_t_s_1_1_vehicule_a01ce85ab728c9f2f10f9d5cf2d0bfe1f}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!OnPaint@{OnPaint}}
+\index{OnPaint@{OnPaint}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{OnPaint()}{OnPaint()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+On\+Paint (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Update the vehicule then paint it on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_a46d03f73e870c26e51641766ec438a65}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a907e8ec3e97bc7f1ae496d3e75f4fb3f}\label{class_learn___c_t_s_1_1_vehicule_a907e8ec3e97bc7f1ae496d3e75f4fb3f}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!OpenDoors@{OpenDoors}}
+\index{OpenDoors@{OpenDoors}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{OpenDoors()}{OpenDoors()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Open\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Open the doors. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a9cd6063bb90bbab52fecd51732b4835d}\label{class_learn___c_t_s_1_1_vehicule_a9cd6063bb90bbab52fecd51732b4835d}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!SetSpeed@{SetSpeed}}
+\index{SetSpeed@{SetSpeed}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{SetSpeed()}{SetSpeed()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Set\+Speed (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the speed of the vehicule. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_a939012bb38623c19ec1fa29ae7ce4f9f}\label{class_learn___c_t_s_1_1_vehicule_a939012bb38623c19ec1fa29ae7ce4f9f}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!SetState@{SetState}}
+\index{SetState@{SetState}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Set\+State (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the state of the vehicule. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_vehicule_af3f87a4efcf38821b52a59b3ff5e1ece}\label{class_learn___c_t_s_1_1_vehicule_af3f87a4efcf38821b52a59b3ff5e1ece}} 
+\index{Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}!Update@{Update}}
+\index{Update@{Update}!Learn\_CTS.Vehicule@{Learn\_CTS.Vehicule}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Vehicule.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Depending of the state of the vehicule, changes the hitbox, moves the vehicule or the doors. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Vehicule.\+cs\end{DoxyCompactItemize}

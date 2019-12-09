@@ -1,0 +1,165 @@
+\hypertarget{class_learn___c_t_s_1_1_item_manager}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Item\+Manager Class Reference}
+\label{class_learn___c_t_s_1_1_item_manager}\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+
+
+Manager of the items for the point and click game mode.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_aa0c160eb396ab59729c70df2d56afa1d}{Item\+Manager}} (string game, string situation\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_aaf6675fda147239bda5cabec14bfa849}{Create\+Item}} (int id, string name, int x, int y, J\+Object actions)
+\begin{DoxyCompactList}\small\item\em Creates an item and adds it to the list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_ac57a32aae59163c372a14b8492be701b}{Get\+Item\+By\+ID}} (int id)
+\begin{DoxyCompactList}\small\item\em Gets the item with the ID passed in. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_a0d0bd93c0169ad303432b82086d36996}{Delete\+Item\+By\+ID}} (int id)
+\begin{DoxyCompactList}\small\item\em Deletes the item which has the id passed in from the list. \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_abd1e013168271e10fdc8216c1ef95da1}{Get\+List}} ()
+\begin{DoxyCompactList}\small\item\em Returns the list of items \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_a07658b7e92844aa9e5817a4033f83d15}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the list of items \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_ab68007387a31ca0287f510982353cd10}{Get\+Items\+From\+Situation}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all the items used for a specific situation and puts them in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a8f4e1c6a41ae005eb28d4aaba508dbea}\label{class_learn___c_t_s_1_1_item_manager_a8f4e1c6a41ae005eb28d4aaba508dbea}} 
+List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseries list\+\_\+items} = new List$<$\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}$>$()
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_ad62d6f70bf6d658d3dca955b260155e6}\label{class_learn___c_t_s_1_1_item_manager_ad62d6f70bf6d658d3dca955b260155e6}} 
+string {\bfseries game}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a29a9ecf57a501e6bcfab543b5872e9ca}\label{class_learn___c_t_s_1_1_item_manager_a29a9ecf57a501e6bcfab543b5872e9ca}} 
+string {\bfseries situation\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a8c1e0ca1da67d838f8ff6e33f280e798}\label{class_learn___c_t_s_1_1_item_manager_a8c1e0ca1da67d838f8ff6e33f280e798}} 
+string {\bfseries library\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a1de63eae97efc5cb78cd5bcf929c20de}\label{class_learn___c_t_s_1_1_item_manager_a1de63eae97efc5cb78cd5bcf929c20de}} 
+string {\bfseries items\+\_\+lib\+\_\+path}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manager of the items for the point and click game mode. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_aa0c160eb396ab59729c70df2d56afa1d}\label{class_learn___c_t_s_1_1_item_manager_aa0c160eb396ab59729c70df2d56afa1d}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!ItemManager@{ItemManager}}
+\index{ItemManager@{ItemManager}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{ItemManager()}{ItemManager()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Item\+Manager (\begin{DoxyParamCaption}\item[{string}]{game,  }\item[{string}]{situation\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a07658b7e92844aa9e5817a4033f83d15}\label{class_learn___c_t_s_1_1_item_manager_a07658b7e92844aa9e5817a4033f83d15}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!Clear@{Clear}}
+\index{Clear@{Clear}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the list of items 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_aaf6675fda147239bda5cabec14bfa849}\label{class_learn___c_t_s_1_1_item_manager_aaf6675fda147239bda5cabec14bfa849}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!CreateItem@{CreateItem}}
+\index{CreateItem@{CreateItem}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{CreateItem()}{CreateItem()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Create\+Item (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{string}]{name,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{J\+Object}]{actions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an item and adds it to the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+{\em name} & \\
+\hline
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+{\em description} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a0d0bd93c0169ad303432b82086d36996}\label{class_learn___c_t_s_1_1_item_manager_a0d0bd93c0169ad303432b82086d36996}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!DeleteItemByID@{DeleteItemByID}}
+\index{DeleteItemByID@{DeleteItemByID}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{DeleteItemByID()}{DeleteItemByID()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Delete\+Item\+By\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deletes the item which has the id passed in from the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_ac57a32aae59163c372a14b8492be701b}\label{class_learn___c_t_s_1_1_item_manager_ac57a32aae59163c372a14b8492be701b}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!GetItemByID@{GetItemByID}}
+\index{GetItemByID@{GetItemByID}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{GetItemByID()}{GetItemByID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Get\+Item\+By\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the item with the ID passed in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & ID of the item to get\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_learn___c_t_s_1_1_item}{Item}} by id.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_ab68007387a31ca0287f510982353cd10}\label{class_learn___c_t_s_1_1_item_manager_ab68007387a31ca0287f510982353cd10}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!GetItemsFromSituation@{GetItemsFromSituation}}
+\index{GetItemsFromSituation@{GetItemsFromSituation}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{GetItemsFromSituation()}{GetItemsFromSituation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Get\+Items\+From\+Situation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves all the items used for a specific situation and puts them in the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em situation} & J\+Object of the situation\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_abd1e013168271e10fdc8216c1ef95da1}\label{class_learn___c_t_s_1_1_item_manager_abd1e013168271e10fdc8216c1ef95da1}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!GetList@{GetList}}
+\index{GetList@{GetList}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{GetList()}{GetList()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}$>$ Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Get\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the list of items 
+
+\begin{DoxyReturn}{Returns}
+List of items
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Item\+Manager.\+cs\end{DoxyCompactItemize}
