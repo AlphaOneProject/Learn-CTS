@@ -250,7 +250,7 @@ namespace Learn_CTS
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
-            { "npcs", "dialogs" };
+            { "npcs", "dialogs", "backgrounds" };
 
             if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
             {
@@ -1342,7 +1342,98 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Backgrounds()
         {
-            // WIP
+            if (this.old_category == "backgrounds") // Activates upon resize from the Editor.
+            {
+                content.Controls.Find("flp_backgrounds", true)[0].Width = content.Width - 40;
+                content.Controls.Find("flp_backgrounds", true)[0].Height = content.Height - 120;
+                return;
+            }
+
+            // Controls 
+            Label lbl_backgrounds = new Label()
+            {
+                Name = "lbl_backgrounds",
+                Text = "Décors",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_backgrounds);
+
+            PictureBox pb_add_background = new PictureBox()
+            {
+                Name = "pb_add_background",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_background.Click += new EventHandler(Add_Background);
+            content.Controls.Add(pb_add_background);
+            tlt_global.SetToolTip(pb_add_background, "Ajoute un nouveau modèle de décor depuis un fichier");
+
+            FlowLayoutPanel flp_backgrounds = new FlowLayoutPanel()
+            {
+                Name = "flp_backgrounds",
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 120
+            };
+            content.Controls.Add(flp_backgrounds);
+
+            // Placement of those Controls.
+            lbl_backgrounds.Location = new Point(20, 40);
+            pb_add_background.Location = new Point(lbl_backgrounds.Location.X + lbl_backgrounds.Width + 20, 40);
+            flp_backgrounds.Location = new Point(20, 100);
+
+            // Add all existing backgrounds to the FlowLayoutPanel.
+        }
+
+        private void Add_Background(object sender, EventArgs e)
+        {
+            if (ofd_global.ShowDialog() == DialogResult.Cancel) { return; }
+
+            string extension = ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last().Split('.').Last();
+            if (!(extension == "png" || extension == "jpeg")) {
+                MessageBox.Show("L'image doit être soit de format .png soit .jpeg pour être utilisée.", "Type invalide",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (@"" + ofd_global.FileName == @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
+                Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last())
+            {
+                MessageBox.Show("Vous ne pouvez importer un modèle déjà présent.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                File.Copy(@"" + ofd_global.FileName, @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
+                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last(), false);
+            }
+            catch (IOException except)
+            {
+                if (MessageBox.Show("Un fichier du même nom existe déjà dans votre liste de modèles.\n" +
+                                    "Souhaitez-vous le remplacer ?", "Remplacement de fichier",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    File.Copy(@"" + ofd_global.FileName, @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
+                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last(), true);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            ImageEdition ie = new ImageEdition(this, ofd_global.FileName);
+            content.Controls.Find("flp_backgrounds", true)[0].Controls.Add(ie);
         }
 
         /// <summary>
