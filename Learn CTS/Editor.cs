@@ -1386,6 +1386,15 @@ namespace Learn_CTS
             flp_backgrounds.Location = new Point(20, 100);
 
             // Add all existing backgrounds to the FlowLayoutPanel.
+            string backgrounds_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                      "background" + Path.DirectorySeparatorChar;
+            foreach(string file_name in Directory.GetFiles(backgrounds_path))
+            {
+                if (file_name.Contains("_hitbox")) { continue; }
+                ImageEdition ie = new ImageEdition(this, file_name);
+                flp_backgrounds.Controls.Add(ie);
+            }
         }
 
         private void Add_Background(object sender, EventArgs e)
@@ -1407,11 +1416,12 @@ namespace Learn_CTS
                 return;
             }
 
+            string new_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
+                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last();
             try
             {
-                File.Copy(@"" + ofd_global.FileName, @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
-                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
-                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last(), false);
+                File.Copy(@"" + ofd_global.FileName, @"" + new_path, false);
             }
             catch (IOException except)
             {
@@ -1419,9 +1429,7 @@ namespace Learn_CTS
                                     "Souhaitez-vous le remplacer ?", "Remplacement de fichier",
                                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    File.Copy(@"" + ofd_global.FileName, @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
-                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
-                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last(), true);
+                    File.Copy(@"" + ofd_global.FileName, @"" + new_path, true);
                 }
                 else
                 {
@@ -1429,7 +1437,7 @@ namespace Learn_CTS
                 }
             }
 
-            ImageEdition ie = new ImageEdition(this, ofd_global.FileName);
+            ImageEdition ie = new ImageEdition(this, @"" + new_path);
             content.Controls.Find("flp_backgrounds", true)[0].Controls.Add(ie);
         }
 
@@ -2168,7 +2176,7 @@ namespace Learn_CTS
             foreach (string fi in Directory.GetFiles(@"" + bg_path))
             {
                 string file_name = fi.Split(Path.DirectorySeparatorChar).Last();
-                if (!file_name.Contains("Hitbox"))
+                if (!file_name.Contains("_hitbox"))
                 {
                     list_bg.Add(file_name);
                 }
