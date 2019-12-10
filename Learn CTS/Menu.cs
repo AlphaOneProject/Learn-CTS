@@ -49,6 +49,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Menu_Load(object sender, EventArgs e)
         {
+            System.Threading.Thread.Sleep(500);
             this.Activate();
 
             string options_path = System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json";
