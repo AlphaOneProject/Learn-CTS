@@ -26,6 +26,7 @@ namespace Learn_CTS
         private bool saved = true;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
+        private bool is_loading = false;
 
         // Methods.
 
@@ -154,6 +155,25 @@ namespace Learn_CTS
         public JObject Get_Theme()
         {
             return this.theme;
+        }
+
+        public bool Get_Is_Loading()
+        {
+            return this.is_loading;
+        }
+
+        public void Set_Is_Loading(bool new_is_loading)
+        {
+            this.is_loading = new_is_loading;
+
+            if (is_loading)
+            {
+                content.Enabled = false;
+            }
+            else
+            {
+                content.Enabled = true;
+            }
         }
 
         /// <summary>
