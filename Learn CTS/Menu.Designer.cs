@@ -43,7 +43,7 @@
             this.main_menu_btn_edit.FlatAppearance.BorderSize = 0;
             this.main_menu_btn_edit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.main_menu_btn_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.main_menu_btn_edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.main_menu_btn_edit.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_edit.ForeColor = System.Drawing.Color.White;
             this.main_menu_btn_edit.Location = new System.Drawing.Point(65, 203);
             this.main_menu_btn_edit.Name = "main_menu_btn_edit";
@@ -61,7 +61,7 @@
             this.main_menu_btn_exit.FlatAppearance.BorderSize = 0;
             this.main_menu_btn_exit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.main_menu_btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.main_menu_btn_exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.main_menu_btn_exit.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_exit.ForeColor = System.Drawing.Color.White;
             this.main_menu_btn_exit.Location = new System.Drawing.Point(525, 253);
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
@@ -79,7 +79,7 @@
             this.main_menu_btn_options.FlatAppearance.BorderSize = 0;
             this.main_menu_btn_options.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.main_menu_btn_options.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.main_menu_btn_options.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F);
+            this.main_menu_btn_options.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_options.ForeColor = System.Drawing.Color.White;
             this.main_menu_btn_options.Location = new System.Drawing.Point(278, 253);
             this.main_menu_btn_options.Name = "main_menu_btn_options";
@@ -120,14 +120,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(800, 461);
+            this.ClientSize = new System.Drawing.Size(1264, 725);
             this.Controls.Add(this.main_menu_lbl_title2);
             this.Controls.Add(this.main_menu_lbl_title1);
             this.Controls.Add(this.main_menu_btn_options);
             this.Controls.Add(this.main_menu_btn_exit);
             this.Controls.Add(this.main_menu_btn_edit);
             this.ForeColor = System.Drawing.Color.White;
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.MinimumSize = new System.Drawing.Size(1280, 764);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "0";

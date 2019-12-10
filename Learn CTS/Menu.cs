@@ -203,9 +203,13 @@ namespace Learn_CTS
             Size old_size = this.Size;
             InitializeComponent();
             this.Size = old_size;
-            PerformLayout();
             this.displayed_menu = "main_menu";
+            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background.png");
+            PerformLayout();
             Responsive_Resize_Main_Menu();
+            Tools.Begin_Control_Update(this);
+            Tools.End_Control_Update(this);
         }
 
         /// <summary>
@@ -321,6 +325,8 @@ namespace Learn_CTS
         private void Display_options_menu()
         {
             this.displayed_menu = "options_menu";
+
+            this.BackgroundImage = null;
 
             Label options_menu_pnl_topbar = new Label()
             {
@@ -475,7 +481,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Called by Menu_SizeChanged(), if the user is browsing the Games Menu.
+        /// Called by Menu_Layout(), if the user is browsing the Games Menu.
         /// </summary>
         private void Responsive_Resize_games_menu()
         {
