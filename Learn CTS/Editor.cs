@@ -329,7 +329,7 @@ namespace Learn_CTS
             TextBox txt_desc = new TextBox()
             {
                 Name = "txt_desc",
-                Tag = "properties.json",
+                Tag = this.game_path + Path.DirectorySeparatorChar + "properties.json",
                 Text = (string)this.game_properties["description"],
                 Cursor = Cursors.IBeam,
                 Multiline = true,
@@ -401,9 +401,6 @@ namespace Learn_CTS
                 if (t.Name == "txt_desc")
                 {
                     content.Controls.Find("lbl_desc_state", false)[0].Text = "";
-
-                    // Resize all controls inside "content".
-                    Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
                 }
                 e.Handled = true;
             }
