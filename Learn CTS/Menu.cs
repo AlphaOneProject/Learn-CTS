@@ -4,6 +4,7 @@ using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Media.Effects;
 
 namespace Learn_CTS
 {
@@ -198,9 +199,7 @@ namespace Learn_CTS
         {
             Dispose_Controls(this);
             this.Controls.Clear();
-            //Display_Main_Menu();
-            
-            
+
             Size old_size = this.Size;
             InitializeComponent();
             this.Size = old_size;
@@ -523,24 +522,24 @@ namespace Learn_CTS
                 switch (c.Name)
                 {
                     case "main_menu_lbl_title1":
-                        c.Location = new Point((this.Width / 2) - (c.Width) + 28,
+                        c.Location = new Point((this.Width / 2) - (c.Width) + 45,
                                     (this.Height / 2) - (c.Height * 2));
                         break;
                     case "main_menu_lbl_title2":
                         c.Location = new Point((this.Width / 2),
-                                    (this.Height / 2) - (c.Height * 2) + 12);
+                                    (this.Height / 2) - (c.Height * 2) + 26);
                         break;
                     case "main_menu_btn_edit":
-                        c.Location = new Point((this.Width / 2) - (c.Width / 2),
-                            (this.Height / 2) - c.Height + main_menu_lbl_title1.Height / 2 + 2);
+                        c.Location = new Point(0, this.Height - (this.Height / 8) * 3 - 38);
+                        c.Size = new Size(this.Width, this.Height/8);
                         break;
                     case "main_menu_btn_options":
-                        c.Location = new Point((this.Width / 2) - c.Width - 6,
-                            (this.Height / 2) + main_menu_lbl_title1.Height + 10);
+                        c.Location = new Point(0, this.Height - (this.Height / 8) * 2 - 38);
+                        c.Size = new Size(this.Width, this.Height / 8);
                         break;
                     case "main_menu_btn_exit":
-                        c.Location = new Point((this.Width / 2) + 6,
-                            (this.Height / 2) + main_menu_lbl_title1.Height * 2 + 10);
+                        c.Location = new Point(0, this.Height - (this.Height / 8) - 38);
+                        c.Size = new Size(this.Width, this.Height / 8);
                         break;
                 }
             }
