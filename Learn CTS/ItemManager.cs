@@ -107,7 +107,7 @@ namespace Learn_CTS
         /// <param name="situation">JObject of the situation</param>
         public void GetItemsFromSituation()
         {
-            JObject situation = Tools.Get_From_JSON(situation_path + Path.DirectorySeparatorChar + "item_test.json");
+            JObject situation = Tools.Get_From_JSON(situation_path + Path.DirectorySeparatorChar + "items.json");
             for (int i = 1; i <= int.Parse(situation["events"].ToString()); i++)
             {
                 string index = i.ToString();
