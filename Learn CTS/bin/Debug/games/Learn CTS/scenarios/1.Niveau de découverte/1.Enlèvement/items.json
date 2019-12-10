@@ -1,0 +1,23 @@
+{
+    "1": {
+      "x": 150,
+      "y": 840,
+      "item": {
+        "name": "Book",
+        "description": "salut a tousdmoihef",
+        "id": 4
+      },
+      "quizz": 1
+    },
+    "2": {
+      "x": 970,
+      "y": 600,
+      "item": {
+        "name": "Papers",
+        "description": "salut a zdoizhd",
+        "id": 2
+      },
+      "quizz": 2
+    },
+    "events": 2
+  }
