@@ -197,19 +197,18 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Back_to_main_menu(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background.png");
             Dispose_Controls(this);
             this.Controls.Clear();
 
             Size old_size = this.Size;
             InitializeComponent();
             this.Size = old_size;
-            this.displayed_menu = "main_menu";
-            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background.png");
             PerformLayout();
+            this.displayed_menu = "main_menu";
             Responsive_Resize_Main_Menu();
-            Tools.Begin_Control_Update(this);
-            Tools.End_Control_Update(this);
+            this.RecreateHandle();
         }
 
         /// <summary>
