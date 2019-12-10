@@ -37,7 +37,7 @@
             // 
             // main_menu_btn_edit
             // 
-            this.main_menu_btn_edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.main_menu_btn_edit.BackColor = System.Drawing.Color.Transparent;
             this.main_menu_btn_edit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.main_menu_btn_edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.main_menu_btn_edit.ForeColor = System.Drawing.Color.White;
@@ -52,7 +52,7 @@
             // 
             // main_menu_btn_exit
             // 
-            this.main_menu_btn_exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.main_menu_btn_exit.BackColor = System.Drawing.Color.Transparent;
             this.main_menu_btn_exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.main_menu_btn_exit.ForeColor = System.Drawing.Color.White;
             this.main_menu_btn_exit.Location = new System.Drawing.Point(399, 286);
@@ -66,7 +66,7 @@
             // 
             // main_menu_btn_options
             // 
-            this.main_menu_btn_options.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.main_menu_btn_options.BackColor = System.Drawing.Color.Transparent;
             this.main_menu_btn_options.Cursor = System.Windows.Forms.Cursors.Hand;
             this.main_menu_btn_options.ForeColor = System.Drawing.Color.White;
             this.main_menu_btn_options.Location = new System.Drawing.Point(278, 286);
@@ -81,10 +81,11 @@
             // main_menu_lbl_title1
             // 
             this.main_menu_lbl_title1.AutoSize = true;
-            this.main_menu_lbl_title1.Font = new System.Drawing.Font("Nirmala UI Semilight", 36F);
-            this.main_menu_lbl_title1.Location = new System.Drawing.Point(267, 122);
+            this.main_menu_lbl_title1.BackColor = System.Drawing.Color.Transparent;
+            this.main_menu_lbl_title1.Font = new System.Drawing.Font("Nirmala UI Semilight", 58F);
+            this.main_menu_lbl_title1.Location = new System.Drawing.Point(190, 85);
             this.main_menu_lbl_title1.Name = "main_menu_lbl_title1";
-            this.main_menu_lbl_title1.Size = new System.Drawing.Size(141, 65);
+            this.main_menu_lbl_title1.Size = new System.Drawing.Size(229, 104);
             this.main_menu_lbl_title1.TabIndex = 5;
             this.main_menu_lbl_title1.Tag = "5";
             this.main_menu_lbl_title1.Text = "Learn";
@@ -92,11 +93,12 @@
             // main_menu_lbl_title2
             // 
             this.main_menu_lbl_title2.AutoSize = true;
-            this.main_menu_lbl_title2.Font = new System.Drawing.Font("Nirmala UI", 44F, System.Drawing.FontStyle.Bold);
+            this.main_menu_lbl_title2.BackColor = System.Drawing.Color.Transparent;
+            this.main_menu_lbl_title2.Font = new System.Drawing.Font("Nirmala UI", 64F, System.Drawing.FontStyle.Bold);
             this.main_menu_lbl_title2.ForeColor = System.Drawing.Color.Red;
-            this.main_menu_lbl_title2.Location = new System.Drawing.Point(389, 111);
+            this.main_menu_lbl_title2.Location = new System.Drawing.Point(406, 75);
             this.main_menu_lbl_title2.Name = "main_menu_lbl_title2";
-            this.main_menu_lbl_title2.Size = new System.Drawing.Size(138, 78);
+            this.main_menu_lbl_title2.Size = new System.Drawing.Size(200, 114);
             this.main_menu_lbl_title2.TabIndex = 6;
             this.main_menu_lbl_title2.Text = "CTS";
             // 
@@ -105,6 +107,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(800, 461);
             this.Controls.Add(this.main_menu_lbl_title2);
             this.Controls.Add(this.main_menu_lbl_title1);
@@ -119,7 +122,7 @@
             this.Text = "Learn CTS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.Load += new System.EventHandler(this.Menu_Load);
-            this.SizeChanged += new System.EventHandler(this.Menu_SizeChanged);
+            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Menu_Layout);
             this.ResumeLayout(false);
             this.PerformLayout();
 
