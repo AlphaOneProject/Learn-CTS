@@ -65,6 +65,11 @@ namespace Learn_CTS
             this.collide_only_z = b;
         }
 
+        public Texture(int x, int y, int z) : this(x, y)
+        {
+            this.z = z;
+        }
+
         /// <summary>
         /// Constructor of a texture with a custom name, placed at the specified coordinates x,y
         /// </summary>

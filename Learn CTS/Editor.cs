@@ -1181,6 +1181,16 @@ namespace Learn_CTS
 
         private void Dialog_Fast_Backward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1189,6 +1199,16 @@ namespace Learn_CTS
 
         private void Dialog_Backward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1198,6 +1218,16 @@ namespace Learn_CTS
 
         private void Dialog_Forward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1207,6 +1237,16 @@ namespace Learn_CTS
 
         private void Dialog_Fast_Forward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1417,7 +1457,7 @@ namespace Learn_CTS
 
         private void Add_Sprite(object sender, EventArgs e)
         {
-
+            // WIP
         }
 
         /// <summary>
@@ -2307,8 +2347,8 @@ namespace Learn_CTS
 
             List<string> list_scenes = new List<string>()
             {
-                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "Montée dans le bus", "Trajet en bus",
-                "Descente du bus", "Accident de bus", "Marche dans un parc"
+                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "[NYI] Montée dans le bus", "[NYI] Trajet en bus",
+                "[NYI] Descente du bus", "[NYI] Accident de bus", "Marche dans un parc"
             };
             ComboBoxFix cbo_scene_type = new ComboBoxFix()
             {
@@ -2538,11 +2578,25 @@ namespace Learn_CTS
                 }
             }
 
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            // START WIP
+            switch (int.Parse(envi_data["scene_type"].ToString()))
+            {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+            // END WIP
             PictureBox pb_background = new PictureBox()
             {
                 Name = "pb_background",
                 Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
-                                       Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "TramInside.png"),
+                                       Path.DirectorySeparatorChar + "vehicule" + Path.DirectorySeparatorChar + "tram" +
+                                       Path.DirectorySeparatorChar + "tramInside.png"),
                 SizeMode = PictureBoxSizeMode.AutoSize,
                 Location = new Point(0, 0)
             };

@@ -89,5 +89,21 @@ namespace Learn_CTS
             list_npcs.Clear();
             npc_id = 1;
         }
+
+        public void MakeAllNPCsInteractives()
+        {
+            foreach (NPC n in list_npcs)
+            {
+                n.DisplayInteraction();
+            }
+        }
+
+        public void MakeAllNPCsNotInteractives()
+        {
+            foreach (NPC n in list_npcs)
+            {
+                n.RemoveInteraction();
+            }
+        }
     }
 }

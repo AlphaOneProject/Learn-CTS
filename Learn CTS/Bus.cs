@@ -9,13 +9,17 @@ namespace Learn_CTS
     class Bus : Vehicule
     {
         private static int[] pos_doors = new int[]{
-            510,
-            920,
-            1528,
-            1944,
-            2552,
-            2928
+            160,
+            664,
+            1256
         };
+
+        /*private static int[] pos_textures_doors = new int[]
+        {
+            88,
+            56,
+            152
+        };*/
 
         /// <summary>
         /// Constructor of a tram.

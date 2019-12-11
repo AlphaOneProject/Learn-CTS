@@ -17,6 +17,7 @@ namespace Learn_CTS
         private GameMessage()
         {
             InitializeComponent();
+            this.Tag = 0;
         }
 
         public GameMessage(string msg) : this()

@@ -22,7 +22,7 @@ namespace Learn_CTS
             Texture t;
             for (int i = 0; i < 4; i++)
             {
-                t = new Texture("Terminal", "platform", x + this.GetWidth()/6 + i* this.GetWidth() / 6, y + 32, true);
+                t = new Texture("Terminal", "platform", x + this.GetWidth()/6 + i* this.GetWidth() / 6, y - 8, true);
                 list_terminals.Add(t);
                 this.AddChild(t);
             }
@@ -47,7 +47,7 @@ namespace Learn_CTS
             Texture p = Player.GetInstance();
             foreach (Texture t in list_terminals)
             {
-                if (t.IsHitboxHit(c, d) && Math.Abs((t.GetX()+t.GetWidth()/2) - (p.GetX()+p.GetWidth()/2))<50 && t.GetZ() - p.GetZ() < 100 && t.GetZ() - p.GetZ() > 0) res = true;
+                if (t.IsHitboxHit(c, d) && Math.Abs((t.GetX()+t.GetWidth()/2) - (p.GetX()+p.GetWidth()/2)) < 100 && Math.Abs(t.GetZ() - p.GetZ()) < 100) res = true;
             }
             return res;
         }

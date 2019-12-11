@@ -20,7 +20,6 @@ namespace Learn_CTS
         private List<Image> animation_list_est = new List<Image>();
         private List<Point> list_objectives = new List<Point>();
         private int last_direction = 1;
-        private static int m = 4;
         private string folder;
         private string name;
         private static int speed_character = 8;
@@ -82,7 +81,7 @@ namespace Learn_CTS
         public void UpdateMovement(int a, int b)
         {
             t++;
-            if (t % m == 0)
+            if (t % 4 == 0)
             {
                 t = 0;
                 if (a > 0)
@@ -102,11 +101,6 @@ namespace Learn_CTS
                     }
                 }
             }
-        }
-
-        public static void SetM(int a)
-        {
-            m = a;
         }
 
         public int GetID()
