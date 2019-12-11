@@ -30,9 +30,13 @@ namespace Learn_CTS
             this.quiz = quiz;
         }
 
-        public NPC(int id, int x, int y) : base(id, null, null, x, y)
+        public NPC(string name, int id, int x, int y) : base(id, name, null, x, y)
         {
             this.quiz = -1;
+        }
+
+        public NPC(int id, int x, int y) : this(null, id, x, y)
+        {
         }
 
         public int GetQuiz()

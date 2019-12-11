@@ -38,31 +38,26 @@ namespace Learn_CTS
             if (list_images_char.Count == 0) MessageBox.Show("Aucunes textures de personnage n'a été trouvée !");
             else
             {
-                pbox_char.Image = list_images_char[0];
-                Player.SetFolder((i_current_img+1).ToString());
+                UpdateFolder();
             }
         }
 
         private void pbox_arrow_right_MouseDown(object sender, MouseEventArgs e)
         {
             this.i_current_img--;
-            if (i_current_img < 0)
-            {
-                i_current_img = list_images_char.Count - 1;
-            }
-            pbox_char.Image = list_images_char[i_current_img];
-            Player.SetFolder((i_current_img+1).ToString());
+            UpdateFolder();
         }
 
         private void pbox_arrow_left_MouseDown(object sender, MouseEventArgs e)
         {
             this.i_current_img++;
-            if (i_current_img >= list_images_char.Count)
-            {
-                i_current_img = 0;
-            }
-            pbox_char.Image = list_images_char[i_current_img];
-            Player.SetFolder((i_current_img + 1).ToString());
+            UpdateFolder();
+        }
+
+        private void UpdateFolder()
+        {
+            pbox_char.Image = list_images_char[Math.Abs(i_current_img) % list_images_char.Count];
+            Player.SetFolder((Math.Abs(i_current_img) + 1 % list_images_char.Count).ToString());
         }
     }
 }

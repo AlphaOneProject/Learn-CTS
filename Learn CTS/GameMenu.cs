@@ -30,7 +30,7 @@ namespace Learn_CTS
             p_menu = new Panel();
             p_menu.Name = "panel_black";
             p_menu.BackColor = Color.Black;
-            p_menu.Size = new Size(this.Width / 5, this.Height);
+            p_menu.Size = new Size(350, this.Height);
             p_menu.Location = new Point(this.Width / 5, 0);
             this.Controls.Add(p_menu);
         }
@@ -141,7 +141,7 @@ namespace Learn_CTS
 
         private void GameMenu_Resize(object sender, EventArgs e)
         {
-            p_menu.Size = new Size(this.Width / 5, this.Height);
+            p_menu.Size = new Size(p_menu.Width, this.Height);
             PerformLayout();
         }
 
