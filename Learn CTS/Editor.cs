@@ -1445,10 +1445,10 @@ namespace Learn_CTS
             flp_sprites.Location = new Point(20, 100);
 
             // Add all existing sprites to the display.
-            string backgrounds_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+            string characters_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
                                       "characters" + Path.DirectorySeparatorChar;
-            foreach (string folder_name in Directory.GetDirectories(backgrounds_path))
+            foreach (string folder_name in Directory.GetDirectories(characters_path))
             {
                 AnimationEdition ae = new AnimationEdition(this, folder_name);
                 flp_sprites.Controls.Add(ae);
@@ -1457,7 +1457,14 @@ namespace Learn_CTS
 
         private void Add_Sprite(object sender, EventArgs e)
         {
-            // WIP
+            string characters_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                          "characters" + Path.DirectorySeparatorChar;
+            string new_folder = characters_path + (Directory.GetDirectories(characters_path).Count() + 1).ToString();
+            Directory.CreateDirectory(new_folder);
+
+            AnimationEdition ae = new AnimationEdition(this, new_folder);
+            content.Controls.Find("flp_sprites", true)[0].Controls.Add(ae);
         }
 
         /// <summary>

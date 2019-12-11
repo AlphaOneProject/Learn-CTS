@@ -186,9 +186,21 @@ namespace Learn_CTS
         public static Image Image_From_File(string image_path)
         {
             Image img;
-            using (var bmpTemp = new Bitmap(image_path))
+            try
             {
-                img = new Bitmap(bmpTemp);
+                using (var bmpTemp = new Bitmap(image_path))
+                {
+                    img = new Bitmap(bmpTemp);
+                }
+            }
+            catch (Exception e)
+            {
+                using (var bmpTemp = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar +
+                                                "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                                "image_missing.png"))
+                {
+                    img = new Bitmap(bmpTemp);
+                }
             }
             return img;
         }
