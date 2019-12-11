@@ -191,6 +191,8 @@ namespace Learn_CTS
                 lbl_nfps.Visible = true;
                 lbl_nscore.Visible = true;
                 lbl_score.Visible = true;
+                lbl_name_place.Visible = false;
+                lbl_place.Visible = false;
                 this.Focus();
                 this.BackColor = Color.White;
                 tr.EndTransition();
@@ -913,7 +915,7 @@ namespace Learn_CTS
                 {
                     t.Move(a, b, false);
                 }
-                if(t == background && vehicule != null && vehicule.IsInside())
+                if(t == background && platform != null && vehicule != null && vehicule.IsInside())
                 {
                     t.Move(-a, -b, false);
                 }
@@ -1107,7 +1109,7 @@ namespace Learn_CTS
             else if (scene_type == 3)
             {
                 FillVehiculeNPCs(NPCsDensity);
-                nm.MakeAllNPCsInteractives();
+                //nm.MakeAllNPCsInteractives();
             }
             else if(scene_type == 8)
             {
@@ -1379,6 +1381,7 @@ namespace Learn_CTS
             {
                 egg.SetD(5 - score / step_score);
             }
+            else if (score / step_score < 0) egg.SetD(5);
         }
 
         public void OpenClose_Backpack()
@@ -1509,17 +1512,11 @@ namespace Learn_CTS
             Refresh();
         }
 
-        private void StartVehiculeCrash()
-        {
-            if (!vehicule.IsInside()) return;
-            ChangeCurrentTick(VehiculeCrashed_Tick);
-        }
-
         private void VehiculeCrashed_Tick(object sender, EventArgs e)
         {
             ticks_temp++;
             int b;
-            if(ticks_temp > 300)
+            if(ticks_temp > 150)
             {
                 if (ticks_temp % 2 == 0)
                 {
@@ -1533,17 +1530,18 @@ namespace Learn_CTS
                 {
                     if (t.GetType().Name != "Transition") t.Move(0, b);
                 }
-                if (ticks_temp == 316)
+                if (ticks_temp == 150 + 16)
                 {
                     tr.SetD(10);
                     StartTransition();
                 }
-                else if (ticks_temp == 364)
+                else if (ticks_temp == 150 + 64)
                 {
                     vehicule.SetSpeed(0);
                     vehicule.SetState(0);
                     MessageBox.Show("Tout le monde va bien ?");
                     ChangeCurrentTick(Normal_Tick);
+                    nm.MakeAllNPCsInteractives();
                     tr.EndTransition();
                 }
             }
