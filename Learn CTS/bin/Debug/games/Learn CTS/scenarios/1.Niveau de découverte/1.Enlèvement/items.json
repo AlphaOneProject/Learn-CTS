@@ -4,7 +4,6 @@
       "y": 840,
       "item": {
         "name": "Book",
-        "description": "salut a tousdmoihef",
         "id": 4
       },
       "quizz": 1
@@ -14,8 +13,16 @@
       "y": 600,
       "item": {
         "name": "Papers",
-        "description": "salut a zdoizhd",
         "id": 2
+      },
+      "quizz": 2
+    },
+    "3": {
+      "x": 1100,
+      "y": 620,
+      "item": {
+        "name": "Smartphone",
+        "id": 3
       },
       "quizz": 2
     },
