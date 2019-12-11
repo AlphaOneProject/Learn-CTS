@@ -2538,11 +2538,24 @@ namespace Learn_CTS
                 }
             }
 
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+
+            switch (int.Parse(envi_data["scene_type"].ToString()))
+            {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
             PictureBox pb_background = new PictureBox()
             {
                 Name = "pb_background",
                 Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
-                                       Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "TramInside.png"),
+                                       Path.DirectorySeparatorChar + "vehicule" + Path.DirectorySeparatorChar + "tram" +
+                                       Path.DirectorySeparatorChar + "tramInside.png"),
                 SizeMode = PictureBoxSizeMode.AutoSize,
                 Location = new Point(0, 0)
             };
