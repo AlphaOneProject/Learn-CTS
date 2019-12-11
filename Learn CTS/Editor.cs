@@ -270,7 +270,7 @@ namespace Learn_CTS
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
-            { "npcs", "dialogs", "backgrounds" };
+            { "npcs", "dialogs", "sprites", "backgrounds" };
 
             if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
             {
@@ -1351,7 +1351,66 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Sprites()
         {
-            // WIP
+            if (this.old_category == "sprites") // Activates upon resize from the Editor.
+            {
+                content.Controls.Find("flp_sprites", true)[0].Width = content.Width - 40;
+                content.Controls.Find("flp_sprites", true)[0].Height = content.Height - 120;
+                return;
+            }
+
+            // Controls 
+            Label lbl_sprites = new Label()
+            {
+                Name = "lbl_sprites",
+                Text = "Personnages",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_sprites);
+
+            PictureBox pb_add_sprite = new PictureBox()
+            {
+                Name = "pb_add_sprite",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_sprite.Click += new EventHandler(Add_Sprite);
+            content.Controls.Add(pb_add_sprite);
+            tlt_global.SetToolTip(pb_add_sprite, "Ajoute un nouveau modèle de personnage et de ses animations");
+
+            FlowLayoutPanel flp_sprites = new FlowLayoutPanel()
+            {
+                Name = "flp_sprites",
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 120
+            };
+            content.Controls.Add(flp_sprites);
+
+            // Placement of those Controls.
+            lbl_sprites.Location = new Point(20, 40);
+            pb_add_sprite.Location = new Point(lbl_sprites.Location.X + lbl_sprites.Width + 20, 40);
+            flp_sprites.Location = new Point(20, 100);
+
+            // Add all existing sprites to the display.
+            string backgrounds_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                      "characters" + Path.DirectorySeparatorChar;
+            foreach (string folder_name in Directory.GetDirectories(backgrounds_path))
+            {
+                AnimationEdition ae = new AnimationEdition(this, folder_name);
+                flp_sprites.Controls.Add(ae);
+            }
+        }
+
+        private void Add_Sprite(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>

@@ -183,6 +183,16 @@ namespace Learn_CTS
             }
         }
 
+        public static Image Image_From_File(string image_path)
+        {
+            Image img;
+            using (var bmpTemp = new Bitmap(image_path))
+            {
+                img = new Bitmap(bmpTemp);
+            }
+            return img;
+        }
+
         /// <summary>
         /// Copy directory and its content.
         /// </summary>
