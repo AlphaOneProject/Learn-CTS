@@ -364,6 +364,7 @@ namespace Learn_CTS
                 Style = JCS.ToggleSwitch.ToggleSwitchStyle.IOS5,
                 TabIndex = 7,
                 Tag = 0,
+                Name = "options_menu_tgs_theme",
                 Size = new Size(80, 30),
                 ToggleOnButtonClick = true,
                 ToggleOnSideClick = true,
@@ -552,14 +553,15 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "options_menu_pb_back":
-                        break;
                     case "options_menu_lbl_theme":
-                        c.Location = new Point((int)(this.Width / 2 - c.Width * 1.5),
+                        c.Location = new Point((int)((this.Width / 2) - c.Width - 15),
                             this.Height / 2 + c.Height / 2);
                         break;
                     case "options_menu_tgs_theme":
-                        c.Location = new Point(this.Width / 2 + c.Width, this.Height / 2 + c.Height / 3);
+                        c.Location = new Point((this.Width / 2) + (c.Width / 2), (this.Height / 2) + (c.Height / 3));
+                        break;
+                    case "options_menu_pnl_topbar":
+                        c.Width = this.Width;
                         break;
                     default:
                         break;
