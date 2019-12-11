@@ -45,6 +45,14 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void ItemViewer_Load(object sender, EventArgs e)
         {
+            /**
+             * A ENLEVER IMERATIVEMENT
+             */
+            GameWindow gw = new GameWindow("Learn CTS", "1.Niveau de découverte");
+            /**
+             * A ENLEVER IMPERATIVEMENT
+             */
+
             // Properties of the item image picturebox
             pb_item.BackgroundImage = item.GetImage();
 
@@ -129,7 +137,11 @@ namespace Learn_CTS
             }
             else
             {
-                JObject new_actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar + "dialogs" + s + ".json");
+                JObject new_actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar +
+                    "dialogs" + Path.DirectorySeparatorChar + s + ".json");
+                /**
+                 * TODO : Rewrite action chaning system.
+                 */
                 item.SetActions(new_actions);
                 DisplayActions();
             }
