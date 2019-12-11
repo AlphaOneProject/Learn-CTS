@@ -197,6 +197,8 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void Back_to_main_menu(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background.png");
             Dispose_Controls(this);
             this.Controls.Clear();
 
@@ -206,6 +208,7 @@ namespace Learn_CTS
             PerformLayout();
             this.displayed_menu = "main_menu";
             Responsive_Resize_Main_Menu();
+            this.RecreateHandle();
         }
 
         /// <summary>
@@ -321,6 +324,8 @@ namespace Learn_CTS
         private void Display_options_menu()
         {
             this.displayed_menu = "options_menu";
+
+            this.BackgroundImage = null;
 
             Label options_menu_pnl_topbar = new Label()
             {
@@ -475,7 +480,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Called by Menu_SizeChanged(), if the user is browsing the Games Menu.
+        /// Called by Menu_Layout(), if the user is browsing the Games Menu.
         /// </summary>
         private void Responsive_Resize_games_menu()
         {
