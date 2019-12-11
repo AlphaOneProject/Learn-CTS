@@ -49,10 +49,10 @@
             // 
             // lbl_desc
             // 
-            this.lbl_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lbl_desc.Location = new System.Drawing.Point(134, 3);
+            this.lbl_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.lbl_desc.Location = new System.Drawing.Point(134, 12);
             this.lbl_desc.Name = "lbl_desc";
-            this.lbl_desc.Size = new System.Drawing.Size(585, 90);
+            this.lbl_desc.Size = new System.Drawing.Size(585, 64);
             this.lbl_desc.TabIndex = 1;
             this.lbl_desc.Text = "lbl_desc";
             // 
@@ -69,9 +69,9 @@
             // 
             // flp_actions
             // 
-            this.flp_actions.Location = new System.Drawing.Point(134, 96);
+            this.flp_actions.Location = new System.Drawing.Point(134, 79);
             this.flp_actions.Name = "flp_actions";
-            this.flp_actions.Size = new System.Drawing.Size(542, 28);
+            this.flp_actions.Size = new System.Drawing.Size(542, 45);
             this.flp_actions.TabIndex = 3;
             // 
             // pb_audio

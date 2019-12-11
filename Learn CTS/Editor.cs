@@ -2347,8 +2347,8 @@ namespace Learn_CTS
 
             List<string> list_scenes = new List<string>()
             {
-                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "Montée dans le bus", "Trajet en bus",
-                "Descente du bus", "Accident de bus", "Marche dans un parc"
+                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "[NYI] Montée dans le bus", "[NYI] Trajet en bus",
+                "[NYI] Descente du bus", "[NYI] Accident de bus", "Marche dans un parc"
             };
             ComboBoxFix cbo_scene_type = new ComboBoxFix()
             {
