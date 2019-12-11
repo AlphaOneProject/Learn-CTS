@@ -59,6 +59,7 @@ namespace Learn_CTS
             pb_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
 
             this.t_audio = new Thread(new ThreadStart(Listen));
+            lbl_desc.Text = item.GetDescription();
             this.actions = item.GetActions();
             DisplayActions();
         }
@@ -84,6 +85,7 @@ namespace Learn_CTS
             lbl_desc.Width = this.Width - pb_item.Width - 6;
             btn_exit.Location = new Point(this.Width - btn_exit.Width - 24, this.Height - 6 - btn_exit.Height);
             pb_audio.Location = new Point(this.Width - pb_audio.Width - 24, 6);
+            flp_actions.Width = this.Width - btn_exit.Width - pb_item.Width - 24;
         }
 
         /// <summary>
@@ -103,15 +105,9 @@ namespace Learn_CTS
                 btn.Text = actions["c" + i.ToString()]["answer"].ToString();
                 btn.UseVisualStyleBackColor = true;
                 btn.Click += new System.EventHandler(this.Action_Event);
+                btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
                 flp_actions.Controls.Add(btn);
             }
-        }
-
-        private JObject GetActionsFromItem()
-        {
-            JObject actions = item.GetActions();
-            this.actions = actions;
-            return actions;
         }
 
         /// <summary>
@@ -130,6 +126,7 @@ namespace Learn_CTS
             {
                 PNCWindow window = ((PNCWindow)this.FindForm());
                 window.setItemsLeft(window.getItemsLeft() - 1);
+                Exit();   
             }
             else if (s == "-1")
             {
@@ -139,6 +136,7 @@ namespace Learn_CTS
             {
                 this.actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar +
                     "dialogs" + Path.DirectorySeparatorChar + s + ".json");
+                this.lbl_desc.Text = actions["question"].ToString();
                 DisplayActions();
             }
         }
