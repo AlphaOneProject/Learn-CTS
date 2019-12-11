@@ -57,7 +57,7 @@ namespace Learn_CTS
         private void UpdateFolder()
         {
             pbox_char.Image = list_images_char[Math.Abs(i_current_img) % list_images_char.Count];
-            Player.SetFolder((Math.Abs(i_current_img) + 1 % list_images_char.Count).ToString());
+            Player.SetFolder((Math.Abs(i_current_img) % list_images_char.Count + 1).ToString());
         }
     }
 }

@@ -27,12 +27,19 @@ namespace Learn_CTS
             this.game = game;
             this.Text = "Menu de "+game;
             this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "menu" + Path.DirectorySeparatorChar + "mainmenu.png");
+            this.pbox_return.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png");
             p_menu = new Panel();
-            p_menu.Name = "panel_black";
+            p_menu.Name = "panel_menu";
             p_menu.BackColor = Color.Black;
             p_menu.Size = new Size(350, this.Height);
             p_menu.Location = new Point(this.Width / 5, 0);
             this.Controls.Add(p_menu);
+        }
+
+        private void GameMenu_Load(object sender, EventArgs e)
+        {
+            SetUpWindow();
+            DisplayGameMenu();
         }
 
         private void btn_launch_scenario_Click(object sender, EventArgs e)
@@ -49,6 +56,7 @@ namespace Learn_CTS
         {
             this.displayed_menu = "character_menu";
             p_menu.Controls.Clear();
+            pbox_return.Visible = true;
             Label lbl_name_player = new Label();
             lbl_name_player.Text = "Veuillez entrer votre prénom/pseudo :";
             lbl_name_player.AutoSize = true;
@@ -100,6 +108,7 @@ namespace Learn_CTS
         {
             this.displayed_menu = "scenario_menu";
             p_menu.Controls.Clear();
+            pbox_return.Visible = true;
             Label lbl_choice_scenario = new Label();
             lbl_choice_scenario.Text = "Quel scénario voulez-vous lancer ?";
             lbl_choice_scenario.Name = "lbl_choice_scenario";
@@ -210,11 +219,6 @@ namespace Learn_CTS
             if (this.Visible) { Application.Restart(); }
         }
 
-        private void GameMenu_Load(object sender, EventArgs e)
-        {
-            SetUpWindow();
-            DisplayGameMenu();
-        }
         private void SetUpWindow()
         {
             JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
@@ -233,9 +237,8 @@ namespace Learn_CTS
         private void DisplayGameMenu()
         {
             this.displayed_menu = "game_menu";
-            // 
-            // lbl_name_game
-            // 
+            p_menu.Controls.Clear();
+            pbox_return.Visible = false;
             Label lbl_name_game = new Label();
             lbl_name_game.AutoSize = true;
             lbl_name_game.Font = new System.Drawing.Font("Microsoft Sans Serif", 30.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -247,9 +250,6 @@ namespace Learn_CTS
             lbl_name_game.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
             lbl_name_game.Location = new System.Drawing.Point(p_menu.Width / 4, this.Height * 1 / 6);
             p_menu.Controls.Add(lbl_name_game);
-            // 
-            // btn_launch_scenario
-            // 
             Button btn_launch_scenario = new Button();
             btn_launch_scenario.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btn_launch_scenario.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
@@ -262,9 +262,6 @@ namespace Learn_CTS
             btn_launch_scenario.Click += new System.EventHandler(this.btn_launch_scenario_Click);
             btn_launch_scenario.Location = new System.Drawing.Point(p_menu.Width / 4, lbl_name_game.Location.Y + lbl_name_game.Height + this.Height * 2 / 16);
             p_menu.Controls.Add(btn_launch_scenario);
-            // 
-            // btn_options
-            // 
             Button btn_options = new Button();
             btn_options.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btn_options.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
@@ -276,9 +273,6 @@ namespace Learn_CTS
             btn_options.UseVisualStyleBackColor = false;
             btn_options.Location = new System.Drawing.Point(p_menu.Width / 4, btn_launch_scenario.Location.Y + btn_launch_scenario.Height + this.Height * 1 / 16);
             p_menu.Controls.Add(btn_options);
-            // 
-            // btn_leave
-            // 
             Button btn_leave = new Button();
             btn_leave.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             btn_leave.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
@@ -292,6 +286,21 @@ namespace Learn_CTS
             btn_leave.Location = new System.Drawing.Point(p_menu.Width / 4, btn_options.Location.Y + btn_options.Height + this.Height * 1 / 16);
             p_menu.Controls.Add(btn_leave);
             PerformLayout();
+        }
+
+        private void Button_Return(object sender, EventArgs e)
+        {
+            switch (this.displayed_menu)
+            {
+                case "character_menu":
+                    DisplayGameMenu();
+                    break;
+                case "scenario_menu":
+                    DisplayCharacterMenu();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void GameMenu_Layout(object sender, LayoutEventArgs e)

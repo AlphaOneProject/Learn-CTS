@@ -61,16 +61,18 @@ namespace Learn_CTS
         private GameWindow(string game)
         {
             InitializeComponent();
-            if (instance == null) instance = this;
+            if (instance == null)
+            {
+                instance = this;
+                Texture.InitializePath(game);
+                this.Text = game;
+                string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
+                sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+            }
             else
             {
                 MessageBox.Show("Vous ne pouvez avoir qu'une seule fenêtre de jeu ouverte en même temps.");
-                this.Close();
             }
-            Texture.InitializePath(game);
-            this.Text = game;
-            string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
-            sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
         }
 
         /// <summary>
@@ -118,6 +120,7 @@ namespace Learn_CTS
 
         private void GameWindow_Load(object sender, EventArgs e)
         {
+            if (instance == null) throw new InvalidOperationException();
             SetUpWindow();
             lbl_nfps.Location = new Point((int)(this.Width * 0.98) - lbl_nfps.Width - 10, this.Height * 3 / 32);
             lbl_score.Location = new Point(this.Width / 2 - lbl_score.Width - 5, this.Height * 1 / 32);
@@ -143,7 +146,6 @@ namespace Learn_CTS
             lbl_loading.Location = new System.Drawing.Point(this.Width / 2 - lbl_loading.Width / 2, this.Height / 2 - lbl_loading.Height / 2);
             lbl_loading.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Controls.Add(lbl_loading);
-            this.Show();
             Refresh();
         }
 
@@ -206,6 +208,7 @@ namespace Learn_CTS
 
         private void Load_Game()
         {
+            if (instance == null) return;
             RemoveAllControls();
             this.Focus();
             StartTransition();
@@ -213,7 +216,7 @@ namespace Learn_CTS
             lbl_name_place.Text = environment["scene_name"].ToString();
             int scene_type = (int)environment["scene_type"];
             Console.WriteLine(scene_type);
-            if(scene_type < 0 || scene_type >= 8)
+            if(scene_type < 0 || scene_type > 9)
             {
                 MessageBox.Show("Erreur : Le type de scène n'a pas été reconnu.");
                 this.Close();
