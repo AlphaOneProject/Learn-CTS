@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "PNCWindow";
             this.Text = "PNCWindow";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PNCWindow_Load);
             this.SizeChanged += new System.EventHandler(this.PNCWindow_SizeChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PNCWindow_MouseDown);
