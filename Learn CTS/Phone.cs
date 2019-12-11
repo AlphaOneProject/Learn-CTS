@@ -14,16 +14,16 @@ namespace Learn_CTS
     {
         public Phone()
         {
-            this.Location = new Point(200, 200);
             InitializeComponent();
             flp_talk.Width = flp_talk.Width + SystemInformation.VerticalScrollBarWidth;
+            flp_talk.BorderStyle = BorderStyle.FixedSingle;
+            this.Tag = 0;
         }
 
         public void AddAnswer(string text)
         {
             RichTextBox r = new RichTextBox();
             r.BackColor = System.Drawing.Color.ForestGreen;
-            r.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             r.Size = new System.Drawing.Size(flp_talk.Width / 2, 96);
             r.TabIndex = 1;
             r.Text = text;

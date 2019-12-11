@@ -17,7 +17,7 @@ namespace Learn_CTS
 
         private List<Image> list_transitions = new List<Image>();
 
-        public Transition(int w, int h) : base(0, 0)
+        public Transition(int w, int h) : base(0, 0, 5000)
         {
             Bitmap bmp = new Bitmap(w, h);
             using (Graphics graph = Graphics.FromImage(bmp))

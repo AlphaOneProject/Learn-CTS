@@ -42,7 +42,7 @@ namespace Learn_CTS
             {
                 this.SetX(this.GetX() + this.GetWidth());
             }
-            if (this.GetX() > 0)
+            if (this.GetX() >= 0)
             {
                 this.SetX(-this.GetWidth());
             }

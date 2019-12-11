@@ -17,6 +17,7 @@ namespace Learn_CTS
         public Backpack()
         {
             InitializeComponent();
+            this.Tag = 0;
         }
 
         private void Backpack_Load(object sender, EventArgs e)
@@ -30,7 +31,6 @@ namespace Learn_CTS
             pbox_phone.Image = Image.FromFile(path + "smartphone.png");
             pbox_close.Image = Image.FromFile(path + "gamecard-delete-btn-x64.png");
             pbox_close.Click += new EventHandler(Backpack_Closed);
-            this.Show();
         }
 
         private void Backpack_Closed(object sender, EventArgs e)

@@ -25,6 +25,7 @@ namespace Learn_CTS
             InitializeComponent();
             InitializeGamePath(game);
             this.DoubleBuffered = true;
+            this.Tag = 0;
         }
 
         public Dialog(int id, string game) : this(game)
@@ -167,6 +168,7 @@ namespace Learn_CTS
             }
             else if(s == "-1")
             {
+                npc.RemoveQuiz();
                 this.Dialog_Closed(sender, e);
             }
             else

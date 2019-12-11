@@ -58,26 +58,14 @@ namespace Learn_CTS
                 this.doors_left.SetVisible(false);
                 this.doors_right.SetVisible(false);
                 this.outside.SetVisible(false);
-                foreach (Texture t in this.GetListChilds())
-                {
-                    if (t.GetType().Name == "NPC")
-                    {
-                        ((NPC)t).DisplayInteraction();
-                    }
-                }
+                NPC_Manager.GetInstance().MakeAllNPCsInteractives();
             }
             else
             {
                 this.doors_left.SetVisible(true);
                 this.doors_right.SetVisible(true);
                 this.outside.SetVisible(true);
-                foreach (Texture t in this.GetListChilds())
-                {
-                    if (t.GetType().Name == "NPC")
-                    {
-                        ((NPC)t).RemoveInteraction();
-                    }
-                }
+                NPC_Manager.GetInstance().MakeAllNPCsNotInteractives();
             }
         }
 
