@@ -45,7 +45,7 @@
             this.main_menu_btn_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.main_menu_btn_edit.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_edit.ForeColor = System.Drawing.Color.White;
-            this.main_menu_btn_edit.Location = new System.Drawing.Point(65, 203);
+            this.main_menu_btn_edit.Location = new System.Drawing.Point(519, 260);
             this.main_menu_btn_edit.Name = "main_menu_btn_edit";
             this.main_menu_btn_edit.Size = new System.Drawing.Size(230, 115);
             this.main_menu_btn_edit.TabIndex = 1;
@@ -63,7 +63,7 @@
             this.main_menu_btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.main_menu_btn_exit.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_exit.ForeColor = System.Drawing.Color.White;
-            this.main_menu_btn_exit.Location = new System.Drawing.Point(525, 253);
+            this.main_menu_btn_exit.Location = new System.Drawing.Point(546, 536);
             this.main_menu_btn_exit.Name = "main_menu_btn_exit";
             this.main_menu_btn_exit.Size = new System.Drawing.Size(230, 130);
             this.main_menu_btn_exit.TabIndex = 4;
@@ -81,7 +81,7 @@
             this.main_menu_btn_options.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.main_menu_btn_options.Font = new System.Drawing.Font("Nirmala UI", 28F, System.Drawing.FontStyle.Bold);
             this.main_menu_btn_options.ForeColor = System.Drawing.Color.White;
-            this.main_menu_btn_options.Location = new System.Drawing.Point(278, 253);
+            this.main_menu_btn_options.Location = new System.Drawing.Point(519, 381);
             this.main_menu_btn_options.Name = "main_menu_btn_options";
             this.main_menu_btn_options.Size = new System.Drawing.Size(230, 130);
             this.main_menu_btn_options.TabIndex = 3;
@@ -108,7 +108,7 @@
             this.main_menu_lbl_title2.BackColor = System.Drawing.Color.Transparent;
             this.main_menu_lbl_title2.Font = new System.Drawing.Font("Nirmala UI", 104F, System.Drawing.FontStyle.Bold);
             this.main_menu_lbl_title2.ForeColor = System.Drawing.Color.Red;
-            this.main_menu_lbl_title2.Location = new System.Drawing.Point(406, 75);
+            this.main_menu_lbl_title2.Location = new System.Drawing.Point(515, 41);
             this.main_menu_lbl_title2.Name = "main_menu_lbl_title2";
             this.main_menu_lbl_title2.Size = new System.Drawing.Size(323, 184);
             this.main_menu_lbl_title2.TabIndex = 6;

@@ -218,8 +218,6 @@ namespace Learn_CTS
         {
             this.displayed_menu = "games_menu";
 
-            this.SuspendLayout();
-
             // Creation of the panel parent to the the back to menu pb, and create game controls.
             Label games_menu_pnl_topbar = new Label()
             {
@@ -256,7 +254,6 @@ namespace Learn_CTS
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Parent = games_menu_pnl_topbar
             };
-            games_menu_pb_back.Location = new Point(6, (games_menu_pnl_topbar.Height - games_menu_pb_back.Height) / 2);
             games_menu_pb_back.Click += new EventHandler(this.Back_to_main_menu);
             games_menu_pb_back.BackColor = Color.FromArgb(
                     (int)(this.themes[this.options["theme"].ToString()][games_menu_pb_back.Tag.ToString()]["R"]),
@@ -287,7 +284,7 @@ namespace Learn_CTS
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
             {
-                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
+                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth + 1, this.Height - games_menu_pnl_topbar.Height),
                 Name = "games_menu_flp_games",
                 Anchor = AnchorStyles.Top,
                 Tag = 2,
@@ -295,7 +292,6 @@ namespace Learn_CTS
                 TabIndex = 3,
                 AutoScroll = true
             };
-            games_menu_flp_games.Location = new Point(0, games_menu_pnl_topbar.Height);
             games_menu_flp_games.BackColor = Color.FromArgb(
                         (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["R"]),
                         (int)(this.themes[this.options["theme"].ToString()][games_menu_flp_games.Tag.ToString()]["G"]),
@@ -362,8 +358,6 @@ namespace Learn_CTS
                 Text = "Thème de couleurs : " + this.options["theme"].ToString(),
                 AutoSize = true
             };
-            options_menu_lbl_theme.Location = new Point((int)(this.Width/2 - options_menu_lbl_theme.Width * 1.5),
-                this.Height / 2 + options_menu_lbl_theme.Height / 2);
 
             JCS.ToggleSwitch options_menu_tgs_theme = new JCS.ToggleSwitch()
             {
@@ -376,7 +370,6 @@ namespace Learn_CTS
             };
             if (this.options["theme"].ToString() == "dark") options_menu_tgs_theme.Checked = true;
             options_menu_tgs_theme.CheckedChanged += new JCS.ToggleSwitch.CheckedChangedDelegate(Options_Menu_Tgs_Theme_CheckedChanged);
-            options_menu_tgs_theme.Location = new Point(this.Width / 2 + options_menu_tgs_theme.Width, this.Height / 2 + options_menu_tgs_theme.Height / 3);
 
             this.Controls.AddRange(new Control[] { options_menu_pb_back, options_menu_pnl_topbar, options_menu_tgs_theme, options_menu_lbl_theme });
             Change_Theme();
@@ -559,11 +552,14 @@ namespace Learn_CTS
             {
                 switch (c.Name)
                 {
-                    case "salut":
-                        // Salut Antoine
-                        // Salut !
-                        // Cool comme fonction dis-donc !
-                        // Merci !
+                    case "options_menu_pb_back":
+                        break;
+                    case "options_menu_lbl_theme":
+                        c.Location = new Point((int)(this.Width / 2 - c.Width * 1.5),
+                            this.Height / 2 + c.Height / 2);
+                        break;
+                    case "options_menu_tgs_theme":
+                        c.Location = new Point(this.Width / 2 + c.Width, this.Height / 2 + c.Height / 3);
                         break;
                     default:
                         break;
