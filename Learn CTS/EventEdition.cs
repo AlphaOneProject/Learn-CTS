@@ -25,6 +25,12 @@ namespace Learn_CTS
 
         // Methods.
 
+        /// <summary>
+        /// Constructor of the UserControl, setup the necessary arguments as parameters.
+        /// </summary>
+        /// <param name="editor">Parent instance of Editor.</param>
+        /// <param name="file_path">Path of the "dialogs.json" file of the situation.</param>
+        /// <param name="event_id">ID of the event to manage inside the file.</param>
         public EventEdition(Editor editor, string file_path, int event_id)
         {
             InitializeComponent();
@@ -36,21 +42,38 @@ namespace Learn_CTS
             this.DoubleBuffered = true;
         }
 
+        /// <summary>
+        /// Accessor to the file path.
+        /// </summary>
+        /// <returns>File full path.</returns>
         public string Get_File_Path()
         {
             return this.file_path;
         }
 
+        /// <summary>
+        /// Accessor to the ID of the event managed.
+        /// </summary>
+        /// <returns>ID of the event.</returns>
         public int Get_Event_Id()
         {
             return this.event_id;
         }
 
+        /// <summary>
+        /// Allow access from the Editor to the path of the aimed file (modified after renaming the situation).
+        /// </summary>
+        /// <param name="new_file_path">Path of the "dialogs.json" file of the situation.</param>
         public void Set_File_Path(string new_file_path)
         {
             this.file_path = new_file_path;
         }
 
+        /// <summary>
+        /// Load all NPCs and Dialogs into the ComboBoxFix which will allow their selection.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void EventEdition_Load(object sender, EventArgs e)
         {
             List<string> cbo_npcs_list = new List<string>();
@@ -158,6 +181,11 @@ namespace Learn_CTS
             btn_placement.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
         }
 
+        /// <summary>
+        /// Placement and sizing upon resize (from the editor).
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void EventEdition_SizeChanged(object sender, EventArgs e)
         {
             // Sizing.
@@ -170,6 +198,11 @@ namespace Learn_CTS
             pb_delete.Location = new Point(this.Width - pb_delete.Width - 15, 15);
         }
 
+        /// <summary>
+        /// Saves the new selected NPC into the event.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Cbo_npcs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (editor.Get_Is_Loading() || this.loading) { return; }
@@ -183,6 +216,11 @@ namespace Learn_CTS
             editor.Set_Is_Loading(false);
         }
 
+        /// <summary>
+        /// Saves the new selected dialog into the event.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Cbo_dialogs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (editor.Get_Is_Loading() || this.loading) { return; }
@@ -205,6 +243,11 @@ namespace Learn_CTS
             ((Editor)this.ParentForm).Discard_Event(this);
         }
 
+        /// <summary>
+        /// Sends a placement request to the Editor.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Btn_placement_Click(object sender, EventArgs e)
         {
             ((Editor)this.ParentForm).Place_Event(this);
