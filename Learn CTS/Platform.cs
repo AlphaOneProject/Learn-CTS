@@ -20,7 +20,7 @@ namespace Learn_CTS
         {
             list_terminals = new List<Texture>();
             Texture t;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 t = new Texture("Terminal", "platform", x + this.GetWidth()/6 + i* this.GetWidth() / 6, y - 8, true);
                 list_terminals.Add(t);

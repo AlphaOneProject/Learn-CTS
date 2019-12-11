@@ -44,6 +44,14 @@ namespace Learn_CTS
             return npc;
         }
 
+        public NPC CreateNPC(string name, int x, int y)
+        {
+            NPC npc = new NPC(name, NPC_Manager.npc_id, x, y);
+            NPC_Manager.npc_id++;
+            list_npcs.Add(npc);
+            return npc;
+        }
+
         public NPC GetNPCByID(int id)
         {
             foreach(NPC n in list_npcs)
