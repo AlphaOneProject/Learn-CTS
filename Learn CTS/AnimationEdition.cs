@@ -30,20 +30,28 @@ namespace Learn_CTS
 
             this.editor = editor;
             this.folder_path = @"" + folder_path + Path.DirectorySeparatorChar;
-            Console.WriteLine(this.folder_path);
         }
 
         private void AnimationEdition_Load(object sender, EventArgs e)
         {
             JObject theme = this.editor.Get_Theme();
-            lbl_name.BackColor = Color.FromArgb(int.Parse((string)theme["2"]["R"]), int.Parse((string)theme["2"]["G"]), int.Parse((string)theme["2"]["B"]));
+            lbl_name.BackColor = Color.FromArgb(int.Parse((string)theme["1"]["R"]), int.Parse((string)theme["1"]["G"]), int.Parse((string)theme["1"]["B"]));
             lbl_name.ForeColor = Color.FromArgb(int.Parse((string)theme["5"]["R"]), int.Parse((string)theme["5"]["G"]), int.Parse((string)theme["5"]["B"]));
-            lbl_name.Text = folder_path.Split(Path.DirectorySeparatorChar).Last();
+            lbl_name.Text = folder_path.Substring(0, folder_path.Length - 1).Split(Path.DirectorySeparatorChar).Last();
+            Console.WriteLine(folder_path);
             Load_Images();
         }
 
         private void Load_Images()
         {
+            pb_up1.Tag = folder_path + "1_" + (upper_cursor % 9).ToString() + ".png";
+            pb_up2.Tag = folder_path + "1_" + ((upper_cursor + 1) % 9).ToString() + ".png";
+            pb_up3.Tag = folder_path + "1_" + ((upper_cursor + 2) % 9).ToString() + ".png";
+
+            pb_down1.Tag = folder_path + "3_" + (lower_cursor % 9).ToString() + ".png";
+            pb_down2.Tag = folder_path + "3_" + ((lower_cursor + 1) % 9).ToString() + ".png";
+            pb_down3.Tag = folder_path + "3_" + ((lower_cursor + 2) % 9).ToString() + ".png";
+
             pb_up1.Image = Tools.Image_From_File(folder_path + "1_" + (upper_cursor % 9).ToString() + ".png");
             pb_up2.Image = Tools.Image_From_File(folder_path + "1_" + ((upper_cursor + 1) % 9).ToString() + ".png");
             pb_up3.Image = Tools.Image_From_File(folder_path + "1_" + ((upper_cursor + 2) % 9).ToString() + ".png");
@@ -52,7 +60,7 @@ namespace Learn_CTS
             pb_down2.Image = Tools.Image_From_File(folder_path + "3_" + ((lower_cursor + 1) % 9).ToString() + ".png");
             pb_down3.Image = Tools.Image_From_File(folder_path + "3_" + ((lower_cursor + 2) % 9).ToString() + ".png");
 
-            if (this.Is_Valid())
+            if (Tools.Is_Valid(folder_path))
             {
                 pb_valid.Image = Tools.Image_From_File(System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
                                                        Path.DirectorySeparatorChar + "images" +
@@ -64,37 +72,6 @@ namespace Learn_CTS
                                                        Path.DirectorySeparatorChar + "images" +
                                                        Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png");
             }
-        }
-
-        public bool Is_Valid()
-        {
-            bool valid = true;
-            List<string> required_files = new List<string>()
-            {
-                "1_0.png", "1_1.png", "1_2.png", "1_3.png", "1_4.png",
-                "1_5.png", "1_6.png", "1_7.png", "1_8.png",
-                "3_0.png", "3_1.png", "3_2.png", "3_3.png", "3_4.png",
-                "3_5.png", "3_6.png", "3_7.png", "3_8.png"
-            };
-            bool found = false;
-            foreach (string required_file in required_files)
-            {
-                found = false;
-                foreach (string actual_file in Directory.GetFiles(folder_path))
-                {
-                    if (actual_file.Split(Path.DirectorySeparatorChar).Last().Equals(required_file))
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    valid = false;
-                    break;
-                }
-            }
-            return valid;
         }
 
         private void Pb_up_left_Click(object sender, EventArgs e)
@@ -119,6 +96,39 @@ namespace Learn_CTS
         {
             this.lower_cursor++;
             Load_Images();
+        }
+
+        private void Click_Sprite(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            if (ofd_sprites.ShowDialog() == DialogResult.Cancel) { return; }
+
+            string extension = ofd_sprites.FileName.Split(Path.DirectorySeparatorChar).Last().Split('.').Last();
+            if (!(extension == "png" || extension == "jpeg"))
+            {
+                MessageBox.Show("L'image doit être soit de format .png soit .jpeg pour être utilisée.", "Type invalide",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (@"" + ofd_sprites.FileName == @"" + pb.Tag)
+            {
+                MessageBox.Show("Vous ne pouvez importer un modèle déjà présent.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            File.Copy(@"" + ofd_sprites.FileName, @"" + pb.Tag, true);
+
+            pb.Image = Tools.Image_From_File(@"" + pb.Tag);
+        }
+
+        private void Pb_delete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Confirmez-vous la suppression de ce décor ?", "Suppression de décor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                Directory.Delete(folder_path, true);
+                this.Dispose();
+            }
         }
     }
 }

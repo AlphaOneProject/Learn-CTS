@@ -41,6 +41,8 @@
             this.pb_up2 = new System.Windows.Forms.PictureBox();
             this.lbl_name = new System.Windows.Forms.Label();
             this.pb_valid = new System.Windows.Forms.PictureBox();
+            this.ofd_sprites = new System.Windows.Forms.OpenFileDialog();
+            this.pb_delete = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down1)).BeginInit();
@@ -52,34 +54,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_up3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_up2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_valid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
             this.SuspendLayout();
             // 
             // pb_down2
             // 
+            this.pb_down2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_down2.Location = new System.Drawing.Point(128, 95);
             this.pb_down2.Name = "pb_down2";
             this.pb_down2.Size = new System.Drawing.Size(80, 80);
             this.pb_down2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_down2.TabIndex = 0;
             this.pb_down2.TabStop = false;
+            this.pb_down2.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // pb_down3
             // 
+            this.pb_down3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_down3.Location = new System.Drawing.Point(214, 95);
             this.pb_down3.Name = "pb_down3";
             this.pb_down3.Size = new System.Drawing.Size(80, 80);
             this.pb_down3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_down3.TabIndex = 1;
             this.pb_down3.TabStop = false;
+            this.pb_down3.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // pb_down1
             // 
+            this.pb_down1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_down1.Location = new System.Drawing.Point(42, 95);
             this.pb_down1.Name = "pb_down1";
             this.pb_down1.Size = new System.Drawing.Size(80, 80);
             this.pb_down1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_down1.TabIndex = 2;
             this.pb_down1.TabStop = false;
+            this.pb_down1.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // pb_down_left
             // 
@@ -135,38 +144,44 @@
             // 
             // pb_up1
             // 
+            this.pb_up1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_up1.Location = new System.Drawing.Point(42, 9);
             this.pb_up1.Name = "pb_up1";
             this.pb_up1.Size = new System.Drawing.Size(80, 80);
             this.pb_up1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_up1.TabIndex = 7;
             this.pb_up1.TabStop = false;
+            this.pb_up1.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // pb_up3
             // 
+            this.pb_up3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_up3.Location = new System.Drawing.Point(214, 9);
             this.pb_up3.Name = "pb_up3";
             this.pb_up3.Size = new System.Drawing.Size(80, 80);
             this.pb_up3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_up3.TabIndex = 6;
             this.pb_up3.TabStop = false;
+            this.pb_up3.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // pb_up2
             // 
+            this.pb_up2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_up2.Location = new System.Drawing.Point(128, 9);
             this.pb_up2.Name = "pb_up2";
             this.pb_up2.Size = new System.Drawing.Size(80, 80);
             this.pb_up2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_up2.TabIndex = 5;
             this.pb_up2.TabStop = false;
+            this.pb_up2.Click += new System.EventHandler(this.Click_Sprite);
             // 
             // lbl_name
             // 
             this.lbl_name.AutoSize = true;
-            this.lbl_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_name.Location = new System.Drawing.Point(42, 192);
+            this.lbl_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_name.Location = new System.Drawing.Point(39, 190);
             this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(93, 24);
+            this.lbl_name.Size = new System.Drawing.Size(107, 26);
             this.lbl_name.TabIndex = 10;
             this.lbl_name.Text = "Loading...";
             // 
@@ -181,13 +196,29 @@
             this.pb_valid.TabIndex = 11;
             this.pb_valid.TabStop = false;
             // 
+            // ofd_sprites
+            // 
+            this.ofd_sprites.Title = "Nouvelle image";
+            // 
+            // pb_delete
+            // 
+            this.pb_delete.BackColor = System.Drawing.Color.Transparent;
+            this.pb_delete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_delete.Image = ((System.Drawing.Image)(resources.GetObject("pb_delete.Image")));
+            this.pb_delete.Location = new System.Drawing.Point(301, -1);
+            this.pb_delete.Name = "pb_delete";
+            this.pb_delete.Size = new System.Drawing.Size(32, 32);
+            this.pb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_delete.TabIndex = 12;
+            this.pb_delete.TabStop = false;
+            this.pb_delete.Click += new System.EventHandler(this.Pb_delete_Click);
+            // 
             // AnimationEdition
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.pb_valid);
+            this.Controls.Add(this.pb_delete);
             this.Controls.Add(this.lbl_name);
+            this.Controls.Add(this.pb_valid);
             this.Controls.Add(this.pb_up_right);
             this.Controls.Add(this.pb_up_left);
             this.Controls.Add(this.pb_up1);
@@ -198,9 +229,11 @@
             this.Controls.Add(this.pb_down1);
             this.Controls.Add(this.pb_down3);
             this.Controls.Add(this.pb_down2);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "AnimationEdition";
             this.Size = new System.Drawing.Size(336, 223);
             this.Load += new System.EventHandler(this.AnimationEdition_Load);
+            this.Click += new System.EventHandler(this.Click_Sprite);
             ((System.ComponentModel.ISupportInitialize)(this.pb_down2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down1)).EndInit();
@@ -212,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pb_up3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_up2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_valid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +265,7 @@
         private System.Windows.Forms.PictureBox pb_up2;
         private System.Windows.Forms.Label lbl_name;
         private System.Windows.Forms.PictureBox pb_valid;
+        private System.Windows.Forms.OpenFileDialog ofd_sprites;
+        private System.Windows.Forms.PictureBox pb_delete;
     }
 }
