@@ -26,6 +26,7 @@ namespace Learn_CTS
         private bool saved = true;
         private GameWindow preview = null;
         private PlacementEdition event_placement = null;
+        private bool is_loading = false;
 
         // Methods.
 
@@ -48,6 +49,13 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Editor1_Load(object sender, EventArgs e)
         {
+            // START TEMPORARY
+
+            menu.Nodes.Remove(menu.Nodes.Find("items", true)[0]);
+            menu.Nodes.Remove(menu.Nodes.Find("item_images", true)[0]);
+
+            // END TEMPORARY
+
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
             this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
             this.saved = true;
@@ -156,6 +164,25 @@ namespace Learn_CTS
             return this.theme;
         }
 
+        public bool Get_Is_Loading()
+        {
+            return this.is_loading;
+        }
+
+        public void Set_Is_Loading(bool new_is_loading)
+        {
+            this.is_loading = new_is_loading;
+
+            if (is_loading)
+            {
+                content.Enabled = false;
+            }
+            else
+            {
+                content.Enabled = true;
+            }
+        }
+
         /// <summary>
         /// Accessor to the local parameter "saved".
         /// </summary>
@@ -250,7 +277,7 @@ namespace Learn_CTS
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
-            { "npcs", "dialogs", "backgrounds" };
+            { "npcs", "dialogs", "sprites", "backgrounds" };
 
             if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
             {
@@ -1154,6 +1181,16 @@ namespace Learn_CTS
 
         private void Dialog_Fast_Backward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1162,6 +1199,16 @@ namespace Learn_CTS
 
         private void Dialog_Backward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1171,6 +1218,16 @@ namespace Learn_CTS
 
         private void Dialog_Forward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1180,6 +1237,16 @@ namespace Learn_CTS
 
         private void Dialog_Fast_Forward(object sender, EventArgs e)
         {
+            if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
+                                "Confirmation d'abandon de modifications", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                this.saved = true;
+            }
+
             Label lbl = (Label)content.Controls.Find("lbl_page_number", true)[0];
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
@@ -1330,6 +1397,65 @@ namespace Learn_CTS
         /// Load controls for sprites' content.
         /// </summary>
         private void Display_Sprites()
+        {
+            if (this.old_category == "sprites") // Activates upon resize from the Editor.
+            {
+                content.Controls.Find("flp_sprites", true)[0].Width = content.Width - 40;
+                content.Controls.Find("flp_sprites", true)[0].Height = content.Height - 120;
+                return;
+            }
+
+            // Controls 
+            Label lbl_sprites = new Label()
+            {
+                Name = "lbl_sprites",
+                Text = "Personnages",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_sprites);
+
+            PictureBox pb_add_sprite = new PictureBox()
+            {
+                Name = "pb_add_sprite",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_sprite.Click += new EventHandler(Add_Sprite);
+            content.Controls.Add(pb_add_sprite);
+            tlt_global.SetToolTip(pb_add_sprite, "Ajoute un nouveau modèle de personnage et de ses animations");
+
+            FlowLayoutPanel flp_sprites = new FlowLayoutPanel()
+            {
+                Name = "flp_sprites",
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 120
+            };
+            content.Controls.Add(flp_sprites);
+
+            // Placement of those Controls.
+            lbl_sprites.Location = new Point(20, 40);
+            pb_add_sprite.Location = new Point(lbl_sprites.Location.X + lbl_sprites.Width + 20, 40);
+            flp_sprites.Location = new Point(20, 100);
+
+            // Add all existing sprites to the display.
+            string backgrounds_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                      "characters" + Path.DirectorySeparatorChar;
+            foreach (string folder_name in Directory.GetDirectories(backgrounds_path))
+            {
+                AnimationEdition ae = new AnimationEdition(this, folder_name);
+                flp_sprites.Controls.Add(ae);
+            }
+        }
+
+        private void Add_Sprite(object sender, EventArgs e)
         {
             // WIP
         }
@@ -2452,11 +2578,25 @@ namespace Learn_CTS
                 }
             }
 
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            // START WIP
+            switch (int.Parse(envi_data["scene_type"].ToString()))
+            {
+                case 0:
+                    break;
+                default:
+                    break;
+            }
+            // END WIP
             PictureBox pb_background = new PictureBox()
             {
                 Name = "pb_background",
                 Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
-                                       Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "TramInside.png"),
+                                       Path.DirectorySeparatorChar + "vehicule" + Path.DirectorySeparatorChar + "tram" +
+                                       Path.DirectorySeparatorChar + "tramInside.png"),
                 SizeMode = PictureBoxSizeMode.AutoSize,
                 Location = new Point(0, 0)
             };
@@ -2648,6 +2788,10 @@ namespace Learn_CTS
                 ee.Set_File_Path(sc_path + Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + secured_new_name +
                                  Path.DirectorySeparatorChar + "dialogs.json");
             }
+            content.Controls.Find("txt_scene_name", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
+            content.Controls.Find("txt_scene_intro", true)[0].Tag = sc_path + Path.DirectorySeparatorChar + 
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
 
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];

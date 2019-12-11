@@ -25,6 +25,7 @@ namespace Learn_CTS
         private ItemManager manager;
         SpeechSynthesizer s;
         private Thread t_audio;
+        private JObject actions;
 
         /// <summary>
         /// Constructor
@@ -58,6 +59,7 @@ namespace Learn_CTS
             pb_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
 
             this.t_audio = new Thread(new ThreadStart(Listen));
+            this.actions = item.GetActions();
             DisplayActions();
         }
 
@@ -90,7 +92,6 @@ namespace Learn_CTS
         private void DisplayActions()
         {
             flp_actions.Controls.Clear();
-            JObject actions = item.GetActions();
             int nbr_choices = (int)actions["choices"];
             for (int i = 1; i <= nbr_choices; i++)
             {
@@ -104,6 +105,13 @@ namespace Learn_CTS
                 btn.Click += new System.EventHandler(this.Action_Event);
                 flp_actions.Controls.Add(btn);
             }
+        }
+
+        private JObject GetActionsFromItem()
+        {
+            JObject actions = item.GetActions();
+            this.actions = actions;
+            return actions;
         }
 
         /// <summary>
@@ -129,8 +137,8 @@ namespace Learn_CTS
             }
             else
             {
-                JObject new_actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar + "dialogs" + s + ".json");
-                item.SetActions(new_actions);
+                this.actions = Tools.Get_From_JSON(manager.GetLibraryPath() + Path.DirectorySeparatorChar +
+                    "dialogs" + Path.DirectorySeparatorChar + s + ".json");
                 DisplayActions();
             }
         }

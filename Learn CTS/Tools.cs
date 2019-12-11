@@ -183,6 +183,47 @@ namespace Learn_CTS
             }
         }
 
+        public static Image Image_From_File(string image_path)
+        {
+            Image img;
+            using (var bmpTemp = new Bitmap(image_path))
+            {
+                img = new Bitmap(bmpTemp);
+            }
+            return img;
+        }
+
+        public static bool Is_Valid(string folder_path)
+        {
+            bool valid = true;
+            List<string> required_files = new List<string>()
+            {
+                "1_0.png", "1_1.png", "1_2.png", "1_3.png", "1_4.png",
+                "1_5.png", "1_6.png", "1_7.png", "1_8.png",
+                "3_0.png", "3_1.png", "3_2.png", "3_3.png", "3_4.png",
+                "3_5.png", "3_6.png", "3_7.png", "3_8.png"
+            };
+            bool found = false;
+            foreach (string required_file in required_files)
+            {
+                found = false;
+                foreach (string actual_file in Directory.GetFiles(folder_path))
+                {
+                    if (actual_file.Split(Path.DirectorySeparatorChar).Last().Equals(required_file))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            return valid;
+        }
+
         /// <summary>
         /// Copy directory and its content.
         /// </summary>

@@ -17,9 +17,9 @@ namespace Learn_CTS
     {
         // Attributes.
 
+        private Editor editor;
         private string file_path;
         private int event_id;
-        private JObject file_data;
         private JObject theme;
         private bool loading;
 
@@ -28,9 +28,10 @@ namespace Learn_CTS
         public EventEdition(Editor editor, string file_path, int event_id)
         {
             InitializeComponent();
+
+            this.editor = editor;
             this.file_path = file_path;
             this.event_id = event_id;
-            this.file_data = Tools.Get_From_JSON(file_path);
             this.theme = editor.Get_Theme();
             this.DoubleBuffered = true;
         }
@@ -59,6 +60,7 @@ namespace Learn_CTS
                                                       Path.DirectorySeparatorChar + "npcs");
             DirectoryInfo dialogs_dir = new DirectoryInfo(game_dir.FullName + Path.DirectorySeparatorChar + "library" +
                                                       Path.DirectorySeparatorChar + "dialogs");
+            JObject file_data = Tools.Get_From_JSON(file_path);
             JObject temp_data;
             int nbr_files = npcs_dir.GetFiles().Length;
             foreach (FileInfo npc in npcs_dir.GetFiles())
@@ -138,8 +140,8 @@ namespace Learn_CTS
             cbo_npcs.DataSource = cbo_npcs_list;
             cbo_dialogs.DataSource = cbo_dialogs_list;
 
-            cbo_npcs.SelectedIndex = int.Parse((string)this.file_data[this.event_id.ToString()]["npc"]["id"]) - 1;
-            cbo_dialogs.SelectedIndex = int.Parse((string)this.file_data[this.event_id.ToString()]["quizz"]) - 1;
+            cbo_npcs.SelectedIndex = int.Parse((string)file_data[this.event_id.ToString()]["npc"]["id"]) - 1;
+            cbo_dialogs.SelectedIndex = int.Parse((string)file_data[this.event_id.ToString()]["quizz"]) - 1;
             this.loading = false;
 
             // Setup the theme to match the one of the editor.
@@ -170,25 +172,27 @@ namespace Learn_CTS
 
         private void Cbo_npcs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.loading) { return; }
-            DirectoryInfo game_dir = Directory.GetParent(this.file_path).Parent.Parent.Parent;
-            DirectoryInfo npcs_dir = new DirectoryInfo(game_dir.FullName + Path.DirectorySeparatorChar + "library" +
-                                                      Path.DirectorySeparatorChar + "npcs");
+            if (editor.Get_Is_Loading() || this.loading) { return; }
+            editor.Set_Is_Loading(true);
+
             ComboBoxFix cbo = (ComboBoxFix)sender;
+            JObject file_data = Tools.Get_From_JSON(this.file_path);
             int file_id = cbo.SelectedIndex + 1;
-            Console.WriteLine("Access: " + npcs_dir.FullName + Path.DirectorySeparatorChar + file_id + ".json" + "\nChoice: " + this.event_id + "\n");
-            this.file_data[event_id.ToString()]["npc"] = Tools.Get_From_JSON(npcs_dir.FullName + Path.DirectorySeparatorChar +
-                                                                        file_id + ".json");
-            this.file_data[event_id.ToString()]["npc"]["id"] = file_id;
-            Tools.Set_To_JSON(this.file_path, this.file_data);
+            file_data[event_id.ToString()]["npc"]["id"] = file_id;
+            Tools.Set_To_JSON(this.file_path, file_data);
+            editor.Set_Is_Loading(false);
         }
 
         private void Cbo_dialogs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.loading) { return; }
+            if (editor.Get_Is_Loading() || this.loading) { return; }
+            editor.Set_Is_Loading(true);
+
             ComboBoxFix cbo = (ComboBoxFix)sender;
-            this.file_data[event_id.ToString()]["quizz"] = cbo.SelectedIndex + 1;
-            Tools.Set_To_JSON(this.file_path, this.file_data);
+            JObject file_data = Tools.Get_From_JSON(this.file_path);
+            file_data[event_id.ToString()]["quizz"] = cbo.SelectedIndex + 1;
+            Tools.Set_To_JSON(this.file_path, file_data);
+            editor.Set_Is_Loading(false);
         }
 
         /// <summary>
