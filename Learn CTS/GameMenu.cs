@@ -17,7 +17,6 @@ namespace Learn_CTS
     {
         private string game;
         private TextBox txtbox_name_player;
-        private JObject theme;
         private string displayed_menu;
         private Panel p_menu;
 
@@ -31,8 +30,8 @@ namespace Learn_CTS
             p_menu = new Panel();
             p_menu.Name = "panel_menu";
             p_menu.BackColor = Color.Black;
-            p_menu.Size = new Size(350, this.Height);
-            p_menu.Location = new Point(this.Width / 5, 0);
+            p_menu.Size = new Size(550, this.Height);
+            p_menu.Location = new Point(this.Width / 3, 0);
             this.Controls.Add(p_menu);
         }
 
@@ -61,25 +60,24 @@ namespace Learn_CTS
             lbl_name_player.Text = "Veuillez entrer votre prénom/pseudo :";
             lbl_name_player.AutoSize = true;
             lbl_name_player.BackColor = Color.Transparent;
-            lbl_name_player.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+            lbl_name_player.ForeColor = Color.White;
             lbl_name_player.Name = "lbl_name_player";
-            lbl_name_player.Location = new Point(p_menu.Width / 4, 10);
+            lbl_name_player.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             p_menu.Controls.Add(lbl_name_player);
             txtbox_name_player = new TextBox();
-            txtbox_name_player.Location = new Point(p_menu.Width / 4, lbl_name_player.Location.Y + lbl_name_player.Height + 20);
+            txtbox_name_player.Text = "";
+            txtbox_name_player.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            txtbox_name_player.Size = new Size(p_menu.Width - 40,p_menu.Height * 1/16);
             txtbox_name_player.KeyDown += new KeyEventHandler(txtbox_KeyDown);
             txtbox_name_player.Name = "txtbox_name_player";
             p_menu.Controls.Add(txtbox_name_player);
             ChooseCharacter cc = new ChooseCharacter(game);
-            cc.Location = new Point(p_menu.Width / 4, txtbox_name_player.Location.Y + txtbox_name_player.Height + 10);
             cc.Name = "ctrl_selection";
             p_menu.Controls.Add(cc);
             Button btn_confirm = new Button();
+            SetupButton(btn_confirm);
             btn_confirm.Text = "Confirmer";
             btn_confirm.Click += new EventHandler(btn_confirm_Click);
-            btn_confirm.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
-            btn_confirm.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
-            btn_confirm.Location = new Point(p_menu.Width / 4, cc.Location.Y + cc.Height + 10);
             btn_confirm.AutoSize = true;
             btn_confirm.Name = "btn_confirm";
             p_menu.Controls.Add(btn_confirm);
@@ -112,10 +110,10 @@ namespace Learn_CTS
             Label lbl_choice_scenario = new Label();
             lbl_choice_scenario.Text = "Quel scénario voulez-vous lancer ?";
             lbl_choice_scenario.Name = "lbl_choice_scenario";
-            lbl_choice_scenario.Location = new Point(p_menu.Width / 4, 10);
             lbl_choice_scenario.AutoSize = true;
             lbl_choice_scenario.BackColor = Color.Transparent;
-            lbl_choice_scenario.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+            lbl_choice_scenario.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_choice_scenario.ForeColor = Color.White;
             p_menu.Controls.Add(lbl_choice_scenario);
             string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
             string sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
@@ -125,16 +123,15 @@ namespace Learn_CTS
             {
                 btn = new Button();
                 btn.Text = dir.Remove(0, sc_path.Length);
-                btn.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
-                btn.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+                SetupButton(btn);
                 btn.Click += new EventHandler(LaunchGame);
                 btn.AutoSize = true;
+                //btn.Size = new Size(flp.Width, btn.Font.Height*2);
                 flp.Controls.Add(btn);
             }
             flp.AutoSize = true;
             flp.Name = "flp";
             flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            flp.Location = new Point(this.Width/6, (this.Height/2 - flp.Height/2)/2);
             p_menu.Controls.Add(flp);
             PerformLayout();
         }
@@ -192,7 +189,7 @@ namespace Learn_CTS
                         c.Location = new Point(p_menu.Width / 2 - c.Width / 2, this.Height * 5 / 16);
                         break;
                     case "btn_confirm":
-                        c.Location = new Point(p_menu.Width / 2 - c.Width / 2, 24 + this.Height * 7 / 16);
+                        c.Location = new Point(p_menu.Width / 2 - c.Width / 2, 24 + this.Height * 8 / 16);
                         break;
                 }
             }
@@ -208,7 +205,7 @@ namespace Learn_CTS
                         c.Location = new Point(p_menu.Width / 2 - c.Width / 2, this.Height * 3 / 16);
                         break;
                     case "flp":
-                        c.Location = new Point(p_menu.Width / 2 - c.Width / 2, this.Height * 4 / 16);
+                        c.Location = new Point(p_menu.Width / 2 - c.Width / 2, this.Height * 5 / 16);
                         break;
                 }
             }
@@ -222,14 +219,12 @@ namespace Learn_CTS
         private void SetUpWindow()
         {
             JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
-            this.theme = (JObject)Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "internal"
-             + Path.DirectorySeparatorChar + "themes.json")[(string)options["theme"]];
             if ((bool)options["maximized"])
             {
                 this.WindowState = FormWindowState.Maximized;
             }
-            this.BackColor = Color.FromArgb(int.Parse((string)this.theme["0"]["R"]), int.Parse((string)this.theme["0"]["G"]), int.Parse((string)this.theme["0"]["B"]));
-            this.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
+            this.BackColor = Color.Black;
+            this.ForeColor = Color.White;
             this.Width = (int)options["size"]["x"];
             this.Height = (int)options["size"]["y"];
         }
@@ -238,6 +233,7 @@ namespace Learn_CTS
         {
             this.displayed_menu = "game_menu";
             p_menu.Controls.Clear();
+            p_menu.Focus();
             pbox_return.Visible = false;
             Label lbl_name_game = new Label();
             lbl_name_game.AutoSize = true;
@@ -246,46 +242,42 @@ namespace Learn_CTS
             lbl_name_game.AutoSize = true;
             lbl_name_game.TabIndex = 0;
             lbl_name_game.Text = game;
-            lbl_name_game.BackColor = Color.FromArgb(int.Parse((string)this.theme["1"]["R"]), int.Parse((string)this.theme["1"]["G"]), int.Parse((string)this.theme["1"]["B"]));
-            lbl_name_game.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
-            lbl_name_game.Location = new System.Drawing.Point(p_menu.Width / 4, this.Height * 1 / 6);
+            lbl_name_game.BackColor = Color.Transparent;
+            lbl_name_game.ForeColor = Color.White;
             p_menu.Controls.Add(lbl_name_game);
             Button btn_launch_scenario = new Button();
-            btn_launch_scenario.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            btn_launch_scenario.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            SetupButton(btn_launch_scenario);
             btn_launch_scenario.Name = "btn_launch_scenario";
             btn_launch_scenario.AutoSize = true;
-            btn_launch_scenario.TabIndex = 1;
             btn_launch_scenario.Text = "Lancer un scénario";
-            btn_launch_scenario.UseVisualStyleBackColor = false;
-            btn_launch_scenario.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
             btn_launch_scenario.Click += new System.EventHandler(this.btn_launch_scenario_Click);
-            btn_launch_scenario.Location = new System.Drawing.Point(p_menu.Width / 4, lbl_name_game.Location.Y + lbl_name_game.Height + this.Height * 2 / 16);
             p_menu.Controls.Add(btn_launch_scenario);
             Button btn_options = new Button();
-            btn_options.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            btn_options.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            SetupButton(btn_options);
             btn_options.Name = "btn_options";
             btn_options.Size = btn_launch_scenario.Size;
-            btn_options.TabIndex = 4;
             btn_options.Text = "Options";
-            btn_options.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
-            btn_options.UseVisualStyleBackColor = false;
-            btn_options.Location = new System.Drawing.Point(p_menu.Width / 4, btn_launch_scenario.Location.Y + btn_launch_scenario.Height + this.Height * 1 / 16);
             p_menu.Controls.Add(btn_options);
             Button btn_leave = new Button();
-            btn_leave.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            btn_leave.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
+            SetupButton(btn_leave);
             btn_leave.Name = "btn_leave";
             btn_leave.Size = btn_launch_scenario.Size;
-            btn_leave.TabIndex = 3;
             btn_leave.Text = "Quitter";
-            btn_leave.UseVisualStyleBackColor = false;
-            btn_leave.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
             btn_leave.Click += new System.EventHandler(this.button_leave_Click);
-            btn_leave.Location = new System.Drawing.Point(p_menu.Width / 4, btn_options.Location.Y + btn_options.Height + this.Height * 1 / 16);
             p_menu.Controls.Add(btn_leave);
             PerformLayout();
+        }
+
+        private void SetupButton(Button b)
+        {
+            b.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            b.UseVisualStyleBackColor = false;
+            b.FlatAppearance.BorderSize = 1;
+            b.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            b.ForeColor = Color.White;
+            b.BackColor = Color.Black;
+            b.MouseEnter += new EventHandler(delegate (object sender, EventArgs e) { this.BackColor = Color.LightSlateGray; });
+            b.MouseLeave += new EventHandler(delegate (object sender, EventArgs e) { this.BackColor = Color.Black; });
         }
 
         private void Button_Return(object sender, EventArgs e)

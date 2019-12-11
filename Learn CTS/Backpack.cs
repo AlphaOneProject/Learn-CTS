@@ -31,6 +31,7 @@ namespace Learn_CTS
             pbox_phone.Image = Image.FromFile(path + "smartphone.png");
             pbox_close.Image = Image.FromFile(path + "gamecard-delete-btn-x64.png");
             pbox_close.Click += new EventHandler(Backpack_Closed);
+            this.Focus();
         }
 
         private void Backpack_Closed(object sender, EventArgs e)
