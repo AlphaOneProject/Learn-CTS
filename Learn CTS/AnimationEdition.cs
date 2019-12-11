@@ -70,7 +70,7 @@ namespace Learn_CTS
             {
                 pb_valid.Image = Tools.Image_From_File(System.AppDomain.CurrentDomain.BaseDirectory + "internal" +
                                                        Path.DirectorySeparatorChar + "images" +
-                                                       Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png");
+                                                       Path.DirectorySeparatorChar + "wrong.png");
             }
         }
 

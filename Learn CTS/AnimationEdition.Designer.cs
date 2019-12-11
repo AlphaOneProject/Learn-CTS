@@ -179,7 +179,7 @@
             // 
             this.lbl_name.AutoSize = true;
             this.lbl_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_name.Location = new System.Drawing.Point(39, 190);
+            this.lbl_name.Location = new System.Drawing.Point(37, 191);
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(107, 26);
             this.lbl_name.TabIndex = 10;
@@ -189,9 +189,9 @@
             // 
             this.pb_valid.BackColor = System.Drawing.Color.Transparent;
             this.pb_valid.Image = ((System.Drawing.Image)(resources.GetObject("pb_valid.Image")));
-            this.pb_valid.Location = new System.Drawing.Point(9, 192);
+            this.pb_valid.Location = new System.Drawing.Point(4, 188);
             this.pb_valid.Name = "pb_valid";
-            this.pb_valid.Size = new System.Drawing.Size(24, 24);
+            this.pb_valid.Size = new System.Drawing.Size(32, 32);
             this.pb_valid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_valid.TabIndex = 11;
             this.pb_valid.TabStop = false;
