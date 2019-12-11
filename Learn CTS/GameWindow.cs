@@ -209,6 +209,7 @@ namespace Learn_CTS
         private void Load_Game()
         {
             if (instance == null) return;
+            this.BackColor = Color.Black;
             RemoveAllControls();
             this.Focus();
             StartTransition();
@@ -222,7 +223,6 @@ namespace Learn_CTS
                 this.Close();
             }
             SetupScene(scene_type);
-            this.BackColor = Color.Black;
             DisplayLoading();
             while (!tr.HasFinished())
             {

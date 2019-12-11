@@ -38,18 +38,18 @@
             // 
             // pbox_char
             // 
-            this.pbox_char.Location = new System.Drawing.Point(118, 14);
+            this.pbox_char.Location = new System.Drawing.Point(118, 12);
             this.pbox_char.Name = "pbox_char";
-            this.pbox_char.Size = new System.Drawing.Size(91, 91);
+            this.pbox_char.Size = new System.Drawing.Size(134, 135);
             this.pbox_char.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_char.TabIndex = 0;
             this.pbox_char.TabStop = false;
             // 
             // pbox_arrow_left
             // 
-            this.pbox_arrow_left.Location = new System.Drawing.Point(52, 33);
+            this.pbox_arrow_left.Location = new System.Drawing.Point(17, 33);
             this.pbox_arrow_left.Name = "pbox_arrow_left";
-            this.pbox_arrow_left.Size = new System.Drawing.Size(60, 58);
+            this.pbox_arrow_left.Size = new System.Drawing.Size(95, 93);
             this.pbox_arrow_left.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_arrow_left.TabIndex = 2;
             this.pbox_arrow_left.TabStop = false;
@@ -57,9 +57,9 @@
             // 
             // pbox_arrow_right
             // 
-            this.pbox_arrow_right.Location = new System.Drawing.Point(215, 33);
+            this.pbox_arrow_right.Location = new System.Drawing.Point(258, 33);
             this.pbox_arrow_right.Name = "pbox_arrow_right";
-            this.pbox_arrow_right.Size = new System.Drawing.Size(60, 58);
+            this.pbox_arrow_right.Size = new System.Drawing.Size(88, 93);
             this.pbox_arrow_right.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_arrow_right.TabIndex = 3;
             this.pbox_arrow_right.TabStop = false;
@@ -74,7 +74,7 @@
             this.Controls.Add(this.pbox_arrow_left);
             this.Controls.Add(this.pbox_char);
             this.Name = "ChooseCharacter";
-            this.Size = new System.Drawing.Size(338, 126);
+            this.Size = new System.Drawing.Size(370, 162);
             this.Load += new System.EventHandler(this.ChooseCharacter_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_char)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbox_arrow_left)).EndInit();
