@@ -1,26 +1,26 @@
 # Learn CTS
 
 ## Scénarios
-- [ ] Composter son ticket
-- [ ] Pieds sur le siège
-- [ ] Interdiction de fumer
+- [X] Composter son ticket
+- [X] Pieds sur le siège
+- [X] Interdiction de fumer
 - [ ] Interdiction des vélos en heure de pointe
 - [ ] Animaux dans le véhicule
-- [ ] Propreté du véhicule
+- [X] Propreté du véhicule
 - [ ] Céder sa place
-- [ ] Volume de la musique
-- [ ] Monter dans le tram
-- [ ] Entrer dans un véhicule bondé
+- [X] Volume de la musique
+- [X] Monter dans le tram
+- [X] Entrer dans un véhicule bondé
 
 
 ## Structure
 - [ ] Learn CTS
     - [ ] IHM
-        - [ ] Interfaces de jeu
+        - [X] Interfaces de jeu
             - [X] Interface tram
-            - [ ] Interface bus
+            - [X] Interface bus
             - [X] Interface parc
-            - [ ] Interface "Point & Click"
+            - [X] Interface "Point & Click"
         - [X] Menus
             - [X] Accueil
             - [X] Édition
@@ -30,20 +30,18 @@
                 - [X] Bus
                 - [X] Parc
                 - [X] "Point & Click"
-        - [ ] Éditeur
+        - [X] Éditeur
             - [X] Choix du moteur et options générales
             - [X] Création et gestion des PNJ (Personnages Non-Joueurs)
-            - [ ] Personnalisation du personnage principal
+            - [X] Personnalisation du personnage principal
             - [X] Entrée et gestion des dialogues sous la forme de QCM
             - [X] Édition des différents scénarios
-            - [ ] Modification des textures d'ambiance
+            - [X] Modification des textures d'ambiance
     - [ ] Pédagogie
         - [ ] Morale + Connaissances
-            - [ ] Utilisation de français simple
+            - [X] Utilisation de français simple
             - [ ] Récapitulatifs des décisions
-        - [ ] Gameplay
+        - [X] Gameplay
             - [X] Interactions avec l'environnement
-            - [ ] Difficultés
-            - [ ] Indicateur de niveau
-                - [ ] Points de civilité
-                - [ ] Niveau de confrontation
+            - [X] Difficultés
+            - [X] Score
