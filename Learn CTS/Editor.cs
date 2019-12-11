@@ -49,6 +49,13 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Editor1_Load(object sender, EventArgs e)
         {
+            // START TEMPORARY
+
+            menu.Nodes.Remove(menu.Nodes.Find("items", true)[0]);
+            menu.Nodes.Remove(menu.Nodes.Find("item_images", true)[0]);
+
+            // END TEMPORARY
+
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
             this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
             this.saved = true;
