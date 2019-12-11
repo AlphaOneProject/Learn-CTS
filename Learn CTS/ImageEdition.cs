@@ -49,6 +49,27 @@ namespace Learn_CTS
 
         private void Pb_delete_Click(object sender, EventArgs e)
         {
+            // Checks if it is used in a situation.
+            string scenarios_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+            JObject data;
+            foreach (string scenario in Directory.GetDirectories(scenarios_path))
+            {
+                foreach (string situation in Directory.GetDirectories(scenario))
+                {
+                    data = Tools.Get_From_JSON(situation + Path.DirectorySeparatorChar + "environment.json");
+                    if (data["background"].ToString() == this.image_path.Split(Path.DirectorySeparatorChar).Last())
+                    {
+                        MessageBox.Show("Cette image est utilisée dans une ou plusieurs situations.\n" +
+                                        "Remplacez-la dans ces situations puis réessayez.\n\n" +
+                                        "Situation en faisant usage : " +
+                                        situation.Split(Path.DirectorySeparatorChar).Last().Split('.').Last(),
+                                        "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+
+            // Asks for confirmation before suppression.
             if (MessageBox.Show("Confirmez-vous la suppression de ce décor ?", "Suppression de décor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 File.Delete(image_path);

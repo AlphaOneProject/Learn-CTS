@@ -124,6 +124,24 @@ namespace Learn_CTS
 
         private void Pb_delete_Click(object sender, EventArgs e)
         {
+            // Checks if it is used in a situation.
+            string npcs_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs";
+            JObject data;
+            foreach (string npc in Directory.GetFiles(npcs_path))
+            {
+                data = Tools.Get_From_JSON(npc);
+                if (data["folder"].ToString() == this.folder_path.Substring(0, this.folder_path.Length - 1).Split(Path.DirectorySeparatorChar).Last())
+                {
+                    MessageBox.Show("Ces images sont utilisées par un ou plusieurs figurants.\n" +
+                                    "Remplacez-le pour ces figurants puis réessayez.\n\n" +
+                                    "Figurant en faisant usage : " + data["name"].ToString(),
+                                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+
+            // Asks for confirmation before suppression.
             if (MessageBox.Show("Confirmez-vous la suppression de ce décor ?", "Suppression de décor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 Directory.Delete(folder_path, true);

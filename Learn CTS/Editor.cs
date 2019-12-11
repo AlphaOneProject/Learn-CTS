@@ -154,6 +154,11 @@ namespace Learn_CTS
             return this.game;
         }
 
+        public string Get_Game_Path()
+        {
+            return this.game_path;
+        }
+
         /// <summary>
         /// Transmit the data object already read when starting the Editor and thus
         /// optimizing the I/O memory access.
@@ -896,6 +901,29 @@ namespace Learn_CTS
                 return;
             }
 
+            // Checks if it is used in a situation.
+            string scenarios_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+            JObject data;
+            foreach (string scenario in Directory.GetDirectories(scenarios_path))
+            {
+                foreach (string situation in Directory.GetDirectories(scenario))
+                {
+                    data = Tools.Get_From_JSON(situation + Path.DirectorySeparatorChar + "dialogs.json");
+                    for (int i = 1; i <= int.Parse(data["events"].ToString()); i++)
+                    {
+                        if (int.Parse(data[i.ToString()]["npc"]["id"].ToString()) == del_id)
+                        {
+                            MessageBox.Show("Ce figurant est utilisé dans une ou plusieurs situations.\n" +
+                                            "Remplacez-le dans ces situations puis réessayez.\n\n" +
+                                            "Situation en faisant usage : " +
+                                            situation.Split(Path.DirectorySeparatorChar).Last().Split('.').Last(),
+                                            "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                }
+            }
+
             // Removing the involved file.
             string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                       Path.DirectorySeparatorChar + "npcs";
@@ -1345,14 +1373,38 @@ namespace Learn_CTS
             string dialogs_path = this.game_path + Path.DirectorySeparatorChar + "library" +
                                   Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
 
-            // Disable suppression of all dialogs.
+            // Disables suppression of all dialogs.
             if (Directory.GetFiles(@"" + dialogs_path).Length <= 1)
             {
-                MessageBox.Show("Vous ne pouvez pas supprimer l'intégralité des dialogues.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous ne pouvez pas supprimer l'intégralité des dialogues.", "Erreur",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Ask for confirmation before suppression of the scenario.
+            // Checks if it is used in a situation.
+            string scenarios_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+            JObject data;
+            foreach (string scenario in Directory.GetDirectories(scenarios_path))
+            {
+                foreach (string situation in Directory.GetDirectories(scenario))
+                {
+                    data = Tools.Get_From_JSON(situation + Path.DirectorySeparatorChar + "dialogs.json");
+                    for (int i = 1; i <= int.Parse(data["events"].ToString()); i++)
+                    {
+                        if (int.Parse(data[i.ToString()]["quizz"].ToString()) == sender.Get_Id())
+                        {
+                            MessageBox.Show("Ce dialogue est utilisé dans une ou plusieurs situations.\n" +
+                                            "Remplacez-le dans ces situations puis réessayez.\n\n" +
+                                            "Situation en faisant usage : " +
+                                            situation.Split(Path.DirectorySeparatorChar).Last().Split('.').Last(),
+                                            "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Asks for confirmation before suppression of the dialog.
             if ((MessageBox.Show("Confirmer la suppression du dialogue N°" + sender.Get_Id() + " ?", "Confirmation de suppression",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No))
             {
@@ -1445,10 +1497,10 @@ namespace Learn_CTS
             flp_sprites.Location = new Point(20, 100);
 
             // Add all existing sprites to the display.
-            string backgrounds_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+            string characters_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
                                       "characters" + Path.DirectorySeparatorChar;
-            foreach (string folder_name in Directory.GetDirectories(backgrounds_path))
+            foreach (string folder_name in Directory.GetDirectories(characters_path))
             {
                 AnimationEdition ae = new AnimationEdition(this, folder_name);
                 flp_sprites.Controls.Add(ae);
@@ -1457,7 +1509,14 @@ namespace Learn_CTS
 
         private void Add_Sprite(object sender, EventArgs e)
         {
-            // WIP
+            string characters_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                          "characters" + Path.DirectorySeparatorChar;
+            string new_folder = characters_path + (Directory.GetDirectories(characters_path).Count() + 1).ToString();
+            Directory.CreateDirectory(new_folder);
+
+            AnimationEdition ae = new AnimationEdition(this, new_folder);
+            content.Controls.Find("flp_sprites", true)[0].Controls.Add(ae);
         }
 
         /// <summary>
