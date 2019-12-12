@@ -64,6 +64,8 @@ namespace Learn_CTS
             //Setting the colors for the controls accoring to the theme
             Change_Theme();
 
+            ShowThumbnail();
+
             //Setting tooltips
             tlt_gc.SetToolTip(pb_play, "Jouer au jeu");
             tlt_gc.SetToolTip(pb_copy, "Copier le jeu");
@@ -125,8 +127,6 @@ namespace Learn_CTS
                 }
                 ToolTip tp_title = new ToolTip();
                 tp_title.SetToolTip(lbl_title, value);
-                // We need to know the game title in order to retrieve the thumbnail.
-                Show_Thumbnail(value);
             }
         }
 
@@ -157,12 +157,10 @@ namespace Learn_CTS
         /// <summary>
         /// Fetches the game thumbnail in the library.
         /// </summary>
-        /// <param name="game">Name of the game of the thumbnail.</param>
-        public void Show_Thumbnail(string game)
+        public void ShowThumbnail()
         {
-            string thumbnail_path = AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game
-                + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images"
-                + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "thumbnail.png";
+            string thumbnail_path = AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.gameFullName +
+                Path.DirectorySeparatorChar + "thumbnail.png";
             try
             {
                 Image img;

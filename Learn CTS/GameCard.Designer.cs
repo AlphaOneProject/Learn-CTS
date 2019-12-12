@@ -90,7 +90,7 @@ namespace Learn_CTS
             this.pb_play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_play.ErrorImage = null;
             this.pb_play.ImageLocation = "gamecard-play-btn-x128.png";
-            this.pb_play.Location = new System.Drawing.Point(24, 24);
+            this.pb_play.Location = new System.Drawing.Point(24, 22);
             this.pb_play.Name = "pb_play";
             this.pb_play.Size = new System.Drawing.Size(91, 92);
             this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

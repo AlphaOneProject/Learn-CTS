@@ -45,7 +45,6 @@ namespace Learn_CTS
         /// <returns></returns>
         public Item CreateItem(int id, string name, int x, int y, JObject actions)
         {
-            MessageBox.Show(name);
             Item item = new Item(id, x, y);
             item.SetImage(item.CreateImage(items_lib_path + Path.DirectorySeparatorChar + name + ".png"));
             item.SetActions(actions);
