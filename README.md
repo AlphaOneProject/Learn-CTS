@@ -16,7 +16,11 @@ Celui-ci propose en effet de nombreux **outils** d'édition, un **accompagnement
 
 Afin de faciliter le travail de création, les jeux créés sont divisés en **scénarios** et en ***situations**.
 
-### Composition d'un jeu
+## Documentation
+
+[Lien d'accès à la documentation](https://webetu.iutrs.unistra.fr/~lallemann/doc-cts/learn-cts/Learn%20CTS/html/namespace_learn___c_t_s.html) (accessible uniquement depuis l'IUT)
+
+## Composition d'un jeu
 
 Un jeu est tout d'abord composé de **scénarios**. Ces scénarios seront séléctionnables au lancement du jeu. Ils peuvent donc être utilisés comme des niveaux différents, mais aussi comme des niveaux de difficulté.
 
@@ -69,12 +73,11 @@ Une fois sur le menu principal, cliquez sur **Mes jeux**. Editez un jeu déjà e
 
 La première rubrique de l'éditeur est **Général** Vous pourrez y modifier le titre et la description du jeu.
 
-Comme tous les textes changeables du jeu, il faut **valider le changement** en appuyant sur la touche "Entrée".
+Comme tous les textes changeables du jeu, il faut **valider le changement** en appuyant sur la touche "Entrée". Vous pouvez aussi annuler le changement avec la touche "Echap".
 
 ### Modèles
 
 Dans cette rubrique, il est possible de modifier et de créer des **figurants**, des **dialogues**, ainsi que les images des **personnages** et des **décors**.
-
 
 
 #### Figurants
@@ -89,11 +92,11 @@ Choisissez l'apparence de votre figurant avec les flèches, renommez-le en cliqu
 
 Vous pouvez créer une nouvelle question en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
 
-Chaque question, numérotée dans un onglet en haut à gauche du cadre du dialogue, est composée de une ou plusieurs choix de réponse.
+Chaque question, numérotée dans un onglet en haut à gauche du cadre du dialogue, est composée de **un ou plusieurs choix de réponse**.
 
 Changez le texte de la question en cliquant dessus, ajoutez un choix de réponse avec le bouton <img src="https://i.imgur.com/p0VrcMo.png" width="32" height="32"/>, et choisissez comment la question sera présentée au joueur : uniquement sous forme de **texte**, d'**audio**, ou **les deux** ?
 
-Pour chaque choix de réponse, personnalisable en cliquant sur le texte, vous pouvez assigner un **score** positif ou négatif. Il est possible de choisir une question sur laquelle rediriger le joueur s'il choisit cette réponse.
+Pour chaque **choix de réponse**, personnalisable en cliquant sur le texte, vous pouvez assigner un **score** positif ou négatif. Il est possible de **choisir une question sur laquelle rediriger le joueur** s'il choisit cette réponse.
 Cette redirection permet des dialogues complexes et riches, qui augmente la personnalisation du jeu et l'immersion du joueur.
 
 Supprimez une question (et ses choix de réponse avec, attention !) en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>, ou supprimez un choix de réponse unique en cliquant sur la poubelle <img src="https://i.imgur.com/dDG9pNU.png" width="32" height="32"/>.
@@ -101,15 +104,40 @@ Ne vous perdez pas, les questions sont réparties sur des pages, que vous pouvez
 
 ### Images
 
-La rubrique **Images** permet d'ajouter ou des supprimer de images utilisables directement dans votre éditeur, et donc dans votre jeu !
+La rubrique Images permet d'ajouter ou des supprimer des **images utilisables directement dans votre éditeur**, et donc dans votre jeu !
 
 #### Personnages
 
-Ce menu donne l'accès aux images des personnages, et de leur animation. Vous pouvez ajouter un nouvel ensemble d'images pour un personnage en cliquand sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
+Ce menu donne l'accès aux images des personnages, et de leur animation. Vous pouvez ajouter un nouvel ensemble d'images pour un personnage en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
 
 Chaque ensemble d'images est placé dans un cadre, qui représente l'animation d'un personnage à chaque fois. La croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/> permet de supprimer l'ensemble d'images. La première ligne d'images contient les animations de déplacement vers la droite du personnage, et la deuxième ligne les animations vers la gauche.
 
 En cliquant sur une image, l'explorateur de fichier de votre ordinateur s'ouvre. Vous pouvez alors choisir une image, qui sera uilisée pour une étape de l'animation. L'icone en bas à gauche du cadre vous indique si les images sont valides ou non.
 
+### Scénarios
 
-[Lien d'accès à la documentation](https://webetu.iutrs.unistra.fr/~lallemann/doc-cts/learn-cts/Learn%20CTS/html/namespace_learn___c_t_s.html) (accessible uniquement depuis l'IUT)
+Cette rubrique vous permet d'ajouter des scénarios. Quand vous ajoutez un scénario, il est créé vide. Pour ajouter une nouvelle situation dans ce scénario, il suffit de cliquer sur **Ajouter une nouvelle situation**.
+
+Vous pouvez voir le nom complet du scénario, avec son arborescence, dans l'onglet en haut à gauche du cadre. Juste en dessous, vous pouvez modifier l'ordre d'apparition du scénario avec les flèches pointant vers le haut et vers le bas. Pour renommer le scénario, il suffit de cliquer sur son nom ou sur le crayon à coté. Vous pouvez supprimmer le scénario en cliquant sur la poubelle <img src="https://i.imgur.com/dDG9pNU.png" width="32" height="32"/> à coté. 
+
+### Les situations
+
+La situation est le **niveau de jeu dans lequel va évoluer le joueur**. Vous pouvez, comme pour les scénarios, modifier l'ordre d'apparition de la situation. Notez que celui-ci est limité au scénario de la situation.
+
+La situation est introduite par un **écran d'introduction**. Vous pouvez y renseigner le **lieu de déroulement de la situation**, et un **texte d'introduction**.
+
+La **densité de PNJs** est réglable par un curseur horizontal. Plus elle est faible, moins il y aura de PNJs dans la situation, et inversement.
+
+Vous pouvez choisir un **décor**, défini plus haut dans la rubrique **Images/Décors**. Vous pouvez alors séléctionner le décor par son nom, qui est le nom du fichier de l'image.
+
+Le **type de scène** est le moteur de jeu utilisé pour la situation. Un trajet en tram, une marche dans la ville ou dans un parc, une vision à la première personne, et bien d'autres sont déjà présents dans Learn CTS. Choisissez celui qui convient le mieux à vos envies !
+
+La rubrique **Evènements** permet de **mettre en lien un Figurant avec un dialogue** définit dans la rubrique **Modèles/Figurants** et **Modèles/Dialogues** respectivement.
+
+Vous pouvez ajouter un évènement par figurant avec le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>. La liste déroulante de gauche permet le choix du figurant voulu, et la liste déroulante de droite permet le choix du dialogue qui lui sera associé pendant la partie.
+
+Le bouton **Placer** ouvre une nouvelle fenêtre qui permet de **placer le figurant dans le décor**, selon vos souhaits. Il est placé par défaut en haut à gauche de la fenêtre. Pour le **déplacer** le figurant, il faut cliquer dessus et maintenir le clic enfoncé jusqu'à ce que la position vous convient. Si l'emplacement que vous avez choisi est jugé invalide par l'éditeur, celui-ci vous préviendra et placera le figurant aléatoirment dans le décor.
+
+**Pour jouer un aperçu de la situation cliquez sur le bouton <img src="https://i.imgur.com/E3ppsKZ.png" width="32" height="32"/>. 
+
+###### C'est tout !
