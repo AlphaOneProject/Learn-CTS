@@ -68,10 +68,11 @@ namespace Learn_CTS
         {
             // Checks if it is used somewhere.
             JObject data;
+            string scenarios_path;
             switch (this.type)
             {
                 case "background":
-                    string scenarios_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+                    scenarios_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
                     foreach (string scenario in Directory.GetDirectories(scenarios_path))
                     {
                         foreach (string situation in Directory.GetDirectories(scenario))
@@ -90,17 +91,24 @@ namespace Learn_CTS
                     }
                     break;
                 case "item":
-                    string items_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "items";
-                    foreach (string npc in Directory.GetFiles(items_path))
+                    scenarios_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+                    foreach (string scenario in Directory.GetDirectories(scenarios_path))
                     {
-                        data = Tools.Get_From_JSON(npc);
-                        if (data["image"].ToString() == this.image_path.Split(Path.DirectorySeparatorChar).Last().Split('.')[0])
+                        foreach (string situation in Directory.GetDirectories(scenario))
                         {
-                            MessageBox.Show("Cette image est utilisée par un ou plusieurs objets.\n" +
-                                            "Remplacez-la pour ces objets puis réessayez.\n\n" +
-                                            "Objet en faisant usage : " + data["name"].ToString(),
-                                            "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            data = Tools.Get_From_JSON(situation + Path.DirectorySeparatorChar + "items.json");
+                            for (int i = 1; i <= int.Parse(data["events"].ToString()); i++)
+                            {
+                                if (data[i.ToString()]["item"]["name"].ToString() == this.image_path.Split(Path.DirectorySeparatorChar).Last().Split('.')[0])
+                                {
+                                    MessageBox.Show("Cet objet est utilisé dans une ou plusieurs situations.\n" +
+                                                    "Remplacez-le dans ces situations puis réessayez.\n\n" +
+                                                    "Situation en faisant usage : " +
+                                                    situation.Split(Path.DirectorySeparatorChar).Last().Split('.').Last(),
+                                                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                            }
                         }
                     }
                     break;

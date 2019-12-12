@@ -30,22 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Objets");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Figurants");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Objets");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Personnages");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Décors");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Figurants");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objets");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Personnages");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Décors");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
             treeNode5,
-            treeNode6,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
             treeNode2,
             treeNode3,
-            treeNode4,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Scénarios");
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Scénarios");
             this.menu = new System.Windows.Forms.TreeView();
             this.content = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Label();
@@ -66,37 +64,34 @@
             treeNode1.Name = "global";
             treeNode1.Text = "Général";
             treeNode1.ToolTipText = "Paramètres du jeu";
-            treeNode2.Name = "items";
-            treeNode2.Text = "Objets";
-            treeNode2.ToolTipText = "Objets utilisables dans le jeu pour une recherche d\'indices";
-            treeNode3.Name = "npcs";
-            treeNode3.Text = "Figurants";
-            treeNode3.ToolTipText = "Personnages non joueurs s\'adressant au joueur par le moyen de dialogues";
-            treeNode4.Name = "dialogs";
-            treeNode4.Text = "Dialogues";
-            treeNode4.ToolTipText = "Questions et réponses proposables au joueur";
-            treeNode5.Name = "item_images";
-            treeNode5.Text = "Objets";
-            treeNode5.ToolTipText = "Images associables à des objets";
-            treeNode6.Name = "sprites";
-            treeNode6.Text = "Personnages";
-            treeNode6.ToolTipText = "Combinaisons d\'images permettant d\'animer les personnages";
-            treeNode7.Name = "backgrounds";
-            treeNode7.Text = "Décors";
-            treeNode7.ToolTipText = "Images servant d\'illustration de fond à une situation";
-            treeNode8.Name = "images";
-            treeNode8.Text = "Images";
-            treeNode8.ToolTipText = "Représentations visuelles des différents éléments du jeu";
-            treeNode9.Name = "models";
-            treeNode9.Text = "Modèles";
-            treeNode9.ToolTipText = "Gestion des modèles du jeu";
-            treeNode10.Name = "scenarios";
-            treeNode10.Text = "Scénarios";
-            treeNode10.ToolTipText = "Gestion des scénarios qui seront disponibles au joueur";
+            treeNode2.Name = "npcs";
+            treeNode2.Text = "Figurants";
+            treeNode2.ToolTipText = "Personnages non joueurs s\'adressant au joueur par le moyen de dialogues";
+            treeNode3.Name = "dialogs";
+            treeNode3.Text = "Dialogues";
+            treeNode3.ToolTipText = "Questions et réponses proposables au joueur";
+            treeNode4.Name = "item_images";
+            treeNode4.Text = "Objets";
+            treeNode4.ToolTipText = "Images associables à des objets";
+            treeNode5.Name = "sprites";
+            treeNode5.Text = "Personnages";
+            treeNode5.ToolTipText = "Combinaisons d\'images permettant d\'animer les personnages";
+            treeNode6.Name = "backgrounds";
+            treeNode6.Text = "Décors";
+            treeNode6.ToolTipText = "Images servant d\'illustration de fond à une situation";
+            treeNode7.Name = "images";
+            treeNode7.Text = "Images";
+            treeNode7.ToolTipText = "Représentations visuelles des différents éléments du jeu";
+            treeNode8.Name = "models";
+            treeNode8.Text = "Modèles";
+            treeNode8.ToolTipText = "Gestion des modèles du jeu";
+            treeNode9.Name = "scenarios";
+            treeNode9.Text = "Scénarios";
+            treeNode9.ToolTipText = "Gestion des scénarios qui seront disponibles au joueur";
             this.menu.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
-            treeNode9,
-            treeNode10});
+            treeNode8,
+            treeNode9});
             this.menu.PathSeparator = " / ";
             this.menu.ShowLines = false;
             this.menu.ShowNodeToolTips = true;

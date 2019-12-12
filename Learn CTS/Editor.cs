@@ -323,8 +323,6 @@ namespace Learn_CTS
                         Display_Global(); break;
                     case "models":
                         Display_Models(); break;
-                    case "items":
-                        Display_Items(); break;
                     case "npcs":
                         Display_NPCs(); break;
                     case "dialogs":
@@ -576,14 +574,6 @@ namespace Learn_CTS
 
             MessageBox.Show("La copie des modèles du jeu <" + game_name + "> a bien été effectuée !", "Copie réussie",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        /// <summary>
-        /// Load controls for items' content.
-        /// </summary>
-        private void Display_Items()
-        {
-            // WIP
         }
 
         /// <summary>
@@ -1127,9 +1117,26 @@ namespace Learn_CTS
                 return;
             }
 
+            // Checks if it is used in another dialog.
+            JObject data;
+            foreach (string dialog in Directory.GetFiles(dialogs_path))
+            {
+                data = Tools.Get_From_JSON(dialog);
+                for (int i = 1; i <= int.Parse(data["choices"].ToString()); i++)
+                {
+                    if (int.Parse(data["c" + i.ToString()]["redirect"].ToString()) == sender.Get_Id())
+                    {
+                        MessageBox.Show("Ce dialogue est utilisé par un ou plusieurs autres dialogues.\n" +
+                                        "Remplacez-le pour ces dialogues puis réessayez.\n\n" +
+                                        "Dialogue en faisant usage : " + data["question"].ToString(),
+                                        "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+
             // Checks if it is used in a situation.
             string scenarios_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
-            JObject data;
             foreach (string scenario in Directory.GetDirectories(scenarios_path))
             {
                 foreach (string situation in Directory.GetDirectories(scenario))
@@ -1943,6 +1950,28 @@ namespace Learn_CTS
                 }
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "dialogs.json",
+                              dialogs_content.ToString());
+
+            // Add a "items.json" to the newly created folder.
+            string items_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "items" +
+                          Path.DirectorySeparatorChar;
+            JObject items_content = new JObject()
+            {
+                ["events"] = 1,
+                ["1"] = new JObject()
+                {
+                    ["x"] = 0,
+                    ["y"] = 0,
+                    ["item"] = new JObject()
+                    {
+                        ["id"] = 1,
+                        ["name"] = Directory.GetFiles(items_path)[0].Split(Path.DirectorySeparatorChar).Last().Split('.')[0]
+                    },
+                    ["quizz"] = 1
+                }
+            };
+            File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "items.json",
                               dialogs_content.ToString());
 
             // Add a "environment.json" to the folder.
