@@ -168,7 +168,7 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_delete_Click(object sender, EventArgs e)
         {
-            // Checks if it is used in a situation.
+            // Checks if it is used in a NPC.
             string npcs_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs";
             JObject data;
             foreach (string npc in Directory.GetFiles(npcs_path))
@@ -177,7 +177,7 @@ namespace Learn_CTS
                 if (data["folder"].ToString() == this.folder_path.Substring(0, this.folder_path.Length - 1).Split(Path.DirectorySeparatorChar).Last())
                 {
                     MessageBox.Show("Ces images sont utilisées par un ou plusieurs figurants.\n" +
-                                    "Remplacez-le pour ces figurants puis réessayez.\n\n" +
+                                    "Remplacez-les pour ces figurants puis réessayez.\n\n" +
                                     "Figurant en faisant usage : " + data["name"].ToString(),
                                     "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
