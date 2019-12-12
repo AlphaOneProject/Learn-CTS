@@ -36,10 +36,46 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
 
 ✅ Des **dialogues personnalisables** et de l'**audiodescription** pour s'entraîner à la **compréhension écrite et orale**.
 
+✅ Des outils pour le joueur, tels qu'un sac avec un téléphone.
+
+<table align="center">
+    <tr>
+        <td><img src ="https://i.imgur.com/XfnvfAl.png" width="500" height="300" /></td>
+        <td><img src ="https://i.imgur.com/6a5uw1S.png" width="500" height="300" /></td>
+    </tr>
+    <tr>
+        <td>Première situation : Vue à la première personne, le joueur achète son ticket.</td>
+        <td>Deuxième situation : Le joueur valide son ticket et monte dans le tram.</td>
+    </tr>
+</table>
+
 ### Les moteurs de jeu
 
-Learn CTS offre l'accès à plusieurs moteurs de jeu, pour donner plus de possibilités au créateur. 
+Learn CTS offre l'accès à plusieurs **moteurs de jeu**, pour donner plus de possibilités au créateur. 
 
-Ces moteurs ont tous un point commun : Le déroulement est sous la forme d'interaction
+Ces moteurs ont tous un point commun : Le déroulement est sous la forme d'**interaction question-réponse**. Ce système permet de créer des **dialogues complexes**, qui n'ont pas de limite de longueur.
+
+Chaque situation a la possibilité d'être liée à un moteur de jeu différent, pour un maximum de **diversité** dans le gameplay.
+
+## Comment créer son jeu ?
+
+### Choix ou création d'un nouveau jeu
+
+Une fois sur le menu principal, cliquez sur **Mes jeux**. Editez un jeu déjà existant en cliquant sur le crayon <img src="https://i.imgur.com/JAbIO2D.png" width="32" height="32"/>d'un jeu, ou créez un nouveau jeu avec le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
+
+**Cette action va lancer l'éditeur de jeu.**
+
+### Général
+
+La première rubrique de l'éditeur est **Général** Vous pourrez y modifier le titre et la description du jeu.
+
+### Modèles
+
+Dans cette rubrique, il est possible de modifier et de créer des **figurants**, des **dialogues**, ainsi que les images des **personnages** et des **décors**.
+
+#### Figurants
+
+Ajoutez un figurant en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/> ou supprimez-en en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>.
+
 
 [Lien d'accès à la documentation](https://webetu.iutrs.unistra.fr/~lallemann/doc-cts/learn-cts/Learn%20CTS/html/namespace_learn___c_t_s.html) (accessible uniquement depuis l'IUT)
