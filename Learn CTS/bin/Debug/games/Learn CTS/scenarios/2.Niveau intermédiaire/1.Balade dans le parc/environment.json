@@ -1,7 +1,1 @@
-{
-  "scene_name": "",
-  "scene_intro": "",
-  "npc_density": 10,
-  "background": 0,
-  "scene_type": 0
-}
+{"scene_name":"","scene_intro":"","npc_density":10,"background":"parkBackground","scene_type":0}
