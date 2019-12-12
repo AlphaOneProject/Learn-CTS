@@ -71,6 +71,12 @@
     </Compile>
     <Compile Include="Bus.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterSelection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CharacterSelection.Designer.cs">
+      <DependentUpon>CharacterSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChooseCharacter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Backpack.resx">
       <DependentUpon>Backpack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CharacterSelection.resx">
+      <DependentUpon>CharacterSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChooseCharacter.resx">
       <DependentUpon>ChooseCharacter.cs</DependentUpon>

@@ -229,11 +229,10 @@
             this.Controls.Add(this.pb_down1);
             this.Controls.Add(this.pb_down3);
             this.Controls.Add(this.pb_down2);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "AnimationEdition";
             this.Size = new System.Drawing.Size(336, 223);
             this.Load += new System.EventHandler(this.AnimationEdition_Load);
-            this.Click += new System.EventHandler(this.Click_Sprite);
             ((System.ComponentModel.ISupportInitialize)(this.pb_down2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_down1)).EndInit();

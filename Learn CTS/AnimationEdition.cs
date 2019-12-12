@@ -57,21 +57,21 @@ namespace Learn_CTS
         /// </summary>
         private void Load_Images()
         {
-            pb_up1.Tag = folder_path + "1_" + (upper_cursor % 9).ToString() + ".png";
-            pb_up2.Tag = folder_path + "1_" + ((upper_cursor + 1) % 9).ToString() + ".png";
-            pb_up3.Tag = folder_path + "1_" + ((upper_cursor + 2) % 9).ToString() + ".png";
+            pb_up1.Tag = folder_path + "1_" + (((upper_cursor % 9) + 9) % 9).ToString() + ".png";
+            pb_up2.Tag = folder_path + "1_" + ((((upper_cursor + 1) % 9) + 9) % 9).ToString() + ".png";
+            pb_up3.Tag = folder_path + "1_" + ((((upper_cursor + 2) % 9) + 9) % 9).ToString() + ".png";
 
-            pb_down1.Tag = folder_path + "3_" + (lower_cursor % 9).ToString() + ".png";
-            pb_down2.Tag = folder_path + "3_" + ((lower_cursor + 1) % 9).ToString() + ".png";
-            pb_down3.Tag = folder_path + "3_" + ((lower_cursor + 2) % 9).ToString() + ".png";
+            pb_down1.Tag = folder_path + "3_" + (((lower_cursor % 9) + 9) % 9).ToString() + ".png";
+            pb_down2.Tag = folder_path + "3_" + ((((lower_cursor + 1) % 9) + 9) % 9).ToString() + ".png";
+            pb_down3.Tag = folder_path + "3_" + ((((lower_cursor + 2) % 9) + 9) % 9).ToString() + ".png";
 
-            pb_up1.Image = Tools.Image_From_File(folder_path + "1_" + (upper_cursor % 9).ToString() + ".png");
-            pb_up2.Image = Tools.Image_From_File(folder_path + "1_" + ((upper_cursor + 1) % 9).ToString() + ".png");
-            pb_up3.Image = Tools.Image_From_File(folder_path + "1_" + ((upper_cursor + 2) % 9).ToString() + ".png");
+            pb_up1.Image = Tools.Image_From_File(folder_path + "1_" + (((upper_cursor % 9) + 9) % 9).ToString() + ".png");
+            pb_up2.Image = Tools.Image_From_File(folder_path + "1_" + ((((upper_cursor + 1) % 9) + 9) % 9).ToString() + ".png");
+            pb_up3.Image = Tools.Image_From_File(folder_path + "1_" + ((((upper_cursor + 2) % 9) + 9) % 9).ToString() + ".png");
 
-            pb_down1.Image = Tools.Image_From_File(folder_path + "3_" + (lower_cursor % 9).ToString() + ".png");
-            pb_down2.Image = Tools.Image_From_File(folder_path + "3_" + ((lower_cursor + 1) % 9).ToString() + ".png");
-            pb_down3.Image = Tools.Image_From_File(folder_path + "3_" + ((lower_cursor + 2) % 9).ToString() + ".png");
+            pb_down1.Image = Tools.Image_From_File(folder_path + "3_" + (((lower_cursor % 9) + 9) % 9).ToString() + ".png");
+            pb_down2.Image = Tools.Image_From_File(folder_path + "3_" + ((((lower_cursor + 1) % 9) + 9) % 9).ToString() + ".png");
+            pb_down3.Image = Tools.Image_From_File(folder_path + "3_" + ((((lower_cursor + 2) % 9) + 9) % 9).ToString() + ".png");
 
             if (Tools.Is_Valid(folder_path))
             {

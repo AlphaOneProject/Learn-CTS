@@ -158,3 +158,4 @@ C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.AnimationEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.AnimationEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.ImageEdition.resources
+C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.CharacterSelection.resources
