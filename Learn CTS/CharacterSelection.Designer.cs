@@ -121,7 +121,7 @@
             this.pb_delete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pb_delete.TabIndex = 19;
             this.pb_delete.TabStop = false;
-            this.pb_delete.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.pb_delete.Click += new System.EventHandler(this.Delete_This);
             // 
             // CharacterSelection
             // 

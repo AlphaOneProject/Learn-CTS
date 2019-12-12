@@ -139,7 +139,7 @@ namespace Learn_CTS
             }
         }
 
-        private void PictureBox1_Click(object sender, EventArgs e)
+        private void Delete_This(object sender, EventArgs e)
         {
             // Prevent the user from suppressing the last NPC.
             string npcs_folder_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" +

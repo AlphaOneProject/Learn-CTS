@@ -49,13 +49,6 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Editor1_Load(object sender, EventArgs e)
         {
-            // START TEMPORARY
-
-            menu.Nodes.Remove(menu.Nodes.Find("items", true)[0]);
-            menu.Nodes.Remove(menu.Nodes.Find("item_images", true)[0]);
-
-            // END TEMPORARY
-
             // Marks the current game as in edition so it blocks any concurrent edition or playing.
             this.game_properties = Tools.Get_From_JSON(this.game_path + Path.DirectorySeparatorChar + "properties.json");
             this.saved = true;
@@ -79,7 +72,7 @@ namespace Learn_CTS
             // Set the title and cut it if necessary.
             int char_space = (this.Width - menu.Width - 64) / 24;
             if (char_space < 12) { char_space = 12; } // Avoid a possible substring exception with a ridicularly little window.
-            String cut_game = this.game;
+            string cut_game = this.game;
             if (cut_game.Length > char_space)
             {
                 cut_game = cut_game.Substring(0, char_space - 3) + "...";
@@ -297,7 +290,7 @@ namespace Learn_CTS
             string name = t.SelectedNode.Name;
             lbl_path.Text = t.SelectedNode.FullPath;
             List<String> keeping_categories = new List<String>()
-            { "npcs", "dialogs", "sprites", "backgrounds" };
+            { "npcs", "dialogs", "item_images", "sprites", "backgrounds" };
 
             if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
             {
@@ -602,7 +595,7 @@ namespace Learn_CTS
             {
                 FlowLayoutPanel flp = (FlowLayoutPanel)content.Controls.Find("flp_npcs", false)[0];
 
-                flp.Width = content.Width - 80;
+                flp.Width = content.Width - 40;
                 flp.Height = content.Height - 120;
                 return;
             }
@@ -646,7 +639,7 @@ namespace Learn_CTS
             // Set the correct location of the controls (responsive with the groupbox's size).
             lbl_npcs.Location = new Point(20, 20);
             pb_add_lib_npc.Location = new Point(lbl_npcs.Location.X + lbl_npcs.Width + 20, 20);
-            flp_npcs.Location = new Point(40, lbl_npcs.Location.Y + lbl_npcs.Height + 20);
+            flp_npcs.Location = new Point(20, 100);
 
             // Generates all CharacterSelection UserControls.
             int i = 0;
@@ -1195,7 +1188,106 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Item_Images()
         {
-            // WIP
+            if (this.old_category == "item_images") // Activates upon resize from the Editor.
+            {
+                content.Controls.Find("flp_item_images", true)[0].Width = content.Width - 40;
+                content.Controls.Find("flp_item_images", true)[0].Height = content.Height - 120;
+                return;
+            }
+
+            // Controls 
+            Label lbl_item_images = new Label()
+            {
+                Name = "lbl_item_images",
+                Text = "Images des objets",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_item_images);
+
+            PictureBox pb_add_item_image = new PictureBox()
+            {
+                Name = "pb_add_item_image",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_item_image.Click += new EventHandler(Add_Item_Image);
+            content.Controls.Add(pb_add_item_image);
+            tlt_global.SetToolTip(pb_add_item_image, "Ajoute un nouveau modèle de décor depuis un fichier");
+
+            FlowLayoutPanel flp_item_images = new FlowLayoutPanel()
+            {
+                Name = "flp_item_images",
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 120
+            };
+            content.Controls.Add(flp_item_images);
+
+            // Placement of those Controls.
+            lbl_item_images.Location = new Point(20, 40);
+            pb_add_item_image.Location = new Point(lbl_item_images.Location.X + lbl_item_images.Width + 20, 40);
+            flp_item_images.Location = new Point(20, 100);
+
+            // Add all existing backgrounds to the FlowLayoutPanel.
+            string items_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                      "items" + Path.DirectorySeparatorChar;
+            foreach (string file_name in Directory.GetFiles(items_path))
+            {
+                ImageEdition ie = new ImageEdition(this, file_name, "item");
+                flp_item_images.Controls.Add(ie);
+            }
+        }
+
+        public void Add_Item_Image(object sender, EventArgs e)
+        {
+            if (ofd_global.ShowDialog() == DialogResult.Cancel) { return; }
+
+            string extension = ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last().Split('.').Last();
+            if (extension != "png")
+            {
+                MessageBox.Show("L'image doit être de format .png pour être utilisée.", "Type invalide",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (@"" + ofd_global.FileName == @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "items" +
+                Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last())
+            {
+                MessageBox.Show("Vous ne pouvez importer un modèle déjà présent.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string new_path = this.game_path + Path.DirectorySeparatorChar + "library" +
+                          Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "items" +
+                          Path.DirectorySeparatorChar + ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last();
+            try
+            {
+                File.Copy(@"" + ofd_global.FileName, @"" + new_path, false);
+            }
+            catch (IOException except)
+            {
+                if (MessageBox.Show("Un fichier du même nom existe déjà dans votre liste de modèles.\n" +
+                                    "Souhaitez-vous le remplacer ?", "Remplacement de fichier",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    File.Copy(@"" + ofd_global.FileName, @"" + new_path, true);
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            ImageEdition ie = new ImageEdition(this, @"" + new_path, "item");
+            content.Controls.Find("flp_item_images", true)[0].Controls.Add(ie);
         }
 
         /// <summary>
@@ -1335,7 +1427,7 @@ namespace Learn_CTS
             foreach(string file_name in Directory.GetFiles(backgrounds_path))
             {
                 if (file_name.Contains("_hitbox")) { continue; }
-                ImageEdition ie = new ImageEdition(this, file_name);
+                ImageEdition ie = new ImageEdition(this, file_name, "background");
                 flp_backgrounds.Controls.Add(ie);
             }
         }
@@ -1350,8 +1442,8 @@ namespace Learn_CTS
             if (ofd_global.ShowDialog() == DialogResult.Cancel) { return; }
 
             string extension = ofd_global.FileName.Split(Path.DirectorySeparatorChar).Last().Split('.').Last();
-            if (!(extension == "png" || extension == "jpeg")) {
-                MessageBox.Show("L'image doit être soit de format .png soit .jpeg pour être utilisée.", "Type invalide",
+            if (extension != "png") {
+                MessageBox.Show("L'image doit être de format .png pour être utilisée.", "Type invalide",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -1385,7 +1477,7 @@ namespace Learn_CTS
                 }
             }
 
-            ImageEdition ie = new ImageEdition(this, @"" + new_path);
+            ImageEdition ie = new ImageEdition(this, @"" + new_path, "background");
             content.Controls.Find("flp_backgrounds", true)[0].Controls.Add(ie);
         }
 
