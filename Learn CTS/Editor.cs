@@ -600,11 +600,10 @@ namespace Learn_CTS
         {
             if (this.old_category.Equals("npcs")) // Trigger only on form resize.
             {
-                TableLayoutPanel tlp = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
-                PictureBox pb_add = (PictureBox)content.Controls.Find("pb_add_lib_npc", false)[0];
+                FlowLayoutPanel flp = (FlowLayoutPanel)content.Controls.Find("flp_npcs", false)[0];
 
-                tlp.Width = content.Width - 80;
-                pb_add.Location = new Point((content.Width - pb_add.Width) / 2, tlp.Location.Y + tlp.Height + 8);
+                flp.Width = content.Width - 80;
+                flp.Height = content.Height - 120;
                 return;
             }
 
@@ -631,43 +630,25 @@ namespace Learn_CTS
             };
             pb_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
             content.Controls.Add(pb_add_lib_npc);
-            tlt_global.SetToolTip(pb_add_lib_npc, "Ajouter un nouveau figurant");
+            tlt_global.SetToolTip(pb_add_lib_npc, "Ajoute un nouveau figurant");
 
-            // TableLayoutPanel, keeping the generated elements in rows.
-            TableLayoutPanel tlp_npcs = new TableLayoutPanel()
+            // FlowLayoutPanel, keeping the generated UserControls in well displayed.
+            FlowLayoutPanel flp_npcs = new FlowLayoutPanel()
             {
-                Name = "tlp_npcs",
+                Name = "flp_npcs",
                 AutoScroll = true,
-                Width = content.Width - 80,
-                Height = 2,
-                RowCount = 0,
-                ColumnCount = 3,
-                CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset,
-                Visible = false
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 120
             };
-            content.Controls.Add(tlp_npcs);
-
-            // Button allowing the creation of a new NPC.
-            Button btn_add_lib_npc = new Button()
-            {
-                Name = "btn_add_lib_npc",
-                Text = "Ajouter un personnage",
-                AutoSize = true
-            };
-            btn_add_lib_npc.Click += new EventHandler(this.Add_Lib_NPC);
-            content.Controls.Add(btn_add_lib_npc);
+            content.Controls.Add(flp_npcs);
 
             // Set the correct location of the controls (responsive with the groupbox's size).
             lbl_npcs.Location = new Point(20, 20);
             pb_add_lib_npc.Location = new Point(lbl_npcs.Location.X + lbl_npcs.Width + 20, 20);
-            tlp_npcs.Location = new Point(40, lbl_npcs.Location.Y + lbl_npcs.Height + 20);
+            flp_npcs.Location = new Point(40, lbl_npcs.Location.Y + lbl_npcs.Height + 20);
 
-            // Setup the columns sizes.
-            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
-            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
-            tlp_npcs.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.06));
-
-            // Generates all data in tlp_npcs.
+            // Generates all CharacterSelection UserControls.
             int i = 0;
             JObject data_pnj;
             string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
@@ -675,71 +656,12 @@ namespace Learn_CTS
             foreach (string file_npc in Directory.GetFiles(npcs_folder_path))
             {
                 data_pnj = Tools.Get_From_JSON(npcs_folder_path + Path.DirectorySeparatorChar + (i + 1) + ".json");
-                
-                tlp_npcs.Height += 42;
-                tlp_npcs.RowCount++;
-                tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
 
-                TextBox npc_name = new TextBox()
-                {
-                    Name = "npc_name" + (i + 1),
-                    Text = (string)data_pnj["name"],
-                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                    BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
-                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
-                    Dock = DockStyle.Fill,
-                    ShortcutsEnabled = false,
-                    AutoSize = true
-                };
-                npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
-                tlp_npcs.Controls.Add(npc_name, 0, i);
-                tlt_global.SetToolTip(npc_name, "Nom du figurant");
-
-                TextBox npc_folder = new TextBox()
-                {
-                    Name = "npc_folder" + (i + 1),
-                    Text = (string)data_pnj["folder"],
-                    Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                    BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
-                    ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
-                    Dock = DockStyle.Fill,
-                    ShortcutsEnabled = false,
-                    AutoSize = true
-                };
-                npc_folder.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
-                tlp_npcs.Controls.Add(npc_folder, 1, i);
-
-                PictureBox npc_discard = new PictureBox()
-                {
-                    Name = "npc_discard" + (i + 1),
-                    Cursor = Cursors.Hand,
-                    Dock = DockStyle.Fill,
-                    Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                           Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png"),
-                    SizeMode = PictureBoxSizeMode.Zoom
-                };
-                npc_discard.Click += new EventHandler(this.Discard_Lib_NPC);
-                tlp_npcs.Controls.Add(npc_discard, 2, i);
+                CharacterSelection cs = new CharacterSelection(this, file_npc);
+                flp_npcs.Controls.Add(cs);
 
                 i++;
             }
-
-            tlp_npcs.Visible = true;
-
-            // Must takes the final size of "tlp_npcs" in order to be under it.
-            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
-
-            /*if (content.VerticalScroll.Enabled)
-            {
-                // Add some space under the whole structure.
-                Panel pan_spacing = new Panel()
-                {
-                    Name = "pan_spacing",
-                    Size = new Size(content.Width - 40, 10),
-                    Location = new Point(20, content.VerticalScroll.Maximum + 30)
-                };
-                content.Controls.Add(pan_spacing);
-            }*/
         }
 
         /// <summary>
@@ -764,217 +686,7 @@ namespace Learn_CTS
                               npc_content.ToString());
 
             // Updating the display.
-            TableLayoutPanel tlp_npcs = (TableLayoutPanel)content.Controls.Find("tlp_npcs", false)[0];
-            Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
 
-            Tools.Begin_Control_Update(tlp_npcs);
-
-            tlp_npcs.Height += 42;
-            tlp_npcs.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-
-            TextBox npc_name = new TextBox()
-            {
-                Name = "npc_name" + new_id,
-                Text = "Nom",
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
-                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
-                Dock = DockStyle.Fill,
-                AutoSize = true
-            };
-            npc_name.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
-            tlp_npcs.Controls.Add(npc_name, 0, new_id - 1);
-
-            TextBox npc_folder = new TextBox()
-            {
-                Name = "npc_folder" + new_id,
-                Text = "",
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
-                BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
-                ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
-                Dock = DockStyle.Fill,
-                AutoSize = true
-            };
-            npc_folder.KeyPress += new KeyPressEventHandler(Text_Changed_Lib_NPC);
-            tlp_npcs.Controls.Add(npc_folder, 1, new_id - 1);
-
-            PictureBox npc_discard = new PictureBox()
-            {
-                Name = "npc_discard" + new_id,
-                Cursor = Cursors.Hand,
-                Dock = DockStyle.Fill,
-                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
-                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "gamecard-delete-btn-x64.png"),
-                SizeMode = PictureBoxSizeMode.Zoom
-            };
-            npc_discard.Click += new EventHandler(this.Discard_Lib_NPC);
-            tlp_npcs.Controls.Add(npc_discard, 2, new_id - 1);
-
-            tlp_npcs.RowCount++;
-
-            Tools.End_Control_Update(tlp_npcs);
-
-            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp_npcs.Location.Y + tlp_npcs.Height + 8);
-        }
-
-        /// <summary>
-        /// Checks the action made into the TextBox and depending on this action,
-        /// save, cancel or edit the content.
-        /// </summary>
-        /// <param name="sender">Control calling the method.</param>
-        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        public void Text_Changed_Lib_NPC(object sender, KeyPressEventArgs e)
-        {
-            TextBox t = (TextBox)sender;
-            List<char> autorized_chars = new List<char>() { ' ', '?', '!', '-', '(', ')', ':' };
-            if (e.KeyChar == (char)13) // (char)13 => Enter.
-            {
-                // Recovering the id of the involved file.
-                TableLayoutPanel flp = (TableLayoutPanel)t.Parent;
-                int txt_id = flp.GetRow(t) + 1;
-                int txt_type = flp.GetColumn(t);
-
-                string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                                  "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
-                JObject data_npc = Tools.Get_From_JSON(this.game_path + txt_path);
-                switch (txt_type)
-                {
-                    case 0:
-                        data_npc["name"] = t.Text;
-                        break;
-                    case 1:
-                        data_npc["folder"] = t.Text;
-                        break;
-                }
-                Tools.Set_To_JSON(this.game_path + txt_path, data_npc); // Set the entered setting as a stored blueprint for npc.
-                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
-                this.saved = true;
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)27) // (char)27 => Escape.
-            {
-                // Recovering the id of the involved file.
-                TableLayoutPanel flp = (TableLayoutPanel)t.Parent;
-                int txt_id = flp.GetRow(t) + 1;
-                int txt_type = flp.GetColumn(t);
-
-                string txt_path = Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                                  "npcs" + Path.DirectorySeparatorChar + txt_id + ".json";
-                JObject data_npc = Tools.Get_From_JSON(this.game_path + txt_path);
-                switch (txt_type)
-                {
-                    case 0:
-                        t.Text = (string)data_npc["name"];
-                        break;
-                    case 1:
-                        t.Text = (string)data_npc["folder"];
-                        break;
-                }
-                t.SelectionStart = t.Text.Length;
-                t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
-                this.saved = true;
-                e.Handled = true;
-            }
-            else if (!(Char.IsLetterOrDigit(e.KeyChar) || autorized_chars.Contains(e.KeyChar) || e.KeyChar == (char)8)) // (char)8 => Backspace.
-            {
-                e.Handled = true;
-            }
-            else if (t.Text.Length > 32) // Avoid endless names.
-            {
-                if (e.KeyChar == (char)8) // Still backspace.
-                {
-                    t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
-                    this.saved = false;
-                    return; // Let you erase regardless of the length.
-                }
-                e.Handled = true;
-            }
-            else
-            {
-                t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
-                this.saved = false;
-            }
-        }
-
-        /// <summary>
-        /// Discard the file matching the sender position in his TableLayoutPanel.
-        /// Then discard the row in the above-mentionned TableLayoutPanel.
-        /// </summary>
-        /// <param name="sender">Control calling the method.</param>
-        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        public void Discard_Lib_NPC(object sender, EventArgs e)
-        {
-            // Recovering the id of the involved file.
-            Control ctrl = (Control)sender;
-            TableLayoutPanel tlp = (TableLayoutPanel)ctrl.Parent;
-            int del_id = tlp.GetRow(ctrl) + 1;
-
-            // Prevent the user from suppressing the last NPC.
-            if (tlp.RowCount <= 1)
-            {
-                MessageBox.Show("Vous ne pouvez pas supprimer l'intégralité des personnages non-joueurs.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Checks if it is used in a situation.
-            string scenarios_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
-            JObject data;
-            foreach (string scenario in Directory.GetDirectories(scenarios_path))
-            {
-                foreach (string situation in Directory.GetDirectories(scenario))
-                {
-                    data = Tools.Get_From_JSON(situation + Path.DirectorySeparatorChar + "dialogs.json");
-                    for (int i = 1; i <= int.Parse(data["events"].ToString()); i++)
-                    {
-                        if (int.Parse(data[i.ToString()]["npc"]["id"].ToString()) == del_id)
-                        {
-                            MessageBox.Show("Ce figurant est utilisé dans une ou plusieurs situations.\n" +
-                                            "Remplacez-le dans ces situations puis réessayez.\n\n" +
-                                            "Situation en faisant usage : " +
-                                            situation.Split(Path.DirectorySeparatorChar).Last().Split('.').Last(),
-                                            "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                    }
-                }
-            }
-
-            // Removing the involved file.
-            string npcs_folder_path = this.game_path + Path.DirectorySeparatorChar + "library" +
-                                      Path.DirectorySeparatorChar + "npcs";
-            File.Delete(npcs_folder_path + Path.DirectorySeparatorChar + del_id + ".json");
-
-            // Reordering the others files.
-            for (int i = del_id; i <= Directory.GetFiles(@"" + npcs_folder_path).Length; i++)
-            {
-                if (del_id <= i)
-                {
-                    Directory.Move(@"" + npcs_folder_path + Path.DirectorySeparatorChar + (i + 1) + ".json",
-                                   @"" + npcs_folder_path + Path.DirectorySeparatorChar + i + ".json");
-                }
-            }
-
-            Tools.Begin_Control_Update(tlp);
-
-            // Updating the display.
-            Button btn_add_lib_npc = (Button)content.Controls.Find("btn_add_lib_npc", false)[0];
-
-            tlp.GetControlFromPosition(2, del_id - 1).Dispose();
-            tlp.GetControlFromPosition(1, del_id - 1).Dispose();
-            tlp.GetControlFromPosition(0, del_id - 1).Dispose();
-
-            for(int i = del_id; i < tlp.RowCount; i++)
-            {
-                tlp.SetCellPosition(tlp.GetControlFromPosition(2, i), new TableLayoutPanelCellPosition(2, i - 1));
-                tlp.SetCellPosition(tlp.GetControlFromPosition(1, i), new TableLayoutPanelCellPosition(1, i - 1));
-                tlp.SetCellPosition(tlp.GetControlFromPosition(0, i), new TableLayoutPanelCellPosition(0, i - 1));
-            }
-            tlp.RowCount--;
-
-            Tools.End_Control_Update(tlp);
-
-            tlp.Height -= 42;
-            btn_add_lib_npc.Location = new Point((content.Width - btn_add_lib_npc.Width) / 2, tlp.Location.Y + tlp.Height + 8);
         }
 
         /// <summary>
