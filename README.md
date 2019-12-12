@@ -138,6 +138,6 @@ Vous pouvez ajouter un évènement par figurant avec le bouton <img src="https:/
 
 Le bouton **Placer** ouvre une nouvelle fenêtre qui permet de **placer le figurant dans le décor**, selon vos souhaits. Il est placé par défaut en haut à gauche de la fenêtre. Pour le **déplacer** le figurant, il faut cliquer dessus et maintenir le clic enfoncé jusqu'à ce que la position vous convient. Si l'emplacement que vous avez choisi est jugé invalide par l'éditeur, celui-ci vous préviendra et placera le figurant aléatoirment dans le décor.
 
-**Pour jouer un aperçu de la situation cliquez sur le bouton <img src="https://i.imgur.com/E3ppsKZ.png" width="32" height="32"/>. 
+**Pour jouer un aperçu de la situation, cliquez sur le bouton **<img src="https://i.imgur.com/E3ppsKZ.png" width="32" height="32"/>.
 
 ###### C'est tout !
