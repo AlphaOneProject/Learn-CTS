@@ -154,6 +154,11 @@ namespace Learn_CTS
             return this.game;
         }
 
+        /// <summary>
+        /// Allow external Forms or UserControls to access the path of the game edited by
+        /// an instance of Editor and thus, the game they are asked to focus on.
+        /// </summary>
+        /// <returns>Path of the game currently edited.</returns>
         public string Get_Game_Path()
         {
             return this.game_path;
@@ -169,11 +174,21 @@ namespace Learn_CTS
             return this.theme;
         }
 
+        /// <summary>
+        /// Allow external Forms or UserControls to access the loading state of the game edited by
+        /// an instance of Editor and thus, the game they are asked to focus on.
+        /// </summary>
+        /// <returns>Current loading state of the editor, false if no loading and true if loading.</returns>
         public bool Get_Is_Loading()
         {
             return this.is_loading;
         }
 
+        /// <summary>
+        /// Accessor to the local parameter "is_loading",
+        /// used to transmit a non-interruption demand.
+        /// </summary>
+        /// <param name="new_is_loading">New loading state to assign to the editor.</param>
         public void Set_Is_Loading(bool new_is_loading)
         {
             this.is_loading = new_is_loading;
@@ -1122,6 +1137,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Refresh the display of QuizzEdition inside the content depending on the new dialogs' page.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Page_Update(object sender, EventArgs e)
         {
             Label lbl = (Label)sender;
@@ -1207,6 +1227,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Go to the first page of the dialogs.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Fast_Backward(object sender, EventArgs e)
         {
             if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
@@ -1225,6 +1250,11 @@ namespace Learn_CTS
             lbl.Text = "1/" + Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
+        /// <summary>
+        /// Go to the precedent page of the dialogs.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Backward(object sender, EventArgs e)
         {
             if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
@@ -1244,6 +1274,11 @@ namespace Learn_CTS
                        Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
+        /// <summary>
+        /// Go to the next page of the dialogs.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Forward(object sender, EventArgs e)
         {
             if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
@@ -1263,6 +1298,11 @@ namespace Learn_CTS
                        Tools.Round_Up((double)Directory.GetFiles(dialogs_path).Length / dialogs_per_page).ToString();
         }
 
+        /// <summary>
+        /// Go to the last page of the dialogs.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Fast_Forward(object sender, EventArgs e)
         {
             if (!this.saved && MessageBox.Show("Vous avez des modifications non enregistrées.\nSouhaitez-vous les abandonner ?",
@@ -1507,6 +1547,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Creates and display a new sprite.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Add_Sprite(object sender, EventArgs e)
         {
             string characters_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
@@ -1582,6 +1627,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Creates and display a new background from a selected image file.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Add_Background(object sender, EventArgs e)
         {
             if (ofd_global.ShowDialog() == DialogResult.Cancel) { return; }
@@ -2491,6 +2541,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Adjust value of NPC's density in the environment.json file
+        /// of the current situation.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Npc_Density_Update(object sender, EventArgs e)
         {
             // Diplay the new value.
@@ -2507,6 +2563,12 @@ namespace Learn_CTS
             try { Tools.Set_To_JSON(situation_path + "environment.json", envi_data); } catch (Exception except) { return; }
         }
 
+        /// <summary>
+        /// Synchronize value of active background in the environment.json file
+        /// of the current situation.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Situation_Background_Changed(object sender, EventArgs e)
         {
             ComboBoxFix cbo = (ComboBoxFix)sender;
@@ -2516,6 +2578,12 @@ namespace Learn_CTS
             Tools.Set_To_JSON((string)cbo.Tag, data);
         }
 
+        /// <summary>
+        /// Synchronize value of scene_type in the environment.json file
+        /// of the current situation.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Scene_Type_Changed(object sender, EventArgs e)
         {
             ComboBoxFix cbo = (ComboBoxFix)sender;
@@ -2525,6 +2593,12 @@ namespace Learn_CTS
             Tools.Set_To_JSON((string)cbo.Tag, data);
         }
 
+        /// <summary>
+        /// Creates a new event in the current situation.
+        /// Both displayed and created on hard drive.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Add_Event(object sender, EventArgs e)
         {
             // Filling the matching file.
@@ -2569,6 +2643,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Deletes the event inside the situation's "dialogs.json" file.
+        /// Then the display of the sender ( EventEdition ). 
+        /// </summary>
+        /// <param name="sender">Instance of EventEdition UserControl sending a self-destruction request.</param>
         public void Discard_Event(EventEdition sender)
         {
             string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
@@ -2601,6 +2680,10 @@ namespace Learn_CTS
             Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
+        /// <summary>
+        /// Starts a PlacementEdition UserControl to place the event.
+        /// </summary>
+        /// <param name="sender">Instance of EventEdition UserControl sending a placement request.</param>
         public void Place_Event(EventEdition sender)
         {
             if (this.event_placement != null) { return; }
@@ -2664,6 +2747,11 @@ namespace Learn_CTS
             this.event_placement.ShowDialog();
         }
 
+        /// <summary>
+        /// Is called by PlacementEdition to transmit the new event position.
+        /// </summary>
+        /// <param name="id">ID of the event.</param>
+        /// <param name="new_pos">New position of the event.</param>
         public void Reset_Place_Event(int id, Point new_pos)
         {
             // Reset of the PlacementEdition local Form.

@@ -90,7 +90,7 @@ namespace Learn_CTS
         private void InitializeListTextures()
         {
             Texture.InitializePath(game);
-            Texture background = new Texture("pncBackground", "background", 0, 0, -100);
+            Texture background = FetchBackground();
             list_textures.Add(background); // Adding the background first
 
             item_manager.GetItemsFromSituation();
@@ -235,6 +235,16 @@ namespace Learn_CTS
         public int getItemsLeft()
         {
             return items_left;
+        }
+
+        /// <summary>
+        /// Finds which background is used in the environnement.json file, then gets it in the library.
+        /// </summary>
+        private Texture FetchBackground()
+        {
+            string bg_name = Tools.Get_From_JSON(situation_path + Path.DirectorySeparatorChar + "environment.json")["background"].ToString();
+            Texture bg = new Texture(bg_name, "background", 0, 0, -100);
+            return bg;
         }
     }
 }
