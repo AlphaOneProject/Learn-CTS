@@ -223,13 +223,13 @@ namespace Learn_CTS
                 orig.Dispose();
                 return (Image)clone;
             }
-            catch (Exception)
+            catch (IOException)
             {
-                Console.WriteLine("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
-                                "Veuillez qu'elle soit bien ici : " + path);
+                MessageBox.Show("L'image de la texture n'a pas été trouvée, ou elle est inaccessible.\n" +
+                                "Veuillez vérifier qu'elle soit bien ici : " + path);
+                GameWindow.GetInstance().Close();
             }
             return null;
-
         }
 
         /// <summary>
@@ -244,10 +244,8 @@ namespace Learn_CTS
             {
                 return new Bitmap(Image.FromFile(path));
             }
-            catch (Exception)
+            catch (IOException)
             {
-                Console.WriteLine("L'image de la hitbox n'a pas été trouvée, ou elle est inaccessible.\n" +
-                                "Veuillez qu'elle soit bien ici : " + path);
             }
             return null;
         }

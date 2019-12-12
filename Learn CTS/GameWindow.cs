@@ -213,9 +213,17 @@ namespace Learn_CTS
             RemoveAllControls();
             this.Focus();
             StartTransition();
-            JObject environment = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json");
-            lbl_name_place.Text = environment["scene_name"].ToString();
-            int scene_type = (int)environment["scene_type"];
+            JObject environment = null;
+            int scene_type = 0;
+            string background_name = "";
+            try
+            {
+                environment = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json");
+                lbl_name_place.Text = environment["scene_name"].ToString();
+                scene_type = (int)environment["scene_type"];
+                background_name = (string)environment["background"];
+            }
+            catch(IOException ex) { MessageBox.Show("Erreur : " + this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json" + " n'a pas été trouvé."); this.Close(); }
             Console.WriteLine(scene_type);
             if(scene_type < 0 || scene_type > 9)
             {
@@ -232,7 +240,7 @@ namespace Learn_CTS
             SetScore(800);
             r = new Random();
             InitializeTimer(scene_type);
-            InitializeListTextures(scene_type);
+            InitializeListTextures(scene_type, background_name);
             DisplayIntro(environment["scene_name"].ToString(), environment["scene_intro"].ToString());
         }
 
@@ -324,7 +332,7 @@ namespace Learn_CTS
         /// Initialize all the textures of the game.
         /// </summary>
 
-        private void InitializeListTextures(int scene_type)
+        private void InitializeListTextures(int scene_type, string background_name)
         {
             if (list_game_textures != null && list_game_textures.Count > 0)
             {
@@ -334,10 +342,10 @@ namespace Learn_CTS
                 }
             }
             player = new Player(this.Width/2-96, 650);
+            background = new Background(background_name, 0, -372);
             list_game_textures = new List<Texture>();
             if (scene_type == 0)
             {
-                background = new Background("backgroundCity", 0, -372);
                 vehicule = new Tram(-4000, 298 + 80);
                 platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
                 platform.AddChild(player);
@@ -346,7 +354,6 @@ namespace Learn_CTS
             }
             else if (scene_type == 1 || scene_type == 3)
             {
-                background = new Background("backgroundCity", 0, -372);
                 vehicule = new Tram(-4000, 298 + 80);
                 vehicule.AddChild(player);
                 player.SetX(vehicule.GetX() + vehicule.GetWidth() / 2 - player.GetWidth() / 2);
@@ -358,7 +365,6 @@ namespace Learn_CTS
             }
             else if (scene_type == 2)
             {
-                background = new Background("backgroundCity", 0, -372);
                 vehicule = new Tram(-4000, 298 + 80);
                 platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
                 vehicule.AddChild(player);
@@ -368,13 +374,11 @@ namespace Learn_CTS
             }
             else if (scene_type == 8)
             {
-                background = new Background("parkBackground", 0, -372);
                 background.EnableCollisions();
                 list_game_textures.Add(player);
             }
             else if (scene_type == 9)
             {
-                background = new Background("backgroundCityStreet", 0, -372);
                 background.EnableCollisions();
                 list_game_textures.Add(player);
             }
@@ -1133,6 +1137,7 @@ namespace Learn_CTS
             else if (scene_type == 9)
             {
                 FillStreetNPCs(NPCsDensity);
+                FillStreetCars(4);
             }
         }
 
@@ -1280,11 +1285,40 @@ namespace Learn_CTS
             for (int i = 0; i < max; i++)
             {
                 x = r.Next(0, draw_surface_width);
-                if (i%2 == 0) y = r.Next(1248-192, 1440-192);
-                else y = r.Next(992-192, 1062-192);
+                if (i%2 == 0) y = r.Next(1248-192, 1440-192) - 372;
+                else y = r.Next(992-192, 1062-192) - 372;
                 n = nm.CreateNPC(x, y);
                 if (r.Next(0, 2) == 0) n.SetObjectiveX(5000);
                 else n.SetObjectiveX(-5000);
+                list_game_textures.Add(n);
+            }
+        }
+
+        private void FillStreetCars(int number)
+        {
+            int max = number;
+            int x;
+            int y;
+            NPC n;
+            for (int i = 0; i < max; i++)
+            {
+                x = r.Next(0, draw_surface_width);
+                if (i % 2 == 0)
+                {
+                    y = 960 - 372;
+                    n = nm.CreateNPC(x, y);
+                    n.SetVisible(false);
+                    n.AddChild(new Texture("car_red_3","vehicule/cars",x,y));
+                    n.SetObjectiveX(-500000);
+                }
+                else
+                {
+                    y = 1060 - 372;
+                    n = nm.CreateNPC(x, y);
+                    n.SetVisible(false);
+                    n.AddChild(new Texture("car_red_1", "vehicule/cars", x, y));
+                    n.SetObjectiveX(500000);
+                }
                 list_game_textures.Add(n);
             }
         }
@@ -1295,19 +1329,18 @@ namespace Learn_CTS
             {
                 if (!IsOnScreen(n))
                 {
-                    Console.WriteLine(n.GetX() + ":" + n.GetY());
                     n.RemoveAllObjectives();
                     if (n.GetX()+n.GetWidth() <= 0)
                     {
                         n.SetX(draw_surface_width - 1);
                         n.SetY(r.Next(draw_surface_height * 2 / 3, draw_surface_height));
-                        n.SetObjectiveX(-5000);
+                        n.SetObjectiveX(-500000);
                     }
                     else if(n.GetX() > draw_surface_width)
                     {
                         n.SetX(-n.GetWidth() + 1);
                         n.SetY(r.Next(draw_surface_height * 2 / 3, draw_surface_height));
-                        n.SetObjectiveX(5000);
+                        n.SetObjectiveX(500000);
                     }
                 }
             }
@@ -1317,23 +1350,22 @@ namespace Learn_CTS
         {
             foreach (NPC n in nm.GetList())
             {
-                if (!IsOnScreen(n))
+                if (!IsOnScreen(n) && n.GetListChilds().Find(x => x.GetName().Contains("car")) == null)
                 {
-                    Console.WriteLine(n.GetX() + ":" + n.GetY());
                     n.RemoveAllObjectives();
                     if (n.GetX() + n.GetWidth() <= 0)
                     {
                         n.SetX(draw_surface_width - 1);
-                        if (r.Next(0, 2) == 0) n.SetY(r.Next(1248 - 192, 1440 - 192));
-                        else n.SetY(r.Next(992 - 192, 1062 - 192));
-                        n.SetObjectiveX(-5000);
+                        if (r.Next(0, 2) == 0) n.SetY(r.Next(1248 - 192, 1440 - 192) - 372);
+                        else n.SetY(r.Next(992 - 192, 1062 - 192) - 372);
+                        n.SetObjectiveX(-500000);
                     }
                     else if (n.GetX() > draw_surface_width)
                     {
                         n.SetX(-n.GetWidth() + 1);
-                        if (r.Next(0, 2) == 0) n.SetY(r.Next(1248 - 192, 1440 - 192));
-                        else n.SetY(r.Next(992 - 192, 1062 - 192));
-                        n.SetObjectiveX(5000);
+                        if (r.Next(0, 2) == 0) n.SetY(r.Next(1248 - 192, 1440 - 192) - 372);
+                        else n.SetY(r.Next(992 - 192, 1062 - 192) - 372);
+                        n.SetObjectiveX(500000);
                     }
                 }
             }
@@ -1341,7 +1373,27 @@ namespace Learn_CTS
 
         private void RespawnCarsOutsideScreen()
         {
-
+            Texture car;
+            foreach (NPC n in nm.GetList())
+            {
+                if (!IsOnScreen(n) && n.GetListChilds().Find(x => x.GetName().Contains("car")) != null)
+                {
+                    car = n.GetListChilds().Find(x => x.GetName().Contains("car"));
+                    n.RemoveAllObjectives();
+                    if (car.GetX() + car.GetWidth() <= 0)
+                    {
+                        n.SetX(draw_surface_width - 1);
+                        n.SetY(960 - 372);
+                        n.SetObjectiveX(-500000);
+                    }
+                    else if (car.GetX() > draw_surface_width)
+                    {
+                        n.SetX(-n.GetWidth() + 1);
+                        n.SetY(1060 - 372);
+                        n.SetObjectiveX(500000);
+                    }
+                }
+            }
         }
 
         private void ShuffleVehiculeNPCs()
@@ -1597,6 +1649,7 @@ namespace Learn_CTS
                 if(int.Parse(c.Tag.ToString()) == 1)
                 {
                     this.Controls.Remove(c);
+                    this.Focus();
                 }
             }
         }
