@@ -74,6 +74,10 @@ namespace Learn_CTS
         {
             txt_create.Focus();
             Change_Theme();
+
+            // Setting tooltips
+            tlt_gcr.SetToolTip(pb_back_create, "Retour");
+            tlt_gcr.SetToolTip(pb_confirm, "Confirmer");
         }
 
         /// <summary>

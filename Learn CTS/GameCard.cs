@@ -63,6 +63,12 @@ namespace Learn_CTS
         {
             //Setting the colors for the controls accoring to the theme
             Change_Theme();
+
+            //Setting tooltips
+            tlt_gc.SetToolTip(pb_play, "Jouer au jeu");
+            tlt_gc.SetToolTip(pb_copy, "Copier le jeu");
+            tlt_gc.SetToolTip(pb_edit, "Editer le jeu");
+            tlt_gc.SetToolTip(pb_delete, "Supprimer le jeu");
         }
 
         /// <summary>
