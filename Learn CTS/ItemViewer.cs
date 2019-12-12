@@ -119,14 +119,14 @@ namespace Learn_CTS
         private void Action_Event(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string s = item.GetActions()["c" + btn.TabIndex.ToString()]["redirect"].ToString();
-            int score = (int)item.GetActions()["c" + btn.TabIndex.ToString()]["score"];
+            string s = this.actions["c" + btn.TabIndex.ToString()]["redirect"].ToString();
+            int score = (int)this.actions["c" + btn.TabIndex.ToString()]["score"];
             GameWindow.GetInstance().SetScore(score);
             if (s.Length == 0 || s == "0")
             {
                 PNCWindow window = ((PNCWindow)this.FindForm());
                 window.setItemsLeft(window.getItemsLeft() - 1);
-                Exit();   
+                Exit();
             }
             else if (s == "-1")
             {
