@@ -44,20 +44,21 @@ namespace Learn_CTS
 
         private void pbox_arrow_right_MouseDown(object sender, MouseEventArgs e)
         {
-            this.i_current_img--;
+            this.i_current_img++;
             UpdateFolder();
         }
 
         private void pbox_arrow_left_MouseDown(object sender, MouseEventArgs e)
         {
-            this.i_current_img++;
+            this.i_current_img--;
             UpdateFolder();
         }
 
         private void UpdateFolder()
         {
-            pbox_char.Image = list_images_char[Math.Abs(i_current_img) % list_images_char.Count];
-            Player.SetFolder((Math.Abs(i_current_img) % list_images_char.Count + 1).ToString());
+
+            pbox_char.Image = list_images_char[((((i_current_img % list_images_char.Count) + list_images_char.Count) % list_images_char.Count))];
+            Player.SetFolder(((((i_current_img % list_images_char.Count) + list_images_char.Count) % list_images_char.Count) + 1).ToString());
         }
     }
 }

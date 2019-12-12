@@ -77,7 +77,7 @@ namespace Learn_CTS
         private void Txt_create_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox t = (TextBox)sender;
-            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar.Equals(Keys.Space))
             {
                 e.Handled = true;
             }

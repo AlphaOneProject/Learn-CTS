@@ -40,7 +40,7 @@
             // pb_item
             // 
             this.pb_item.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pb_item.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pb_item.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_item.Location = new System.Drawing.Point(3, 3);
             this.pb_item.Name = "pb_item";
             this.pb_item.Size = new System.Drawing.Size(125, 121);

@@ -284,7 +284,7 @@ namespace Learn_CTS
             // Creation of the FlowLayoutPanel in which the games will be displayed as UserControls.
             FlowLayoutPanel games_menu_flp_games = new FlowLayoutPanel()
             {
-                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth + 1, this.Height - games_menu_pnl_topbar.Height),
+                Size = new Size(this.Width - SystemInformation.VerticalScrollBarWidth, this.Height - games_menu_pnl_topbar.Height),
                 Name = "games_menu_flp_games",
                 Anchor = AnchorStyles.Top,
                 Tag = 2,

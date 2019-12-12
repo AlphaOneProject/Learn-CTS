@@ -46,7 +46,6 @@ namespace Learn_CTS
 
         private void Dialog_Load(object sender, EventArgs e)
         {
-            this.Focus();
             t_audio = new Thread(new ThreadStart(Listen));
             InitializeTimerDisplayText();
             this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
@@ -62,6 +61,7 @@ namespace Learn_CTS
                 txt_dialog_npc.Text = "";
                 if (!t_audio.IsAlive) t_audio.Start();
             }
+            this.Focus();
         }
 
         private void InitializeGamePath(string game)
