@@ -76,7 +76,7 @@ namespace Learn_CTS
             pb_3.Image = valid_sprites[(((cursor + 1) % valid_sprites.Count) + valid_sprites.Count) % valid_sprites.Count];
 
             JObject data = Tools.Get_From_JSON(npc_path);
-            data["folder"] = valid_folders[((cursor % valid_sprites.Count) + valid_sprites.Count) % valid_sprites.Count];
+            data["folder"] = valid_folders[((cursor % valid_sprites.Count) + valid_sprites.Count) % valid_sprites.Count].Split(Path.DirectorySeparatorChar).Last();
             Tools.Set_To_JSON(npc_path, data);
         }
 

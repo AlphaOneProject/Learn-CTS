@@ -43,10 +43,10 @@ namespace Learn_CTS
         /// <param name="y"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public Item CreateItem(int id, string name, int x, int y, JObject actions)
+        public Item CreateItem(int id, string image, int x, int y, JObject actions)
         {
             Item item = new Item(id, x, y);
-            item.SetImage(item.CreateImage(name));
+            item.SetImage(item.CreateImage(image));
             item.SetActions(actions);
             list_items.Add(item);
             return item;
@@ -114,8 +114,7 @@ namespace Learn_CTS
                 string nb_quizz = situation[index]["quizz"].ToString();
                 Item item = this.CreateItem(
                         int.Parse(situation[index]["item"]["id"].ToString()),
-                        items_lib_path + Path.DirectorySeparatorChar +
-                            situation[index]["item"]["name"].ToString() + ".png",
+                        situation[index]["image"].ToString(),
                         int.Parse(situation[index]["x"].ToString()),
                         int.Parse(situation[index]["y"].ToString()),
                         Tools.Get_From_JSON(library_path + Path.DirectorySeparatorChar +

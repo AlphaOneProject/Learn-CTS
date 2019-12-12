@@ -55,7 +55,9 @@
             // 
             this.txt_create.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.txt_create.Location = new System.Drawing.Point(69, 39);
+            this.txt_create.MaxLength = 32;
             this.txt_create.Name = "txt_create";
+            this.txt_create.ShortcutsEnabled = false;
             this.txt_create.Size = new System.Drawing.Size(231, 29);
             this.txt_create.TabIndex = 2;
             this.txt_create.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txt_create_KeyPress);

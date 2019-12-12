@@ -34,6 +34,11 @@ namespace Learn_CTS
          */
         private Menu menu;
 
+        /**
+         * Default folders to copy into the newly created game
+         */
+        private DirectoryInfo di_default;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -43,6 +48,8 @@ namespace Learn_CTS
             InitializeComponent();
 
             this.games_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar;
+            this.di_default = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "internal" +
+                Path.DirectorySeparatorChar + "defaultgame");
             this.menu = menu;
             this.theme = menu.GetTheme();
 
@@ -133,26 +140,8 @@ namespace Learn_CTS
         {
             // ./Game
             Directory.CreateDirectory(@"" + this.games_path + nom);
-            // ./Game/library
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library");
-            // ./Game/library/dialogs
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs");
-            // ./Game/library/dialogs
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "audio");
-            // ./Game/library/images
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images");
-            // ./Game/library/npcs
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs");
-            // ./Game/scenarios
-            Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "scenarios");
-
-            List<string> dir_list = new List<string>() {
-                "background", "characters", "eggs", "items", "others", "park", "platform", "vehicule"
-            };
-            foreach(string d in dir_list){
-                Directory.CreateDirectory(@"" + this.games_path + nom + Path.DirectorySeparatorChar +
-                    "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + d);
-            }
+            DirectoryInfo di_newgame = new DirectoryInfo(this.games_path + nom);
+            Tools.DirectoryCopy(di_default, di_newgame);
 
             // Add a "properties.json" to the newly created folder.
             JObject properties_content = new JObject();
@@ -161,58 +150,6 @@ namespace Learn_CTS
             properties_content["description"] = "Description par défaut";
             File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "properties.json",
                               properties_content.ToString());
-
-            // Add the default "1.json" file for the first NPC.
-            JObject default_pnj_content = new JObject();
-            default_pnj_content["name"] = "Personnage 1";
-            default_pnj_content["folder"] = "1";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "npcs" + Path.DirectorySeparatorChar + "1.json",
-                              default_pnj_content.ToString());
-
-            // Add the default "2.json" file for the second NPC.
-            JObject default2_pnj_content = new JObject();
-            default2_pnj_content["name"] = "Personnage 2";
-            default2_pnj_content["folder"] = "2";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "npcs" + Path.DirectorySeparatorChar + "2.json",
-                              default2_pnj_content.ToString());
-
-            // Add the default "2.json" file for the third NPC.
-            JObject default3_pnj_content = new JObject();
-            default3_pnj_content["name"] = "Personnage 3";
-            default3_pnj_content["folder"] = "3";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "npcs" + Path.DirectorySeparatorChar + "3.json",
-                              default3_pnj_content.ToString());
-
-            // Add the default "1.json" file for the first scenario.
-            JObject default_dialog_content = new JObject()
-            {
-                ["question"] = "Quelle première question écrire ?",
-                ["choices"] = 2,
-                ["c1"] = new JObject()
-                {
-                    ["answer"] = "Réponse 1",
-                    ["score"] = 1,
-                    ["redirect"] = 0
-                },
-                ["c2"] = new JObject()
-                {
-                    ["answer"] = "Réponse 2",
-                    ["score"] = -1,
-                    ["redirect"] = 0
-                },
-                ["audio"] = 1
-            };
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "dialogs" + Path.DirectorySeparatorChar + "1.json", default_dialog_content.ToString());
-            default_dialog_content["question"] = "Quelle seconde question écrire ?";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "dialogs" + Path.DirectorySeparatorChar + "2.json", default_dialog_content.ToString());
-            default_dialog_content["question"] = "Quelle troisième question écrire ?";
-            File.WriteAllText(@"" + this.games_path + nom + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
-                "dialogs" + Path.DirectorySeparatorChar + "3.json", default_dialog_content.ToString());
         }
 
         /// <summary>
