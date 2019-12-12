@@ -212,6 +212,7 @@ namespace Learn_CTS
         {
             try
             {
+                MessageBox.Show(path);
                 Bitmap orig = new Bitmap(path);
                 Bitmap clone = new Bitmap(orig.Width, orig.Height,
                     System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
