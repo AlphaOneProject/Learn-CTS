@@ -62,6 +62,7 @@ namespace Learn_CTS
             lbl_desc.Text = item.GetDescription();
             this.actions = item.GetActions();
             DisplayActions();
+            tlt_iv.SetToolTip(pb_audio, "Ecouter l'audiodescription");
         }
 
         /// <summary>

@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pb_item = new System.Windows.Forms.PictureBox();
             this.lbl_desc = new System.Windows.Forms.Label();
             this.btn_exit = new System.Windows.Forms.Button();
             this.flp_actions = new System.Windows.Forms.FlowLayoutPanel();
             this.pb_audio = new System.Windows.Forms.PictureBox();
+            this.tlt_iv = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_item)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_audio)).BeginInit();
             this.SuspendLayout();
@@ -112,5 +114,6 @@
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.FlowLayoutPanel flp_actions;
         private System.Windows.Forms.PictureBox pb_audio;
+        private System.Windows.Forms.ToolTip tlt_iv;
     }
 }
