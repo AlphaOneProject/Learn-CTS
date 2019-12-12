@@ -127,6 +127,12 @@ namespace Learn_CTS
             return output;
         }
 
+        /// <summary>
+        /// Round up a number (round down is induced by cast to int).
+        /// Usefull for calculations purposes.
+        /// </summary>
+        /// <param name="nbr">Number to round.</param>
+        /// <returns>Number rounded up.</returns>
         public static int Round_Up(double nbr)
         {
             if ((int)nbr != nbr)
@@ -183,6 +189,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Generates an image from a path without any link to the file.
+        /// Useful for edition of the said file while the image is loaded.
+        /// </summary>
+        /// <param name="image_path">Path of the image to load.</param>
+        /// <returns>Image object created from a bitmap of the file.</returns>
         public static Image Image_From_File(string image_path)
         {
             Image img;
@@ -205,6 +217,12 @@ namespace Learn_CTS
             return img;
         }
 
+        /// <summary>
+        /// Checks if a specified folder is valid as an animation.
+        /// Required: "1_[0 to 8].png" && "3_[0 to 8].png".
+        /// </summary>
+        /// <param name="folder_path">Full path of the folder to check.</param>
+        /// <returns>Validity of the folder.</returns>
         public static bool Is_Valid(string folder_path)
         {
             bool valid = true;

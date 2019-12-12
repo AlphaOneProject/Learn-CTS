@@ -23,6 +23,14 @@ namespace Learn_CTS
 
         // Methods.
 
+        /// <summary>
+        /// Constructor of the Form, setup the necessary arguments as parameters.
+        /// </summary>
+        /// <param name="sender">Instance of the Editor parent of the Form.</param>
+        /// <param name="pb_placing">PictureBox to place.</param>
+        /// <param name="pbs_placed">Others PictureBoxes already placed.</param>
+        /// <param name="pbs_placed_points">Positions from the placed PictureBoxes.</param>
+        /// <param name="pb_environment">PictureBox where the others will be placed.</param>
         public PlacementEdition(Editor sender, PictureBox pb_placing, List<PictureBox> pbs_placed, List<Point> pbs_placed_points, PictureBox pb_environment)
         {
             InitializeComponent();
@@ -57,12 +65,22 @@ namespace Learn_CTS
             
         }
 
+        /// <summary>
+        /// Activates the dragging.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_Placing_MouseDown(object sender, MouseEventArgs e)
         {
             dragging = true;
             dragPoint = new Point(e.X, e.Y);
         }
 
+        /// <summary>
+        /// Modify the location for the PictureBox while it is dragged.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_Placing_MouseMove(object sender, MouseEventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -72,11 +90,21 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Toggles the dragging off.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_Placing_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
         }
 
+        /// <summary>
+        /// Transmits to the Editor the new position selected.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void PlacementEdition_FormClosing(object sender, FormClosingEventArgs e)
         {
             Point current_pos = new Point(this.pb.Location.X + pan_global.HorizontalScroll.Value,

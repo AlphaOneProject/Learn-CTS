@@ -22,6 +22,11 @@ namespace Learn_CTS
 
         // Methods.
 
+        /// <summary>
+        /// Constructor of the UserControl, setup the necessary arguments as parameters.
+        /// </summary>
+        /// <param name="editor">Parent of the UserControl, used for game path and theme.</param>
+        /// <param name="image_path">Path of the image to edit.</param>
         public ImageEdition(Editor editor, string image_path)
         {
             InitializeComponent();
@@ -30,6 +35,11 @@ namespace Learn_CTS
             this.image_path = image_path;
         }
 
+        /// <summary>
+        /// Load the image, its title and the global theme.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void ImageEdition_Load(object sender, EventArgs e)
         {
             Image img;
@@ -47,6 +57,11 @@ namespace Learn_CTS
             this.ForeColor = Color.FromArgb(int.Parse((string)theme["5"]["R"]), int.Parse((string)theme["5"]["G"]), int.Parse((string)theme["5"]["B"]));
         }
 
+        /// <summary>
+        /// Checks the uses of the image, if not used delete it and then "Dispose()" himself.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_delete_Click(object sender, EventArgs e)
         {
             // Checks if it is used in a situation.

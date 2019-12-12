@@ -24,6 +24,11 @@ namespace Learn_CTS
 
         // Methods.
 
+        /// <summary>
+        /// Constructor of the UserControl, setup the necessary arguments as parameters.
+        /// </summary>
+        /// <param name="editor">Parent instance of Editor.</param>
+        /// <param name="folder_path">Sprite folder's full path.</param>
         public AnimationEdition(Editor editor, string folder_path)
         {
             InitializeComponent();
@@ -32,16 +37,24 @@ namespace Learn_CTS
             this.folder_path = @"" + folder_path + Path.DirectorySeparatorChar;
         }
 
+        /// <summary>
+        /// Apply the global theme to the UserControl and set the name.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void AnimationEdition_Load(object sender, EventArgs e)
         {
             JObject theme = this.editor.Get_Theme();
             lbl_name.BackColor = Color.FromArgb(int.Parse((string)theme["1"]["R"]), int.Parse((string)theme["1"]["G"]), int.Parse((string)theme["1"]["B"]));
             lbl_name.ForeColor = Color.FromArgb(int.Parse((string)theme["5"]["R"]), int.Parse((string)theme["5"]["G"]), int.Parse((string)theme["5"]["B"]));
             lbl_name.Text = folder_path.Substring(0, folder_path.Length - 1).Split(Path.DirectorySeparatorChar).Last();
-            Console.WriteLine(folder_path);
             Load_Images();
         }
 
+        /// <summary>
+        /// Load images depending upon values of "upper_cursor" and "lower_cursor".
+        /// Then checks validity of the folder.
+        /// </summary>
         private void Load_Images()
         {
             pb_up1.Tag = folder_path + "1_" + (upper_cursor % 9).ToString() + ".png";
@@ -74,30 +87,55 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Slides the upper bar to the left.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_up_left_Click(object sender, EventArgs e)
         {
             this.upper_cursor--;
             Load_Images();
         }
 
+        /// <summary>
+        /// Slides the upper bar to the right.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_up_right_Click(object sender, EventArgs e)
         {
             this.upper_cursor++;
             Load_Images();
         }
 
+        /// <summary>
+        /// Slides the lower bar to the left.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_down_left_Click(object sender, EventArgs e)
         {
             this.lower_cursor--;
             Load_Images();
         }
 
+        /// <summary>
+        /// Slides the lower bar to the right.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_down_right_Click(object sender, EventArgs e)
         {
             this.lower_cursor++;
             Load_Images();
         }
 
+        /// <summary>
+        /// Set or modify the assigned sprite with one specified by the user through OpenFileDialog.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Click_Sprite(object sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -122,6 +160,12 @@ namespace Learn_CTS
             pb.Image = Tools.Image_From_File(@"" + pb.Tag);
         }
 
+        /// <summary>
+        /// After checking for any usage in NPCs folders,
+        /// deletes this sprite folder.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Pb_delete_Click(object sender, EventArgs e)
         {
             // Checks if it is used in a situation.

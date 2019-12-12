@@ -209,6 +209,7 @@ namespace Learn_CTS
         private void Load_Game()
         {
             if (instance == null) return;
+            this.BackColor = Color.Black;
             RemoveAllControls();
             this.Focus();
             StartTransition();
@@ -222,7 +223,6 @@ namespace Learn_CTS
                 this.Close();
             }
             SetupScene(scene_type);
-            this.BackColor = Color.Black;
             DisplayLoading();
             while (!tr.HasFinished())
             {
@@ -670,25 +670,6 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Open or close the dialog if its already on screen.
-        /// </summary>
-
-        public void OpenCloseDialog(int id_npc)
-        {
-            Refresh();
-            if (this.Controls.Find("Dialog", true).Length > 0 && id_npc < 0)
-            {
-                this.Controls.Remove(this.Controls.Find("Dialog", true)[0]);
-                this.Focus();
-            }
-            else
-            {
-                this.Controls.Add(new Dialog(id_npc, this.Text));
-            }
-            Refresh();
-        }
-
-        /// <summary>
         /// Check if the vehicule has to slow down.
         /// </summary>
 
@@ -851,7 +832,7 @@ namespace Learn_CTS
                 }
             }
             if (backpack.IsHitboxHit(mouse_x, mouse_y)) OpenClose_Backpack();
-            else if (this.Controls.Count <= 5 && !SearchNPCDialog(mouse_x, mouse_y))
+            else if (this.Focused && !SearchNPCDialog(mouse_x, mouse_y))
             {
                 player.SetObjective(mouse_x, mouse_y);
             }
@@ -873,7 +854,7 @@ namespace Learn_CTS
                 {
                     if (Math.Abs((t.GetX() + t.GetWidth() / 2 - (player.GetX() + player.GetWidth() / 2))) < 256 && Math.Abs((t.GetY() - player.GetY())) < 256)
                     {
-                        OpenCloseDialog(t.GetID());
+                        this.Controls.Add(new Dialog(t.GetID(), this.Text));
                     }
                     else
                     {
@@ -913,7 +894,7 @@ namespace Learn_CTS
         {
             bool c_vertical = true;
             bool c_horizontal = true;
-            if (this.Controls.Count > 5) return;
+            if (!this.Focused) return;
             player.UpdateMovement(a, b);
             if (a != 0)
             {
@@ -1428,10 +1409,9 @@ namespace Learn_CTS
             }
             else
             {
-                this.Controls.Remove((this.Controls.Find("Backpack", true)[0]));
+                RemoveAllControls();
                 this.Focus();
             }
-            Refresh();
         }
 
         public void PassThroughNPCs()
@@ -1586,7 +1566,7 @@ namespace Learn_CTS
         {
             return (t.GetX() + t.GetWidth() >= 0 && t.GetX() < draw_surface_width && t.GetY() + t.GetHeight() >= 0 && t.GetY() < draw_surface_height);
         }
-        private void RemoveAllControls()
+        public void RemoveAllControls()
         {
             foreach(Control c in this.Controls)
             {

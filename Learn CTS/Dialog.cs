@@ -46,9 +46,9 @@ namespace Learn_CTS
 
         private void Dialog_Load(object sender, EventArgs e)
         {
+            this.Focus();
             t_audio = new Thread(new ThreadStart(Listen));
             InitializeTimerDisplayText();
-            this.Focus();
             this.pbox_audio.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "speaker.png");
             if (npc != null) this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
             else
@@ -184,7 +184,7 @@ namespace Learn_CTS
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
             if (t_audio != null && t_audio.IsAlive) t_audio.Abort();
-            ((GameWindow)this.FindForm()).OpenCloseDialog(-1);
+            ((GameWindow)this.FindForm()).RemoveAllControls();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
