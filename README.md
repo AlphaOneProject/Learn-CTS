@@ -69,13 +69,47 @@ Une fois sur le menu principal, cliquez sur **Mes jeux**. Editez un jeu déjà e
 
 La première rubrique de l'éditeur est **Général** Vous pourrez y modifier le titre et la description du jeu.
 
+Comme tous les textes changeables du jeu, il faut **valider le changement** en appuyant sur la touche "Entrée".
+
 ### Modèles
 
 Dans cette rubrique, il est possible de modifier et de créer des **figurants**, des **dialogues**, ainsi que les images des **personnages** et des **décors**.
 
+
+
 #### Figurants
 
 Ajoutez un figurant en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/> ou supprimez-en en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>.
+
+Choisissez l'apparence de votre figurant avec les flèches, renommez-le en cliquant sur son nom.
+
+#### Dialogues
+
+**Dans ce menu, vous pouvez créer des dialogues, une question à la fois, et les assigner à des personnages.**
+
+Vous pouvez créer une nouvelle question en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
+
+Chaque question, numérotée dans un onglet en haut à gauche du cadre du dialogue, est composée de une ou plusieurs choix de réponse.
+
+Changez le texte de la question en cliquant dessus, ajoutez un choix de réponse avec le bouton <img src="https://i.imgur.com/p0VrcMo.png" width="32" height="32"/>, et choisissez comment la question sera présentée au joueur : uniquement sous forme de **texte**, d'**audio**, ou **les deux** ?
+
+Pour chaque choix de réponse, personnalisable en cliquant sur le texte, vous pouvez assigner un **score** positif ou négatif. Il est possible de choisir une question sur laquelle rediriger le joueur s'il choisit cette réponse.
+Cette redirection permet des dialogues complexes et riches, qui augmente la personnalisation du jeu et l'immersion du joueur.
+
+Supprimez une question (et ses choix de réponse avec, attention !) en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>, ou supprimez un choix de réponse unique en cliquant sur la poubelle <img src="https://i.imgur.com/dDG9pNU.png" width="32" height="32"/>.
+Ne vous perdez pas, les questions sont réparties sur des pages, que vous pouvez changer avec les flèches en haut à droite de l'écran.
+
+### Images
+
+La rubrique **Images** permet d'ajouter ou des supprimer de images utilisables directement dans votre éditeur, et donc dans votre jeu !
+
+#### Personnages
+
+Ce menu donne l'accès aux images des personnages, et de leur animation. Vous pouvez ajouter un nouvel ensemble d'images pour un personnage en cliquand sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
+
+Chaque ensemble d'images est placé dans un cadre, qui représente l'animation d'un personnage à chaque fois. La croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/> permet de supprimer l'ensemble d'images. La première ligne d'images contient les animations de déplacement vers la droite du personnage, et la deuxième ligne les animations vers la gauche.
+
+En cliquant sur une image, l'explorateur de fichier de votre ordinateur s'ouvre. Vous pouvez alors choisir une image, qui sera uilisée pour une étape de l'animation. L'icone en bas à gauche du cadre vous indique si les images sont valides ou non.
 
 
 [Lien d'accès à la documentation](https://webetu.iutrs.unistra.fr/~lallemann/doc-cts/learn-cts/Learn%20CTS/html/namespace_learn___c_t_s.html) (accessible uniquement depuis l'IUT)
