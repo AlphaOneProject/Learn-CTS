@@ -14,7 +14,7 @@ Il est donc à destination de tous ceux souhaitant créer un **jeu sérieux** sa
 
 Celui-ci propose en effet de nombreux **outils** d'édition, un **accompagnement** sous la forme d'aides et des **exemples**. Étant initialement créé à des fins d'**éducation au langage**, ce logiciel permet un suivi et une pédagogie qui n'a pour limite que les idées de son utilisateur !
 
-Afin de faciliter le travail de création, les jeux créés sont divisés en **scénarios** et en ***situations**.
+Afin de faciliter le travail de création, les jeux créés sont divisés en **scénarios** et en **situations**.
 
 ## Documentation
 
@@ -41,6 +41,8 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
 ✅ Des **dialogues personnalisables** et de l'**audiodescription** pour s'entraîner à la **compréhension écrite et orale**.
 
 ✅ Des outils pour le joueur, tels qu'un sac avec un téléphone.
+
+##### Exemple de situations
 
 <table align="center">
     <tr>
@@ -75,10 +77,11 @@ La première rubrique de l'éditeur est **Général** Vous pourrez y modifier le
 
 Comme tous les textes changeables du jeu, il faut **valider le changement** en appuyant sur la touche "Entrée". Vous pouvez aussi annuler le changement avec la touche "Echap".
 
+Vous pouvez aussi choisir une image de *carte*, accessible par le joueur depuis son sac à dos. Cliquez sur l'image pour ouvrir l'explorateur de fichier, et choisir l'image de votre choix sur votre ordinateur. Cliquez sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/> pour supprimer l'image séléctionnée.
+
 ### Modèles
 
 Dans cette rubrique, il est possible de modifier et de créer des **figurants**, des **dialogues**, ainsi que les images des **personnages** et des **décors**.
-
 
 #### Figurants
 
@@ -106,6 +109,14 @@ Ne vous perdez pas, les questions sont réparties sur des pages, que vous pouvez
 
 La rubrique Images permet d'ajouter ou des supprimer des **images utilisables directement dans votre éditeur**, et donc dans votre jeu !
 
+#### Objets
+
+Cette rubrique vous donne accès aux images des **objets** utilisables directement dans l'éditeur et votre jeu, dans le mode de jeu **vision à la première personne**.
+
+Ajoutez une nouvelle image d'objet en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>. Cette action va ouvrir l'explorateur de fichiers.
+
+Une fois une image ajoutée, vous pouvez la supprimer en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>.
+
 #### Personnages
 
 Ce menu donne l'accès aux images des personnages, et de leur animation. Vous pouvez ajouter un nouvel ensemble d'images pour un personnage en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>.
@@ -113,6 +124,14 @@ Ce menu donne l'accès aux images des personnages, et de leur animation. Vous po
 Chaque ensemble d'images est placé dans un cadre, qui représente l'animation d'un personnage à chaque fois. La croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/> permet de supprimer l'ensemble d'images. La première ligne d'images contient les animations de déplacement vers la droite du personnage, et la deuxième ligne les animations vers la gauche.
 
 En cliquant sur une image, l'explorateur de fichier de votre ordinateur s'ouvre. Vous pouvez alors choisir une image, qui sera uilisée pour une étape de l'animation. L'icone en bas à gauche du cadre vous indique si les images sont valides ou non.
+
+#### Décors
+
+Cette rubrique vous donne accès aux images des **décors** utilisables directement dans l'éditeur et votre jeu.
+
+Ajoutez une nouvelle image de décor en cliquant sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>. Cette action va ouvrir l'explorateur de fichiers.
+
+Une fois une image ajoutée, vous pouvez la supprimer en cliquant sur la croix <img src="https://i.imgur.com/epcD5so.png" width="32" height="32"/>.
 
 ### Scénarios
 
@@ -134,10 +153,12 @@ Le **type de scène** est le moteur de jeu utilisé pour la situation. Un trajet
 
 La rubrique **Evènements** permet de **mettre en lien un Figurant avec un dialogue** définit dans la rubrique **Modèles/Figurants** et **Modèles/Dialogues** respectivement.
 
+Si vous choisissez le mode de jeu **vision à la première personne**, vous pouvez mettre en lien des **objets avec un dialogue**, et non un figurant. Les objets sont définis dans **Images/Objets**.
+
 Vous pouvez ajouter un évènement par figurant avec le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/>. La liste déroulante de gauche permet le choix du figurant voulu, et la liste déroulante de droite permet le choix du dialogue qui lui sera associé pendant la partie.
 
 Le bouton **Placer** ouvre une nouvelle fenêtre qui permet de **placer le figurant dans le décor**, selon vos souhaits. Il est placé par défaut en haut à gauche de la fenêtre. Pour le **déplacer** le figurant, il faut cliquer dessus et maintenir le clic enfoncé jusqu'à ce que la position vous convient. Si l'emplacement que vous avez choisi est jugé invalide par l'éditeur, celui-ci vous préviendra et placera le figurant aléatoirment dans le décor.
 
-**Pour jouer un aperçu de la situation, cliquez sur le bouton **<img src="https://i.imgur.com/E3ppsKZ.png" width="32" height="32"/>.
+**Pour jouer un aperçu de la situation, cliquez sur le bouton** <img src="https://i.imgur.com/E3ppsKZ.png" width="32" height="32"/>.
 
 ###### C'est tout !
