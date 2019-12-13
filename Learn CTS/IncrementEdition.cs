@@ -52,6 +52,8 @@ namespace Learn_CTS
             nud_score.Value = int.Parse(data[id.ToString()]["score"].ToString());
             txt_message.Text = data[id.ToString()]["comment"].ToString();
 
+            editor.Set_Saved(true);
+
             this.BackColor = Color.FromArgb(int.Parse((string)this.theme["2"]["R"]), int.Parse((string)this.theme["2"]["G"]), int.Parse((string)this.theme["2"]["B"]));
             this.ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"]));
 

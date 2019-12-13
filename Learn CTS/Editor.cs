@@ -363,6 +363,20 @@ namespace Learn_CTS
             };
             content.Controls.Add(lbl_desc);
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Général",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             // Creation of textbox containing the current game description.
             TextBox txt_desc = new TextBox()
             {
@@ -413,6 +427,7 @@ namespace Learn_CTS
 
             // Set the correct location of the controls (responsive with the groupbox's size).
             lbl_desc.Location = new Point(20, 20);
+            pb_help.Location = new Point(lbl_desc.Location.X + lbl_desc.Width + 20, 20);
             txt_desc.Location = new Point(20, lbl_desc.Location.Y + lbl_desc.Height + 20);
             lbl_desc_state.Location = new Point(20, txt_desc.Location.Y + txt_desc.Height + 8);
             lbl_map_title.Location = new Point(20, lbl_desc_state.Location.Y + lbl_desc_state.Height + 40);
@@ -538,9 +553,24 @@ namespace Learn_CTS
             content.Controls.Add(lbl_import_lib);
             tlt_global.SetToolTip(lbl_import_lib, "Permet d'importer les modèles d'un jeu quelconque dans celui-ci");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Modèles",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             pb_import_lib.Location = new Point((content.Width - pb_import_lib.Width - 8 - lbl_import_lib.Width) / 2, 20);
             lbl_import_lib.Location = new Point(pb_import_lib.Location.X + pb_import_lib.Width + 8, pb_import_lib.Location.Y +
                                                 (pb_import_lib.Height - lbl_import_lib.Height) / 2);
+            pb_help.Location = new Point(lbl_import_lib.Location.X + lbl_import_lib.Width + 20, 20);
         }
 
         /// <summary>
@@ -634,6 +664,20 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_lib_npc);
             tlt_global.SetToolTip(pb_add_lib_npc, "Ajoute un nouveau figurant");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Figurants",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             // FlowLayoutPanel, keeping the generated UserControls in well displayed.
             FlowLayoutPanel flp_npcs = new FlowLayoutPanel()
             {
@@ -648,6 +692,7 @@ namespace Learn_CTS
             // Set the correct location of the controls (responsive with the groupbox's size).
             lbl_npcs.Location = new Point(20, 20);
             pb_add_lib_npc.Location = new Point(lbl_npcs.Location.X + lbl_npcs.Width + 20, 20);
+            pb_help.Location = new Point(pb_add_lib_npc.Location.X + pb_add_lib_npc.Width + 20, 20);
             flp_npcs.Location = new Point(20, 100);
 
             // Generates all CharacterSelection UserControls.
@@ -743,9 +788,24 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_dialog);
             tlt_global.SetToolTip(pb_add_dialog, "Ajouter un nouveau dialogue");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Dialogues",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             // Place the controls just created.
             lbl_dialogs.Location = new Point(20, 20);
             pb_add_dialog.Location = new Point(lbl_dialogs.Location.X + lbl_dialogs.Width + 20, 20);
+            pb_help.Location = new Point(pb_add_dialog.Location.X + pb_add_dialog.Width + 20, 20);
 
             // Generating Controls associated to the pages.
             // Choosen pattern: << < P > >>
@@ -1207,7 +1267,21 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Images()
         {
-            // WIP
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Images",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
+            pb_help.Location = new Point(20, 20);
         }
 
         /// <summary>
@@ -1246,6 +1320,20 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_item_image);
             tlt_global.SetToolTip(pb_add_item_image, "Ajoute un nouveau modèle de décor depuis un fichier");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Objets",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             FlowLayoutPanel flp_item_images = new FlowLayoutPanel()
             {
                 Name = "flp_item_images",
@@ -1259,6 +1347,7 @@ namespace Learn_CTS
             // Placement of those Controls.
             lbl_item_images.Location = new Point(20, 40);
             pb_add_item_image.Location = new Point(lbl_item_images.Location.X + lbl_item_images.Width + 20, 40);
+            pb_help.Location = new Point(pb_add_item_image.Location.X + pb_add_item_image.Width + 20, 40);
             flp_item_images.Location = new Point(20, 100);
 
             // Add all existing backgrounds to the FlowLayoutPanel.
@@ -1359,6 +1448,20 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_sprite);
             tlt_global.SetToolTip(pb_add_sprite, "Ajoute un nouveau modèle de personnage et de ses animations");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Personnages",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             FlowLayoutPanel flp_sprites = new FlowLayoutPanel()
             {
                 Name = "flp_sprites",
@@ -1372,6 +1475,7 @@ namespace Learn_CTS
             // Placement of those Controls.
             lbl_sprites.Location = new Point(20, 40);
             pb_add_sprite.Location = new Point(lbl_sprites.Location.X + lbl_sprites.Width + 20, 40);
+            pb_help.Location = new Point(pb_add_sprite.Location.X + pb_add_sprite.Width + 20, 40);
             flp_sprites.Location = new Point(20, 100);
 
             // Add all existing sprites to the display.
@@ -1438,6 +1542,20 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_background);
             tlt_global.SetToolTip(pb_add_background, "Ajoute un nouveau modèle de décor depuis un fichier");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Décors",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             FlowLayoutPanel flp_backgrounds = new FlowLayoutPanel()
             {
                 Name = "flp_backgrounds",
@@ -1451,6 +1569,7 @@ namespace Learn_CTS
             // Placement of those Controls.
             lbl_backgrounds.Location = new Point(20, 40);
             pb_add_background.Location = new Point(lbl_backgrounds.Location.X + lbl_backgrounds.Width + 20, 40);
+            pb_help.Location = new Point(pb_add_background.Location.X + pb_add_background.Width + 20, 40);
             flp_backgrounds.Location = new Point(20, 100);
 
             // Add all existing backgrounds to the FlowLayoutPanel.
@@ -1531,7 +1650,23 @@ namespace Learn_CTS
             };
             btn_add_scenario.Click += new System.EventHandler(this.Add_Scenario);
             content.Controls.Add(btn_add_scenario);
+
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Scénarios",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             btn_add_scenario.Location = new Point((content.Size.Width - btn_add_scenario.Size.Width) / 2, 100);
+            pb_help.Location = new Point(20, 20);
         }
 
         /// <summary>
@@ -1750,6 +1885,20 @@ namespace Learn_CTS
             pb_add_increment.Click += new EventHandler(Add_Increment);
             content.Controls.Add(pb_add_increment);
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Scénario",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             FlowLayoutPanel flp_increments = new FlowLayoutPanel()
             {
                 Name = "flp_increments",
@@ -1764,6 +1913,7 @@ namespace Learn_CTS
             btn_add_situation.Location = new Point((content.Width - btn_add_situation.Width) / 2, 100);
             lbl_increments.Location = new Point(20, 180);
             pb_add_increment.Location = new Point(lbl_increments.Location.X + lbl_increments.Width + 20, 180);
+            pb_help.Location = new Point(pb_add_increment.Location.X + pb_add_increment.Width + 20, 180);
             flp_increments.Location = new Point(20, 240);
 
             // Adds the increments already in place.
@@ -1801,7 +1951,7 @@ namespace Learn_CTS
             IncrementEdition ie = new IncrementEdition(this, scenario_path + "properties.json", new_event_id.ToString())
             {
                 Name = "EventEdition" + new_event_id,
-                Width = content.Controls.Find("flp_increments", true)[0].Width - 80,
+                Width = content.Controls.Find("flp_increments", true)[0].Width - 40,
                 Location = new Point(40, new_event_id)
             };
             content.Controls.Find("flp_increments", true)[0].Controls.Add(ie);
@@ -2445,8 +2595,8 @@ namespace Learn_CTS
 
             List<string> list_scenes = new List<string>()
             {
-                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "[NYI] Montée dans le bus", "[NYI] Trajet en bus",
-                "[NYI] Descente du bus", "[NYI] Accident de bus", "Marche dans un parc", "Marche dans la ville", "Vision à la première personne"
+                "Montée dans le tram", "Trajet en tram", "Descente du tram", "Accident de tram", "Montée dans le bus", "Trajet en bus",
+                "Descente du bus", "Accident de bus", "Marche dans un parc", "Marche dans la ville", "Vision à la première personne"
             };
             ComboBoxFix cbo_scene_type = new ComboBoxFix()
             {
@@ -2510,9 +2660,24 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_event);
             tlt_global.SetToolTip(pb_add_event, "Ajoute un nouvel évènement");
 
+            // PictureBox of help.
+            PictureBox pb_help = new PictureBox()
+            {
+                Name = "pb_help",
+                Tag = "Situations",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "help.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_help.Click += new EventHandler(Click_Help);
+            content.Controls.Add(pb_help);
+
             // Places the Controls just created.
             lbl_events.Location = new Point(20, 360);
             pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 360);
+            pb_help.Location = new Point(pb_add_event.Location.X + pb_add_event.Width + 20, 360);
 
             // Generating to all files an EventEdition UserControl.
             int data_size;
@@ -2845,16 +3010,16 @@ namespace Learn_CTS
             switch (scene_type)
             {
                 case int n when (n > 3 && n < 8):
-                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "bus" +
-                                                Path.DirectorySeparatorChar + "busInside.png");
+                    img = Tools.Image_From_File(images_path + "vehicle" + Path.DirectorySeparatorChar + "bus" +
+                                                Path.DirectorySeparatorChar + "bus_inside.png");
                     break;
                 case int n when (n > 7):
                     img = Tools.Image_From_File(images_path + "background" + Path.DirectorySeparatorChar +
                                                 envi_data["background"].ToString() + ".png");
                     break;
                 default:
-                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "tram" +
-                                                Path.DirectorySeparatorChar + "tramInside.png");
+                    img = Tools.Image_From_File(images_path + "vehicle" + Path.DirectorySeparatorChar + "tram" +
+                                                Path.DirectorySeparatorChar + "tram_inside.png");
                     break;
             }
 
@@ -3156,6 +3321,13 @@ namespace Learn_CTS
             this.preview.Size = new Size(600, 400);
             Rectangle screen = Screen.FromControl(this).Bounds;
             this.preview.Location = new Point((screen.Width - this.preview.Width) / 2, (screen.Height - this.preview.Height) / 2);
+        }
+
+        private void Click_Help(object sender, EventArgs e)
+        {
+            Control ctrl = (Control)sender;
+            Help new_help = new Help(ctrl.Tag.ToString());
+            new_help.Show();
         }
 
         /// <summary>
