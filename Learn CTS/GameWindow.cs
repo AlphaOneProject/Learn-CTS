@@ -1636,15 +1636,18 @@ namespace Learn_CTS
 
         public void DisplayEndComment()
         {
-            ChangeCurrentTick(DoNothing_Tick);
+            if(timer_game != null)
+            {
+                ChangeCurrentTick(DoNothing_Tick);
+                StartTransition();
+                while (!tr.HasFinished())
+                {
+                    Refresh();
+                }
+                this.Focus();
+            }
             this.BackColor = Color.Black;
             this.Controls.Clear();
-            this.Focus();
-            StartTransition();
-            while (!tr.HasFinished())
-            {
-                Refresh();
-            }
             Label lbl_comment = new Label();
             lbl_comment.BackColor = System.Drawing.Color.Black;
             lbl_comment.ForeColor = System.Drawing.Color.White;
@@ -1680,7 +1683,7 @@ namespace Learn_CTS
                     break;
                 }
             }
-            timer_game.Stop();
+            if(timer_game != null) timer_game.Stop();
         }
 
         /// <summary>
