@@ -32,11 +32,6 @@ namespace Learn_CTS
             this.doors_right = new Texture("bus_doors_right", "vehicle" + Path.DirectorySeparatorChar + "bus", this.GetX() + 144, this.GetY() + 88, this.GetY() + this.GetHeight() + 1, true);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
-            NPC conductor = NPC_Manager.GetInstance().CreateNPC("Conducteur", this.GetX() + this.GetWidth() - 192 - 10, this.GetY() + this.GetHeight() - 192 - 60);
-            conductor.SetDirection(1);
-            conductor.SetDefaultPose();
-            //conductor.SetZ(this.GetZ() + 1);
-            this.AddChild(conductor);
         }
 
         /// <summary>
@@ -116,7 +111,7 @@ namespace Learn_CTS
             }
             else if (i == this.GetNumberDoors() - 1)
             {
-                n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, 16));
+                n.SetObjectiveX(n.GetX() + n.GetWidth() / 2 + r.Next(-256, -64));
             }
             else if (i % 2 == 0)
             {
@@ -135,7 +130,7 @@ namespace Learn_CTS
         public override void PlaceNPCRandomlyInVehicle(NPC npc)
         {
             Random r = new Random();
-            npc.SetX(this.GetX() + r.Next(78, this.GetWidth() - 160));
+            npc.SetX(this.GetX() + r.Next(78, this.GetWidth() - 256));
             npc.SetY(this.GetY() + this.GetHeight() - npc.GetHeight() - r.Next(56, 64));
             this.AddChild(npc);
         }
@@ -150,10 +145,20 @@ namespace Learn_CTS
             {
                 if (t.GetType().Name == "NPC" && ((NPC)t).GetQuiz() < 1 && t.GetName() != "Conducteur")
                 {
-                    t.SetX(this.GetX() + r.Next(78, this.GetWidth() - 160));
+                    t.SetX(this.GetX() + r.Next(78, this.GetWidth() - 256));
                     t.SetY(this.GetY() + this.GetHeight() - t.GetHeight() - r.Next(56, 64));
                 }
             }
+        }
+
+        public override void AddConductor(NPC conductor)
+        {
+            conductor.SetX(this.GetX() + this.GetWidth() - 192 - 10);
+            conductor.SetY(this.GetY() + this.GetHeight() - 192 - 60);
+            conductor.SetDirection(1);
+            conductor.SetDefaultPose();
+            conductor.SetZ(this.GetZ() + 1);
+            this.AddChild(conductor);
         }
     }
 }

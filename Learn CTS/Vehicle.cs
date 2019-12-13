@@ -275,6 +275,8 @@ namespace Learn_CTS
         /// </summary>
         public abstract void ShuffleVehicleNPCs();
 
+        public abstract void AddConductor(NPC conductor);
+
         /// <summary>
         /// Check if the vehicle is colliding with the texture t or its childs
         /// </summary>

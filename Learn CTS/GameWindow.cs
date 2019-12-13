@@ -132,7 +132,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Display a loading label.
+        /// Display a loading lbl.
         /// </summary>
         private void DisplayLoading()
         {
@@ -161,16 +161,17 @@ namespace Learn_CTS
             RemoveControlsToSuppress();
             if(scene_name != "" && scene_intro != "")
             {
-                Label label_intro = new Label();
-                label_intro.BackColor = System.Drawing.Color.Black;
-                label_intro.ForeColor = System.Drawing.Color.White;
-                label_intro.Size = new System.Drawing.Size(384, 20);
-                label_intro.TabIndex = 2;
-                label_intro.Text = scene_intro;
-                label_intro.AutoSize = true;
-                label_intro.BorderStyle = BorderStyle.None;
-                label_intro.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                label_intro.Location = new Point(this.Width / 2 - label_intro.Width / 2, this.Height / 2 - label_intro.Height / 2);
+                Label lbl_intro = new Label();
+                lbl_intro.BackColor = System.Drawing.Color.Black;
+                lbl_intro.ForeColor = System.Drawing.Color.White;
+                lbl_intro.Size = new System.Drawing.Size(384, 20);
+                lbl_intro.TabIndex = 2;
+                lbl_intro.Text = scene_intro;
+                lbl_intro.AutoSize = true;
+                lbl_intro.Name = "lbl_intro";
+                lbl_intro.BorderStyle = BorderStyle.None;
+                lbl_intro.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lbl_intro.Location = new Point(this.Width / 2 - lbl_intro.Width / 2, this.Height * 5 / 16);
                 Button btn_continue = new Button();
                 btn_continue.Click += new EventHandler(delegate (object sender, EventArgs e) { 
                     RemoveAllControls();
@@ -186,12 +187,12 @@ namespace Learn_CTS
                 });
                 btn_continue.Name = "btn_continue";
                 btn_continue.Size = new Size(100, 30);
-                btn_continue.Location = new Point(this.Width/2 - btn_continue.Width/2, label_intro.Location.Y + label_intro.Height + 64);
+                btn_continue.Location = new Point(this.Width/2 - btn_continue.Width/2, this.Height * 14/16);
                 btn_continue.BackColor = System.Drawing.Color.Black;
                 btn_continue.ForeColor = System.Drawing.Color.White;
                 btn_continue.UseVisualStyleBackColor = false;
                 btn_continue.Text = "Continuer";
-                this.Controls.Add(label_intro);
+                this.Controls.Add(lbl_intro);
                 this.Controls.Add(btn_continue);
             }
             else
@@ -235,6 +236,10 @@ namespace Learn_CTS
                 this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
                 SetupScene(scene_type);
                 DisplayLoading();
+                while (!tr.HasFinished())
+                {
+                    Refresh();
+                }
                 r = new Random();
                 InitializeTimer(scene_type);
                 InitializeGameTextures(scene_type, background_name);
@@ -265,7 +270,6 @@ namespace Learn_CTS
                     }
                 });
             }
-            else if (scene_type == 4) { }//todo : placer bornes dans bus
         }
 
         /// <summary>
@@ -359,11 +363,18 @@ namespace Learn_CTS
             }
             else if (scene_type == 1 || scene_type == 5)
             {
-                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
-                else vehicle = new Bus(-4000, 298 + 80);
+                if (scene_type == 0)
+                {
+                    vehicle = new Tram(-4000, 298 + 80);
+                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
+                }
+                else
+                {
+                    vehicle = new Bus(-4000, 298 + 80);
+                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 256);
+                }
                 vehicle.AddChild(player);
                 player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
-                player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
                 list_game_textures.Add(vehicle);
                 vehicle.ChangeInside();
                 vehicle.SetState(2);
@@ -1163,6 +1174,7 @@ namespace Learn_CTS
             {
                 FillVehicleNPCs(NPCsDensity / 2);
                 FillPlatformNPCs(NPCsDensity / 2);
+                vehicle.AddConductor(NPC_Manager.GetInstance().CreateNPC("Conducteur", 0, 0));
             }
             else if (scene_type == 1 || scene_type == 5)
             {
@@ -1603,8 +1615,7 @@ namespace Learn_CTS
                 n_situation++;
                 if (Directory.GetDirectories(@"" + sc_path + scenario).Length == n_situation)
                 {
-                    StartTransition();
-                    timer_game.Tick += new EventHandler(EndTimer);
+                    DisplayEndComment();
                 }
                 else
                 {
@@ -1614,20 +1625,53 @@ namespace Learn_CTS
             }
         }
 
-        /// <summary>
-        /// todo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void EndTimer(object sender, EventArgs e)
+        public void DisplayEndComment()
         {
-            //todo : afficher commentaires
-            if (tr.HasFinished())
+            ChangeCurrentTick(DoNothing_Tick);
+            this.BackColor = Color.Black;
+            this.Controls.Clear();
+            this.Focus();
+            StartTransition();
+            while (!tr.HasFinished())
             {
-                RemoveAllControls();
-                //this.Controls.Add();
-                this.Close();
+                Refresh();
             }
+            Label lbl_comment = new Label();
+            lbl_comment.BackColor = System.Drawing.Color.Black;
+            lbl_comment.ForeColor = System.Drawing.Color.White;
+            lbl_comment.Size = new System.Drawing.Size(384, 20);
+            lbl_comment.TabIndex = 2;
+            lbl_comment.AutoSize = true;
+            lbl_comment.Name = "lbl_comment";
+            lbl_comment.BorderStyle = BorderStyle.None;
+            lbl_comment.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lbl_comment.Location = new Point(this.Width / 2 - lbl_comment.Width / 2, this.Height * 5 / 16);
+            Button btn_close = new Button();
+            btn_close.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                this.Close();
+            });
+            btn_close.Name = "btn_close";
+            btn_close.Size = new Size(100, 30);
+            btn_close.Location = new Point(this.Width / 2 - btn_close.Width / 2, this.Height * 14 / 16);
+            btn_close.BackColor = System.Drawing.Color.Black;
+            btn_close.ForeColor = System.Drawing.Color.White;
+            btn_close.UseVisualStyleBackColor = false;
+            btn_close.Name = "btn_close";
+            btn_close.Text = "Quitter";
+            this.Controls.Add(lbl_comment);
+            this.Controls.Add(btn_close);
+            JObject endcomment = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + "properties.json");
+            if (int.Parse(endcomment["increments"].ToString()) == 0) { return; }
+            for(int i = 1; i <= int.Parse(endcomment["increments"].ToString()); i++)
+            {
+                if (score < int.Parse(endcomment[i.ToString()]["score"].ToString()) || i == int.Parse(endcomment["increments"].ToString()))
+                {
+                    lbl_comment.Text = endcomment[i.ToString()]["comment"].ToString();
+                    lbl_comment.Location = new Point(this.Width / 2 - lbl_comment.Width / 2, this.Height / 2 - lbl_comment.Height / 2);
+                    break;
+                }
+            }
+            timer_game.Stop();
         }
 
         /// <summary>
@@ -1655,6 +1699,18 @@ namespace Learn_CTS
                         break;
                     case "lbl_name_place":
                         c.Location = new Point((int)(this.Width * 0.93), this.Height * 1 / 32);
+                        break;
+                    case "lbl_intro":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 5 / 16);
+                        break;
+                    case "lbl_comment":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 5 / 16);
+                        break;
+                    case "btn_continue":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 14 / 16);
+                        break;
+                    case "btn_close":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 14 / 16);
                         break;
                     default:
                         break;
@@ -1748,7 +1804,7 @@ namespace Learn_CTS
             for (int i = this.Controls.Count - 1; i >= 0; i--)
             {
                 Control c = this.Controls[i];
-                if(int.Parse(c.Tag.ToString()) == 1)
+                if(c.Tag != null && int.Parse(c.Tag.ToString()) == 1)
                 {
                     this.Controls.Remove(c);
                     this.Focus();

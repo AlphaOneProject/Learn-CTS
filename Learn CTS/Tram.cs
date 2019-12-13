@@ -37,11 +37,6 @@ namespace Learn_CTS
             this.AddChild(new Texture("tram_interior", "vehicle" + Path.DirectorySeparatorChar + "tram", this.GetX() + 480, this.GetY() + 208, true));
             this.AddChild(doors_left);
             this.AddChild(doors_right);
-            NPC conductor = NPC_Manager.GetInstance().CreateNPC("Conducteur", this.GetX() + this.GetWidth() - 192 - 100, this.GetY() + this.GetHeight() - 192 - 10);
-            conductor.SetDirection(1);
-            conductor.SetDefaultPose();
-            conductor.SetZ(this.GetZ() - 1);
-            this.AddChild(conductor);
         }
 
         /// <summary>
@@ -159,6 +154,16 @@ namespace Learn_CTS
                     t.SetY(this.GetY() + this.GetHeight() - t.GetHeight() - r.Next(16, 30));
                 }
             }
+        }
+
+        public override void AddConductor(NPC conductor)
+        {
+            conductor.SetX(this.GetX() + this.GetWidth() - 192 - 100);
+            conductor.SetY(this.GetY() + this.GetHeight() - 192 - 10);
+            conductor.SetDirection(1);
+            conductor.SetDefaultPose();
+            conductor.SetZ(this.GetZ() - 1);
+            this.AddChild(conductor);
         }
     }
 }
