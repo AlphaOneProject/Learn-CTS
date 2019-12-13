@@ -124,7 +124,6 @@ namespace Learn_CTS
             lbl_score.Location = new Point(this.Width / 2 - lbl_score.Width - 5, this.Height * 1 / 32);
             lbl_nscore.Location = new Point(this.Width / 2 + 5, this.Height * 1 / 32);
             lbl_name_place.Location = new Point((int)(this.Width * 0.98) - lbl_name_place.Width - 10, this.Height * 1 / 32);
-            lbl_place.Location = new Point((int)(this.Width * 0.98) - lbl_place.Width - lbl_name_place.Width - 10, this.Height * 1 / 32);
             InitializeFPSThread();
             InitializeHUD();
             InitializeTransition();
@@ -157,7 +156,7 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="scene_name"></param>
         /// <param name="scene_intro"></param>
-        private void DisplayIntro(string scene_name, string scene_intro)
+        private void DisplayIntro(int scene_type, string scene_name, string scene_intro)
         {
             RemoveControlsToSuppress();
             if(scene_name != "" && scene_intro != "")
@@ -165,26 +164,37 @@ namespace Learn_CTS
                 Label lbl_intro = new Label();
                 lbl_intro.BackColor = System.Drawing.Color.Black;
                 lbl_intro.ForeColor = System.Drawing.Color.White;
-                lbl_intro.Size = new System.Drawing.Size(384, 20);
+                //lbl_intro.Size = new System.Drawing.Size(384, 20);
                 lbl_intro.TabIndex = 2;
                 lbl_intro.Text = scene_intro;
-                lbl_intro.AutoSize = true;
+                lbl_intro.AutoSize = false;
                 lbl_intro.Name = "lbl_intro";
+                lbl_intro.Size = new Size(this.Width / 2, this.Height / 2);
                 lbl_intro.BorderStyle = BorderStyle.None;
                 lbl_intro.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 lbl_intro.Location = new Point(this.Width / 2 - lbl_intro.Width / 2, this.Height * 5 / 16);
                 Button btn_continue = new Button();
-                btn_continue.Click += new EventHandler(delegate (object sender, EventArgs e) { 
-                    RemoveAllControls();
-                    this.Focus();
-                    this.BackColor = Color.White;
-                    lbl_nscore.Visible = true;
-                    lbl_score.Visible = true;
-                    lbl_name_place.Visible = true;
-                    lbl_place.Visible = true;
-                    tr.EndTransition();
-                    timer_game.Start();
-                });
+                if(scene_type != 10)
+                {
+                    btn_continue.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                        RemoveAllControls();
+                        this.Focus();
+                        this.BackColor = Color.White;
+                        lbl_nscore.Visible = true;
+                        lbl_score.Visible = true;
+                        lbl_name_place.Visible = true;
+                        tr.EndTransition();
+                        timer_game.Start();
+                    });
+                }
+                else
+                {
+                    btn_continue.Click += new EventHandler(delegate (object sender, EventArgs e) {
+                        this.Hide();
+                        Form pandc = new PNCWindow(this.Text, scenario, situation);
+                        pandc.ShowDialog();
+                    });
+                }
                 btn_continue.Name = "btn_continue";
                 btn_continue.Size = new Size(100, 30);
                 btn_continue.Location = new Point(this.Width/2 - btn_continue.Width/2, this.Height * 14/16);
@@ -197,14 +207,22 @@ namespace Learn_CTS
             }
             else
             {
-                timer_game.Start();
-                lbl_nscore.Visible = true;
-                lbl_score.Visible = true;
-                lbl_name_place.Visible = false;
-                lbl_place.Visible = false;
-                this.Focus();
-                this.BackColor = Color.White;
-                tr.EndTransition();
+                if (scene_type != 10)
+                {
+                    timer_game.Start();
+                    lbl_nscore.Visible = true;
+                    lbl_score.Visible = true;
+                    lbl_name_place.Visible = false;
+                    this.Focus();
+                    this.BackColor = Color.White;
+                    tr.EndTransition();
+                }
+                else
+                {
+                    this.Hide();
+                    Form pandc = new PNCWindow(this.Text, scenario, situation);
+                    pandc.ShowDialog();
+                }
             }
             Refresh();
         }
@@ -223,6 +241,7 @@ namespace Learn_CTS
             StartTransition();
             JObject environment = Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json");
             lbl_name_place.Text = environment["scene_name"].ToString();
+            lbl_name_place.Location = new Point(this.Width - lbl_name_place.Width - 20, this.Height * 1 / 32);
             int scene_type = (int)environment["scene_type"];
             string background_name = (string)environment["background"];
             if(scene_type < 0 || scene_type > 10)
@@ -241,13 +260,11 @@ namespace Learn_CTS
                 r = new Random();
                 InitializeTimer(scene_type);
                 InitializeGameTextures(scene_type, background_name);
-                DisplayIntro(environment["scene_name"].ToString(), environment["scene_intro"].ToString());
+                DisplayIntro(scene_type, environment["scene_name"].ToString(), environment["scene_intro"].ToString());
             }
             else
             {
-                this.Hide();
-                Form pandc = new PNCWindow(this.Text, scenario, situation);
-                pandc.ShowDialog();
+                DisplayIntro(scene_type, environment["scene_name"].ToString(), environment["scene_intro"].ToString());
             }
         }
 
@@ -1105,10 +1122,10 @@ namespace Learn_CTS
                 n = nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder);
                 if (scene_type == 0 || scene_type == 4)
                 {
+                    n.SetX(vehicle.GetX() + npc_x);
+                    n.SetY(vehicle.GetY() + npc_y);
                     if (vehicle.CollideWith(n, false))
                     {
-                        n.SetX(vehicle.GetX() + npc_x);
-                        n.SetY(vehicle.GetY() + npc_y);
                         vehicle.AddChild(n);
                     }
                     else
@@ -1120,10 +1137,10 @@ namespace Learn_CTS
                 }
                 else if(scene_type == 2 || scene_type == 6)
                 {
+                    n.SetX(platform.GetX() + npc_x);
+                    n.SetY(platform.GetY() + npc_y);
                     if (platform.CollideWith(n, false))
                     {
-                        n.SetX(platform.GetX() + npc_x);
-                        n.SetY(platform.GetY() + npc_y);
                         platform.AddChild(n);
                     }
                     else
@@ -1135,10 +1152,10 @@ namespace Learn_CTS
                 }
                 else if(scene_type == 1 || scene_type == 3 || scene_type == 5 || scene_type == 7)
                 {
+                    n.SetX(vehicle.GetX() + npc_x);
+                    n.SetY(vehicle.GetY() + npc_y);
                     if (vehicle.CollideWith(n, false))
                     {
-                        n.SetX(vehicle.GetX() + npc_x);
-                        n.SetY(vehicle.GetY() + npc_y);
                         vehicle.AddChild(n);
                     }
                     else
@@ -1691,11 +1708,8 @@ namespace Learn_CTS
                     case "lbl_nscore":
                         c.Location = new Point(this.Width / 2 + 5, this.Height * 1 / 32);
                         break;
-                    case "lbl_place":
-                        c.Location = new Point((int)(this.Width * 0.93) - c.Width, this.Height * 1 / 32);
-                        break;
                     case "lbl_name_place":
-                        c.Location = new Point((int)(this.Width * 0.93), this.Height * 1 / 32);
+                        c.Location = new Point(this.Width - c.Width - 20, this.Height * 1 / 32);
                         break;
                     case "lbl_intro":
                         c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 5 / 16);
@@ -1790,8 +1804,6 @@ namespace Learn_CTS
                     case "lbl_score":
                         break;
                     case "lbl_nscore":
-                        break;
-                    case "lbl_place":
                         break;
                     case "lbl_name_place":
                         break;

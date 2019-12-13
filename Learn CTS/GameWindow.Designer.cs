@@ -32,7 +32,6 @@
             this.lbl_name_place = new System.Windows.Forms.Label();
             this.lbl_nfps = new System.Windows.Forms.Label();
             this.lbl_score = new System.Windows.Forms.Label();
-            this.lbl_place = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_nscore
@@ -91,27 +90,12 @@
             this.lbl_score.Text = "Score :";
             this.lbl_score.Visible = false;
             // 
-            // lbl_place
-            // 
-            this.lbl_place.AutoSize = true;
-            this.lbl_place.BackColor = System.Drawing.Color.Black;
-            this.lbl_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.lbl_place.ForeColor = System.Drawing.Color.White;
-            this.lbl_place.Location = new System.Drawing.Point(1070, 9);
-            this.lbl_place.Name = "lbl_place";
-            this.lbl_place.Size = new System.Drawing.Size(80, 31);
-            this.lbl_place.TabIndex = 4;
-            this.lbl_place.Tag = "0";
-            this.lbl_place.Text = "Lieu :";
-            this.lbl_place.Visible = false;
-            // 
             // GameWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1264, 581);
-            this.Controls.Add(this.lbl_place);
             this.Controls.Add(this.lbl_score);
             this.Controls.Add(this.lbl_nfps);
             this.Controls.Add(this.lbl_name_place);
@@ -139,7 +123,6 @@
         private System.Windows.Forms.Label lbl_name_place;
         private System.Windows.Forms.Label lbl_nfps;
         private System.Windows.Forms.Label lbl_score;
-        private System.Windows.Forms.Label lbl_place;
     }
 }
 
