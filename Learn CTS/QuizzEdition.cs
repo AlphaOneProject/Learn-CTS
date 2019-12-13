@@ -176,7 +176,7 @@ namespace Learn_CTS
             {
                 e.Handled = true;
             }
-            else if (t.Text.Length > 128) // Avoid endless names.
+            else if (t.Text.Length > 200) // Avoid endless names.
             {
                 if (e.KeyChar == (char)8) // Still backspace.
                 {

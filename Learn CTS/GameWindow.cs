@@ -178,7 +178,6 @@ namespace Learn_CTS
                     RemoveAllControls();
                     this.Focus();
                     this.BackColor = Color.White;
-                    lbl_nfps.Visible = true;
                     lbl_nscore.Visible = true;
                     lbl_score.Visible = true;
                     lbl_name_place.Visible = true;
@@ -199,7 +198,6 @@ namespace Learn_CTS
             else
             {
                 timer_game.Start();
-                lbl_nfps.Visible = true;
                 lbl_nscore.Visible = true;
                 lbl_score.Visible = true;
                 lbl_name_place.Visible = false;
@@ -483,7 +481,7 @@ namespace Learn_CTS
         {
             ticks++;
             if (ticks % 3 == 0) PassThroughNPCs();
-            if (n_fps.ToString().Length > 4) lbl_nfps.Text = n_fps.ToString().Substring(0,4);
+            if (lbl_nfps.Visible && n_fps.ToString().Length > 4) lbl_nfps.Text = n_fps.ToString().Substring(0,4);
             MoveAllCharactersToObjective();
             CheckPlayerMove();
             RemoveControlsToSuppress();
@@ -992,15 +990,17 @@ namespace Learn_CTS
                 case Keys.B: OpenClose_Backpack(); break;
                 case Keys.Escape: this.Close(); break;
             }
-            if (e.Control)
+            // For development purposes
+            /*if (e.Control)
             {
                 switch (e.KeyCode)
                 {
                     case Keys.F1: this.god = !god; if (god) player.DisableCollisions(); else player.EnableCollisions(); break;
                     case Keys.F2: this.showhitbox = !showhitbox; break;
                     case Keys.F3: SwitchSituation(); break;
+                    case Keys.F4: lbl_nfps.Visible = !lbl_nfps.Visible; break;
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -1708,6 +1708,15 @@ namespace Learn_CTS
                         break;
                     case "btn_close":
                         c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 14 / 16);
+                        break;
+                    case "backpack":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+                        break;
+                    case "phone":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+                        break;
+                    case "map":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
                         break;
                     default:
                         break;
