@@ -351,6 +351,7 @@ namespace Learn_CTS
             }
             player = new Player(this.Width/2-96, 650);
             background = new Background(background_name, 0, -372);
+            background.DisableCollisions();
             list_game_textures = new List<Texture>();
             if (scene_type == 0 || scene_type == 4)
             {
@@ -363,7 +364,7 @@ namespace Learn_CTS
             }
             else if (scene_type == 1 || scene_type == 5)
             {
-                if (scene_type == 0)
+                if (scene_type == 1)
                 {
                     vehicle = new Tram(-4000, 298 + 80);
                     player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
@@ -371,7 +372,7 @@ namespace Learn_CTS
                 else
                 {
                     vehicle = new Bus(-4000, 298 + 80);
-                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 256);
+                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 246);
                 }
                 vehicle.AddChild(player);
                 player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
@@ -382,8 +383,16 @@ namespace Learn_CTS
             }
             else if (scene_type == 2 || scene_type == 6)
             {
-                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
-                else vehicle = new Bus(-4000, 298 + 80);
+                if (scene_type == 2)
+                {
+                    vehicle = new Tram(-4000, 298 + 80);
+                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
+                }
+                else
+                {
+                    vehicle = new Bus(-4000, 298 + 80);
+                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 246);
+                }
                 platform = new Platform(-100, vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
                 vehicle.AddChild(player);
                 player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
@@ -392,7 +401,7 @@ namespace Learn_CTS
             }
             else if (scene_type == 3 || scene_type == 7)
             {
-                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
+                if (scene_type == 3) vehicle = new Tram(-4000, 298 + 80);
                 else vehicle = new Bus(-4000, 298 + 80);
                 vehicle.AddChild(player);
                 player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);

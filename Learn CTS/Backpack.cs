@@ -71,5 +71,15 @@ namespace Learn_CTS
             this.FindForm().Controls.Add(new Phone());
             ((GameWindow)this.FindForm()).OpenClose_Backpack();
         }
+
+        /// <summary>
+        /// Open the map of the user clicks on the map icon.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void pbox_map_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("La map n'a pas été implémenté.");
+        }
     }
 }

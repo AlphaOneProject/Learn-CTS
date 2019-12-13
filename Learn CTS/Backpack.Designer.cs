@@ -60,6 +60,7 @@
             this.pbox_map.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbox_map.TabIndex = 1;
             this.pbox_map.TabStop = false;
+            this.pbox_map.Click += new System.EventHandler(this.pbox_map_Click);
             // 
             // pbox_phone
             // 
