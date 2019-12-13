@@ -1,0 +1,10 @@
+Format : x_y.png
+
+x : {
+	0 : "back",
+	1 : "right",
+	2 : "front",
+	3 : "left"
+}
+
+y : Frame number while moving, initial frame has y = 0.

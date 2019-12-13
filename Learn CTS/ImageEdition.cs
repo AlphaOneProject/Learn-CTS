@@ -107,7 +107,7 @@ namespace Learn_CTS
             }
             catch (Exception)
             {
-                MessageBox.Show("L'image est en cours d'utilisation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("L'image est en cours d'utilisation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
