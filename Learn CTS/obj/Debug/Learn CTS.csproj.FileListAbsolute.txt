@@ -163,3 +163,6 @@ C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.CharacterSel
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Help.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Help.resources
 C:\Users\felix\OneDrive\Documents\DUT A2\T3\learn-cts\Learn CTS\obj\Debug\Learn_CTS.IncrementEdition.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.CharacterSelection.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Help.resources
+C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.IncrementEdition.resources

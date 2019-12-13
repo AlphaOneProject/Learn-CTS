@@ -232,6 +232,7 @@ namespace Learn_CTS
             }
             if(scene_type != 10)
             {
+                this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
                 SetupScene(scene_type);
                 DisplayLoading();
                 r = new Random();
@@ -242,7 +243,7 @@ namespace Learn_CTS
             else
             {
                 Form pandc = new PNCWindow(this.Text, scenario, situation);
-                //this.Hide();
+                this.Hide();
                 pandc.Show();
             }
         }
@@ -848,7 +849,7 @@ namespace Learn_CTS
         {
             int mouse_x = e.Location.X;
             int mouse_y = e.Location.Y;
-            if(timer_game.Enabled)
+            if(timer_game != null && timer_game.Enabled)
             foreach (Control c in this.Controls)
             {
                 if ((mouse_x < c.Location.X || mouse_x > c.Location.X + c.Width) || (mouse_y < c.Location.Y || mouse_y > c.Location.Y + c.Height))
