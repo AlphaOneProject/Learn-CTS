@@ -168,3 +168,4 @@ C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Help.resourc
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.IncrementEdition.resources
 C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.IncrementEdition.resources
 C:\Users\orian\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Map.resources
+C:\Users\louis\Source\Repos\learn-cts\Learn CTS\obj\Debug\Learn_CTS.Map.resources
