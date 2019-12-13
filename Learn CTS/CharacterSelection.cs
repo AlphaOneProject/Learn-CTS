@@ -53,7 +53,7 @@ namespace Learn_CTS
             {
                 if (Tools.Is_Valid(sprite_dir))
                 {
-                    valid_folders.Add(sprite_dir);
+                    valid_folders.Add(sprite_dir.Split(Path.DirectorySeparatorChar).Last().Split('.')[0]);
                     valid_sprites.Add(Tools.Image_From_File(sprite_dir + Path.DirectorySeparatorChar + "1_0.png"));
                 }
             }
