@@ -19,6 +19,7 @@ namespace Learn_CTS
         public Backpack()
         {
             InitializeComponent();
+            this.Name = "backpack";
             this.Tag = 0;
         }
 
@@ -70,7 +71,6 @@ namespace Learn_CTS
         {
             GameWindow.GetInstance().RemoveAllControls();
             this.FindForm().Controls.Add(new Phone());
-            //MessageBox.Show("Le téléphone n'a pas été implémenté.");
         }
 
         /// <summary>
@@ -82,7 +82,6 @@ namespace Learn_CTS
         {
             GameWindow.GetInstance().RemoveAllControls();
             this.FindForm().Controls.Add(new Map(this.FindForm().Text));
-            //MessageBox.Show("La map n'a pas été implémenté.");
         }
     }
 }

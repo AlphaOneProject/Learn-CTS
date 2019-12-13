@@ -22,6 +22,7 @@ namespace Learn_CTS
             flp_talk.Width = flp_talk.Width + SystemInformation.VerticalScrollBarWidth;
             flp_talk.BorderStyle = BorderStyle.FixedSingle;
             this.Tag = 0;
+            this.Name = "phone";
         }
 
         /// <summary>

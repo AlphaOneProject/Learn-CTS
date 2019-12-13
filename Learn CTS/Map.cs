@@ -16,6 +16,8 @@ namespace Learn_CTS
         public Map(string game)
         {
             InitializeComponent();
+            this.Name = "map";
+            this.Tag = 0;
             try
             {
                 pbox_map.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory +"games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "others" + Path.DirectorySeparatorChar + "map.png");

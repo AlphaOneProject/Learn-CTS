@@ -1709,6 +1709,15 @@ namespace Learn_CTS
                     case "btn_close":
                         c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height * 14 / 16);
                         break;
+                    case "backpack":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+                        break;
+                    case "phone":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+                        break;
+                    case "map":
+                        c.Location = new Point(this.Width / 2 - c.Width / 2, this.Height / 2 - c.Height / 2);
+                        break;
                     default:
                         break;
                 }
