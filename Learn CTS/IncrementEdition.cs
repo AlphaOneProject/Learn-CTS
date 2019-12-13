@@ -39,6 +39,11 @@ namespace Learn_CTS
         {
             return this.file_path;
         }
+        
+        public void Set_File_Path(string new_path)
+        {
+            this.file_path = new_path;
+        }
 
         public int Get_Id()
         {
