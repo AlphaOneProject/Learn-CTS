@@ -46,7 +46,11 @@ namespace Learn_CTS
             help_texts.Add("Situation", "");
             help_texts.Add("Situations", "La situation est le niveau de jeu dans lequel va évoluer le joueur. Vous pouvez, comme pour les scénarios, vous pouvez modifier l'ordre d'apparition de la situation. Notez que celui-ci est limité au scénario de la situation.\nLa situation est introduite par un écran d'introduction. Vous pouvez y renseigner le lieu de déroulement de la situation, et un texte d'introduction.\nVous pouvez choisir un décor pour la situation en le séléctionnant par son nom, qui est le nom du fichier de l'image.\nLe type de scène est le moteur de jeu utilisé pour la situation. Choisissez celui qui convient le mieux à vos envies !\nLa rubrique Evènements permet de mettre en lien un Figurant avec un dialogue.\nSi vous choisissez le mode de jeu vision à la première personne, vous pouvez mettre en lien des objets avec un dialogue, et non un figurant.\nVous pouvez ajouter un évènement par figurant avec le bouton          .La liste déroulante de gauche permet le choix du figurant voulu, et la liste déroulante de droite permet le choix du dialogue qui lui sera associé pendant la partie.\nPour jouer un aperçu de la situation, cliquez sur le bouton          .");
 
-            tvw_help.SelectedNode = tvw_help.Nodes[anchor];
+            try
+            {
+                tvw_help.SelectedNode = tvw_help.Nodes.Find(anchor, true)[0];
+            }
+            catch (Exception) {}
         }
 
         /// <summary>

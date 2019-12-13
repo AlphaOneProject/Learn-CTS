@@ -42,7 +42,7 @@
             treeNode2,
             treeNode3,
             treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Situation");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Scénario");
             System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Situations");
             System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Scénarios", new System.Windows.Forms.TreeNode[] {
             treeNode9,
@@ -61,27 +61,27 @@
             this.tvw_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.tvw_help.Location = new System.Drawing.Point(12, 12);
             this.tvw_help.Name = "tvw_help";
-            treeNode1.Name = "nd_gen";
+            treeNode1.Name = "Général";
             treeNode1.Text = "Général";
-            treeNode2.Name = "nd_fig";
+            treeNode2.Name = "Figurants";
             treeNode2.Text = "Figurants";
-            treeNode3.Name = "Nœud4";
+            treeNode3.Name = "Dialogues";
             treeNode3.Text = "Dialogues";
-            treeNode4.Name = "nd_obj";
+            treeNode4.Name = "Objets";
             treeNode4.Text = "Objets";
-            treeNode5.Name = "nd_per";
+            treeNode5.Name = "Personnages";
             treeNode5.Text = "Personnages";
-            treeNode6.Name = "nd_dec";
+            treeNode6.Name = "Décors";
             treeNode6.Text = "Décors";
-            treeNode7.Name = "nd_img";
+            treeNode7.Name = "Images";
             treeNode7.Text = "Images";
-            treeNode8.Name = "nd_mod";
+            treeNode8.Name = "Modèles";
             treeNode8.Text = "Modèles";
-            treeNode9.Name = "nd_stn";
-            treeNode9.Text = "Situation";
-            treeNode10.Name = "nd_sit";
+            treeNode9.Name = "Scénario";
+            treeNode9.Text = "Scénario";
+            treeNode10.Name = "Situations";
             treeNode10.Text = "Situations";
-            treeNode11.Name = "nd_sce";
+            treeNode11.Name = "Scénarios";
             treeNode11.Text = "Scénarios";
             this.tvw_help.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
