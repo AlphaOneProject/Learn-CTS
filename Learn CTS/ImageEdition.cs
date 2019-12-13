@@ -101,7 +101,15 @@ namespace Learn_CTS
                 return;
             }
 
-            File.Copy(@"" + ofd_img.FileName, @"" + new_path, true);
+            try
+            {
+                File.Copy(@"" + ofd_img.FileName, @"" + new_path, true);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("L'image est en cours d'utilisation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                return;
+            }
 
             ImageEdition_Load(this, new EventArgs());
         }
