@@ -2153,6 +2153,7 @@ namespace Learn_CTS
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                                   Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
 
             // Creates primary Controls of the situation.
@@ -2355,21 +2356,45 @@ namespace Learn_CTS
             content.Controls.Add(pb_add_event);
             tlt_global.SetToolTip(pb_add_event, "Ajoute un nouvel évènement");
 
-            // Place the Controls just created.
+            // Places the Controls just created.
             lbl_events.Location = new Point(20, 360);
             pb_add_event.Location = new Point(lbl_events.Location.X + lbl_events.Width + 20, 360);
 
-            // Generating to all files' an EventEdition UserControl.
+            // Generating to all files an EventEdition UserControl.
+            int data_size;
+            switch (cbo_scene_type.SelectedIndex)
+            {
+                case 10:
+                    data_size = int.Parse((string)item_data["events"]);
+                    break;
+                default:
+                    data_size = int.Parse((string)situ_data["events"]);
+                    break;
+            }
             int last_pos = 420;
-            for (int i = 1; i <= int.Parse((string)situ_data["events"]); i++)
+            for (int i = 1; i <= data_size; i++)
             {
                 // Creating the UserControl responsible for the internal edition of the JSON file.
-                EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", i)
+                EventEdition EEdition;
+                switch (cbo_scene_type.SelectedIndex)
                 {
-                    Name = "EventEdition" + i,
-                    Width = content.Width - 80,
-                    Location = new Point(40, last_pos)
-                };
+                    case 10:
+                        EEdition = new EventEdition(this, @"" + situation_path + "items.json", i)
+                        {
+                            Name = "EventEdition" + i,
+                            Width = content.Width - 80,
+                            Location = new Point(40, last_pos)
+                        };
+                        break;
+                    default:
+                        EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", i)
+                        {
+                            Name = "EventEdition" + i,
+                            Width = content.Width - 80,
+                            Location = new Point(40, last_pos)
+                        };
+                        break;
+                }
                 content.Controls.Add(EEdition);
                 last_pos += EEdition.Height + 20;
             }
@@ -2423,8 +2448,67 @@ namespace Learn_CTS
             ComboBoxFix cbo = (ComboBoxFix)sender;
 
             JObject data = Tools.Get_From_JSON((string)cbo.Tag);
+            int old_index = int.Parse(data["scene_type"].ToString());
+            if (old_index == cbo.SelectedIndex) { return; }
+
             data["scene_type"] = cbo.SelectedIndex;
             Tools.Set_To_JSON((string)cbo.Tag, data);
+
+            if (old_index != 10 & cbo.SelectedIndex != 10) { return; }
+
+            List<Control> temp_ctrls = new List<Control>();
+            foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
+            {
+                temp_ctrls.Add(ee);
+            }
+            foreach (Control temp_ctrl in temp_ctrls)
+            {
+                content.Controls.Remove(temp_ctrl);
+            }
+            
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                    Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                    Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            int data_size;
+            switch (cbo.SelectedIndex)
+            {
+                case 10:
+                    data_size = int.Parse((string)item_data["events"]);
+                    break;
+                default:
+                    data_size = int.Parse((string)situ_data["events"]);
+                    break;
+            }
+            int last_pos = 420;
+            for (int i = 1; i <= data_size; i++)
+            {
+                // Creating the UserControl responsible for the internal edition of the JSON file.
+                EventEdition EEdition;
+                switch (cbo.SelectedIndex)
+                {
+                    case 10:
+                        EEdition = new EventEdition(this, @"" + situation_path + "items.json", i)
+                        {
+                            Name = "EventEdition" + i,
+                            Width = content.Width - 80,
+                            Location = new Point(40, last_pos)
+                        };
+                        break;
+                    default:
+                        EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", i)
+                        {
+                            Name = "EventEdition" + i,
+                            Width = content.Width - 80,
+                            Location = new Point(40, last_pos)
+                        };
+                        break;
+                }
+                content.Controls.Add(EEdition);
+                last_pos += EEdition.Height + 20;
+            }
         }
 
         /// <summary>
@@ -2440,25 +2524,42 @@ namespace Learn_CTS
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                                   Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
-            int new_event_id = int.Parse((string)situ_data["events"]) + 1;
-            situ_data["events"] = new_event_id;
-            situ_data[new_event_id.ToString()] = new JObject()
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
+            int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
+            JObject data;
+            string kind;
+            string file;
+            switch (cbo_index)
+            {
+                case 10:
+                    data = item_data;
+                    kind = "item";
+                    file = "items.json";
+                    break;
+                default:
+                    data = situ_data;
+                    kind = "npc";
+                    file = "dialogs.json";
+                    break;
+            }
+
+            int new_event_id = int.Parse((string)data["events"]) + 1;
+            data["events"] = new_event_id;
+            data[new_event_id.ToString()] = new JObject()
             {
                 ["x"] = 0,
                 ["y"] = 0,
-                ["npc"] = new JObject()
+                [kind] = new JObject()
                 {
-                    ["id"] = 1,
-                    ["name"] = "Gérard",
-                    ["folder"] = 1
+                    ["id"] = 1
                 },
                 ["quizz"] = 1
             };
-            Tools.Set_To_JSON(situation_path + "dialogs.json", situ_data);
 
-            // Creating the correspondant UserControl.
+            Tools.Set_To_JSON(situation_path + file, data);
+
             // Creating the UserControl responsible for the internal edition of the JSON file.
-            EventEdition EEdition = new EventEdition(this, @"" + situation_path + "dialogs.json", new_event_id)
+            EventEdition EEdition = new EventEdition(this, @"" + situation_path + file, new_event_id)
             {
                 Name = "EventEdition" + new_event_id,
                 Width = content.Width - 80,
@@ -2488,7 +2589,20 @@ namespace Learn_CTS
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                                   Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
-            int nbr_events = int.Parse((string)situ_data["events"]);
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
+            int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
+            JObject data;
+            switch (cbo_index)
+            {
+                case 10:
+                    data = item_data;
+                    break;
+                default:
+                    data = situ_data;
+                    break;
+            }
+
+            int nbr_events = int.Parse((string)data["events"]);
             if (nbr_events < 2)
             {
                 MessageBox.Show("Vous allez supprimer l'intégralité des évènements de la situation.\nSi vous souhaitez supprimer la situation," +
@@ -2497,13 +2611,13 @@ namespace Learn_CTS
             }
 
             // Delete the event then reoder the others in the JSON file.
-            situ_data["events"] = nbr_events - 1;
+            data["events"] = nbr_events - 1;
             for (int i = sender.Get_Event_Id(); i < nbr_events; i++)
             {
-                situ_data[i.ToString()] = situ_data[(i + 1).ToString()];
+                data[i.ToString()] = data[(i + 1).ToString()];
             }
-            situ_data.Property(nbr_events.ToString()).Remove();
-            Tools.Set_To_JSON(sender.Get_File_Path(), situ_data);
+            data.Property(nbr_events.ToString()).Remove();
+            Tools.Set_To_JSON(sender.Get_File_Path(), data);
 
             // Delete the UserControl linked to the event.
             this.Controls.Remove(sender);

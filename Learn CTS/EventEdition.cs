@@ -21,6 +21,7 @@ namespace Learn_CTS
         private string file_path;
         private int event_id;
         private JObject theme;
+        private string type;
         private bool loading;
 
         // Methods.
@@ -39,6 +40,7 @@ namespace Learn_CTS
             this.file_path = file_path;
             this.event_id = event_id;
             this.theme = editor.Get_Theme();
+            this.type = file_path.Split(Path.DirectorySeparatorChar).Last().Split('.')[0];
             this.DoubleBuffered = true;
         }
 
@@ -58,6 +60,15 @@ namespace Learn_CTS
         public int Get_Event_Id()
         {
             return this.event_id;
+        }
+
+        /// <summary>
+        /// Accessor to the type of the event managed.
+        /// </summary>
+        /// <returns>Type of the event.</returns>
+        public string Get_Type()
+        {
+            return this.type;
         }
 
         /// <summary>
@@ -83,42 +94,75 @@ namespace Learn_CTS
                                                       Path.DirectorySeparatorChar + "npcs");
             DirectoryInfo dialogs_dir = new DirectoryInfo(game_dir.FullName + Path.DirectorySeparatorChar + "library" +
                                                       Path.DirectorySeparatorChar + "dialogs");
+            DirectoryInfo items_dir = new DirectoryInfo(game_dir.FullName + Path.DirectorySeparatorChar + "library" +
+                                                      Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                                      "items");
             JObject file_data = Tools.Get_From_JSON(file_path);
             JObject temp_data;
-            int nbr_files = npcs_dir.GetFiles().Length;
-            foreach (FileInfo npc in npcs_dir.GetFiles())
+            DirectoryInfo choosen_dir;
+            int nbr_files;
+
+            switch (this.type)
             {
-                temp_data = Tools.Get_From_JSON(npc.FullName);
+                case "dialogs":
+                    choosen_dir = npcs_dir;
+                    break;
+                case "items":
+                    choosen_dir = items_dir;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid argument in EventEdition!");
+            }
+
+            int i = 1;
+            string displayed_name = "";
+            nbr_files = choosen_dir.GetFiles().Length;
+            foreach (FileInfo file in choosen_dir.GetFiles())
+            {
+                switch (this.type)
+                {
+                    case "dialogs":
+                        displayed_name = Tools.Get_From_JSON(file.FullName)["name"].ToString();
+                        break;
+                    case "items":
+                        displayed_name = file.Name.Split('.')[0];
+                        break;
+                    default:
+                        throw new ArgumentException("Invalid argument in EventEdition!");
+                }
+
+                
                 if (nbr_files < 10)
                 {
-                    cbo_npcs_list.Add("[" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                    cbo_npcs_list.Add("[" + i.ToString() + "] > " + displayed_name);
                 }
                 else if (nbr_files < 100)
                 {
-                    if (npc.Name.Split('.')[0].Length == 1)
+                    if (i.ToString().Length == 1)
                     {
-                        cbo_npcs_list.Add("[0" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                        cbo_npcs_list.Add("[0" + i.ToString() + "] > " + displayed_name);
                     }
                     else
                     {
-                        cbo_npcs_list.Add("[" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                        cbo_npcs_list.Add("[" + i.ToString() + "] > " + displayed_name);
                     }
                 }
                 else
                 {
-                    if (npc.Name.Split('.')[0].Length == 1)
+                    if (i.ToString().Length == 1)
                     {
-                        cbo_npcs_list.Add("[00" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                        cbo_npcs_list.Add("[00" + i.ToString() + "] > " + displayed_name);
                     }
-                    else if (npc.Name.Split('.')[0].Length == 2)
+                    else if (i.ToString().Length == 2)
                     {
-                        cbo_npcs_list.Add("[0" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                        cbo_npcs_list.Add("[0" + i.ToString() + "] > " + displayed_name);
                     }
                     else
                     {
-                        cbo_npcs_list.Add("[" + npc.Name.Split('.')[0] + "] > " + temp_data["name"]);
+                        cbo_npcs_list.Add("[" + i.ToString() + "] > " + displayed_name);
                     }
                 }
+                i++;
             }
             cbo_npcs_list.Sort();
 
@@ -162,8 +206,18 @@ namespace Learn_CTS
             this.loading = true;
             cbo_npcs.DataSource = cbo_npcs_list;
             cbo_dialogs.DataSource = cbo_dialogs_list;
-
-            cbo_npcs.SelectedIndex = int.Parse((string)file_data[this.event_id.ToString()]["npc"]["id"]) - 1;
+            switch (this.type)
+            {
+                case "dialogs":
+                    cbo_npcs.SelectedIndex = int.Parse(file_data[this.event_id.ToString()]["npc"]["id"].ToString()) - 1;
+                    break;
+                case "items":
+                    cbo_npcs.SelectedIndex = int.Parse(file_data[this.event_id.ToString()]["item"]["id"].ToString()) - 1;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid argument in EventEdition!");
+            }
+            
             cbo_dialogs.SelectedIndex = int.Parse((string)file_data[this.event_id.ToString()]["quizz"]) - 1;
             this.loading = false;
 
@@ -211,7 +265,18 @@ namespace Learn_CTS
             ComboBoxFix cbo = (ComboBoxFix)sender;
             JObject file_data = Tools.Get_From_JSON(this.file_path);
             int file_id = cbo.SelectedIndex + 1;
-            file_data[event_id.ToString()]["npc"]["id"] = file_id;
+            switch (this.type)
+            {
+                case "dialogs":
+                    file_data[event_id.ToString()]["npc"]["id"] = file_id;
+                    break;
+                case "items":
+                    file_data[event_id.ToString()]["item"]["name"] = cbo.SelectedItem.ToString();
+                    file_data[event_id.ToString()]["item"]["id"] = file_id;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid argument in EventEdition!");
+            }
             Tools.Set_To_JSON(this.file_path, file_data);
             editor.Set_Is_Loading(false);
         }

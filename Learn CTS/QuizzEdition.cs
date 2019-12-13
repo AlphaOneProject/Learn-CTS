@@ -191,7 +191,6 @@ namespace Learn_CTS
                 t.BackColor = Color.FromArgb(255, (int)(int.Parse((string)this.theme["4"]["G"]) * 0.4), (int)(int.Parse((string)this.theme["4"]["B"]) * 0.4));
                 ((Editor)this.ParentForm).Set_Saved(false);
             }
-            Console.WriteLine("Hehe");
 
             // Adapt the TextBox's size.
             t.Width = Tools.Min_Int(Tools.Get_Text_Width(this, txt_question.Text, 20) + 12,
