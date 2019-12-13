@@ -36,8 +36,6 @@ void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a428537a82a6f98fea476cdc728d0
 \begin{DoxyCompactList}\small\item\em Called when the main\+\_\+menu\+\_\+btn\+\_\+options is clicked. Displays the options menu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afacc4f17ed8af8dbb498e602eb2e46ca}{Back\+\_\+to\+\_\+main\+\_\+menu}} (object sender, Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when a button to return to the main menu is clicked. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}{Display\+\_\+\+Main\+\_\+\+Menu}} ()
-\begin{DoxyCompactList}\small\item\em Creates all controls necessary to display the main menu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afc66b1e8385e7a661efdd94d6fde0f45}{Display\+\_\+games\+\_\+menu}} ()
 \begin{DoxyCompactList}\small\item\em Creates all controls necessary to display the editor menu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}{Display\+\_\+options\+\_\+menu}} ()
@@ -48,14 +46,14 @@ void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_afb5b1138a95dc7ed85f2d97a53b1
 \begin{DoxyCompactList}\small\item\em Displays a custom box to create a game. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a0bfa9205f71c4cc0802208b3d95bbce2}{Game\+Creator\+\_\+\+Leave}} (object sender, Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_creator}{Game\+Creator}} loses focus. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a61fa009f33208a70299d72fffbbde109}{Menu\+\_\+\+Layout}} (object sender, Layout\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when the size of the window has changed. Is used for responsive behavior. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a3845476a21c5bb64dfc0af0f1ea08894}{Responsive\+\_\+\+Resize\+\_\+games\+\_\+menu}} ()
-\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a61fa009f33208a70299d72fffbbde109}{Menu\+\_\+\+Layout()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}{Responsive\+\_\+\+Resize\+\_\+\+Main\+\_\+\+Menu}} ()
-\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Called by Menu\+\_\+\+Size\+Changed(), if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}{Responsive\+\_\+\+Resize\+\_\+\+Options\+\_\+\+Menu}} ()
-\begin{DoxyCompactList}\small\item\em Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Called by Menu\+\_\+\+Size\+Changed(), if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_ac796242a3d3afb00413da6332fdcf1f1}{Menu\+\_\+\+Form\+Closing}} (object sender, Form\+Closing\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when the form is closed. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a7b6bf03efe7158b5b13ff63218057d7c}{Dispose}} (bool disposing)
@@ -89,6 +87,9 @@ private System Windows Forms Label {\bfseries main\+\_\+menu\+\_\+lbl\+\_\+title
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a7e97988744e5dcfed29524766d67eda4}\label{class_learn___c_t_s_1_1_menu_a7e97988744e5dcfed29524766d67eda4}} 
 private System Windows Forms Label {\bfseries main\+\_\+menu\+\_\+lbl\+\_\+title2}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a60f539099ed623a7c6871f4d59a2d564}\label{class_learn___c_t_s_1_1_menu_a60f539099ed623a7c6871f4d59a2d564}} 
+private System Windows Forms Tool\+Tip {\bfseries tlt\+\_\+menu}
 \end{DoxyCompactItemize}
 
 
@@ -159,16 +160,6 @@ Displays a custom box to create a game.
 
 
 Creates all controls necessary to display the editor menu. 
-
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}\label{class_learn___c_t_s_1_1_menu_a6aa8db284f4884d0b17e34d7a0a62675}} 
-\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_Main\_Menu@{Display\_Main\_Menu}}
-\index{Display\_Main\_Menu@{Display\_Main\_Menu}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
-\doxysubsubsection{\texorpdfstring{Display\_Main\_Menu()}{Display\_Main\_Menu()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Display\+\_\+\+Main\+\_\+\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Creates all controls necessary to display the main menu. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}\label{class_learn___c_t_s_1_1_menu_a62916ff0729afa1f373c367180565147}} 
 \index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Display\_options\_menu@{Display\_options\_menu}}
@@ -351,6 +342,23 @@ Called when the form is closed.
 {\em e} & \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a61fa009f33208a70299d72fffbbde109}\label{class_learn___c_t_s_1_1_menu_a61fa009f33208a70299d72fffbbde109}} 
+\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_Layout@{Menu\_Layout}}
+\index{Menu\_Layout@{Menu\_Layout}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
+\doxysubsubsection{\texorpdfstring{Menu\_Layout()}{Menu\_Layout()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu\+\_\+\+Layout (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Layout\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the size of the window has changed. Is used for responsive behavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a843c4c435994681c7551519150f06214}\label{class_learn___c_t_s_1_1_menu_a843c4c435994681c7551519150f06214}} 
 \index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_Load@{Menu\_Load}}
 \index{Menu\_Load@{Menu\_Load}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
@@ -366,23 +374,6 @@ Fonction called at the start of this form.
 {\em sender} & Control calling the method.\\
 \hline
 {\em e} & Arguments from the action whose caused the call of this method.\\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}\label{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}} 
-\index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Menu\_SizeChanged@{Menu\_SizeChanged}}
-\index{Menu\_SizeChanged@{Menu\_SizeChanged}!Learn\_CTS.Menu@{Learn\_CTS.Menu}}
-\doxysubsubsection{\texorpdfstring{Menu\_SizeChanged()}{Menu\_SizeChanged()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Menu.\+Menu\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Called when the size of the window has changed. Is used for responsive behavior. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em sender} & \\
-\hline
-{\em e} & \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_ab30f685e9826ccd59225f3e12bdd3d80}\label{class_learn___c_t_s_1_1_menu_ab30f685e9826ccd59225f3e12bdd3d80}} 
@@ -410,7 +401,7 @@ Called when the Toogle\+Switch is changed, to directly update the colors of the 
 
 
 
-Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a61fa009f33208a70299d72fffbbde109}{Menu\+\_\+\+Layout()}}, if the user is browsing the Games \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}\label{class_learn___c_t_s_1_1_menu_aa7a92b2384fa5a191cafe3c507982c8c}} 
 \index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Responsive\_Resize\_Main\_Menu@{Responsive\_Resize\_Main\_Menu}}
@@ -420,7 +411,7 @@ Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba
 
 
 
-Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+Called by Menu\+\_\+\+Size\+Changed(), if the user is browsing the Main \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}\label{class_learn___c_t_s_1_1_menu_a015e86b8f5317514dbc34c46da678e10}} 
 \index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Responsive\_Resize\_Options\_Menu@{Responsive\_Resize\_Options\_Menu}}
@@ -430,7 +421,7 @@ Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba
 
 
 
-Called by \mbox{\hyperlink{class_learn___c_t_s_1_1_menu_a96a04c9d6946a11dfbf64ba996ebb8ef}{Menu\+\_\+\+Size\+Changed()}}, if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
+Called by Menu\+\_\+\+Size\+Changed(), if the user is browsing the Options \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_menu_a7aab91068e91f174a2f36ce1ceba3eb4}\label{class_learn___c_t_s_1_1_menu_a7aab91068e91f174a2f36ce1ceba3eb4}} 
 \index{Learn\_CTS.Menu@{Learn\_CTS.Menu}!Save\_Options@{Save\_Options}}

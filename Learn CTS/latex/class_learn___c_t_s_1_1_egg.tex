@@ -9,24 +9,42 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Egg\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a4f9825afea76149f291f04451234892e}\label{class_learn___c_t_s_1_1_egg_a4f9825afea76149f291f04451234892e}} 
-{\bfseries Egg} (int x, int y)
-\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_egg_a4f9825afea76149f291f04451234892e}{Egg}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Construct an egg \end{DoxyCompactList}\item 
 override Image \mbox{\hyperlink{class_learn___c_t_s_1_1_egg_af6fa2518d6860ec2e0395264659e346a}{Get\+Image}} ()
-\begin{DoxyCompactList}\small\item\em Get the image used by the texture. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a92b6256a658211d080b40c685ac39ca3}\label{class_learn___c_t_s_1_1_egg_a92b6256a658211d080b40c685ac39ca3}} 
-void {\bfseries SetD} (int d)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Return the image according to the score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_egg_a510e20f7485586bb685cc43c63e56b09}{Set\+State}} (int state)
+\begin{DoxyCompactList}\small\item\em Set the state of the egg. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a1a5527088a56d71b5fefeb70bf4b9def}\label{class_learn___c_t_s_1_1_egg_a1a5527088a56d71b5fefeb70bf4b9def}} 
 List$<$ Image $>$ {\bfseries list\+\_\+eggs}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a7501f4b1b05c2c45da073355a53ca497}\label{class_learn___c_t_s_1_1_egg_a7501f4b1b05c2c45da073355a53ca497}} 
-int {\bfseries d} = 0
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_ac16efd61458ed88087ef1c2c6c0944e6}\label{class_learn___c_t_s_1_1_egg_ac16efd61458ed88087ef1c2c6c0944e6}} 
+int {\bfseries state} = 0
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a4f9825afea76149f291f04451234892e}\label{class_learn___c_t_s_1_1_egg_a4f9825afea76149f291f04451234892e}} 
+\index{Learn\_CTS.Egg@{Learn\_CTS.Egg}!Egg@{Egg}}
+\index{Egg@{Egg}!Learn\_CTS.Egg@{Learn\_CTS.Egg}}
+\doxysubsubsection{\texorpdfstring{Egg()}{Egg()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Egg.\+Egg (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an egg 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The position of the egg on the x axis.\\
+\hline
+{\em y} & The position of the egg on the y axis.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -38,15 +56,30 @@ int {\bfseries d} = 0
 
 
 
-Get the image used by the texture. 
+Return the image according to the score. 
 
 \begin{DoxyReturn}{Returns}
-The texture\textquotesingle{}s image
+
 \end{DoxyReturn}
 
 
 Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_afc1d8c882ddd243851d964a50257c613}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_egg_a510e20f7485586bb685cc43c63e56b09}\label{class_learn___c_t_s_1_1_egg_a510e20f7485586bb685cc43c63e56b09}} 
+\index{Learn\_CTS.Egg@{Learn\_CTS.Egg}!SetState@{SetState}}
+\index{SetState@{SetState}!Learn\_CTS.Egg@{Learn\_CTS.Egg}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Egg.\+Set\+State (\begin{DoxyParamCaption}\item[{int}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the state of the egg. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & The state of the egg.\\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

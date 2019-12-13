@@ -1,0 +1,170 @@
+\hypertarget{class_learn___c_t_s_1_1_image_edition}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Image\+Edition Class Reference}
+\label{class_learn___c_t_s_1_1_image_edition}\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Image\+Edition\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_image_edition}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_ababc6d047e14edb675202a15d4d23fc2}{Image\+Edition}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor, string image\+\_\+path, string type)
+\begin{DoxyCompactList}\small\item\em Constructor of the User\+Control, setup the necessary arguments as parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_af02f3f7f3ad8c6d53d0ca97ad4c5a551}{Image\+Edition\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Load the image, its title and the global theme. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_ad6652c6bd4d4863375076338e8714485}{Pb\+\_\+img\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Allow the user to override the current image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_a0ddc59d0eb5762e5e3b3e53404096aa0}{Pb\+\_\+delete\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Checks the uses of the image, if not used delete it and then \char`\"{}\+Dispose()\char`\"{} himself. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_a5bbdb64f4d71f78aae80769c9a3d396a}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_ab8d036bf4c6fa0644cfe95f9cdecbe6f}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a8d2cc54d978ef9cf3841c3510e38dea4}\label{class_learn___c_t_s_1_1_image_edition_a8d2cc54d978ef9cf3841c3510e38dea4}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} {\bfseries editor}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a9d0d790f1e6e8fbea03193822b2977e9}\label{class_learn___c_t_s_1_1_image_edition_a9d0d790f1e6e8fbea03193822b2977e9}} 
+string {\bfseries image\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_ab694e9710c0de6fd8e1d90d35246388a}\label{class_learn___c_t_s_1_1_image_edition_ab694e9710c0de6fd8e1d90d35246388a}} 
+string {\bfseries type}
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_image_edition_a12e90e6dc3f98ed5f3edba3c2069a246}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_ab31acac927bde5ec8696af0848ffb031}\label{class_learn___c_t_s_1_1_image_edition_ab31acac927bde5ec8696af0848ffb031}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+img}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a9cbe7dccfa4df08db39f579419ae2af2}\label{class_learn___c_t_s_1_1_image_edition_a9cbe7dccfa4df08db39f579419ae2af2}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+title}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a0281bf1e1b2edd8ce935480b3aa63e57}\label{class_learn___c_t_s_1_1_image_edition_a0281bf1e1b2edd8ce935480b3aa63e57}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+delete}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a3b287a7c0f811d278b5ec60e475a0fb8}\label{class_learn___c_t_s_1_1_image_edition_a3b287a7c0f811d278b5ec60e475a0fb8}} 
+private System Windows Forms Open\+File\+Dialog {\bfseries ofd\+\_\+img}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_ababc6d047e14edb675202a15d4d23fc2}\label{class_learn___c_t_s_1_1_image_edition_ababc6d047e14edb675202a15d4d23fc2}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!ImageEdition@{ImageEdition}}
+\index{ImageEdition@{ImageEdition}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{ImageEdition()}{ImageEdition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Image\+Edition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{editor,  }\item[{string}]{image\+\_\+path,  }\item[{string}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor of the User\+Control, setup the necessary arguments as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em editor} & Parent of the User\+Control, used for game path and theme.\\
+\hline
+{\em image\+\_\+path} & Path of the image to edit.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a5bbdb64f4d71f78aae80769c9a3d396a}\label{class_learn___c_t_s_1_1_image_edition_a5bbdb64f4d71f78aae80769c9a3d396a}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_af02f3f7f3ad8c6d53d0ca97ad4c5a551}\label{class_learn___c_t_s_1_1_image_edition_af02f3f7f3ad8c6d53d0ca97ad4c5a551}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!ImageEdition\_Load@{ImageEdition\_Load}}
+\index{ImageEdition\_Load@{ImageEdition\_Load}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{ImageEdition\_Load()}{ImageEdition\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Image\+Edition\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load the image, its title and the global theme. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_ab8d036bf4c6fa0644cfe95f9cdecbe6f}\label{class_learn___c_t_s_1_1_image_edition_ab8d036bf4c6fa0644cfe95f9cdecbe6f}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a0ddc59d0eb5762e5e3b3e53404096aa0}\label{class_learn___c_t_s_1_1_image_edition_a0ddc59d0eb5762e5e3b3e53404096aa0}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!Pb\_delete\_Click@{Pb\_delete\_Click}}
+\index{Pb\_delete\_Click@{Pb\_delete\_Click}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_delete\_Click()}{Pb\_delete\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Pb\+\_\+delete\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Checks the uses of the image, if not used delete it and then \char`\"{}\+Dispose()\char`\"{} himself. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_ad6652c6bd4d4863375076338e8714485}\label{class_learn___c_t_s_1_1_image_edition_ad6652c6bd4d4863375076338e8714485}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!Pb\_img\_Click@{Pb\_img\_Click}}
+\index{Pb\_img\_Click@{Pb\_img\_Click}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_img\_Click()}{Pb\_img\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+Pb\+\_\+img\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Allow the user to override the current image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_image_edition_a12e90e6dc3f98ed5f3edba3c2069a246}\label{class_learn___c_t_s_1_1_image_edition_a12e90e6dc3f98ed5f3edba3c2069a246}} 
+\index{Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}!components@{components}}
+\index{components@{components}!Learn\_CTS.ImageEdition@{Learn\_CTS.ImageEdition}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Image\+Edition.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Image\+Edition.\+cs\item 
+Image\+Edition.\+Designer.\+cs\end{DoxyCompactItemize}

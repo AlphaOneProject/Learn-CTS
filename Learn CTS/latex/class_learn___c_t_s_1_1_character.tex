@@ -9,76 +9,55 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Character\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_learn___c_t_s_1_1_character_a87a04e136fbb913416ee20650f528d65}{Character}} (int id, string name, string npc\+\_\+folder, int x, int y)
-\begin{DoxyCompactList}\small\item\em Constructor of character with a custom name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_character_a972f85163eb7d406c29010cb52c00757}{Character}} (int id, string name, string character\+\_\+folder, int x, int y)
+\begin{DoxyCompactList}\small\item\em Construct a character. \end{DoxyCompactList}\item 
 override Image \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a6e88fbbe5507cd4acaac33fea5405e9e}{Get\+Image}} ()
-\begin{DoxyCompactList}\small\item\em Get the image used by the texture. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ae8cc28f860ed218d2a8c07b9a29caa52}\label{class_learn___c_t_s_1_1_character_ae8cc28f860ed218d2a8c07b9a29caa52}} 
-void {\bfseries Set\+Default\+Pose} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ad99aae67668f541fc2bd1fb3eeeac8da}\label{class_learn___c_t_s_1_1_character_ad99aae67668f541fc2bd1fb3eeeac8da}} 
-void {\bfseries Update\+Movement} (int a, int b)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a60c3189500d61e39fdb7030d3de66737}\label{class_learn___c_t_s_1_1_character_a60c3189500d61e39fdb7030d3de66737}} 
-int {\bfseries Get\+ID} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_af7d0ce0c91f8328f3fd6518d5b8374a1}\label{class_learn___c_t_s_1_1_character_af7d0ce0c91f8328f3fd6518d5b8374a1}} 
-string {\bfseries Get\+Folder} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a69b7d3cd56b7bd837e6ea5c391fa23f5}\label{class_learn___c_t_s_1_1_character_a69b7d3cd56b7bd837e6ea5c391fa23f5}} 
-override string {\bfseries Get\+Name} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a15df721c6b4a1ff7771be89a7695af23}\label{class_learn___c_t_s_1_1_character_a15df721c6b4a1ff7771be89a7695af23}} 
-int {\bfseries Get\+Direction} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a34362160d06ff02c929774066e277145}\label{class_learn___c_t_s_1_1_character_a34362160d06ff02c929774066e277145}} 
-void {\bfseries Set\+Direction} (int d)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the current image of the character following the state of the animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_ae8cc28f860ed218d2a8c07b9a29caa52}{Set\+Default\+Pose}} ()
+\begin{DoxyCompactList}\small\item\em Set the default pose of the character, used when the character does not move anymore. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_ad99aae67668f541fc2bd1fb3eeeac8da}{Update\+Movement}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Update the animation of the character following its movements. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a60c3189500d61e39fdb7030d3de66737}{Get\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Get the ID of the \mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}}. \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a69b7d3cd56b7bd837e6ea5c391fa23f5}{Get\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the name of the character. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a15df721c6b4a1ff7771be89a7695af23}{Get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Get the last direction of the character. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a34362160d06ff02c929774066e277145}{Set\+Direction}} (int d)
+\begin{DoxyCompactList}\small\item\em Set the current direction of the character. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a2da67d8cbe8a96998005fc1bd905c45f}{Set\+Objective}} (int x, int y)
 \begin{DoxyCompactList}\small\item\em Set coordinates as objective \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a79f0eb0609d1a92b66af93dbd366c58f}\label{class_learn___c_t_s_1_1_character_a79f0eb0609d1a92b66af93dbd366c58f}} 
-void {\bfseries Set\+ObjectiveX} (int x)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ad09a9782de5356368995c65cb61da490}\label{class_learn___c_t_s_1_1_character_ad09a9782de5356368995c65cb61da490}} 
-void {\bfseries Set\+ObjectiveY} (int y)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a79f0eb0609d1a92b66af93dbd366c58f}{Set\+ObjectiveX}} (int x)
+\begin{DoxyCompactList}\small\item\em Set an objective on the x axis relative to the character. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_ad09a9782de5356368995c65cb61da490}{Set\+ObjectiveY}} (int y)
+\begin{DoxyCompactList}\small\item\em Set an objective on the y axis relative to the character. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a8848503f678132c005a4c18617b21443}{Get\+ObjX}} ()
-\begin{DoxyCompactList}\small\item\em Get the x coordinate of the objective. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the x coordinate of the current objective. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a8642866263dc330cb8fb06e88f000702}{Get\+ObjY}} ()
-\begin{DoxyCompactList}\small\item\em Get the y coordinate of the objective. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a4e975ec72c573373557565c3d5eddaa9}\label{class_learn___c_t_s_1_1_character_a4e975ec72c573373557565c3d5eddaa9}} 
-void {\bfseries Update\+ObjX} (int x)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a743228c64e71f824eaf5d33dbf42d207}\label{class_learn___c_t_s_1_1_character_a743228c64e71f824eaf5d33dbf42d207}} 
-void {\bfseries Update\+ObjY} (int y)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the y coordinate of the current objective. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a4e975ec72c573373557565c3d5eddaa9}{Update\+ObjX}} (int x)
+\begin{DoxyCompactList}\small\item\em Update the x coordinate the the current objective. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a743228c64e71f824eaf5d33dbf42d207}{Update\+ObjY}} (int y)
+\begin{DoxyCompactList}\small\item\em Update the y coordinate the the current objective. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a17ee7338f550118552e4987a7e3c3296}{Has\+Objective}} ()
 \begin{DoxyCompactList}\small\item\em Check if the player has an objective. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a260d45722f57432c86897937362cf903}{Reached\+Objective}} ()
 \begin{DoxyCompactList}\small\item\em Check if the player has reached his objective. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a25feac02d881b6d500eea1bbceab68f6}\label{class_learn___c_t_s_1_1_character_a25feac02d881b6d500eea1bbceab68f6}} 
-bool {\bfseries Reached\+ObjX} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a7524db9c2f4117826d1e283b25696b3a}\label{class_learn___c_t_s_1_1_character_a7524db9c2f4117826d1e283b25696b3a}} 
-bool {\bfseries Reached\+ObjY} ()
-\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a25feac02d881b6d500eea1bbceab68f6}{Reached\+ObjX}} ()
+\begin{DoxyCompactList}\small\item\em Check if the character has reached its current x objective. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a7524db9c2f4117826d1e283b25696b3a}{Reached\+ObjY}} ()
+\begin{DoxyCompactList}\small\item\em Check if the character has reached its current y objective. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a9cced5e9b63558966078fcea265146f4}{Remove\+Objective}} ()
-\begin{DoxyCompactList}\small\item\em Remove the player\textquotesingle{}s objective. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ac99b869df3f0252bec69e9864c82cec8}\label{class_learn___c_t_s_1_1_character_ac99b869df3f0252bec69e9864c82cec8}} 
-void {\bfseries Remove\+All\+Objectives} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_af1403ab58e036147ef1a84ed81ecaab1}\label{class_learn___c_t_s_1_1_character_af1403ab58e036147ef1a84ed81ecaab1}} 
-override void {\bfseries Dispose} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Remove the current character objective. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_ac99b869df3f0252bec69e9864c82cec8}{Remove\+All\+Objectives}} ()
+\begin{DoxyCompactList}\small\item\em Remove all the objective of the character. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_character_af1403ab58e036147ef1a84ed81ecaab1}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Dispose all the images used by the character. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a93a56de62fff5d3901f67c4d46700876}\label{class_learn___c_t_s_1_1_character_a93a56de62fff5d3901f67c4d46700876}} 
-static int {\bfseries Get\+Character\+Speed} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_aeb1c7dba914bc3beab1c98f35131cbda}\label{class_learn___c_t_s_1_1_character_aeb1c7dba914bc3beab1c98f35131cbda}} 
-static void {\bfseries SetM} (int a)
-\end{DoxyCompactItemize}
+static int \mbox{\hyperlink{class_learn___c_t_s_1_1_character_a93a56de62fff5d3901f67c4d46700876}{Get\+Character\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Get the speed of a character. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -112,9 +91,6 @@ string {\bfseries name}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a49bbc4d805f9c00c74b26cbfdfc26f97}\label{class_learn___c_t_s_1_1_character_a49bbc4d805f9c00c74b26cbfdfc26f97}} 
-static int {\bfseries m} = 4
-\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a9ba8f15c77ab8277c4dead69082326ad}\label{class_learn___c_t_s_1_1_character_a9ba8f15c77ab8277c4dead69082326ad}} 
 static int {\bfseries speed\+\_\+character} = 8
 \end{DoxyCompactItemize}
@@ -122,28 +98,89 @@ static int {\bfseries speed\+\_\+character} = 8
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a87a04e136fbb913416ee20650f528d65}\label{class_learn___c_t_s_1_1_character_a87a04e136fbb913416ee20650f528d65}} 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a972f85163eb7d406c29010cb52c00757}\label{class_learn___c_t_s_1_1_character_a972f85163eb7d406c29010cb52c00757}} 
 \index{Learn\_CTS.Character@{Learn\_CTS.Character}!Character@{Character}}
 \index{Character@{Character}!Learn\_CTS.Character@{Learn\_CTS.Character}}
 \doxysubsubsection{\texorpdfstring{Character()}{Character()}}
-{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Character.\+Character (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{string}]{name,  }\item[{string}]{npc\+\_\+folder,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Character.\+Character (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{string}]{name,  }\item[{string}]{character\+\_\+folder,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor of character with a custom name. 
+Construct a character. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em name} & The name of the character.\\
+{\em id} & ID of the character.\\
 \hline
-{\em x} & The x coordinate.\\
+{\em name} & Name of the character.\\
 \hline
-{\em y} & The y coordinate.\\
+{\em character\+\_\+folder} & The folder of the character appearence. If null, a default appearence will be taken.\\
+\hline
+{\em x} & The position of the character on the x axis.\\
+\hline
+{\em y} & The position of the character on the y axis.\\
 \hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_af1403ab58e036147ef1a84ed81ecaab1}\label{class_learn___c_t_s_1_1_character_af1403ab58e036147ef1a84ed81ecaab1}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Character.\+Dispose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Dispose all the images used by the character. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_a9a0b444c7a350d3f7328c6e420aade70}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_learn___c_t_s_1_1_player_a78a3c878bee77327fc01c0348e98d7f6}{Learn\+\_\+\+C\+T\+S.\+Player}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a93a56de62fff5d3901f67c4d46700876}\label{class_learn___c_t_s_1_1_character_a93a56de62fff5d3901f67c4d46700876}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetCharacterSpeed@{GetCharacterSpeed}}
+\index{GetCharacterSpeed@{GetCharacterSpeed}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{GetCharacterSpeed()}{GetCharacterSpeed()}}
+{\footnotesize\ttfamily static int Learn\+\_\+\+C\+T\+S.\+Character.\+Get\+Character\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get the speed of a character. 
+
+\begin{DoxyReturn}{Returns}
+The speed of a character.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a15df721c6b4a1ff7771be89a7695af23}\label{class_learn___c_t_s_1_1_character_a15df721c6b4a1ff7771be89a7695af23}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Character.\+Get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the last direction of the character. 
+
+\begin{DoxyReturn}{Returns}
+The last direction of the character. 3 is left and 1 is right.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a60c3189500d61e39fdb7030d3de66737}\label{class_learn___c_t_s_1_1_character_a60c3189500d61e39fdb7030d3de66737}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetID@{GetID}}
+\index{GetID@{GetID}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{GetID()}{GetID()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Character.\+Get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the ID of the \mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}}. 
+
+\begin{DoxyReturn}{Returns}
+The ID of the character.
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a6e88fbbe5507cd4acaac33fea5405e9e}\label{class_learn___c_t_s_1_1_character_a6e88fbbe5507cd4acaac33fea5405e9e}} 
 \index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetImage@{GetImage}}
 \index{GetImage@{GetImage}!Learn\_CTS.Character@{Learn\_CTS.Character}}
@@ -152,14 +189,31 @@ Constructor of character with a custom name.
 
 
 
-Get the image used by the texture. 
+Get the current image of the character following the state of the animation. 
 
 \begin{DoxyReturn}{Returns}
-The texture\textquotesingle{}s image
+The current image of the animation.
 \end{DoxyReturn}
 
 
 Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_afc1d8c882ddd243851d964a50257c613}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a69b7d3cd56b7bd837e6ea5c391fa23f5}\label{class_learn___c_t_s_1_1_character_a69b7d3cd56b7bd837e6ea5c391fa23f5}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetName@{GetName}}
+\index{GetName@{GetName}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily override string Learn\+\_\+\+C\+T\+S.\+Character.\+Get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the name of the character. 
+
+\begin{DoxyReturn}{Returns}
+The name of the character.
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_a255d3407c77a7a4107c5409071f3f373}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a8848503f678132c005a4c18617b21443}\label{class_learn___c_t_s_1_1_character_a8848503f678132c005a4c18617b21443}} 
 \index{Learn\_CTS.Character@{Learn\_CTS.Character}!GetObjX@{GetObjX}}
@@ -169,7 +223,7 @@ Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_afc1d8c882dd
 
 
 
-Get the x coordinate of the objective. 
+Get the x coordinate of the current objective. 
 
 \begin{DoxyReturn}{Returns}
 The x coordinate that has to be reached.
@@ -182,7 +236,7 @@ The x coordinate that has to be reached.
 
 
 
-Get the y coordinate of the objective. 
+Get the y coordinate of the current objective. 
 
 \begin{DoxyReturn}{Returns}
 The y coordinate that has to be reached.
@@ -213,6 +267,42 @@ Check if the player has reached his objective.
 \begin{DoxyReturn}{Returns}
 True if the player has reached his objective.
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a25feac02d881b6d500eea1bbceab68f6}\label{class_learn___c_t_s_1_1_character_a25feac02d881b6d500eea1bbceab68f6}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!ReachedObjX@{ReachedObjX}}
+\index{ReachedObjX@{ReachedObjX}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{ReachedObjX()}{ReachedObjX()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Character.\+Reached\+ObjX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the character has reached its current x objective. 
+
+\begin{DoxyReturn}{Returns}
+True if the character is close enough to the x objective, false otherwise.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a7524db9c2f4117826d1e283b25696b3a}\label{class_learn___c_t_s_1_1_character_a7524db9c2f4117826d1e283b25696b3a}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!ReachedObjY@{ReachedObjY}}
+\index{ReachedObjY@{ReachedObjY}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{ReachedObjY()}{ReachedObjY()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Character.\+Reached\+ObjY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the character has reached its current y objective. 
+
+\begin{DoxyReturn}{Returns}
+True if the character is close enough to the y objective, false otherwise.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ac99b869df3f0252bec69e9864c82cec8}\label{class_learn___c_t_s_1_1_character_ac99b869df3f0252bec69e9864c82cec8}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!RemoveAllObjectives@{RemoveAllObjectives}}
+\index{RemoveAllObjectives@{RemoveAllObjectives}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{RemoveAllObjectives()}{RemoveAllObjectives()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Remove\+All\+Objectives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Remove all the objective of the character. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a9cced5e9b63558966078fcea265146f4}\label{class_learn___c_t_s_1_1_character_a9cced5e9b63558966078fcea265146f4}} 
 \index{Learn\_CTS.Character@{Learn\_CTS.Character}!RemoveObjective@{RemoveObjective}}
 \index{RemoveObjective@{RemoveObjective}!Learn\_CTS.Character@{Learn\_CTS.Character}}
@@ -221,8 +311,33 @@ True if the player has reached his objective.
 
 
 
-Remove the player\textquotesingle{}s objective. 
+Remove the current character objective. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ae8cc28f860ed218d2a8c07b9a29caa52}\label{class_learn___c_t_s_1_1_character_ae8cc28f860ed218d2a8c07b9a29caa52}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!SetDefaultPose@{SetDefaultPose}}
+\index{SetDefaultPose@{SetDefaultPose}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{SetDefaultPose()}{SetDefaultPose()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Set\+Default\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the default pose of the character, used when the character does not move anymore. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a34362160d06ff02c929774066e277145}\label{class_learn___c_t_s_1_1_character_a34362160d06ff02c929774066e277145}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!SetDirection@{SetDirection}}
+\index{SetDirection@{SetDirection}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{SetDirection()}{SetDirection()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Set\+Direction (\begin{DoxyParamCaption}\item[{int}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the current direction of the character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & The new direction of the character. 3 is left and 1 is right.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a2da67d8cbe8a96998005fc1bd905c45f}\label{class_learn___c_t_s_1_1_character_a2da67d8cbe8a96998005fc1bd905c45f}} 
 \index{Learn\_CTS.Character@{Learn\_CTS.Character}!SetObjective@{SetObjective}}
 \index{SetObjective@{SetObjective}!Learn\_CTS.Character@{Learn\_CTS.Character}}
@@ -244,6 +359,83 @@ Set coordinates as objective
 
 Reimplemented in \mbox{\hyperlink{class_learn___c_t_s_1_1_player_a05558140528a1617a13f2cd0b7092586}{Learn\+\_\+\+C\+T\+S.\+Player}}.
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a79f0eb0609d1a92b66af93dbd366c58f}\label{class_learn___c_t_s_1_1_character_a79f0eb0609d1a92b66af93dbd366c58f}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!SetObjectiveX@{SetObjectiveX}}
+\index{SetObjectiveX@{SetObjectiveX}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{SetObjectiveX()}{SetObjectiveX()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Set\+ObjectiveX (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set an objective on the x axis relative to the character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate of the objective relative to the character.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ad09a9782de5356368995c65cb61da490}\label{class_learn___c_t_s_1_1_character_ad09a9782de5356368995c65cb61da490}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!SetObjectiveY@{SetObjectiveY}}
+\index{SetObjectiveY@{SetObjectiveY}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{SetObjectiveY()}{SetObjectiveY()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Set\+ObjectiveY (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set an objective on the y axis relative to the character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The y coordinate of the objective relative to the character.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_ad99aae67668f541fc2bd1fb3eeeac8da}\label{class_learn___c_t_s_1_1_character_ad99aae67668f541fc2bd1fb3eeeac8da}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!UpdateMovement@{UpdateMovement}}
+\index{UpdateMovement@{UpdateMovement}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{UpdateMovement()}{UpdateMovement()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Update\+Movement (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the animation of the character following its movements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The movement on the x axis.\\
+\hline
+{\em b} & The movement on the y axis.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a4e975ec72c573373557565c3d5eddaa9}\label{class_learn___c_t_s_1_1_character_a4e975ec72c573373557565c3d5eddaa9}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!UpdateObjX@{UpdateObjX}}
+\index{UpdateObjX@{UpdateObjX}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{UpdateObjX()}{UpdateObjX()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Update\+ObjX (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the x coordinate the the current objective. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The new x coordinate that has to be reached.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_character_a743228c64e71f824eaf5d33dbf42d207}\label{class_learn___c_t_s_1_1_character_a743228c64e71f824eaf5d33dbf42d207}} 
+\index{Learn\_CTS.Character@{Learn\_CTS.Character}!UpdateObjY@{UpdateObjY}}
+\index{UpdateObjY@{UpdateObjY}!Learn\_CTS.Character@{Learn\_CTS.Character}}
+\doxysubsubsection{\texorpdfstring{UpdateObjY()}{UpdateObjY()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Character.\+Update\+ObjY (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the y coordinate the the current objective. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The new y coordinate that has to be reached.\\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

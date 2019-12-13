@@ -1,0 +1,159 @@
+\hypertarget{class_learn___c_t_s_1_1_help}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Help Class Reference}
+\label{class_learn___c_t_s_1_1_help}\index{Learn\_CTS.Help@{Learn\_CTS.Help}}
+
+
+Form used as help for the user. Contains documentation to learn to use the editor.  
+
+
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Help\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_help}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_help_a9b1c1226d4d78647b657936d62ad37ef}{Help}} (string anchor)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_help_ac1aedda6e5dfb91fd16d9f4cf4350739}{Help\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the form is loaded. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_help_aeb81e5cde6237d439702913d10bcb2f2}{Tvw\+\_\+help\+\_\+\+After\+Select}} (object sender, Tree\+View\+Event\+Args e)
+\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_help_a04b2dcb29d6fd26362fa5c86d60ef2ff}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_help_ac08b737bb3603e18076c3c545140fc05}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Required method for Designer support -\/ do not modify the contents of this method with the code editor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a52065eece6d049da54841460d30aee5c}\label{class_learn___c_t_s_1_1_help_a52065eece6d049da54841460d30aee5c}} 
+string {\bfseries theme}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a67fa2497463daed11a76115ffcc080fb}\label{class_learn___c_t_s_1_1_help_a67fa2497463daed11a76115ffcc080fb}} 
+J\+Object {\bfseries themes}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a16896e83c339e5d90a071f1343df4d20}\label{class_learn___c_t_s_1_1_help_a16896e83c339e5d90a071f1343df4d20}} 
+Dictionary$<$ string, string $>$ {\bfseries help\+\_\+texts} = new Dictionary$<$string, string$>$()
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_help_a06fe2862e015f1d1957198b807e88978}{components}} = null
+\begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_ac86b05b233dc777e6fcb13872668897d}\label{class_learn___c_t_s_1_1_help_ac86b05b233dc777e6fcb13872668897d}} 
+private System Windows Forms Tree\+View {\bfseries tvw\+\_\+help}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_ad2feb9409be802155b354844197ac2cb}\label{class_learn___c_t_s_1_1_help_ad2feb9409be802155b354844197ac2cb}} 
+private System Windows Forms Panel {\bfseries pnl\+\_\+bg}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a51ca5379f8ec619432ea2c64644d2ba1}\label{class_learn___c_t_s_1_1_help_a51ca5379f8ec619432ea2c64644d2ba1}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+help}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a629bb3b60f79ba7eee628348db780168}\label{class_learn___c_t_s_1_1_help_a629bb3b60f79ba7eee628348db780168}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+help}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Form used as help for the user. Contains documentation to learn to use the editor. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a9b1c1226d4d78647b657936d62ad37ef}\label{class_learn___c_t_s_1_1_help_a9b1c1226d4d78647b657936d62ad37ef}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!Help@{Help}}
+\index{Help@{Help}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{Help()}{Help()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Help.\+Help (\begin{DoxyParamCaption}\item[{string}]{anchor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anchor} & Optionnal anchor to get to a category directly. If the category is not found, displays the first one.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a04b2dcb29d6fd26362fa5c86d60ef2ff}\label{class_learn___c_t_s_1_1_help_a04b2dcb29d6fd26362fa5c86d60ef2ff}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Help.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Clean up any resources being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true if managed resources should be disposed; otherwise, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_ac1aedda6e5dfb91fd16d9f4cf4350739}\label{class_learn___c_t_s_1_1_help_ac1aedda6e5dfb91fd16d9f4cf4350739}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!Help\_Load@{Help\_Load}}
+\index{Help\_Load@{Help\_Load}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{Help\_Load()}{Help\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Help.\+Help\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the form is loaded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_ac08b737bb3603e18076c3c545140fc05}\label{class_learn___c_t_s_1_1_help_ac08b737bb3603e18076c3c545140fc05}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Help.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_aeb81e5cde6237d439702913d10bcb2f2}\label{class_learn___c_t_s_1_1_help_aeb81e5cde6237d439702913d10bcb2f2}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!Tvw\_help\_AfterSelect@{Tvw\_help\_AfterSelect}}
+\index{Tvw\_help\_AfterSelect@{Tvw\_help\_AfterSelect}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{Tvw\_help\_AfterSelect()}{Tvw\_help\_AfterSelect()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Help.\+Tvw\+\_\+help\+\_\+\+After\+Select (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Tree\+View\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_help_a06fe2862e015f1d1957198b807e88978}\label{class_learn___c_t_s_1_1_help_a06fe2862e015f1d1957198b807e88978}} 
+\index{Learn\_CTS.Help@{Learn\_CTS.Help}!components@{components}}
+\index{components@{components}!Learn\_CTS.Help@{Learn\_CTS.Help}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Help.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Required designer variable. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Help.\+cs\item 
+Help.\+Designer.\+cs\end{DoxyCompactItemize}

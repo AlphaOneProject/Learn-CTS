@@ -12,10 +12,9 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Platform\+:\begin{figure}[H]
 \mbox{\hyperlink{class_learn___c_t_s_1_1_platform_a8dbfb8df0af1bc35552997a477f17fe0}{Platform}} (int x, int y, int z)
 \begin{DoxyCompactList}\small\item\em Constructor of platform. \end{DoxyCompactList}\item 
 override void \mbox{\hyperlink{class_learn___c_t_s_1_1_platform_a44c0198b8526f010e2ae7deeb9a643f7}{On\+Paint}} (Paint\+Event\+Args e)
-\begin{DoxyCompactList}\small\item\em Paint the platform \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_platform_a336c2c0ac7ca6d586691ae608a0f9a00}\label{class_learn___c_t_s_1_1_platform_a336c2c0ac7ca6d586691ae608a0f9a00}} 
-bool {\bfseries Is\+Terminal\+Hit} (int c, int d)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Optimize the paint environment and paint the platform \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_platform_a7e0824bfdf4a82696c006fa4e4d70f5f}{Is\+Terminal\+Hit}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Check if a terminal has been hit and the player is close enough to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,10 +39,34 @@ Constructor of platform.
 \begin{DoxyParams}{Parameters}
 {\em x} & The x coordinate.\\
 \hline
+{\em y} & The y coordinate.\\
+\hline
+{\em z} & T\+He depth position compared to the other textures.\\
+\hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_platform_a7e0824bfdf4a82696c006fa4e4d70f5f}\label{class_learn___c_t_s_1_1_platform_a7e0824bfdf4a82696c006fa4e4d70f5f}} 
+\index{Learn\_CTS.Platform@{Learn\_CTS.Platform}!IsTerminalHit@{IsTerminalHit}}
+\index{IsTerminalHit@{IsTerminalHit}!Learn\_CTS.Platform@{Learn\_CTS.Platform}}
+\doxysubsubsection{\texorpdfstring{IsTerminalHit()}{IsTerminalHit()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Platform.\+Is\+Terminal\+Hit (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if a terminal has been hit and the player is close enough to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate of the mouse click.\\
+\hline
+{\em y} & The y coordinate of the mouse click.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a terminal has been hit and the player is close enough to it, false otherwise. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_platform_a44c0198b8526f010e2ae7deeb9a643f7}\label{class_learn___c_t_s_1_1_platform_a44c0198b8526f010e2ae7deeb9a643f7}} 
 \index{Learn\_CTS.Platform@{Learn\_CTS.Platform}!OnPaint@{OnPaint}}
 \index{OnPaint@{OnPaint}!Learn\_CTS.Platform@{Learn\_CTS.Platform}}
@@ -52,7 +75,7 @@ Constructor of platform.
 
 
 
-Paint the platform 
+Optimize the paint environment and paint the platform 
 
 
 \begin{DoxyParams}{Parameters}

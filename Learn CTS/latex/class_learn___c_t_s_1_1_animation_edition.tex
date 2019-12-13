@@ -1,0 +1,291 @@
+\hypertarget{class_learn___c_t_s_1_1_animation_edition}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Animation\+Edition Class Reference}
+\label{class_learn___c_t_s_1_1_animation_edition}\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Animation\+Edition\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_learn___c_t_s_1_1_animation_edition}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_ad4fa2f5192da56ff4816e3c919fe3dc6}{Animation\+Edition}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor, string folder\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Constructor of the User\+Control, setup the necessary arguments as parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a4ecf307e901b3ae5b174a249b13253a3}{Animation\+Edition\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Apply the global theme to the User\+Control and set the name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_ac68c90c529b7109d9e7daad62036e4ca}{Load\+\_\+\+Images}} ()
+\begin{DoxyCompactList}\small\item\em Load images depending upon values of \char`\"{}upper\+\_\+cursor\char`\"{} and \char`\"{}lower\+\_\+cursor\char`\"{}. Then checks validity of the folder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a5d8166a41c066118f9784900e6daf743}{Pb\+\_\+up\+\_\+left\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Slides the upper bar to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a7139e12d72a64cf0a843b7a232dceb87}{Pb\+\_\+up\+\_\+right\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Slides the upper bar to the right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a7e7b86ff580ae3986c5a417b5f1db329}{Pb\+\_\+down\+\_\+left\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Slides the lower bar to the left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a8362f126b16970fae5a6c01850e0c020}{Pb\+\_\+down\+\_\+right\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Slides the lower bar to the right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a2e7c893b47b111d2d634364dd94a0490}{Click\+\_\+\+Sprite}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Set or modify the assigned sprite with one specified by the user through Open\+File\+Dialog. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_afdf6d01db1045b63bfadcc52a9cc54f7}{Pb\+\_\+delete\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em After checking for any usage in N\+P\+Cs folders, deletes this sprite folder. \end{DoxyCompactList}\item 
+protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_ad004e4bc46106e483c5a2ef10d868167}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
+private void \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_a3024e0787f12b410d263d2dd693ef864}{Initialize\+Component}} ()
+\begin{DoxyCompactList}\small\item\em Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_af5f0931ad359afb51b5eb571586f9819}\label{class_learn___c_t_s_1_1_animation_edition_af5f0931ad359afb51b5eb571586f9819}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} {\bfseries editor}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_aca15c2710af975dc1661da8ba841675b}\label{class_learn___c_t_s_1_1_animation_edition_aca15c2710af975dc1661da8ba841675b}} 
+string {\bfseries folder\+\_\+path}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_ac9c9fdcbb6a83ac68a25477e7b5e5a07}\label{class_learn___c_t_s_1_1_animation_edition_ac9c9fdcbb6a83ac68a25477e7b5e5a07}} 
+int {\bfseries upper\+\_\+cursor} = 2
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a9a95c8409b36190eccbbca86569c97cb}\label{class_learn___c_t_s_1_1_animation_edition_a9a95c8409b36190eccbbca86569c97cb}} 
+int {\bfseries lower\+\_\+cursor} = 2
+\item 
+private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_animation_edition_acc567b9156cab37b4ec919d92e6e7e07}{components}} = null
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_aad93dd8d0472c53c8aa0480044604460}\label{class_learn___c_t_s_1_1_animation_edition_aad93dd8d0472c53c8aa0480044604460}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+down2}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a6de6b6f7ed3f28ab73abf100a1c905ec}\label{class_learn___c_t_s_1_1_animation_edition_a6de6b6f7ed3f28ab73abf100a1c905ec}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+down3}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a71f5b8944c4d326b3be744cf235124a3}\label{class_learn___c_t_s_1_1_animation_edition_a71f5b8944c4d326b3be744cf235124a3}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+down1}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a9057b98069d6805517bf69b89c0de3ee}\label{class_learn___c_t_s_1_1_animation_edition_a9057b98069d6805517bf69b89c0de3ee}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+down\+\_\+left}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a7a81bd3b0a6bbe2aca00a05fd57b57e8}\label{class_learn___c_t_s_1_1_animation_edition_a7a81bd3b0a6bbe2aca00a05fd57b57e8}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+down\+\_\+right}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a599139fd25e5d7d874d76b5af61bb861}\label{class_learn___c_t_s_1_1_animation_edition_a599139fd25e5d7d874d76b5af61bb861}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+up\+\_\+right}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a156990e62e5e98b1c6edff0caabdd4cb}\label{class_learn___c_t_s_1_1_animation_edition_a156990e62e5e98b1c6edff0caabdd4cb}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+up\+\_\+left}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_acdb3eba0093d2999224c1f7af5585258}\label{class_learn___c_t_s_1_1_animation_edition_acdb3eba0093d2999224c1f7af5585258}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+up1}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a6d927006a27c6098100d2b290c5f73fe}\label{class_learn___c_t_s_1_1_animation_edition_a6d927006a27c6098100d2b290c5f73fe}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+up3}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a31515a4d8f7fb49037e4e437970497c9}\label{class_learn___c_t_s_1_1_animation_edition_a31515a4d8f7fb49037e4e437970497c9}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+up2}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a828b2512f8298d27efae92a864ddcdf1}\label{class_learn___c_t_s_1_1_animation_edition_a828b2512f8298d27efae92a864ddcdf1}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+name}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a852329b3de0a2d97b939b564e33bb61b}\label{class_learn___c_t_s_1_1_animation_edition_a852329b3de0a2d97b939b564e33bb61b}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+valid}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a5adacac1f3be55979cb18869d6972a02}\label{class_learn___c_t_s_1_1_animation_edition_a5adacac1f3be55979cb18869d6972a02}} 
+private System Windows Forms Open\+File\+Dialog {\bfseries ofd\+\_\+sprites}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_ab657b198a226c0e072d800f30884d632}\label{class_learn___c_t_s_1_1_animation_edition_ab657b198a226c0e072d800f30884d632}} 
+private System Windows Forms Picture\+Box {\bfseries pb\+\_\+delete}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_ad4fa2f5192da56ff4816e3c919fe3dc6}\label{class_learn___c_t_s_1_1_animation_edition_ad4fa2f5192da56ff4816e3c919fe3dc6}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!AnimationEdition@{AnimationEdition}}
+\index{AnimationEdition@{AnimationEdition}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{AnimationEdition()}{AnimationEdition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Animation\+Edition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{editor,  }\item[{string}]{folder\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor of the User\+Control, setup the necessary arguments as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em editor} & Parent instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}.\\
+\hline
+{\em folder\+\_\+path} & Sprite folder\textquotesingle{}s full path.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a4ecf307e901b3ae5b174a249b13253a3}\label{class_learn___c_t_s_1_1_animation_edition_a4ecf307e901b3ae5b174a249b13253a3}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!AnimationEdition\_Load@{AnimationEdition\_Load}}
+\index{AnimationEdition\_Load@{AnimationEdition\_Load}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{AnimationEdition\_Load()}{AnimationEdition\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Animation\+Edition\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Apply the global theme to the User\+Control and set the name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a2e7c893b47b111d2d634364dd94a0490}\label{class_learn___c_t_s_1_1_animation_edition_a2e7c893b47b111d2d634364dd94a0490}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Click\_Sprite@{Click\_Sprite}}
+\index{Click\_Sprite@{Click\_Sprite}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Click\_Sprite()}{Click\_Sprite()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Click\+\_\+\+Sprite (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set or modify the assigned sprite with one specified by the user through Open\+File\+Dialog. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_ad004e4bc46106e483c5a2ef10d868167}\label{class_learn___c_t_s_1_1_animation_edition_ad004e4bc46106e483c5a2ef10d868167}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily protected override void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Nettoyage des ressources utilisées. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a3024e0787f12b410d263d2dd693ef864}\label{class_learn___c_t_s_1_1_animation_edition_a3024e0787f12b410d263d2dd693ef864}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!InitializeComponent@{InitializeComponent}}
+\index{InitializeComponent@{InitializeComponent}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{InitializeComponent()}{InitializeComponent()}}
+{\footnotesize\ttfamily private void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Initialize\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_ac68c90c529b7109d9e7daad62036e4ca}\label{class_learn___c_t_s_1_1_animation_edition_ac68c90c529b7109d9e7daad62036e4ca}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Load\_Images@{Load\_Images}}
+\index{Load\_Images@{Load\_Images}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Load\_Images()}{Load\_Images()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Load\+\_\+\+Images (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load images depending upon values of \char`\"{}upper\+\_\+cursor\char`\"{} and \char`\"{}lower\+\_\+cursor\char`\"{}. Then checks validity of the folder. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_afdf6d01db1045b63bfadcc52a9cc54f7}\label{class_learn___c_t_s_1_1_animation_edition_afdf6d01db1045b63bfadcc52a9cc54f7}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Pb\_delete\_Click@{Pb\_delete\_Click}}
+\index{Pb\_delete\_Click@{Pb\_delete\_Click}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_delete\_Click()}{Pb\_delete\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Pb\+\_\+delete\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+After checking for any usage in N\+P\+Cs folders, deletes this sprite folder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a7e7b86ff580ae3986c5a417b5f1db329}\label{class_learn___c_t_s_1_1_animation_edition_a7e7b86ff580ae3986c5a417b5f1db329}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Pb\_down\_left\_Click@{Pb\_down\_left\_Click}}
+\index{Pb\_down\_left\_Click@{Pb\_down\_left\_Click}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_down\_left\_Click()}{Pb\_down\_left\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Pb\+\_\+down\+\_\+left\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Slides the lower bar to the left. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a8362f126b16970fae5a6c01850e0c020}\label{class_learn___c_t_s_1_1_animation_edition_a8362f126b16970fae5a6c01850e0c020}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Pb\_down\_right\_Click@{Pb\_down\_right\_Click}}
+\index{Pb\_down\_right\_Click@{Pb\_down\_right\_Click}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_down\_right\_Click()}{Pb\_down\_right\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Pb\+\_\+down\+\_\+right\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Slides the lower bar to the right. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a5d8166a41c066118f9784900e6daf743}\label{class_learn___c_t_s_1_1_animation_edition_a5d8166a41c066118f9784900e6daf743}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Pb\_up\_left\_Click@{Pb\_up\_left\_Click}}
+\index{Pb\_up\_left\_Click@{Pb\_up\_left\_Click}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_up\_left\_Click()}{Pb\_up\_left\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Pb\+\_\+up\+\_\+left\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Slides the upper bar to the left. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_a7139e12d72a64cf0a843b7a232dceb87}\label{class_learn___c_t_s_1_1_animation_edition_a7139e12d72a64cf0a843b7a232dceb87}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!Pb\_up\_right\_Click@{Pb\_up\_right\_Click}}
+\index{Pb\_up\_right\_Click@{Pb\_up\_right\_Click}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_up\_right\_Click()}{Pb\_up\_right\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+Pb\+\_\+up\+\_\+right\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Slides the upper bar to the right. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_animation_edition_acc567b9156cab37b4ec919d92e6e7e07}\label{class_learn___c_t_s_1_1_animation_edition_acc567b9156cab37b4ec919d92e6e7e07}} 
+\index{Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}!components@{components}}
+\index{components@{components}!Learn\_CTS.AnimationEdition@{Learn\_CTS.AnimationEdition}}
+\doxysubsubsection{\texorpdfstring{components}{components}}
+{\footnotesize\ttfamily private System Component\+Model I\+Container Learn\+\_\+\+C\+T\+S.\+Animation\+Edition.\+components = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Variable nécessaire au concepteur. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Animation\+Edition.\+cs\item 
+Animation\+Edition.\+Designer.\+cs\end{DoxyCompactItemize}

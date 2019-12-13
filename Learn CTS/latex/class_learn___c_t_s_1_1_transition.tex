@@ -9,36 +9,30 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Transition\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a6bcabbca539a3e4370463fe1f0d5477f}\label{class_learn___c_t_s_1_1_transition_a6bcabbca539a3e4370463fe1f0d5477f}} 
-{\bfseries Transition} (int w, int h)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a019edb38f707fc9b95fcb7e482845915}\label{class_learn___c_t_s_1_1_transition_a019edb38f707fc9b95fcb7e482845915}} 
-void {\bfseries Update} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a5fc8a7bef97dab1dcc8b30b37507050a}\label{class_learn___c_t_s_1_1_transition_a5fc8a7bef97dab1dcc8b30b37507050a}} 
-bool {\bfseries Has\+Finished} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a4cef46e11c03e89bc214a1370fd8002b}\label{class_learn___c_t_s_1_1_transition_a4cef46e11c03e89bc214a1370fd8002b}} 
-void {\bfseries End\+Transition} ()
-\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a6bcabbca539a3e4370463fe1f0d5477f}{Transition}} (int w, int h)
+\begin{DoxyCompactList}\small\item\em Construct a transition \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a019edb38f707fc9b95fcb7e482845915}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Update the transition to fade in or fade out. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a5fc8a7bef97dab1dcc8b30b37507050a}{Has\+Finished}} ()
+\begin{DoxyCompactList}\small\item\em Check if the transition has fade in totally. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a4cef46e11c03e89bc214a1370fd8002b}{End\+Transition}} ()
+\begin{DoxyCompactList}\small\item\em Set the transition to fade out. \end{DoxyCompactList}\item 
 override Image \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a17a3ab3fadab60f9f70b1b9e45ac64da}{Get\+Image}} ()
-\begin{DoxyCompactList}\small\item\em Get the image used by the texture. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a1914a94278ee1dd3a0e6bc7cea049fe3}\label{class_learn___c_t_s_1_1_transition_a1914a94278ee1dd3a0e6bc7cea049fe3}} 
-void {\bfseries SetD} (int d)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a245d1379f50225051875e2942fdeafb7}\label{class_learn___c_t_s_1_1_transition_a245d1379f50225051875e2942fdeafb7}} 
-override void {\bfseries Dispose} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the current image of the transition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_add531785e21e66e201ea06fce6f6b0ae}{Set\+State}} (int state)
+\begin{DoxyCompactList}\small\item\em Set the state of the transition. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_a245d1379f50225051875e2942fdeafb7}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Dispose the transition. \end{DoxyCompactList}\item 
 override void \mbox{\hyperlink{class_learn___c_t_s_1_1_transition_aef2efaa7cbf2613677f42badcdc87c92}{On\+Paint}} (Paint\+Event\+Args e)
-\begin{DoxyCompactList}\small\item\em Paint itself to the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Update the transition and paint it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_aa2cad38bae520c0ba4d09442afba3d5d}\label{class_learn___c_t_s_1_1_transition_aa2cad38bae520c0ba4d09442afba3d5d}} 
 bool {\bfseries t} = true
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_ac78113688efef3e2ebcac2ecb3cf7797}\label{class_learn___c_t_s_1_1_transition_ac78113688efef3e2ebcac2ecb3cf7797}} 
-int {\bfseries d} = 0
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a9634979feb5a48ce3f5b7bc915fa5728}\label{class_learn___c_t_s_1_1_transition_a9634979feb5a48ce3f5b7bc915fa5728}} 
+int {\bfseries state} = 0
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_acd40b85e152d3ba5d69dee2ed80a91f8}\label{class_learn___c_t_s_1_1_transition_acd40b85e152d3ba5d69dee2ed80a91f8}} 
 List$<$ Image $>$ {\bfseries list\+\_\+transitions} = new List$<$Image$>$()
@@ -46,7 +40,51 @@ List$<$ Image $>$ {\bfseries list\+\_\+transitions} = new List$<$Image$>$()
 \doxysubsection*{Additional Inherited Members}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a6bcabbca539a3e4370463fe1f0d5477f}\label{class_learn___c_t_s_1_1_transition_a6bcabbca539a3e4370463fe1f0d5477f}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!Transition@{Transition}}
+\index{Transition@{Transition}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{Transition()}{Transition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Transition.\+Transition (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a transition 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & The width of the transition.\\
+\hline
+{\em h} & The height of the transition.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a245d1379f50225051875e2942fdeafb7}\label{class_learn___c_t_s_1_1_transition_a245d1379f50225051875e2942fdeafb7}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Transition.\+Dispose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Dispose the transition. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_a9a0b444c7a350d3f7328c6e420aade70}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a4cef46e11c03e89bc214a1370fd8002b}\label{class_learn___c_t_s_1_1_transition_a4cef46e11c03e89bc214a1370fd8002b}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!EndTransition@{EndTransition}}
+\index{EndTransition@{EndTransition}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{EndTransition()}{EndTransition()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Transition.\+End\+Transition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the transition to fade out. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a17a3ab3fadab60f9f70b1b9e45ac64da}\label{class_learn___c_t_s_1_1_transition_a17a3ab3fadab60f9f70b1b9e45ac64da}} 
 \index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!GetImage@{GetImage}}
 \index{GetImage@{GetImage}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
@@ -55,15 +93,28 @@ List$<$ Image $>$ {\bfseries list\+\_\+transitions} = new List$<$Image$>$()
 
 
 
-Get the image used by the texture. 
+Get the current image of the transition. 
 
 \begin{DoxyReturn}{Returns}
-The texture\textquotesingle{}s image
+The current image of the transition.
 \end{DoxyReturn}
 
 
 Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_afc1d8c882ddd243851d964a50257c613}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a5fc8a7bef97dab1dcc8b30b37507050a}\label{class_learn___c_t_s_1_1_transition_a5fc8a7bef97dab1dcc8b30b37507050a}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!HasFinished@{HasFinished}}
+\index{HasFinished@{HasFinished}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{HasFinished()}{HasFinished()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Transition.\+Has\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the transition has fade in totally. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_aef2efaa7cbf2613677f42badcdc87c92}\label{class_learn___c_t_s_1_1_transition_aef2efaa7cbf2613677f42badcdc87c92}} 
 \index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!OnPaint@{OnPaint}}
 \index{OnPaint@{OnPaint}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
@@ -72,7 +123,7 @@ Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_afc1d8c882dd
 
 
 
-Paint itself to the window. 
+Update the transition and paint it. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -82,6 +133,31 @@ Paint itself to the window.
 
 
 Reimplemented from \mbox{\hyperlink{class_learn___c_t_s_1_1_texture_a46d03f73e870c26e51641766ec438a65}{Learn\+\_\+\+C\+T\+S.\+Texture}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_add531785e21e66e201ea06fce6f6b0ae}\label{class_learn___c_t_s_1_1_transition_add531785e21e66e201ea06fce6f6b0ae}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!SetState@{SetState}}
+\index{SetState@{SetState}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Transition.\+Set\+State (\begin{DoxyParamCaption}\item[{int}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the state of the transition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & The state of the transition.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_transition_a019edb38f707fc9b95fcb7e482845915}\label{class_learn___c_t_s_1_1_transition_a019edb38f707fc9b95fcb7e482845915}} 
+\index{Learn\_CTS.Transition@{Learn\_CTS.Transition}!Update@{Update}}
+\index{Update@{Update}!Learn\_CTS.Transition@{Learn\_CTS.Transition}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Transition.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the transition to fade in or fade out. 
 
 
 
