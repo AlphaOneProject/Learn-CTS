@@ -31,7 +31,7 @@ namespace Learn_CTS
             InitializeComponent();
             this.game = game;
             this.Text = "Menu de "+game;
-            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "menu" + Path.DirectorySeparatorChar + "mainmenu.png");
+            this.BackgroundImage = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "mainmenu.png");
             this.pbox_return.Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "arrow_left.png");
             p_menu = new Panel();
             p_menu.Name = "panel_menu";
