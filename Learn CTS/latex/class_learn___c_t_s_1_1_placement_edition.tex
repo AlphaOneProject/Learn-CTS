@@ -9,24 +9,19 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Placement\+Edition\+:\begin{figur
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_aca9b352f871ac38600fd02d4e799aa87}\label{class_learn___c_t_s_1_1_placement_edition_aca9b352f871ac38600fd02d4e799aa87}} 
-{\bfseries Placement\+Edition} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} sender, Picture\+Box pb\+\_\+placing, List$<$ Picture\+Box $>$ pbs\+\_\+placed, List$<$ Point $>$ pbs\+\_\+placed\+\_\+points, Picture\+Box pb\+\_\+environment)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a9285e648bb2123e511f25ce9c5254c0a}{Placement\+Edition}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} sender, Picture\+Box pb\+\_\+placing, List$<$ Picture\+Box $>$ pbs\+\_\+placed, List$<$ Point $>$ pbs\+\_\+placed\+\_\+points, Picture\+Box pb\+\_\+environment, int scene\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Constructor of the Form, setup the necessary arguments as parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a33086c9df8c60eafe53d35f4189ed16d}\label{class_learn___c_t_s_1_1_placement_edition_a33086c9df8c60eafe53d35f4189ed16d}} 
-void {\bfseries Pb\+\_\+\+Placing\+\_\+\+Mouse\+Down} (object sender, Mouse\+Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a21450dbfd6cfa1cc2ea993e7b86cb4b9}\label{class_learn___c_t_s_1_1_placement_edition_a21450dbfd6cfa1cc2ea993e7b86cb4b9}} 
-void {\bfseries Pb\+\_\+\+Placing\+\_\+\+Mouse\+Move} (object sender, Mouse\+Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a77caa64e75b23fd2869dbfba5ee8254f}\label{class_learn___c_t_s_1_1_placement_edition_a77caa64e75b23fd2869dbfba5ee8254f}} 
-void {\bfseries Pb\+\_\+\+Placing\+\_\+\+Mouse\+Up} (object sender, Mouse\+Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_af9f4567801477669043fb93e2990c3f1}\label{class_learn___c_t_s_1_1_placement_edition_af9f4567801477669043fb93e2990c3f1}} 
-void {\bfseries Placement\+Edition\+\_\+\+Form\+Closing} (object sender, Form\+Closing\+Event\+Args e)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a33086c9df8c60eafe53d35f4189ed16d}{Pb\+\_\+\+Placing\+\_\+\+Mouse\+Down}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Activates the dragging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a21450dbfd6cfa1cc2ea993e7b86cb4b9}{Pb\+\_\+\+Placing\+\_\+\+Mouse\+Move}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Modify the location for the Picture\+Box while it is dragged. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a77caa64e75b23fd2869dbfba5ee8254f}{Pb\+\_\+\+Placing\+\_\+\+Mouse\+Up}} (object sender, Mouse\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Toggles the dragging off. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_af9f4567801477669043fb93e2990c3f1}{Placement\+Edition\+\_\+\+Form\+Closing}} (object sender, Form\+Closing\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Transmits to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} the new position selected. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a882aca5646908f987785fcd68c9aed98}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a9bbcdb6610cc30aa7b0d1e5df75cc492}{Initialize\+Component}} ()
@@ -49,11 +44,40 @@ bool {\bfseries dragging} = false
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a99b35a1c1ac0748d59cd206ab5db5327}\label{class_learn___c_t_s_1_1_placement_edition_a99b35a1c1ac0748d59cd206ab5db5327}} 
 int {\bfseries event\+\_\+id}
 \item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a3528f89901abd68067828e76e2a32cef}\label{class_learn___c_t_s_1_1_placement_edition_a3528f89901abd68067828e76e2a32cef}} 
+int {\bfseries scene\+\_\+type}
+\item 
 private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_placement_edition_a27f4cc282301cfeaf36a22575326c2c1}{components}} = null
 \begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_abed1699ff5b2cb514bc5d42ae7b30a38}\label{class_learn___c_t_s_1_1_placement_edition_abed1699ff5b2cb514bc5d42ae7b30a38}} 
 private System Windows Forms Panel {\bfseries pan\+\_\+global}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a9285e648bb2123e511f25ce9c5254c0a}\label{class_learn___c_t_s_1_1_placement_edition_a9285e648bb2123e511f25ce9c5254c0a}} 
+\index{Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}!PlacementEdition@{PlacementEdition}}
+\index{PlacementEdition@{PlacementEdition}!Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}}
+\doxysubsubsection{\texorpdfstring{PlacementEdition()}{PlacementEdition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Placement\+Edition.\+Placement\+Edition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{sender,  }\item[{Picture\+Box}]{pb\+\_\+placing,  }\item[{List$<$ Picture\+Box $>$}]{pbs\+\_\+placed,  }\item[{List$<$ Point $>$}]{pbs\+\_\+placed\+\_\+points,  }\item[{Picture\+Box}]{pb\+\_\+environment,  }\item[{int}]{scene\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor of the Form, setup the necessary arguments as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Instance of the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} parent of the Form.\\
+\hline
+{\em pb\+\_\+placing} & Picture\+Box to place.\\
+\hline
+{\em pbs\+\_\+placed} & Others Picture\+Boxes already placed.\\
+\hline
+{\em pbs\+\_\+placed\+\_\+points} & Positions from the placed Picture\+Boxes.\\
+\hline
+{\em pb\+\_\+environment} & Picture\+Box where the others will be placed.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -82,6 +106,74 @@ Clean up any resources being used.
 
 Required method for Designer support -\/ do not modify the contents of this method with the code editor. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a33086c9df8c60eafe53d35f4189ed16d}\label{class_learn___c_t_s_1_1_placement_edition_a33086c9df8c60eafe53d35f4189ed16d}} 
+\index{Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}!Pb\_Placing\_MouseDown@{Pb\_Placing\_MouseDown}}
+\index{Pb\_Placing\_MouseDown@{Pb\_Placing\_MouseDown}!Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_Placing\_MouseDown()}{Pb\_Placing\_MouseDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Placement\+Edition.\+Pb\+\_\+\+Placing\+\_\+\+Mouse\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Activates the dragging. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a21450dbfd6cfa1cc2ea993e7b86cb4b9}\label{class_learn___c_t_s_1_1_placement_edition_a21450dbfd6cfa1cc2ea993e7b86cb4b9}} 
+\index{Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}!Pb\_Placing\_MouseMove@{Pb\_Placing\_MouseMove}}
+\index{Pb\_Placing\_MouseMove@{Pb\_Placing\_MouseMove}!Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_Placing\_MouseMove()}{Pb\_Placing\_MouseMove()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Placement\+Edition.\+Pb\+\_\+\+Placing\+\_\+\+Mouse\+Move (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Modify the location for the Picture\+Box while it is dragged. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_a77caa64e75b23fd2869dbfba5ee8254f}\label{class_learn___c_t_s_1_1_placement_edition_a77caa64e75b23fd2869dbfba5ee8254f}} 
+\index{Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}!Pb\_Placing\_MouseUp@{Pb\_Placing\_MouseUp}}
+\index{Pb\_Placing\_MouseUp@{Pb\_Placing\_MouseUp}!Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}}
+\doxysubsubsection{\texorpdfstring{Pb\_Placing\_MouseUp()}{Pb\_Placing\_MouseUp()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Placement\+Edition.\+Pb\+\_\+\+Placing\+\_\+\+Mouse\+Up (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Mouse\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Toggles the dragging off. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_placement_edition_af9f4567801477669043fb93e2990c3f1}\label{class_learn___c_t_s_1_1_placement_edition_af9f4567801477669043fb93e2990c3f1}} 
+\index{Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}!PlacementEdition\_FormClosing@{PlacementEdition\_FormClosing}}
+\index{PlacementEdition\_FormClosing@{PlacementEdition\_FormClosing}!Learn\_CTS.PlacementEdition@{Learn\_CTS.PlacementEdition}}
+\doxysubsubsection{\texorpdfstring{PlacementEdition\_FormClosing()}{PlacementEdition\_FormClosing()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Placement\+Edition.\+Placement\+Edition\+\_\+\+Form\+Closing (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Form\+Closing\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Transmits to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} the new position selected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}

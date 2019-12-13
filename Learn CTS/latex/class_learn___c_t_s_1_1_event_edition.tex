@@ -9,38 +9,31 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Event\+Edition\+:\begin{figure}[H
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ae45878e5daba000702df5cc9435b385a}\label{class_learn___c_t_s_1_1_event_edition_ae45878e5daba000702df5cc9435b385a}} 
-{\bfseries Event\+Edition} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor, string file\+\_\+path, int event\+\_\+id)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a5da5a92ed26515bbc8da5eed26c418a9}\label{class_learn___c_t_s_1_1_event_edition_a5da5a92ed26515bbc8da5eed26c418a9}} 
-string {\bfseries Get\+\_\+\+File\+\_\+\+Path} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a695252c9e9aa11d1922427ad84558495}\label{class_learn___c_t_s_1_1_event_edition_a695252c9e9aa11d1922427ad84558495}} 
-int {\bfseries Get\+\_\+\+Event\+\_\+\+Id} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a1ed858d38f30c10293577dbfeca403ca}\label{class_learn___c_t_s_1_1_event_edition_a1ed858d38f30c10293577dbfeca403ca}} 
-void {\bfseries Set\+\_\+\+File\+\_\+\+Path} (string new\+\_\+file\+\_\+path)
-\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_ae45878e5daba000702df5cc9435b385a}{Event\+Edition}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} editor, string file\+\_\+path, int event\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Constructor of the User\+Control, setup the necessary arguments as parameters. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a5da5a92ed26515bbc8da5eed26c418a9}{Get\+\_\+\+File\+\_\+\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Accessor to the file path. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a695252c9e9aa11d1922427ad84558495}{Get\+\_\+\+Event\+\_\+\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Accessor to the ID of the event managed. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a5472511c43f51f9005f9d797efd3e3d4}{Get\+\_\+\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Accessor to the type of the event managed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a1ed858d38f30c10293577dbfeca403ca}{Set\+\_\+\+File\+\_\+\+Path}} (string new\+\_\+file\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Allow access from the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to the path of the aimed file (modified after renaming the situation). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_aaf65f59b1e9ba95532e8f159a5c9d61d}{Discard}} (object sender, Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Asks to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to delete both this \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition}{Event\+Edition}} and his linked event in the J\+S\+ON file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ad9bd11c470734345996f5fd43c7f9966}\label{class_learn___c_t_s_1_1_event_edition_ad9bd11c470734345996f5fd43c7f9966}} 
-void {\bfseries Event\+Edition\+\_\+\+Load} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a2e382278ed281b589cb9983d5a519833}\label{class_learn___c_t_s_1_1_event_edition_a2e382278ed281b589cb9983d5a519833}} 
-void {\bfseries Event\+Edition\+\_\+\+Size\+Changed} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a7e7279398077b8167f84ffc68dde9649}\label{class_learn___c_t_s_1_1_event_edition_a7e7279398077b8167f84ffc68dde9649}} 
-void {\bfseries Cbo\+\_\+npcs\+\_\+\+Selected\+Index\+Changed} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ac963c4fb57eba9aba78f805dd232443c}\label{class_learn___c_t_s_1_1_event_edition_ac963c4fb57eba9aba78f805dd232443c}} 
-void {\bfseries Cbo\+\_\+dialogs\+\_\+\+Selected\+Index\+Changed} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ade88c0a74af94dcf5e867be1e20ed423}\label{class_learn___c_t_s_1_1_event_edition_ade88c0a74af94dcf5e867be1e20ed423}} 
-void {\bfseries Btn\+\_\+placement\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_ad9bd11c470734345996f5fd43c7f9966}{Event\+Edition\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Load all N\+P\+Cs and Dialogs into the \mbox{\hyperlink{class_learn___c_t_s_1_1_combo_box_fix}{Combo\+Box\+Fix}} which will allow their selection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a2e382278ed281b589cb9983d5a519833}{Event\+Edition\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Placement and sizing upon resize (from the editor). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a7e7279398077b8167f84ffc68dde9649}{Cbo\+\_\+npcs\+\_\+\+Selected\+Index\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Saves the new selected \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} into the event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_ac963c4fb57eba9aba78f805dd232443c}{Cbo\+\_\+dialogs\+\_\+\+Selected\+Index\+Changed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Saves the new selected dialog into the event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_ade88c0a74af94dcf5e867be1e20ed423}{Btn\+\_\+placement\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Sends a placement request to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_a01c2c9a61b297ca52fd8e099c5861673}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_af31108fa031e3dd60bfb4ea9ee7faf81}{Initialize\+Component}} ()
@@ -48,17 +41,20 @@ private void \mbox{\hyperlink{class_learn___c_t_s_1_1_event_edition_af31108fa031
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a71a906fc6da242f574036bc0fbe70fe2}\label{class_learn___c_t_s_1_1_event_edition_a71a906fc6da242f574036bc0fbe70fe2}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} {\bfseries editor}
+\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a3e3fcb8272b180126df92b9f3dc97ec0}\label{class_learn___c_t_s_1_1_event_edition_a3e3fcb8272b180126df92b9f3dc97ec0}} 
 string {\bfseries file\+\_\+path}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a496f5944f17178a248754a820b189d4c}\label{class_learn___c_t_s_1_1_event_edition_a496f5944f17178a248754a820b189d4c}} 
 int {\bfseries event\+\_\+id}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a44e9e3a171bc73b042dfb874c99ad89f}\label{class_learn___c_t_s_1_1_event_edition_a44e9e3a171bc73b042dfb874c99ad89f}} 
-J\+Object {\bfseries file\+\_\+data}
-\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ad2c49eaa6c51f925c3e64ead1e4f0936}\label{class_learn___c_t_s_1_1_event_edition_ad2c49eaa6c51f925c3e64ead1e4f0936}} 
 J\+Object {\bfseries theme}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a806f58b9f1358796502bc1ab969b4b8a}\label{class_learn___c_t_s_1_1_event_edition_a806f58b9f1358796502bc1ab969b4b8a}} 
+string {\bfseries type}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a93fe509d0ae5d9515e9e8fb3c7e69e41}\label{class_learn___c_t_s_1_1_event_edition_a93fe509d0ae5d9515e9e8fb3c7e69e41}} 
 bool {\bfseries loading}
@@ -82,7 +78,80 @@ private System Windows Forms Button {\bfseries btn\+\_\+placement}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ae45878e5daba000702df5cc9435b385a}\label{class_learn___c_t_s_1_1_event_edition_ae45878e5daba000702df5cc9435b385a}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!EventEdition@{EventEdition}}
+\index{EventEdition@{EventEdition}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{EventEdition()}{EventEdition()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Event\+Edition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}}]{editor,  }\item[{string}]{file\+\_\+path,  }\item[{int}]{event\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor of the User\+Control, setup the necessary arguments as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em editor} & Parent instance of \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}.\\
+\hline
+{\em file\+\_\+path} & Path of the \char`\"{}dialogs.\+json\char`\"{} file of the situation.\\
+\hline
+{\em event\+\_\+id} & ID of the event to manage inside the file.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ade88c0a74af94dcf5e867be1e20ed423}\label{class_learn___c_t_s_1_1_event_edition_ade88c0a74af94dcf5e867be1e20ed423}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Btn\_placement\_Click@{Btn\_placement\_Click}}
+\index{Btn\_placement\_Click@{Btn\_placement\_Click}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Btn\_placement\_Click()}{Btn\_placement\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Btn\+\_\+placement\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Sends a placement request to the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ac963c4fb57eba9aba78f805dd232443c}\label{class_learn___c_t_s_1_1_event_edition_ac963c4fb57eba9aba78f805dd232443c}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Cbo\_dialogs\_SelectedIndexChanged@{Cbo\_dialogs\_SelectedIndexChanged}}
+\index{Cbo\_dialogs\_SelectedIndexChanged@{Cbo\_dialogs\_SelectedIndexChanged}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Cbo\_dialogs\_SelectedIndexChanged()}{Cbo\_dialogs\_SelectedIndexChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Cbo\+\_\+dialogs\+\_\+\+Selected\+Index\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Saves the new selected dialog into the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a7e7279398077b8167f84ffc68dde9649}\label{class_learn___c_t_s_1_1_event_edition_a7e7279398077b8167f84ffc68dde9649}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Cbo\_npcs\_SelectedIndexChanged@{Cbo\_npcs\_SelectedIndexChanged}}
+\index{Cbo\_npcs\_SelectedIndexChanged@{Cbo\_npcs\_SelectedIndexChanged}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Cbo\_npcs\_SelectedIndexChanged()}{Cbo\_npcs\_SelectedIndexChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Cbo\+\_\+npcs\+\_\+\+Selected\+Index\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Saves the new selected \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} into the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_aaf65f59b1e9ba95532e8f159a5c9d61d}\label{class_learn___c_t_s_1_1_event_edition_aaf65f59b1e9ba95532e8f159a5c9d61d}} 
 \index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Discard@{Discard}}
 \index{Discard@{Discard}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
@@ -115,6 +184,79 @@ Nettoyage des ressources utilisées.
 {\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_ad9bd11c470734345996f5fd43c7f9966}\label{class_learn___c_t_s_1_1_event_edition_ad9bd11c470734345996f5fd43c7f9966}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!EventEdition\_Load@{EventEdition\_Load}}
+\index{EventEdition\_Load@{EventEdition\_Load}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{EventEdition\_Load()}{EventEdition\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Event\+Edition\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load all N\+P\+Cs and Dialogs into the \mbox{\hyperlink{class_learn___c_t_s_1_1_combo_box_fix}{Combo\+Box\+Fix}} which will allow their selection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a2e382278ed281b589cb9983d5a519833}\label{class_learn___c_t_s_1_1_event_edition_a2e382278ed281b589cb9983d5a519833}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!EventEdition\_SizeChanged@{EventEdition\_SizeChanged}}
+\index{EventEdition\_SizeChanged@{EventEdition\_SizeChanged}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{EventEdition\_SizeChanged()}{EventEdition\_SizeChanged()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Event\+Edition\+\_\+\+Size\+Changed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Placement and sizing upon resize (from the editor). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a695252c9e9aa11d1922427ad84558495}\label{class_learn___c_t_s_1_1_event_edition_a695252c9e9aa11d1922427ad84558495}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Get\_Event\_Id@{Get\_Event\_Id}}
+\index{Get\_Event\_Id@{Get\_Event\_Id}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Get\_Event\_Id()}{Get\_Event\_Id()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Get\+\_\+\+Event\+\_\+\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor to the ID of the event managed. 
+
+\begin{DoxyReturn}{Returns}
+ID of the event.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a5da5a92ed26515bbc8da5eed26c418a9}\label{class_learn___c_t_s_1_1_event_edition_a5da5a92ed26515bbc8da5eed26c418a9}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Get\_File\_Path@{Get\_File\_Path}}
+\index{Get\_File\_Path@{Get\_File\_Path}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Get\_File\_Path()}{Get\_File\_Path()}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Get\+\_\+\+File\+\_\+\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor to the file path. 
+
+\begin{DoxyReturn}{Returns}
+File full path.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a5472511c43f51f9005f9d797efd3e3d4}\label{class_learn___c_t_s_1_1_event_edition_a5472511c43f51f9005f9d797efd3e3d4}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Get\_Type@{Get\_Type}}
+\index{Get\_Type@{Get\_Type}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Get\_Type()}{Get\_Type()}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Get\+\_\+\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accessor to the type of the event managed. 
+
+\begin{DoxyReturn}{Returns}
+Type of the event.
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_af31108fa031e3dd60bfb4ea9ee7faf81}\label{class_learn___c_t_s_1_1_event_edition_af31108fa031e3dd60bfb4ea9ee7faf81}} 
 \index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!InitializeComponent@{InitializeComponent}}
 \index{InitializeComponent@{InitializeComponent}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
@@ -125,6 +267,21 @@ Nettoyage des ressources utilisées.
 
 Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_event_edition_a1ed858d38f30c10293577dbfeca403ca}\label{class_learn___c_t_s_1_1_event_edition_a1ed858d38f30c10293577dbfeca403ca}} 
+\index{Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}!Set\_File\_Path@{Set\_File\_Path}}
+\index{Set\_File\_Path@{Set\_File\_Path}!Learn\_CTS.EventEdition@{Learn\_CTS.EventEdition}}
+\doxysubsubsection{\texorpdfstring{Set\_File\_Path()}{Set\_File\_Path()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Event\+Edition.\+Set\+\_\+\+File\+\_\+\+Path (\begin{DoxyParamCaption}\item[{string}]{new\+\_\+file\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Allow access from the \mbox{\hyperlink{class_learn___c_t_s_1_1_editor}{Editor}} to the path of the aimed file (modified after renaming the situation). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+file\+\_\+path} & Path of the \char`\"{}dialogs.\+json\char`\"{} file of the situation.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}

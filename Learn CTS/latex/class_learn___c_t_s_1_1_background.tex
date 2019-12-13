@@ -12,7 +12,7 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Background\+:\begin{figure}[H]
 \mbox{\hyperlink{class_learn___c_t_s_1_1_background_a75e2c474b4fe1d6d7a020f2ee5c5dd50}{Background}} (string name, int x, int y)
 \begin{DoxyCompactList}\small\item\em Constructor of background \end{DoxyCompactList}\item 
 override bool \mbox{\hyperlink{class_learn___c_t_s_1_1_background_ae006c2601bc4a09dba3b2bdeb13c3518}{Collide\+With}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} t, bool b)
-\begin{DoxyCompactList}\small\item\em Check if the instance is colliding with the texture t or its childs \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Overriding the Collide\+With method to take in account the duplicate background. \end{DoxyCompactList}\item 
 override void \mbox{\hyperlink{class_learn___c_t_s_1_1_background_a7b5d2b92df29df5e16e30a3824c3447e}{On\+Paint}} (Paint\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Paint the background on the screen and repeat it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -37,11 +37,11 @@ Constructor of background
 
 
 \begin{DoxyParams}{Parameters}
-{\em name} & \\
+{\em name} & Name of the background.\\
 \hline
-{\em x} & \\
+{\em x} & The position of the background on the x axis.\\
 \hline
-{\em y} & \\
+{\em y} & The position of the background on the y axis.\\
 \hline
 \end{DoxyParams}
 
@@ -55,20 +55,17 @@ Constructor of background
 
 
 
-Check if the instance is colliding with the texture t or its childs 
+Overriding the Collide\+With method to take in account the duplicate background. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em t} & The texture that will be tested.\\
+{\em t} & The texture tested\\
 \hline
-\end{DoxyParams}
-/// 
-\begin{DoxyParams}{Parameters}
-{\em b} & Check if t collides with the childs\\
+{\em b} & Does it affect the background childs.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if this hit the hitbox of t or one of its childs, false otherwise.
+True if the texture collides with the hitbox of the background, false otherwise.
 \end{DoxyReturn}
 
 
@@ -86,7 +83,7 @@ Paint the background on the screen and repeat it.
 
 
 \begin{DoxyParams}{Parameters}
-{\em e} & \\
+{\em e} & The paint environment.\\
 \hline
 \end{DoxyParams}
 

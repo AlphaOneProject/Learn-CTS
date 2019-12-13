@@ -1,5 +1,10 @@
 \hypertarget{class_learn___c_t_s_1_1_game_card}{}\doxysection{Learn\+\_\+\+C\+T\+S.\+Game\+Card Class Reference}
 \label{class_learn___c_t_s_1_1_game_card}\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+
+
+User\+Control used for displaying a game. Allow user to launch the game, start the editor of the game, copying it or deleting it.  
+
+
 Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Card\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,60 +14,46 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Card\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a4a87509afe503babcf3d7c39d0174ce3}\label{class_learn___c_t_s_1_1_game_card_a4a87509afe503babcf3d7c39d0174ce3}} 
-{\bfseries Game\+Card} (\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} menu)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ab15c2e92ee2e93c806babdf63a469a97}\label{class_learn___c_t_s_1_1_game_card_ab15c2e92ee2e93c806babdf63a469a97}} 
-void {\bfseries Show\+\_\+\+Thumbnail} (string game)
-\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a4a87509afe503babcf3d7c39d0174ce3}{Game\+Card}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} menu)
+\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a7ca98e6bc8c06a0974ff2ac4f1f0e25d}{Show\+Thumbnail}} ()
+\begin{DoxyCompactList}\small\item\em Fetches the game thumbnail in the library. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_acb1f6e240ced13a2bc4e1ebea7e25743}{Change\+\_\+\+Theme}} ()
 \begin{DoxyCompactList}\small\item\em Change the theme of all the controls of this form, according to the current theme in the options. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ab10fe18ba3ca56c05429fa5fe836df3f}\label{class_learn___c_t_s_1_1_game_card_ab10fe18ba3ca56c05429fa5fe836df3f}} 
-string {\bfseries Title}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a975fa32f4e1b4bd87df5cc0ef8c61bd3}\label{class_learn___c_t_s_1_1_game_card_a975fa32f4e1b4bd87df5cc0ef8c61bd3}} 
-string {\bfseries Description}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a7459ff326dfb227fca7e12d7ec19313f}\label{class_learn___c_t_s_1_1_game_card_a7459ff326dfb227fca7e12d7ec19313f}} 
-bool {\bfseries Is\+Default}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\end{DoxyCompactItemize}
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_ab10fe18ba3ca56c05429fa5fe836df3f}{Title}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Title of the game, truncated if necessary. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a975fa32f4e1b4bd87df5cc0ef8c61bd3}{Description}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Description of the game, truncated if necessary. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a7459ff326dfb227fca7e12d7ec19313f}{Is\+Default}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is the game a default game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a4318274ef2ef260e0097853f3ecb8a68}{Game\+Card\+\_\+\+Load}} (object sender, Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when the gamecard is loaded. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_aaab8bc19c8babd9831aea8f1c54cbc05}\label{class_learn___c_t_s_1_1_game_card_aaab8bc19c8babd9831aea8f1c54cbc05}} 
-void {\bfseries Fetch\+Icons} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_af038c1fd037285a7b233b346809a1754}\label{class_learn___c_t_s_1_1_game_card_af038c1fd037285a7b233b346809a1754}} 
-void {\bfseries Btn\+\_\+edit\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_abc88aa01a62af84243bcd9fba5203c29}\label{class_learn___c_t_s_1_1_game_card_abc88aa01a62af84243bcd9fba5203c29}} 
-void {\bfseries Pb\+\_\+play\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a747905d2d7b4b4e657d75a5f90cfd715}\label{class_learn___c_t_s_1_1_game_card_a747905d2d7b4b4e657d75a5f90cfd715}} 
-void {\bfseries Pb\+\_\+edit\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ae6ffb22fb4710541fc5f6eee897c3d80}\label{class_learn___c_t_s_1_1_game_card_ae6ffb22fb4710541fc5f6eee897c3d80}} 
-void {\bfseries Pb\+\_\+delete\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a069c59196170e119d3aa95b3e4d1b72f}\label{class_learn___c_t_s_1_1_game_card_a069c59196170e119d3aa95b3e4d1b72f}} 
-void {\bfseries Delete\+\_\+\+Game} ()
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_aaab8bc19c8babd9831aea8f1c54cbc05}{Fetch\+Icons}} ()
+\begin{DoxyCompactList}\small\item\em Gets the images of the icons from the library and stores them in local variables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_af038c1fd037285a7b233b346809a1754}{Btn\+\_\+edit\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the button to edit the game is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_abc88aa01a62af84243bcd9fba5203c29}{Pb\+\_\+play\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Picture\+Box to launch the game is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a747905d2d7b4b4e657d75a5f90cfd715}{Pb\+\_\+edit\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Picture\+Box to edit the game is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_ae6ffb22fb4710541fc5f6eee897c3d80}{Pb\+\_\+delete\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Picture\+Box to delete the game is clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a069c59196170e119d3aa95b3e4d1b72f}{Delete\+\_\+\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Deletes the game from the file system. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_afe1ce1525f50312954f622664152f5bf}{Copy\+\_\+\+Game}} ()
-\begin{DoxyCompactList}\small\item\em marche pa \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a6853856dd8528e7bf8f11961e54d7fc5}\label{class_learn___c_t_s_1_1_game_card_a6853856dd8528e7bf8f11961e54d7fc5}} 
-void {\bfseries Pb\+\_\+\+Btn\+\_\+\+Mouse\+Hover} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ae79d73150e2ed713a642169bf221b8ed}\label{class_learn___c_t_s_1_1_game_card_ae79d73150e2ed713a642169bf221b8ed}} 
-void {\bfseries Pb\+\_\+\+Btn\+\_\+\+Mouse\+Leave} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_aa884d3bda1b026857863b693d70b035c}\label{class_learn___c_t_s_1_1_game_card_aa884d3bda1b026857863b693d70b035c}} 
-void {\bfseries Pb\+\_\+copy\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a copy of the game in the fil system and launches the editor of the newly created game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a6853856dd8528e7bf8f11961e54d7fc5}{Pb\+\_\+\+Btn\+\_\+\+Mouse\+Hover}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the mouse hovers a Picture\+Box used to interact with the card. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_ae79d73150e2ed713a642169bf221b8ed}{Pb\+\_\+\+Btn\+\_\+\+Mouse\+Leave}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the mouse leaves a Picture\+Box used to interact with the card. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_aa884d3bda1b026857863b693d70b035c}{Pb\+\_\+copy\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Called when the Picture\+Box to copy a game is clicked. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_a00aad000c355c89a2059ea104fa509d0}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card_ae966a27ee35dccde23b84791ffc3e108}{Initialize\+Component}} ()
@@ -109,6 +100,9 @@ private System Windows Forms Panel {\bfseries pnl\+\_\+border}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a60a478bf065afcd05e7e2362e0e20c34}\label{class_learn___c_t_s_1_1_game_card_a60a478bf065afcd05e7e2362e0e20c34}} 
 private Picture\+Box {\bfseries pb\+\_\+copy}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a78922b0d2a135d68959f219d96ff4f8b}\label{class_learn___c_t_s_1_1_game_card_a78922b0d2a135d68959f219d96ff4f8b}} 
+private Tool\+Tip {\bfseries tlt\+\_\+gc}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -127,7 +121,47 @@ static Image {\bfseries icon\+\_\+delete}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+User\+Control used for displaying a game. Allow user to launch the game, start the editor of the game, copying it or deleting it. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a4a87509afe503babcf3d7c39d0174ce3}\label{class_learn___c_t_s_1_1_game_card_a4a87509afe503babcf3d7c39d0174ce3}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!GameCard@{GameCard}}
+\index{GameCard@{GameCard}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{GameCard()}{GameCard()}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Game\+Card (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}}}]{menu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu} & \mbox{\hyperlink{class_learn___c_t_s_1_1_menu}{Menu}} calling the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_card}{Game\+Card}}.\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_af038c1fd037285a7b233b346809a1754}\label{class_learn___c_t_s_1_1_game_card_af038c1fd037285a7b233b346809a1754}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Btn\_edit\_Click@{Btn\_edit\_Click}}
+\index{Btn\_edit\_Click@{Btn\_edit\_Click}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Btn\_edit\_Click()}{Btn\_edit\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Btn\+\_\+edit\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the button to edit the game is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_acb1f6e240ced13a2bc4e1ebea7e25743}\label{class_learn___c_t_s_1_1_game_card_acb1f6e240ced13a2bc4e1ebea7e25743}} 
 \index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Change\_Theme@{Change\_Theme}}
 \index{Change\_Theme@{Change\_Theme}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
@@ -146,7 +180,17 @@ Change the theme of all the controls of this form, according to the current them
 
 
 
-marche pa 
+Creates a copy of the game in the fil system and launches the editor of the newly created game. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a069c59196170e119d3aa95b3e4d1b72f}\label{class_learn___c_t_s_1_1_game_card_a069c59196170e119d3aa95b3e4d1b72f}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Delete\_Game@{Delete\_Game}}
+\index{Delete\_Game@{Delete\_Game}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Delete\_Game()}{Delete\_Game()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Delete\+\_\+\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Deletes the game from the file system. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a00aad000c355c89a2059ea104fa509d0}\label{class_learn___c_t_s_1_1_game_card_a00aad000c355c89a2059ea104fa509d0}} 
 \index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Dispose@{Dispose}}
@@ -163,6 +207,16 @@ Nettoyage des ressources utilisées.
 {\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_aaab8bc19c8babd9831aea8f1c54cbc05}\label{class_learn___c_t_s_1_1_game_card_aaab8bc19c8babd9831aea8f1c54cbc05}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!FetchIcons@{FetchIcons}}
+\index{FetchIcons@{FetchIcons}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{FetchIcons()}{FetchIcons()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Fetch\+Icons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Gets the images of the icons from the library and stores them in local variables. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a4318274ef2ef260e0097853f3ecb8a68}\label{class_learn___c_t_s_1_1_game_card_a4318274ef2ef260e0097853f3ecb8a68}} 
 \index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!GameCard\_Load@{GameCard\_Load}}
 \index{GameCard\_Load@{GameCard\_Load}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
@@ -190,6 +244,118 @@ Called when the gamecard is loaded.
 
 Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a6853856dd8528e7bf8f11961e54d7fc5}\label{class_learn___c_t_s_1_1_game_card_a6853856dd8528e7bf8f11961e54d7fc5}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_Btn\_MouseHover@{Pb\_Btn\_MouseHover}}
+\index{Pb\_Btn\_MouseHover@{Pb\_Btn\_MouseHover}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_Btn\_MouseHover()}{Pb\_Btn\_MouseHover()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+\+Btn\+\_\+\+Mouse\+Hover (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the mouse hovers a Picture\+Box used to interact with the card. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ae79d73150e2ed713a642169bf221b8ed}\label{class_learn___c_t_s_1_1_game_card_ae79d73150e2ed713a642169bf221b8ed}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_Btn\_MouseLeave@{Pb\_Btn\_MouseLeave}}
+\index{Pb\_Btn\_MouseLeave@{Pb\_Btn\_MouseLeave}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_Btn\_MouseLeave()}{Pb\_Btn\_MouseLeave()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+\+Btn\+\_\+\+Mouse\+Leave (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the mouse leaves a Picture\+Box used to interact with the card. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_aa884d3bda1b026857863b693d70b035c}\label{class_learn___c_t_s_1_1_game_card_aa884d3bda1b026857863b693d70b035c}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_copy\_Click@{Pb\_copy\_Click}}
+\index{Pb\_copy\_Click@{Pb\_copy\_Click}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_copy\_Click()}{Pb\_copy\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+copy\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Picture\+Box to copy a game is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ae6ffb22fb4710541fc5f6eee897c3d80}\label{class_learn___c_t_s_1_1_game_card_ae6ffb22fb4710541fc5f6eee897c3d80}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_delete\_Click@{Pb\_delete\_Click}}
+\index{Pb\_delete\_Click@{Pb\_delete\_Click}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_delete\_Click()}{Pb\_delete\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+delete\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Picture\+Box to delete the game is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a747905d2d7b4b4e657d75a5f90cfd715}\label{class_learn___c_t_s_1_1_game_card_a747905d2d7b4b4e657d75a5f90cfd715}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_edit\_Click@{Pb\_edit\_Click}}
+\index{Pb\_edit\_Click@{Pb\_edit\_Click}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_edit\_Click()}{Pb\_edit\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+edit\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Picture\+Box to edit the game is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_abc88aa01a62af84243bcd9fba5203c29}\label{class_learn___c_t_s_1_1_game_card_abc88aa01a62af84243bcd9fba5203c29}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Pb\_play\_Click@{Pb\_play\_Click}}
+\index{Pb\_play\_Click@{Pb\_play\_Click}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Pb\_play\_Click()}{Pb\_play\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Pb\+\_\+play\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Called when the Picture\+Box to launch the game is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a7ca98e6bc8c06a0974ff2ac4f1f0e25d}\label{class_learn___c_t_s_1_1_game_card_a7ca98e6bc8c06a0974ff2ac4f1f0e25d}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!ShowThumbnail@{ShowThumbnail}}
+\index{ShowThumbnail@{ShowThumbnail}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{ShowThumbnail()}{ShowThumbnail()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Show\+Thumbnail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fetches the game thumbnail in the library. 
+
 
 
 \doxysubsection{Member Data Documentation}
@@ -210,6 +376,39 @@ Variable nécessaire au concepteur.
 {\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+is\+Default\+Game\hspace{0.3cm}{\ttfamily [private]}}
 
 True if this is the card of a default game False otherwise 
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a975fa32f4e1b4bd87df5cc0ef8c61bd3}\label{class_learn___c_t_s_1_1_game_card_a975fa32f4e1b4bd87df5cc0ef8c61bd3}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Description@{Description}}
+\index{Description@{Description}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Description\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Description of the game, truncated if necessary. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_a7459ff326dfb227fca7e12d7ec19313f}\label{class_learn___c_t_s_1_1_game_card_a7459ff326dfb227fca7e12d7ec19313f}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!IsDefault@{IsDefault}}
+\index{IsDefault@{IsDefault}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{IsDefault}{IsDefault}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Is\+Default\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Is the game a default game. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_card_ab10fe18ba3ca56c05429fa5fe836df3f}\label{class_learn___c_t_s_1_1_game_card_ab10fe18ba3ca56c05429fa5fe836df3f}} 
+\index{Learn\_CTS.GameCard@{Learn\_CTS.GameCard}!Title@{Title}}
+\index{Title@{Title}!Learn\_CTS.GameCard@{Learn\_CTS.GameCard}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily string Learn\+\_\+\+C\+T\+S.\+Game\+Card.\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Title of the game, truncated if necessary. 
+
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -2,7 +2,7 @@
 \label{class_learn___c_t_s_1_1_p_n_c_window}\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
 
 
-Window responsible for the point and click game mode  
+Window responsible for a situation of the point and click game mode.  
 
 
 Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window\+:\begin{figure}[H]
@@ -15,9 +15,13 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window\+:\begin{figure}[
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a0016f659a46fd1c8eb56c248fb3a7214}{P\+N\+C\+Window}} (string game, string scenario, string situation)
-\begin{DoxyCompactList}\small\item\em Constructor \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor of the window. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}{Set\+Situation}} (string situation)
-\begin{DoxyCompactList}\small\item\em Setter for the situation. Updates the path to the situation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Setter for the situation. Updates the path to the situation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_af8db8f1ea52fa034fdefcc742e02e0b7}{set\+Items\+Left}} (int n)
+\begin{DoxyCompactList}\small\item\em Sets the number of items that needs to be validated in order to complete the situation. Calls the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} to switch situation if all the items are validated. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_ad9d465691501f222b73b74e5f600a731}{get\+Items\+Left}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of items that needs to be validated in order to complete the situation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,6 +44,8 @@ void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051
 \begin{DoxyCompactList}\small\item\em Creates an \mbox{\hyperlink{class_learn___c_t_s_1_1_item_viewer}{Item\+Viewer}} to view the item in details. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a5d6b5c9755ee312f805f604bc252d901}{P\+N\+C\+Window\+\_\+\+Size\+Changed}} (object sender, Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Called when the window resizes, to have a responsive behavior. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_abf5020972447db81cc55ff123e5efaef}{Fetch\+Background}} ()
+\begin{DoxyCompactList}\small\item\em Finds which background is used in the environnement.\+json file, then gets it in the library. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a2d06ca2c7e7486290906c49db0bf04db}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Clean up any resources being used. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a1bcb65209bd7b29fff727e8de17bce99}{Initialize\+Component}} ()
@@ -80,12 +86,15 @@ string {\bfseries library\+\_\+path}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a6efdc952681d51cabb008d599ae2080e}\label{class_learn___c_t_s_1_1_p_n_c_window_a6efdc952681d51cabb008d599ae2080e}} 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager}{Item\+Manager}} {\bfseries item\+\_\+manager}
 \item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a47c74e664034fcb7f424ef145ec41412}\label{class_learn___c_t_s_1_1_p_n_c_window_a47c74e664034fcb7f424ef145ec41412}} 
+int {\bfseries items\+\_\+left}
+\item 
 private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_p_n_c_window_a2ee3b0f23cef1a34238ca9387202865b}{components}} = null
 \begin{DoxyCompactList}\small\item\em Required designer variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Window responsible for the point and click game mode 
+Window responsible for a situation of the point and click game mode. 
 
 
 
@@ -98,7 +107,7 @@ Window responsible for the point and click game mode
 
 
 
-Constructor 
+Constructor of the window. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -127,6 +136,16 @@ Clean up any resources being used.
 {\em disposing} & true if managed resources should be disposed; otherwise, false.\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_abf5020972447db81cc55ff123e5efaef}\label{class_learn___c_t_s_1_1_p_n_c_window_abf5020972447db81cc55ff123e5efaef}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!FetchBackground@{FetchBackground}}
+\index{FetchBackground@{FetchBackground}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{FetchBackground()}{FetchBackground()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+Fetch\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Finds which background is used in the environnement.\+json file, then gets it in the library. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_aac9ed3da0eeb00013cd490940fe7f7a9}\label{class_learn___c_t_s_1_1_p_n_c_window_aac9ed3da0eeb00013cd490940fe7f7a9}} 
 \index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!GetAllTextures@{GetAllTextures}}
 \index{GetAllTextures@{GetAllTextures}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
@@ -143,7 +162,20 @@ Retrieve all the textures and the childs of each textures.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
+The textures from the list of textures.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_ad9d465691501f222b73b74e5f600a731}\label{class_learn___c_t_s_1_1_p_n_c_window_ad9d465691501f222b73b74e5f600a731}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!getItemsLeft@{getItemsLeft}}
+\index{getItemsLeft@{getItemsLeft}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{getItemsLeft()}{getItemsLeft()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+get\+Items\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Returns the number of items that needs to be validated in order to complete the situation. 
+
+\begin{DoxyReturn}{Returns}
+Number of items
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051870b6e7b8e48}\label{class_learn___c_t_s_1_1_p_n_c_window_afe0b7e0556488d9bd051870b6e7b8e48}} 
 \index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!HighlightItem@{HighlightItem}}
@@ -244,6 +276,21 @@ Called when the window resizes, to have a responsive behavior.
 {\em sender} & \\
 \hline
 {\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_af8db8f1ea52fa034fdefcc742e02e0b7}\label{class_learn___c_t_s_1_1_p_n_c_window_af8db8f1ea52fa034fdefcc742e02e0b7}} 
+\index{Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}!setItemsLeft@{setItemsLeft}}
+\index{setItemsLeft@{setItemsLeft}!Learn\_CTS.PNCWindow@{Learn\_CTS.PNCWindow}}
+\doxysubsubsection{\texorpdfstring{setItemsLeft()}{setItemsLeft()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+P\+N\+C\+Window.\+set\+Items\+Left (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the number of items that needs to be validated in order to complete the situation. Calls the \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} to switch situation if all the items are validated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of items\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}\label{class_learn___c_t_s_1_1_p_n_c_window_a84750155c1ab8d91bc35561ef32ee158}} 

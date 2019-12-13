@@ -21,7 +21,12 @@ List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ \mbox{\h
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_a07658b7e92844aa9e5817a4033f83d15}{Clear}} ()
 \begin{DoxyCompactList}\small\item\em Clears the list of items \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_ab68007387a31ca0287f510982353cd10}{Get\+Items\+From\+Situation}} ()
-\begin{DoxyCompactList}\small\item\em Retrieves all the items used for a specific situation and puts them in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Retrieves all the items used for a specific situation and puts them in the list. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_learn___c_t_s_1_1_item_manager_a559fd2c8acfef0fc1678b3bc5e6687ed}{Get\+Number\+Of\+Items\+To\+Validate}} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of items that need to be validated in order to complete the situation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_af59ea194242de9d3a2965fb3cdc79ae0}\label{class_learn___c_t_s_1_1_item_manager_af59ea194242de9d3a2965fb3cdc79ae0}} 
+string {\bfseries Get\+Library\+Path} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -157,6 +162,19 @@ Returns the list of items
 
 \begin{DoxyReturn}{Returns}
 List of items
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_item_manager_a559fd2c8acfef0fc1678b3bc5e6687ed}\label{class_learn___c_t_s_1_1_item_manager_a559fd2c8acfef0fc1678b3bc5e6687ed}} 
+\index{Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}!GetNumberOfItemsToValidate@{GetNumberOfItemsToValidate}}
+\index{GetNumberOfItemsToValidate@{GetNumberOfItemsToValidate}!Learn\_CTS.ItemManager@{Learn\_CTS.ItemManager}}
+\doxysubsubsection{\texorpdfstring{GetNumberOfItemsToValidate()}{GetNumberOfItemsToValidate()}}
+{\footnotesize\ttfamily int Learn\+\_\+\+C\+T\+S.\+Item\+Manager.\+Get\+Number\+Of\+Items\+To\+Validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of items that need to be validated in order to complete the situation. 
+
+\begin{DoxyReturn}{Returns}
+Number of items
 \end{DoxyReturn}
 
 

@@ -10,7 +10,35 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Tram\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_a38b128e7bb9e71327bdc64dcd4281090}{Tram}} (int x, int y)
-\begin{DoxyCompactList}\small\item\em Constructor of a tram. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor of a tram. \end{DoxyCompactList}\item 
+override \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_a8ce282d5d5d407811bfedb4fce2f4e25}{Get\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Get the doors of the tram \end{DoxyCompactList}\item 
+override int \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_ab7907621115c73eacccb2483f1881a80}{Get\+Pos\+Door}} (int i)
+\begin{DoxyCompactList}\small\item\em Get the position of the door related to the tram. \end{DoxyCompactList}\item 
+override int \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_afe68a74e1738bf596c3831b0c6fa7f79}{Get\+Number\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Get the total number of doors. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_a4687bea19e8bf73b1a8f1dec06be2874}{Open\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Open slightly the doors of the tram \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_ac71d03619a481fba9177270daaa39b72}{Close\+Doors}} ()
+\begin{DoxyCompactList}\small\item\em Close a bit the doors of the tram. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_a77a81a1d608f0e7a6669f0701a41ba2d}{Set\+Path\+N\+P\+C\+To\+Vehicle}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} n)
+\begin{DoxyCompactList}\small\item\em Set a series of objectives for the npc to get on the tram. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_ae9fc50a4019ffbb5e8e6fed9543239ed}{Place\+N\+P\+C\+Randomly\+In\+Vehicle}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} npc)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_learn___c_t_s_1_1_place}{Place}} the npc randomly in the tram. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_learn___c_t_s_1_1_tram_a6d41ddbbc5841e0be788d7a45c2377ba}{Shuffle\+Vehicle\+N\+P\+Cs}} ()
+\begin{DoxyCompactList}\small\item\em Replace randomly the npcs already inside the vehicle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_abb2aa245f41edc29678f63dc07dd1613}\label{class_learn___c_t_s_1_1_tram_abb2aa245f41edc29678f63dc07dd1613}} 
+override void {\bfseries Add\+Conductor} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} conductor)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_a8f4ac3157495b615647318ff0997faa3}\label{class_learn___c_t_s_1_1_tram_a8f4ac3157495b615647318ff0997faa3}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries doors\+\_\+left}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_ae1a663a3d31f3fbac74387d64dc1049e}\label{class_learn___c_t_s_1_1_tram_ae1a663a3d31f3fbac74387d64dc1049e}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} {\bfseries doors\+\_\+right}
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,6 +65,151 @@ Constructor of a tram.
 {\em y} & The y coordinate.\\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_ac71d03619a481fba9177270daaa39b72}\label{class_learn___c_t_s_1_1_tram_ac71d03619a481fba9177270daaa39b72}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!CloseDoors@{CloseDoors}}
+\index{CloseDoors@{CloseDoors}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{CloseDoors()}{CloseDoors()}}
+{\footnotesize\ttfamily override bool Learn\+\_\+\+C\+T\+S.\+Tram.\+Close\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Close a bit the doors of the tram. 
+
+\begin{DoxyReturn}{Returns}
+true if the doors are closing. false otherwise.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_ad18d17d615006427dd06ee9f190dc18f}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_a8ce282d5d5d407811bfedb4fce2f4e25}\label{class_learn___c_t_s_1_1_tram_a8ce282d5d5d407811bfedb4fce2f4e25}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!GetDoors@{GetDoors}}
+\index{GetDoors@{GetDoors}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{GetDoors()}{GetDoors()}}
+{\footnotesize\ttfamily override \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} \mbox{[}$\,$\mbox{]} Learn\+\_\+\+C\+T\+S.\+Tram.\+Get\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the doors of the tram 
+
+\begin{DoxyReturn}{Returns}
+The first element in the array is the texture of the left doors, the second one is the texture of the right door.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_a6d0693768a086c40c1d73cfc387419f8}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_afe68a74e1738bf596c3831b0c6fa7f79}\label{class_learn___c_t_s_1_1_tram_afe68a74e1738bf596c3831b0c6fa7f79}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!GetNumberDoors@{GetNumberDoors}}
+\index{GetNumberDoors@{GetNumberDoors}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{GetNumberDoors()}{GetNumberDoors()}}
+{\footnotesize\ttfamily override int Learn\+\_\+\+C\+T\+S.\+Tram.\+Get\+Number\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the total number of doors. 
+
+\begin{DoxyReturn}{Returns}
+The number of doors.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_a44732a633a954fb9883f97a5a096562c}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_ab7907621115c73eacccb2483f1881a80}\label{class_learn___c_t_s_1_1_tram_ab7907621115c73eacccb2483f1881a80}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!GetPosDoor@{GetPosDoor}}
+\index{GetPosDoor@{GetPosDoor}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{GetPosDoor()}{GetPosDoor()}}
+{\footnotesize\ttfamily override int Learn\+\_\+\+C\+T\+S.\+Tram.\+Get\+Pos\+Door (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the position of the door related to the tram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The number of the door.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The position of the door related to the tram.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_a2953be0e355599b1fd451d53401953b2}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_a4687bea19e8bf73b1a8f1dec06be2874}\label{class_learn___c_t_s_1_1_tram_a4687bea19e8bf73b1a8f1dec06be2874}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!OpenDoors@{OpenDoors}}
+\index{OpenDoors@{OpenDoors}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{OpenDoors()}{OpenDoors()}}
+{\footnotesize\ttfamily override bool Learn\+\_\+\+C\+T\+S.\+Tram.\+Open\+Doors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Open slightly the doors of the tram 
+
+\begin{DoxyReturn}{Returns}
+true if the doors are opening. false otherwise.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_a7aac1e6f9a106c28512682cca41b91d1}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_ae9fc50a4019ffbb5e8e6fed9543239ed}\label{class_learn___c_t_s_1_1_tram_ae9fc50a4019ffbb5e8e6fed9543239ed}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!PlaceNPCRandomlyInVehicle@{PlaceNPCRandomlyInVehicle}}
+\index{PlaceNPCRandomlyInVehicle@{PlaceNPCRandomlyInVehicle}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{PlaceNPCRandomlyInVehicle()}{PlaceNPCRandomlyInVehicle()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Tram.\+Place\+N\+P\+C\+Randomly\+In\+Vehicle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}}]{npc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_learn___c_t_s_1_1_place}{Place}} the npc randomly in the tram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em npc} & The npc that will be placed randomly in the tram.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_afef32102cc1a619a9f12e38e023ba1e7}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_a77a81a1d608f0e7a6669f0701a41ba2d}\label{class_learn___c_t_s_1_1_tram_a77a81a1d608f0e7a6669f0701a41ba2d}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!SetPathNPCToVehicle@{SetPathNPCToVehicle}}
+\index{SetPathNPCToVehicle@{SetPathNPCToVehicle}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{SetPathNPCToVehicle()}{SetPathNPCToVehicle()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Tram.\+Set\+Path\+N\+P\+C\+To\+Vehicle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Set a series of objectives for the npc to get on the tram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The npc which will enter the tram.\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_a169000e3aed78d1fee1af98d121d70e1}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_tram_a6d41ddbbc5841e0be788d7a45c2377ba}\label{class_learn___c_t_s_1_1_tram_a6d41ddbbc5841e0be788d7a45c2377ba}} 
+\index{Learn\_CTS.Tram@{Learn\_CTS.Tram}!ShuffleVehicleNPCs@{ShuffleVehicleNPCs}}
+\index{ShuffleVehicleNPCs@{ShuffleVehicleNPCs}!Learn\_CTS.Tram@{Learn\_CTS.Tram}}
+\doxysubsubsection{\texorpdfstring{ShuffleVehicleNPCs()}{ShuffleVehicleNPCs()}}
+{\footnotesize\ttfamily override void Learn\+\_\+\+C\+T\+S.\+Tram.\+Shuffle\+Vehicle\+N\+P\+Cs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Replace randomly the npcs already inside the vehicle. 
+
+
+
+Implements \mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle_ade8695b7f6be0fe6ff646481edc229e2}{Learn\+\_\+\+C\+T\+S.\+Vehicle}}.
+
 
 
 \doxysubsection{Member Data Documentation}

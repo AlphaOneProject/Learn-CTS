@@ -15,34 +15,26 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Game\+Window\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}{Game\+Window}} (string game, string scenario)
-\begin{DoxyCompactList}\small\item\em Launch the game with at a scenario \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Launch the game at a scenario \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}{Game\+Window}} (string game, string scenario, string situation)
-\begin{DoxyCompactList}\small\item\em Launch a game, at a situation in a scenario \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Launch a game, at a situation in a scenario Used exclusively to preview a situation \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}{Remove\+Transition}} ()
-\begin{DoxyCompactList}\small\item\em Remove the transition on screen. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}{Open\+Close\+Dialog}} (int id\+\_\+npc)
-\begin{DoxyCompactList}\small\item\em Open or close the dialog if its already on screen. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad6a379f4f9995449c6f6b4bda4d40fcc}\label{class_learn___c_t_s_1_1_game_window_ad6a379f4f9995449c6f6b4bda4d40fcc}} 
-void {\bfseries Initialize\+N\+P\+Cs} ()
+\begin{DoxyCompactList}\small\item\em Remove the transition in the hud list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_adb9f0971b9faabb23aac2acf13fcb363}{Initialize\+N\+P\+Cs}} (int scene\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Initialize the npcs according to the scene type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}{Set\+Score}} (int s)
+\begin{DoxyCompactList}\small\item\em Initialize the score or set it if already initialized. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}{Open\+Close\+\_\+\+Backpack}} ()
+\begin{DoxyCompactList}\small\item\em Open or close the backpack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}{Pass\+Through\+N\+P\+Cs}} ()
+\begin{DoxyCompactList}\small\item\em Check if npcs are in front of the player and move each npcs to let the player pass. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}{Switch\+Situation}} ()
+\begin{DoxyCompactList}\small\item\em Switch the situation to the next one. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac5303f320b758974eae583dbc2c41810}\label{class_learn___c_t_s_1_1_game_window_ac5303f320b758974eae583dbc2c41810}} 
+void {\bfseries Display\+End\+Comment} ()
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}\label{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}} 
-void {\bfseries Set\+Score} (int s)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}\label{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}} 
-void {\bfseries Open\+Close\+\_\+\+Backpack} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}\label{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}} 
-void {\bfseries Pass\+Through\+N\+P\+Cs} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}\label{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}} 
-void {\bfseries Switch\+Situation} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a2a1a500fc3d4f6de76ab2aaa8dd77534}\label{class_learn___c_t_s_1_1_game_window_a2a1a500fc3d4f6de76ab2aaa8dd77534}} 
-void {\bfseries End\+Timer} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_adb7b05714889125e21b754bfd6af1eeb}\label{class_learn___c_t_s_1_1_game_window_adb7b05714889125e21b754bfd6af1eeb}} 
-void {\bfseries Add\+Comment} (string comment)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a6a19dc2e05a270aff4cad35e634882d5}{Remove\+All\+Controls}} ()
+\begin{DoxyCompactList}\small\item\em Tag the controls to be removed before the next refresh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,152 +44,130 @@ static \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window}{Game\+Window}} \mbo
 \begin{DoxyCompactItemize}
 \item 
 override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}{On\+Paint}} (Paint\+Event\+Args e)
-\begin{DoxyCompactList}\small\item\em Paint the textures at the user\textquotesingle{}s screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Optimize the graphics of the given paint environment, resize the game window if needed then paint the textures on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a66efb13b961a7434d1201035750ed92f}{Game\+Window}} (string game)
-\begin{DoxyCompactList}\small\item\em Initialize the game window \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Construct a game window \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}{Game\+Window\+\_\+\+Load}} (object sender, Event\+Args e)
-\begin{DoxyCompactList}\small\item\em When the form is loading, create a button \char`\"{}\+Launch\char`\"{}, initialize the timer and the textures, then show the form. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}\label{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}} 
-void {\bfseries Display\+Loading} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}\label{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}} 
-void {\bfseries Display\+Intro} (string scene\+\_\+name, string scene\+\_\+intro)
-\item 
+\begin{DoxyCompactList}\small\item\em Load the game window \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}{Display\+Loading}} ()
+\begin{DoxyCompactList}\small\item\em Display a loading lbl. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}{Display\+Intro}} (string scene\+\_\+name, string scene\+\_\+intro)
+\begin{DoxyCompactList}\small\item\em Display the introduction and the place name. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}{Load\+\_\+\+Game}} ()
-\begin{DoxyCompactList}\small\item\em Load every objects needed \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Initialize the timer and the textures accordingly to the environment.\+json file. Display the point and click form todo Display the introduction if there is one set. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_af081e4e926eaa2432c51eea6a45c35f8}{Setup\+Scene}} (int scene\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Setup some events according to the scene type. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a231d20ad5f1bb539704fcb1482d22404}{Initialize\+F\+P\+S\+Thread}} ()
 \begin{DoxyCompactList}\small\item\em Initialize the thread which calculate the fps. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}{Initialize\+Transition}} ()
 \begin{DoxyCompactList}\small\item\em Initialize the transition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a537716f0840642c801dab8f5f893b1d8}{Start\+Transition}} ()
-\begin{DoxyCompactList}\small\item\em Start the transition. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}{Initialize\+Timer}} ()
-\begin{DoxyCompactList}\small\item\em Initialize the game timer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}{Initialize\+List\+Textures}} ()
-\begin{DoxyCompactList}\small\item\em Initialize all the textures of the game. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Start the transition and had it to the hud list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a32cfb095c5c0ebd4d1d7ddc5d22c3ae9}{Initialize\+Timer}} (int scene\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Initialize the game timer according to the scene type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae868c228848098aa46c4ee653ab16520}{Initialize\+Game\+Textures}} (int scene\+\_\+type, string background\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Initialize all the textures of the game according to the scene type and the background. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}{Initialize\+H\+UD}} ()
-\begin{DoxyCompactList}\small\item\em Initialize the textures of the hud, like the egg and the backpack icons. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Initialize the textures of the hud. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}{Set\+Up\+Window}} ()
 \begin{DoxyCompactList}\small\item\em Setup the window according to the general settings of the application stored in the options.\+json \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}{Calcul\+F\+P\+SandM}} ()
-\begin{DoxyCompactList}\small\item\em Show the fps average at this moment. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a4a281710cdb761d6e415e00eff26bb34}{Calculate\+F\+PS}} ()
+\begin{DoxyCompactList}\small\item\em Calculate the fps every second. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}{Game\+Tick}} (object sender, Event\+Args e)
-\begin{DoxyCompactList}\small\item\em Instructions executed every tick \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}\label{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}} 
-void {\bfseries On\+Platform\+\_\+\+Tick} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a56ab0093c607ef99f8433ebea811e13f}\label{class_learn___c_t_s_1_1_game_window_a56ab0093c607ef99f8433ebea811e13f}} 
-void {\bfseries Inside\+Vehicule\+\_\+\+Tick} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}\label{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}} 
-void {\bfseries Park\+\_\+\+Tick} (object sender, Event\+Args e)
-\item 
+\begin{DoxyCompactList}\small\item\em Base game tick which is responsible of moving the characters, removing the control if needed and refreshing the game window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}{On\+Platform\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the player is waiting the vehicle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a586d840a7143fe79350284d31f54d95a}{Vehicle\+Arrive\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the player is in the vehicle and have to get off the vehicle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aa07e68861e963ff6179e6c7e7f6c0adb}{Do\+Nothing\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Tick which does nothing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a60c835ab581a8237f5e82aea5a3ecf8e}{Inside\+Vehicle\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the player is in the vehicle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}{Park\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the player is in the park. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_af21c8430f482724662d6c06194a2a00a}{Street\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the player is in the street. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}{Move\+All\+Characters\+To\+Objective}} ()
 \begin{DoxyCompactList}\small\item\em Move all the the characters towards its objective if he has any. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}{Move\+Textures\+If\+Player\+Moves}} ()
-\begin{DoxyCompactList}\small\item\em Move the textures if the player reaches the borders of the screen. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}{Check\+Arrows\+Pressed}} ()
-\begin{DoxyCompactList}\small\item\em Check if arrows are pressed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a1ddd7aa97121eed0099a642a6283692b}{Check\+Player\+Move}} ()
+\begin{DoxyCompactList}\small\item\em Check if the player wants to move and request a move. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}{Move\+Character\+To\+Objective}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} c)
-\begin{DoxyCompactList}\small\item\em Move the character toward his objective \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}{Check\+If\+The\+Vehicule\+Is\+Arrived}} ()
-\begin{DoxyCompactList}\small\item\em Check if the vehicule has to slow down. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}{Check\+If\+Character\+Is\+Entering\+The\+Vehicule}} ()
-\begin{DoxyCompactList}\small\item\em Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}{Check\+If\+Character\+Is\+Leaving\+The\+Vehicule}} ()
-\begin{DoxyCompactList}\small\item\em Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aca36807f7ae0973094fcae225c330b95}\label{class_learn___c_t_s_1_1_game_window_aca36807f7ae0973094fcae225c330b95}} 
-void {\bfseries Resize\+Game\+Window} (Paint\+Event\+Args e)
-\item 
-void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}{Move\+Background}} ()
-\begin{DoxyCompactList}\small\item\em Move the background. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Move the character toward its current objective \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a860ef07aadef7841175a0e5536d5faf3}{Change\+State\+If\+Vehicle\+Arrived}} ()
+\begin{DoxyCompactList}\small\item\em Check if the vehicle has to slow down to be at the middle of the platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a972b7751f2e43b1c4e2a4bd8c279e21e}{Check\+If\+Character\+Is\+Entering\+The\+Vehicle}} ()
+\begin{DoxyCompactList}\small\item\em Check if a character enters the vehicle, add it as a child of the vehicle and remove it from the platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a0a7087fe30b5d833a6f9bdce652feb60}{Check\+If\+Character\+Is\+Leaving\+The\+Vehicle}} ()
+\begin{DoxyCompactList}\small\item\em Check if a character leaves the vehicle, remove it from the vehicle and add it to the platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a1681085d2c6336a385a66d2bb6c6cfe6}{Update\+Vertical\+Textures}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Move each textures to keep it at the vertical center of the screen. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}{Paint\+All\+Textures}} (Paint\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Retrieve all the textures, sort them by depth then are paint on the window. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}\label{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}} 
-void {\bfseries Optimize\+Graphics} (Paint\+Event\+Args e)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}{Optimize\+Graphics}} (Paint\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Optimize the graphics of the given paint environment to get better speed when drawing bitmaps. \end{DoxyCompactList}\item 
 List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a735ef1e3a9126d519a718133e5f2abeb}{Get\+All\+Textures}} (List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ list)
-\begin{DoxyCompactList}\small\item\em Retrieve all the textures and the childs of each textures. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Retrieve all the textures and the childs of each textures in the given the list. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}{Game\+Window\+\_\+\+Mouse\+Down}} (object sender, System.\+Windows.\+Forms.\+Mouse\+Event\+Args e)
-\begin{DoxyCompactList}\small\item\em When the player clicks on the mouse. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Open the backpack if the player clicks on it, remove the controls if the user clicks outside or move the player to the position of the mouse. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}{Search\+N\+P\+C\+Dialog}} (int mx, int my)
 \begin{DoxyCompactList}\small\item\em Activate a dialog if the player clicks on a \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}{Is\+Character\+Colliding\+With\+Textures}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_character}{Character}} c)
 \begin{DoxyCompactList}\small\item\em Check if a character is colliding with the other textures in the game. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}{Move\+Player}} (int a, int b)
 \begin{DoxyCompactList}\small\item\em Move the player if there are no collisions. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}\label{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}} 
-void {\bfseries Move\+All\+Textures\+Except\+Player} (int a, int b)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}\label{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}} 
-void {\bfseries Move\+N\+PC} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} n, int a, int b)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a56a3871b3cb4409eb4a9229ec8ffc431}{Prevent\+Player\+Leaving\+Platform}} ()
+\begin{DoxyCompactList}\small\item\em Prevent the player of leaving the platform if the ticket is not valid or the vehicle is not here. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}{Move\+All\+Textures\+Except\+Player}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Move all the textures except the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}{Move\+N\+PC}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} n, int a, int b)
+\begin{DoxyCompactList}\small\item\em Move the given npc and animate it. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}{Game\+Window\+\_\+\+Key\+Down}} (object sender, System.\+Windows.\+Forms.\+Key\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Check if the player presses down the keys \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}{Game\+Window\+\_\+\+Key\+Up}} (object sender, System.\+Windows.\+Forms.\+Key\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Check if the player presses up the arrows. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}{Game\+Window\+\_\+\+Form\+Closed}} (object sender, Form\+Closed\+Event\+Args e)
 \begin{DoxyCompactList}\small\item\em Display the average F\+PS during the game session. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae30977e7feb0711b503b5336e6ec4b74}\label{class_learn___c_t_s_1_1_game_window_ae30977e7feb0711b503b5336e6ec4b74}} 
-void {\bfseries Stop\+Vehicule} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa562e54bf8f039626984e91f79b74be7}\label{class_learn___c_t_s_1_1_game_window_aa562e54bf8f039626984e91f79b74be7}} 
-void {\bfseries N\+P\+C\+Leave\+Vehicule} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a7a7c31e6c7e9c48f78e6ad9f35431d25}\label{class_learn___c_t_s_1_1_game_window_a7a7c31e6c7e9c48f78e6ad9f35431d25}} 
-List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} $>$ {\bfseries Selection\+N\+P\+Cs\+Leaving\+Vehicule} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5ae2e8bd5d1b9950d0a5ae76b0b66be9}\label{class_learn___c_t_s_1_1_game_window_a5ae2e8bd5d1b9950d0a5ae76b0b66be9}} 
-void {\bfseries View\+Inside} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}\label{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}} 
-void {\bfseries Change\+Current\+Tick} (Event\+Handler eh)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}\label{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}} 
-void {\bfseries Place\+Player\+Middle\+Screen} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a744ff376b60b6c0f5883b64be6cd5dc9}\label{class_learn___c_t_s_1_1_game_window_a744ff376b60b6c0f5883b64be6cd5dc9}} 
-void {\bfseries N\+P\+C\+Entering\+Vehicule} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a26b2e10c1af70c557b13421b36ac55ec}\label{class_learn___c_t_s_1_1_game_window_a26b2e10c1af70c557b13421b36ac55ec}} 
-void {\bfseries Fill\+Vehicule\+N\+P\+Cs} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa7eae8298c0f7366f1d0dc1cde6b465e}\label{class_learn___c_t_s_1_1_game_window_aa7eae8298c0f7366f1d0dc1cde6b465e}} 
-void {\bfseries Fill\+Platform\+N\+P\+Cs} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a7313471ed1a236a12cf1c560c92cf102}\label{class_learn___c_t_s_1_1_game_window_a7313471ed1a236a12cf1c560c92cf102}} 
-void {\bfseries Fill\+Park\+N\+P\+Cs} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1acbb38d8c7203f0b4cee3a33b4cc990}\label{class_learn___c_t_s_1_1_game_window_a1acbb38d8c7203f0b4cee3a33b4cc990}} 
-void {\bfseries Respawn\+N\+P\+C\+Outside\+Screen} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aac71e90bcc6e6aaaeb9b66ffae80261e}\label{class_learn___c_t_s_1_1_game_window_aac71e90bcc6e6aaaeb9b66ffae80261e}} 
-void {\bfseries Shuffle\+Vehicule\+N\+P\+Cs} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}\label{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}} 
-void {\bfseries N\+P\+Cs\+Coming\+Platform} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}\label{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}} 
-void {\bfseries Game\+Window\+\_\+\+Resize} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1dcafcc9689c18758daf3d75e9080c93}\label{class_learn___c_t_s_1_1_game_window_a1dcafcc9689c18758daf3d75e9080c93}} 
-void {\bfseries Start\+Vehicule\+Crash} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aaab9187c0cc7e603c0514b9da3f8d103}\label{class_learn___c_t_s_1_1_game_window_aaab9187c0cc7e603c0514b9da3f8d103}} 
-void {\bfseries Vehicule\+Crashed\+\_\+\+Tick} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}\label{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}} 
-bool {\bfseries Is\+On\+Screen} (\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} t)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac858a774f1ad38af7d346b3aa86b9257}\label{class_learn___c_t_s_1_1_game_window_ac858a774f1ad38af7d346b3aa86b9257}} 
-void {\bfseries Display\+Settings} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a131181789c2cdcabadb3c15d3e623daf}\label{class_learn___c_t_s_1_1_game_window_a131181789c2cdcabadb3c15d3e623daf}} 
-void {\bfseries Controls\+Settings} ()
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae7244538e4b7496c941e3961476fde01}{Reset\+Vehicle}} ()
+\begin{DoxyCompactList}\small\item\em Reset the vehicle and respawn it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a14e053ece9b59d0c91ca05f911c02573}{N\+P\+C\+Leave\+Vehicle}} (bool affect\+\_\+interactive\+\_\+npcs)
+\begin{DoxyCompactList}\small\item\em Set the npcs to leave the vehicle. todo \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aea6c8fc26bd80419d8e040c6ea0e3714}{View\+Inside\+Vehicle}} ()
+\begin{DoxyCompactList}\small\item\em Change the view to inside of the vehicle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}{Change\+Current\+Tick}} (Event\+Handler eh)
+\begin{DoxyCompactList}\small\item\em Change the current tick of the timer to a new event handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}{Place\+Player\+Middle\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_learn___c_t_s_1_1_place}{Place}} the player at the middle of the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_ae8d598814fc344b059d526e8329ad990}{N\+P\+C\+Enter\+Vehicle}} (bool affect\+\_\+interactive\+\_\+npcs)
+\begin{DoxyCompactList}\small\item\em Set the npcs to enter the vehicle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a02de425662cb34f190af877b91d0c3d7}{Fill\+Vehicle\+N\+P\+Cs}} (int density)
+\begin{DoxyCompactList}\small\item\em Fill the vehicle with random npcs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_abac6886f208b6ac2fec65fc8c8fe9549}{Fill\+Platform\+N\+P\+Cs}} (int density)
+\begin{DoxyCompactList}\small\item\em Fill the platform with random npcs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aa2bd64ac9a76f6001e85e65b000ae8e2}{Fill\+Park\+N\+P\+Cs}} (int density)
+\begin{DoxyCompactList}\small\item\em Fill the park with random npcs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a5d8d4b6be11534822d8fbac257f29790}{Fill\+Street\+N\+P\+Cs}} (int density)
+\begin{DoxyCompactList}\small\item\em Fill the street with random npcs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a483e97f2d076adf70f48d08162db64f6}{Fill\+Street\+Cars}} (int number)
+\begin{DoxyCompactList}\small\item\em Fill the street with random cars. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aa2f9e94cda3df9b4bad9bdce0950b0e6}{Respawn\+N\+P\+C\+Park\+Outside\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Respawn the npcs if outside the screen in the park. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a2fe8b10df789233ec511f3e234ec8137}{Respawn\+N\+P\+C\+Street\+Outside\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Respawn the npcs if outside the screen in the street. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a8a910c9268cf4b5983dfc69869e8921e}{Respawn\+Cars\+Outside\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Respawn the cars if outside the screen in the street. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}{N\+P\+Cs\+Coming\+Platform}} ()
+\begin{DoxyCompactList}\small\item\em Set the npcs below the screen which leaved the vehicle a new position and an objective to the platform. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}{Game\+Window\+\_\+\+Resize}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Resize the control on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a22d00aeb4d4366426d9f183904524d34}{Vehicle\+Crashed\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Instructions executed when the vehicle has to crash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}{Is\+On\+Screen}} (\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} t)
+\begin{DoxyCompactList}\small\item\em Check if the texture is on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a97d5848ac76317030a511fb6d19ad652}{Remove\+Controls\+To\+Suppress}} ()
+\begin{DoxyCompactList}\small\item\em Remove the controls tagged to be removed. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}{Initialize\+Component}} ()
@@ -206,7 +176,7 @@ private void \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a98
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa3ba73fbcc7274a489e327cafbc7fb71}\label{class_learn___c_t_s_1_1_game_window_aa3ba73fbcc7274a489e327cafbc7fb71}} 
-\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager}{N\+P\+C\+\_\+\+Manager}} {\bfseries nm} = N\+P\+C\+\_\+\+Manager.\+Get\+Instance()
+\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager}{N\+P\+C\+\_\+\+Manager}} {\bfseries nm} = \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager_ad9549b16bd1dce534342bd8acdadaf00}{N\+P\+C\+\_\+\+Manager.\+Get\+Instance}}()
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa99c466754b3738b9d4ad503b48c5da9}\label{class_learn___c_t_s_1_1_game_window_aa99c466754b3738b9d4ad503b48c5da9}} 
 List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseries list\+\_\+game\+\_\+textures}
@@ -217,14 +187,14 @@ List$<$ \mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}} $>$ {\bfseri
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a3a898cc2722c6f1cdbc63d37376f72e5}\label{class_learn___c_t_s_1_1_game_window_a3a898cc2722c6f1cdbc63d37376f72e5}} 
 List$<$ string $>$ {\bfseries list\+\_\+comments}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af045cc706e41b0543933442cd6f87e65}\label{class_learn___c_t_s_1_1_game_window_af045cc706e41b0543933442cd6f87e65}} 
-System.\+Windows.\+Forms.\+Timer {\bfseries timer}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9864727d9d55ad65c8776d85c7e3be13}\label{class_learn___c_t_s_1_1_game_window_a9864727d9d55ad65c8776d85c7e3be13}} 
+System.\+Windows.\+Forms.\+Timer {\bfseries timer\+\_\+game}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af723c753aea72ed0ab90c1d474c1a2a2}\label{class_learn___c_t_s_1_1_game_window_af723c753aea72ed0ab90c1d474c1a2a2}} 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_player}{Player}} {\bfseries player}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a386fc0cc0b82da503ca5226551795126}\label{class_learn___c_t_s_1_1_game_window_a386fc0cc0b82da503ca5226551795126}} 
-\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicule}{Vehicule}} {\bfseries vehicule}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a8801d6927090a80c5bb21b52408e5a65}\label{class_learn___c_t_s_1_1_game_window_a8801d6927090a80c5bb21b52408e5a65}} 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_vehicle}{Vehicle}} {\bfseries vehicle}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9f311acec424b19084694f6e3594829d}\label{class_learn___c_t_s_1_1_game_window_a9f311acec424b19084694f6e3594829d}} 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_background}{Background}} {\bfseries background}
@@ -298,9 +268,6 @@ bool {\bfseries ticket\+\_\+valid} = false
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0f27043a102751c489e22d07e762a75e}\label{class_learn___c_t_s_1_1_game_window_a0f27043a102751c489e22d07e762a75e}} 
 Event\+Handler {\bfseries current\+\_\+scene\+\_\+tick}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a063c815af472cad436d779acefd1e75e}\label{class_learn___c_t_s_1_1_game_window_a063c815af472cad436d779acefd1e75e}} 
-int {\bfseries scene\+\_\+type}
-\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a4bc0fe948f7476445ae7b8323ceb0d79}\label{class_learn___c_t_s_1_1_game_window_a4bc0fe948f7476445ae7b8323ceb0d79}} 
 bool {\bfseries showhitbox} = false
 \item 
@@ -308,7 +275,22 @@ bool {\bfseries showhitbox} = false
 bool {\bfseries god} = false
 \item 
 private System Component\+Model I\+Container \mbox{\hyperlink{class_learn___c_t_s_1_1_game_window_a1efc218d12b9a81a1aba718e1bbd8567}{components}} = null
-\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Variable nécessaire au concepteur. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a99f0c47ccd91ec20019e10494a468d57}\label{class_learn___c_t_s_1_1_game_window_a99f0c47ccd91ec20019e10494a468d57}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+nscore}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a06f337116187466c39d0bb4926aa4790}\label{class_learn___c_t_s_1_1_game_window_a06f337116187466c39d0bb4926aa4790}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+name\+\_\+place}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aaa7988e997f7812c0e1895219683ce93}\label{class_learn___c_t_s_1_1_game_window_aaa7988e997f7812c0e1895219683ce93}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+nfps}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a4888488b521c34d194a503f55348f9ff}\label{class_learn___c_t_s_1_1_game_window_a4888488b521c34d194a503f55348f9ff}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+score}
+\item 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab1a97b9369a1828614df974f05b59f54}\label{class_learn___c_t_s_1_1_game_window_ab1a97b9369a1828614df974f05b59f54}} 
+private System Windows Forms Label {\bfseries lbl\+\_\+place}
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -331,8 +313,13 @@ Window where the game is displayed
 
 
 
-Initialize the game window 
+Construct a game window 
 
+
+\begin{DoxyParams}{Parameters}
+{\em game} & Name of the game\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}\label{class_learn___c_t_s_1_1_game_window_afededb9a7567c334a419948331eb084f}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow@{GameWindow}}
 \index{GameWindow@{GameWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -341,13 +328,13 @@ Initialize the game window
 
 
 
-Launch the game with at a scenario 
+Launch the game at a scenario 
 
 
 \begin{DoxyParams}{Parameters}
-{\em game} & \\
+{\em game} & Name of the game.\\
 \hline
-{\em scenario} & \\
+{\em scenario} & Name of the scenario.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}\label{class_learn___c_t_s_1_1_game_window_af91b8b4003b66040601212376f161053}} 
@@ -358,69 +345,111 @@ Launch the game with at a scenario
 
 
 
-Launch a game, at a situation in a scenario 
+Launch a game, at a situation in a scenario Used exclusively to preview a situation 
 
 
 \begin{DoxyParams}{Parameters}
-{\em game} & \\
+{\em game} & Name of the game.\\
 \hline
-{\em scenario} & \\
+{\em scenario} & Name of the scenario.\\
 \hline
-{\em situation} & \\
+{\em situation} & Name of the situation.\\
 \hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}\label{class_learn___c_t_s_1_1_game_window_aed40b93a521c581eeabcd214977b0daf}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CalculFPSandM@{CalculFPSandM}}
-\index{CalculFPSandM@{CalculFPSandM}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{CalculFPSandM()}{CalculFPSandM()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Calcul\+F\+P\+SandM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a4a281710cdb761d6e415e00eff26bb34}\label{class_learn___c_t_s_1_1_game_window_a4a281710cdb761d6e415e00eff26bb34}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CalculateFPS@{CalculateFPS}}
+\index{CalculateFPS@{CalculateFPS}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CalculateFPS()}{CalculateFPS()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Calculate\+F\+PS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Show the fps average at this moment. 
+Calculate the fps every second. 
 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}\label{class_learn___c_t_s_1_1_game_window_aa8e81c2e1560a2b5f03cef8f134dc8da}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckArrowsPressed@{CheckArrowsPressed}}
-\index{CheckArrowsPressed@{CheckArrowsPressed}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{CheckArrowsPressed()}{CheckArrowsPressed()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+Arrows\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
-
-
-
-Check if arrows are pressed 
-
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}\label{class_learn___c_t_s_1_1_game_window_ac3bc77837b57ba6d22a4fac4bf3852a0}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsEnteringTheVehicule@{CheckIfCharacterIsEnteringTheVehicule}}
-\index{CheckIfCharacterIsEnteringTheVehicule@{CheckIfCharacterIsEnteringTheVehicule}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsEnteringTheVehicule()}{CheckIfCharacterIsEnteringTheVehicule()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Entering\+The\+Vehicule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}\label{class_learn___c_t_s_1_1_game_window_ab1cce6d88a4818b9c474238866a11015}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!ChangeCurrentTick@{ChangeCurrentTick}}
+\index{ChangeCurrentTick@{ChangeCurrentTick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{ChangeCurrentTick()}{ChangeCurrentTick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Change\+Current\+Tick (\begin{DoxyParamCaption}\item[{Event\+Handler}]{eh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform. 
-
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}\label{class_learn___c_t_s_1_1_game_window_acdf51f45def11c4b3df7e61c6614d49e}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsLeavingTheVehicule@{CheckIfCharacterIsLeavingTheVehicule}}
-\index{CheckIfCharacterIsLeavingTheVehicule@{CheckIfCharacterIsLeavingTheVehicule}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsLeavingTheVehicule()}{CheckIfCharacterIsLeavingTheVehicule()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Leaving\+The\+Vehicule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+Change the current tick of the timer to a new event handler. 
 
 
-
-Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform. 
-
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}\label{class_learn___c_t_s_1_1_game_window_acad66b5ebe8796d2976c841ac7685e01}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfTheVehiculeIsArrived@{CheckIfTheVehiculeIsArrived}}
-\index{CheckIfTheVehiculeIsArrived@{CheckIfTheVehiculeIsArrived}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{CheckIfTheVehiculeIsArrived()}{CheckIfTheVehiculeIsArrived()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+The\+Vehicule\+Is\+Arrived (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\begin{DoxyParams}{Parameters}
+{\em eh} & The new tick action.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a860ef07aadef7841175a0e5536d5faf3}\label{class_learn___c_t_s_1_1_game_window_a860ef07aadef7841175a0e5536d5faf3}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!ChangeStateIfVehicleArrived@{ChangeStateIfVehicleArrived}}
+\index{ChangeStateIfVehicleArrived@{ChangeStateIfVehicleArrived}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{ChangeStateIfVehicleArrived()}{ChangeStateIfVehicleArrived()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Change\+State\+If\+Vehicle\+Arrived (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Check if the vehicule has to slow down. 
+Check if the vehicle has to slow down to be at the middle of the platform. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a972b7751f2e43b1c4e2a4bd8c279e21e}\label{class_learn___c_t_s_1_1_game_window_a972b7751f2e43b1c4e2a4bd8c279e21e}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsEnteringTheVehicle@{CheckIfCharacterIsEnteringTheVehicle}}
+\index{CheckIfCharacterIsEnteringTheVehicle@{CheckIfCharacterIsEnteringTheVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsEnteringTheVehicle()}{CheckIfCharacterIsEnteringTheVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Entering\+The\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if a character enters the vehicle, add it as a child of the vehicle and remove it from the platform. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0a7087fe30b5d833a6f9bdce652feb60}\label{class_learn___c_t_s_1_1_game_window_a0a7087fe30b5d833a6f9bdce652feb60}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckIfCharacterIsLeavingTheVehicle@{CheckIfCharacterIsLeavingTheVehicle}}
+\index{CheckIfCharacterIsLeavingTheVehicle@{CheckIfCharacterIsLeavingTheVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckIfCharacterIsLeavingTheVehicle()}{CheckIfCharacterIsLeavingTheVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+If\+Character\+Is\+Leaving\+The\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if a character leaves the vehicle, remove it from the vehicle and add it to the platform. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1ddd7aa97121eed0099a642a6283692b}\label{class_learn___c_t_s_1_1_game_window_a1ddd7aa97121eed0099a642a6283692b}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!CheckPlayerMove@{CheckPlayerMove}}
+\index{CheckPlayerMove@{CheckPlayerMove}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{CheckPlayerMove()}{CheckPlayerMove()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Check\+Player\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the player wants to move and request a move. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}\label{class_learn___c_t_s_1_1_game_window_a509f5d625f18c30761f0236d5fca0a37}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!DisplayIntro@{DisplayIntro}}
+\index{DisplayIntro@{DisplayIntro}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{DisplayIntro()}{DisplayIntro()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Display\+Intro (\begin{DoxyParamCaption}\item[{string}]{scene\+\_\+name,  }\item[{string}]{scene\+\_\+intro }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display the introduction and the place name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+name} & \\
+\hline
+{\em scene\+\_\+intro} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}\label{class_learn___c_t_s_1_1_game_window_a627bdb49b584fa8352b4833db04144bf}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!DisplayLoading@{DisplayLoading}}
+\index{DisplayLoading@{DisplayLoading}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{DisplayLoading()}{DisplayLoading()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Display\+Loading (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display a loading lbl. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}\label{class_learn___c_t_s_1_1_game_window_afac590d46a2280ac0a100c2de59b5934}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Dispose@{Dispose}}
@@ -437,6 +466,98 @@ Nettoyage des ressources utilisées.
 {\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa07e68861e963ff6179e6c7e7f6c0adb}\label{class_learn___c_t_s_1_1_game_window_aa07e68861e963ff6179e6c7e7f6c0adb}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!DoNothing\_Tick@{DoNothing\_Tick}}
+\index{DoNothing\_Tick@{DoNothing\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{DoNothing\_Tick()}{DoNothing\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Do\+Nothing\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Tick which does nothing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa2bd64ac9a76f6001e85e65b000ae8e2}\label{class_learn___c_t_s_1_1_game_window_aa2bd64ac9a76f6001e85e65b000ae8e2}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!FillParkNPCs@{FillParkNPCs}}
+\index{FillParkNPCs@{FillParkNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{FillParkNPCs()}{FillParkNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Fill\+Park\+N\+P\+Cs (\begin{DoxyParamCaption}\item[{int}]{density }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fill the park with random npcs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & Number of npcs randomly placed.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_abac6886f208b6ac2fec65fc8c8fe9549}\label{class_learn___c_t_s_1_1_game_window_abac6886f208b6ac2fec65fc8c8fe9549}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!FillPlatformNPCs@{FillPlatformNPCs}}
+\index{FillPlatformNPCs@{FillPlatformNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{FillPlatformNPCs()}{FillPlatformNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Fill\+Platform\+N\+P\+Cs (\begin{DoxyParamCaption}\item[{int}]{density }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fill the platform with random npcs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & Number of npcs randomly placed.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a483e97f2d076adf70f48d08162db64f6}\label{class_learn___c_t_s_1_1_game_window_a483e97f2d076adf70f48d08162db64f6}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!FillStreetCars@{FillStreetCars}}
+\index{FillStreetCars@{FillStreetCars}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{FillStreetCars()}{FillStreetCars()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Fill\+Street\+Cars (\begin{DoxyParamCaption}\item[{int}]{number }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fill the street with random cars. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & Number of cars randomly placed.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5d8d4b6be11534822d8fbac257f29790}\label{class_learn___c_t_s_1_1_game_window_a5d8d4b6be11534822d8fbac257f29790}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!FillStreetNPCs@{FillStreetNPCs}}
+\index{FillStreetNPCs@{FillStreetNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{FillStreetNPCs()}{FillStreetNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Fill\+Street\+N\+P\+Cs (\begin{DoxyParamCaption}\item[{int}]{density }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fill the street with random npcs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & Number of npcs randomly placed.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a02de425662cb34f190af877b91d0c3d7}\label{class_learn___c_t_s_1_1_game_window_a02de425662cb34f190af877b91d0c3d7}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!FillVehicleNPCs@{FillVehicleNPCs}}
+\index{FillVehicleNPCs@{FillVehicleNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{FillVehicleNPCs()}{FillVehicleNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Fill\+Vehicle\+N\+P\+Cs (\begin{DoxyParamCaption}\item[{int}]{density }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Fill the vehicle with random npcs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em density} & Number of npcs randomly placed.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}\label{class_learn___c_t_s_1_1_game_window_ae8d1730b145861f79aeb7cb3609d7e53}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameTick@{GameTick}}
 \index{GameTick@{GameTick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -445,13 +566,13 @@ Nettoyage des ressources utilisées.
 
 
 
-Instructions executed every tick 
+Base game tick which is responsible of moving the characters, removing the control if needed and refreshing the game window. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em Sender} & \\
+{\em sender} & Control calling the method.\\
 \hline
-{\em e} & \\
+{\em e} & Arguments from the action whose caused the call of this method.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}\label{class_learn___c_t_s_1_1_game_window_ad7b504626e3a6604b5b6024dbe655d63}} 
@@ -466,9 +587,9 @@ Display the average F\+PS during the game session.
 
 
 \begin{DoxyParams}{Parameters}
-{\em sender} & \\
+{\em sender} & Control calling the method.\\
 \hline
-{\em e} & \\
+{\em e} & Arguments from the action whose caused the call of this method.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}\label{class_learn___c_t_s_1_1_game_window_a364e99c65b304e2b612d4b7aaf43f0be}} 
@@ -483,9 +604,9 @@ Check if the player presses down the keys
 
 
 \begin{DoxyParams}{Parameters}
-{\em sender} & \\
+{\em sender} & Control calling the method.\\
 \hline
-{\em e} & \\
+{\em e} & Arguments from the action whose caused the call of this method.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}\label{class_learn___c_t_s_1_1_game_window_a680003be8b60610abe2a81b5d36ef641}} 
@@ -500,9 +621,9 @@ Check if the player presses up the arrows.
 
 
 \begin{DoxyParams}{Parameters}
-{\em sender} & \\
+{\em sender} & Control calling the method.\\
 \hline
-{\em e} & \\
+{\em e} & Arguments from the action whose caused the call of this method.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}\label{class_learn___c_t_s_1_1_game_window_a91ffaa2edca6cd687e2d6542aa216b2f}} 
@@ -513,13 +634,13 @@ Check if the player presses up the arrows.
 
 
 
-When the form is loading, create a button \char`\"{}\+Launch\char`\"{}, initialize the timer and the textures, then show the form. 
+Load the game window 
 
 
 \begin{DoxyParams}{Parameters}
-{\em sender} & \\
+{\em sender} & Control calling the method.\\
 \hline
-{\em e} & \\
+{\em e} & Arguments from the action whose caused the call of this method.\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}\label{class_learn___c_t_s_1_1_game_window_a757a53aea6cd5af18f61ce67371aa19e}} 
@@ -530,7 +651,24 @@ When the form is loading, create a button \char`\"{}\+Launch\char`\"{}, initiali
 
 
 
-When the player clicks on the mouse. 
+Open the backpack if the player clicks on it, remove the controls if the user clicks outside or move the player to the position of the mouse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}\label{class_learn___c_t_s_1_1_game_window_a5c4628e89738c5fcdb82683800ec7db1}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GameWindow\_Resize@{GameWindow\_Resize}}
+\index{GameWindow\_Resize@{GameWindow\_Resize}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow\_Resize()}{GameWindow\_Resize()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Game\+Window\+\_\+\+Resize (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Resize the control on the screen. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -547,15 +685,15 @@ When the player clicks on the mouse.
 
 
 
-Retrieve all the textures and the childs of each textures. 
+Retrieve all the textures and the childs of each textures in the given the list. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em list} & \\
+{\em list} & The list of the textures.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-
+The list of all the textures in the given list.
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a98cbed952571733fd49da06629926d02}\label{class_learn___c_t_s_1_1_game_window_a98cbed952571733fd49da06629926d02}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!GetInstance@{GetInstance}}
@@ -568,7 +706,7 @@ Retrieve all the textures and the childs of each textures.
 Get the instance of the current game window. 
 
 \begin{DoxyReturn}{Returns}
-
+The instance of the game window.
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}\label{class_learn___c_t_s_1_1_game_window_aaa00d0ba92a983d17b924f86eebbd53f}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeComponent@{InitializeComponent}}
@@ -590,6 +728,23 @@ Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le co
 
 Initialize the thread which calculate the fps. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae868c228848098aa46c4ee653ab16520}\label{class_learn___c_t_s_1_1_game_window_ae868c228848098aa46c4ee653ab16520}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeGameTextures@{InitializeGameTextures}}
+\index{InitializeGameTextures@{InitializeGameTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeGameTextures()}{InitializeGameTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Game\+Textures (\begin{DoxyParamCaption}\item[{int}]{scene\+\_\+type,  }\item[{string}]{background\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize all the textures of the game according to the scene type and the background. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+type} & The scene type.\\
+\hline
+{\em background\+\_\+name} & The name of the background.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}\label{class_learn___c_t_s_1_1_game_window_ab69194207a8424475a106a3cdd3e61b8}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeHUD@{InitializeHUD}}
 \index{InitializeHUD@{InitializeHUD}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -598,28 +753,38 @@ Initialize the thread which calculate the fps.
 
 
 
-Initialize the textures of the hud, like the egg and the backpack icons. 
+Initialize the textures of the hud. 
 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}\label{class_learn___c_t_s_1_1_game_window_a63ee428b0c4c6e0170539ca9a600d3fb}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeListTextures@{InitializeListTextures}}
-\index{InitializeListTextures@{InitializeListTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{InitializeListTextures()}{InitializeListTextures()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+List\+Textures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_adb9f0971b9faabb23aac2acf13fcb363}\label{class_learn___c_t_s_1_1_game_window_adb9f0971b9faabb23aac2acf13fcb363}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeNPCs@{InitializeNPCs}}
+\index{InitializeNPCs@{InitializeNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeNPCs()}{InitializeNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+N\+P\+Cs (\begin{DoxyParamCaption}\item[{int}]{scene\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Initialize all the textures of the game. 
+Initialize the npcs according to the scene type. 
 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}\label{class_learn___c_t_s_1_1_game_window_a688d0bc7011bff642fcd9ed978eab3dc}} 
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+type} & The scene type.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a32cfb095c5c0ebd4d1d7ddc5d22c3ae9}\label{class_learn___c_t_s_1_1_game_window_a32cfb095c5c0ebd4d1d7ddc5d22c3ae9}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeTimer@{InitializeTimer}}
 \index{InitializeTimer@{InitializeTimer}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
 \doxysubsubsection{\texorpdfstring{InitializeTimer()}{InitializeTimer()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Initialize\+Timer (\begin{DoxyParamCaption}\item[{int}]{scene\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Initialize the game timer. 
+Initialize the game timer according to the scene type. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+type} & The scene type.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}\label{class_learn___c_t_s_1_1_game_window_a6179f0ce6ec5fa25585bcbe93dc8c6a2}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InitializeTransition@{InitializeTransition}}
 \index{InitializeTransition@{InitializeTransition}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -630,6 +795,23 @@ Initialize the game timer.
 
 Initialize the transition. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a60c835ab581a8237f5e82aea5a3ecf8e}\label{class_learn___c_t_s_1_1_game_window_a60c835ab581a8237f5e82aea5a3ecf8e}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!InsideVehicle\_Tick@{InsideVehicle\_Tick}}
+\index{InsideVehicle\_Tick@{InsideVehicle\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{InsideVehicle\_Tick()}{InsideVehicle\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Inside\+Vehicle\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the player is in the vehicle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}\label{class_learn___c_t_s_1_1_game_window_a57b24e977c65295e09cbb9cb2e6849c0}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!IsCharacterCollidingWithTextures@{IsCharacterCollidingWithTextures}}
 \index{IsCharacterCollidingWithTextures@{IsCharacterCollidingWithTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -648,6 +830,24 @@ Check if a character is colliding with the other textures in the game.
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}\label{class_learn___c_t_s_1_1_game_window_a73286cee253282f779530002c0bd7d51}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!IsOnScreen@{IsOnScreen}}
+\index{IsOnScreen@{IsOnScreen}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{IsOnScreen()}{IsOnScreen()}}
+{\footnotesize\ttfamily bool Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Is\+On\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_texture}{Texture}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if the texture is on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The texture tested.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the texture is on the screen, false otherwise.
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}\label{class_learn___c_t_s_1_1_game_window_a63e35009e7a720db25575fad710cf4ff}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Load\_Game@{Load\_Game}}
 \index{Load\_Game@{Load\_Game}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -656,7 +856,7 @@ Check if a character is colliding with the other textures in the game.
 
 
 
-Load every objects needed 
+Initialize the timer and the textures accordingly to the environment.\+json file. Display the point and click form todo Display the introduction if there is one set. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}\label{class_learn___c_t_s_1_1_game_window_aef00cc6d969a664dd18fc5c882a76df9}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveAllCharactersToObjective@{MoveAllCharactersToObjective}}
@@ -668,16 +868,23 @@ Load every objects needed
 
 Move all the the characters towards its objective if he has any. 
 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}\label{class_learn___c_t_s_1_1_game_window_a37057cb52687343510d2d27b8e3e5c7a}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveBackground@{MoveBackground}}
-\index{MoveBackground@{MoveBackground}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{MoveBackground()}{MoveBackground()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}\label{class_learn___c_t_s_1_1_game_window_ad8e6d8634779dcf529b295dd4e6869c2}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveAllTexturesExceptPlayer@{MoveAllTexturesExceptPlayer}}
+\index{MoveAllTexturesExceptPlayer@{MoveAllTexturesExceptPlayer}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveAllTexturesExceptPlayer()}{MoveAllTexturesExceptPlayer()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+All\+Textures\+Except\+Player (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Move the background. 
+Move all the textures except the player. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em a} & todo\\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}\label{class_learn___c_t_s_1_1_game_window_a17ca4483bf8bcacf556bac4cd9734841}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveCharacterToObjective@{MoveCharacterToObjective}}
 \index{MoveCharacterToObjective@{MoveCharacterToObjective}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -686,8 +893,27 @@ Move the background.
 
 
 
-Move the character toward his objective 
+Move the character toward its current objective 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}\label{class_learn___c_t_s_1_1_game_window_a72e588d6989b9268b115805377a598fb}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveNPC@{MoveNPC}}
+\index{MoveNPC@{MoveNPC}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{MoveNPC()}{MoveNPC()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+N\+PC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}}}]{n,  }\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move the given npc and animate it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The npc that will be moved.\\
+\hline
+{\em a} & Number that will be added to the current x coordinate of the texture.\\
+\hline
+{\em b} & Number that will be added to the current y coordinate of the texture.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}\label{class_learn___c_t_s_1_1_game_window_adff5c058f59eb926d498e6dc8d710ed0}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MovePlayer@{MovePlayer}}
 \index{MovePlayer@{MovePlayer}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -698,25 +924,52 @@ Move the character toward his objective
 
 Move the player if there are no collisions. 
 
+$<$param name=\char`\"{}a\char`\"{}
+
 
 \begin{DoxyParams}{Parameters}
-{\em a} & Move the player of a\\
-\hline
 {\em b} & \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if the player has moved, false otherwise.
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}\label{class_learn___c_t_s_1_1_game_window_a666426f8994c2a9bf6aa926b1376b495}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!MoveTexturesIfPlayerMoves@{MoveTexturesIfPlayerMoves}}
-\index{MoveTexturesIfPlayerMoves@{MoveTexturesIfPlayerMoves}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{MoveTexturesIfPlayerMoves()}{MoveTexturesIfPlayerMoves()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Move\+Textures\+If\+Player\+Moves (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae8d598814fc344b059d526e8329ad990}\label{class_learn___c_t_s_1_1_game_window_ae8d598814fc344b059d526e8329ad990}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!NPCEnterVehicle@{NPCEnterVehicle}}
+\index{NPCEnterVehicle@{NPCEnterVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{NPCEnterVehicle()}{NPCEnterVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+N\+P\+C\+Enter\+Vehicle (\begin{DoxyParamCaption}\item[{bool}]{affect\+\_\+interactive\+\_\+npcs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
-Move the textures if the player reaches the borders of the screen. 
+Set the npcs to enter the vehicle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em affect\+\_\+interactive\+\_\+npcs} & True if it affects the interactive npcs.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a14e053ece9b59d0c91ca05f911c02573}\label{class_learn___c_t_s_1_1_game_window_a14e053ece9b59d0c91ca05f911c02573}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!NPCLeaveVehicle@{NPCLeaveVehicle}}
+\index{NPCLeaveVehicle@{NPCLeaveVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{NPCLeaveVehicle()}{NPCLeaveVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+N\+P\+C\+Leave\+Vehicle (\begin{DoxyParamCaption}\item[{bool}]{affect\+\_\+interactive\+\_\+npcs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the npcs to leave the vehicle. todo 
+
+
+\begin{DoxyParams}{Parameters}
+{\em affect\+\_\+interactive\+\_\+npcs} & True if it affects the interactive npcs.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}\label{class_learn___c_t_s_1_1_game_window_abfb1bdce0e89086ffe1438dfdc90c480}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!NPCsComingPlatform@{NPCsComingPlatform}}
+\index{NPCsComingPlatform@{NPCsComingPlatform}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{NPCsComingPlatform()}{NPCsComingPlatform()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+N\+P\+Cs\+Coming\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set the npcs below the screen which leaved the vehicle a new position and an objective to the platform. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}\label{class_learn___c_t_s_1_1_game_window_a6a06037173d5ec85807a07471cb14124}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OnPaint@{OnPaint}}
@@ -726,23 +979,55 @@ Move the textures if the player reaches the borders of the screen.
 
 
 
-Paint the textures at the user\textquotesingle{}s screen. 
+Optimize the graphics of the given paint environment, resize the game window if needed then paint the textures on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & The paint environment.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}\label{class_learn___c_t_s_1_1_game_window_a0f9712b958f842e89b7c2d2301a07904}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OnPlatform\_Tick@{OnPlatform\_Tick}}
+\index{OnPlatform\_Tick@{OnPlatform\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{OnPlatform\_Tick()}{OnPlatform\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+On\+Platform\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the player is waiting the vehicle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}\label{class_learn___c_t_s_1_1_game_window_a738eafc258b88b618730fa7da896d932}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OpenClose\_Backpack@{OpenClose\_Backpack}}
+\index{OpenClose\_Backpack@{OpenClose\_Backpack}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{OpenClose\_Backpack()}{OpenClose\_Backpack()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Open\+Close\+\_\+\+Backpack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Open or close the backpack. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}\label{class_learn___c_t_s_1_1_game_window_afdb100745fb40fc8e37e6740c7f65412}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OptimizeGraphics@{OptimizeGraphics}}
+\index{OptimizeGraphics@{OptimizeGraphics}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{OptimizeGraphics()}{OptimizeGraphics()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Optimize\+Graphics (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Optimize the graphics of the given paint environment to get better speed when drawing bitmaps. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em e} & \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}\label{class_learn___c_t_s_1_1_game_window_acd6fbdda355c7f579e023932fa0c7f46}} 
-\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!OpenCloseDialog@{OpenCloseDialog}}
-\index{OpenCloseDialog@{OpenCloseDialog}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
-\doxysubsubsection{\texorpdfstring{OpenCloseDialog()}{OpenCloseDialog()}}
-{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Open\+Close\+Dialog (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+npc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Open or close the dialog if its already on screen. 
-
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}\label{class_learn___c_t_s_1_1_game_window_a8e829200312c26e8ebbc5fbc2589cb15}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!PaintAllTextures@{PaintAllTextures}}
 \index{PaintAllTextures@{PaintAllTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -758,6 +1043,73 @@ Retrieve all the textures, sort them by depth then are paint on the window.
 {\em e} & \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}\label{class_learn___c_t_s_1_1_game_window_aeb68df37fc5d5b899ecd56b9ff546100}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Park\_Tick@{Park\_Tick}}
+\index{Park\_Tick@{Park\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{Park\_Tick()}{Park\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Park\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the player is in the park. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}\label{class_learn___c_t_s_1_1_game_window_a74ec936a227894186a32a0f7e2429776}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!PassThroughNPCs@{PassThroughNPCs}}
+\index{PassThroughNPCs@{PassThroughNPCs}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{PassThroughNPCs()}{PassThroughNPCs()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Pass\+Through\+N\+P\+Cs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if npcs are in front of the player and move each npcs to let the player pass. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}\label{class_learn___c_t_s_1_1_game_window_ae48a926c4918dab4ff37dfaf67857f5a}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!PlacePlayerMiddleScreen@{PlacePlayerMiddleScreen}}
+\index{PlacePlayerMiddleScreen@{PlacePlayerMiddleScreen}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{PlacePlayerMiddleScreen()}{PlacePlayerMiddleScreen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Place\+Player\+Middle\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{class_learn___c_t_s_1_1_place}{Place}} the player at the middle of the screen. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a56a3871b3cb4409eb4a9229ec8ffc431}\label{class_learn___c_t_s_1_1_game_window_a56a3871b3cb4409eb4a9229ec8ffc431}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!PreventPlayerLeavingPlatform@{PreventPlayerLeavingPlatform}}
+\index{PreventPlayerLeavingPlatform@{PreventPlayerLeavingPlatform}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{PreventPlayerLeavingPlatform()}{PreventPlayerLeavingPlatform()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Prevent\+Player\+Leaving\+Platform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Prevent the player of leaving the platform if the ticket is not valid or the vehicle is not here. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a6a19dc2e05a270aff4cad35e634882d5}\label{class_learn___c_t_s_1_1_game_window_a6a19dc2e05a270aff4cad35e634882d5}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RemoveAllControls@{RemoveAllControls}}
+\index{RemoveAllControls@{RemoveAllControls}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RemoveAllControls()}{RemoveAllControls()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Remove\+All\+Controls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tag the controls to be removed before the next refresh. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a97d5848ac76317030a511fb6d19ad652}\label{class_learn___c_t_s_1_1_game_window_a97d5848ac76317030a511fb6d19ad652}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RemoveControlsToSuppress@{RemoveControlsToSuppress}}
+\index{RemoveControlsToSuppress@{RemoveControlsToSuppress}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RemoveControlsToSuppress()}{RemoveControlsToSuppress()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Remove\+Controls\+To\+Suppress (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Remove the controls tagged to be removed. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}\label{class_learn___c_t_s_1_1_game_window_ad16f265726498c8beddd57a35dd457f9}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RemoveTransition@{RemoveTransition}}
 \index{RemoveTransition@{RemoveTransition}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -766,7 +1118,47 @@ Retrieve all the textures, sort them by depth then are paint on the window.
 
 
 
-Remove the transition on screen. 
+Remove the transition in the hud list. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_ae7244538e4b7496c941e3961476fde01}\label{class_learn___c_t_s_1_1_game_window_ae7244538e4b7496c941e3961476fde01}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!ResetVehicle@{ResetVehicle}}
+\index{ResetVehicle@{ResetVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{ResetVehicle()}{ResetVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Reset\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Reset the vehicle and respawn it. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a8a910c9268cf4b5983dfc69869e8921e}\label{class_learn___c_t_s_1_1_game_window_a8a910c9268cf4b5983dfc69869e8921e}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RespawnCarsOutsideScreen@{RespawnCarsOutsideScreen}}
+\index{RespawnCarsOutsideScreen@{RespawnCarsOutsideScreen}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RespawnCarsOutsideScreen()}{RespawnCarsOutsideScreen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Respawn\+Cars\+Outside\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Respawn the cars if outside the screen in the street. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aa2f9e94cda3df9b4bad9bdce0950b0e6}\label{class_learn___c_t_s_1_1_game_window_aa2f9e94cda3df9b4bad9bdce0950b0e6}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RespawnNPCParkOutsideScreen@{RespawnNPCParkOutsideScreen}}
+\index{RespawnNPCParkOutsideScreen@{RespawnNPCParkOutsideScreen}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RespawnNPCParkOutsideScreen()}{RespawnNPCParkOutsideScreen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Respawn\+N\+P\+C\+Park\+Outside\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Respawn the npcs if outside the screen in the park. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a2fe8b10df789233ec511f3e234ec8137}\label{class_learn___c_t_s_1_1_game_window_a2fe8b10df789233ec511f3e234ec8137}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!RespawnNPCStreetOutsideScreen@{RespawnNPCStreetOutsideScreen}}
+\index{RespawnNPCStreetOutsideScreen@{RespawnNPCStreetOutsideScreen}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{RespawnNPCStreetOutsideScreen()}{RespawnNPCStreetOutsideScreen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Respawn\+N\+P\+C\+Street\+Outside\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Respawn the npcs if outside the screen in the street. 
 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}\label{class_learn___c_t_s_1_1_game_window_a558d17ccff120418a0665023bc06dc79}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SearchNPCDialog@{SearchNPCDialog}}
@@ -790,6 +1182,36 @@ Activate a dialog if the player clicks on a \mbox{\hyperlink{class_learn___c_t_s
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}\label{class_learn___c_t_s_1_1_game_window_a9f86c1c489df32e044d6e8230bc4053f}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SetScore@{SetScore}}
+\index{SetScore@{SetScore}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{SetScore()}{SetScore()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Set\+Score (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize the score or set it if already initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The score.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af081e4e926eaa2432c51eea6a45c35f8}\label{class_learn___c_t_s_1_1_game_window_af081e4e926eaa2432c51eea6a45c35f8}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SetupScene@{SetupScene}}
+\index{SetupScene@{SetupScene}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{SetupScene()}{SetupScene()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Setup\+Scene (\begin{DoxyParamCaption}\item[{int}]{scene\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Setup some events according to the scene type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+\_\+type} & The scene\+\_\+type\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}\label{class_learn___c_t_s_1_1_game_window_a34bad7462853821b1b7977fa78f6f128}} 
 \index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SetUpWindow@{SetUpWindow}}
 \index{SetUpWindow@{SetUpWindow}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
@@ -808,7 +1230,93 @@ Setup the window according to the general settings of the application stored in 
 
 
 
-Start the transition. 
+Start the transition and had it to the hud list. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_af21c8430f482724662d6c06194a2a00a}\label{class_learn___c_t_s_1_1_game_window_af21c8430f482724662d6c06194a2a00a}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!Street\_Tick@{Street\_Tick}}
+\index{Street\_Tick@{Street\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{Street\_Tick()}{Street\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Street\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the player is in the street. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}\label{class_learn___c_t_s_1_1_game_window_a93e9697ecd10e20c4673d2a5b7e7448c}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!SwitchSituation@{SwitchSituation}}
+\index{SwitchSituation@{SwitchSituation}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{SwitchSituation()}{SwitchSituation()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Switch\+Situation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Switch the situation to the next one. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a1681085d2c6336a385a66d2bb6c6cfe6}\label{class_learn___c_t_s_1_1_game_window_a1681085d2c6336a385a66d2bb6c6cfe6}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!UpdateVerticalTextures@{UpdateVerticalTextures}}
+\index{UpdateVerticalTextures@{UpdateVerticalTextures}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{UpdateVerticalTextures()}{UpdateVerticalTextures()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Update\+Vertical\+Textures (\begin{DoxyParamCaption}\item[{Paint\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Move each textures to keep it at the vertical center of the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a586d840a7143fe79350284d31f54d95a}\label{class_learn___c_t_s_1_1_game_window_a586d840a7143fe79350284d31f54d95a}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!VehicleArrive\_Tick@{VehicleArrive\_Tick}}
+\index{VehicleArrive\_Tick@{VehicleArrive\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{VehicleArrive\_Tick()}{VehicleArrive\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Vehicle\+Arrive\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the player is in the vehicle and have to get off the vehicle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_a22d00aeb4d4366426d9f183904524d34}\label{class_learn___c_t_s_1_1_game_window_a22d00aeb4d4366426d9f183904524d34}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!VehicleCrashed\_Tick@{VehicleCrashed\_Tick}}
+\index{VehicleCrashed\_Tick@{VehicleCrashed\_Tick}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{VehicleCrashed\_Tick()}{VehicleCrashed\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+Vehicle\+Crashed\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Instructions executed when the vehicle has to crash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_game_window_aea6c8fc26bd80419d8e040c6ea0e3714}\label{class_learn___c_t_s_1_1_game_window_aea6c8fc26bd80419d8e040c6ea0e3714}} 
+\index{Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}!ViewInsideVehicle@{ViewInsideVehicle}}
+\index{ViewInsideVehicle@{ViewInsideVehicle}!Learn\_CTS.GameWindow@{Learn\_CTS.GameWindow}}
+\doxysubsubsection{\texorpdfstring{ViewInsideVehicle()}{ViewInsideVehicle()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Game\+Window.\+View\+Inside\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Change the view to inside of the vehicle. 
 
 
 

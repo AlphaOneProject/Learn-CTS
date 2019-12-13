@@ -9,57 +9,41 @@ Inheritance diagram for Learn\+\_\+\+C\+T\+S.\+Dialog\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a38fa924d931c079e2822797c8d9f1a46}\label{class_learn___c_t_s_1_1_dialog_a38fa924d931c079e2822797c8d9f1a46}} 
-{\bfseries Dialog} (string game)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a9133e33dfac04beb407d04ef99445e58}\label{class_learn___c_t_s_1_1_dialog_a9133e33dfac04beb407d04ef99445e58}} 
-{\bfseries Dialog} (int id, string game)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a539b7c43d79b5ae13d108a1decd6a281}\label{class_learn___c_t_s_1_1_dialog_a539b7c43d79b5ae13d108a1decd6a281}} 
-{\bfseries Dialog} (string nom, string question, string game, int audio)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_aaa0b04438e2a2f16484f7a48a97fae64}\label{class_learn___c_t_s_1_1_dialog_aaa0b04438e2a2f16484f7a48a97fae64}} 
-void {\bfseries Answer\+\_\+\+Event} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a7c51affa1684a0884bb4ac55c137ff88}\label{class_learn___c_t_s_1_1_dialog_a7c51affa1684a0884bb4ac55c137ff88}} 
-void {\bfseries Dialog\+\_\+\+Closed} (object sender, Event\+Args e)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a38fa924d931c079e2822797c8d9f1a46}{Dialog}} (string game)
+\begin{DoxyCompactList}\small\item\em Construct a dialog \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a9133e33dfac04beb407d04ef99445e58}{Dialog}} (int id, string game)
+\begin{DoxyCompactList}\small\item\em Construct a dialog linked to a npc. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a539b7c43d79b5ae13d108a1decd6a281}{Dialog}} (string nom, string question, string game, int audio)
+\begin{DoxyCompactList}\small\item\em Construct a custom dialog \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_aaa0b04438e2a2f16484f7a48a97fae64}{Answer\+\_\+\+Event}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Depending of the dialog \+: update the score in the game window, switch of situation, remove the quiz of the npc and/or launch a new dialog. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a7c51affa1684a0884bb4ac55c137ff88}{Dialog\+\_\+\+Closed}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Close the dialog. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a3ed3a4330ba8e4212229b984e9edd850}\label{class_learn___c_t_s_1_1_dialog_a3ed3a4330ba8e4212229b984e9edd850}} 
-void {\bfseries Dialog\+\_\+\+Load} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_ad4a70077e4e228456b45667b25396dff}\label{class_learn___c_t_s_1_1_dialog_ad4a70077e4e228456b45667b25396dff}} 
-void {\bfseries Initialize\+Game\+Path} (string game)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a689f79eebde6420a411a7c19f59ffdd2}\label{class_learn___c_t_s_1_1_dialog_a689f79eebde6420a411a7c19f59ffdd2}} 
-void {\bfseries Set\+\_\+\+Up} (string q)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a9952d10b37a44639e233729264cb557f}\label{class_learn___c_t_s_1_1_dialog_a9952d10b37a44639e233729264cb557f}} 
-void {\bfseries Initialize\+Timer\+Display\+Text} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a1c7ef9e0a390e4776ae1c861d7fca016}\label{class_learn___c_t_s_1_1_dialog_a1c7ef9e0a390e4776ae1c861d7fca016}} 
-void {\bfseries Question\+\_\+\+Tick} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_ac86403091d8b17029aebceccd8d76c1b}\label{class_learn___c_t_s_1_1_dialog_ac86403091d8b17029aebceccd8d76c1b}} 
-void {\bfseries Generate\+\_\+\+Buttons\+\_\+\+Choices} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a43fe71dd7342c9c5d3b7e92ef6d22d11}\label{class_learn___c_t_s_1_1_dialog_a43fe71dd7342c9c5d3b7e92ef6d22d11}} 
-Button {\bfseries Generate\+\_\+\+Button\+\_\+\+Leave} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_ac7bbcf8cf4d685ea3cf0a7d8186c4aae}\label{class_learn___c_t_s_1_1_dialog_ac7bbcf8cf4d685ea3cf0a7d8186c4aae}} 
-void {\bfseries Listen} ()
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a14cf78858201775a3ef4e8bd86f364ca}\label{class_learn___c_t_s_1_1_dialog_a14cf78858201775a3ef4e8bd86f364ca}} 
-void {\bfseries picture\+Box1\+\_\+\+Click} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a806c59838d6a9f786a444eeee594a43e}\label{class_learn___c_t_s_1_1_dialog_a806c59838d6a9f786a444eeee594a43e}} 
-void {\bfseries Dialog\+\_\+\+Resize} (object sender, Event\+Args e)
-\item 
-\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_abbdbec621efc37fc9161ac67394dcf3b}\label{class_learn___c_t_s_1_1_dialog_abbdbec621efc37fc9161ac67394dcf3b}} 
-void {\bfseries Dialog\+\_\+\+Key\+Down} (object sender, Key\+Event\+Args e)
-\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a3ed3a4330ba8e4212229b984e9edd850}{Dialog\+\_\+\+Load}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Load the dialog. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a6ae7b0a4034f39505cf231f3bccdef4e}{Initialize\+Dialogs\+Path}} (string game)
+\begin{DoxyCompactList}\small\item\em Initialize the path to the dialogs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a689f79eebde6420a411a7c19f59ffdd2}{Set\+\_\+\+Up}} (string q)
+\begin{DoxyCompactList}\small\item\em Set up the dialog according to the quiz. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a9952d10b37a44639e233729264cb557f}{Initialize\+Timer\+Display\+Text}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the timer that will display the question gradually. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a1c7ef9e0a390e4776ae1c861d7fca016}{Question\+\_\+\+Tick}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Display the question character by character. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_ac86403091d8b17029aebceccd8d76c1b}{Generate\+\_\+\+Buttons\+\_\+\+Choices}} ()
+\begin{DoxyCompactList}\small\item\em Generate the buttons choices according to the data of the quiz. \end{DoxyCompactList}\item 
+Button \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a43fe71dd7342c9c5d3b7e92ef6d22d11}{Generate\+\_\+\+Button\+\_\+\+Leave}} ()
+\begin{DoxyCompactList}\small\item\em Generate the button to leave the dialog. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_ac7bbcf8cf4d685ea3cf0a7d8186c4aae}{Listen}} ()
+\begin{DoxyCompactList}\small\item\em Launch the question and choices audio. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a14cf78858201775a3ef4e8bd86f364ca}{picture\+Box1\+\_\+\+Click}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Launch the audio if clicked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a806c59838d6a9f786a444eeee594a43e}{Dialog\+\_\+\+Resize}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Resize the controls of the dialog control. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_abbdbec621efc37fc9161ac67394dcf3b}{Dialog\+\_\+\+Key\+Down}} (object sender, Key\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em If the user press escape, close the dialog. \end{DoxyCompactList}\item 
 protected override void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_af1453f5935c384a0aed39938769ed1cf}{Dispose}} (bool disposing)
 \begin{DoxyCompactList}\small\item\em Nettoyage des ressources utilisées. \end{DoxyCompactList}\item 
 private void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a180b2d7da26f24f354610122fdab3cef}{Initialize\+Component}} ()
@@ -68,8 +52,8 @@ private void \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a180b2d7da26f24f354
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a8f8df50b71bacd129a5268ff8b9459ad}\label{class_learn___c_t_s_1_1_dialog_a8f8df50b71bacd129a5268ff8b9459ad}} 
-\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager}{N\+P\+C\+\_\+\+Manager}} {\bfseries nm} = N\+P\+C\+\_\+\+Manager.\+Get\+Instance()
-\item 
+\mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager}{N\+P\+C\+\_\+\+Manager}} \mbox{\hyperlink{class_learn___c_t_s_1_1_dialog_a8f8df50b71bacd129a5268ff8b9459ad}{nm}} = \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c___manager_ad9549b16bd1dce534342bd8acdadaf00}{N\+P\+C\+\_\+\+Manager.\+Get\+Instance}}()
+\begin{DoxyCompactList}\small\item\em Attributes. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a881c55a8d1fa30c5436c48694cf454f1}\label{class_learn___c_t_s_1_1_dialog_a881c55a8d1fa30c5436c48694cf454f1}} 
 \mbox{\hyperlink{class_learn___c_t_s_1_1_n_p_c}{N\+PC}} {\bfseries npc}
 \item 
@@ -110,7 +94,148 @@ private System Windows Forms Picture\+Box {\bfseries pbox\+\_\+audio}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a38fa924d931c079e2822797c8d9f1a46}\label{class_learn___c_t_s_1_1_dialog_a38fa924d931c079e2822797c8d9f1a46}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog@{Dialog}}
+\index{Dialog@{Dialog}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog()}{Dialog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog (\begin{DoxyParamCaption}\item[{string}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a dialog 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & The current game where the control will search the dialogs.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a9133e33dfac04beb407d04ef99445e58}\label{class_learn___c_t_s_1_1_dialog_a9133e33dfac04beb407d04ef99445e58}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog@{Dialog}}
+\index{Dialog@{Dialog}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog()}{Dialog()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{string}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a dialog linked to a npc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the npc linked to the dialog\\
+\hline
+{\em game} & The current game where the control will search the dialogs.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a539b7c43d79b5ae13d108a1decd6a281}\label{class_learn___c_t_s_1_1_dialog_a539b7c43d79b5ae13d108a1decd6a281}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog@{Dialog}}
+\index{Dialog@{Dialog}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog()}{Dialog()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog (\begin{DoxyParamCaption}\item[{string}]{nom,  }\item[{string}]{question,  }\item[{string}]{game,  }\item[{int}]{audio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a custom dialog 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom} & Name of the npc\\
+\hline
+{\em question} & Question of the npc\\
+\hline
+{\em game} & The current game where the control will search the dialogs.\\
+\hline
+{\em audio} & todo\\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_aaa0b04438e2a2f16484f7a48a97fae64}\label{class_learn___c_t_s_1_1_dialog_aaa0b04438e2a2f16484f7a48a97fae64}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Answer\_Event@{Answer\_Event}}
+\index{Answer\_Event@{Answer\_Event}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Answer\_Event()}{Answer\_Event()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Answer\+\_\+\+Event (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Depending of the dialog \+: update the score in the game window, switch of situation, remove the quiz of the npc and/or launch a new dialog. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a7c51affa1684a0884bb4ac55c137ff88}\label{class_learn___c_t_s_1_1_dialog_a7c51affa1684a0884bb4ac55c137ff88}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog\_Closed@{Dialog\_Closed}}
+\index{Dialog\_Closed@{Dialog\_Closed}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog\_Closed()}{Dialog\_Closed()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog\+\_\+\+Closed (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close the dialog. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_abbdbec621efc37fc9161ac67394dcf3b}\label{class_learn___c_t_s_1_1_dialog_abbdbec621efc37fc9161ac67394dcf3b}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog\_KeyDown@{Dialog\_KeyDown}}
+\index{Dialog\_KeyDown@{Dialog\_KeyDown}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog\_KeyDown()}{Dialog\_KeyDown()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog\+\_\+\+Key\+Down (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Key\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+If the user press escape, close the dialog. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a3ed3a4330ba8e4212229b984e9edd850}\label{class_learn___c_t_s_1_1_dialog_a3ed3a4330ba8e4212229b984e9edd850}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog\_Load@{Dialog\_Load}}
+\index{Dialog\_Load@{Dialog\_Load}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog\_Load()}{Dialog\_Load()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog\+\_\+\+Load (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Load the dialog. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a806c59838d6a9f786a444eeee594a43e}\label{class_learn___c_t_s_1_1_dialog_a806c59838d6a9f786a444eeee594a43e}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dialog\_Resize@{Dialog\_Resize}}
+\index{Dialog\_Resize@{Dialog\_Resize}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Dialog\_Resize()}{Dialog\_Resize()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Dialog\+\_\+\+Resize (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Resize the controls of the dialog control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_af1453f5935c384a0aed39938769ed1cf}\label{class_learn___c_t_s_1_1_dialog_af1453f5935c384a0aed39938769ed1cf}} 
 \index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Dispose@{Dispose}}
 \index{Dispose@{Dispose}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
@@ -126,6 +251,29 @@ Nettoyage des ressources utilisées.
 {\em disposing} & true si les ressources managées doivent être supprimées~; sinon, false.\\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a43fe71dd7342c9c5d3b7e92ef6d22d11}\label{class_learn___c_t_s_1_1_dialog_a43fe71dd7342c9c5d3b7e92ef6d22d11}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Generate\_Button\_Leave@{Generate\_Button\_Leave}}
+\index{Generate\_Button\_Leave@{Generate\_Button\_Leave}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Generate\_Button\_Leave()}{Generate\_Button\_Leave()}}
+{\footnotesize\ttfamily Button Learn\+\_\+\+C\+T\+S.\+Dialog.\+Generate\+\_\+\+Button\+\_\+\+Leave (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Generate the button to leave the dialog. 
+
+\begin{DoxyReturn}{Returns}
+The leave button.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_ac86403091d8b17029aebceccd8d76c1b}\label{class_learn___c_t_s_1_1_dialog_ac86403091d8b17029aebceccd8d76c1b}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Generate\_Buttons\_Choices@{Generate\_Buttons\_Choices}}
+\index{Generate\_Buttons\_Choices@{Generate\_Buttons\_Choices}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Generate\_Buttons\_Choices()}{Generate\_Buttons\_Choices()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Generate\+\_\+\+Buttons\+\_\+\+Choices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Generate the buttons choices according to the data of the quiz. 
+
 \mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a180b2d7da26f24f354610122fdab3cef}\label{class_learn___c_t_s_1_1_dialog_a180b2d7da26f24f354610122fdab3cef}} 
 \index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!InitializeComponent@{InitializeComponent}}
 \index{InitializeComponent@{InitializeComponent}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
@@ -136,6 +284,90 @@ Nettoyage des ressources utilisées.
 
 Méthode requise pour la prise en charge du concepteur -\/ ne modifiez pas le contenu de cette méthode avec l\textquotesingle{}éditeur de code. 
 
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a6ae7b0a4034f39505cf231f3bccdef4e}\label{class_learn___c_t_s_1_1_dialog_a6ae7b0a4034f39505cf231f3bccdef4e}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!InitializeDialogsPath@{InitializeDialogsPath}}
+\index{InitializeDialogsPath@{InitializeDialogsPath}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{InitializeDialogsPath()}{InitializeDialogsPath()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Initialize\+Dialogs\+Path (\begin{DoxyParamCaption}\item[{string}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the path to the dialogs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a9952d10b37a44639e233729264cb557f}\label{class_learn___c_t_s_1_1_dialog_a9952d10b37a44639e233729264cb557f}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!InitializeTimerDisplayText@{InitializeTimerDisplayText}}
+\index{InitializeTimerDisplayText@{InitializeTimerDisplayText}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{InitializeTimerDisplayText()}{InitializeTimerDisplayText()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Initialize\+Timer\+Display\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Initialize the timer that will display the question gradually. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_ac7bbcf8cf4d685ea3cf0a7d8186c4aae}\label{class_learn___c_t_s_1_1_dialog_ac7bbcf8cf4d685ea3cf0a7d8186c4aae}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Listen@{Listen}}
+\index{Listen@{Listen}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Listen()}{Listen()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Listen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Launch the question and choices audio. 
+
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a14cf78858201775a3ef4e8bd86f364ca}\label{class_learn___c_t_s_1_1_dialog_a14cf78858201775a3ef4e8bd86f364ca}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!pictureBox1\_Click@{pictureBox1\_Click}}
+\index{pictureBox1\_Click@{pictureBox1\_Click}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{pictureBox1\_Click()}{pictureBox1\_Click()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+picture\+Box1\+\_\+\+Click (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Launch the audio if clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a1c7ef9e0a390e4776ae1c861d7fca016}\label{class_learn___c_t_s_1_1_dialog_a1c7ef9e0a390e4776ae1c861d7fca016}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Question\_Tick@{Question\_Tick}}
+\index{Question\_Tick@{Question\_Tick}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Question\_Tick()}{Question\_Tick()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Question\+\_\+\+Tick (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Display the question character by character. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Control calling the method.\\
+\hline
+{\em e} & Arguments from the action whose caused the call of this method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_learn___c_t_s_1_1_dialog_a689f79eebde6420a411a7c19f59ffdd2}\label{class_learn___c_t_s_1_1_dialog_a689f79eebde6420a411a7c19f59ffdd2}} 
+\index{Learn\_CTS.Dialog@{Learn\_CTS.Dialog}!Set\_Up@{Set\_Up}}
+\index{Set\_Up@{Set\_Up}!Learn\_CTS.Dialog@{Learn\_CTS.Dialog}}
+\doxysubsubsection{\texorpdfstring{Set\_Up()}{Set\_Up()}}
+{\footnotesize\ttfamily void Learn\+\_\+\+C\+T\+S.\+Dialog.\+Set\+\_\+\+Up (\begin{DoxyParamCaption}\item[{string}]{q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Set up the dialog according to the quiz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & The id of the quiz.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Data Documentation}
