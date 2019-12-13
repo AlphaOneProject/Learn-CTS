@@ -242,9 +242,9 @@ namespace Learn_CTS
             }
             else
             {
-                Form pandc = new PNCWindow(this.Text, scenario, situation);
                 this.Hide();
-                pandc.Show();
+                Form pandc = new PNCWindow(this.Text, scenario, situation);
+                pandc.ShowDialog();
             }
         }
 
