@@ -42,6 +42,7 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
 
 ✅ Des outils pour le joueur, tels qu'un sac avec un téléphone.
 
+
 ##### Exemple de situations
 
 <table align="center">
@@ -54,6 +55,10 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
         <td>Deuxième situation : Le joueur valide son ticket et monte dans le tram.</td>
     </tr>
 </table>
+
+### Installation de Learn CTS
+
+**Téléchargez** l'installeur de Learn CTS en [Cliquant ici]() et suivez ses instructions !
 
 ### Les moteurs de jeu
 
