@@ -1,12 +1,1 @@
-{
-  "events": 1,
-  "1": {
-    "x": 0,
-    "y": 0,
-    "item": {
-      "id": 1,
-      "name": "Banana"
-    },
-    "quizz": 1
-  }
-}
+{"events":2,"1":{"x":525,"y":539,"item":{"id":1,"name":"affiche"},"quizz":13},"2":{"x":697,"y":839,"item":{"id":6,"name":"Porte"},"quizz":14}}

@@ -2964,40 +2964,53 @@ namespace Learn_CTS
         {
             if (this.event_placement != null) { return; }
 
-            JObject situation_data = Tools.Get_From_JSON(sender.Get_File_Path());
             string images_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                                 "images" + Path.DirectorySeparatorChar;
-            string situation_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" +
-                      Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                      Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
-            string npcs_folder_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
-                                      Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar;
-            JObject npc_data;
-            Image img;
+            JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
             int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
+            JObject data;
+            string kind;
+            switch (cbo_index)
+            {
+                case 10:
+                    data = item_data;
+                    kind = "item";
+                    break;
+                default:
+                    data = situ_data;
+                    kind = "npc";
+                    break;
+            }
+            Image img;
 
             PictureBox placing_npc = new PictureBox();
             List<PictureBox> list_placed_npcs = new List<PictureBox>();
             List<Point> list_placed_npcs_points = new List<Point>();
-            for (int i = 1; i <= int.Parse((string)situation_data["events"]); i++)
+            for (int i = 1; i <= int.Parse((string)data["events"]); i++)
             {
                 switch (cbo_index)
                 {
                     case 10:
                         img = Tools.Image_From_File(images_path + "items" + Path.DirectorySeparatorChar +
-                                                         situation_data[i.ToString()]["item"]["name"].ToString() + ".png");
+                                                    data[i.ToString()]["item"]["name"].ToString() + ".png");
                         break;
                     default:
-                        npc_data = Tools.Get_From_JSON(npcs_folder_path + i.ToString() + ".json");
+                        string npcs_folder_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar;
+                        data = Tools.Get_From_JSON(npcs_folder_path + i.ToString() + ".json");
                         img = Tools.Image_From_File(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                                 "images" + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar +
-                                npc_data["folder"].ToString() + Path.DirectorySeparatorChar + "1_0.png");
+                                data["folder"].ToString() + Path.DirectorySeparatorChar + "1_0.png");
                         break;
                 }
 
-                if (i == sender.Get_Event_Id() || int.Parse((string)situation_data[i.ToString()]["x"]) != 0 ||
-                    int.Parse((string)situation_data[i.ToString()]["y"]) != 0)
+                if (i == sender.Get_Event_Id() || int.Parse((string)data[i.ToString()]["x"]) != 0 ||
+                    int.Parse((string)data[i.ToString()]["y"]) != 0)
                 {
                     PictureBox pb_temp = new PictureBox()
                     {
@@ -3013,8 +3026,8 @@ namespace Learn_CTS
                     else
                     {
                         list_placed_npcs.Add(pb_temp);
-                        list_placed_npcs_points.Add(new Point(int.Parse((string)situation_data[i.ToString()]["x"]),
-                                                              int.Parse((string)situation_data[i.ToString()]["y"])));
+                        list_placed_npcs_points.Add(new Point(int.Parse((string)data[i.ToString()]["x"]),
+                                                              int.Parse((string)data[i.ToString()]["y"])));
                     }
                 }
             }
