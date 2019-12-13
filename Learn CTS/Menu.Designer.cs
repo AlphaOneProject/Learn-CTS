@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.main_menu_btn_edit = new System.Windows.Forms.Button();
             this.main_menu_btn_exit = new System.Windows.Forms.Button();
             this.main_menu_btn_options = new System.Windows.Forms.Button();
             this.main_menu_lbl_title1 = new System.Windows.Forms.Label();
             this.main_menu_lbl_title2 = new System.Windows.Forms.Label();
+            this.tlt_menu = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // main_menu_btn_edit
@@ -146,5 +148,6 @@
         private System.Windows.Forms.Button main_menu_btn_options;
         private System.Windows.Forms.Label main_menu_lbl_title1;
         private System.Windows.Forms.Label main_menu_lbl_title2;
+        private System.Windows.Forms.ToolTip tlt_menu;
     }
 }

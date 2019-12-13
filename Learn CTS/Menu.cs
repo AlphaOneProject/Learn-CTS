@@ -305,6 +305,9 @@ namespace Learn_CTS
                 games_menu_flp_games
             });
 
+            tlt_menu.SetToolTip(games_menu_pb_back, "Retour au menu principal");
+            tlt_menu.SetToolTip(games_menu_pb_create_game, "Créer un nouveau jeu");
+
             // Fetching the existing games
             ArrayList games_list = Get_Games_List();
             foreach (GameCard gc in games_list)
@@ -372,7 +375,15 @@ namespace Learn_CTS
             if (this.options["theme"].ToString() == "dark") options_menu_tgs_theme.Checked = true;
             options_menu_tgs_theme.CheckedChanged += new JCS.ToggleSwitch.CheckedChangedDelegate(Options_Menu_Tgs_Theme_CheckedChanged);
 
-            this.Controls.AddRange(new Control[] { options_menu_pb_back, options_menu_pnl_topbar, options_menu_tgs_theme, options_menu_lbl_theme });
+            this.Controls.AddRange(new Control[] {
+                options_menu_pb_back,
+                options_menu_pnl_topbar,
+                options_menu_tgs_theme,
+                options_menu_lbl_theme
+            });
+
+            tlt_menu.SetToolTip(options_menu_pb_back, "Retour au menu principal");
+
             Change_Theme();
         }
 
