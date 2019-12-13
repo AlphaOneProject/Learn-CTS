@@ -107,6 +107,7 @@
             this.txt_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_name.Location = new System.Drawing.Point(142, 14);
             this.txt_name.Name = "txt_name";
+            this.txt_name.ShortcutsEnabled = false;
             this.txt_name.Size = new System.Drawing.Size(246, 29);
             this.txt_name.TabIndex = 18;
             // 

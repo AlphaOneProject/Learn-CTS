@@ -44,19 +44,66 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void ImageEdition_Load(object sender, EventArgs e)
         {
-            Image img;
-            using (var bmpTemp = new Bitmap(image_path))
-            {
-                img = new Bitmap(bmpTemp);
-            }
-            pb_img.BackgroundImage = img;
+            pb_img.BackgroundImage = Tools.Image_From_File(this.image_path);
 
             lbl_title.Text = image_path.Split(Path.DirectorySeparatorChar).Last().Split('.')[0];
+
+            if (this.type == "map") lbl_title.Text = "Carte accessible en jeu";
 
             JObject theme = editor.Get_Theme();
 
             this.BackColor = Color.FromArgb(int.Parse((string)theme["2"]["R"]), int.Parse((string)theme["2"]["G"]), int.Parse((string)theme["2"]["B"]));
             this.ForeColor = Color.FromArgb(int.Parse((string)theme["5"]["R"]), int.Parse((string)theme["5"]["G"]), int.Parse((string)theme["5"]["B"]));
+        }
+
+        /// <summary>
+        /// Allow the user to override the current image.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void Pb_img_Click(object sender, EventArgs e)
+        {
+            if (ofd_img.ShowDialog() == DialogResult.Cancel) { return; }
+
+            string extension = ofd_img.FileName.Split(Path.DirectorySeparatorChar).Last().Split('.').Last();
+            if (extension != "png")
+            {
+                MessageBox.Show("L'image doit être de format .png pour être utilisée.", "Type invalide",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string new_path;
+            switch (this.type)
+            {
+                case "background":
+                    new_path = editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" +
+                               Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "background" +
+                               Path.DirectorySeparatorChar + this.image_path.Split(Path.DirectorySeparatorChar).Last();
+                    break;
+                case "item":
+                    new_path = editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" +
+                               Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "items" +
+                               Path.DirectorySeparatorChar + this.image_path.Split(Path.DirectorySeparatorChar).Last();
+                    break;
+                case "map":
+                    new_path = editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" +
+                               Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "others" +
+                               Path.DirectorySeparatorChar + this.image_path.Split(Path.DirectorySeparatorChar).Last();
+                    break;
+                default:
+                    throw new ArgumentException("Type given to ImageEdition was invalid!");
+            }
+
+            if (@"" + ofd_img.FileName == new_path)
+            {
+                MessageBox.Show("Vous ne pouvez importer un modèle déjà présent.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            File.Copy(@"" + ofd_img.FileName, @"" + new_path, true);
+
+            ImageEdition_Load(this, new EventArgs());
         }
 
         /// <summary>
@@ -112,16 +159,19 @@ namespace Learn_CTS
                         }
                     }
                     break;
+                case "map":
+                    break;
                 default:
                     throw new ArgumentException("Type given to ImageEdition was invalid!");
             }
 
             // Asks for confirmation before suppression.
-            if (MessageBox.Show("Confirmez-vous la suppression de ce décor ?", "Suppression de décor", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            if (MessageBox.Show("Confirmez-vous la suppression de cette image ?", "Suppression d'image", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 File.Delete(image_path);
-                this.Dispose();
+                if (this.type != "map") this.Dispose();
             }
         }
+
     }
 }

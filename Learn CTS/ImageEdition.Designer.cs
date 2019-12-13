@@ -32,18 +32,22 @@
             this.pb_img = new System.Windows.Forms.PictureBox();
             this.lbl_title = new System.Windows.Forms.Label();
             this.pb_delete = new System.Windows.Forms.PictureBox();
+            this.ofd_img = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pb_img)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_delete)).BeginInit();
             this.SuspendLayout();
             // 
             // pb_img
             // 
+            this.pb_img.BackColor = System.Drawing.Color.Transparent;
             this.pb_img.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pb_img.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_img.Location = new System.Drawing.Point(-1, -1);
             this.pb_img.Name = "pb_img";
             this.pb_img.Size = new System.Drawing.Size(200, 200);
             this.pb_img.TabIndex = 0;
             this.pb_img.TabStop = false;
+            this.pb_img.Click += new System.EventHandler(this.Pb_img_Click);
             // 
             // lbl_title
             // 
@@ -91,5 +95,6 @@
         private System.Windows.Forms.PictureBox pb_img;
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.PictureBox pb_delete;
+        private System.Windows.Forms.OpenFileDialog ofd_img;
     }
 }

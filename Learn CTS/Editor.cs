@@ -357,7 +357,7 @@ namespace Learn_CTS
             Label lbl_desc = new Label()
             {
                 Name = "lbl_desc",
-                Text = "Description",
+                Text = "Description du jeu",
                 Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
             };
@@ -369,16 +369,13 @@ namespace Learn_CTS
                 Name = "txt_desc",
                 Tag = this.game_path + Path.DirectorySeparatorChar + "properties.json",
                 Text = (string)this.game_properties["description"],
-                Cursor = Cursors.IBeam,
-                Multiline = true,
                 BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"])),
                 ForeColor = Color.FromArgb(int.Parse((string)this.theme["5"]["R"]), int.Parse((string)this.theme["5"]["G"]), int.Parse((string)this.theme["5"]["B"])),
-                BorderStyle = BorderStyle.Fixed3D,
-                Margin = new Padding(8, 8, 8, 8),
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 ShortcutsEnabled = false
             };
-            txt_desc.Width = content.Width - 100;
-            txt_desc.Height = ((int)((txt_desc.Text.Length * 12) / txt_desc.Width) + 1) * 40;
+            txt_desc.Width = content.Width - 40;
             txt_desc.KeyPress += new KeyPressEventHandler(this.Txt_Keypress);
             content.Controls.Add(txt_desc);
             tlt_global.SetToolTip(txt_desc, "Description du jeu");
@@ -389,14 +386,37 @@ namespace Learn_CTS
                 Name = "lbl_desc_state",
                 Text = "",
                 ForeColor = Color.Red,
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
             };
             content.Controls.Add(lbl_desc_state);
+
+            Label lbl_map_title = new Label()
+            {
+                Name = "lbl_map_title",
+                Text = "Carte du réseau",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_map_title);
+
+            ImageEdition ie_map = new ImageEdition(this, this.game_path + Path.DirectorySeparatorChar + "library" +
+                                                   Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
+                                                   "others" + Path.DirectorySeparatorChar + "map.png", "map")
+            {
+                Name = "ie_map"
+            };
+            content.Controls.Add(ie_map);
+            tlt_global.SetToolTip(ie_map, "Carte servant au joueur à se repérer dans le réseau de stations que vous souhaitez établir");
 
             // Set the correct location of the controls (responsive with the groupbox's size).
             lbl_desc.Location = new Point(20, 20);
             txt_desc.Location = new Point(20, lbl_desc.Location.Y + lbl_desc.Height + 20);
             lbl_desc_state.Location = new Point(20, txt_desc.Location.Y + txt_desc.Height + 8);
+            lbl_map_title.Location = new Point(20, lbl_desc_state.Location.Y + lbl_desc_state.Height + 40);
+            ie_map.Location = new Point(20, lbl_map_title.Location.Y + lbl_map_title.Height + 20);
         }
 
         /// <summary>
@@ -433,7 +453,6 @@ namespace Learn_CTS
             {
                 data[data_piece] = t.Text;
                 Tools.Set_To_JSON(data_path, data); // Set the entered value as new file's value.
-                t.Height = ((int)((t.Text.Length * 12) / t.Width) + 1) * 40;
                 t.BackColor = Color.FromArgb(int.Parse((string)this.theme["4"]["R"]), int.Parse((string)this.theme["4"]["G"]), int.Parse((string)this.theme["4"]["B"]));
                 this.saved = true;
                 if (t.Name == "txt_desc")
@@ -705,7 +724,8 @@ namespace Learn_CTS
             {
                 Name = "lbl_dialogs",
                 Text = "Dialogues",
-                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 AutoSize = true
             };
             content.Controls.Add(lbl_dialogs);
@@ -1252,6 +1272,12 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Asks a new Image from the user then copy it and add it
+        /// to the display.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Add_Item_Image(object sender, EventArgs e)
         {
             if (ofd_global.ShowDialog() == DialogResult.Cancel) { return; }

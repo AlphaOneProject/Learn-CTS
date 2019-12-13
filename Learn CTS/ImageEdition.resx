@@ -132,4 +132,7 @@
         oAAKSE8AJvpLo2TJXBhDAUDZQwHAiRjzB1Rm+uTR3La4AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="ofd_img.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
