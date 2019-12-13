@@ -146,11 +146,11 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if a npc is colliding at a point is colliding with a vehicule.
+        /// Check if a npc is colliding at a point is colliding with a vehicle.
         /// </summary>
         /// <param name="p1">The position of the npc.</param>
-        /// <returns>True if the npc is colliding with the vehicule, false otherwise.</returns>
-        public static bool IsCollidingWithVehicule(Vehicule v, Point p1)
+        /// <returns>True if the npc is colliding with the vehicle, false otherwise.</returns>
+        public static bool IsCollidingWithVehicle(Vehicle v, Point p1)
         {
             //Texture.InitializePath(game); //todo : préciser le jeu dans le constructeur.
             //Transport v = new Tram(0, 0); //todo : pareil que ci-dessus.

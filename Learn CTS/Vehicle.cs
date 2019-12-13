@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Learn_CTS
 {
-    abstract class Vehicule : Texture
+    abstract class Vehicle : Texture
     {
         // Attributes
 
@@ -21,16 +21,16 @@ namespace Learn_CTS
         private int max_distance_stop;
 
         /// <summary>
-        /// Constructor of a vehicule.
+        /// Constructor of a vehicle.
         /// </summary>
+        /// <param name="name">The name of the vehicle.</param>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-
-        public Vehicule(string name, int x, int y, int[] pos_doors) : base(name, "vehicule" + Path.DirectorySeparatorChar + name, x, y, -2000)
+        public Vehicle(string name, int x, int y) : base(name, "vehicle" + Path.DirectorySeparatorChar + name, x, y, -2000)
         {
             this.max_distance_stop = this.DistanceBeforeStopping();
-            this.inside = new Texture(name + "Inside", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), this.GetZ() + 1);
-            this.outside = new Texture(name + "Outside", "vehicule" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), true);
+            this.inside = new Texture(name + "_inside", "vehicle" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), this.GetZ() + 1);
+            this.outside = new Texture(name + "_outside", "vehicle" + Path.DirectorySeparatorChar + name, this.GetX(), this.GetY(), true);
             this.inside.SetVisible(false);
             this.AddChild(outside);
             this.AddChild(this.inside);
@@ -39,7 +39,6 @@ namespace Learn_CTS
         /// <summary>
         /// Switch between outside and inside, which results in a change of hitbox, doors and the outside aspect.
         /// </summary>
-
         public void ChangeInside()
         {
             this.is_inside = !this.is_inside;
@@ -59,12 +58,15 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Get the doors of the vehicle
+        /// </summary>
+        /// <returns>The first element in the array is the texture of the left doors, the second one is the texture of the right door.</returns>
         public abstract Texture[] GetDoors();
 
         /// <summary>
-        /// Depending of the state of the vehicule, changes the hitbox, moves the vehicule or the doors.
+        /// Depending of the state of the vehicle, changes the hitbox, moves the vehicle or the doors.
         /// </summary>
-
         public void Update()
         {
             if (this.GetState() == 1 && this.speed < this.max_speed)
@@ -111,58 +113,54 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Open the doors.
+        /// Open slightly the doors of the vehicle
         /// </summary>
-
+        /// <returns>true if the doors are opening. false otherwise.</returns>
         public abstract bool OpenDoors();
 
         /// <summary>
-        /// Close the doors.
+        /// Close a bit the doors of the vehicle.
         /// </summary>
-
+        /// <returns>true if the doors are closing. false otherwise.</returns>
         public abstract bool CloseDoors();
 
         /// <summary>
-        /// Check if the player is inside the vehicule.
+        /// Check if the player is inside the vehicle.
         /// </summary>
         /// <returns></returns>
-
         public bool IsInside()
         {
             return this.is_inside;
         }
 
         /// <summary>
-        /// Return the maximal speed of the vehicule.
+        /// Return the maximal speed of the vehicle.
         /// </summary>
         /// <returns></returns>
-
         public int GetMaxSpeed()
         {
             return this.max_speed;
         }
 
         /// <summary>
-        /// Set the speed of the vehicule.
+        /// Set the speed of the vehicle.
         /// </summary>
         /// <param name="v"></param>
-
         public void SetSpeed(int v)
         {
             this.speed = v;
         }
 
         /// <summary>
-        /// Change the state of the vehicule.
+        /// Change the state of the vehicle.
         /// </summary>
-
         public void ChangeState()
         {
             this.state++;
         }
 
         /// <summary>
-        /// Return the state of the vehicule.
+        /// Return the state of the vehicle.
         /// </summary>
         /// <returns>
         /// 0 = Stopped
@@ -170,65 +168,43 @@ namespace Learn_CTS
         /// 2 = Moving at maximal speed
         /// 3 = Deccelerating
         /// </returns>
-
         public int GetState()
         {
             return this.state % 4;
         }
 
         /// <summary>
-        /// Return the state of the vehicule in a string.
+        /// Get the actual speed of the vehicle.
         /// </summary>
         /// <returns></returns>
-
-        public string GetStateString()
-        {
-            switch (this.GetState())
-            {
-                case 0:
-                    return "Stopped";
-                case 1:
-                    return "Leaving";
-                case 2:
-                    return "Moving";
-                case 3:
-                    return "Stopping";
-                default:
-                    return "France";
-            }
-        }
-
-        /// <summary>
-        /// Get the actual speed of the vehicule.
-        /// </summary>
-        /// <returns></returns>
-
         public int GetSpeed()
         {
             return this.speed;
         }
 
         /// <summary>
-        /// Set the state of the vehicule.
+        /// Set the state of the vehicle.
         /// </summary>
         /// <param name="s"></param>
-
         public void SetState(int s)
         {
             this.state = s;
         }
 
         /// <summary>
-        /// Update the vehicule then paint it on the screen.
+        /// Update the vehicle then paint it on the screen.
         /// </summary>
-        /// <param name="e"></param>
-
+        /// <param name="e">The paint environment.</param>
         public override void OnPaint(PaintEventArgs e)
         {
             this.Update();
             base.OnPaint(e);
         }
 
+        /// <summary>
+        /// Calculate the distance before the vehicle stop.
+        /// </summary>
+        /// <returns>The distance before the vehicle stop.</returns>
         private int DistanceBeforeStopping()
         {
             int s = 0;
@@ -239,23 +215,72 @@ namespace Learn_CTS
             return s;
         }
 
+        /// <summary>
+        /// Get the distance before the vehicle stop.
+        /// </summary>
+        /// <returns>The distance before the vehicle stop.</returns>
         public int GetDistanceMaxStop()
         {
             return this.max_distance_stop;
         }
 
-        public abstract int GetIndexNearestDoor(int pos_c);
 
+        /// <summary>
+        /// Get the closest door compared with a x coordinate.
+        /// </summary>
+        /// <param name="pos_c">The x position of the character.</param>
+        /// <returns>The nearest door.</returns>
+        public int GetIndexNearestDoor(int pos_c)
+        {
+            int min = Math.Abs(this.GetPosDoor(0) - pos_c);
+            int index = 0;
+            for (int i = 1; i < this.GetNumberDoors(); i++)
+            {
+                if (Math.Abs(this.GetPosDoor(i) - pos_c) < min)
+                {
+                    min = Math.Abs(this.GetPosDoor(i) - pos_c);
+                    index = i;
+                }
+            }
+            return index;
+        }
+
+        /// <summary>
+        /// Get the position of the door related to the vehicle.
+        /// </summary>
+        /// <param name="i">The number of the door.</param>
+        /// <returns>The position of the door related to the vehicle.</returns>
         public abstract int GetPosDoor(int i);
 
+        /// <summary>
+        /// Get the total number of doors.
+        /// </summary>
+        /// <returns>The number of doors.</returns>
         public abstract int GetNumberDoors();
 
-        public abstract void SetPathNPCToVehicule(NPC n);
+        /// <summary>
+        /// Set a series of objectives for the npc to get on the vehicle.
+        /// </summary>
+        /// <param name="n">The npc which will enter the vehicle.</param>
+        public abstract void SetPathNPCToVehicle(NPC n);
 
+        /// <summary>
+        /// Place the npc randomly in the vehicle.
+        /// </summary>
+        /// <param name="npc">The npc that will be placed randomly in the vehicle.</param>
         public abstract void PlaceNPCRandomlyInVehicle(NPC n);
 
-        public abstract void ShuffleVehiculeNPCs();
+        /// <summary>
+        /// Replace randomly the npcs already inside the vehicle.
+        /// </summary>
+        public abstract void ShuffleVehicleNPCs();
 
+        /// <summary>
+        /// Check if the vehicle is colliding with the texture t or its childs
+        /// </summary>
+        /// <param name="t">The texture that will be tested.</param>
+        /// /// <param name="b">Check if t collides with the childs</param>
+        /// <returns>true if this hit the hitbox of t or one of its childs, false otherwise.</returns>
         public override bool CollideWith(Texture t, bool b)
         {
             if (!b)

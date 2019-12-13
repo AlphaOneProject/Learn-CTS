@@ -2845,7 +2845,7 @@ namespace Learn_CTS
             switch (scene_type)
             {
                 case int n when (n > 3 && n < 8):
-                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "bus" +
+                    img = Tools.Image_From_File(images_path + "vehicle" + Path.DirectorySeparatorChar + "bus" +
                                                 Path.DirectorySeparatorChar + "busInside.png");
                     break;
                 case int n when (n > 7):
@@ -2853,7 +2853,7 @@ namespace Learn_CTS
                                                 envi_data["background"].ToString() + ".png");
                     break;
                 default:
-                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "tram" +
+                    img = Tools.Image_From_File(images_path + "vehicle" + Path.DirectorySeparatorChar + "tram" +
                                                 Path.DirectorySeparatorChar + "tramInside.png");
                     break;
             }

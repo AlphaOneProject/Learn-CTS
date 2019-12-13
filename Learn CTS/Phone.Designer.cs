@@ -30,11 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.flp_talk = new System.Windows.Forms.FlowLayoutPanel();
             this.txt_answer = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.flp_talk = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -54,35 +53,10 @@
             this.panel1.BackColor = System.Drawing.Color.LightGray;
             this.panel1.Controls.Add(this.flp_talk);
             this.panel1.Controls.Add(this.txt_answer);
-            this.panel1.Location = new System.Drawing.Point(15, 38);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(343, 590);
             this.panel1.TabIndex = 1;
-            // 
-            // txt_answer
-            // 
-            this.txt_answer.Location = new System.Drawing.Point(24, 556);
-            this.txt_answer.Name = "txt_answer";
-            this.txt_answer.Size = new System.Drawing.Size(292, 20);
-            this.txt_answer.TabIndex = 3;
-            this.txt_answer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_answer_KeyDown);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.ForestGreen;
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(15, 53);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(343, 53);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(15, 38);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(343, 21);
-            this.panel3.TabIndex = 1;
             // 
             // flp_talk
             // 
@@ -96,27 +70,41 @@
             this.flp_talk.TabIndex = 0;
             this.flp_talk.WrapContents = false;
             // 
-            // button1
+            // txt_answer
             // 
-            this.button1.Location = new System.Drawing.Point(15, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(343, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Remettre téléphone dans le sac";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txt_answer.Location = new System.Drawing.Point(24, 556);
+            this.txt_answer.Name = "txt_answer";
+            this.txt_answer.Size = new System.Drawing.Size(292, 20);
+            this.txt_answer.TabIndex = 3;
+            this.txt_answer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_answer_KeyDown);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.ForestGreen;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(12, 27);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(343, 53);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Location = new System.Drawing.Point(12, 12);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(343, 21);
+            this.panel3.TabIndex = 1;
             // 
             // Phone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Phone";
-            this.Size = new System.Drawing.Size(372, 643);
+            this.Size = new System.Drawing.Size(372, 617);
             this.Load += new System.EventHandler(this.Phone_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -134,6 +122,5 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txt_answer;
         private System.Windows.Forms.FlowLayoutPanel flp_talk;
-        private System.Windows.Forms.Button button1;
     }
 }

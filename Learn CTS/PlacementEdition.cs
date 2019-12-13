@@ -116,13 +116,13 @@ namespace Learn_CTS
             switch (this.scene_type)
             {
                 case int n when (n > 3 && n < 8):
-                    isColliding = Tools.IsCollidingWithVehicule(new Bus(0, 0), current_pos);
+                    isColliding = Tools.IsCollidingWithVehicle(new Bus(0, 0), current_pos);
                     break;
                 case int n when (n > 7):
                     isColliding = false;
                     break;
                 default:
-                    isColliding = Tools.IsCollidingWithVehicule(new Tram(0, 0), current_pos);
+                    isColliding = Tools.IsCollidingWithVehicle(new Tram(0, 0), current_pos);
                     break;
             }
 

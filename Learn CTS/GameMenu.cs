@@ -15,11 +15,17 @@ namespace Learn_CTS
 {
     public partial class GameMenu : Form
     {
+
+        //Attributes
         private string game;
         private TextBox txtbox_name_player;
         private string displayed_menu;
         private Panel p_menu;
 
+        /// <summary>
+        /// Construct a game menu.
+        /// </summary>
+        /// <param name="game">The name of the game.</param>
         public GameMenu(string game)
         {
             InitializeComponent();
@@ -35,22 +41,40 @@ namespace Learn_CTS
             this.Controls.Add(p_menu);
         }
 
+        /// <summary>
+        /// Load the game menu.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameMenu_Load(object sender, EventArgs e)
         {
             SetUpWindow();
             DisplayGameMenu();
         }
 
+        /// <summary>
+        /// Display the character menu if clicked.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void btn_launch_scenario_Click(object sender, EventArgs e)
         {
             DisplayCharacterMenu();
         }
 
+        /// <summary>
+        /// Close the game menu if clicked.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void button_leave_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Display the character menu.
+        /// </summary>
         private void DisplayCharacterMenu()
         {
             this.displayed_menu = "character_menu";
@@ -68,7 +92,6 @@ namespace Learn_CTS
             txtbox_name_player.Text = "";
             txtbox_name_player.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             txtbox_name_player.Size = new Size(p_menu.Width - 40,p_menu.Height * 1/16);
-            txtbox_name_player.KeyDown += new KeyEventHandler(txtbox_KeyDown);
             txtbox_name_player.Name = "txtbox_name_player";
             p_menu.Controls.Add(txtbox_name_player);
             ChooseCharacter cc = new ChooseCharacter(game);
@@ -84,11 +107,11 @@ namespace Learn_CTS
             PerformLayout();
         }
 
-        private void txtbox_KeyDown(object sender, KeyEventArgs e)
-        {
-            Player.SetName(((TextBox)sender).Text);
-        }
-
+        /// <summary>
+        /// Confirm the name of the player and display the scenario menu.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void btn_confirm_Click(object sender, EventArgs e)
         {
             if(txtbox_name_player.Text == "")
@@ -102,6 +125,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Display the scenario menu.
+        /// </summary>
         private void DisplayScenarioMenu()
         {
             this.displayed_menu = "scenario_menu";
@@ -126,7 +152,6 @@ namespace Learn_CTS
                 SetupButton(btn);
                 btn.Click += new EventHandler(LaunchGame);
                 btn.AutoSize = true;
-                //btn.Size = new Size(flp.Width, btn.Font.Height*2);
                 flp.Controls.Add(btn);
             }
             flp.AutoSize = true;
@@ -136,6 +161,11 @@ namespace Learn_CTS
             PerformLayout();
         }
 
+        /// <summary>
+        /// Launch the game.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void LaunchGame(object sender, EventArgs e)
         {
             p_menu.Controls.Clear();
@@ -145,12 +175,20 @@ namespace Learn_CTS
             game_window.Show();
         }
 
+        /// <summary>
+        /// Replace the controls when the form is resized.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameMenu_Resize(object sender, EventArgs e)
         {
             p_menu.Size = new Size(p_menu.Width, this.Height);
             PerformLayout();
         }
 
+        /// <summary>
+        /// Replace the controls if the menu displayed is the game menu.
+        /// </summary>
         private void Responsive_Resize_Game_Menu()
         {
             foreach(Control c in p_menu.Controls)
@@ -173,6 +211,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Replace the controls if the menu displayed is the character menu.
+        /// </summary>
         private void Responsive_Resize_Character_Menu()
         {
             foreach (Control c in p_menu.Controls)
@@ -195,6 +236,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Replace the controls if the menu displayed is the scenario menu.
+        /// </summary>
         private void Responsive_Resize_Scenario_Menu()
         {
             foreach (Control c in p_menu.Controls)
@@ -211,11 +255,19 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Return to the main menu.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (this.Visible) { Application.Restart(); }
         }
 
+        /// <summary>
+        /// Setup the window according to the options.json file.
+        /// </summary>
         private void SetUpWindow()
         {
             JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
@@ -229,6 +281,9 @@ namespace Learn_CTS
             this.Height = (int)options["size"]["y"];
         }
 
+        /// <summary>
+        /// Display the game menu.
+        /// </summary>
         private void DisplayGameMenu()
         {
             this.displayed_menu = "game_menu";
@@ -268,6 +323,10 @@ namespace Learn_CTS
             PerformLayout();
         }
 
+        /// <summary>
+        /// Setup a button.
+        /// </summary>
+        /// <param name="b">The button that will be set up.</param>
         private void SetupButton(Button b)
         {
             b.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -280,6 +339,11 @@ namespace Learn_CTS
             b.MouseLeave += new EventHandler(delegate (object sender, EventArgs e) { this.BackColor = Color.Black; });
         }
 
+        /// <summary>
+        /// Change the event of the return button according to the menu displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Return(object sender, EventArgs e)
         {
             switch (this.displayed_menu)
@@ -295,6 +359,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Display the menu according to the menu that has to be displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameMenu_Layout(object sender, LayoutEventArgs e)
         {
             switch (this.displayed_menu)

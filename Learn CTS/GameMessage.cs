@@ -12,25 +12,30 @@ namespace Learn_CTS
 {
     public partial class GameMessage : UserControl
     {
-        //List<string> list_messages = new List<string>();
 
+        /// <summary>
+        /// Construct a game message.
+        /// </summary>
         private GameMessage()
         {
             InitializeComponent();
             this.Tag = 0;
         }
 
+        /// <summary>
+        /// Construct a game message with a message.
+        /// </summary>
+        /// <param name="msg">The message.</param>
         public GameMessage(string msg) : this()
         {
             lbl_msg.Text = msg;
         }
 
-        public GameMessage(int x, int y, string msg) : this()
-        {
-            lbl_msg.Text = msg;
-            this.Location = new Point(x, y);
-        }
-
+        /// <summary>
+        /// Remove the game message in the game window.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void btn_ok_Click(object sender, EventArgs e)
         {
             GameWindow.GetInstance().Controls.Remove(this);
@@ -38,6 +43,11 @@ namespace Learn_CTS
             GameWindow.GetInstance().Refresh();
         }
 
+        /// <summary>
+        /// Load the game message.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameMessage_Load(object sender, EventArgs e)
         {
             Form f = this.FindForm();
