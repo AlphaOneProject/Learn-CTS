@@ -1596,6 +1596,7 @@ namespace Learn_CTS
         /// </summary>
         public void SwitchSituation()
         {
+            this.Show();
             if (preview) this.Close();
             else
             {
