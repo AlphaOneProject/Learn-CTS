@@ -58,7 +58,7 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
 
 ### Installation de Learn CTS
 
-**Téléchargez** l'installeur de Learn CTS en [Cliquant ici]() et suivez ses instructions !
+**Téléchargez** l'installeur de Learn CTS en [Cliquant ici](https://gitlab.unistra.fr/t432_scl19_t3_a/learn-cts/raw/master/Installation/Learn%20CTS.msi) et suivez ses instructions !
 
 ### Les moteurs de jeu
 
