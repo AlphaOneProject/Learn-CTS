@@ -1673,7 +1673,7 @@ namespace Learn_CTS
             if (int.Parse(endcomment["increments"].ToString()) == 0) { return; }
             for(int i = 1; i <= int.Parse(endcomment["increments"].ToString()); i++)
             {
-                if (score < int.Parse(endcomment[i.ToString()]["score"].ToString()) || i == int.Parse(endcomment["increments"].ToString()))
+                if (score < int.Parse(endcomment[i.ToString()]["score"].ToString()))
                 {
                     lbl_comment.Text = endcomment[i.ToString()]["comment"].ToString();
                     lbl_comment.Location = new Point(this.Width / 2 - lbl_comment.Width / 2, this.Height / 2 - lbl_comment.Height / 2);
