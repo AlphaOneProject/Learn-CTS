@@ -1124,7 +1124,7 @@ namespace Learn_CTS
                 {
                     n.SetX(vehicle.GetX() + npc_x);
                     n.SetY(vehicle.GetY() + npc_y);
-                    if (vehicle.CollideWith(n, false))
+                    if (!vehicle.CollideWith(n, false))
                     {
                         vehicle.AddChild(n);
                     }
@@ -1139,7 +1139,7 @@ namespace Learn_CTS
                 {
                     n.SetX(platform.GetX() + npc_x);
                     n.SetY(platform.GetY() + npc_y);
-                    if (platform.CollideWith(n, false))
+                    if (!platform.CollideWith(n, false))
                     {
                         platform.AddChild(n);
                     }
@@ -1154,7 +1154,7 @@ namespace Learn_CTS
                 {
                     n.SetX(vehicle.GetX() + npc_x);
                     n.SetY(vehicle.GetY() + npc_y);
-                    if (vehicle.CollideWith(n, false))
+                    if (!vehicle.CollideWith(n, false))
                     {
                         vehicle.AddChild(n);
                     }
