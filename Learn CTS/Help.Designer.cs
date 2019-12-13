@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Général");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Figurants");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Dialogues");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Objets");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Personnages");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Décors");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
-            treeNode24,
-            treeNode25,
-            treeNode26});
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23,
-            treeNode27});
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Situations");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Scénarios", new System.Windows.Forms.TreeNode[] {
-            treeNode29});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Général");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Figurants");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Dialogues");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objets");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Personnages");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Décors");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Images", new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Modèles", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Situation");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Situations");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Scénarios", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Help));
             this.tvw_help = new System.Windows.Forms.TreeView();
             this.pnl_bg = new System.Windows.Forms.Panel();
@@ -59,30 +61,32 @@
             this.tvw_help.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.tvw_help.Location = new System.Drawing.Point(12, 12);
             this.tvw_help.Name = "tvw_help";
-            treeNode21.Name = "nd_gen";
-            treeNode21.Text = "Général";
-            treeNode22.Name = "nd_fig";
-            treeNode22.Text = "Figurants";
-            treeNode23.Name = "Nœud4";
-            treeNode23.Text = "Dialogues";
-            treeNode24.Name = "nd_obj";
-            treeNode24.Text = "Objets";
-            treeNode25.Name = "nd_per";
-            treeNode25.Text = "Personnages";
-            treeNode26.Name = "nd_dec";
-            treeNode26.Text = "Décors";
-            treeNode27.Name = "nd_img";
-            treeNode27.Text = "Images";
-            treeNode28.Name = "nd_mod";
-            treeNode28.Text = "Modèles";
-            treeNode29.Name = "nd_sit";
-            treeNode29.Text = "Situations";
-            treeNode30.Name = "nd_sce";
-            treeNode30.Text = "Scénarios";
+            treeNode1.Name = "nd_gen";
+            treeNode1.Text = "Général";
+            treeNode2.Name = "nd_fig";
+            treeNode2.Text = "Figurants";
+            treeNode3.Name = "Nœud4";
+            treeNode3.Text = "Dialogues";
+            treeNode4.Name = "nd_obj";
+            treeNode4.Text = "Objets";
+            treeNode5.Name = "nd_per";
+            treeNode5.Text = "Personnages";
+            treeNode6.Name = "nd_dec";
+            treeNode6.Text = "Décors";
+            treeNode7.Name = "nd_img";
+            treeNode7.Text = "Images";
+            treeNode8.Name = "nd_mod";
+            treeNode8.Text = "Modèles";
+            treeNode9.Name = "nd_stn";
+            treeNode9.Text = "Situation";
+            treeNode10.Name = "nd_sit";
+            treeNode10.Text = "Situations";
+            treeNode11.Name = "nd_sce";
+            treeNode11.Text = "Scénarios";
             this.tvw_help.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode21,
-            treeNode28,
-            treeNode30});
+            treeNode1,
+            treeNode8,
+            treeNode11});
             this.tvw_help.Size = new System.Drawing.Size(165, 426);
             this.tvw_help.TabIndex = 0;
             this.tvw_help.Tag = "1";
