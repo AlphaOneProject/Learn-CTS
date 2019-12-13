@@ -127,6 +127,7 @@ namespace Learn_CTS
             lbl_place.Location = new Point((int)(this.Width * 0.98) - lbl_place.Width - lbl_name_place.Width - 10, this.Height * 1 / 32);
             InitializeFPSThread();
             InitializeHUD();
+            InitializeTransition();
             tr.SetState(10);
             Load_Game();
         }
@@ -289,7 +290,8 @@ namespace Learn_CTS
             {
                 tr.Dispose();
             }
-            tr = new Transition(draw_surface_width, draw_surface_height);
+            if(draw_surface_width > 0 && draw_surface_height > 0) tr = new Transition(draw_surface_width, draw_surface_height);
+            else tr = new Transition(this.Width, this.Height);
         }
 
         /// <summary>
@@ -326,7 +328,7 @@ namespace Learn_CTS
             }
             if (scene_type == 0 || scene_type == 4) current_scene_tick = OnPlatform_Tick;
             else if (scene_type == 1 || scene_type == 5) current_scene_tick = InsideVehicle_Tick;
-            else if (scene_type == 2 || scene_type == 6) current_scene_tick = VehicleArrive_Tick;
+            else if (scene_type == 2 || scene_type == 6) current_scene_tick = DoNothing_Tick;
             else if (scene_type == 3 || scene_type == 7) current_scene_tick = VehicleCrashed_Tick;
             else if (scene_type == 8) current_scene_tick = Park_Tick;
             else if (scene_type == 9) current_scene_tick = Street_Tick;
@@ -354,12 +356,19 @@ namespace Learn_CTS
             list_game_textures = new List<Texture>();
             if (scene_type == 0 || scene_type == 4)
             {
-                if(scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
-                else vehicle = new Bus(-4000, 298 + 80);
+                if(scene_type == 0)
+                {
+                    vehicle = new Tram(-4000, 298 + 80);
+                }
+                else
+                {
+                    vehicle = new Bus(-4000, 298 + 80);
+                }
                 platform = new Platform(-100, vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
                 platform.AddChild(player);
                 list_game_textures.Add(vehicle);
                 list_game_textures.Add(platform);
+                PlacePlayerMiddleScreen();
             }
             else if (scene_type == 1 || scene_type == 5)
             {
@@ -382,19 +391,20 @@ namespace Learn_CTS
             }
             else if (scene_type == 2 || scene_type == 6)
             {
+                platform = new Platform(0, 0, 0);
+                platform.SetX(player.GetX() - platform.GetWidth() / 2);
                 if (scene_type == 2)
                 {
-                    vehicle = new Tram(-4000, 298 + 80);
-                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
+                    vehicle = new Tram(platform.GetX(), 298 + 80);
                 }
                 else
                 {
-                    vehicle = new Bus(-4000, 298 + 80);
-                    player.SetY(vehicle.GetY() + vehicle.GetHeight() - 246);
+                    vehicle = new Bus(platform.GetX(), 298 + 80);
                 }
-                platform = new Platform(-100, vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
-                vehicle.AddChild(player);
-                player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
+                platform.SetY(vehicle.GetY() + vehicle.GetHeight());
+                platform.SetZ(vehicle.GetZ() + 2);
+                vehicle.SetState(1);
+                platform.AddChild(player);
                 list_game_textures.Add(vehicle);
                 list_game_textures.Add(platform);
             }
@@ -414,12 +424,14 @@ namespace Learn_CTS
             {
                 background.EnableCollisions();
                 list_game_textures.Add(player);
+                PlacePlayerMiddleScreen();
             }
             else if (scene_type == 9)
             {
                 player.SetY(838 - 372);
                 background.EnableCollisions();
                 list_game_textures.Add(player);
+                PlacePlayerMiddleScreen();
             }
             list_game_textures.Add(background);
             InitializeNPCs(scene_type);
@@ -443,13 +455,7 @@ namespace Learn_CTS
         /// </summary>
         private void SetUpWindow()
         {
-            JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
-            if ((bool)options["maximized"])
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            this.Width = (int)options["size"]["x"];
-            this.Height = (int)options["size"]["y"];
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /// <summary>
@@ -511,55 +517,6 @@ namespace Learn_CTS
                 }
             }
             else if (vehicle.Contains(player) && vehicle.GetX() >= draw_surface_width && tr.HasFinished()) ViewInsideVehicle();
-            else if (platform.Contains(player) && vehicle.GetX() >= draw_surface_width)
-            {
-                ticks_temp++;
-                if (ticks_temp == 1)
-                {
-                    NPCsComingPlatform();
-                }
-                else if (ticks_temp > 100)
-                {
-                    ResetVehicle();
-                    ticks_temp = 0;
-                }
-            }
-            if (vehicle.GetState() != 2)
-            {
-                CheckIfCharacterIsEnteringTheVehicle();
-                CheckIfCharacterIsLeavingTheVehicle();
-            }
-            else if (vehicle.Contains(player) && !list_game_textures.Contains(tr) && !IsOnScreen(vehicle))
-            {
-                StartTransition();
-            }
-        }
-
-        /// <summary>
-        /// Instructions executed when the player is in the vehicle and have to get off the vehicle.
-        /// </summary>
-        /// <param name="sender">Control calling the method.</param>
-        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-        private void VehicleArrive_Tick(object sender, EventArgs e)
-        {
-            ChangeStateIfVehicleArrived();
-            if (vehicle.GetState() == 0)
-            {
-                ticks_temp++;
-                if (ticks_temp == 1)
-                {
-                    NPCLeaveVehicle(true);
-                }
-                if (ticks_temp == 35)
-                {
-                    NPCEnterVehicle(false);
-                }
-                if (ticks_temp > 200)
-                {
-                    vehicle.ChangeState();
-                    ticks_temp = 0;
-                }
-            }
             else if (platform.Contains(player) && vehicle.GetX() >= draw_surface_width)
             {
                 ticks_temp++;
@@ -1127,17 +1084,24 @@ namespace Learn_CTS
             NPCsDensity = (int)Tools.Get_From_JSON(this.sc_path + scenario + Path.DirectorySeparatorChar + situation + Path.DirectorySeparatorChar + "environment.json")["npc_density"];
             int npc_x;
             int npc_y;
-            string npc_name;
-            string npc_folder;
+            string npc_name = null;
+            string npc_folder = null;
             int npc_quiz;
+            int npc_id;
             NPC n;
             for (int i = 1; i <= int.Parse((string)npcs["events"]); i++)
             {
+                npc_id = (int)npcs[i.ToString()]["npc"]["id"];
+                JObject npc = Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.Text + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar + npc_id +".json");
+                try
+                {
+                    npc_name = npc[i.ToString()]["name"].ToString();
+                    npc_folder = npc[i.ToString()]["folder"].ToString();
+                }
+                catch(Exception) { }
+                npc_quiz = (int)npcs[i.ToString()]["quizz"];
                 npc_x = (int)npcs[i.ToString()]["x"];
                 npc_y = (int)npcs[i.ToString()]["y"];
-                npc_name = npcs[i.ToString()]["npc"]["name"].ToString();
-                npc_folder = npcs[i.ToString()]["npc"]["folder"].ToString();
-                npc_quiz = (int)npcs[i.ToString()]["quizz"];
                 n = nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder);
                 if (scene_type == 0 || scene_type == 2 || scene_type == 4 || scene_type == 6)
                 {
