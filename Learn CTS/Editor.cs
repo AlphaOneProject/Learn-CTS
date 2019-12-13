@@ -3250,6 +3250,11 @@ namespace Learn_CTS
             content.Controls.Find("txt_scene_intro", true)[0].Tag = sc_path + Path.DirectorySeparatorChar + 
                 (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
 
+            content.Controls.Find("cbo_background", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
+            content.Controls.Find("cbo_scene_type", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
+
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox)content.Controls.Find("txt_rename_situation", false)[0];
             t.Visible = false;
