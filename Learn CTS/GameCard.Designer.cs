@@ -30,6 +30,7 @@ namespace Learn_CTS
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbl_title = new System.Windows.Forms.Label();
             this.lbl_description = new System.Windows.Forms.Label();
             this.pb_edit = new System.Windows.Forms.PictureBox();
@@ -38,6 +39,7 @@ namespace Learn_CTS
             this.pb_delete = new System.Windows.Forms.PictureBox();
             this.pnl_border = new System.Windows.Forms.Panel();
             this.pb_copy = new System.Windows.Forms.PictureBox();
+            this.tlt_gc = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_play)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_thumbnail)).BeginInit();
@@ -88,7 +90,7 @@ namespace Learn_CTS
             this.pb_play.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_play.ErrorImage = null;
             this.pb_play.ImageLocation = "gamecard-play-btn-x128.png";
-            this.pb_play.Location = new System.Drawing.Point(24, 24);
+            this.pb_play.Location = new System.Drawing.Point(24, 22);
             this.pb_play.Name = "pb_play";
             this.pb_play.Size = new System.Drawing.Size(91, 92);
             this.pb_play.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -190,5 +192,6 @@ namespace Learn_CTS
         private System.Windows.Forms.PictureBox pb_delete;
         private System.Windows.Forms.Panel pnl_border;
         private PictureBox pb_copy;
+        private ToolTip tlt_gc;
     }
 }

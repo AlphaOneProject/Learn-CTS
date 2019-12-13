@@ -22,13 +22,12 @@ namespace Learn_CTS
 
         public GameMessage(string msg) : this()
         {
-            rtxtbox_msg.Text = msg;
+            lbl_msg.Text = msg;
         }
 
         public GameMessage(int x, int y, string msg) : this()
         {
-            //doesn't work for now cause overriden by the load
-            rtxtbox_msg.Text = msg;
+            lbl_msg.Text = msg;
             this.Location = new Point(x, y);
         }
 

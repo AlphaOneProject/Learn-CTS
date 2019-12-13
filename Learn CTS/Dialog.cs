@@ -196,7 +196,7 @@ namespace Learn_CTS
             else
             {
                 try { if (!t_audio.IsAlive) t_audio.Start(); }
-                catch (Exception except) { return; }
+                catch (Exception) { return; }
             }
         }
 

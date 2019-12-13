@@ -74,6 +74,10 @@ namespace Learn_CTS
         {
             txt_create.Focus();
             Change_Theme();
+
+            // Setting tooltips
+            tlt_gcr.SetToolTip(pb_back_create, "Retour");
+            tlt_gcr.SetToolTip(pb_confirm, "Confirmer");
         }
 
         /// <summary>
@@ -103,10 +107,10 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="nom"></param>
         /// <returns></returns>
-        private Boolean Is_Game_Unique(String nom)
+        private Boolean Is_Game_Unique(string nom)
         {
             Boolean res = true;
-            foreach (String dir in Directory.GetDirectories(@"" + games_path))
+            foreach (string dir in Directory.GetDirectories(@"" + games_path))
             {
                 if (nom.Equals(dir))
                 {
@@ -120,7 +124,7 @@ namespace Learn_CTS
         /// Displays a confirmation MessageBox
         /// </summary>
         /// <param name="nom"></param>
-        private void games_menu_confirm_box(String nom)
+        private void games_menu_confirm_box(string nom)
         {
             if (MessageBox.Show("Confirmer la creation du jeu " + nom + " ?", "Confirmation de création",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
@@ -136,7 +140,7 @@ namespace Learn_CTS
         /// Creates the directories used by the game.
         /// </summary>
         /// <param name="nom"></param>
-        private void Create_game(String nom)
+        private void Create_game(string nom)
         {
             // ./Game
             Directory.CreateDirectory(@"" + this.games_path + nom);

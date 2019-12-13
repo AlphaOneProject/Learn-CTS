@@ -12,7 +12,6 @@ namespace Learn_CTS
     abstract class Character : Texture
     {
         // Attributes
-
         private int id;
         private int c = 0;
         private int t = 0;
@@ -24,21 +23,35 @@ namespace Learn_CTS
         private string name;
         private static int speed_character = 8;
 
+        /// <summary>
+        /// Get the speed of a character.
+        /// </summary>
+        /// <returns>The speed of a character.</returns>
         public static int GetCharacterSpeed()
         {
             return speed_character;
         }
 
         /// <summary>
-        /// Constructor of character with a custom name.
+        /// Construct a character.
         /// </summary>
-        /// <param name="name">The name of the character.</param>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-
+        /// <param name="id">ID of the character.</param>
+        /// <param name="name">Name of the character.</param>
+        /// <param name="npc_folder">The folder of the character appearence. If null, a default appearence will be taken.</param>
+        /// <param name="x">The position of the character on the x axis.</param>
+        /// <param name="y">The position of the character on the y axis.</param>
         public Character(int id, string name, string npc_folder, int x, int y) : base(x, y, true)
         {
-            if (npc_folder == null) this.folder = (id % 5+1).ToString();
+            string character_path = Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar;
+            Random r = new Random();
+            if (npc_folder == null)
+            {
+                this.folder = Directory.GetDirectories(@"" + character_path)[r.Next(0, Directory.GetDirectories(@"" + character_path).Length - 1)].Remove(0,character_path.Length);
+                while (this.folder == "" || !Tools.Is_Valid(character_path + this.folder))
+                {
+                    this.folder = Directory.GetDirectories(@"" + character_path)[r.Next(0, Directory.GetDirectories(@"" + character_path).Length - 1)].Remove(0, character_path.Length);
+                }
+            }
             else this.folder = npc_folder;
             if (name == null) name = id.ToString();
             else this.name = name;
@@ -52,15 +65,19 @@ namespace Learn_CTS
             {
                 last_direction = 3;
             }
-            this.SetImage(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + last_direction.ToString()+"_0.png"));
-            this.SetHitbox(this.CreateHitbox(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "Hitbox.png"));
+            this.SetImage(this.CreateImage(character_path + this.folder + Path.DirectorySeparatorChar + last_direction.ToString()+"_0.png"));
+            this.SetHitbox(this.CreateHitbox(character_path + this.folder + Path.DirectorySeparatorChar + "Hitbox.png"));
             for (int i = 0; i <= 8; i++)
             {
-                animation_list_est.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "1_" + i.ToString() + ".png"));
-                animation_list_west.Add(this.CreateImage(Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar + this.folder + Path.DirectorySeparatorChar + "3_" + i.ToString() + ".png"));
+                animation_list_est.Add(this.CreateImage(character_path + this.folder + Path.DirectorySeparatorChar + "1_" + i.ToString() + ".png"));
+                animation_list_west.Add(this.CreateImage(character_path + this.folder + Path.DirectorySeparatorChar + "3_" + i.ToString() + ".png"));
             }
         }
 
+        /// <summary>
+        /// Get the current image of the npc following the state of the animation.
+        /// </summary>
+        /// <returns>The current image of the animation.</returns>
         public override Image GetImage()
         {
             if(last_direction == 1)
@@ -73,11 +90,19 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Set the default pose of the npc, used when the npc does not move anymore.
+        /// </summary>
         public void SetDefaultPose()
         {
             this.c = 0;
         }
 
+        /// <summary>
+        /// Update the animation of the npc following its movements.
+        /// </summary>
+        /// <param name="a">The movement on the x axis.</param>
+        /// <param name="b">The movement on the y axis.</param>
         public void UpdateMovement(int a, int b)
         {
             t++;
@@ -103,36 +128,41 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Get the ID of the Character.
+        /// </summary>
+        /// <returns>The ID of the character.</returns>
         public int GetID()
         {
             return this.id;
         }
 
-        public string GetFolder()
-        {
-            if(folder == null)
-            {
-                return this.id.ToString();
-            }
-            else
-            {
-                return this.folder;
-            }
-        }
-
+        /// <summary>
+        /// Get the name of the character.
+        /// </summary>
+        /// <returns>The name of the character.</returns>
         public override string GetName()
         {
             return this.name;
         }
 
+        /// <summary>
+        /// Get the last direction of the character.
+        /// </summary>
+        /// <returns>The last direction of the character. 3 is left and 1 is right.</returns>
         public int GetDirection()
         {
             return this.last_direction;
         }
 
+        /// <summary>
+        /// Set the current direction of the character.
+        /// </summary>
+        /// <param name="d">The new direction of the character. 3 is left and 1 is right.</param>
         public void SetDirection(int d)
         {
-            this.last_direction = d;
+            if (d != 1 || d != 3) this.last_direction = d;
+            else throw new ArgumentException();
         }
 
         /// <summary>
@@ -140,12 +170,15 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="x">The x coordinate of the objective.</param>
         /// <param name="y">The y coordinate of the objective.</param>
-
         public virtual void SetObjective(int x, int y)
         {
             this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), y-(this.GetY() + this.GetHeight())));
         }
 
+        /// <summary>
+        /// Set an objective on the x axis.
+        /// </summary>
+        /// <param name="x"></param>
         public void SetObjectiveX(int x)
         {
             this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), 0));

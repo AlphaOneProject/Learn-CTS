@@ -192,7 +192,11 @@ namespace Learn_CTS
             if (this.visible && this.IsOnScreen(e))
             {
                 Graphics g = e.Graphics;
-                g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
+                try
+                {
+                    g.DrawImage(this.GetImage(), new Point(this.GetX(), this.GetY()));
+                }
+                catch (System.ArgumentException) { }
             }
         }
 

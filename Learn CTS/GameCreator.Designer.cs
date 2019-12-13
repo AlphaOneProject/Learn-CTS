@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pb_confirm = new System.Windows.Forms.PictureBox();
             this.txt_create = new System.Windows.Forms.TextBox();
             this.pb_back_create = new System.Windows.Forms.PictureBox();
             this.pnl_bg = new System.Windows.Forms.Panel();
             this.lbl_create = new System.Windows.Forms.Label();
+            this.tlt_gcr = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pb_confirm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_back_create)).BeginInit();
             this.pnl_bg.SuspendLayout();
@@ -127,5 +129,6 @@
         private System.Windows.Forms.PictureBox pb_back_create;
         private System.Windows.Forms.Panel pnl_bg;
         private System.Windows.Forms.Label lbl_create;
+        private System.Windows.Forms.ToolTip tlt_gcr;
     }
 }
