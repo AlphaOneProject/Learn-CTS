@@ -1,1 +1,1 @@
-{"question":"Quoi ? De quoi vous parlez ? Je n'ai rien vu, je n'ai pas d'argent.","choices":2,"c1":{"answer":"D'accord, bonne journée !","score":42,"redirect":-1},"c2":{"answer":"Non merci, je n'ai pas le temps","score":0,"redirect":0},"audio":1}
+{"question":"Quoi ? De quoi vous parlez ? Je n'ai rien vu, je n'ai pas d'argent.","choices":1,"c1":{"answer":"D'accord, bonne journée !","score":0,"redirect":-1},"audio":1}

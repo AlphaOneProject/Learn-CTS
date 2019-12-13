@@ -1,1 +1,1 @@
-{"question":"Quelle question placer ici ?","choices":2,"c1":{"answer":"Réponse 1","score":0,"redirect":0},"c2":{"answer":"Réponse 2","score":0,"redirect":0},"audio":1}
+{"question":"Oui jai tout vu. Venez prendre un café et je vous raconterai tout.","choices":2,"c1":{"answer":"D'accord...","score":-100,"redirect":-1},"c2":{"answer":"Non merci je n'ai pas le temps de boire un café.","score":0,"redirect":-1},"audio":1}

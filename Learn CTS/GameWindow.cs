@@ -1112,8 +1112,8 @@ namespace Learn_CTS
                 JObject npc = Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.Text + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar + npc_id +".json");
                 try
                 {
-                    npc_name = npc[i.ToString()]["name"].ToString();
-                    npc_folder = npc[i.ToString()]["folder"].ToString();
+                    npc_name = npc["name"].ToString();
+                    npc_folder = npc["folder"].ToString();
                 }
                 catch(Exception) { }
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
@@ -1771,7 +1771,6 @@ namespace Learn_CTS
                 {
                     vehicle.SetSpeed(0);
                     vehicle.SetState(0);
-                    MessageBox.Show("Tout le monde va bien ?");
                     ChangeCurrentTick(DoNothing_Tick);
                     nm.MakeAllNPCsInteractives();
                     tr.EndTransition();
