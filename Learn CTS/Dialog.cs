@@ -10,6 +10,8 @@ namespace Learn_CTS
 {
     public partial class Dialog : UserControl
     {
+
+        /// Attributes
         private NPC_Manager nm = NPC_Manager.GetInstance();
         NPC npc;
         private string game_path;
@@ -20,14 +22,23 @@ namespace Learn_CTS
         private System.Windows.Forms.Timer timer_text;
         private string question = "";
 
+        /// <summary>
+        /// Construct a dialog
+        /// </summary>
+        /// <param name="game">The current game where the control will search the dialogs.</param>
         public Dialog(string game)
         {
             InitializeComponent();
-            InitializeGamePath(game);
+            InitializeDialogsPath(game);
             this.DoubleBuffered = true;
             this.Tag = 0;
         }
 
+        /// <summary>
+        /// Construct a dialog linked to a npc.
+        /// </summary>
+        /// <param name="id">The id of the npc linked to the dialog</param>
+        /// <param name="game">The current game where the control will search the dialogs.</param>
         public Dialog(int id, string game) : this(game)
         {
             npc = nm.GetNPCByID(id);
@@ -37,6 +48,13 @@ namespace Learn_CTS
             lbl_name.Text = npc.GetName();
         }
 
+        /// <summary>
+        /// Construct a custom dialog
+        /// </summary>
+        /// <param name="nom">Name of the npc</param>
+        /// <param name="question">Question of the npc</param>
+        /// <param name="game">The current game where the control will search the dialogs.</param>
+        /// <param name="audio">todo</param>
         public Dialog(string nom, string question, string game, int audio) : this(game)
         {
             this.question = question;
@@ -44,6 +62,11 @@ namespace Learn_CTS
             lbl_name.Text = nom;
         }
 
+        /// <summary>
+        /// Load the dialog.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Load(object sender, EventArgs e)
         {
             t_audio = new Thread(new ThreadStart(Listen));
@@ -64,11 +87,19 @@ namespace Learn_CTS
             this.Focus();
         }
 
-        private void InitializeGamePath(string game)
+        /// <summary>
+        /// Initialize the path to the dialogs.
+        /// </summary>
+        /// <param name="game"></param>
+        private void InitializeDialogsPath(string game)
         {
             this.game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "dialogs" + Path.DirectorySeparatorChar;
         }
 
+        /// <summary>
+        /// Set up the dialog according to the quiz.
+        /// </summary>
+        /// <param name="q">The id of the quiz.</param>
         private void Set_Up(string q)
         {
             data = Tools.Get_From_JSON(this.game_path + q + ".json");
@@ -76,6 +107,9 @@ namespace Learn_CTS
             question = this.data["question"].ToString().Replace("<Nom>", Player.GetInstance().GetName());
         }
 
+        /// <summary>
+        /// Initialize the timer that will display the question gradually.
+        /// </summary>
         private void InitializeTimerDisplayText()
         {
             timer_text = new System.Windows.Forms.Timer();
@@ -83,6 +117,11 @@ namespace Learn_CTS
             timer_text.Interval = 50;
         }
 
+        /// <summary>
+        /// Display the question character by character.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Question_Tick(object sender, EventArgs e)
         {
             if(txt_dialog_npc.Text.Length < question.Length)
@@ -95,6 +134,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Generate the buttons choices according to the data of the quiz.
+        /// </summary>
         private void Generate_Buttons_Choices()
         {
             flp_choices.Controls.Clear();
@@ -116,6 +158,10 @@ namespace Learn_CTS
             flp_choices.Controls.Add(Generate_Button_Leave());
         }
 
+        /// <summary>
+        /// Generate the button to leave the dialog.
+        /// </summary>
+        /// <returns>The leave button.</returns>
         private Button Generate_Button_Leave()
         {
             Button btn_leave = new Button();
@@ -131,6 +177,9 @@ namespace Learn_CTS
             return btn_leave;
         }
 
+        /// <summary>
+        /// Launch the question and choices audio.
+        /// </summary>
         private void Listen()
         {
             if (!t_audio.IsAlive)
@@ -156,6 +205,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Depending of the dialog : update the score in the game window, switch of situation, remove the quiz of the npc and/or launch a new dialog.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Answer_Event(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -180,6 +234,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Close the dialog.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         public void Dialog_Closed(object sender, EventArgs e)
         {
             if (npc.GetQuiz() > 0) npc.DisplayInteraction();
@@ -187,6 +246,11 @@ namespace Learn_CTS
             ((GameWindow)this.FindForm()).RemoveAllControls();
         }
 
+        /// <summary>
+        /// Launch the audio if clicked.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (audio == 0)
@@ -200,12 +264,22 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Resize the controls of the dialog control.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_Resize(object sender, EventArgs e)
         {
             Control c = (Control)sender;
             pbox_audio.Location = new Point(c.Width - pbox_audio.Width - 10, 10);
         }
 
+        /// <summary>
+        /// If the user press escape, close the dialog.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Dialog_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape) Dialog_Closed(sender, e);

@@ -25,7 +25,7 @@ namespace Learn_CTS
         private List<string> list_comments;
         private System.Windows.Forms.Timer timer_game;
         private Player player;
-        private Vehicule vehicule;
+        private Vehicle vehicle;
         private Background background;
         private Platform platform;
         private int draw_surface_width = 0;
@@ -55,9 +55,9 @@ namespace Learn_CTS
         private bool god = false;
 
         /// <summary>
-        /// Initialize the game window
+        /// Construct a game window
         /// </summary>
-
+        /// <param name="game">Name of the game</param>
         private GameWindow(string game)
         {
             InitializeComponent();
@@ -68,6 +68,8 @@ namespace Learn_CTS
                 this.Text = game;
                 string game_path = System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + game + Path.DirectorySeparatorChar;
                 sc_path = game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
+                list_comments = new List<string>();
+                SetScore(800);
             }
             else
             {
@@ -78,9 +80,8 @@ namespace Learn_CTS
         /// <summary>
         /// Launch the game at a scenario
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="scenario"></param>
-
+        /// <param name="game">Name of the game.</param>
+        /// <param name="scenario">Name of the scenario.</param>
         public GameWindow(string game, string scenario) : this(game)
         {
             this.scenario = scenario;
@@ -91,10 +92,9 @@ namespace Learn_CTS
         /// Launch a game, at a situation in a scenario
         /// Used exclusively to preview a situation
         /// </summary>
-        /// <param name="game"></param>
-        /// <param name="scenario"></param>
-        /// <param name="situation"></param>
-
+        /// <param name="game">Name of the game.</param>
+        /// <param name="scenario">Name of the scenario.</param>
+        /// <param name="situation">Name of the situation.</param>
         public GameWindow(string game, string scenario, string situation) : this(game,scenario)
         {
             this.preview = true;
@@ -104,8 +104,7 @@ namespace Learn_CTS
         /// <summary>
         /// Get the instance of the current game window.
         /// </summary>
-        /// <returns></returns>
-
+        /// <returns>The instance of the game window.</returns>
         public static GameWindow GetInstance()
         {
             if (instance == null) throw new Exception();
@@ -113,11 +112,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// 
+        /// Load the game window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameWindow_Load(object sender, EventArgs e)
         {
             if (instance == null) throw new InvalidOperationException();
@@ -129,10 +127,13 @@ namespace Learn_CTS
             lbl_place.Location = new Point((int)(this.Width * 0.98) - lbl_place.Width - lbl_name_place.Width - 10, this.Height * 1 / 32);
             InitializeFPSThread();
             InitializeHUD();
-            tr.SetD(10);
+            tr.SetState(10);
             Load_Game();
         }
 
+        /// <summary>
+        /// Display a loading label.
+        /// </summary>
         private void DisplayLoading()
         {
             Label lbl_loading = new Label();
@@ -150,6 +151,11 @@ namespace Learn_CTS
             Refresh();
         }
 
+        /// <summary>
+        /// Display the introduction and the place name.
+        /// </summary>
+        /// <param name="scene_name"></param>
+        /// <param name="scene_intro"></param>
         private void DisplayIntro(string scene_name, string scene_intro)
         {
             RemoveControlsToSuppress();
@@ -204,9 +210,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Load every objects needed 
+        /// Initialize the timer and the textures accordingly to the environment.json file.
+        /// Display the point and click form todo
+        /// Display the introduction if there is one set.
         /// </summary>
-
         private void Load_Game()
         {
             if (instance == null) return;
@@ -227,12 +234,6 @@ namespace Learn_CTS
             {
                 SetupScene(scene_type);
                 DisplayLoading();
-                /*while (!tr.HasFinished())
-                {
-                    Refresh();
-                }*/
-                list_comments = new List<string>();
-                SetScore(800);
                 r = new Random();
                 InitializeTimer(scene_type);
                 InitializeGameTextures(scene_type, background_name);
@@ -246,6 +247,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Setup some events according to the scene type.
+        /// </summary>
+        /// <param name="scene_type">The scene_type</param>
         private void SetupScene(int scene_type)
         {
             if (scene_type == 0 || scene_type == 4)
@@ -265,7 +270,6 @@ namespace Learn_CTS
         /// <summary>
         /// Initialize the thread which calculate the fps.
         /// </summary>
-
         private void InitializeFPSThread()
         {
             t_fps = new Thread(new ThreadStart(CalculateFPS));
@@ -275,7 +279,6 @@ namespace Learn_CTS
         /// <summary>
         /// Initialize the transition.
         /// </summary>
-
         private void InitializeTransition()
         {
             if(tr != null)
@@ -286,27 +289,25 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Start the transition.
+        /// Start the transition and had it to the hud list.
         /// </summary>
-
         private void StartTransition()
         {
             if (tr != null && !list_hud_textures.Contains(tr)) list_hud_textures.Add(tr);
         }
 
         /// <summary>
-        /// Remove the transition on screen.
+        /// Remove the transition in the hud list.
         /// </summary>
-
         public void RemoveTransition()
         {
             if (list_hud_textures.Contains(tr)) list_hud_textures.Remove(tr);
         }
 
         /// <summary>
-        /// Initialize the game timer_game.
+        /// Initialize the game timer according to the scene type.
         /// </summary>
-
+        /// <param name="scene_type">The scene type.</param>
         private void InitializeTimer(int scene_type)
         {
             if (timer_game == null && current_scene_tick == null)
@@ -320,9 +321,9 @@ namespace Learn_CTS
                 timer_game.Tick -= new EventHandler(current_scene_tick);
             }
             if (scene_type == 0 || scene_type == 4) current_scene_tick = OnPlatform_Tick;
-            else if (scene_type == 1 || scene_type == 5) current_scene_tick = InsideVehicule_Tick;
-            else if (scene_type == 2 || scene_type == 6) current_scene_tick = VehiculeArrive_Tick;
-            else if (scene_type == 3 || scene_type == 7) current_scene_tick = VehiculeCrashed_Tick;
+            else if (scene_type == 1 || scene_type == 5) current_scene_tick = InsideVehicle_Tick;
+            else if (scene_type == 2 || scene_type == 6) current_scene_tick = VehicleArrive_Tick;
+            else if (scene_type == 3 || scene_type == 7) current_scene_tick = VehicleCrashed_Tick;
             else if (scene_type == 8) current_scene_tick = Park_Tick;
             else if (scene_type == 9) current_scene_tick = Street_Tick;
             timer_game.Tick += new EventHandler(current_scene_tick);
@@ -330,9 +331,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Initialize all the textures of the game.
+        /// Initialize all the textures of the game according to the scene type and the background.
         /// </summary>
-
+        /// <param name="scene_type">The scene type.</param>
+        /// <param name="background_name">The name of the background.</param>
         private void InitializeGameTextures(int scene_type, string background_name)
         {
             if (list_game_textures != null && list_game_textures.Count > 0)
@@ -347,45 +349,45 @@ namespace Learn_CTS
             list_game_textures = new List<Texture>();
             if (scene_type == 0 || scene_type == 4)
             {
-                if(scene_type == 0) vehicule = new Tram(-4000, 298 + 80);
-                else vehicule = new Bus(-4000, 298 + 80);
-                platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
+                if(scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
+                else vehicle = new Bus(-4000, 298 + 80);
+                platform = new Platform(-100, vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
                 platform.AddChild(player);
-                list_game_textures.Add(vehicule);
+                list_game_textures.Add(vehicle);
                 list_game_textures.Add(platform);
             }
             else if (scene_type == 1 || scene_type == 5)
             {
-                if (scene_type == 0) vehicule = new Tram(-4000, 298 + 80);
-                else vehicule = new Bus(-4000, 298 + 80);
-                vehicule.AddChild(player);
-                player.SetX(vehicule.GetX() + vehicule.GetWidth() / 2 - player.GetWidth() / 2);
-                player.SetY(vehicule.GetY() + vehicule.GetHeight() - 202);
-                list_game_textures.Add(vehicule);
-                vehicule.ChangeInside();
-                vehicule.SetState(2);
+                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
+                else vehicle = new Bus(-4000, 298 + 80);
+                vehicle.AddChild(player);
+                player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
+                player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
+                list_game_textures.Add(vehicle);
+                vehicle.ChangeInside();
+                vehicle.SetState(2);
                 PlacePlayerMiddleScreen();
             }
             else if (scene_type == 2 || scene_type == 6)
             {
-                if (scene_type == 0) vehicule = new Tram(-4000, 298 + 80);
-                else vehicule = new Bus(-4000, 298 + 80);
-                platform = new Platform(-100, vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
-                vehicule.AddChild(player);
-                player.SetX(vehicule.GetX() + vehicule.GetWidth() / 2 - player.GetWidth() / 2);
-                list_game_textures.Add(vehicule);
+                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
+                else vehicle = new Bus(-4000, 298 + 80);
+                platform = new Platform(-100, vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
+                vehicle.AddChild(player);
+                player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
+                list_game_textures.Add(vehicle);
                 list_game_textures.Add(platform);
             }
             else if (scene_type == 3 || scene_type == 7)
             {
-                if (scene_type == 0) vehicule = new Tram(-4000, 298 + 80);
-                else vehicule = new Bus(-4000, 298 + 80);
-                vehicule.AddChild(player);
-                player.SetX(vehicule.GetX() + vehicule.GetWidth() / 2 - player.GetWidth() / 2);
-                player.SetY(vehicule.GetY() + vehicule.GetHeight() - 202);
-                list_game_textures.Add(vehicule);
-                vehicule.ChangeInside();
-                vehicule.SetState(2);
+                if (scene_type == 0) vehicle = new Tram(-4000, 298 + 80);
+                else vehicle = new Bus(-4000, 298 + 80);
+                vehicle.AddChild(player);
+                player.SetX(vehicle.GetX() + vehicle.GetWidth() / 2 - player.GetWidth() / 2);
+                player.SetY(vehicle.GetY() + vehicle.GetHeight() - 202);
+                list_game_textures.Add(vehicle);
+                vehicle.ChangeInside();
+                vehicle.SetState(2);
                 PlacePlayerMiddleScreen();
             }
             else if (scene_type == 8)
@@ -404,13 +406,12 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Initialize the textures of the hud, like the egg and the backpack icons.
+        /// Initialize the textures of the hud.
         /// </summary>
-
         private void InitializeHUD()
         {
             egg = new Egg(12, 10);
-            backpack = new Texture("Backpack", 12, 145);
+            backpack = new Texture("backpack", 12, 145);
             list_hud_textures = new List<Texture>(){
                 backpack,
                 egg
@@ -420,7 +421,6 @@ namespace Learn_CTS
         /// <summary>
         /// Setup the window according to the general settings of the application stored in the options.json
         /// </summary>
-
         private void SetUpWindow()
         {
             JObject options = Tools.Get_From_JSON("internal" + Path.DirectorySeparatorChar + "options.json");
@@ -433,7 +433,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Show the fps average at this moment.
+        /// Calculate the fps every second.
         /// </summary>
         private void CalculateFPS()
         {
@@ -449,45 +449,49 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Instructions executed every tick
+        /// Base game tick which is responsible of moving the characters, removing the control if needed and refreshing the game window.
         /// </summary>
-        /// <param name="Sender"></param>
-        /// <param name="e"></param>
-
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameTick(object sender, EventArgs e)
         {
             ticks++;
             if (ticks % 3 == 0) PassThroughNPCs();
             if (n_fps.ToString().Length > 4) lbl_nfps.Text = n_fps.ToString().Substring(0,4);
             MoveAllCharactersToObjective();
-            CheckArrowsPressed();
+            CheckPlayerMove();
             RemoveControlsToSuppress();
             Refresh();
         }
 
+        /// <summary>
+        /// Instructions executed when the player is waiting the vehicle.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void OnPlatform_Tick(object sender, EventArgs e)
         {
-            PreventPlayerEnteringVehicule();
-            ChangeStateIfVehiculeArrived();
-            if (vehicule.GetState() == 0)
+            PreventPlayerLeavingPlatform();
+            ChangeStateIfVehicleArrived();
+            if (vehicle.GetState() == 0)
             {
                 ticks_temp++;
                 if (ticks_temp == 1)
                 {
-                    NPCLeaveVehicule(false);
+                    NPCLeaveVehicle(false);
                 }
                 if (ticks_temp == 35)
                 {
-                    NPCEnteringVehicule(true);
+                    NPCEnterVehicle(true);
                 }
                 if (ticks_temp > 200)
                 {
-                    vehicule.ChangeState();
+                    vehicle.ChangeState();
                     ticks_temp = 0;
                 }
             }
-            else if (vehicule.Contains(player) && vehicule.GetX() >= draw_surface_width && tr.HasFinished()) ViewInsideVehicule();
-            else if (platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
+            else if (vehicle.Contains(player) && vehicle.GetX() >= draw_surface_width && tr.HasFinished()) ViewInsideVehicle();
+            else if (platform.Contains(player) && vehicle.GetX() >= draw_surface_width)
             {
                 ticks_temp++;
                 if (ticks_temp == 1)
@@ -496,42 +500,47 @@ namespace Learn_CTS
                 }
                 else if (ticks_temp > 100)
                 {
-                    ResetVehicule();
+                    ResetVehicle();
                     ticks_temp = 0;
                 }
             }
-            if (vehicule.GetState() != 2)
+            if (vehicle.GetState() != 2)
             {
-                CheckIfCharacterIsEnteringTheVehicule();
-                CheckIfCharacterIsLeavingTheVehicule();
+                CheckIfCharacterIsEnteringTheVehicle();
+                CheckIfCharacterIsLeavingTheVehicle();
             }
-            else if (vehicule.Contains(player) && !list_game_textures.Contains(tr) && !IsOnScreen(vehicule))
+            else if (vehicle.Contains(player) && !list_game_textures.Contains(tr) && !IsOnScreen(vehicle))
             {
                 StartTransition();
             }
         }
 
-        private void VehiculeArrive_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Instructions executed when the player is in the vehicle and have to get off the vehicle.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void VehicleArrive_Tick(object sender, EventArgs e)
         {
-            ChangeStateIfVehiculeArrived();
-            if (vehicule.GetState() == 0)
+            ChangeStateIfVehicleArrived();
+            if (vehicle.GetState() == 0)
             {
                 ticks_temp++;
                 if (ticks_temp == 1)
                 {
-                    NPCLeaveVehicule(true);
+                    NPCLeaveVehicle(true);
                 }
                 if (ticks_temp == 35)
                 {
-                    NPCEnteringVehicule(false);
+                    NPCEnterVehicle(false);
                 }
                 if (ticks_temp > 200)
                 {
-                    vehicule.ChangeState();
+                    vehicle.ChangeState();
                     ticks_temp = 0;
                 }
             }
-            else if (platform.Contains(player) && vehicule.GetX() >= draw_surface_width)
+            else if (platform.Contains(player) && vehicle.GetX() >= draw_surface_width)
             {
                 ticks_temp++;
                 if (ticks_temp == 1)
@@ -540,36 +549,56 @@ namespace Learn_CTS
                 }
                 else if (ticks_temp > 100)
                 {
-                    ResetVehicule();
+                    ResetVehicle();
                     ticks_temp = 0;
                 }
             }
-            if (vehicule.GetState() != 2)
+            if (vehicle.GetState() != 2)
             {
-                CheckIfCharacterIsEnteringTheVehicule();
-                CheckIfCharacterIsLeavingTheVehicule();
+                CheckIfCharacterIsEnteringTheVehicle();
+                CheckIfCharacterIsLeavingTheVehicle();
             }
-            else if (vehicule.Contains(player) && !list_game_textures.Contains(tr) && !IsOnScreen(vehicule))
+            else if (vehicle.Contains(player) && !list_game_textures.Contains(tr) && !IsOnScreen(vehicle))
             {
                 StartTransition();
             }
         }
 
-        private void Normal_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Tick which does nothing.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void DoNothing_Tick(object sender, EventArgs e)
         {
 
         }
 
-        private void InsideVehicule_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Instructions executed when the player is in the vehicle.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
+        private void InsideVehicle_Tick(object sender, EventArgs e)
         {
-            background.Move(-vehicule.GetSpeed(), 0);
+            background.Move(-vehicle.GetSpeed(), 0);
         }
 
+        /// <summary>
+        /// Instructions executed when the player is in the park.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Park_Tick(object sender, EventArgs e)
         {
             RespawnNPCParkOutsideScreen();
         }
 
+        /// <summary>
+        /// Instructions executed when the player is in the street.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Street_Tick(object sender, EventArgs e)
         {
             RespawnNPCStreetOutsideScreen();
@@ -579,7 +608,6 @@ namespace Learn_CTS
         /// <summary>
         /// Move all the the characters towards its objective if he has any.
         /// </summary>
-
         private void MoveAllCharactersToObjective()
         {
             foreach (Texture t in GetAllTextures(list_game_textures))
@@ -592,32 +620,9 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Move the textures if the player reaches the borders of the screen.
+        /// Check if the player wants to move and request a move.
         /// </summary>
-
-        private void MoveTexturesIfPlayerMoves()
-        {
-            if (player.GetX() + player.GetWidth() > draw_surface_width - 9)
-            {
-                foreach (Texture t in list_game_textures)
-                {
-                    t.Move(-Character.GetCharacterSpeed(), 0);
-                }
-            }
-            else if (player.GetX() <= 9)
-            {
-                foreach (Texture t in list_game_textures)
-                {
-                    t.Move(Character.GetCharacterSpeed(), 0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Check if arrows are pressed
-        /// </summary>
-
-        private void CheckArrowsPressed()
+        private void CheckPlayerMove()
         {
             int a = 0;
             int b = 0;
@@ -650,9 +655,8 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Move the character toward his objective
+        /// Move the character toward its current objective
         /// </summary>
-
         private void MoveCharacterToObjective(Character c)
         {
             int a = 0;
@@ -690,22 +694,20 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if the vehicule has to slow down.
+        /// Check if the vehicle has to slow down to be at the middle of the platform.
         /// </summary>
-
-        private void ChangeStateIfVehiculeArrived()
+        private void ChangeStateIfVehicleArrived()
         {
-            if(vehicule.GetState() == 2 && (vehicule.GetX()+vehicule.GetWidth() > platform.GetX()+platform.GetWidth()/2+vehicule.GetWidth()/2 - vehicule.GetDistanceMaxStop() && vehicule.GetX() + vehicule.GetWidth() < platform.GetX() + platform.GetWidth() / 2 + vehicule.GetWidth() / 2 - vehicule.GetDistanceMaxStop() + vehicule.GetMaxSpeed()))
+            if(vehicle.GetState() == 2 && (vehicle.GetX()+vehicle.GetWidth() > platform.GetX()+platform.GetWidth()/2+vehicle.GetWidth()/2 - vehicle.GetDistanceMaxStop() && vehicle.GetX() + vehicle.GetWidth() < platform.GetX() + platform.GetWidth() / 2 + vehicle.GetWidth() / 2 - vehicle.GetDistanceMaxStop() + vehicle.GetMaxSpeed()))
             {
-                vehicule.ChangeState();
+                vehicle.ChangeState();
             }
         }
 
         /// <summary>
-        /// Check if a character enters the vehicule, add him as a child of the vehicule and remove it from the platform.
+        /// Check if a character enters the vehicle, add it as a child of the vehicle and remove it from the platform.
         /// </summary>
-
-        private void CheckIfCharacterIsEnteringTheVehicule()
+        private void CheckIfCharacterIsEnteringTheVehicle()
         {
             Texture t;
             for (int i = platform.GetListChilds().Count - 1; i >= 0; i--)
@@ -713,9 +715,9 @@ namespace Learn_CTS
                 t = platform.GetListChilds()[i];
                 if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                 {
-                    if (t.GetZ() <= vehicule.GetY() + vehicule.GetHeight() && t.GetZ() >= vehicule.GetY())
+                    if (t.GetZ() <= vehicle.GetY() + vehicle.GetHeight() && t.GetZ() >= vehicle.GetY())
                     {
-                        vehicule.AddChild(t);
+                        vehicle.AddChild(t);
                         platform.RemoveChild(t);
                     }
                 }
@@ -723,31 +725,29 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Check if a character leaves the vehicule, remove it from the vehicule and add it to the platform.
+        /// Check if a character leaves the vehicle, remove it from the vehicle and add it to the platform.
         /// </summary>
-
-        private void CheckIfCharacterIsLeavingTheVehicule()
+        private void CheckIfCharacterIsLeavingTheVehicle()
         {
             Texture t;
-            for (int i = vehicule.GetListChilds().Count - 1; i >= 0; i--)
+            for (int i = vehicle.GetListChilds().Count - 1; i >= 0; i--)
             {
-                t = vehicule.GetListChilds()[i];
+                t = vehicle.GetListChilds()[i];
                 if (t.GetType().Name == "Player" || t.GetType().Name == "NPC")
                 {
-                    if (t.GetZ() > vehicule.GetY() + vehicule.GetHeight())
+                    if (t.GetZ() > vehicle.GetY() + vehicle.GetHeight())
                     {
                         platform.AddChild(t);
-                        vehicule.RemoveChild(t);
+                        vehicle.RemoveChild(t);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Paint the textures at the user's screen.
+        /// Optimize the graphics of the given paint environment, resize the game window if needed then paint the textures on the screen.
         /// </summary>
-        /// <param name="e"></param>
-
+        /// <param name="e">The paint environment.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
             OptimizeGraphics(e);
@@ -760,12 +760,16 @@ namespace Learn_CTS
             }
             if(e.ClipRectangle.Width != this.draw_surface_width || e.ClipRectangle.Height != this.draw_surface_height)
             {
-                ResizeGameWindow(e);
+                UpdateVerticalTextures(e);
             }
             PaintAllTextures(e);
         }
 
-        private void ResizeGameWindow(PaintEventArgs e)
+        /// <summary>
+        /// Move each textures to keep it at the vertical center of the screen.
+        /// </summary>
+        /// <param name="e"></param>
+        private void UpdateVerticalTextures(PaintEventArgs e)
         {
             int diff_y = e.ClipRectangle.Height - this.draw_surface_height;
             this.draw_surface_width = e.ClipRectangle.Width;
@@ -782,7 +786,6 @@ namespace Learn_CTS
         /// Retrieve all the textures, sort them by depth then are paint on the window.
         /// </summary>
         /// <param name="e"></param>
-
         private void PaintAllTextures(PaintEventArgs e)
         {
             List<Texture> list_all_textures = GetAllTextures(list_game_textures);
@@ -806,6 +809,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Optimize the graphics of the given paint environment to get better speed when drawing bitmaps.
+        /// </summary>
+        /// <param name="e"></param>
         private void OptimizeGraphics(PaintEventArgs e)
         {
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
@@ -816,11 +823,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Retrieve all the textures and the childs of each textures.
+        /// Retrieve all the textures and the childs of each textures in the given the list.
         /// </summary>
-        /// <param name="list"></param>
-        /// <returns></returns>
-
+        /// <param name="list">The list of the textures.</param>
+        /// <returns>The list of all the textures in the given list.</returns>
         private List<Texture> GetAllTextures(List<Texture> list)
         {
             List<Texture> list_temp = new List<Texture>();
@@ -834,11 +840,10 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// When the player clicks on the mouse.
+        /// Open the backpack if the player clicks on it, remove the controls if the user clicks outside or move the player to the position of the mouse.
         /// </summary>
         /// <param name="sender">Control calling the method.</param>
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
-
         private void GameWindow_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             int mouse_x = e.Location.X;
@@ -865,7 +870,6 @@ namespace Learn_CTS
         /// <param name="mx"></param>
         /// <param name="my"></param>
         /// <returns></returns>
-
         private bool SearchNPCDialog(int mx, int my)
         {
             foreach (NPC t in nm.GetList())
@@ -893,7 +897,6 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-
         private bool IsCharacterCollidingWithTextures(Character c)
         {
             foreach(Texture t in list_game_textures)
@@ -911,7 +914,6 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="a"</param>
         /// <param name="b"></param>
-
         private void MovePlayer(int a, int b)
         {
             bool c_vertical = true;
@@ -942,15 +944,18 @@ namespace Learn_CTS
             }
         }
 
-        private void PreventPlayerEnteringVehicule()
+        /// <summary>
+        /// Prevent the player of leaving the platform if the ticket is not valid or the vehicle is not here.
+        /// </summary>
+        private void PreventPlayerLeavingPlatform()
         {
-            if (vehicule != null && platform != null
+            if (vehicle != null && platform != null
                     && player.GetY() <= platform.GetY() - player.GetHeight() + 2
                     && ((!ticket_valid && !god)
-                    || (player.GetX() < vehicule.GetX() || player.GetX() + player.GetWidth() > vehicule.GetX() + vehicule.GetWidth())))
+                    || (player.GetX() < vehicle.GetX() || player.GetX() + player.GetWidth() > vehicle.GetX() + vehicle.GetWidth())))
             {
                 player.Move(0, Character.GetCharacterSpeed());
-                if (!ticket_valid && this.Controls.Find("GameMessage", true).Length == 0 && IsOnScreen(vehicule))
+                if (!ticket_valid && this.Controls.Find("GameMessage", true).Length == 0 && IsOnScreen(vehicle))
                 {
                     movement[0] = false; movement[1] = false; movement[2] = false; movement[3] = false;
                     this.Controls.Add(new GameMessage("Vous devez d'abord valider votre ticket !"));
@@ -958,6 +963,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Move all the textures except the player.
+        /// </summary>
+        /// <param name="a">todo</param>
+        /// <param name="b"></param>
         private void MoveAllTexturesExceptPlayer(int a, int b)
         {
             foreach (Texture t in GetAllTextures(list_game_textures))
@@ -966,13 +976,19 @@ namespace Learn_CTS
                 {
                     t.Move(a, b, false);
                 }
-                if(t == background && vehicule != null && vehicule.IsInside() && vehicule.GetSpeed()>0)
+                if(t == background && vehicle != null && vehicle.IsInside() && vehicle.GetSpeed()>0)
                 {
                     t.Move(-a, -b, false);
                 }
             }
         }
 
+        /// <summary>
+        /// Move the given npc and animate it.
+        /// </summary>
+        /// <param name="n">The npc that will be moved.</param>
+        /// <param name="a">Number that will be added to the current x coordinate of the texture.</param>
+        /// <param name="b">Number that will be added to the current y coordinate of the texture.</param>
         private void MoveNPC(NPC n, int a, int b)
         {
             n.UpdateMovement(a, b);
@@ -982,9 +998,8 @@ namespace Learn_CTS
         /// <summary>
         /// Check if the player presses down the keys
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -1014,9 +1029,8 @@ namespace Learn_CTS
         /// <summary>
         /// Check if the player presses up the arrows.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameWindow_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -1035,9 +1049,8 @@ namespace Learn_CTS
         /// <summary>
         /// Display the average FPS during the game session.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(list_game_textures!=null)
@@ -1060,26 +1073,33 @@ namespace Learn_CTS
             }
         }
 
-        private void ResetVehicule()
+        /// <summary>
+        /// Reset the vehicle and respawn it.
+        /// </summary>
+        private void ResetVehicle()
         {
-            if (vehicule.GetState() == 2)
+            if (vehicle.GetState() == 2)
             {
-                if (vehicule.IsInside())
+                if (vehicle.IsInside())
                 {
-                    vehicule.ChangeInside();
+                    vehicle.ChangeInside();
                     list_game_textures.Remove(player);
-                    vehicule.AddChild(player);
-                    platform = new Platform(vehicule.GetX(), vehicule.GetY() + vehicule.GetHeight(), vehicule.GetZ() + 2);
-                    vehicule.SetSpeed(vehicule.GetMaxSpeed());
+                    vehicle.AddChild(player);
+                    platform = new Platform(vehicle.GetX(), vehicle.GetY() + vehicle.GetHeight(), vehicle.GetZ() + 2);
+                    vehicle.SetSpeed(vehicle.GetMaxSpeed());
                     list_game_textures.Add(platform);
                     FillPlatformNPCs(NPCsDensity/2);
                 }
-                else vehicule.ShuffleVehiculeNPCs();
-                vehicule.SetX(-4000);
-                vehicule.SetSpeed(vehicule.GetMaxSpeed());
+                else vehicle.ShuffleVehicleNPCs();
+                vehicle.SetX(-4000);
+                vehicle.SetSpeed(vehicle.GetMaxSpeed());
             }
         }
 
+        /// <summary>
+        /// Initialize the npcs according to the scene type.
+        /// </summary>
+        /// <param name="scene_type">The scene type.</param>
         public void InitializeNPCs(int scene_type)
         {
             nm.Clear();
@@ -1101,11 +1121,11 @@ namespace Learn_CTS
                 n = nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder);
                 if (scene_type == 0 || scene_type == 2 || scene_type == 4 || scene_type == 6)
                 {
-                    if (vehicule.CollideWith(n, false))
+                    if (vehicle.CollideWith(n, false))
                     {
-                        n.SetX(vehicule.GetX() + npc_x);
-                        n.SetY(vehicule.GetY() + npc_y);
-                        vehicule.AddChild(n);
+                        n.SetX(vehicle.GetX() + npc_x);
+                        n.SetY(vehicle.GetY() + npc_y);
+                        vehicle.AddChild(n);
                     }
                     else
                     {
@@ -1116,35 +1136,41 @@ namespace Learn_CTS
                 }
                 else if(scene_type == 1 || scene_type == 3 || scene_type == 5 || scene_type == 7)
                 {
-                    if (vehicule.CollideWith(n, false))
+                    if (vehicle.CollideWith(n, false))
                     {
-                        n.SetX(vehicule.GetX() + npc_x);
-                        n.SetY(vehicule.GetY() + npc_y);
-                        vehicule.AddChild(n);
+                        n.SetX(vehicle.GetX() + npc_x);
+                        n.SetY(vehicle.GetY() + npc_y);
+                        vehicle.AddChild(n);
                     }
                     else
                     {
-                        vehicule.PlaceNPCRandomlyInVehicle(n);
+                        vehicle.PlaceNPCRandomlyInVehicle(n);
                     }
                 }
-                else if (scene_type == 8 || scene_type == 9)
+                else if (scene_type == 8)
                 {
+                    n.SetY(r.Next(draw_surface_height * 2 / 3, draw_surface_height));
+                    list_game_textures.Add(n);
+                }
+                else if (scene_type == 9)
+                {
+                    n.SetY(r.Next(992 - 192, 1062 - 192) - 372);
                     list_game_textures.Add(n);
                 }
             }
             if(scene_type == 0 || scene_type == 2 || scene_type == 4 || scene_type == 6)
             {
-                FillVehiculeNPCs(NPCsDensity / 2);
+                FillVehicleNPCs(NPCsDensity / 2);
                 FillPlatformNPCs(NPCsDensity / 2);
             }
             else if (scene_type == 1 || scene_type == 5)
             {
-                FillVehiculeNPCs(NPCsDensity);
+                FillVehicleNPCs(NPCsDensity);
                 nm.MakeAllNPCsInteractives();
             }
             else if (scene_type == 3 || scene_type == 7)
             {
-                FillVehiculeNPCs(NPCsDensity);
+                FillVehicleNPCs(NPCsDensity);
             }
             else if(scene_type == 8)
             {
@@ -1159,44 +1185,55 @@ namespace Learn_CTS
             }
         }
 
-        private void NPCLeaveVehicule(bool affect_interactive_npcs)
+        /// <summary>
+        /// Set the npcs to leave the vehicle. todo
+        /// </summary>
+        /// <param name="affect_interactive_npcs">True if it affects the interactive npcs.</param>
+        private void NPCLeaveVehicle(bool affect_interactive_npcs)
         {
             int i;
             NPC n;
-            foreach (Texture t in vehicule.GetListChilds())
+            foreach (Texture t in vehicle.GetListChilds())
             {
                 if(t.GetType().Name == "NPC" && t.GetName() != "Conducteur")
                 {
                     n = (NPC)t;
                     if((affect_interactive_npcs && n.GetQuiz() >= 1))
                     {
-                        i = vehicule.GetIndexNearestDoor(n.GetX());
-                        n.SetObjectiveX(vehicule.GetPosDoor(i));
-                        n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight());
+                        i = vehicle.GetIndexNearestDoor(n.GetX());
+                        n.SetObjectiveX(vehicle.GetPosDoor(i));
+                        n.SetObjectiveY(vehicle.GetY() + vehicle.GetHeight());
                         n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), r.Next(0, platform.GetHeight()-n.GetHeight()-20));
                     }
                     else if (r.Next(0, 3) != 0 && n.GetQuiz() < 1)
                     {
-                        i = vehicule.GetIndexNearestDoor(n.GetX());
-                        n.SetObjectiveX(vehicule.GetPosDoor(i));
-                        n.SetObjectiveY(vehicule.GetY() + vehicule.GetHeight() + r.Next(0, 100));
+                        i = vehicle.GetIndexNearestDoor(n.GetX());
+                        n.SetObjectiveX(vehicle.GetPosDoor(i));
+                        n.SetObjectiveY(vehicle.GetY() + vehicle.GetHeight() + r.Next(0, 100));
                         n.SetObjective(n.GetX() + n.GetWidth() / 2 + r.Next(-1024, 1014), 5000);
                     }
                 }
             }
         }
 
-        private void ViewInsideVehicule()
+        /// <summary>
+        /// Change the view to inside of the vehicle.
+        /// </summary>
+        private void ViewInsideVehicle()
         {
-            ChangeCurrentTick(InsideVehicule_Tick);
+            ChangeCurrentTick(InsideVehicle_Tick);
             platform.Dispose();
             list_game_textures.Remove(platform);
-            vehicule.ChangeInside();
-            vehicule.SetState(2);
+            vehicle.ChangeInside();
+            vehicle.SetState(2);
             PlacePlayerMiddleScreen();
             tr.EndTransition();
         }
 
+        /// <summary>
+        /// Change the current tick of the timer to a new event handler.
+        /// </summary>
+        /// <param name="eh">The new tick action.</param>
         private void ChangeCurrentTick(EventHandler eh)
         {
             timer_game.Tick -= new EventHandler(current_scene_tick);
@@ -1204,6 +1241,9 @@ namespace Learn_CTS
             current_scene_tick = eh;
         }
 
+        /// <summary>
+        /// Place the player at the middle of the screen.
+        /// </summary>
         private void PlacePlayerMiddleScreen()
         {
             int px = player.GetX() + player.GetWidth() / 2 - draw_surface_width/2;
@@ -1211,27 +1251,39 @@ namespace Learn_CTS
             MoveAllTexturesExceptPlayer(-px,0);
         }
 
-        private void NPCEnteringVehicule(bool affect_interactive_npcs)
+        /// <summary>
+        /// Set the npcs to enter the vehicle.
+        /// </summary>
+        /// <param name="affect_interactive_npcs">True if it affects the interactive npcs.</param>
+        private void NPCEnterVehicle(bool affect_interactive_npcs)
         {
             foreach (Texture t in platform.GetListChilds())
             {
                 if (t.GetType().Name == "NPC" && !((NPC)t).HasObjective())
                 {
                     if (!affect_interactive_npcs && ((NPC)t).GetQuiz() >= 1) break;
-                    vehicule.SetPathNPCToVehicule((NPC)t);
+                    vehicle.SetPathNPCToVehicle((NPC)t);
                 }
             }
         }
 
-        private void FillVehiculeNPCs(int density)
+        /// <summary>
+        /// Fill the vehicle with random npcs.
+        /// </summary>
+        /// <param name="density">Number of npcs randomly placed.</param>
+        private void FillVehicleNPCs(int density)
         {
             int max = density;
             for(int i = 0; i < max; i++)
             {
-                vehicule.PlaceNPCRandomlyInVehicle(NPC_Manager.GetInstance().CreateNPC(0, 0));
+                vehicle.PlaceNPCRandomlyInVehicle(NPC_Manager.GetInstance().CreateNPC(0, 0));
             }
         }
 
+        /// <summary>
+        /// Fill the platform with random npcs.
+        /// </summary>
+        /// <param name="density">Number of npcs randomly placed.</param>
         private void FillPlatformNPCs(int density)
         {
             int max = density;
@@ -1245,6 +1297,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Fill the park with random npcs.
+        /// </summary>
+        /// <param name="density">Number of npcs randomly placed.</param>
         private void FillParkNPCs(int density)
         {
             int max = density;
@@ -1262,6 +1318,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Fill the street with random npcs.
+        /// </summary>
+        /// <param name="density">Number of npcs randomly placed.</param>
         private void FillStreetNPCs(int density)
         {
             int max = density;
@@ -1280,6 +1340,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Fill the street with random cars.
+        /// </summary>
+        /// <param name="density">Number of cars randomly placed.</param>
         private void FillStreetCars(int number)
         {
             int max = number;
@@ -1294,14 +1358,15 @@ namespace Learn_CTS
                     y = 960 - 372;
                     n = nm.CreateNPC(x, y);
                     n.SetVisible(false);
-                    n.AddChild(new Texture("car_red_3","vehicule/cars",x,y));
-                    while (IsCharacterCollidingWithTextures(n))
+                    n.AddChild(new Texture("car_red_3","vehicle/cars",x,y));
+                    /*while (IsCharacterCollidingWithTextures(n))
                     {
+                        x = r.Next(0, draw_surface_width);
                         nm.RemoveNPC(n.GetID());
                         n = nm.CreateNPC(x, y);
                         n.SetVisible(false);
-                        n.AddChild(new Texture("car_red_3", "vehicule/cars", x, y));
-                    }
+                        n.AddChild(new Texture("car_red_3", "vehicle/cars", x, y));
+                    }*/
                     n.SetObjectiveX(-500000);
                 }
                 else
@@ -1309,20 +1374,24 @@ namespace Learn_CTS
                     y = 1060 - 372;
                     n = nm.CreateNPC(x, y);
                     n.SetVisible(false);
-                    n.AddChild(new Texture("car_red_1", "vehicule/cars", x, y));
-                    while (IsCharacterCollidingWithTextures(n))
+                    n.AddChild(new Texture("car_red_1", "vehicle/cars", x, y));
+                    /*while (IsCharacterCollidingWithTextures(n))
                     {
+                        x = r.Next(0, draw_surface_width);
                         nm.RemoveNPC(n.GetID());
                         n = nm.CreateNPC(x, y);
                         n.SetVisible(false);
-                        n.AddChild(new Texture("car_red_1", "vehicule/cars", x, y));
-                    }
+                        n.AddChild(new Texture("car_red_1", "vehicle/cars", x, y));
+                    }*/
                     n.SetObjectiveX(500000);
                 }
                 list_game_textures.Add(n);
             }
         }
 
+        /// <summary>
+        /// Respawn the npcs if outside the screen in the park.
+        /// </summary>
         private void RespawnNPCParkOutsideScreen()
         {
             foreach(NPC n in nm.GetList())
@@ -1346,6 +1415,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Respawn the npcs if outside the screen in the street.
+        /// </summary>
         private void RespawnNPCStreetOutsideScreen()
         {
             foreach (NPC n in nm.GetList())
@@ -1371,6 +1443,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Respawn the cars if outside the screen in the street.
+        /// </summary>
         private void RespawnCarsOutsideScreen()
         {
             Texture car;
@@ -1396,6 +1471,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Set the npcs below the screen which leaved the vehicle a new position and an objective to the platform.
+        /// </summary>
         private void NPCsComingPlatform()
         {
             int x;
@@ -1416,6 +1494,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Initialize the score or set it if already initialized.
+        /// </summary>
+        /// <param name="s">The score.</param>
         public void SetScore(int s)
         {
             if (step_score < 0)
@@ -1430,11 +1512,14 @@ namespace Learn_CTS
             this.Controls.Find("lbl_nscore", true)[0].Text = score.ToString();
             if (egg != null && score / step_score >= 0 && score / step_score < 6)
             {
-                egg.SetD(5 - score / step_score);
+                egg.SetState(5 - score / step_score);
             }
-            else if (score / step_score < 0) egg.SetD(5);
+            else if (score / step_score < 0) egg.SetState(5);
         }
 
+        /// <summary>
+        /// Open or close the backpack.
+        /// </summary>
         public void OpenClose_Backpack()
         {
             if (this.Controls.Find("Backpack", true).Length == 0)
@@ -1448,6 +1533,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Check if npcs are in front of the player and move each npcs to let the player pass.
+        /// </summary>
         public void PassThroughNPCs()
         {
             int d = player.GetDirection();
@@ -1467,10 +1555,10 @@ namespace Learn_CTS
                         m = (int)(1.5 * Character.GetCharacterSpeed());
                     }
                     n.Move(0, m);
-                    if (vehicule != null && vehicule.CollideWith(n, false))
+                    if (vehicle != null && vehicle.CollideWith(n, false))
                     {
                         n.Move(0, -2 * m);
-                        if (vehicule.CollideWith(n, false))
+                        if (vehicle.CollideWith(n, false))
                         {
                             n.Move(0, m);
                         }
@@ -1490,10 +1578,10 @@ namespace Learn_CTS
                         m = (int)(1.5 * Character.GetCharacterSpeed());
                     }
                     n.Move(0, m);
-                    if (vehicule != null && vehicule.CollideWith(n, false))
+                    if (vehicle != null && vehicle.CollideWith(n, false))
                     {
                         n.Move(0, -2 * m);
-                        if (vehicule.CollideWith(n, false))
+                        if (vehicle.CollideWith(n, false))
                         {
                             n.Move(0, m);
                         }
@@ -1502,6 +1590,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Switch the situation to the next one.
+        /// </summary>
         public void SwitchSituation()
         {
             if (preview) this.Close();
@@ -1521,6 +1612,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// todo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void EndTimer(object sender, EventArgs e)
         {
             //todo : afficher commentaires
@@ -1532,6 +1628,11 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Resize the control on the screen.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void GameWindow_Resize(object sender, EventArgs e)
         {
             foreach (Control c in this.Controls)
@@ -1560,7 +1661,12 @@ namespace Learn_CTS
             Refresh();
         }
 
-        private void VehiculeCrashed_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// Instructions executed when the vehicle has to crash.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void VehicleCrashed_Tick(object sender, EventArgs e)
         {
             ticks_temp++;
             int b;
@@ -1580,26 +1686,35 @@ namespace Learn_CTS
                 }
                 if (ticks_temp == 150 + 16)
                 {
-                    tr.SetD(10);
+                    tr.SetState(10);
                     StartTransition();
                 }
                 else if (ticks_temp == 150 + 64)
                 {
-                    vehicule.SetSpeed(0);
-                    vehicule.SetState(0);
+                    vehicle.SetSpeed(0);
+                    vehicle.SetState(0);
                     MessageBox.Show("Tout le monde va bien ?");
-                    ChangeCurrentTick(Normal_Tick);
+                    ChangeCurrentTick(DoNothing_Tick);
                     nm.MakeAllNPCsInteractives();
                     tr.EndTransition();
                 }
             }
-            background.Move(-vehicule.GetSpeed(), 0);
+            background.Move(-vehicle.GetSpeed(), 0);
         }
 
+        /// <summary>
+        /// Check if the texture is on the screen.
+        /// </summary>
+        /// <param name="t">The texture tested.</param>
+        /// <returns>True if the texture is on the screen, false otherwise.</returns>
         private bool IsOnScreen(Texture t)
         {
             return (t.GetX() + t.GetWidth() >= 0 && t.GetX() < draw_surface_width && t.GetY() + t.GetHeight() >= 0 && t.GetY() < draw_surface_height);
         }
+
+        /// <summary>
+        /// Tag the controls to be removed before the next refresh.
+        /// </summary>
         public void RemoveAllControls()
         {
             foreach(Control c in this.Controls)
@@ -1623,6 +1738,9 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Remove the controls tagged to be removed.
+        /// </summary>
         private void RemoveControlsToSuppress()
         {
             for (int i = this.Controls.Count - 1; i >= 0; i--)
@@ -1634,11 +1752,6 @@ namespace Learn_CTS
                     this.Focus();
                 }
             }
-        }
-
-        public void AddComment(string comment)
-        {
-            list_comments.Add(comment);
         }
     }
 }

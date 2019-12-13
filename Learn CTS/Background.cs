@@ -8,6 +8,8 @@ namespace Learn_CTS
     class Background : Texture
     {
 
+        // Attributes
+
         //Duplication of the background, used for the collisions.
         private Texture double_b;
 

@@ -204,7 +204,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transition.cs" />
-    <Compile Include="Vehicule.cs" />
+    <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="AnimationEdition.resx">
       <DependentUpon>AnimationEdition.cs</DependentUpon>
     </EmbeddedResource>
