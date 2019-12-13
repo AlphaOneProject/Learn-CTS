@@ -2280,12 +2280,14 @@ namespace Learn_CTS
                               items_content.ToString());
 
             // Add a "environment.json" to the folder.
+            string bg_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                             "images" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar;
             JObject environment_content = new JObject()
             {
                 ["scene_name"] = "",
                 ["scene_intro"] = "",
                 ["npc_density"] = 10,
-                ["background"] = 0,
+                ["background"] = Directory.GetFiles(bg_path)[0].Split(Path.DirectorySeparatorChar).Last().Split('.')[0],
                 ["scene_type"] = 0
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
