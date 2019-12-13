@@ -37,8 +37,8 @@ namespace Learn_CTS
             this.id = int.Parse(file_name.Split('.')[0]);
             this.file_path = file_path;
             this.data = Tools.Get_From_JSON(file_path);
-            this.DoubleBuffered = true;
             this.theme = editor.Get_Theme();
+            this.DoubleBuffered = true;
 
             Reload_Redirections();
         }

@@ -141,6 +141,12 @@
     <Compile Include="ImageEdition.Designer.cs">
       <DependentUpon>ImageEdition.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncrementEdition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IncrementEdition.Designer.cs">
+      <DependentUpon>IncrementEdition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemManager.cs" />
     <Compile Include="ItemViewer.cs">
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImageEdition.resx">
       <DependentUpon>ImageEdition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncrementEdition.resx">
+      <DependentUpon>IncrementEdition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemViewer.resx">
       <DependentUpon>ItemViewer.cs</DependentUpon>

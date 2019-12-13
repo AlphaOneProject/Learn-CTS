@@ -75,13 +75,6 @@ namespace Learn_CTS
         {
             InitializeListTextures();
             Refresh();
-            /**
-             * A ENLEVER IMERATIVEMENT
-             */
-            new GameWindow("Learn CTS", "1.Niveau de découverte");
-            /**
-             * A ENLEVER IMPERATIVEMENT
-             */
         }
 
         /// <summary>
