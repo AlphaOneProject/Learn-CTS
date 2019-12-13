@@ -139,6 +139,13 @@ Cette rubrique vous permet d'ajouter des scénarios. Quand vous ajoutez un scén
 
 Vous pouvez voir le nom complet du scénario, avec son arborescence, dans l'onglet en haut à gauche du cadre. Juste en dessous, vous pouvez modifier l'ordre d'apparition du scénario avec les flèches pointant vers le haut et vers le bas. Pour renommer le scénario, il suffit de cliquer sur son nom ou sur le crayon à coté. Vous pouvez supprimmer le scénario en cliquant sur la poubelle <img src="https://i.imgur.com/dDG9pNU.png" width="32" height="32"/> à coté. 
 
+### Scénario
+
+Cette rubrique est accessible en cliquant sur le nom d'un de vos scénarios dans l'arborescence à gauche.
+
+Vous pouvez créer une nouvelle situation, mais aussi définir des paliers de score que le joueur doit atteindre dans la situation. Vous pouvez définir des messages personnalisés, en fonction du score minimal atteint par le joueur.
+Cliquez sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/> pour ajouter un nouveau palier.
+
 ### Les situations
 
 La situation est le **niveau de jeu dans lequel va évoluer le joueur**. Vous pouvez, comme pour les scénarios, modifier l'ordre d'apparition de la situation. Notez que celui-ci est limité au scénario de la situation.
