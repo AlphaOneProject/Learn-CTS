@@ -126,7 +126,8 @@ namespace Learn_CTS
             if (s.Length == 0 || s == "0")
             {
                 PNCWindow window = ((PNCWindow)this.FindForm());
-                window.setItemsLeft(window.getItemsLeft() - 1);
+                GameWindow.GetInstance().SwitchSituation();
+                ((PNCWindow)this.FindForm()).Close();
                 Exit();
             }
             else if (s == "-1")
