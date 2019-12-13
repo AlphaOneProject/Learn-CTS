@@ -414,10 +414,12 @@ namespace Learn_CTS
                 });
             }
 
+            tgs.Enabled = false;
             this.Change_Theme();
 
             // Mise à jour du fichier des options
             Tools.Set_To_JSON(AppDomain.CurrentDomain.BaseDirectory + "internal" + Path.DirectorySeparatorChar + "options.json", this.options);
+            tgs.Enabled = true;
         }
 
         /// <summary>

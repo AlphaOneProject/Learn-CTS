@@ -101,7 +101,15 @@ namespace Learn_CTS
                 return;
             }
 
-            File.Copy(@"" + ofd_img.FileName, @"" + new_path, true);
+            try
+            {
+                File.Copy(@"" + ofd_img.FileName, @"" + new_path, true);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("L'image est en cours d'utilisation.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             ImageEdition_Load(this, new EventArgs());
         }
@@ -119,6 +127,16 @@ namespace Learn_CTS
             switch (this.type)
             {
                 case "background":
+                    // Checks if it's the last one.
+                    string bg_path = editor.Get_Game_Path() + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                     "images" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar;
+                    if (Directory.GetFiles(bg_path).Count() < 2)
+                    {
+                        MessageBox.Show("Cette image est la dernière image restante, vous ne pouvez pas la supprimer.",
+                                        "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     scenarios_path = @"" + editor.Get_Game_Path() + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar;
                     foreach (string scenario in Directory.GetDirectories(scenarios_path))
                     {

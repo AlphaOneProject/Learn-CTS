@@ -1681,8 +1681,8 @@ namespace Learn_CTS
             TreeNode parent = menu.Nodes.Find("scenarios", false)[0];
             string new_scenario = "Nouveau scénario";
             int nbr_new_scenarios = 0;
-            int i = 0;
-            while (i < parent.Nodes.Count)
+            int i = 1;
+            while (i < parent.Nodes.Count + 1)
             {
                 nbr_new_scenarios = i;
                 foreach (TreeNode t in parent.Nodes)
@@ -2277,15 +2277,17 @@ namespace Learn_CTS
                 }
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "items.json",
-                              dialogs_content.ToString());
+                              items_content.ToString());
 
             // Add a "environment.json" to the folder.
+            string bg_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                             "images" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar;
             JObject environment_content = new JObject()
             {
                 ["scene_name"] = "",
                 ["scene_intro"] = "",
                 ["npc_density"] = 10,
-                ["background"] = 0,
+                ["background"] = Directory.GetFiles(bg_path)[0].Split(Path.DirectorySeparatorChar).Last().Split('.')[0],
                 ["scene_type"] = 0
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "environment.json",
@@ -3248,6 +3250,11 @@ namespace Learn_CTS
             content.Controls.Find("txt_scene_name", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
                 (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
             content.Controls.Find("txt_scene_intro", true)[0].Tag = sc_path + Path.DirectorySeparatorChar + 
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
+
+            content.Controls.Find("cbo_background", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
+                (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
+            content.Controls.Find("cbo_scene_type", true)[0].Tag = sc_path + Path.DirectorySeparatorChar +
                 (menu.SelectedNode.Index + 1) + "." + secured_new_name + Path.DirectorySeparatorChar + "environment.json";
 
             // Repositioning size-sensitives contents.

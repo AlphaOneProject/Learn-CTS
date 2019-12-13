@@ -699,6 +699,7 @@ namespace Learn_CTS
             {
                 t.Dispose();
             }
+
             this.image.Dispose();
             if(this.hitbox != null) this.hitbox.Dispose();
         }
