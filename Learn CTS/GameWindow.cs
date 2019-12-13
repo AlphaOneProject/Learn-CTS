@@ -1157,7 +1157,7 @@ namespace Learn_CTS
                     list_game_textures.Add(n);
                 }
             }
-            if(scene_type == 0 || scene_type == 2 || scene_type == 4 || scene_type == 6)
+            if(scene_type == 0 || scene_type == 4)
             {
                 FillVehicleNPCs(NPCsDensity / 2);
                 FillPlatformNPCs(NPCsDensity / 2);
@@ -1167,6 +1167,13 @@ namespace Learn_CTS
             {
                 FillVehicleNPCs(NPCsDensity);
                 nm.MakeAllNPCsInteractives();
+            }
+            else if(scene_type == 2 || scene_type == 6)
+            {
+                FillVehicleNPCs(NPCsDensity / 5);
+                FillPlatformNPCs(NPCsDensity);
+                nm.MakeAllNPCsInteractives();
+                vehicle.AddConductor(NPC_Manager.GetInstance().CreateNPC("Conducteur", 0, 0));
             }
             else if (scene_type == 3 || scene_type == 7)
             {
