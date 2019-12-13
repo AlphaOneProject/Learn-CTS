@@ -1,1 +1,1 @@
-{"question":"Quelle question placer ici ?","choices":2,"c1":{"answer":"Réponse 1","score":0,"redirect":0},"c2":{"answer":"Réponse 2","score":0,"redirect":0},"audio":1}
+{"question":"Bonjour, comment puis-je vous aider ?","choices":2,"c1":{"answer":"Je cherche la boulangerie, pourriez-vous me l'indiquer ?","score":10,"redirect":0},"c2":{"answer":"Je voudrais des Mannele s'il-vous-plaît.","score":-5,"redirect":0},"audio":1}

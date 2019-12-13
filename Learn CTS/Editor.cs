@@ -2971,6 +2971,9 @@ namespace Learn_CTS
                       Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                       Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            string npcs_folder_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" +
+                                      Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar;
+            JObject npc_data;
             Image img;
             int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
 
@@ -2986,9 +2989,10 @@ namespace Learn_CTS
                                                          situation_data[i.ToString()]["item"]["name"].ToString() + ".png");
                         break;
                     default:
+                        npc_data = Tools.Get_From_JSON(npcs_folder_path + i.ToString() + ".json");
                         img = Tools.Image_From_File(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
                                 "images" + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar +
-                                (string)situation_data[i.ToString()]["npc"]["folder"] + Path.DirectorySeparatorChar + "1_0.png");
+                                npc_data["folder"].ToString() + Path.DirectorySeparatorChar + "1_0.png");
                         break;
                 }
 
@@ -3018,7 +3022,10 @@ namespace Learn_CTS
             int scene_type = int.Parse(envi_data["scene_type"].ToString());
             switch (scene_type)
             {
-                case int n when (n > 3 && n < 8):
+                case int n when (n == 2 || n == 6):
+                    img = Tools.Image_From_File(images_path + "platform" + Path.DirectorySeparatorChar + "Platform.png");
+                    break;
+                case int n when (n == 4 || n == 5 || n == 7):
                     img = Tools.Image_From_File(images_path + "vehicle" + Path.DirectorySeparatorChar + "bus" +
                                                 Path.DirectorySeparatorChar + "bus_inside.png");
                     break;
