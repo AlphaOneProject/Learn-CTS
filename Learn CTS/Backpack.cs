@@ -13,13 +13,20 @@ namespace Learn_CTS
 {
     public partial class Backpack : UserControl
     {
-
+        /// <summary>
+        /// Constructor of the backpack control
+        /// </summary>
         public Backpack()
         {
             InitializeComponent();
             this.Tag = 0;
         }
 
+        /// <summary>
+        /// Load the backpack control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Backpack_Load(object sender, EventArgs e)
         {
             Form f = this.FindForm();
@@ -33,17 +40,32 @@ namespace Learn_CTS
             pbox_close.Click += new EventHandler(Backpack_Closed);
             this.Focus();
         }
-
+        
+        /// <summary>
+        /// Close the backpack.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Backpack_Closed(object sender, EventArgs e)
         {
             ((GameWindow)this.FindForm()).OpenClose_Backpack();
         }
 
+        /// <summary>
+        /// Close the backpack if the user press b.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Backpack_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.B) Backpack_Closed(sender, e);
         }
 
+        /// <summary>
+        /// Open the phone if the user clicks on the phone icon.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbox_phone_Click(object sender, EventArgs e)
         {
             this.FindForm().Controls.Add(new Phone());

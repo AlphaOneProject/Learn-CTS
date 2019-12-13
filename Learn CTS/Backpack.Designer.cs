@@ -43,8 +43,8 @@
             // 
             // pbox_ticket
             // 
-            this.pbox_ticket.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbox_ticket.Location = new System.Drawing.Point(27, 90);
+            this.pbox_ticket.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_ticket.Location = new System.Drawing.Point(3, 90);
             this.pbox_ticket.Name = "pbox_ticket";
             this.pbox_ticket.Size = new System.Drawing.Size(128, 128);
             this.pbox_ticket.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -53,8 +53,8 @@
             // 
             // pbox_map
             // 
-            this.pbox_map.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbox_map.Location = new System.Drawing.Point(176, 90);
+            this.pbox_map.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_map.Location = new System.Drawing.Point(137, 90);
             this.pbox_map.Name = "pbox_map";
             this.pbox_map.Size = new System.Drawing.Size(128, 128);
             this.pbox_map.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -63,8 +63,8 @@
             // 
             // pbox_phone
             // 
-            this.pbox_phone.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbox_phone.Location = new System.Drawing.Point(329, 90);
+            this.pbox_phone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbox_phone.Location = new System.Drawing.Point(271, 90);
             this.pbox_phone.Name = "pbox_phone";
             this.pbox_phone.Size = new System.Drawing.Size(128, 128);
             this.pbox_phone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -75,10 +75,10 @@
             // lbl_backpack
             // 
             this.lbl_backpack.AutoSize = true;
-            this.lbl_backpack.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_backpack.Location = new System.Drawing.Point(73, 23);
+            this.lbl_backpack.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_backpack.Location = new System.Drawing.Point(73, 19);
             this.lbl_backpack.Name = "lbl_backpack";
-            this.lbl_backpack.Size = new System.Drawing.Size(93, 24);
+            this.lbl_backpack.Size = new System.Drawing.Size(134, 31);
             this.lbl_backpack.TabIndex = 3;
             this.lbl_backpack.Text = "Sac à dos";
             // 
@@ -93,7 +93,7 @@
             // 
             // pbox_close
             // 
-            this.pbox_close.Location = new System.Drawing.Point(454, 3);
+            this.pbox_close.Location = new System.Drawing.Point(367, 3);
             this.pbox_close.Name = "pbox_close";
             this.pbox_close.Size = new System.Drawing.Size(32, 32);
             this.pbox_close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -111,7 +111,7 @@
             this.Controls.Add(this.pbox_map);
             this.Controls.Add(this.pbox_ticket);
             this.Name = "Backpack";
-            this.Size = new System.Drawing.Size(489, 309);
+            this.Size = new System.Drawing.Size(404, 223);
             this.Load += new System.EventHandler(this.Backpack_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Backpack_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbox_ticket)).EndInit();

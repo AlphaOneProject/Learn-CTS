@@ -33,7 +33,7 @@ namespace Learn_CTS
             pbox_arrow_right.Image = Image.FromFile(images_path + "arrow_right.png");
             foreach (string dir in Directory.GetDirectories(@"" + character_path))
             {
-                list_images_char.Add(Image.FromFile(dir + Path.DirectorySeparatorChar + "1_0.png"));
+                if(Tools.Is_Valid(dir)) list_images_char.Add(Image.FromFile(dir + Path.DirectorySeparatorChar + "1_0.png"));
             }
             if (list_images_char.Count == 0) MessageBox.Show("Aucunes textures de personnage n'a été trouvée !");
             else
@@ -56,7 +56,6 @@ namespace Learn_CTS
 
         private void UpdateFolder()
         {
-
             pbox_char.Image = list_images_char[((((i_current_img % list_images_char.Count) + list_images_char.Count) % list_images_char.Count))];
             Player.SetFolder(((((i_current_img % list_images_char.Count) + list_images_char.Count) % list_images_char.Count) + 1).ToString());
         }
