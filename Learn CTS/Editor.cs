@@ -292,7 +292,7 @@ namespace Learn_CTS
             List<String> keeping_categories = new List<String>()
             { "npcs", "dialogs", "item_images", "sprites", "backgrounds" };
 
-            if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation"))))
+            if (!(this.old_category.Equals(name) && (keeping_categories.Contains(name) || name.StartsWith("situation") || name.StartsWith("scenario"))))
             {
                 // Empty the groupbox from precedent controls.
                 int nbr_ctrl = content.Controls.Count;
@@ -1524,6 +1524,8 @@ namespace Learn_CTS
             {
                 Name = "btn_add_scenario",
                 Text = "Ajouter un nouveau scénario",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 Cursor = Cursors.Hand,
                 AutoSize = true
             };
@@ -1568,7 +1570,7 @@ namespace Learn_CTS
             // Add a "properties.json" to the newly created folder.
             JObject properties_content = new JObject()
             {
-                ["description"] = "Description par défaut"
+                ["increments"] = 0
             };
             File.WriteAllText(@"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar + parent.LastNode.Name.Substring(8)
                               + "." + new_scenario + Path.DirectorySeparatorChar + "properties.json",
@@ -1601,6 +1603,22 @@ namespace Learn_CTS
         /// </summary>
         private void Display_Scenario()
         {
+            if (this.old_category == menu.SelectedNode.Name)
+            {
+                FlowLayoutPanel flp = (FlowLayoutPanel)content.Controls.Find("flp_increments", true)[0];
+                Button btn = (Button)content.Controls.Find("btn_add_situation", true)[0];
+
+                btn.Location = new Point((content.Width - btn.Width) / 2, 100);
+                flp.Width = content.Width - 40;
+                flp.Height = content.Height - 260;
+
+                foreach(IncrementEdition ie in flp.Controls.OfType<IncrementEdition>())
+                {
+                    ie.Width = flp.Width - 10;
+                }
+                return;
+            }
+
             // Creation of all controls.
 
             // Creation of two arrows allowing changement of the scenarios' order.
@@ -1689,17 +1707,6 @@ namespace Learn_CTS
             content.Controls.Add(pb_discard_scenario);
             tlt_global.SetToolTip(pb_discard_scenario, "Supprime le scénario et ses situations");
 
-            // Creation of the button responsible for the situations' creation.
-            Button btn_add_situation = new Button()
-            {
-                Name = "btn_add_situation",
-                Text = "Ajouter une situation",
-                Cursor = Cursors.Hand,
-                AutoSize = true
-            };
-            btn_add_situation.Click += new EventHandler(this.Add_Situation);
-            content.Controls.Add(btn_add_situation);
-
             // Set the correct location of the controls (responsive with the groupbox's size).
             pb_down_scenario.Location = new Point(8, 0);
             pb_up_scenario.Location = new Point(pb_down_scenario.Location.X + pb_down_scenario.Width + 2, 0);
@@ -1708,7 +1715,122 @@ namespace Learn_CTS
             pb_rename_scenario.Location = new Point(lbl_name_scenario.Location.X + lbl_name_scenario.Width, 0);
             pb_discard_scenario.Location = new Point(pb_rename_scenario.Location.X + pb_rename_scenario.Width + 2, 0);
 
+            // Creation of the button responsible for the situations' creation.
+            Button btn_add_situation = new Button()
+            {
+                Name = "btn_add_situation",
+                Text = "Ajouter une situation",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                               System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                Cursor = Cursors.Hand,
+                AutoSize = true
+            };
+            btn_add_situation.Click += new EventHandler(this.Add_Situation);
+            content.Controls.Add(btn_add_situation);
+
+            Label lbl_increments = new Label()
+            {
+                Name = "lbl_increments",
+                Text = "Paliers de score",
+                Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular,
+                                                   System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true
+            };
+            content.Controls.Add(lbl_increments);
+
+            PictureBox pb_add_increment = new PictureBox()
+            {
+                Name = "pb_add_increment",
+                Cursor = Cursors.Hand,
+                Size = new Size(32, 32),
+                Image = Image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "internal" +
+                                       Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar + "add.png"),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            pb_add_increment.Click += new EventHandler(Add_Increment);
+            content.Controls.Add(pb_add_increment);
+
+            FlowLayoutPanel flp_increments = new FlowLayoutPanel()
+            {
+                Name = "flp_increments",
+                AutoScroll = true,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = content.Width - 40,
+                Height = content.Height - 260
+            };
+            content.Controls.Add(flp_increments);
+
+            // Second area placement.
             btn_add_situation.Location = new Point((content.Width - btn_add_situation.Width) / 2, 100);
+            lbl_increments.Location = new Point(20, 180);
+            pb_add_increment.Location = new Point(lbl_increments.Location.X + lbl_increments.Width + 20, 180);
+            flp_increments.Location = new Point(20, 240);
+
+            // Adds the increments already in place.
+            string scenario_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                                   menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject scenario_data = Tools.Get_From_JSON(scenario_path + "properties.json");
+            for (int i = 1; i <= int.Parse(scenario_data["increments"].ToString()); i++)
+            {
+                IncrementEdition ie = new IncrementEdition(this, scenario_path + "properties.json", i.ToString())
+                {
+                    Width = flp_increments.Width - 10
+                };
+                flp_increments.Controls.Add(ie);
+            }
+        }
+
+        private void Add_Increment(object sender, EventArgs e)
+        {
+            // Filling the matching file.
+            string scenario_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                                   menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject properties_data = Tools.Get_From_JSON(scenario_path + "properties.json");
+
+            int new_event_id = int.Parse((string)properties_data["increments"]) + 1;
+            properties_data["increments"] = new_event_id;
+            properties_data[new_event_id.ToString()] = new JObject()
+            {
+                ["score"] = 0,
+                ["comment"] = ""
+            };
+
+            Tools.Set_To_JSON(scenario_path + "properties.json", properties_data);
+
+            // Creating the UserControl responsible for the internal edition of the JSON file.
+            IncrementEdition ie = new IncrementEdition(this, scenario_path + "properties.json", new_event_id.ToString())
+            {
+                Name = "EventEdition" + new_event_id,
+                Width = content.Controls.Find("flp_increments", true)[0].Width - 80,
+                Location = new Point(40, new_event_id)
+            };
+            content.Controls.Find("flp_increments", true)[0].Controls.Add(ie);
+        }
+
+        public void Discard_Increment(IncrementEdition sender)
+        {
+            string scenario_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" + Path.DirectorySeparatorChar +
+                                   menu.SelectedNode.Name.Substring(8) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject properties_data = Tools.Get_From_JSON(scenario_path + "properties.json");
+
+            int nbr_increments = int.Parse((string)properties_data["increments"]);
+
+            // Delete the increment then reoder the others in the JSON file.
+            properties_data["increments"] = nbr_increments - 1;
+            for (int i = sender.Get_Id(); i < nbr_increments; i++)
+            {
+                properties_data[i.ToString()] = properties_data[(i + 1).ToString()];
+            }
+            properties_data.Property(nbr_increments.ToString()).Remove();
+            Tools.Set_To_JSON(sender.Get_File_Path(), properties_data);
+
+            // Delete the UserControl linked to the increment.
+            this.Controls.Remove(sender);
+            sender.Dispose();
+
+            // Reload all others Controls.
+            this.old_category = "reload_needed";
+            Menu_AfterSelect(menu, new TreeViewEventArgs(new TreeNode()));
         }
 
         /// <summary>
@@ -2049,8 +2171,8 @@ namespace Learn_CTS
                 TextBox t2 = (TextBox)content.Controls.Find("txt_scene_intro", true)[0];
                 Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
                 TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
-                TrackBar l3 = (TrackBar)content.Controls.Find("lbl_background", true)[0];
-                TrackBar l4 = (TrackBar)content.Controls.Find("lbl_scene_type", true)[0];
+                Label l3 = (Label)content.Controls.Find("lbl_background", true)[0];
+                Label l4 = (Label)content.Controls.Find("lbl_scene_type", true)[0];
                 ComboBox cbo1 = (ComboBox)content.Controls.Find("cbo_background", true)[0];
                 ComboBox cbo2 = (ComboBox)content.Controls.Find("cbo_scene_type", true)[0];
 
