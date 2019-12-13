@@ -271,7 +271,7 @@ namespace Learn_CTS
                     file_data[event_id.ToString()]["npc"]["id"] = file_id;
                     break;
                 case "items":
-                    file_data[event_id.ToString()]["item"]["name"] = cbo.SelectedItem.ToString();
+                    file_data[event_id.ToString()]["item"]["name"] = cbo.SelectedItem.ToString().Split('>')[1].Substring(1);
                     file_data[event_id.ToString()]["item"]["id"] = file_id;
                     break;
                 default:

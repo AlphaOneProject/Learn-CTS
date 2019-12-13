@@ -20,6 +20,7 @@ namespace Learn_CTS
         private Point dragPoint = Point.Empty;
         private bool dragging = false;
         private int event_id;
+        private int scene_type;
 
         // Methods.
 
@@ -31,7 +32,7 @@ namespace Learn_CTS
         /// <param name="pbs_placed">Others PictureBoxes already placed.</param>
         /// <param name="pbs_placed_points">Positions from the placed PictureBoxes.</param>
         /// <param name="pb_environment">PictureBox where the others will be placed.</param>
-        public PlacementEdition(Editor sender, PictureBox pb_placing, List<PictureBox> pbs_placed, List<Point> pbs_placed_points, PictureBox pb_environment)
+        public PlacementEdition(Editor sender, PictureBox pb_placing, List<PictureBox> pbs_placed, List<Point> pbs_placed_points, PictureBox pb_environment, int scene_type)
         {
             InitializeComponent();
 
@@ -39,6 +40,7 @@ namespace Learn_CTS
             this.DoubleBuffered = true;
             this.editor = sender;
             this.event_id = (int)pb_placing.Tag;
+            this.scene_type = scene_type;
             this.Height = Tools.Min_Int(pb_environment.Height, 800) + 56; // 56 = Border + Scrollbar. (by deduction)
             this.Width = Tools.Min_Int(pb_environment.Width, 1200);
             pan_global.Controls.Add(pb_environment);
@@ -110,7 +112,21 @@ namespace Learn_CTS
             Point current_pos = new Point(this.pb.Location.X + pan_global.HorizontalScroll.Value,
                                                                    this.pb.Location.Y + pan_global.VerticalScroll.Value);
             Texture.InitializePath(editor.Get_Game());
-            if (Tools.IsCollidingWithVehicule(new Tram(0, 0), current_pos))
+            bool isColliding;
+            switch (this.scene_type)
+            {
+                case int n when (n > 3 && n < 8):
+                    isColliding = Tools.IsCollidingWithVehicule(new Bus(0, 0), current_pos);
+                    break;
+                case int n when (n > 7):
+                    isColliding = false;
+                    break;
+                default:
+                    isColliding = Tools.IsCollidingWithVehicule(new Tram(0, 0), current_pos);
+                    break;
+            }
+
+            if (isColliding)
             {
                 if (MessageBox.Show("L'évènement rentre en collision avec la scène, rendant sa position invalide.\n" +
                                     "Souhaitez-vous valider tout de même ? (Il sera alors placé aléatoirement.)", "Position invalide",

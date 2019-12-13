@@ -2021,12 +2021,18 @@ namespace Learn_CTS
                 Label l2 = (Label)content.Controls.Find("lbl_scene_intro", true)[0];
                 TextBox t1 = (TextBox)content.Controls.Find("txt_scene_name", true)[0];
                 TextBox t2 = (TextBox)content.Controls.Find("txt_scene_intro", true)[0];
-                TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
                 Label lbl = (Label)content.Controls.Find("lbl_tb", true)[0];
+                TrackBar tb = (TrackBar)content.Controls.Find("tb_npc_density", true)[0];
+                TrackBar l3 = (TrackBar)content.Controls.Find("lbl_background", true)[0];
+                TrackBar l4 = (TrackBar)content.Controls.Find("lbl_scene_type", true)[0];
+                ComboBox cbo1 = (ComboBox)content.Controls.Find("cbo_background", true)[0];
+                ComboBox cbo2 = (ComboBox)content.Controls.Find("cbo_scene_type", true)[0];
 
                 t1.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
                 t2.Width = content.Width - 40 - 10 - Tools.Max_Int(l1.Width, l2.Width);
                 tb.Width = content.Width - lbl.Width - 10 - 80;
+                cbo1.Width = content.Width - Tools.Max_Int(l3.Width, l4.Width) - 40 - 10;
+                cbo2.Width = content.Width - Tools.Max_Int(l3.Width, l4.Width) - 40 - 10;
 
                 foreach (EventEdition ee in content.Controls.OfType<EventEdition>())
                 {
@@ -2637,12 +2643,33 @@ namespace Learn_CTS
             if (this.event_placement != null) { return; }
 
             JObject situation_data = Tools.Get_From_JSON(sender.Get_File_Path());
+            string images_path = @"" + this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                "images" + Path.DirectorySeparatorChar;
+            string situation_path = @"" + this.game_path + Path.DirectorySeparatorChar + "scenarios" +
+                      Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
+                      Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
+            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
+            Image img;
+            int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
 
             PictureBox placing_npc = new PictureBox();
             List<PictureBox> list_placed_npcs = new List<PictureBox>();
             List<Point> list_placed_npcs_points = new List<Point>();
             for (int i = 1; i <= int.Parse((string)situation_data["events"]); i++)
             {
+                switch (cbo_index)
+                {
+                    case 10:
+                        img = Tools.Image_From_File(images_path + "items" + Path.DirectorySeparatorChar +
+                                                         situation_data[i.ToString()]["item"]["name"].ToString() + ".png");
+                        break;
+                    default:
+                        img = Tools.Image_From_File(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar +
+                                "images" + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar +
+                                (string)situation_data[i.ToString()]["npc"]["folder"] + Path.DirectorySeparatorChar + "1_0.png");
+                        break;
+                }
+
                 if (i == sender.Get_Event_Id() || int.Parse((string)situation_data[i.ToString()]["x"]) != 0 ||
                     int.Parse((string)situation_data[i.ToString()]["y"]) != 0)
                 {
@@ -2650,9 +2677,7 @@ namespace Learn_CTS
                     {
                         Name = "pb_temp" + i,
                         Tag = i,
-                        Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
-                                               Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar +
-                                               (string)situation_data[i.ToString()]["npc"]["folder"] + Path.DirectorySeparatorChar + "1_0.png"),
+                        Image = img,
                         SizeMode = PictureBoxSizeMode.AutoSize
                     };
                     if (i == sender.Get_Event_Id())
@@ -2668,30 +2693,32 @@ namespace Learn_CTS
                 }
             }
 
-            string situation_path = this.game_path + Path.DirectorySeparatorChar + "scenarios" +
-                                  Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
-                                  Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
-            JObject envi_data = Tools.Get_From_JSON(situation_path + "environment.json");
-            // START WIP
-            switch (int.Parse(envi_data["scene_type"].ToString()))
+            int scene_type = int.Parse(envi_data["scene_type"].ToString());
+            switch (scene_type)
             {
-                case 0:
+                case int n when (n > 3 && n < 8):
+                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "bus" +
+                                                Path.DirectorySeparatorChar + "busInside.png");
+                    break;
+                case int n when (n > 7):
+                    img = Tools.Image_From_File(images_path + "background" + Path.DirectorySeparatorChar +
+                                                envi_data["background"].ToString() + ".png");
                     break;
                 default:
+                    img = Tools.Image_From_File(images_path + "vehicule" + Path.DirectorySeparatorChar + "tram" +
+                                                Path.DirectorySeparatorChar + "tramInside.png");
                     break;
             }
-            // END WIP
+
             PictureBox pb_background = new PictureBox()
             {
                 Name = "pb_background",
-                Image = Image.FromFile(this.game_path + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "images" +
-                                       Path.DirectorySeparatorChar + "vehicule" + Path.DirectorySeparatorChar + "tram" +
-                                       Path.DirectorySeparatorChar + "tramInside.png"),
+                Image = img,
                 SizeMode = PictureBoxSizeMode.AutoSize,
                 Location = new Point(0, 0)
             };
 
-            this.event_placement = new PlacementEdition(this, placing_npc, list_placed_npcs, list_placed_npcs_points, pb_background);
+            this.event_placement = new PlacementEdition(this, placing_npc, list_placed_npcs, list_placed_npcs_points, pb_background, scene_type);
             this.event_placement.ShowDialog();
         }
 
@@ -2711,9 +2738,24 @@ namespace Learn_CTS
                                   Path.DirectorySeparatorChar + menu.SelectedNode.Parent.Name.Remove(0, "scenario".Length) + "." + menu.SelectedNode.Parent.Text +
                                   Path.DirectorySeparatorChar + (menu.SelectedNode.Index + 1) + "." + menu.SelectedNode.Text + Path.DirectorySeparatorChar;
             JObject situ_data = Tools.Get_From_JSON(situation_path + "dialogs.json");
-            situ_data[id.ToString()]["x"] = new_pos.X;
-            situ_data[id.ToString()]["y"] = new_pos.Y;
-            Tools.Set_To_JSON(situation_path + "dialogs.json", situ_data);
+            JObject item_data = Tools.Get_From_JSON(situation_path + "items.json");
+            int cbo_index = ((ComboBox)content.Controls.Find("cbo_scene_type", true)[0]).SelectedIndex;
+            JObject data;
+            string file;
+            switch (cbo_index)
+            {
+                case 10:
+                    data = item_data;
+                    file = "items.json";
+                    break;
+                default:
+                    data = situ_data;
+                    file = "dialogs.json";
+                    break;
+            }
+            data[id.ToString()]["x"] = new_pos.X;
+            data[id.ToString()]["y"] = new_pos.Y;
+            Tools.Set_To_JSON(situation_path + file, data);
         }
 
         /// <summary>

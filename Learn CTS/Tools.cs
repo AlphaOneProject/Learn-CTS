@@ -200,14 +200,14 @@ namespace Learn_CTS
             Image img;
             try
             {
-                using (var bmpTemp = new Bitmap(image_path))
+                using (var bmpTemp = new Bitmap(@"" + image_path))
                 {
                     img = new Bitmap(bmpTemp);
                 }
             }
             catch (Exception e)
             {
-                using (var bmpTemp = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar +
+                using (var bmpTemp = new Bitmap(@"" + System.AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar +
                                                 "internal" + Path.DirectorySeparatorChar + "images" + Path.DirectorySeparatorChar +
                                                 "image_missing.png"))
                 {
