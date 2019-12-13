@@ -2,6 +2,6 @@
   "scene_name": "",
   "scene_intro": "",
   "npc_density": 10,
-  "background": 0,
+  "background": "backgroundCity",
   "scene_type": 0
 }

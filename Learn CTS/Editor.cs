@@ -1681,8 +1681,8 @@ namespace Learn_CTS
             TreeNode parent = menu.Nodes.Find("scenarios", false)[0];
             string new_scenario = "Nouveau scénario";
             int nbr_new_scenarios = 0;
-            int i = 0;
-            while (i < parent.Nodes.Count)
+            int i = 1;
+            while (i < parent.Nodes.Count + 1)
             {
                 nbr_new_scenarios = i;
                 foreach (TreeNode t in parent.Nodes)
