@@ -2277,7 +2277,7 @@ namespace Learn_CTS
                 }
             };
             File.WriteAllText(@"" + access_path + parent.Nodes.Count.ToString() + "." + new_situation + Path.DirectorySeparatorChar + "items.json",
-                              dialogs_content.ToString());
+                              items_content.ToString());
 
             // Add a "environment.json" to the folder.
             JObject environment_content = new JObject()
