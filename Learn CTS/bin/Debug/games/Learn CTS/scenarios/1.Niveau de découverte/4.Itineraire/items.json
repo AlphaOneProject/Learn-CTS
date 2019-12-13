@@ -3,10 +3,9 @@
   "1": {
     "x": 0,
     "y": 0,
-    "npc": {
+    "item": {
       "id": 1,
-      "name": "Gérard",
-      "folder": 1
+      "name": "Banana"
     },
     "quizz": 1
   }

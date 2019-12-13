@@ -1112,8 +1112,8 @@ namespace Learn_CTS
                 JObject npc = Tools.Get_From_JSON(System.AppDomain.CurrentDomain.BaseDirectory + "games" + Path.DirectorySeparatorChar + this.Text + Path.DirectorySeparatorChar + "library" + Path.DirectorySeparatorChar + "npcs" + Path.DirectorySeparatorChar + npc_id +".json");
                 try
                 {
-                    npc_name = npc[i.ToString()]["name"].ToString();
-                    npc_folder = npc[i.ToString()]["folder"].ToString();
+                    npc_name = npc["name"].ToString();
+                    npc_folder = npc["folder"].ToString();
                 }
                 catch(Exception) { }
                 npc_quiz = (int)npcs[i.ToString()]["quizz"];
@@ -1124,7 +1124,7 @@ namespace Learn_CTS
                 {
                     n.SetX(vehicle.GetX() + npc_x);
                     n.SetY(vehicle.GetY() + npc_y);
-                    if (vehicle.CollideWith(n, false))
+                    if (!vehicle.CollideWith(n, false))
                     {
                         vehicle.AddChild(n);
                     }
@@ -1139,7 +1139,7 @@ namespace Learn_CTS
                 {
                     n.SetX(platform.GetX() + npc_x);
                     n.SetY(platform.GetY() + npc_y);
-                    if (platform.CollideWith(n, false))
+                    if (!platform.CollideWith(n, false))
                     {
                         platform.AddChild(n);
                     }
@@ -1154,7 +1154,7 @@ namespace Learn_CTS
                 {
                     n.SetX(vehicle.GetX() + npc_x);
                     n.SetY(vehicle.GetY() + npc_y);
-                    if (vehicle.CollideWith(n, false))
+                    if (!vehicle.CollideWith(n, false))
                     {
                         vehicle.AddChild(n);
                     }
@@ -1771,7 +1771,6 @@ namespace Learn_CTS
                 {
                     vehicle.SetSpeed(0);
                     vehicle.SetState(0);
-                    MessageBox.Show("Tout le monde va bien ?");
                     ChangeCurrentTick(DoNothing_Tick);
                     nm.MakeAllNPCsInteractives();
                     tr.EndTransition();
