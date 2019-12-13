@@ -68,8 +68,9 @@ namespace Learn_CTS
         /// <param name="e"></param>
         private void pbox_phone_Click(object sender, EventArgs e)
         {
+            GameWindow.GetInstance().RemoveAllControls();
             this.FindForm().Controls.Add(new Phone());
-            ((GameWindow)this.FindForm()).OpenClose_Backpack();
+            //MessageBox.Show("Le téléphone n'a pas été implémenté.");
         }
 
         /// <summary>
@@ -79,7 +80,9 @@ namespace Learn_CTS
         /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void pbox_map_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("La map n'a pas été implémenté.");
+            GameWindow.GetInstance().RemoveAllControls();
+            this.FindForm().Controls.Add(new Map(this.FindForm().Text));
+            //MessageBox.Show("La map n'a pas été implémenté.");
         }
     }
 }
