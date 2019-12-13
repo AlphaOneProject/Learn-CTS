@@ -1103,13 +1103,28 @@ namespace Learn_CTS
                 npc_x = (int)npcs[i.ToString()]["x"];
                 npc_y = (int)npcs[i.ToString()]["y"];
                 n = nm.CreateNPC(npc_name, npc_x, npc_y, npc_quiz, npc_folder);
-                if (scene_type == 0 || scene_type == 2 || scene_type == 4 || scene_type == 6)
+                if (scene_type == 0 || scene_type == 4)
                 {
                     if (vehicle.CollideWith(n, false))
                     {
                         n.SetX(vehicle.GetX() + npc_x);
                         n.SetY(vehicle.GetY() + npc_y);
                         vehicle.AddChild(n);
+                    }
+                    else
+                    {
+                        n.SetX(platform.GetX() - 192 + r.Next(100, platform.GetWidth() - 100));
+                        n.SetY(platform.GetY() - 192 + r.Next(10, platform.GetHeight()));
+                        platform.AddChild(n);
+                    }
+                }
+                else if(scene_type == 2 || scene_type == 6)
+                {
+                    if (platform.CollideWith(n, false))
+                    {
+                        n.SetX(platform.GetX() + npc_x);
+                        n.SetY(platform.GetY() + npc_y);
+                        platform.AddChild(n);
                     }
                     else
                     {
