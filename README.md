@@ -42,6 +42,7 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
 
 ✅ Des outils pour le joueur, tels qu'un sac avec un téléphone.
 
+
 ##### Exemple de situations
 
 <table align="center">
@@ -54,6 +55,10 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
         <td>Deuxième situation : Le joueur valide son ticket et monte dans le tram.</td>
     </tr>
 </table>
+
+### Installation de Learn CTS
+
+**Téléchargez** l'installeur de Learn CTS en [Cliquant ici]() et suivez ses instructions !
 
 ### Les moteurs de jeu
 
@@ -138,6 +143,13 @@ Une fois une image ajoutée, vous pouvez la supprimer en cliquant sur la croix <
 Cette rubrique vous permet d'ajouter des scénarios. Quand vous ajoutez un scénario, il est créé vide. Pour ajouter une nouvelle situation dans ce scénario, il suffit de cliquer sur **Ajouter une nouvelle situation**.
 
 Vous pouvez voir le nom complet du scénario, avec son arborescence, dans l'onglet en haut à gauche du cadre. Juste en dessous, vous pouvez modifier l'ordre d'apparition du scénario avec les flèches pointant vers le haut et vers le bas. Pour renommer le scénario, il suffit de cliquer sur son nom ou sur le crayon à coté. Vous pouvez supprimmer le scénario en cliquant sur la poubelle <img src="https://i.imgur.com/dDG9pNU.png" width="32" height="32"/> à coté. 
+
+### Scénario
+
+Cette rubrique est accessible en cliquant sur le nom d'un de vos scénarios dans l'arborescence à gauche.
+
+Vous pouvez créer une nouvelle situation, mais aussi définir des paliers de score que le joueur doit atteindre dans la situation. Vous pouvez définir des messages personnalisés, en fonction du score minimal atteint par le joueur.
+Cliquez sur le bouton <img src="https://i.imgur.com/TY0AKSZ.png" width="32" height="32"/> pour ajouter un nouveau palier.
 
 ### Les situations
 

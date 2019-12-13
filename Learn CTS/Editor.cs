@@ -2140,6 +2140,13 @@ namespace Learn_CTS
             menu.SelectedNode.Text = secured_new_name;
             lbl_path.Text = menu.SelectedNode.FullPath;
 
+            // Re-configuring path-sensitives UserControls.
+            foreach (IncrementEdition ie in content.Controls.OfType<IncrementEdition>())
+            {
+                ie.Set_File_Path(@"" + sc_path + Path.DirectorySeparatorChar + menu.SelectedNode.Name.Substring(8) + "." + secured_new_name +
+                                 Path.DirectorySeparatorChar + "properties.json");
+            }
+
             // Repositioning size-sensitives contents.
             TextBox t = (TextBox) content.Controls.Find("txt_rename_scenario", false)[0];
             t.Visible = false;
