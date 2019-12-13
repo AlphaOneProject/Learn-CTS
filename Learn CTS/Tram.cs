@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Learn_CTS
 {
-    class Tram : Vehicule
+    class Tram : Vehicle
     {
 
         // Attributes
@@ -30,12 +30,11 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-
-        public Tram(int x, int y) : base("tram", x, y, pos_doors)
+        public Tram(int x, int y) : base("tram", x, y)
         {
-            this.doors_left = new Texture("tram" + "DoorsLeft", "vehicule" + Path.DirectorySeparatorChar + "tram", this.GetX() + 424, this.GetY() + 112, this.GetY() + this.GetHeight() + 1, true);
-            this.doors_right = new Texture("tram" + "DoorsRight", "vehicule" + Path.DirectorySeparatorChar + "tram", this.GetX() + 512, this.GetY() + 112, this.GetY() + this.GetHeight() + 1, true);
-            this.AddChild(new Texture("tram" + "Interior", "vehicule" + Path.DirectorySeparatorChar + "tram", this.GetX() + 480, this.GetY() + 208, true));
+            this.doors_left = new Texture("tram_doors_left", "vehicle" + Path.DirectorySeparatorChar + "tram", this.GetX() + 424, this.GetY() + 112, this.GetY() + this.GetHeight() + 1, true);
+            this.doors_right = new Texture("tram_doors_right", "vehicle" + Path.DirectorySeparatorChar + "tram", this.GetX() + 512, this.GetY() + 112, this.GetY() + this.GetHeight() + 1, true);
+            this.AddChild(new Texture("tram_interior", "vehicle" + Path.DirectorySeparatorChar + "tram", this.GetX() + 480, this.GetY() + 208, true));
             this.AddChild(doors_left);
             this.AddChild(doors_right);
             NPC conductor = NPC_Manager.GetInstance().CreateNPC("Conducteur", this.GetX() + this.GetWidth() - 192 - 100, this.GetY() + this.GetHeight() - 192 - 10);
@@ -45,37 +44,38 @@ namespace Learn_CTS
             this.AddChild(conductor);
         }
 
+        /// <summary>
+        /// Get the doors of the tram
+        /// </summary>
+        /// <returns>The first element in the array is the texture of the left doors, the second one is the texture of the right door.</returns>
         public override Texture[] GetDoors()
         {
             return new Texture[] { this.doors_left, this.doors_right };
         }
 
+        /// <summary>
+        /// Get the position of the door related to the tram.
+        /// </summary>
+        /// <param name="i">The number of the door.</param>
+        /// <returns>The position of the door related to the tram.</returns>
         public override int GetPosDoor(int i)
         {
             return this.GetX() + pos_doors[i];
         }
 
+        /// <summary>
+        /// Get the total number of doors.
+        /// </summary>
+        /// <returns>The number of doors.</returns>
         public override int GetNumberDoors()
         {
             return pos_doors.Length;
         }
 
-
-        public override int GetIndexNearestDoor(int pos_c)
-        {
-            int min = Math.Abs(this.GetX() + pos_doors[0] - pos_c);
-            int index = 0;
-            for (int i = 1; i < pos_doors.Length; i++)
-            {
-                if (Math.Abs(this.GetX() + pos_doors[i] - pos_c) < min)
-                {
-                    min = Math.Abs(this.GetX() + pos_doors[i] - pos_c);
-                    index = i;
-                }
-            }
-            return index;
-        }
-
+        /// <summary>
+        /// Open slightly the doors of the tram
+        /// </summary>
+        /// <returns>true if the doors are opening. false otherwise.</returns>
         public override bool OpenDoors()
         {
             if (this.GetDoors()[0].GetX() >= this.GetX() + 348)
@@ -87,6 +87,10 @@ namespace Learn_CTS
             else return false;
         }
 
+        /// <summary>
+        /// Close a bit the doors of the tram.
+        /// </summary>
+        /// <returns>true if the doors are closing. false otherwise.</returns>
         public override bool CloseDoors()
         {
             if (this.GetDoors()[0].GetX() < this.GetX() + 424)
@@ -98,7 +102,11 @@ namespace Learn_CTS
             else return false;
         }
 
-        public override void SetPathNPCToVehicule(NPC n)
+        /// <summary>
+        /// Set a series of objectives for the npc to get on the tram.
+        /// </summary>
+        /// <param name="n">The npc which will enter the tram.</param>
+        public override void SetPathNPCToVehicle(NPC n)
         {
             int i;
             int y;
@@ -125,6 +133,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Place the npc randomly in the tram.
+        /// </summary>
+        /// <param name="npc">The npc that will be placed randomly in the tram.</param>
         public override void PlaceNPCRandomlyInVehicle(NPC npc)
         {
             Random r = new Random();
@@ -133,7 +145,10 @@ namespace Learn_CTS
             this.AddChild(npc);
         }
 
-        public override void ShuffleVehiculeNPCs()
+        /// <summary>
+        /// Replace randomly the npcs already inside the vehicle.
+        /// </summary>
+        public override void ShuffleVehicleNPCs()
         {
             Random r = new Random();
             foreach (Texture t in this.GetListChilds())

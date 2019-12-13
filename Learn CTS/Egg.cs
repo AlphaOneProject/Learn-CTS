@@ -10,9 +10,16 @@ namespace Learn_CTS
 {
     class Egg : Texture
     {
-        private List<Image> list_eggs;
-        private int d = 0;
 
+        // Attributes
+        private List<Image> list_eggs;
+        private int state = 0;
+
+        /// <summary>
+        /// Construct an egg
+        /// </summary>
+        /// <param name="x">The position of the egg on the x axis.</param>
+        /// <param name="y">The position of the egg on the y axis.</param>
         public Egg(int x, int y) : base(x, y)
         {
             list_eggs = new List<Image>();
@@ -24,14 +31,22 @@ namespace Learn_CTS
             this.SetImage(list_eggs[0]);
         }
 
+        /// <summary>
+        /// Return the image according to the score.
+        /// </summary>
+        /// <returns></returns>
         public override Image GetImage()
         {
-            return list_eggs[d];
+            return list_eggs[this.state];
         }
 
-        public void SetD(int d)
+        /// <summary>
+        /// Set the state of the egg.
+        /// </summary>
+        /// <param name="d">The state of the egg.</param>
+        public void SetState(int state)
         {
-            this.d = d;
+            this.state = state;
         }
 
     }

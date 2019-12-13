@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Learn_CTS
 {
-    class Bus : Vehicule
+    class Bus : Vehicle
     {
+
+        // Attributes
         private static int[] pos_doors = new int[]{
             152,
             656,
@@ -24,10 +26,10 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-        public Bus(int x, int y) : base("bus", x, y, pos_doors)
+        public Bus(int x, int y) : base("bus", x, y)
         {
-            this.doors_left = new Texture("bus" + "DoorsLeft", "vehicule" + Path.DirectorySeparatorChar + "bus", this.GetX() + 56, this.GetY() + 88, this.GetY() + this.GetHeight() + 1, true);
-            this.doors_right = new Texture("bus" + "DoorsRight", "vehicule" + Path.DirectorySeparatorChar + "bus", this.GetX() + 144, this.GetY() + 88, this.GetY() + this.GetHeight() + 1, true);
+            this.doors_left = new Texture("bus_doors_left", "vehicle" + Path.DirectorySeparatorChar + "bus", this.GetX() + 56, this.GetY() + 88, this.GetY() + this.GetHeight() + 1, true);
+            this.doors_right = new Texture("bus_doors_right", "vehicle" + Path.DirectorySeparatorChar + "bus", this.GetX() + 144, this.GetY() + 88, this.GetY() + this.GetHeight() + 1, true);
             this.AddChild(doors_left);
             this.AddChild(doors_right);
             NPC conductor = NPC_Manager.GetInstance().CreateNPC("Conducteur", this.GetX() + this.GetWidth() - 192 - 10, this.GetY() + this.GetHeight() - 192 - 60);
@@ -37,36 +39,38 @@ namespace Learn_CTS
             this.AddChild(conductor);
         }
 
+        /// <summary>
+        /// Get the doors of the bus
+        /// </summary>
+        /// <returns>The first element in the array is the texture of the left doors, the second one is the texture of the right door.</returns>
         public override Texture[] GetDoors()
         {
             return new Texture[] { this.doors_left, this.doors_right };
         }
 
+        /// <summary>
+        /// Get the position of the door related to the bus.
+        /// </summary>
+        /// <param name="i">The number of the door.</param>
+        /// <returns>The position of the door related to the bus.</returns>
         public override int GetPosDoor(int i)
         {
             return this.GetX() + pos_doors[i];
         }
 
+        /// <summary>
+        /// Get the total number of doors.
+        /// </summary>
+        /// <returns>The number of doors.</returns>
         public override int GetNumberDoors()
         {
             return pos_doors.Length;
         }
 
-        public override int GetIndexNearestDoor(int pos_c)
-        {
-            int min = Math.Abs(this.GetX() + pos_doors[0] - pos_c);
-            int index = 0;
-            for (int i = 1; i < pos_doors.Length; i++)
-            {
-                if (Math.Abs(this.GetX() + pos_doors[i] - pos_c) < min)
-                {
-                    min = Math.Abs(this.GetX() + pos_doors[i] - pos_c);
-                    index = i;
-                }
-            }
-            return index;
-        }
-
+        /// <summary>
+        /// Open slightly the doors of the bus
+        /// </summary>
+        /// <returns>true if the doors are opening. false otherwise.</returns>
         public override bool OpenDoors()
         {
             if (this.doors_left.GetX() >= this.GetX() + 56 - 112)
@@ -78,6 +82,10 @@ namespace Learn_CTS
             else return false;
         }
 
+        /// <summary>
+        /// Close a bit the doors of the bus.
+        /// </summary>
+        /// <returns>true if the doors are closing. false otherwise.</returns>
         public override bool CloseDoors()
         {
             if (this.doors_left.GetX() < this.GetX() + 56)
@@ -89,7 +97,11 @@ namespace Learn_CTS
             else return false;
         }
 
-        public override void SetPathNPCToVehicule(NPC n)
+        /// <summary>
+        /// Set a series of objectives for the npc to get on the bus.
+        /// </summary>
+        /// <param name="n">The npc which will enter the bus.</param>
+        public override void SetPathNPCToVehicle(NPC n)
         {
             int i;
             int y;
@@ -116,6 +128,10 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Place the npc randomly in the bus.
+        /// </summary>
+        /// <param name="npc">The npc that will be placed randomly in the bus.</param>
         public override void PlaceNPCRandomlyInVehicle(NPC npc)
         {
             Random r = new Random();
@@ -124,7 +140,10 @@ namespace Learn_CTS
             this.AddChild(npc);
         }
 
-        public override void ShuffleVehiculeNPCs()
+        /// <summary>
+        /// Replace randomly the npcs already inside the vehicle.
+        /// </summary>
+        public override void ShuffleVehicleNPCs()
         {
             Random r = new Random();
             foreach (Texture t in this.GetListChilds())

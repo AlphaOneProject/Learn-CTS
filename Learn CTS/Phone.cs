@@ -12,6 +12,10 @@ namespace Learn_CTS
 {
     public partial class Phone : UserControl
     {
+
+        /// <summary>
+        /// Construct a phone control.
+        /// </summary>
         public Phone()
         {
             InitializeComponent();
@@ -20,6 +24,10 @@ namespace Learn_CTS
             this.Tag = 0;
         }
 
+        /// <summary>
+        /// Add an answer to the phone.
+        /// </summary>
+        /// <param name="text">The message of the answer.</param>
         public void AddAnswer(string text)
         {
             RichTextBox r = new RichTextBox();
@@ -38,7 +46,11 @@ namespace Learn_CTS
             flp_talk.Controls.SetChildIndex(r, 0);
         }
 
-        public void Addjsp(string text)
+        /// <summary>
+        /// Add the answer of the player.
+        /// </summary>
+        /// <param name="text">The message of the player answer.</param>
+        public void AddMyAnswer(string text)
         {
             RichTextBox r = new RichTextBox();
             r.BackColor = System.Drawing.Color.White;
@@ -61,31 +73,30 @@ namespace Learn_CTS
             flp_talk.ScrollControlIntoView(p);
         }
 
+        /// <summary>
+        /// Load the phone.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void Phone_Load(object sender, EventArgs e)
         {
             Form f = this.FindForm();
             this.Location = new Point(f.Width / 2 - this.Width / 2, f.Height / 2 - this.Height / 2);
-            AddAnswer("coucou");
-            Addjsp("hey");
-            AddAnswer("comment ça va ?");
-            Addjsp("ouais ça va et toi ?");
-            AddAnswer("bieng merci");
-            AddAnswer("blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla");
+            AddAnswer("Bonjour !");
         }
 
+        /// <summary>
+        /// Add the answer of the player.
+        /// </summary>
+        /// <param name="sender">Control calling the method.</param>
+        /// <param name="e">Arguments from the action whose caused the call of this method.</param>
         private void txt_answer_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter && ((TextBox)sender).Text != "")
             {
-                Addjsp(((TextBox)sender).Text);
+                AddMyAnswer(((TextBox)sender).Text);
                 ((TextBox)sender).Text = "";
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ((GameWindow)this.FindForm()).OpenClose_Backpack();
-            this.FindForm().Controls.Remove(this);
         }
     }
 }

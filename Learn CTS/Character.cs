@@ -37,14 +37,14 @@ namespace Learn_CTS
         /// </summary>
         /// <param name="id">ID of the character.</param>
         /// <param name="name">Name of the character.</param>
-        /// <param name="npc_folder">The folder of the character appearence. If null, a default appearence will be taken.</param>
+        /// <param name="character_folder">The folder of the character appearence. If null, a default appearence will be taken.</param>
         /// <param name="x">The position of the character on the x axis.</param>
         /// <param name="y">The position of the character on the y axis.</param>
-        public Character(int id, string name, string npc_folder, int x, int y) : base(x, y, true)
+        public Character(int id, string name, string character_folder, int x, int y) : base(x, y, true)
         {
             string character_path = Texture.GetDirImages() + Path.DirectorySeparatorChar + "characters" + Path.DirectorySeparatorChar;
             Random r = new Random();
-            if (npc_folder == null)
+            if (character_folder == null)
             {
                 this.folder = Directory.GetDirectories(@"" + character_path)[r.Next(0, Directory.GetDirectories(@"" + character_path).Length - 1)].Remove(0,character_path.Length);
                 while (this.folder == "" || !Tools.Is_Valid(character_path + this.folder))
@@ -52,7 +52,7 @@ namespace Learn_CTS
                     this.folder = Directory.GetDirectories(@"" + character_path)[r.Next(0, Directory.GetDirectories(@"" + character_path).Length - 1)].Remove(0, character_path.Length);
                 }
             }
-            else this.folder = npc_folder;
+            else this.folder = character_folder;
             if (name == null) name = id.ToString();
             else this.name = name;
             this.id = id;
@@ -75,7 +75,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Get the current image of the npc following the state of the animation.
+        /// Get the current image of the character following the state of the animation.
         /// </summary>
         /// <returns>The current image of the animation.</returns>
         public override Image GetImage()
@@ -91,7 +91,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Set the default pose of the npc, used when the npc does not move anymore.
+        /// Set the default pose of the character, used when the character does not move anymore.
         /// </summary>
         public void SetDefaultPose()
         {
@@ -99,7 +99,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Update the animation of the npc following its movements.
+        /// Update the animation of the character following its movements.
         /// </summary>
         /// <param name="a">The movement on the x axis.</param>
         /// <param name="b">The movement on the y axis.</param>
@@ -176,23 +176,27 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Set an objective on the x axis.
+        /// Set an objective on the x axis relative to the character.
         /// </summary>
-        /// <param name="x"></param>
+        /// <param name="x">The x coordinate of the objective relative to the character.</param>
         public void SetObjectiveX(int x)
         {
             this.list_objectives.Add(new Point(x - (this.GetX() + this.GetWidth() / 2), 0));
         }
+
+        /// <summary>
+        /// Set an objective on the y axis relative to the character.
+        /// </summary>
+        /// <param name="x">The y coordinate of the objective relative to the character.</param>
         public void SetObjectiveY(int y)
         {
             this.list_objectives.Add(new Point(0, y - (this.GetY() + this.GetHeight())));
         }
 
         /// <summary>
-        /// Get the x coordinate of the objective.
+        /// Get the x coordinate of the current objective.
         /// </summary>
         /// <returns>The x coordinate that has to be reached.</returns>
-
         public int GetObjX()
         {
             if (this.list_objectives.Count > 0)
@@ -203,7 +207,7 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Get the y coordinate of the objective.
+        /// Get the y coordinate of the current objective.
         /// </summary>
         /// <returns>The y coordinate that has to be reached.</returns>
 
@@ -216,12 +220,20 @@ namespace Learn_CTS
             return 0;
         }
 
+        /// <summary>
+        /// Update the x coordinate the the current objective.
+        /// </summary>
+        /// <param name="x">The new x coordinate that has to be reached.</param>
         public void UpdateObjX(int x)
         {
             Point p = this.list_objectives[0];
             this.list_objectives[0] = new Point(p.X += x, p.Y);
         }
 
+        /// <summary>
+        /// Update the y coordinate the the current objective.
+        /// </summary>
+        /// <param name="x">The new y coordinate that has to be reached.</param>
         public void UpdateObjY(int y)
         {
             Point p = this.list_objectives[0];
@@ -232,7 +244,6 @@ namespace Learn_CTS
         /// Check if the player has an objective.
         /// </summary>
         /// <returns>Return true if he has an objective, false otherwise.</returns>
-
         public bool HasObjective()
         {
             return this.list_objectives.Count > 0;
@@ -242,7 +253,6 @@ namespace Learn_CTS
         /// Check if the player has reached his objective.
         /// </summary>
         /// <returns>True if the player has reached his objective.</returns>
-
         public bool ReachedObjective()
         {
             return (
@@ -250,12 +260,20 @@ namespace Learn_CTS
                 this.ReachedObjY());
         }
 
+        /// <summary>
+        /// Check if the character has reached its current x objective.
+        /// </summary>
+        /// <returns>True if the character is close enough to the x objective, false otherwise.</returns>
         public bool ReachedObjX()
         {
             return
                 Math.Abs(this.GetObjX()) < 10;
         }
 
+        /// <summary>
+        /// Check if the character has reached its current y objective.
+        /// </summary>
+        /// <returns>True if the character is close enough to the y objective, false otherwise.</returns>
         public bool ReachedObjY()
         {
             return
@@ -263,9 +281,8 @@ namespace Learn_CTS
         }
 
         /// <summary>
-        /// Remove the player's objective.
+        /// Remove the current character objective.
         /// </summary>
-
         public void RemoveObjective()
         {
             if(this.list_objectives.Count > 0)
@@ -275,11 +292,17 @@ namespace Learn_CTS
             }
         }
 
+        /// <summary>
+        /// Remove all the objective of the character.
+        /// </summary>
         public void RemoveAllObjectives()
         {
             this.list_objectives.Clear();
         }
 
+        /// <summary>
+        /// Dispose all the images used by the character.
+        /// </summary>
         public override void Dispose()
         {
             foreach(Image i in animation_list_est)
