@@ -233,7 +233,6 @@ namespace Learn_CTS
             }
             if(scene_type != 10)
             {
-                this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameWindow_MouseDown);
                 SetupScene(scene_type);
                 DisplayLoading();
                 while (!tr.HasFinished())
