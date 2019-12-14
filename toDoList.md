@@ -14,8 +14,8 @@
 
 
 ## Structure
-- [ ] Learn CTS
-    - [ ] IHM
+- [X] Learn CTS
+    - [X] IHM
         - [X] Interfaces de jeu
             - [X] Interface tram
             - [X] Interface bus
@@ -37,10 +37,10 @@
             - [X] Entrée et gestion des dialogues sous la forme de QCM
             - [X] Édition des différents scénarios
             - [X] Modification des textures d'ambiance
-    - [ ] Pédagogie
-        - [ ] Morale + Connaissances
+    - [X] Pédagogie
+        - [X] Morale + Connaissances
             - [X] Utilisation de français simple
-            - [ ] Récapitulatifs des décisions
+            - [X] Récapitulatifs des décisions
         - [X] Gameplay
             - [X] Interactions avec l'environnement
             - [X] Difficultés
