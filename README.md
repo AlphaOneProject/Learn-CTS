@@ -4,6 +4,10 @@
 
 Projet d'intégration des allochtones souhaitant s'initier à la citoyenneté française et plus particulièrement à travers les transports en communs.
 
+## Installation
+
+### [Cliquer ici pour installer Learn CTS Version 1.0](https://gitlab.unistra.fr/t432_scl19_t3_a/learn-cts/raw/master/Installation/Learn%20CTS.msi)
+
 ## Présentation rapide du logiciel
 
 Vous avez bien lu !
@@ -55,10 +59,6 @@ Dans un scénario, on trouve les **situations**. Contrairements aux scénarios, 
         <td>Deuxième situation : Le joueur valide son ticket et monte dans le tram.</td>
     </tr>
 </table>
-
-### Installation de Learn CTS
-
-**Téléchargez** l'installeur de Learn CTS en [Cliquant ici](https://gitlab.unistra.fr/t432_scl19_t3_a/learn-cts/raw/master/Installation/Learn%20CTS.msi) et suivez ses instructions !
 
 ### Les moteurs de jeu
 
