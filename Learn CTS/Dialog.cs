@@ -230,6 +230,7 @@ namespace Learn_CTS
                 this.Set_Up(s);
                 Generate_Buttons_Choices();
                 this.Location = new Point(npc.GetX() + npc.GetWidth() / 2 - this.Width / 2, npc.GetY() - this.Height - 50);
+                txt_dialog_npc.Text = "";
                 timer_text.Start();
             }
         }
